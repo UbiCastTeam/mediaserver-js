@@ -1,0 +1,683 @@
+/* CSS for catalog browser */
+.ms-browser {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+.ms-browser.in-overlay {
+    width: 900px;
+    height: 100%;
+    text-align: left;
+}
+
+/* base */
+.ms-browser * {
+    margin: 0;
+    padding: 0;
+}
+
+.ms-browser a {
+    text-decoration: none;
+    color: #317e9f;
+}
+.ms-browser a:hover {
+    text-decoration: none;
+    color: #44b0df;
+}
+
+.ms-browser img {
+    vertical-align: middle;
+    border: 0 none;
+}
+
+.ms-browser ul,
+.ms-browser ol {
+    padding-left: 24px;
+}
+.ms-browser li {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.ms-browser table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.ms-browser p {
+    margin: 8px 0;
+}
+
+.ms-browser fieldset {
+    margin: 4px;
+    border-radius: 3px;
+}
+.ms-browser legend {
+    padding: 0 5px;
+}
+
+.ms-browser .ms-browser-clear {
+    clear: both;
+    overflow: hidden;
+}
+
+
+/* structure */
+.ms-browser.in-overlay .ms-browser-menu,
+.ms-browser.in-overlay .ms-browser-main,
+.ms-browser.in-overlay .ms-browser-panel,
+.ms-browser.in-overlay .ms-browser-header,
+.ms-browser.in-overlay .ms-browser-block {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.ms-browser .ms-browser-menu {
+    width: 350px;
+    float: left;
+}
+.ms-browser.in-overlay .ms-browser-menu {
+    float: none;
+    right: auto;
+}
+.ms-browser .ms-browser-main {
+    margin-left: 350px;
+}
+.ms-browser.in-overlay .ms-browser-main {
+    margin-left: 0;
+    left: 350px;
+}
+.ms-browser.in-overlay .ms-browser-main .ms-browser-panel {
+    border-left: 1px solid #888;
+}
+.ms-browser .ms-browser-header {
+    line-height: 24px;
+    height: 24px;
+    padding: 4px 6px;
+    background: #ddd;
+    background: -moz-linear-gradient(top, #eee, #ccc);
+    background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+}
+.ms-browser.in-overlay .ms-browser-header {
+    bottom: auto;
+}
+.ms-browser.in-overlay .ms-browser-header h1 {
+    font-weight: bold;
+    font-size: inherit;
+    line-height: inherit;
+}
+.ms-browser .ms-browser-panel-search .ms-browser-header span {
+    font-style: italic;
+    font-size: 80%;
+    margin-left: 24px;
+    color: #444;
+}
+.ms-browser .ms-browser-block {
+    padding: 5px;
+    position: relative;
+}
+.ms-browser.in-overlay .ms-browser-block {
+    top: 32px;
+    position: absolute;
+    overflow: auto;
+}
+.ms-browser .ms-browser-search-title,
+.ms-browser .ms-browser-display-title,
+.ms-browser .ms-browser-section {
+    font-size: 125%;
+    font-weight: bold;
+    text-decoration: italic;
+    color: #666;
+}
+.ms-browser .ms-browser-display-title,
+.ms-browser .ms-browser-search-title {
+    margin-bottom: 4px;
+    margin-left: -8px;
+}
+.ms-browser .ms-browser-search-block {
+    margin-bottom: 16px;
+    margin-left: 24px;
+}
+.ms-browser .ms-browser-search-input {
+    margin-top: 8px;
+}
+.ms-browser .ms-browser-search-input input {
+    width: auto;
+    padding: 3px;
+}
+.ms-browser .ms-browser-search-input #ms_browser_search {
+    width: 72%;
+}
+.ms-browser .ms-browser-latest-btn {
+    margin: 8px 5px;
+    text-align: center;
+}
+
+/* buttons */
+.ms-browser .ms-browser-tab {
+    padding: 0 4px;
+    font-weight: normal;
+    line-height: 24px;
+    cursor: pointer;
+    display: inline; /* fallback */
+    display: inline-block;
+    color: inherit;
+    background: transparent;
+    transition-duration: .3s;
+    transition-property: background;
+    border: 0 none;
+    border-radius: 3px;
+}
+.ms-browser .ms-browser-tab:hover {
+    background: #ccc;
+}
+.ms-browser .ms-browser-tab.active {
+    color: #fff;
+    background: #888;
+    cursor: default;
+}
+.ms-browser .ms-browser-tab + .ms-browser-tab {
+    margin-left: 5px;
+}
+
+/* filters menu and button */
+.ms-browser .ms-browser-top-btns {
+    line-height: 24px;
+    position: absolute;
+    z-index: 1;
+    top: 4px;
+    right: 8px;
+    height: 24px;
+}
+.ms-browser .ms-browser-top-menu {
+    padding: 8px;
+    padding-left: 16px;
+    position: absolute;
+    z-index: 4;
+    top: 36px;
+    right: 8px;
+    display: none;
+    line-height: 24px;
+    white-space:nowrap;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+.ms-browser .ms-browser-top-menu.active {
+    display: block;
+}
+.ms-browser .ms-browser-top-menu div + div {
+    margin-top: 8px;
+}
+
+/* loading */
+.ms-browser .ms-browser-loading {
+    position: absolute;
+    top: 8px;
+    left: 40%;
+    display: none;
+    padding: 5px;
+    color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #000;
+    background: rgba(0, 0, 0, .7);
+}
+.ms-browser .ms-browser-loading div {
+    font-size: 125%;
+    line-height: 32px;
+    padding-left: 40px;
+    background: transparent url('../images/32_loading.gif') 0 50% no-repeat;
+}
+
+/* messages */
+.ms-browser .info,
+.ms-browser .success,
+.ms-browser .warning,
+.ms-browser .error,
+.ms-browser .loading {
+    margin: 5px;
+    padding: 5px;
+    display: block;
+    overflow: hidden;
+    line-height: normal;
+    min-height: 0;
+    color: #222;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.ms-browser .info:before,
+.ms-browser .success:before,
+.ms-browser .warning:before,
+.ms-browser .error:before,
+.ms-browser .loading:before {
+    padding-right: 5px;
+    font: normal normal normal 14px/1 FontAwesome;
+}
+.ms-browser .info {
+    color: #006ba8;
+    border-color: #006ba8;
+}
+.ms-browser .info:before {
+    content: "\f05a";
+}
+.ms-browser .success {
+    color: #006002;
+    border-color: #006002;
+}
+.ms-browser .success:before {
+    content: "\f058";
+}
+.ms-browser .warning {
+    color: #a85500;
+    border-color: #a85500;
+}
+.ms-browser .warning:before {
+    content: "\f071";
+}
+.ms-browser .error {
+    color: #a80000;
+    border-color: #a80000;
+}
+.ms-browser .error:before {
+    content: "\f06a";
+}
+.ms-browser .loading {
+    color: #444;
+    border-color: #444;
+}
+/*.ms-browser .loading:before {
+    content: "\f110";
+}*/
+
+
+/* channels tree */
+.ms-channels-tree ul {
+    padding-left: 0;
+}
+.ms-channels-tree li {
+    line-height: 18px;
+    overflow: hidden;
+    list-style: none;
+}
+.ms-channels-tree ul ul {
+    display: none;
+    padding-left: 20px;
+}
+.ms-channels-tree li .list-none,
+.ms-channels-tree li .list-entry {
+    padding: 0;
+    display: block;
+    float: left;
+    text-align: center;
+    font-weight: normal;
+    vertical-align: top;
+    line-height: 14px;
+    width: 16px;
+    height: 16px;
+    cursor: default;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: content-box;
+}
+.ms-channels-tree li .list-none:before {
+    font: normal normal normal 14px/1 Sans;
+    content: "•";
+}
+.ms-channels-tree li .list-entry {
+    cursor: pointer;
+}
+.ms-channels-tree li .list-entry:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f0da";
+}
+.ms-channels-tree li .list-entry.opened:before {
+    content: "\f0d7";
+}
+.ms-channels-tree .channel-btn {
+    display: block;
+    cursor: pointer;
+    color: #317e9f;
+    text-align: left;
+    background: transparent;
+    border: 0 none;
+    word-wrap: break-word;
+    box-sizing: content-box;
+}
+.ms-channels-tree li .channel-btn {
+    margin-left: 21px;
+}
+.ms-channels-tree .channel-btn:hover,
+.ms-channels-tree .channel-active .channel-btn {
+    color: #44b0df;
+}
+.ms-channels-tree .channel-locked,
+.ms-channels-tree .channel-empty,
+.ms-channels-tree .channel-empty .channel-btn {
+    color: #666;
+}
+
+
+/* channel content list */
+.ms-items .item-entry {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 4px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #eee;
+    background: -moz-linear-gradient(top, #fff, #ddd);
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+}
+.ms-items .item-entry * {
+    box-sizing: content-box;
+}
+.ms-items .item-entry.thumbnail.selectable {
+    border: 2px solid #5b79c4;
+}
+.ms-items .item-entry.thumbnail.selected {
+    border: 2px solid #52ac49;
+}
+.ms-items .item-entry.selectable {
+    border-color: #bce;
+    background: #def;
+    background: -moz-linear-gradient(top, #fff, #def);
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#def));
+}
+.ms-items .item-entry.selected {
+    border-color: #cdc;
+    background: #efe;
+    background: -moz-linear-gradient(top, #fff, #dfd);
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dfd));
+}
+.ms-items .item-entry-preview {
+    line-height: 90px;
+    position: relative;
+    display: block;
+    float: left;
+    width: 120px;
+    height: 90px;
+    text-align: center;
+}
+.ms-items .item-entry-small .item-entry-preview {
+    line-height: 45px;
+    width: 60px;
+    height: 45px;
+}
+.ms-items .item-entry-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: -2px;
+    vertical-align: middle;
+}
+.ms-items .item-entry-preview span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    background: transparent none 50% 50% no-repeat;
+}
+.ms-items .item-entry-preview .item-current-icon {
+    background-image: url('../images/32_channel.png');
+}
+.ms-items .item-entry-preview .item-parent-icon {
+    background-image: url('../images/32_parent.png');
+}
+.ms-items .item-entry-link {
+    display: block;
+    overflow: hidden;
+}
+.ms-items .item-entry-link.clickable {
+    cursor: pointer;
+    color: #317e9f;
+}
+.ms-items .item-entry-link.clickable:hover {
+    color: #44b0df;
+}
+.ms-items .item-entry-content {
+    display: block;
+    padding: 10px;
+    padding-left: 130px;
+}
+.ms-items .item-entry-small .item-entry-content {
+    line-height: 45px;
+    padding: 0;
+    padding-left: 64px;
+}
+
+.ms-items .item-entry-top-bar {
+    font-size: 100%;
+    font-weight: bold;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #888;
+}
+.ms-items .item-entry-small .item-entry-content .item-entry-top-bar {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: 0 none;
+}
+.ms-items .item-entry-duration {
+    display: block;
+    float: right;
+    margin-left: 10px;
+    color: #666;
+}
+.ms-items .item-entry-unlisted,
+.ms-items .item-entry-publication,
+.ms-items .item-entry-state {
+    display: block;
+    float: right;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    background: transparent none 50% 50% no-repeat;
+}
+.ms-items .item-entry-unlisted {
+    background-image: url('../images/16_unlisted.png');
+}
+.ms-items .item-entry-publication {
+    background-image: url('../images/16_nonpublised.png');
+}
+.ms-items .item-entry-publication.published {
+    background-image: url('../images/16_publised.png');
+}
+.ms-items .item-entry-state {
+    background-image: url('../images/16_warning.png');
+}
+.ms-items .item-entry-state.ready {
+    background-image: none;
+}
+
+.ms-items .item-entry-bottom-bar {
+    display: block;
+}
+.ms-items .item-entry-views,
+.ms-items .item-entry-comments,
+.ms-items .item-entry-type {
+    display: block;
+    float: right;
+    margin-left: 10px;
+    color: #666;
+}
+.ms-items .item-entry-date,
+.ms-items .item-entry-annotations,
+.ms-items .item-entry-parent {
+    font-style: italic;
+    display: block;
+    color: #666;
+}
+.ms-items .item-entry-annotations {
+    padding-left: 10px;
+}
+
+.ms-items .item-entry-links {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    display: none;
+    text-align: right;
+}
+.ms-items .item-entry-small .item-entry-links {
+    top: 0;
+    bottom: 0;
+    line-height: 45px;
+}
+.ms-browser.ms-browser-display-display .ms-browser-menu .ms-browser-panel .cb-display,
+.ms-items .item-entry:hover .item-entry-links {
+    display: block;
+}
+.ms-items .item-entry-links .std-btn {
+    padding: 3px 8px;
+    cursor: pointer;
+}
+.overlay-info .item-entry-links .std-btn a {
+    text-decoration: none;
+    color: #333;
+}
+.ms-items .item-entry-links .std-btn + .std-btn {
+    margin-left: 8px;
+}
+.ms-items .item-entry-links br + .std-btn,
+.ms-items .item-entry-links br + .std-btn + .std-btn {
+    margin-top: 8px;
+}
+.ms-browser .ms-browser-menu .ms-browser-panel .cb-display,
+.ms-browser .ms-browser-latest-place.no-channels .item-type-channel {
+    display: none;
+}
+.ms-browser .ms-browser-menu .cb-display.ms-browser-search-block .ms-browser-search-title {
+    margin-left: -5px;
+}
+
+/* thumbnail mode */
+.ms-items .item-entry.thumbnail * {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+.ms-items .item-entry.thumbnail .item-entry-preview,
+.ms-items .item-entry.thumbnail .item-entry-content,
+.ms-items .item-entry.thumbnail .item-entry-top-bar,
+.ms-items .item-entry.thumbnail .item-entry-bottom-bar {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+    position: absolute;
+    background: transparent 50% 50% no-repeat;
+    border: 0 none;
+}
+.ms-items .item-entry.thumbnail .item-entry-date,
+.ms-items .item-entry.thumbnail .item-entry-links,
+.ms-items .item-entry.thumbnail .item-entry-views,
+.ms-items .item-entry.thumbnail .item-entry-parent,
+.ms-items .item-entry.thumbnail .item-entry-type {
+    display: none;
+}
+.ms-items .item-entry.thumbnail .item-entry-top-bar {
+    right: auto;
+    bottom: auto;
+    border-bottom-right-radius: 4px;
+}
+.ms-items .item-entry.thumbnail .item-entry-bottom-bar {
+    top: auto;
+}
+.ms-items .item-entry.thumbnail .item-entry-unlisted,
+.ms-items .item-entry.thumbnail .item-entry-publication,
+.ms-items .item-entry.thumbnail .item-entry-duration,
+.ms-items .item-entry.thumbnail .item-entry-state {
+    float: left;
+}
+.ms-items .item-entry.thumbnail .item-entry-top-bar > *,
+.ms-items .item-entry.thumbnail .item-entry-bottom-bar > * {
+    font-weight: bold;
+    font-style: italic;
+    word-wrap: break-word;
+    color: #bbb;
+}
+.ms-items .item-entry.thumbnail:hover .item-entry-top-bar > *,
+.ms-items .item-entry.thumbnail:hover .item-entry-bottom-bar > * {
+    color: #fff;
+}
+.ms-items .item-entry.thumbnail .item-entry-bottom-bar,
+.ms-items .item-entry.thumbnail .item-entry-top-bar {
+    background: transparent url('../images/black_mask.png') 0 0 repeat;
+}
+.ms-items .item-entry.thumbnail .item-entry-title,
+.ms-items .item-entry.thumbnail .item-entry-unlisted,
+.ms-items .item-entry.thumbnail .item-entry-publication,
+.ms-items .item-entry.thumbnail .item-entry-duration,
+.ms-items .item-entry.thumbnail .item-entry-state {
+    padding: 5px;
+}
+.ms-items .item-entry.thumbnail .obj-block-info,
+.ms-items .item-entry.thumbnail .obj-block-edit {
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    display: none;
+    cursor: pointer;
+    border: none;
+}
+.ms-items .item-entry.thumbnail .obj-block-info {
+    background: transparent url('../images/thumb_info.png') 0 50% no-repeat;
+}
+.ms-items .item-entry.thumbnail .obj-block-edit {
+    top: 65px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: transparent url('../images/thumb_edit.png') 0 50% no-repeat;
+}
+.ms-items .item-entry.thumbnail:hover .obj-block-info,
+.ms-items .item-entry.thumbnail:hover .obj-block-edit {
+    display: block;
+}
+.ms-items .item-entry.thumbnail .info-displayed {
+    background-position: 100% 50%;
+}
+
+.ms-items .item-entry.thumbnail > div.item-entry-link.clickable {
+    width: 100%;
+    height: 100%;
+}
+.ms-items .item-entry.thumbnail {
+    display: block;
+    float: left;
+    overflow: hidden;
+    width: 240px;
+    height: 180px;
+    margin: 4px;
+    cursor: auto;
+    text-align: center;
+    line-height: inherit;
+    border: 1px solid #888;
+    border-radius: 3px;
+    background: transparent;
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, .5), rgba(0, 0, 0, .5));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .5)), to(rgba(0, 0, 0, .5)));
+}
+.ms-items .item-entry.thumbnail.small {
+    width: 180px;
+    height: 135px;
+    font-size: inherit;
+}
