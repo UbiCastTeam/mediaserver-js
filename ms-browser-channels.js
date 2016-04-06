@@ -75,13 +75,6 @@ MSBrowserChannels.prototype.on_show = function () {
         this.display_channel_by_slug(this.init_options.initial_state.channel_slug);
     else
         this.display_channel("0");
-
-    // listen to hash changes
-    if (!this.browser.use_overlay) {
-        $(window).bind("hashchange", function () {
-            obj.on_hash_change();
-        });
-    }
 };
 
 MSBrowserChannels.prototype.set_order = function (order) {
@@ -171,7 +164,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     this.$content.html("");
     if (oid != "0") {
         // parent channel link
-        var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : 0;
+        var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : "0";
         var parent_title = (parent_oid && this.browser.catalog[parent_oid]) ? this.browser.catalog[parent_oid].title : utils.translate("Parent channel");
         this.$content.append(this.browser.get_content_entry("parent", {
             oid: parent_oid,
@@ -179,13 +172,13 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             extra_class: "item-entry-small",
             selectable: !this.browser.parent_selection_oid || response.parent_selectable,
             slug: response.info.parent_slug
-        }, parent_oid != "0" && this.browser.selectable_content.indexOf("c") != -1));
+        }, parent_oid != "0" && this.browser.selectable_content.indexOf("c") != -1, "channels"));
         // current channel link
         var current_info = response.info;
         current_info.oid = oid;
         current_info.extra_class = "item-entry-small";
         current_info.selectable = !this.browser.parent_selection_oid || response.selectable;
-        this.$content.append(this.browser.get_content_entry("current", current_info, this.browser.selectable_content.indexOf("c") != -1));
+        this.$content.append(this.browser.get_content_entry("current", current_info, this.browser.selectable_content.indexOf("c") != -1, "channels"));
         // channel's custom CSS
         if (!this.browser.use_overlay) {
             $("head .csslistlink").remove();
@@ -213,7 +206,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     var has_items = nb_channels > 0 || nb_videos > 0 || nb_live_streams > 0 || nb_photos_groups > 0;
     // channel display
     if (has_items)
-        this.browser.display_content(this.$content, response);
+        this.browser.display_content(this.$content, response, "channels");
     else {
         if (this.browser.selectable_content.indexOf("c") != -1) {
             if (this.browser.displayable_content.length > 1)
@@ -224,16 +217,6 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         else
             this.$content.append("<div class=\"info\">"+utils.translate("This channel contains no media.")+"</div>");
     }
-};
-
-MSBrowserChannels.prototype.on_hash_change = function () {
-    var slug = window.location.hash;
-    if (slug && slug[0] == "#")
-        slug = slug.substring(1);
-    if (slug)
-        this.display_channel_by_slug(slug);
-    else
-        this.display_channel("0");
 };
 
 MSBrowserChannels.prototype.refresh_display = function () {

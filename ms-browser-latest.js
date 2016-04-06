@@ -139,9 +139,6 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
     var $section = $("<div class=\"ms-browser-section\"></div>");
     for (var i=0; i < response.items.length; i++) {
         var item = response.items[i];
-        item.show_type = true;
-        item.show_add_date = true;
-        item.show_parent_title = true;
         if (item.date_label && (item.date_label != this.latest_date_label)) {
             this.latest_date_label = item.date_label;
             this.$content.append($section);
@@ -156,7 +153,7 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         if (item.type == "p")
             type = "photos";
         var selectable = this.browser.selectable_content.indexOf(item.type) != -1;
-        $section.append(this.browser.get_content_entry(type, item, selectable));
+        $section.append(this.browser.get_content_entry(type, item, selectable, "latest"));
     }
     this.$content.append($section);
     if (this.latest_more)
