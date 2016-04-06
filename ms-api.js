@@ -50,7 +50,7 @@ var MSAPI = {
             method: "GET",
             url: "/api/v2/search/",
             errors: {
-                401: utils.translate("You are not logged in. Please login in Moodle and retry."),
+                401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
                 403: utils.translate("Unable to get search's results content because you cannot access to this channel."),
                 404: utils.translate("Requested channel does not exist."),
                 500: utils.translate("An error occured in medias server. Please try again later."),
@@ -69,7 +69,7 @@ var MSAPI = {
             method: "GET",
             url: "/api/v2/latest/",
             errors: {
-                401: utils.translate("You are not logged in. Please login in Moodle and retry."),
+                401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
                 403: utils.translate("Unable to get latest content because you cannot access to this channel."),
                 404: utils.translate("Requested channel does not exist."),
                 500: utils.translate("An error occured in medias server. Please try again later."),
@@ -80,7 +80,7 @@ var MSAPI = {
             method: "GET",
             url: "/api/v2/channels/content/",
             errors: {
-                401: utils.translate("You are not logged in. Please login in Moodle and retry."),
+                401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
                 403: utils.translate("Unable to get channel's content because you cannot access to this channel."),
                 404: utils.translate("Unable to get channel's content because you cannot access to this channel."),
                 500: utils.translate("An error occured in medias server. Please try again later."),
