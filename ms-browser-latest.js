@@ -35,6 +35,8 @@ MSBrowserLatest.prototype.get_menu_html = function () {
     }
     html += "</div>";
     this.$menu = $(html);
+    // events
+    $(".ms-browser-latest-refresh", this.$menu).click({ obj: this }, function (evt) { evt.data.obj.refresh_display(); });
     return this.$menu;
 };
 MSBrowserLatest.prototype.get_content_html = function () {
@@ -54,7 +56,6 @@ MSBrowserLatest.prototype.get_content_html = function () {
     // events
     $(".ms-browser-latest-more-5", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.display_more(5); });
     $(".ms-browser-latest-more-20", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.display_more(20); });
-    $(".ms-browser-latest-refresh", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.refresh_display(); });
     return this.$panel;
 };
 
@@ -83,12 +84,8 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
                 data.content += dc[i];
         }
     }
-    if (this.filter_validated !== null) {
-        if (this.filter_validated)
-            data.validated = "yes";
-        else
-            data.validated = "no";
-    }
+    if (this.browser.filter_validated !== null)
+        data.validated = this.browser.filter_validated ? "yes" : "no";
     
     var start_value = 0;
     if (this.latest_start) {
@@ -139,6 +136,7 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
 
     this.latest_start = response.max_date;
     this.latest_more = response.more === true;
+    var $section = $("<div class=\"ms-browser-section\"></div>");
     for (var i=0; i < response.items.length; i++) {
         var item = response.items[i];
         item.show_type = true;
@@ -146,7 +144,9 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         item.show_parent_title = true;
         if (item.date_label && (item.date_label != this.latest_date_label)) {
             this.latest_date_label = item.date_label;
-            this.$content.append("<h3>"+item.date_label+"</h3>");
+            this.$content.append($section);
+            $section = $("<div class=\"ms-browser-section\"></div>");
+            $section.append("<h3 class=\"ms-browser-section-title\">"+item.date_label+"</h3>");
         }
         var type = "channel";
         if (item.type == "v")
@@ -156,8 +156,9 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         if (item.type == "p")
             type = "photos";
         var selectable = this.browser.selectable_content.indexOf(item.type) != -1;
-        this.$content.append(this.browser.get_content_entry(type, item, selectable));
+        $section.append(this.browser.get_content_entry(type, item, selectable));
     }
+    this.$content.append($section);
     if (this.latest_more)
         $(".ms-browser-latest-btns", this.$panel).css("display", "block");
     else

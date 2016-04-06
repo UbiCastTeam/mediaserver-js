@@ -126,9 +126,12 @@
     position: absolute;
     overflow: auto;
 }
+.ms-browser .ms-browser-section {
+    overflow: hidden;
+}
 .ms-browser .ms-browser-search-title,
 .ms-browser .ms-browser-display-title,
-.ms-browser .ms-browser-section {
+.ms-browser .ms-browser-section-title {
     font-size: 125%;
     font-weight: bold;
     text-decoration: italic;
@@ -141,7 +144,7 @@
 }
 .ms-browser .ms-browser-search-block {
     margin-bottom: 16px;
-    margin-left: 24px;
+    margin-left: 15px;
 }
 .ms-browser .ms-browser-search-input {
     margin-top: 8px;
@@ -153,7 +156,7 @@
 .ms-browser .ms-browser-search-input #ms_browser_search {
     width: 72%;
 }
-.ms-browser .ms-browser-latest-btn {
+.ms-browser .ms-browser-latest-btns {
     margin: 8px 5px;
     text-align: center;
 }
@@ -478,29 +481,37 @@
     color: #666;
 }
 .ms-items .item-entry-unlisted,
-.ms-items .item-entry-publication,
-.ms-items .item-entry-state {
+.ms-items .item-entry-notpublished,
+.ms-items .item-entry-published,
+.ms-items .item-entry-notready {
+    margin-left: 10px;
     display: block;
     float: right;
     width: 16px;
     height: 16px;
-    margin-left: 10px;
-    background: transparent none 50% 50% no-repeat;
+    line-height: 16px;
+    text-align: center;
 }
-.ms-items .item-entry-unlisted {
-    background-image: url('../images/16_unlisted.png');
+.ms-items .item-entry-unlisted:before,
+.ms-items .item-entry-notpublished:before,
+.ms-items .item-entry-published:before,
+.ms-items .item-entry-notready:before {
+    color: #666;
+    font: normal normal normal 16px/1 FontAwesome;
 }
-.ms-items .item-entry-publication {
-    background-image: url('../images/16_nonpublised.png');
+.ms-items .item-entry-unlisted:before {
+    content: "\f070";
 }
-.ms-items .item-entry-publication.published {
-    background-image: url('../images/16_publised.png');
+.ms-items .item-entry-notpublished:before {
+    content: "\f023";
 }
-.ms-items .item-entry-state {
-    background-image: url('../images/16_warning.png');
+.ms-items .item-entry-published:before {
+    content: "\f058";
+    color: #080;
 }
-.ms-items .item-entry-state.ready {
-    background-image: none;
+.ms-items .item-entry-notready:before {
+    content: "\f085";
+    color: #850;
 }
 
 .ms-items .item-entry-bottom-bar {
@@ -561,7 +572,7 @@
     display: none;
 }
 .ms-browser .ms-browser-menu .cb-display.ms-browser-search-block .ms-browser-search-title {
-    margin-left: -5px;
+    margin-left: -15px;
 }
 
 /* thumbnail mode */
@@ -600,10 +611,18 @@
     top: auto;
 }
 .ms-items .item-entry.thumbnail .item-entry-unlisted,
-.ms-items .item-entry.thumbnail .item-entry-publication,
-.ms-items .item-entry.thumbnail .item-entry-duration,
-.ms-items .item-entry.thumbnail .item-entry-state {
+.ms-items .item-entry.thumbnail .item-entry-notpublished,
+.ms-items .item-entry.thumbnail .item-entry-published,
+.ms-items .item-entry.thumbnail .item-entry-notready,
+.ms-items .item-entry.thumbnail .item-entry-duration {
+    padding: 5px;
     float: left;
+}
+.ms-items .item-entry.thumbnail .item-entry-unlisted:before,
+.ms-items .item-entry.thumbnail .item-entry-notpublished:before,
+.ms-items .item-entry.thumbnail .item-entry-published:before,
+.ms-items .item-entry.thumbnail .item-entry-notready:before {
+    color: inherit;
 }
 .ms-items .item-entry.thumbnail .item-entry-top-bar > *,
 .ms-items .item-entry.thumbnail .item-entry-bottom-bar > * {
@@ -620,11 +639,7 @@
 .ms-items .item-entry.thumbnail .item-entry-top-bar {
     background: transparent url('../images/black_mask.png') 0 0 repeat;
 }
-.ms-items .item-entry.thumbnail .item-entry-title,
-.ms-items .item-entry.thumbnail .item-entry-unlisted,
-.ms-items .item-entry.thumbnail .item-entry-publication,
-.ms-items .item-entry.thumbnail .item-entry-duration,
-.ms-items .item-entry.thumbnail .item-entry-state {
+.ms-items .item-entry.thumbnail .item-entry-title {
     padding: 5px;
 }
 .ms-items .item-entry.thumbnail .obj-block-info,
@@ -642,8 +657,7 @@
     background: transparent url('../images/thumb_info.png') 0 50% no-repeat;
 }
 .ms-items .item-entry.thumbnail .obj-block-edit {
-    top: 65px;
-    right: 10px;
+    top: 40px;
     width: 32px;
     height: 32px;
     background: transparent url('../images/thumb_edit.png') 0 50% no-repeat;

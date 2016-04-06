@@ -7,7 +7,6 @@
 /* globals MSBrowser, utils */
 
 MSBrowser.prototype.build_widget = function () {
-    var obj = this;
     // build widget structure
     var html = "<div class=\"ms-browser "+(this.use_overlay ? "in-overlay" : "")+"\">";
     html += "<div class=\"ms-browser-menu\">";
@@ -57,8 +56,8 @@ MSBrowser.prototype.build_widget = function () {
     $("#ms_browser_display_btn", this.$main).click({ obj: this }, function (evt) { evt.data.obj.toggle_menu("display"); });
     //$("#ms_browser_filters_btn", this.$main).click({ obj: this }, function (evt) { evt.data.obj.toggle_menu("filters"); });
     //$("#ms_browser_filters_menu  div select", this.$main).change({ obj: this }, function (evt) { evt.data.obj.toggle_filter_control(evt, this); });
-    $("#ms_browser_display_as_list", this.$main).click({ obj: this }, function (evt) { evt.data.obj.ms_browser_display_as_list(); });
-    $("#ms_browser_display_as_thumbnails", this.$main).click({ obj: this }, function (evt) { evt.data.obj.ms_browser_display_as_thumbnails(); });
+    $("#ms_browser_display_as_list", this.$main).click({ obj: this }, function (evt) { evt.data.obj.display_as_list(); });
+    $("#ms_browser_display_as_thumbnails", this.$main).click({ obj: this }, function (evt) { evt.data.obj.display_as_thumbnails(); });
     $("#ms_browser_order_channel", this.$main).change({ obj: this }, function (evt) { evt.data.obj.channels.set_order($(this).val()); });
 };
 MSBrowser.prototype.get_display_html = function () {
@@ -88,7 +87,7 @@ MSBrowser.prototype.get_display_html = function () {
     // TODO: pagination
     // html += "<div><b class=\"ms-browser-display-title\">"+utils.translate("Number of elements per page:")+"</b><br/>";
     // html += "    <input type=\"number\" class=\"center\" id=\"elements_per_page\" value=\"30\"/>";
-    // html += "<button type=\"button\" onclick=\"javascript: cm.set_elements_per_page();\">"+utils.translate("Ok")+"</button></div>";
+    // html += "<button type=\"button\">"+utils.translate("Ok")+"</button></div>";
     html += "</div>";
     return html;
 };
@@ -181,15 +180,14 @@ MSBrowser.prototype.toggle_filter_control = function (event, js_obj) {
     if (id === "filter_photos_published"){return;}
     return;
 };
-MSBrowser.prototype.ms_browser_display_as_list = function () {
+MSBrowser.prototype.display_as_list = function () {
     if ($("#ms_browser_display_as_list", this.$main).hasClass("active"))
         return;
     this.display_mode = "list";
     $("#ms_browser_display_as_thumbnails", this.$main).removeClass("active");
     $("#ms_browser_display_as_list", this.$main).addClass("active");
     if (!this.use_overlay)
-        $("#global").removeClass("wide");
-    $(".item-entry.list", this.$main).css("float", "none");
+        $("html").addClass("wide-1200").removeClass("wide");
     utils.set_cookie("catalog-display_mode", this.display_mode);
     $("#ms_browser_display_btn", this.$main).removeClass("active");
     $("#ms_browser_display_menu", this.$main).removeClass("active");
@@ -197,15 +195,14 @@ MSBrowser.prototype.ms_browser_display_as_list = function () {
     this.search.refresh_display();
     this.latest.refresh_display();
 };
-MSBrowser.prototype.ms_browser_display_as_thumbnails = function () {
+MSBrowser.prototype.display_as_thumbnails = function () {
     if ($("#ms_browser_display_as_thumbnails", this.$main).hasClass("active"))
         return;
     this.display_mode = "thumbnail";
     $("#ms_browser_display_as_list", this.$main).removeClass("active");
     $("#ms_browser_display_as_thumbnails", this.$main).addClass("active");
     if (!this.use_overlay)
-        $("#global").addClass("wide");
-    $(".item-entry.thumbnail", this.$main).css("float", "left");
+        $("html").addClass("wide").removeClass("wide-1200");
     utils.set_cookie("catalog-display_mode", this.display_mode);
     $("#ms_browser_display_btn", this.$main).removeClass("active");
     $("#ms_browser_display_menu", this.$main).removeClass("active");
@@ -217,9 +214,9 @@ MSBrowser.prototype.get_active_tab = function () {
     var $active = $(".ms-browser-tab.active", this.$menu);
     return $active.length > 0 ? $active.attr("id").replace(/_tab/g, "").replace(/ms_browser_/g, "") : null;
 };
-MSBrowser.prototype.change_tab = function (section, no_pushstate) {
+MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
     var previous = this.get_active_tab();
-    if (previous == section)
+    if (previous == tab)
         return;
 
     if (previous) {
@@ -227,15 +224,15 @@ MSBrowser.prototype.change_tab = function (section, no_pushstate) {
         $("#ms_browser_"+previous+"_menu", this.$menu).css("display", "none");
         $("#ms_browser_"+previous, this.$main).css("display", "none");
     }
-    $("#ms_browser_"+section+"_tab", this.$menu).addClass("active");
-    $("#ms_browser_"+section+"_menu", this.$menu).css("display", "block");
-    $("#ms_browser_"+section, this.$main).css("display", "block");
+    $("#ms_browser_"+tab+"_tab", this.$menu).addClass("active");
+    $("#ms_browser_"+tab+"_menu", this.$menu).css("display", "block");
+    $("#ms_browser_"+tab, this.$main).css("display", "block");
 
-    if (section == "latest")
+    if (tab == "latest")
         this.latest.on_show();
-    if (section == "search")
+    if (tab == "search")
         this.search.on_show();
-    if (section == "channels") {
+    if (tab == "channels") {
         this.channels.on_show();
         $("#ms_browser_display_menu .ms-browser-channel-order", this.$main).css("display", "");
     }
@@ -245,20 +242,14 @@ MSBrowser.prototype.change_tab = function (section, no_pushstate) {
 
     if (!this.use_overlay) {
         var url;
-        if (section == "latest") {
+        if (tab == "latest")
             url = this.url_latest;
-        } else if (section == "search") {
+        else if (tab == "search")
             url = this.url_search;
-        } else {
-            url = this.url_channel + window.location.hash;
-        }
-        if (!no_pushstate) {
-            if (!this.initial_push) {
-                this.initial_push = window.location.href;
-                this.initial_push_section = previous;
-            }
-            window.history.pushState({"ms_section": section}, section, url);
-        }
+        else
+            url = this.url_channels + window.location.hash;
+        if (!no_pushstate)
+            window.history.pushState({"ms_tab": tab}, tab, url);
     }
 };
 

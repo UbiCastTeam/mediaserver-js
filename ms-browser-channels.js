@@ -79,13 +79,7 @@ MSBrowserChannels.prototype.on_show = function () {
     // listen to hash changes
     if (!this.browser.use_overlay) {
         $(window).bind("hashchange", function () {
-            var slug = window.location.hash;
-            if (slug && slug[0] == "#")
-                slug = slug.substring(1);
-            if (slug)
-                obj.display_channel_by_slug(slug);
-            else
-                obj.display_channel("0");
+            obj.on_hash_change();
         });
     }
 };
@@ -107,6 +101,7 @@ MSBrowserChannels.prototype.display_channel = function (oid) {
     this.browser.display_loading();
     this.current_channel_oid = oid;
     this.tree_manager.set_active(oid);
+    this.browser.box_hide_info();
 
     if (oid != "0") {
         var obj = this;
@@ -143,12 +138,8 @@ MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
         data.parent_selection_oid = this.browser.parent_selection_oid;
     if (this.browser.displayable_content)
         data.content = this.browser.displayable_content;
-    if (this.filter_validated !== null) {
-        if (this.filter_validated)
-            data.validated = "yes";
-        else
-            data.validated = "no";
-    }
+    if (this.browser.filter_validated !== null)
+        data.validated = this.browser.filter_validated ? "yes" : "no";
     data.order_by = this.order;
     var obj = this;
     MSAPI.ajax_call("get_channels_content", data, function (response) {
@@ -221,7 +212,9 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     var nb_photos_groups = response.photos_groups ? response.photos_groups.length : 0;
     var has_items = nb_channels > 0 || nb_videos > 0 || nb_live_streams > 0 || nb_photos_groups > 0;
     // channel display
-    if (!has_items) {
+    if (has_items)
+        this.browser.display_content(this.$content, response);
+    else {
         if (this.browser.selectable_content.indexOf("c") != -1) {
             if (this.browser.displayable_content.length > 1)
                 this.$content.append("<div class=\"info\">"+utils.translate("This channel contains no sub channels and no medias.")+"</div>");
@@ -230,9 +223,17 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         }
         else
             this.$content.append("<div class=\"info\">"+utils.translate("This channel contains no media.")+"</div>");
-        return;
     }
-    this.browser.display_content(this.$content, response);
+};
+
+MSBrowserChannels.prototype.on_hash_change = function () {
+    var slug = window.location.hash;
+    if (slug && slug[0] == "#")
+        slug = slug.substring(1);
+    if (slug)
+        this.display_channel_by_slug(slug);
+    else
+        this.display_channel("0");
 };
 
 MSBrowserChannels.prototype.refresh_display = function () {

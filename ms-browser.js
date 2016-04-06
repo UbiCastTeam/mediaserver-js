@@ -9,7 +9,7 @@ function MSBrowser(options) {
     // params
     this.title = "";
     this.place = null;
-    this.selectable_content = "vlp"; // v for videos, l for lives, p for photos group and c for channels
+    this.selectable_content = "cvlp"; // v for videos, l for lives, p for photos group and c for channels
     this.displayable_content = "cvlp";
     this.filter_validated = null;
     this.parent_selection_oid = null; // special for channel parent selection
@@ -17,10 +17,6 @@ function MSBrowser(options) {
     this.initial_state = null;
     this.on_pick = null;
     this.btn_class = "std-btn";
-    this.url_login = "/login/";
-    this.url_channel = "/channels/";
-    this.url_search = "/search/";
-    this.url_latest = "/latest/";
     // vars
     this.use_overlay = true;
     this.$widget = null;
@@ -31,6 +27,11 @@ function MSBrowser(options) {
     this.tree_manager = null;
     this.displayed = "channels";
     this.current_selection = null;
+
+    this.url_login = "/login/";
+    this.url_channels = "/channels/";
+    this.url_search = "/search/";
+    this.url_latest = "/latest/";
 
     this.display_mode = "list";
     utils.setup_class(this, options, [
@@ -44,11 +45,7 @@ function MSBrowser(options) {
         "initial_oid",
         "initial_state",
         "on_pick",
-        "btn_class",
-        "url_search",
-        "url_login",
-        "url_latest",
-        "url_channel"
+        "btn_class"
     ]);
 
     MSAPI.configure(options);
@@ -58,7 +55,7 @@ function MSBrowser(options) {
     if (!this.use_overlay) {
         var obj = this;
         $(document).ready(function () {
-            obj.init(options);
+            obj.init();
         });
     }
 }
@@ -68,8 +65,11 @@ MSBrowser.prototype.init = function () {
         return;
     this.initialized = true;
 
-    if (utils.get_cookie("catalog-display_mode") == "thumbnail")
+    if (utils.get_cookie("catalog-display_mode") == "thumbnail") {
         this.display_mode = "thumbnail";
+        if (!this.use_overlay)
+            $("html").addClass("wide").removeClass("wide-1200");
+    }
 
     // get elements
     this.init_options.browser = this;
@@ -84,15 +84,8 @@ MSBrowser.prototype.init = function () {
     else
         this.change_tab("channels", true);
 
-    /*
-    if (this.initial_oid)
-        this.pick(this.initial_oid);
-
-    if (this.display_mode == "list")
-        this.display_as_list();
-    else
-        this.display_as_thumbnails();
-    */
+    //if (this.initial_oid)
+    //    this.pick(this.initial_oid);
 
     var obj = this;
     if (!this.use_overlay) {
@@ -108,29 +101,21 @@ MSBrowser.prototype.init = function () {
                 });
             }, 500);
         }
-
         */
-        this.initial_push = "";
-        this.initial_push_section = "";
         window.onpopstate = function (event) {
-            //console.log("---------", event.state, obj.initial_push, event.target.location.href);
-            if (event.state) {
-                if (event.state.search) {
-                    for (var filter in event.state.filters) {
-                        $("#"+filter).prop("checked", event.state.filters[filter], obj.$main);
-                    }
-                    $("#ms_browser_search_text", obj.$main).val(event.state.search);
-                    obj.search.on_search_submit(true);
+            if (event.state && event.state.ms_tab) {
+                if (event.state.ms_tab == "search")
+                    obj.search.on_url_change();
+                obj.change_tab(event.state.ms_tab, true);
+            } else if (event.target.location.pathname) {
+                if (event.target.location.pathname == obj.url_channels) {
+                    obj.channels.on_hash_change();
+                    obj.change_tab("channels", true);
+                }
+                else if (event.target.location.pathname == obj.url_search)
                     obj.change_tab("search", true);
-                }
-                if (event.state.ms_section) {
-                    obj.change_tab(event.state.ms_section, true);
-                }
-            } else {
-                if (obj.initial_push == event.target.location.href) {
-                    if (obj.initial_push_section)
-                        obj.change_tab(obj.initial_push_section, true);
-                }
+                else if (event.target.location.pathname == obj.url_latest)
+                    obj.change_tab("latest", true);
             }
         };
         $(window).scroll(function () {
@@ -212,44 +197,51 @@ MSBrowser.prototype.get_info = function (data, is_media, full, callback) {
     MSAPI.ajax_call(method, data, request_callback, null, null);
 };
 MSBrowser.prototype.display_content = function ($container, data, cat_oid) {
-    var i;
-    var selectable;
+    var i, selectable, $section;
     if (data.channels && data.channels.length > 0) {
         // sub channels
         selectable = this.selectable_content.indexOf("c") != -1;
+        $section = $("<div class=\"ms-browser-section\"></div>");
         if (!cat_oid)
-            $container.append("<div class=\"ms-browser-section\">"+utils.translate("Channels")+"</div>");
+            $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Channels")+"</h3>");
         else
-            $container.append("<div class=\"ms-browser-section\">"+utils.translate("Sub channels")+"</div>");
+            $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Sub channels")+"</h3>");
         for (i=0; i < data.channels.length; i++) {
             if (data.channels[i].parent_oid === undefined && cat_oid)
                 data.channels[i].parent_oid = cat_oid;
-            $container.append(this.get_content_entry("channel", data.channels[i], selectable));
+            $section.append(this.get_content_entry("channel", data.channels[i], selectable));
         }
+        $container.append($section);
     }
     if (data.live_streams && data.live_streams.length > 0) {
         // live streams
         selectable = this.selectable_content.indexOf("l") != -1;
-        $container.append("<div class=\"ms-browser-section\">"+utils.translate("Live streams")+"</div>");
+        $section = $("<div class=\"ms-browser-section\"></div>");
+        $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Live streams")+"</h3>");
         for (i=0; i < data.live_streams.length; i++) {
-            $container.append(this.get_content_entry("live", data.live_streams[i], selectable));
+            $section.append(this.get_content_entry("live", data.live_streams[i], selectable));
         }
+        $container.append($section);
     }
     if (data.videos && data.videos.length > 0) {
         // videos
         selectable = this.selectable_content.indexOf("v") != -1;
-        $container.append("<div class=\"ms-browser-section\">"+utils.translate("Videos")+"</div>");
+        $section = $("<div class=\"ms-browser-section\"></div>");
+        $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Videos")+"</h3>");
         for (i=0; i < data.videos.length; i++) {
-            $container.append(this.get_content_entry("video", data.videos[i], selectable));
+            $section.append(this.get_content_entry("video", data.videos[i], selectable));
         }
+        $container.append($section);
     }
     if (data.photos_groups && data.photos_groups.length > 0) {
         // photos groups
         selectable = this.selectable_content.indexOf("p") != -1;
-        $container.append("<div class=\"ms-browser-section\">"+utils.translate("Photos groups")+"</div>");
+        $section = $("<div class=\"ms-browser-section\"></div>");
+        $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Photos groups")+"</h3>");
         for (i=0; i < data.photos_groups.length; i++) {
-            $container.append(this.get_content_entry("photos", data.photos_groups[i], selectable));
+            $section.append(this.get_content_entry("photos", data.photos_groups[i], selectable));
         }
+        $container.append($section);
     }
 };
 MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable) {
@@ -285,7 +277,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable) 
     
     html = this._get_entry_links_html(item, item_type, selectable);
     var $entry_links = $(html);
-    this._set_on_click_entry_links($entry_links, item, oid, item_type, selectable);
+    this._set_on_click_entry_links($entry_links, item, item_type, selectable);
     $entry.append($entry_links);
     
     return $entry;
@@ -296,9 +288,9 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     if (!this.use_overlay && item.slug && item_type != "parent" && item_type != "current") {
         markup = "a";
         if (item_type != "channel" && !item.validated && item.can_edit)
-            href = "href=\""+this._get_btn_link(item, "edit") +  "\"";
+            href = "href=\""+this._get_btn_link(item, "edit")+"\"";
         else
-            href = "href=\""+this._get_btn_link(item, "view") +  "\"";
+            href = "href=\""+this._get_btn_link(item, "view")+"\"";
     }
     var html = "<"+markup+" "+href+"class=\"item-entry-link "+(selectable || item_type == "channel" || item_type == "parent" ? "clickable" : "")+"\">";
     if (this.use_overlay || item_type != "current" || !item.hide_image) {
@@ -334,7 +326,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         if (item.can_edit) {
             html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit")+"</a>";
             if (item.can_delete)
-                html += "<span class=\""+this.btn_class+" item-entry-pick-delete-media\"><i class=\"fa fa-close\"></i> "+utils.translate("Delete")+"</span>";
+                html += "<span class=\""+this.btn_class+" item-entry-pick-delete-media\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</span>";
         }
         if (item.can_add_channel || item.can_add_video) {
             html += "<br/>";
@@ -348,18 +340,18 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         html += "</span>";
     }
     if (item.can_edit && !(item_type == "parent" || item_type == "current")) {
-        if (item.unlisted) {
-            var label = item_type == "channel" ? "channel" : "media";
-            html +=     "<span class=\"item-entry-unlisted\" title=\""+utils.translate("This "+label+" is unlisted")+"\"></span>";
-        }
         if (item_type != "channel") {
-            if (item.validated)
-                html += "<span class=\"item-entry-publication published\" title=\""+utils.translate("This media is published")+"\"></span>";
+            if (!item.validated)
+                html += "<span class=\"item-entry-notpublished\" title=\""+utils.translate("This media is not published")+"\"></span>";
+            else if (item.unlisted)
+                html += "<span class=\"item-entry-unlisted\" title=\""+utils.translate("This media is published and unlisted")+"\"></span>";
             else
-                html += "<span class=\"item-entry-publication\" title=\""+utils.translate("This media is not published")+"\"></span>";
+                html += "<span class=\"item-entry-published\" title=\""+utils.translate("This media is published")+"\"></span>";
         }
+        else if (item.unlisted)
+            html +=     "<span class=\"item-entry-unlisted\" title=\""+utils.translate("This channel is unlisted")+"\"></span>";
         if (item_type == "video" && !item.ready)
-            html +=     "<span class=\"item-entry-state\" title=\""+utils.translate("This video is not ready")+"\"></span>";
+            html +=     "<span class=\"item-entry-notready\" title=\""+utils.translate("This video is not ready")+"\"></span>";
     }
     if (item.duration)
         html +=         "<span class=\"item-entry-duration\">"+item.duration+"</span>";
@@ -420,18 +412,20 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
 MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, item_type, item, selectable) {
     if (this.use_overlay) {
         if (item_type == "channel" || item_type == "parent") {
-            $entry_block.click({ obj: this, oid: oid }, function (evt) {
-                evt.data.obj.channels.display_channel(evt.data.oid);
-                evt.data.obj.tree_manager.expand_tree(evt.data.oid);
+            $entry_block.click({ obj: this, oid: oid }, function (event) {
+                event.data.obj.channels.display_channel(event.data.oid);
+                event.data.obj.tree_manager.expand_tree(event.data.oid);
             });
         } else if (selectable) {
-            $entry_block.click({ obj: this, oid: oid }, function (evt) {
-                evt.data.obj.pick(evt.data.oid);
+            $entry_block.click({ obj: this, oid: oid }, function (event) {
+                event.data.obj.pick(event.data.oid);
             });
         }
     }
     else if (!this.use_overlay && item.can_delete) {
-        $(".item-entry-pick-delete-media", $entry_block).click({ obj: this, oid: oid }, function (evt) { evt.data.obj.pick(evt.data.oid, "delete"); });
+        $(".item-entry-pick-delete-media", $entry_block).click({ obj: this, oid: oid }, function (event) {
+            event.data.obj.pick(event.data.oid, "delete");
+        });
     }
 };
 MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectable) {
@@ -457,7 +451,7 @@ MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectabl
                 html += "<a class=\""+this.btn_class+" item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit") +"</a>";
             }
             if (item.can_delete)
-                html += "<span class=\""+this.btn_class+" item-entry-pick-delete-media\"><i class=\"fa fa-close\"></i> "+utils.translate("Delete")+"</span>";
+                html += "<span class=\""+this.btn_class+" item-entry-pick-delete-media\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</span>";
         }
     }
     html += "</div>";
@@ -501,23 +495,28 @@ MSBrowser.prototype._get_btn_link = function (item, action) {
     }
     return "";
 };
-MSBrowser.prototype._set_on_click_entry_links = function ($entry_links, item, oid, item_type, selectable) {
-    if (item_type == "channel" || item_type == "parent")
-        $(".item-entry-display", $entry_links).click({ obj: this, oid: oid }, function (event) {
+MSBrowser.prototype._set_on_click_entry_links = function ($entry_links, item, item_type, selectable) {
+    if (item_type == "channel" || item_type == "parent") {
+        $(".item-entry-display", $entry_links).click({ obj: this, item: item }, function (event) {
             if (event.data.obj.use_overlay)
-                event.data.obj.channels.display_channel(event.data.oid);
+                event.data.obj.channels.display_channel(event.data.item.oid);
         });
+    }
     if (selectable) {
-        $(".item-entry-pick", $entry_links).click({ obj: this, oid: oid }, function (event) { event.data.obj.pick(event.data.oid); });
+        $(".item-entry-pick", $entry_links).click({ obj: this, item: item }, function (event) {
+            event.data.obj.pick(event.data.item.oid);
+        });
     }
     if (!this.use_overlay && item.can_delete) {
-        $(".item-entry-pick-delete-media", $entry_links).click({ obj: this, oid: oid }, function (evt) { evt.data.obj.pick(evt.data.oid, "delete"); });
+        $(".item-entry-pick-delete-media", $entry_links).click({ obj: this, item: item }, function (event) {
+            event.data.obj.pick(event.data.item.oid, "delete");
+        });
     }
 };
 MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, selectable) {
     var html = "<div class=\"overlay-info-title\">";
-    html += "<div class=\"close\" title=\""+utils.translate("Hide this window")+"\" onclick=\"javascript: box_hide_info();\"></div>";
-    html += "<h3><a href=\"\">"+item.title+"</a></h3>";
+    html += "<button type=\"button\" class=\"overlay-info-close "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\"></i></button>";
+    html += "<h3><a href=\""+this._get_btn_link(item, "view")+"\">"+item.title+"</a></h3>";
     html += "</div>";
     html += "<div class=\"overlay-info-content\">";
     if (!this.use_overlay && this.displayed == "search" && item.annotations) {
@@ -571,33 +570,32 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     html += this._get_entry_links_html(item, item_type, selectable);
     html += "</div>";
     html += "</div>";
-    return html;
+    var $info = $(html);
+    $(".overlay-info-close", $info).click({ obj: this }, function (event) {
+        event.data.obj.box_hide_info();
+    });
+    this._set_on_click_entry_links($info, item, item_type, selectable);
+    return $info;
 };
 MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectable, oid, $entry, item) {
-    var obj = this;
-    $(".obj-block-info", $entry).click(function () {
+    $(".obj-block-info", $entry).click({ obj: this, $entry: $entry }, function (event) {
         var info_id = "#"+$entry.attr("id")+"_info";
-        if ($(info_id).html() !== "") {
-            obj.box_open_info($entry);
+        if ($(info_id, event.data.$entry).html() !== "") {
+            event.data.obj.box_open_info($entry);
             return;
         }
-        if (obj.displayed == "search") {
-            var html = obj._get_thumbnail_info_box_html(item, item_type, selectable);
-            var $entry_overlay = $(info_id);
-            $entry_overlay.append(html);
-            obj._set_on_click_entry_links($entry_overlay, item, oid, item_type, selectable);
-            obj.box_open_info($entry);
+        if (event.data.obj.displayed == "search") {
+            var $element = event.data.obj._get_thumbnail_info_box_html(item, item_type, selectable);
+            $(info_id, event.data.$entry).append($element);
+            event.data.obj.box_open_info($entry);
         } else {
-            obj.get_info_for_oid(oid, true, function (data) {
+            event.data.obj.get_info_for_oid(oid, true, function (data) {
                 var item = data.info;
-                var html = obj._get_thumbnail_info_box_html(item, item_type, selectable);
-                var $entry_overlay = $(info_id);
-                $entry_overlay.append(html);
-                obj._set_on_click_entry_links($entry_overlay, item, oid, item_type, selectable);
-                obj.box_open_info($entry);
+                var $element = event.data.obj._get_thumbnail_info_box_html(item, item_type, selectable);
+                $(info_id, event.data.$entry).append($element);
+                event.data.obj.box_open_info($entry);
             });
         }
-        return;
     });
 };
 MSBrowser.prototype.pick = function (oid, action) {

@@ -122,6 +122,12 @@ MSBrowserSearch.prototype.on_show = function () {
         return;
     this.initialized = true;
 
+    this.on_url_change();
+};
+
+MSBrowserSearch.prototype.on_url_change = function () {
+    if (!this.initialized)
+        return;
     // Example of search url: http://192.168.42.8:8000/search/?search=test&in_titles=on&in_descriptions=on&in_keywords=on&in_licenses=on&in_companies=on&in_annotations=on&in_photos=on&for_channels=on&for_videos=on&for_lives=on&for_photos=on
     var data = this.parse_url();
 
@@ -130,18 +136,20 @@ MSBrowserSearch.prototype.on_show = function () {
     for (i=0; i < this.search_in_fields.length; i++) {
         field = this.search_in_fields[i];
         if (this.should_be_displayed(dc, field.items)) {
-            value = field.initial;
-            if (field.name in data)
+            if (data.exists)
                 value = data[field.name] ? true : false;
+            else
+                value = field.initial;
             $("#ms_browser_search_"+field.name, this.$menu).prop("checked", value);
         }
     }
     for (i=0; i < this.search_for_fields.length; i++) {
         field = this.search_for_fields[i];
         if (this.should_be_displayed(dc, field.items)) {
-            value = field.initial;
-            if (field.name in data)
+            if (data.exists)
                 value = data[field.name] ? true : false;
+            else
+                value = field.initial;
             $("#ms_browser_search_"+field.name, this.$menu).prop("checked", value);
         }
     }
@@ -156,6 +164,7 @@ MSBrowserSearch.prototype.parse_url = function () {
     var data = {};
     var query = window.location.search ? window.location.search.substring(1) : null;
     if (query) {
+        data.exists = true;
         var tuples = query.split("&");
         for (var i=0; i < tuples.length; i++) {
             var attr, value;
@@ -182,65 +191,36 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
     if (!search)
         return;
     this.browser.display_loading();
-    // get fields to search in
-    var checked = {
-        ms_browser_search_in_titles: $("#ms_browser_search_in_titles", this.$menu).is(":checked"),
-        ms_browser_search_in_descriptions: $("#ms_browser_search_in_descriptions", this.$menu).is(":checked"),
-        ms_browser_search_in_keywords: $("#ms_browser_search_in_keywords", this.$menu).is(":checked"),
-        ms_browser_search_in_speakers: $("#ms_browser_search_in_speakers", this.$menu).is(":checked"),
-        ms_browser_search_in_licenses: $("#ms_browser_search_in_licenses", this.$menu).is(":checked"),
-        ms_browser_search_in_companies: $("#ms_browser_search_in_companies", this.$menu).is(":checked"),
-        ms_browser_search_in_locations: $("#ms_browser_search_in_locations", this.$menu).is(":checked"),
-        ms_browser_search_in_categories: $("#ms_browser_search_in_categories", this.$menu).is(":checked"),
-        ms_browser_search_in_annotations: $("#ms_browser_search_in_annotations", this.$menu).is(":checked"),
-        ms_browser_search_in_photos: $("#ms_browser_search_in_photos", this.$menu).is(":checked"),
-        ms_browser_search_in_extref: $("#ms_browser_search_in_extref", this.$menu).is(":checked"),
-        ms_browser_search_for_channels: $("#ms_browser_search_for_channels", this.$menu).is(":checked"),
-        ms_browser_search_for_videos: $("#ms_browser_search_for_videos", this.$menu).is(":checked"),
-        ms_browser_search_for_lives: $("#ms_browser_search_for_lives", this.$menu).is(":checked"),
-        ms_browser_search_for_photos: $("#ms_browser_search_for_photos", this.$menu).is(":checked")
-    };
     var dc = this.browser.displayable_content;
+    var url_query = "search="+search;
+    // get fields to search in
     var fields = "";
-    if (checked.ms_browser_search_in_titles)
-        fields += "_title";
-    if (checked.ms_browser_search_in_descriptions)
-        fields += "_description";
-    if (checked.ms_browser_search_in_keywords)
-        fields += "_keywords";
-    if (dc.length > 1 || dc.indexOf("c") == -1) {
-        if (checked.ms_browser_search_in_speakers)
-            fields += "_speaker";
-        if (checked.ms_browser_search_in_licenses)
-            fields += "_license";
-        if (checked.ms_browser_search_in_companies)
-            fields += "_company";
-        if (checked.ms_browser_search_in_locations)
-            fields += "_location";
-        if (checked.ms_browser_search_in_categories)
-            fields += "_categories";
+    var i, field, value;
+    for (i=0; i < this.search_in_fields.length; i++) {
+        field = this.search_in_fields[i];
+        if (this.should_be_displayed(dc, field.items)) {
+            value = $("#ms_browser_search_"+field.name, this.$menu).is(":checked");
+            if (value) {
+                fields += field.name.substring(2);  // remove "in"
+                url_query += "&"+field.name;
+            }
+        }
     }
-    if (dc != "c" && checked.ms_browser_search_in_annotations)
-        fields += "_annotations";
-    if ((dc.indexOf("v") != -1 || dc.indexOf("p") != -1) && checked.ms_browser_search_in_photos)
-        fields += "_photos";
-    if (checked.ms_browser_search_in_extref)
-        fields += "_extref";
     if (fields)
         fields = fields.substring(1);
     else
         fields = "metadata";
-    // get content to search
+    // get content to search for
     var content = "";
-    if (dc.length > 1) {
-        if (dc.indexOf("c") != -1 && checked.ms_browser_search_for_channels)
-            content += "c";
-        if (dc.indexOf("v") != -1 && checked.ms_browser_search_for_videos)
-            content += "v";
-        if (dc.indexOf("l") != -1 && checked.ms_browser_search_for_lives)
-            content += "l";
-        if (dc.indexOf("p") != -1 && checked.ms_browser_search_for_photos)
-            content += "p";
+    for (i=0; i < this.search_for_fields.length; i++) {
+        field = this.search_for_fields[i];
+        if (this.should_be_displayed(dc, field.items)) {
+            value = $("#ms_browser_search_"+field.name, this.$menu).is(":checked");
+            if (value) {
+                content += field.name.substring(4, 5);  // get content first letter
+                url_query += "&"+field.name;
+            }
+        }
     }
     if (!content)
         content = dc;
@@ -250,27 +230,13 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
         content: content,
         fields: fields
     };
-    if (this.filter_validated !== null) {
-        if (this.filter_validated)
-            data.validated = "yes";
-        else
-            data.validated = "no";
-    }
+    if (this.browser.filter_validated !== null)
+        data.validated = this.browser.filter_validated ? "yes" : "no";
     // change url
-    if (!this.browser.use_overlay) {
+    if (!this.browser.use_overlay && !no_pushstate) {
         var title = utils.translate("Result for")+" "+search;
-        var check_in_url = [];
-        for (var check in checked) {
-            var value = check.split("ms_browser_search_")[1];
-            if (checked[check])
-                value = value+"=on";
-            else
-                continue;
-            check_in_url.push(value);
-        }
-        var url = this.browser.url_search+"?search="+search+"&"+check_in_url.join("&");
-        if (!no_pushstate)
-            window.history.pushState({"search": search, "filters": checked}, title, url);
+        var url = this.browser.url_search+"?"+url_query;
+        window.history.pushState({"ms_tab": "search", "search": search}, title, url);
     }
     // execute search request
     var obj = this;
@@ -317,11 +283,10 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
         if (nb_photos_groups > 0)
             results.push(nb_photos_groups+" "+utils.translate("photos group(s)"));
         this.$content.append("<div>"+utils.translate("Matching items:")+" "+results.join(", ")+"</div>");
-    } else {
-        this.$content.html("<div class=\"info\">"+utils.translate("No results.")+"</div>");
-        return;
+        this.browser.display_content(this.$content, response);
     }
-    this.browser.display_content(this.$content, response);
+    else
+        this.$content.html("<div class=\"info\">"+utils.translate("No results.")+"</div>");
 };
 
 MSBrowserSearch.prototype.refresh_display = function () {
