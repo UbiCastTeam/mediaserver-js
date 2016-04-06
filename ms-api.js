@@ -285,7 +285,7 @@ var MSAPI = {
                 else if (xhr.status)
                     reason = xhr.status;
 
-                var msg = reason in MSAPI.methods[method].errors ? MSAPI.methods[method].errors[reason] : "";
+                var msg = MSAPI.methods[method].errors && reason in MSAPI.methods[method].errors ? MSAPI.methods[method].errors[reason] : "";
                 if (!msg)
                     msg = reason in MSAPI.defaults_errors_messages ? MSAPI.defaults_errors_messages[reason] : utils.translate("Request failed:")+" "+thrownError;
 
