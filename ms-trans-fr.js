@@ -72,6 +72,7 @@ utils.add_translations({
     "locations": "emplacements",
     "March": "mars",
     "Matching chapters:": "Chapitres correspodants :",
+    "Matching items:": "Élément correspodants:",
     "May": "mai",
     "Media does not exist.": "Le média n'existe pas.",
     "No information about error.": "Informations sur le média",

@@ -284,7 +284,7 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
             results.push(nb_live_streams+" "+utils.translate("live stream(s)"));
         if (nb_photos_groups > 0)
             results.push(nb_photos_groups+" "+utils.translate("photos group(s)"));
-        this.$content.append("<div>"+utils.translate("Matching items:")+" "+results.join(", ")+"</div>");
+        this.$content.append("<p><b>"+utils.translate("Matching items:")+"</b> "+results.join(", ")+"</p>");
         this.browser.display_content(this.$content, response, "search");
     }
     else
