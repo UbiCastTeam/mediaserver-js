@@ -210,7 +210,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     var has_items = nb_channels > 0 || nb_videos > 0 || nb_live_streams > 0 || nb_photos_groups > 0;
     // channel display
     if (has_items)
-        this.browser.display_content(this.$content, response, "channels");
+        this.browser.display_content(this.$content, response, oid, "channels");
     else {
         if (this.browser.selectable_content.indexOf("c") != -1) {
             if (this.browser.displayable_content.length > 1)

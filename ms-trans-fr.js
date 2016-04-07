@@ -5,6 +5,7 @@
 *******************************************/
 
 utils.add_translations({
+    "Add a channel": "Ajouter une chaîne",
     "Add a sub channel": "Ajouter une sous chaîne",
     "Add a video": "Ajouter une vidéo",
     "Add date, ascending": "Date d'ajout, croissante",

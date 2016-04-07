@@ -129,6 +129,9 @@
 .ms-browser .ms-browser-section {
     overflow: hidden;
 }
+.ms-browser .ms-browser-section-links {
+    float: right;
+}
 .ms-browser .ms-browser-search-title,
 .ms-browser .ms-browser-display-title,
 .ms-browser .ms-browser-section-title {
@@ -560,7 +563,7 @@
 .ms-items .item-entry:hover .item-entry-links {
     display: block;
 }
-.ms-items .item-entry-links .std-btn {
+.ms-items .std-btn {
     padding: 3px 8px;
     cursor: pointer;
 }

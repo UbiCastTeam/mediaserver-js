@@ -285,7 +285,7 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
         if (nb_photos_groups > 0)
             results.push(nb_photos_groups+" "+utils.translate("photos group(s)"));
         this.$content.append("<p><b>"+utils.translate("Matching items:")+"</b> "+results.join(", ")+"</p>");
-        this.browser.display_content(this.$content, response, "search");
+        this.browser.display_content(this.$content, response, null, "search");
     }
     else
         this.$content.html("<div class=\"info\">"+utils.translate("No results.")+"</div>");

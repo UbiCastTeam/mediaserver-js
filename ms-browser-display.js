@@ -283,8 +283,22 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         // sub channels
         selectable = this.selectable_content.indexOf("c") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
-        if (!cat_oid)
+        if (!cat_oid || cat_oid == "0") {
+            if (tab == "channels" && (data.can_add_channel || data.can_add_video)) {
+                if (data.can_add_channel || data.can_add_video) {
+                    var html = "<div class=\"ms-browser-section-links\">";
+                    if (data.can_add_channel) {
+                        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-channel\" href=\""+this._get_btn_link(null, "add_channel")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a channel")+"</a>";
+                    }
+                    if (data.can_add_video) {
+                        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\""+this._get_btn_link(null, "add_video")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a video")+"</a>";
+                    }
+                    html += "</div>";
+                    $section.append(html);
+                }
+            }
             $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Channels")+"</h3>");
+        }
         else
             $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Sub channels")+"</h3>");
         for (i=0; i < data.channels.length; i++) {
@@ -551,9 +565,8 @@ MSBrowser.prototype._get_btn_link = function (item, action) {
     if (item && item.oid) {
         type = item.oid[0];
     }
-    if (!type || type === "" || type === "0") {
-        if (!item || item.oid == "0")
-            return "/channels/#";
+    if (!action && (!type || type === "" || type === "0") && (!item || item.oid == "0")) {
+        return "/channels/#";
     }
     if (action == "view") {
         if (type == "c") {
@@ -577,9 +590,13 @@ MSBrowser.prototype._get_btn_link = function (item, action) {
     } else if (action == "edit") {
         return "/edit/"+item.oid+"/";
     } else if (action == "add_channel") {
-        return "/add-content/channel/?in="+item.oid;
+        if (item)
+            return "/add-content/channel/?in="+item.oid;
+        return "/add-content/channel/";
     } else if (action == "add_video") {
-        return "/add-content/?in="+item.oid+"#add_video";
+        if (item)
+            return "/add-content/?in="+item.oid+"#add_video";
+        return "/add-content/#add_video";
     }
     return "";
 };
