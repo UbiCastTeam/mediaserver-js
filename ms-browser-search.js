@@ -13,13 +13,13 @@ function MSBrowserSearch(options) {
     this.$panel = null;
     this.last_response = null;
     this.search_in_fields = [
-        { name: "in_titles", label: "titles", initial: true, items: null },
-        { name: "in_descriptions", label: "descriptions", initial: true, items: null },
+        { name: "in_title", label: "titles", initial: true, items: null },
+        { name: "in_description", label: "descriptions", initial: true, items: null },
         { name: "in_keywords", label: "keywords", initial: true, items: null },
-        { name: "in_speakers", label: "speakers", initial: true, items: "vlp" },
-        { name: "in_licenses", label: "licenses", initial: false, items: "vlp" },
-        { name: "in_companies", label: "companies", initial: false, items: "vlp" },
-        { name: "in_locations", label: "locations", initial: true, items: "vlp" },
+        { name: "in_speaker", label: "speakers", initial: true, items: "vlp" },
+        { name: "in_license", label: "licenses", initial: false, items: "vlp" },
+        { name: "in_company", label: "companies", initial: false, items: "vlp" },
+        { name: "in_location", label: "locations", initial: true, items: "vlp" },
         { name: "in_categories", label: "categories", initial: false, items: "vlp" },
         { name: "in_annotations", label: "annotations", initial: true, items: "vlp" },
         { name: "in_photos", label: "photos", initial: true, items: "p" },
