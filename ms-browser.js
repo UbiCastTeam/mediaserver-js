@@ -71,6 +71,10 @@ MSBrowser.prototype.init = function () {
             $("html").addClass("wide").removeClass("wide-1200");
     }
 
+    var $messages;
+    if (!this.use_overlay)
+        $messages = $(".messages-block").detach(); // get Django messages
+
     // get elements
     this.init_options.browser = this;
     this.channels = new MSBrowserChannels(this.init_options);
@@ -89,17 +93,18 @@ MSBrowser.prototype.init = function () {
 
     var obj = this;
     if (!this.use_overlay) {
-        var $messages = $(".messages-block").detach(); // move messages
-        var messages_place = "channels";
+        // display Django messages if any
         if ($messages.length > 0) {
-            // FIXME: if the channel takes too much time to load, the message will not appear
+            $messages.attr("class", "");
             setTimeout(function () {
-                $("div", $messages).each(function () {
-                    var lvl = $(this).hasClass("success") ? "success" : "error";
-                    obj.display_message(messages_place, $(this).html(), lvl);
-                });
+                $(".ms-browser-message", obj.$widget).html("").append($messages);
+                $(".ms-browser-message", obj.$widget).css("display", "block");
+                setTimeout(function () {
+                    $(".ms-browser-message", obj.$widget).css("display", "");
+                }, 5000);
             }, 500);
         }
+        // listen to navigation history changes
         window.onpopstate = function (event) {
             obj.on_hash_change(event.target.location);
         };
@@ -205,27 +210,27 @@ MSBrowser.prototype.pick = function (oid, action, no_close) {
 };
 MSBrowser.prototype._pick = function (oid, result, action, no_close) {
     if (result.success) {
-        // change current selection
-        if (this.current_selection && this.current_selection.oid)
-            $("#item_entry_"+this.current_selection.oid+"_"+this.displayed, this.$main).removeClass("selected");
-        this.current_selection = this.catalog[oid];
-        $("#item_entry_"+oid+"_"+this.displayed, this.$main).addClass("selected");
-        if (this.use_overlay && this.overlay && !no_close)
-            this.overlay.hide();
-        if (this.on_pick) {
-            if (!this.use_overlay) {
-                if (action == "delete" && window.delete_form_manager)
-                    window.delete_form_manager.show(oid, this.catalog[oid].title);
-            } else {
-                this.on_pick(this.catalog[oid]);
-            }
+        if (!this.use_overlay) {
+            if (action == "delete" && window.delete_form_manager)
+                window.delete_form_manager.show(oid, this.catalog[oid].title);
         }
-        // select and open channel
-        if (this.channels) {
-            if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))
-                this.channels.display_channel(oid);
-            else
-                this.channels.display_channel(result.info.parent_oid);
+        else {
+            // change current selection
+            if (this.current_selection && this.current_selection.oid)
+                $("#item_entry_"+this.current_selection.oid+"_"+this.displayed, this.$main).removeClass("selected");
+            this.current_selection = this.catalog[oid];
+            $("#item_entry_"+oid+"_"+this.displayed, this.$main).addClass("selected");
+            if (this.overlay && !no_close)
+                this.overlay.hide();
+            if (this.on_pick)
+                this.on_pick(this.catalog[oid]);
+            // select and open channel
+            if (this.channels) {
+                if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))
+                    this.channels.display_channel(oid);
+                else
+                    this.channels.display_channel(result.info.parent_oid);
+            }
         }
     }
     else {

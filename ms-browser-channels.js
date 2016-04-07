@@ -74,7 +74,7 @@ MSBrowserChannels.prototype.on_show = function () {
     if (this.init_options.initial_state && this.init_options.initial_state.channel_slug)
         this.display_channel_by_slug(this.init_options.initial_state.channel_slug);
     else
-        this.display_channel("0");
+        this.display_channel(this.current_channel_oid);
 };
 
 MSBrowserChannels.prototype.set_order = function (order) {
@@ -91,11 +91,13 @@ MSBrowserChannels.prototype.display_channel_by_slug = function (slug) {
     });
 };
 MSBrowserChannels.prototype.display_channel = function (oid) {
-    this.browser.display_loading();
     this.current_channel_oid = oid;
-    this.tree_manager.set_active(oid);
     this.browser.box_hide_info();
 
+    if (!this.initialized)
+        return;
+    this.browser.display_loading();
+    this.tree_manager.set_active(oid);
     if (oid != "0") {
         var obj = this;
         this.browser.get_info_for_oid(oid, true, function (response) {
@@ -110,12 +112,14 @@ MSBrowserChannels.prototype._on_channel_error = function (response) {
     this.browser.hide_loading();
     this.last_response = null;
 
-    var message = "";
+    var message;
     if (!this.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
-        message = "<p>"+utils.translate("Please login to access this channel")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p>";
+        message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this channel")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
     }
-    this.$content.html("<div>"+response.error + message+"</div>");
+    else
+        message = "<div class=\"error\">"+response.error+"</div>";
+    this.$content.html(message);
 };
 
 MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {

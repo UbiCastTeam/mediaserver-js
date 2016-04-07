@@ -278,12 +278,12 @@ var MSAPI = {
         else {
             ajax_data.error = function(xhr, textStatus, thrownError) {
                 var reason = "?";
-                if (textStatus == "error")
+                if (xhr.status)
+                    reason = xhr.status;
+                else if (textStatus == "error")
                     reason = "unreachable";
                 else if (textStatus == "timeout")
                     reason = "timeout";
-                else if (xhr.status)
-                    reason = xhr.status;
 
                 var msg = MSAPI.methods[method].errors && reason in MSAPI.methods[method].errors ? MSAPI.methods[method].errors[reason] : "";
                 if (!msg)

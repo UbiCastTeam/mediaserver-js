@@ -504,7 +504,7 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
             });
         }
     }
-    else if (!this.use_overlay && item.can_delete) {
+    else if (item.can_delete) {
         $(".item-entry-pick-delete-media", $entry_block).click({ obj: this, oid: oid }, function (event) {
             event.data.obj.pick(event.data.oid, "delete");
         });

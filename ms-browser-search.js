@@ -250,12 +250,14 @@ MSBrowserSearch.prototype._on_ajax_error = function (response) {
     this.browser.hide_loading();
     this.last_response = null;
 
-    var message = "";
+    var message;
     if (!this.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
-        message = "<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p>";
+        message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
     }
-    this.$content.html("<div>"+response.error + message+"</div>");
+    else
+        message = "<div class=\"error\">"+response.error+"</div>";
+    this.$content.html(message);
 };
 
 MSBrowserSearch.prototype._on_ajax_response = function (response) {

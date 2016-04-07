@@ -219,10 +219,11 @@
     margin-top: 8px;
 }
 
-/* loading */
+/* loading and message */
+.ms-browser .ms-browser-message,
 .ms-browser .ms-browser-loading {
     position: absolute;
-    top: 8px;
+    top: 20px;
     left: 40%;
     display: none;
     padding: 5px;
@@ -231,6 +232,10 @@
     border-radius: 3px;
     background: #000;
     background: rgba(0, 0, 0, .7);
+}
+.ms-browser .ms-browser-message {
+    background: #fff;
+    color: #000;
 }
 .ms-browser .ms-browser-loading div {
     font-size: 125%;
