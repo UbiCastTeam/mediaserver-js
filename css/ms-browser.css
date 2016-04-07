@@ -20,11 +20,11 @@
 
 .ms-browser a {
     text-decoration: none;
-    color: #317e9f;
+    color: #1d4b5f;
 }
 .ms-browser a:hover {
     text-decoration: none;
-    color: #44b0df;
+    color: #086E9A;
 }
 
 .ms-browser img {
@@ -353,7 +353,7 @@
 .ms-channels-tree .channel-btn {
     display: block;
     cursor: pointer;
-    color: #317e9f;
+    color: #1D4B5F;
     text-align: left;
     background: transparent;
     border: 0 none;
@@ -365,7 +365,10 @@
 }
 .ms-channels-tree .channel-btn:hover,
 .ms-channels-tree .channel-active .channel-btn {
-    color: #44b0df;
+    color: #086E9A;
+}
+.ms-channels-tree .channel-active .channel-btn {
+    font-weight: bold;
 }
 .ms-channels-tree .channel-locked,
 .ms-channels-tree .channel-empty,
@@ -449,10 +452,10 @@
 }
 .ms-items .item-entry-link.clickable {
     cursor: pointer;
-    color: #317e9f;
+    color: #1D4B5F;
 }
 .ms-items .item-entry-link.clickable:hover {
-    color: #44b0df;
+    color: #086E9A;
 }
 .ms-items .item-entry-content {
     display: block;
