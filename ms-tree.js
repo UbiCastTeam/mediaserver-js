@@ -3,6 +3,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
+/* globals utils, MSAPI */
 
 function MSTreeManager(options) {
     // params
@@ -142,7 +143,12 @@ MSTreeManager.prototype.load_tree = function (parent_oid, callback) {
             error: ecallback
         });
     } else {
-        MSAPI.ajax_call("get_channels_tree", data, obj._ajax_cb, scallback, ecallback);
+        MSAPI.ajax_call("get_channels_tree", data, function (response) {
+            if (response.success)
+                scallback(response);
+            else
+                ecallback(response.xhr, response.textStatus, response.thrownError);
+        });
     }
 };
 MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callback) {
@@ -302,7 +308,12 @@ MSTreeManager.prototype.load_path = function (oid, callback) {
             error: ecallback
         });
     } else {
-        MSAPI.ajax_call("get_channels_path", data, callback, scallback, ecallback);
+        MSAPI.ajax_call("get_channels_path", data, function (response) {
+            if (response.success)
+                scallback(response);
+            else
+                ecallback(response.xhr, response.textStatus, response.thrownError);
+        });
     }
 };
 

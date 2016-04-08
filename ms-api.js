@@ -235,7 +235,7 @@ var MSAPI = {
             url: "/api/v2/social/annotations/notification/"
         }
     },
-    ajax_call: function(method, data, callback, scallback, ecallback, async, file, xhr_function) {
+    ajax_call: function (method, data, callback, async, file, xhr_function) {
         if (typeof MSAPI.methods[method] === "undefined")
             throw new Error("Unknown method.");
 
@@ -259,24 +259,14 @@ var MSAPI = {
             method: MSAPI.methods[method].method,
             data: data,
             dataType: "json",
-            cache: false
-        };
-
-        if (scallback) {
-            ajax_data.success = scallback;
-        }
-        else {
-            ajax_data.success = function(response) {
+            cache: false,
+            success: function (response) {
                 if (!response.success)
                     response.error = response.error ? response.error : utils.translate("No information about error.");
-                return callback(response);
-            };
-        }
-        if (ecallback) {
-            ajax_data.error = ecallback;
-        }
-        else {
-            ajax_data.error = function(xhr, textStatus, thrownError) {
+                if (callback)
+                    return callback(response);
+            },
+            error: function (xhr, textStatus, thrownError) {
                 var reason = "?";
                 if (xhr.status)
                     reason = xhr.status;
@@ -292,10 +282,14 @@ var MSAPI = {
                 return callback({
                     success: false,
                     error: msg,
-                    error_code: xhr.status
+                    error_code: xhr.status,
+                    xhr: xhr,
+                    textStatus: textStatus,
+                    thrownError: thrownError
                 });
-            };
-        }
+            }
+        };
+
         if (typeof async === "undefined" || async) {
             ajax_data.async = async;
         }

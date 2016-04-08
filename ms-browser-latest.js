@@ -113,15 +113,14 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
         data.count = count;
     var obj = this;
     this.browser.display_loading();
-    var callback = function (response) {
+    MSAPI.ajax_call("get_latest_content", data, function (response) {
         if (response.items && this.last_response && this.last_response.items) {
             // merge response items
             response.items = this.last_response.items.concat(response.items);
         }
         obj._on_ajax_response(response);
         obj.latest_loading = false;
-    };
-    MSAPI.ajax_call("get_latest_content", data, callback);
+    });
 };
 
 MSBrowserLatest.prototype._on_ajax_error = function (response) {

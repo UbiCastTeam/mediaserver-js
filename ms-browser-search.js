@@ -242,10 +242,9 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
     }
     // execute search request
     var obj = this;
-    var callback = function (response) {
+    MSAPI.ajax_call("search", data, function (response) {
         obj._on_ajax_response(response);
-    };
-    MSAPI.ajax_call("search", data, callback);
+    });
 };
 
 MSBrowserSearch.prototype._on_ajax_error = function (response) {

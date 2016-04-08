@@ -185,13 +185,12 @@ MSBrowser.prototype.get_info = function (data, is_media, full, callback) {
         data.full = "yes";
     var method = is_media ? "get_medias" : "get_channels";
     var obj = this;
-    var request_callback = function (response) {
+    MSAPI.ajax_call(method, data, function (response) {
         if (response.success)
             obj.update_catalog(response.info, full);
         obj.hide_loading();
         callback(response);
-    };
-    MSAPI.ajax_call(method, data, request_callback, null, null);
+    });
 };
 MSBrowser.prototype.pick = function (oid, action, no_close) {
     if (oid === null || oid === undefined) {
