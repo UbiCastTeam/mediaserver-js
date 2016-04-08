@@ -284,7 +284,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         selectable = this.selectable_content.indexOf("c") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
         if (!cat_oid || cat_oid == "0") {
-            if (tab == "channels" && (data.can_add_channel || data.can_add_video)) {
+            if (!this.use_overlay && tab == "channels" && (data.can_add_channel || data.can_add_video)) {
                 if (data.can_add_channel || data.can_add_video) {
                     var html = "<div class=\"ms-browser-section-links\">";
                     if (data.can_add_channel) {
