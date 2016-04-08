@@ -12,6 +12,10 @@ function MSBrowserLatest(options) {
     this.$menu = null;
     this.$panel = null;
     this.last_response = null;
+    this.more = false;
+    this.start_date = "";
+    this.date_label = "";
+    this.$section = null;
 
     utils.setup_class(this, options, [
         // allowed options
@@ -90,9 +94,9 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
         data.validated = this.browser.filter_validated ? "yes" : "no";
     
     var start_value = 0;
-    if (this.latest_start) {
-        data.start = this.latest_start;
-        start_value = parseInt(this.latest_start.replace(new RegExp("[-_]", "g"), ""), 10);
+    if (this.start_date) {
+        data.start = this.start_date;
+        start_value = parseInt(this.start_date.replace(new RegExp("[-_]", "g"), ""), 10);
         if (isNaN(start_value))
             start_value = 0;
     }
@@ -110,7 +114,10 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
     var obj = this;
     this.browser.display_loading();
     var callback = function (response) {
-        obj.last_response = response;
+        if (response.items && this.last_response && this.last_response.items) {
+            // merge response items
+            response.items = this.last_response.items.concat(response.items);
+        }
         obj._on_ajax_response(response);
         obj.latest_loading = false;
     };
@@ -138,16 +145,17 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
     this.browser.hide_loading();
     this.last_response = response;
 
-    this.latest_start = response.max_date;
-    this.latest_more = response.more === true;
-    var $section = $("<div class=\"ms-browser-section\"></div>");
+    this.start_date = response.max_date;
+    this.more = response.more === true;
+    if (!this.$section)
+        this.$section = $("<div class=\"ms-browser-section\"></div>");
     for (var i=0; i < response.items.length; i++) {
         var item = response.items[i];
-        if (item.date_label && (item.date_label != this.latest_date_label)) {
-            this.latest_date_label = item.date_label;
-            this.$content.append($section);
-            $section = $("<div class=\"ms-browser-section\"></div>");
-            $section.append("<h3 class=\"ms-browser-section-title\">"+item.date_label+"</h3>");
+        if (item.date_label && (item.date_label != this.date_label)) {
+            this.date_label = item.date_label;
+            this.$content.append(this.$section);
+            this.$section = $("<div class=\"ms-browser-section\"></div>");
+            this.$section.append("<h3 class=\"ms-browser-section-title\">"+item.date_label+"</h3>");
         }
         var type = "channel";
         if (item.type == "v")
@@ -157,27 +165,35 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         if (item.type == "p")
             type = "photos";
         var selectable = this.browser.selectable_content.indexOf(item.type) != -1;
-        $section.append(this.browser.get_content_entry(type, item, selectable, "latest"));
+        this.$section.append(this.browser.get_content_entry(type, item, selectable, "latest"));
     }
-    this.$content.append($section);
-    if (this.latest_more)
+    this.$content.append(this.$section);
+    if (this.more)
         $(".ms-browser-latest-btns", this.$panel).css("display", "block");
     else
         $(".ms-browser-latest-btns", this.$panel).css("display", "none");
 };
 
 MSBrowserLatest.prototype.display_more = function (count) {
-    if (!this.latest_more)
+    if (!this.more)
         return;
     this.load_latest(count);
 };
 MSBrowserLatest.prototype.refresh_display = function (reset) {
     if (reset && this.last_response)
         this.last_response = null;
-    // TODO: handle last response
-    this.latest_more = false;
-    this.latest_start = "";
-    this.latest_date_label = "";
-    this.$content.html("");
-    this.load_latest();
+    if (this.last_response) {
+        this.date_label = "";
+        this.$section = null;
+        this.$content.html("");
+        this._on_ajax_response(this.last_response);
+    }
+    else {
+        this.more = false;
+        this.start_date = "";
+        this.date_label = "";
+        this.$section = null;
+        this.$content.html("");
+        this.load_latest();
+    }
 };

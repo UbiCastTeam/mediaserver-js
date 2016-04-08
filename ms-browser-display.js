@@ -76,13 +76,13 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         { "views-asc": utils.translate("Number of views, ascending") }
     ];
     var html = "<div class=\"ms-browser-top-btns\">";
-    html += "<button type=\"button\" id=\"ms_browser_display_btn\" class=\""+this.btn_class+"\">"+utils.translate("Display")+"</button>";
+    html += "<button type=\"button\" id=\"ms_browser_display_btn\" class=\"ms-browser-top-btn "+this.btn_class+"\">"+utils.translate("Display")+"</button>";
 
     html += "<div id=\"ms_browser_display_menu\" class=\"ms-browser-top-menu\">";
     // display mode
     html += "<div><b class=\"ms-browser-top-menu-title\">"+utils.translate("Display mode:")+"</b><br/>";
-    html += "<button type=\"button\" class=\"std-btn "+( this.display_mode === "list" ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
-    html += "<button type=\"button\" class=\"std-btn "+( this.display_mode === "thumbnail" ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
+    html += "<button type=\"button\" class=\"std-btn "+(this.display_mode == "list" ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
+    html += "<button type=\"button\" class=\"std-btn "+(this.display_mode == "thumbnail" ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
     // channel sorting
     html += "<div class=\"ms-browser-channel-order\"><label class=\"ms-browser-top-menu-title\" for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label><br/>";
     html += " <select id=\"ms_browser_order_channel\">";
@@ -141,7 +141,7 @@ MSBrowser.prototype.toggle_menu = function (menu) {
         $btn.removeClass("active");
         $menu.removeClass("active");
     } else {
-        $(".ms-browser-top-btns .active").removeClass("active");
+        $(".ms-browser-top-btn.active").removeClass("active");
         $(".ms-browser-top-menu.active").removeClass("active");
         $btn.addClass("active");
         $menu.addClass("active");

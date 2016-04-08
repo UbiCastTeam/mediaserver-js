@@ -204,7 +204,7 @@
     right: 8px;
     height: 24px;
 }
-.ms-browser .ms-browser-top-btns .active {
+.ms-browser .ms-browser-top-btn.active {
     background: #fff;
 }
 .ms-browser .ms-browser-top-menu {

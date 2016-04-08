@@ -26,6 +26,7 @@ function MSBrowser(options) {
     this.overlay = null;
 
     this.catalog = {};
+    this.display_mode = "list";
     this.displayed = "channels";
     this.current_selection = null;
 
@@ -34,7 +35,6 @@ function MSBrowser(options) {
     this.url_search = "/search/";
     this.url_latest = "/latest/";
 
-    this.display_mode = "list";
     utils.setup_class(this, options, [
         // allowed options
         "title",
@@ -211,33 +211,32 @@ MSBrowser.prototype.pick = function (oid, action, no_close) {
     });
 };
 MSBrowser.prototype._pick = function (oid, result, action, no_close) {
-    if (result.success) {
-        if (!this.use_overlay) {
-            if (action == "delete" && window.delete_form_manager)
-                window.delete_form_manager.show(oid, this.catalog[oid].title);
-        }
-        else {
-            // change current selection
-            if (this.current_selection && this.current_selection.oid)
-                $("#item_entry_"+this.current_selection.oid+"_"+this.displayed, this.$main).removeClass("selected");
-            this.current_selection = this.catalog[oid];
-            $("#item_entry_"+oid+"_"+this.displayed, this.$main).addClass("selected");
-            if (this.overlay && !no_close)
-                this.overlay.hide();
-            if (this.on_pick)
-                this.on_pick(this.catalog[oid]);
-            // select and open channel
-            if (this.channels) {
-                if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))
-                    this.channels.display_channel(oid);
-                else
-                    this.channels.display_channel(result.info.parent_oid);
-            }
-        }
-    }
-    else {
+    if (!result.success) {
         // this should never happen
         console.log("Unable to get info about initial selection:"+result.error);
+        return;
+    }
+    if (!this.use_overlay) {
+        if (action == "delete" && window.delete_form_manager)
+            window.delete_form_manager.show(oid, this.catalog[oid].title);
+    }
+    else {
+        // change current selection
+        if (this.current_selection && this.current_selection.oid)
+            $("#item_entry_"+this.current_selection.oid+"_"+this.displayed, this.$main).removeClass("selected");
+        this.current_selection = this.catalog[oid];
+        $("#item_entry_"+oid+"_"+this.displayed, this.$main).addClass("selected");
+        if (this.overlay && !no_close)
+            this.overlay.hide();
+        if (this.on_pick)
+            this.on_pick(this.catalog[oid]);
+        // select and open channel
+        if (this.channels) {
+            if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))
+                this.channels.display_channel(oid);
+            else
+                this.channels.display_channel(result.info.parent_oid);
+        }
     }
 };
 MSBrowser.prototype.get_last_pick = function () {
