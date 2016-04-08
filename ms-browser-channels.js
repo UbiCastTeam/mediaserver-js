@@ -26,14 +26,14 @@ function MSBrowserChannels(options) {
     this.init_options = options ? options : {};
 }
 
-MSBrowserChannels.prototype.get_menu_html = function () {
+MSBrowserChannels.prototype.get_menu_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_channels_menu\" class=\"ms-browser-block\" style=\"display: none;\">";
     html += "</div>";
     this.$menu = $(html);
     return this.$menu;
 };
-MSBrowserChannels.prototype.get_content_html = function () {
+MSBrowserChannels.prototype.get_content_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_channels\" class=\"ms-browser-content\" style=\"display: none;\">";
     html +=     "<div class=\"ms-browser-header\"><h1>"+utils.translate("Channel's content")+"</h1></div>";
@@ -79,7 +79,7 @@ MSBrowserChannels.prototype.on_show = function () {
 
 MSBrowserChannels.prototype.set_order = function (order) {
     this.order = order ? order : "default";
-    this.display_channel(this.current_channel_oid);
+    this.refresh_display(true);
 };
 MSBrowserChannels.prototype.display_channel_by_slug = function (slug) {
     var obj = this;
@@ -135,6 +135,8 @@ MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
         data.parent_selection_oid = this.browser.parent_selection_oid;
     if (this.browser.displayable_content)
         data.content = this.browser.displayable_content;
+    if (this.browser.filter_editable !== null)
+        data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
     data.order_by = this.order;
@@ -223,7 +225,11 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     }
 };
 
-MSBrowserChannels.prototype.refresh_display = function () {
+MSBrowserChannels.prototype.refresh_display = function (reset) {
+    if (reset && this.last_response)
+        this.last_response = null;
     if (this.last_response)
         this._on_channel_content(this.last_response, this.current_channel_oid);
+    else
+        this.display_channel(this.current_channel_oid);
 };

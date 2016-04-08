@@ -58,6 +58,10 @@
     padding: 0 5px;
 }
 
+.ms-browser option {
+    padding: 2px 5px;
+}
+
 .ms-browser .ms-browser-clear {
     clear: both;
     overflow: hidden;
@@ -133,14 +137,14 @@
     float: right;
 }
 .ms-browser .ms-browser-search-title,
-.ms-browser .ms-browser-display-title,
+.ms-browser .ms-browser-top-menu-title,
 .ms-browser .ms-browser-section-title {
     font-size: 125%;
     font-weight: bold;
     text-decoration: italic;
     color: #666;
 }
-.ms-browser .ms-browser-display-title,
+.ms-browser .ms-browser-top-menu-title,
 .ms-browser .ms-browser-search-title {
     margin-bottom: 4px;
     margin-left: -8px;
@@ -200,13 +204,16 @@
     right: 8px;
     height: 24px;
 }
+.ms-browser .ms-browser-top-btns .active {
+    background: #fff;
+}
 .ms-browser .ms-browser-top-menu {
     padding: 8px;
     padding-left: 16px;
     position: absolute;
     z-index: 4;
-    top: 36px;
-    right: 8px;
+    top: 25px;
+    right: 0;
     display: none;
     line-height: 24px;
     white-space:nowrap;
@@ -240,19 +247,15 @@
     background: #fff;
     color: #000;
 }
-.ms-browser .ms-browser-loading div {
-    font-size: 125%;
-    line-height: 32px;
-    padding-left: 40px;
-    background: transparent url('../images/32_loading.gif') 0 50% no-repeat;
+.ms-browser .ms-browser-loading {
+    font-size: 150%;
 }
 
 /* messages */
 .ms-browser .info,
 .ms-browser .success,
 .ms-browser .warning,
-.ms-browser .error,
-.ms-browser .loading {
+.ms-browser .error {
     margin: 5px;
     padding: 5px;
     display: block;
@@ -267,8 +270,7 @@
 .ms-browser .info:before,
 .ms-browser .success:before,
 .ms-browser .warning:before,
-.ms-browser .error:before,
-.ms-browser .loading:before {
+.ms-browser .error:before {
     padding-right: 5px;
     font: normal normal normal 14px/1 FontAwesome;
 }
@@ -300,13 +302,6 @@
 .ms-browser .error:before {
     content: "\f06a";
 }
-.ms-browser .loading {
-    color: #444;
-    border-color: #444;
-}
-/*.ms-browser .loading:before {
-    content: "\f110";
-}*/
 
 
 /* channels tree */

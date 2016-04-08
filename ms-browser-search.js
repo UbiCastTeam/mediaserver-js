@@ -50,7 +50,7 @@ MSBrowserSearch.prototype.should_be_displayed = function (dc, items) {
     return false;
 };
 
-MSBrowserSearch.prototype.get_menu_html = function () {
+MSBrowserSearch.prototype.get_menu_jq = function () {
     var dc = this.browser.displayable_content;
     var i, field;
     var html = "";
@@ -104,7 +104,7 @@ MSBrowserSearch.prototype.get_menu_html = function () {
     });
     return this.$menu;
 };
-MSBrowserSearch.prototype.get_content_html = function () {
+MSBrowserSearch.prototype.get_content_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_search\" class=\"ms-browser-content\" style=\"display: none;\">";
     html +=     "<div class=\"ms-browser-header\"><h1>"+utils.translate("Search results")+"</h1></div>";
@@ -230,6 +230,8 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
         content: content,
         fields: fields
     };
+    if (this.browser.filter_editable !== null)
+        data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
     // change url
@@ -291,7 +293,11 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
         this.$content.html("<div class=\"info\">"+utils.translate("No results.")+"</div>");
 };
 
-MSBrowserSearch.prototype.refresh_display = function () {
+MSBrowserSearch.prototype.refresh_display = function (reset) {
+    if (reset && this.last_response)
+        this.last_response = null;
     if (this.last_response)
         this._on_ajax_response(this.last_response);
+    else
+        this.on_search_submit(true);
 };

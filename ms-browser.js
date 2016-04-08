@@ -11,6 +11,7 @@ function MSBrowser(options) {
     this.place = null;
     this.selectable_content = "cvlp"; // v for videos, l for lives, p for photos group and c for channels
     this.displayable_content = "cvlp";
+    this.filter_editable = null;
     this.filter_validated = null;
     this.parent_selection_oid = null; // special for channel parent selection
     this.initial_oid = null;
@@ -40,6 +41,7 @@ function MSBrowser(options) {
         "place",
         "selectable_content",
         "displayable_content",
+        "filter_editable",
         "filter_validated",
         "parent_selection_oid",
         "initial_oid",

@@ -21,7 +21,7 @@ function MSBrowserLatest(options) {
     this.init_options = options ? options : {};
 }
 
-MSBrowserLatest.prototype.get_menu_html = function () {
+MSBrowserLatest.prototype.get_menu_jq = function () {
     var dc = this.browser.displayable_content;
     var html = "";
     html += "<div id=\"ms_browser_latest_menu\" class=\"ms-browser-block\" style=\"display: none;\">";
@@ -39,7 +39,7 @@ MSBrowserLatest.prototype.get_menu_html = function () {
     $(".ms-browser-latest-refresh", this.$menu).click({ obj: this }, function (evt) { evt.data.obj.refresh_display(); });
     return this.$menu;
 };
-MSBrowserLatest.prototype.get_content_html = function () {
+MSBrowserLatest.prototype.get_content_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_latest\" class=\"ms-browser-content\" style=\"display: none;\">";
     html +=     "<div class=\"ms-browser-header\"><h1>"+utils.translate("Latest content added")+"</h1></div>";
@@ -84,6 +84,8 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
                 data.content += dc[i];
         }
     }
+    if (this.browser.filter_editable !== null)
+        data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
     
@@ -169,7 +171,10 @@ MSBrowserLatest.prototype.display_more = function (count) {
         return;
     this.load_latest(count);
 };
-MSBrowserLatest.prototype.refresh_display = function () {
+MSBrowserLatest.prototype.refresh_display = function (reset) {
+    if (reset && this.last_response)
+        this.last_response = null;
+    // TODO: handle last response
     this.latest_more = false;
     this.latest_start = "";
     this.latest_date_label = "";
