@@ -562,6 +562,9 @@
     padding: 3px 8px;
     cursor: pointer;
 }
+.ms-items button.std-btn {
+    padding: 2px 7px;
+}
 .overlay-info .item-entry-links .std-btn a {
     text-decoration: none;
     color: #333;
