@@ -9,19 +9,20 @@ function MSBrowserChannels(options) {
     // params
     this.browser = null;
     this.display_itunes_rss = false;
+    this.current_channel_oid = "0";
     // vars
     this.$menu = null;
     this.$panel = null;
     this.$content = null;
     this.tree_manager = null;
-    this.current_channel_oid = "0";
     this.order = "default";
     this.last_response = null;
 
     utils.setup_class(this, options, [
         // allowed options
         "browser",
-        "display_itunes_rss"
+        "display_itunes_rss",
+        "current_channel_oid"
     ]);
     this.init_options = options ? options : {};
 }

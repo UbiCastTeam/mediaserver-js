@@ -1,3 +1,6 @@
+/* CSS for MediaServer browser */
+/* Additional CSS for non overlay use */
+
 /* ms-browser */
 .ms-browser .main-block {
     border: none;
@@ -270,4 +273,8 @@
 .overlay-info-content a:hover {
     color: #fff;
     text-decoration: underline;
+}
+.overlay-info .item-entry-links .std-btn a {
+    text-decoration: none;
+    color: #333;
 }

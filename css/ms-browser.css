@@ -1,4 +1,4 @@
-/* CSS for catalog browser */
+/* CSS for MediaServer browser */
 .ms-browser {
     margin: 0;
     padding: 0;
@@ -65,6 +65,23 @@
 .ms-browser .ms-browser-clear {
     clear: both;
     overflow: hidden;
+}
+
+
+/* buttons */
+.ms-browser .std-btn {
+    padding: 3px 8px;
+    cursor: pointer;
+}
+.ms-browser button.std-btn {
+    padding: 2px 7px;
+}
+.ms-browser .std-btn + .std-btn {
+    margin-left: 8px;
+}
+.ms-browser br + .std-btn,
+.ms-browser br + .std-btn + .std-btn {
+    margin-top: 8px;
 }
 
 
@@ -557,24 +574,6 @@
 .ms-browser.ms-browser-display-display .ms-browser-menu .ms-browser-panel .cb-display,
 .ms-items .item-entry:hover .item-entry-links {
     display: block;
-}
-.ms-items .std-btn {
-    padding: 3px 8px;
-    cursor: pointer;
-}
-.ms-items button.std-btn {
-    padding: 2px 7px;
-}
-.overlay-info .item-entry-links .std-btn a {
-    text-decoration: none;
-    color: #333;
-}
-.ms-items .item-entry-links .std-btn + .std-btn {
-    margin-left: 8px;
-}
-.ms-items .item-entry-links br + .std-btn,
-.ms-items .item-entry-links br + .std-btn + .std-btn {
-    margin-top: 8px;
 }
 .ms-browser .ms-browser-menu .ms-browser-panel .cb-display,
 .ms-browser .ms-browser-latest-place.no-channels .item-type-channel {

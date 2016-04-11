@@ -79,6 +79,12 @@ MSBrowser.prototype.init = function () {
 
     // get elements
     this.init_options.browser = this;
+    if (this.current_selection && this.current_selection.oid) {
+        if (this.current_selection.oid.indexOf("c") === 0 || !isNaN(parseInt(this.current_selection.oid, 10)))
+            this.init_options.current_channel_oid = this.current_selection.oid;
+        else
+            this.init_options.current_channel_oid = this.current_selection.parent_oid;
+    }
     this.channels = new MSBrowserChannels(this.init_options);
     this.search = new MSBrowserSearch(this.init_options);
     this.latest = new MSBrowserLatest(this.init_options);
