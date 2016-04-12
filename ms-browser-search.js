@@ -248,7 +248,6 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
 };
 
 MSBrowserSearch.prototype._on_ajax_error = function (response) {
-    this.browser.hide_loading();
     this.last_response = null;
 
     var message;
@@ -262,10 +261,10 @@ MSBrowserSearch.prototype._on_ajax_error = function (response) {
 };
 
 MSBrowserSearch.prototype._on_ajax_response = function (response) {
+    this.browser.hide_loading();
     if (!response.success)
         return this._on_ajax_error(response);
 
-    this.browser.hide_loading();
     this.last_response = response;
 
     var nb_channels = response.channels ? response.channels.length : 0;

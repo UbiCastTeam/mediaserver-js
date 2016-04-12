@@ -110,7 +110,6 @@ MSBrowserChannels.prototype.display_channel = function (oid) {
 };
 
 MSBrowserChannels.prototype._on_channel_error = function (response) {
-    this.browser.hide_loading();
     this.last_response = null;
 
     var message;
@@ -124,8 +123,10 @@ MSBrowserChannels.prototype._on_channel_error = function (response) {
 };
 
 MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
-    if (this.current_channel_oid != oid)
+    if (this.current_channel_oid != oid) {
+        this.browser.hide_loading();
         return;
+    }
     if (response_info && !response_info.success)
         return this._on_channel_error(response_info);
 
@@ -157,12 +158,12 @@ MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
 };
 
 MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
+    this.browser.hide_loading();
     if (this.current_channel_oid != oid)
         return;
     if (!response.success)
         return this._on_channel_error(response);
 
-    this.browser.hide_loading();
     this.last_response = response;
 
     if (!this.use_overlay && this.display_mode == "thumbnail")

@@ -124,7 +124,6 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
 };
 
 MSBrowserLatest.prototype._on_ajax_error = function (response) {
-    this.browser.hide_loading();
     this.last_response = null;
 
     var message;
@@ -138,10 +137,10 @@ MSBrowserLatest.prototype._on_ajax_error = function (response) {
 };
 
 MSBrowserLatest.prototype._on_ajax_response = function (response) {
+    this.browser.hide_loading();
     if (!response.success)
         return this._on_ajax_error(response);
 
-    this.browser.hide_loading();
     this.last_response = response;
 
     this.start_date = response.max_date;
