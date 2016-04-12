@@ -235,6 +235,10 @@ MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
 };
 
 MSBrowser.prototype.display_loading = function () {
+    if (isNaN(this.loading_count))
+        this.loading_count = 1;
+    else
+        this.loading_count ++;
     if (this.loading_timeout)
         return;
     var obj = this;
@@ -244,6 +248,10 @@ MSBrowser.prototype.display_loading = function () {
     }, 500);
 };
 MSBrowser.prototype.hide_loading = function () {
+    if (this.loading_count)
+        this.loading_count --;
+    if (isNaN(this.loading_count) || this.loading_count > 0)
+        return;
     if (this.loading_timeout) {
         clearTimeout(this.loading_timeout);
         this.loading_timeout = null;
