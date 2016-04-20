@@ -683,12 +683,13 @@
     height: 100%;
 }
 .ms-items .item-entry.thumbnail {
+    margin: 4px;
+    padding: 0;
     display: block;
     float: left;
     overflow: hidden;
     width: 240px;
     height: 180px;
-    margin: 4px;
     cursor: auto;
     text-align: center;
     line-height: inherit;
