@@ -556,7 +556,8 @@
     color: #666;
 }
 .ms-items .item-entry-annotations {
-    padding-left: 10px;
+    padding: 5px 10px;
+    padding-bottom: 0;
 }
 
 .ms-items .item-entry-links {

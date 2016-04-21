@@ -234,11 +234,15 @@
     right: 2px;
     top: 2px;
     position: absolute;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 16px;
     text-align: center;
     display: block;
     cursor: pointer;
+}
+.overlay-info .overlay-info-close i {
+    font-size: 120%;
+    display: block;
 }
 .overlay-info-content {
     padding: 6px;

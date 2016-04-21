@@ -328,7 +328,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var selectable = gselectable && (!this.parent_selection_oid || item.selectable);
     var $entry = null;
     $entry = $("<div class=\"item-entry item-type-"+item_type+"\"></div>");
-    $entry.attr("id", "item_entry_"+oid+"_"+this.displayed);
+    $entry.attr("id", "item_entry_"+oid+"_"+tab);
     if (item_type != "parent" && item_type != "current")
         $entry.addClass(this.display_mode);
     if (this.current_selection && this.current_selection.oid == oid)
@@ -343,13 +343,13 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         if (item.can_edit) {
             html +=   "<a class=\"obj-block-edit\" title=\""+utils.translate("Edit")+"\" href=\""+this._get_btn_link(item, "edit")+"\"></a>";
         }
-        html += "<div class=\"overlay-info\" id=\"item_entry_"+oid+"_"+this.displayed+"_info\" style=\"display: none;\"></div>";
+        html += "<div class=\"overlay-info\" id=\"item_entry_"+oid+"_"+tab+"_info\" style=\"display: none;\"></div>";
     }
     var $entry_block = $(html);
     this._set_on_click_entry_block($entry_block, oid, item_type, item, selectable);
     $entry.append($entry_block);
     if (this.display_mode == "thumbnail")
-        this._set_thumbnail_info_box_html(item_type, selectable, oid, $entry, item);
+        this._set_thumbnail_info_box_html(item_type, selectable, oid, $entry, item, tab);
     
     html = this._get_entry_links_html(item, item_type, selectable);
     var $entry_links = $(html);
@@ -456,11 +456,11 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     html +=         "</span>";
     html +=     "</span>";
     html += "</"+markup+">";
-    if(item.annotations && !this.use_overlay && this.displayed == "search") {
-        html +=         "<span class=\"item-entry-annotations\"><p>"+utils.translate("Annotations")+":</p><ul>";
-        for (var index in item.annotations) {
-            var annotation = item.annotations[index];
-            html += "<li><a href=\"/videos/"+item.slug+"/#start="+annotation.time +  "&autoplay\">";
+    if (item.annotations && !this.use_overlay && tab == "search") {
+        html += "<span class=\"item-entry-annotations\"><span>"+utils.translate("Annotations")+":</span><ul>";
+        for (var i=0; i < item.annotations.length; i++) {
+            var annotation = item.annotations[i];
+            html += "<li><a href=\"/videos/"+item.slug+"/#start="+annotation.time+"&autoplay\">";
             if (annotation.title)
                 html += annotation.title;
             html += " ("+annotation.time_display+") ";
@@ -468,7 +468,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         }
         html += "</ul></span>";
     }
-    if (!this.use_overlay && this.displayed == "channels" && item_type == "current") {
+    if (!this.use_overlay && tab == "channels" && item_type == "current") {
         html += "<div class=\"channel-description-text\">"+item.description+"</div>";
         html += "<div class=\"channel-description-rss\"> ";
         if (this.display_itunes_rss) {
@@ -601,22 +601,21 @@ MSBrowser.prototype._set_on_click_entry_links = function ($entry_links, item, it
         });
     }
 };
-MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, selectable) {
+MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, selectable, tab) {
     var html = "<div class=\"overlay-info-title\">";
     html += "<button type=\"button\" class=\"overlay-info-close "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\"></i></button>";
     html += "<h3><a href=\""+this._get_btn_link(item, "view")+"\">"+item.title+"</a></h3>";
     html += "</div>";
     html += "<div class=\"overlay-info-content\">";
-    if (!this.use_overlay && this.displayed == "search" && item.annotations) {
+    if (item.annotations && !this.use_overlay && tab == "search") {
         html += "<div><b>"+utils.translate("Matching annotations:")+"</b></div>";
         html += "<ul>";
-        for (var index in item.annotations) {
-            var annotation = item.annotations[index];
-            html += "<li><a href=\"/videos/"+item.slug+"/#start="+annotation.time +  "&autoplay\">";
+        for (var i=0; i < item.annotations.length; i++) {
+            var annotation = item.annotations[i];
+            html += "<li><a href=\"/videos/"+item.slug+"/#start="+annotation.time+"&autoplay\">";
             if (annotation.title)
                 html += annotation.title;
-            else
-                html += annotation.time_display;
+            html += " ("+annotation.time_display+") ";
             html += "</a></li>";
         }
         html += "</ul>";
@@ -665,21 +664,21 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     this._set_on_click_entry_links($info, item, item_type, selectable);
     return $info;
 };
-MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectable, oid, $entry, item) {
+MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectable, oid, $entry, item, tab) {
     $(".obj-block-info", $entry).click({ obj: this, $entry: $entry }, function (event) {
         var info_id = "#"+$entry.attr("id")+"_info";
         if ($(info_id, event.data.$entry).html() !== "") {
             event.data.obj.box_open_info($entry);
             return;
         }
-        if (event.data.obj.displayed == "search") {
-            var $element = event.data.obj._get_thumbnail_info_box_html(item, item_type, selectable);
+        if (tab == "search") {
+            var $element = event.data.obj._get_thumbnail_info_box_html(item, item_type, selectable, tab);
             $(info_id, event.data.$entry).append($element);
             event.data.obj.box_open_info($entry);
         } else {
             event.data.obj.get_info_for_oid(oid, true, function (data) {
                 var item = data.info;
-                var $element = event.data.obj._get_thumbnail_info_box_html(item, item_type, selectable);
+                var $element = event.data.obj._get_thumbnail_info_box_html(item, item_type, selectable, tab);
                 $(info_id, event.data.$entry).append($element);
                 event.data.obj.box_open_info($entry);
             });
@@ -713,7 +712,7 @@ MSBrowser.prototype.box_open_info = function ($entry) {
             $(document).unbind("click", this.box_click_handler);
         var obj = this;
         this.box_click_handler = function (event) {
-            if(!$(event.target).closest(info_id).length && !$(event.target).closest(".obj-block-info").length && $(info_id).is(":visible"))
+            if (!$(event.target).closest(info_id).length && !$(event.target).closest(".obj-block-info").length && $(info_id).is(":visible"))
                 obj.box_hide_info();
         };
         $(document).click(this.box_click_handler);
