@@ -428,7 +428,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
             else
                 html += "<span class=\"item-entry-published\" title=\""+utils.translate("This media is published")+"\"></span>";
             if (item_type == "video" && !item.ready)
-                html +=     "<span class=\"item-entry-notready\" title=\""+utils.translate("This video is not ready")+"\"></span>";
+                html +=     "<span class=\"item-entry-notready\" title=\""+utils.translate("This video is being processed")+"\"></span>";
         }
     }
     if (item.duration)

@@ -133,7 +133,7 @@ utils.add_translations({
     "This media is published": "Ce média est publié",
     "This media is unlisted": "Ce média est non listé",
     "this month": "ce mois",
-    "This video is not ready": "Cette vidéo n'est pas prête",
+    "This video is being processed": "Cette vidéo est en cours de traitement",
     "thumbnails": "vignettes",
     "Title, ascending": "Titre, croissant",
     "Title, descending": "Titre, décroissant",
