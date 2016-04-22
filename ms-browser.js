@@ -18,6 +18,7 @@ function MSBrowser(options) {
     this.initial_state = null;
     this.on_pick = null;
     this.btn_class = "std-btn";
+    this.display_itunes_rss = true;
     // vars
     this.use_overlay = true;
     this.$widget = null;
@@ -47,7 +48,8 @@ function MSBrowser(options) {
         "initial_oid",
         "initial_state",
         "on_pick",
-        "btn_class"
+        "btn_class",
+        "display_itunes_rss"
     ]);
 
     MSAPI.configure(options);
