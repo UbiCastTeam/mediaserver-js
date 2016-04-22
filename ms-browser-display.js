@@ -259,6 +259,19 @@ MSBrowser.prototype.hide_loading = function () {
     $(".ms-browser-loading", this.$widget).css("display", "");
 };
 
+MSBrowser.prototype.get_top_section_add_buttons = function (can_add_channel, can_add_video) {
+    if (!can_add_channel && !can_add_video)
+        return "";
+    var html = "<div class=\"ms-browser-section-links\">";
+    if (can_add_channel) {
+        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-channel\" href=\""+this._get_btn_link(null, "add_channel")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a channel")+"</a>";
+    }
+    if (can_add_video) {
+        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\""+this._get_btn_link(null, "add_video")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a video")+"</a>";
+    }
+    html += "</div>";
+    return html;
+};
 
 MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) {
     var i, selectable, $section;
@@ -267,18 +280,10 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         selectable = this.selectable_content.indexOf("c") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
         if (!cat_oid || cat_oid == "0") {
-            if (!this.use_overlay && tab == "channels" && (data.can_add_channel || data.can_add_video)) {
-                if (data.can_add_channel || data.can_add_video) {
-                    var html = "<div class=\"ms-browser-section-links\">";
-                    if (data.can_add_channel) {
-                        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-channel\" href=\""+this._get_btn_link(null, "add_channel")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a channel")+"</a>";
-                    }
-                    if (data.can_add_video) {
-                        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\""+this._get_btn_link(null, "add_video")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a video")+"</a>";
-                    }
-                    html += "</div>";
+            if (!this.use_overlay && tab == "channels") {
+                var html = this.get_top_section_add_buttons(data.can_add_channel, data.can_add_video);
+                if (html != "")
                     $section.append(html);
-                }
             }
             $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Channels")+"</h3>");
         }
