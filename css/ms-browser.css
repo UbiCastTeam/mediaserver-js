@@ -142,6 +142,9 @@
     padding: 5px;
     position: relative;
 }
+.ms-browser .ms-browser-menu .ms-browser-block {
+    overflow: auto;
+}
 .ms-browser.in-overlay .ms-browser-block {
     top: 32px;
     position: absolute;

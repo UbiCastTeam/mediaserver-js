@@ -14,15 +14,15 @@ function MSBrowserSearch(options) {
     this.last_response = null;
     this.search_in_fields = [
         { name: "in_title", label: "titles", initial: true, items: null },
-        { name: "in_description", label: "descriptions", initial: true, items: null },
+        { name: "in_description", label: "descriptions", initial: false, items: null },
         { name: "in_keywords", label: "keywords", initial: true, items: null },
         { name: "in_speaker", label: "speakers", initial: true, items: "vlp" },
         { name: "in_license", label: "licenses", initial: false, items: "vlp" },
         { name: "in_company", label: "companies", initial: false, items: "vlp" },
-        { name: "in_location", label: "locations", initial: true, items: "vlp" },
+        { name: "in_location", label: "locations", initial: false, items: "vlp" },
         { name: "in_categories", label: "categories", initial: false, items: "vlp" },
-        { name: "in_annotations", label: "annotations", initial: true, items: "vlp" },
-        { name: "in_photos", label: "photos", initial: true, items: "p" },
+        { name: "in_annotations", label: "annotations", initial: false, items: "vlp" },
+        { name: "in_photos", label: "photos", initial: false, items: "p" },
         { name: "in_extref", label: "external references", initial: true, items: null }
     ];
     this.search_for_fields = [
@@ -136,7 +136,7 @@ MSBrowserSearch.prototype.on_url_change = function () {
     for (i=0; i < this.search_in_fields.length; i++) {
         field = this.search_in_fields[i];
         if (this.should_be_displayed(dc, field.items)) {
-            if (data.exists)
+            if (data.has_in_vals)
                 value = data[field.name] ? true : false;
             else
                 value = field.initial;
@@ -146,7 +146,7 @@ MSBrowserSearch.prototype.on_url_change = function () {
     for (i=0; i < this.search_for_fields.length; i++) {
         field = this.search_for_fields[i];
         if (this.should_be_displayed(dc, field.items)) {
-            if (data.exists)
+            if (data.has_for_vals)
                 value = data[field.name] ? true : false;
             else
                 value = field.initial;
@@ -164,7 +164,6 @@ MSBrowserSearch.prototype.parse_url = function () {
     var data = {};
     var query = window.location.search ? window.location.search.substring(1) : null;
     if (query) {
-        data.exists = true;
         var tuples = query.split("&");
         for (var i=0; i < tuples.length; i++) {
             var attr, value;
@@ -180,6 +179,10 @@ MSBrowserSearch.prototype.parse_url = function () {
                 attr = tuples[i];
                 value = true;
             }
+            if (attr.substring(0, 3) == "in_")
+                data.has_in_vals = true;
+            else if (attr.substring(0, 4) == "for_")
+                data.has_for_vals = true;
             data[attr] = value;
         }
     }
