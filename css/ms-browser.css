@@ -575,16 +575,8 @@
     bottom: 0;
     line-height: 45px;
 }
-.ms-browser.ms-browser-display-display .ms-browser-menu .ms-browser-panel .cb-display,
 .ms-items .item-entry:hover .item-entry-links {
     display: block;
-}
-.ms-browser .ms-browser-menu .ms-browser-panel .cb-display,
-.ms-browser .ms-browser-latest-place.no-channels .item-type-channel {
-    display: none;
-}
-.ms-browser .ms-browser-menu .cb-display.ms-browser-search-block .ms-browser-search-title {
-    margin-left: -15px;
 }
 
 /* thumbnail mode */

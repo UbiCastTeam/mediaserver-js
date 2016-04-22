@@ -398,11 +398,12 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         }
     }
     if (!this.use_overlay && item_type == "current" && (item.can_edit || item.can_add_channel || item.can_add_video)) {
+        html += "<span class=\"item-entry-placeholder\"><button type=\"button\" class=\""+this.btn_class+"\"><i class=\"fa fa-navicon\"></i></button></span>";
         html += "<span class=\"item-entry-links\">";
         if (item.can_edit) {
             html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit")+"</a>";
             if (item.can_delete)
-                html += "<span class=\""+this.btn_class+" item-entry-pick-delete-media\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</span>";
+                html += "<button type=\"button\" class=\""+this.btn_class+" item-entry-pick-delete-media\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</button>";
         }
         if (item.can_add_channel || item.can_add_video) {
             html += "<br/>";

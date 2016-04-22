@@ -152,7 +152,7 @@
 }
 .ms-items .item-entry.item-type-current .channel-description-rss,
 .ms-items .item-entry.item-type-current .channel-description-text {
-    padding: 5px;
+    padding: 5px 10px;
 }
 .ms-items .item-entry.item-type-current .channel-description-rss {
     line-height: 24px;
@@ -181,6 +181,16 @@
     padding-bottom: 5px;
     display: block;
     line-height: 150%;
+}
+
+.ms-items .item-entry .item-entry-placeholder {
+    padding-right: 4px;
+    float: right;
+    display: block;
+    height: 0;
+}
+.ms-items .item-entry:hover .item-entry-placeholder {
+    display: none;
 }
 
 /* overlay-info */
