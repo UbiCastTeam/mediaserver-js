@@ -116,9 +116,12 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
     var obj = this;
     this.browser.display_loading();
     MSAPI.ajax_call("get_latest_content", data, function (response) {
-        if (response.items && obj.last_response && obj.last_response.items) {
+        if (response.items && response.items.length > 0) {
             // merge response items
-            response.items = obj.last_response.items.concat(response.items);
+            if (!obj.last_response)
+                obj.last_response = response;
+            else
+                obj.last_response.items = obj.last_response.items.concat(response.items);
         }
         obj._on_ajax_response(response);
         obj.latest_loading = false;
@@ -126,8 +129,6 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
 };
 
 MSBrowserLatest.prototype._on_ajax_error = function (response) {
-    this.last_response = null;
-
     var message;
     if (!this.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
@@ -142,8 +143,6 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
     this.browser.hide_loading();
     if (!response.success)
         return this._on_ajax_error(response);
-
-    this.last_response = response;
 
     if (response.can_add_channel)
         this.can_add_channel = true;
@@ -196,7 +195,7 @@ MSBrowserLatest.prototype.display_more = function (count) {
     this.load_latest(count);
 };
 MSBrowserLatest.prototype.refresh_display = function (reset) {
-    if (reset && this.last_response)
+    if (reset)
         this.last_response = null;
     if (this.last_response) {
         this.date_label = "";
