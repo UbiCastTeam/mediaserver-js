@@ -21,12 +21,12 @@ var MSAPI = {
     },
     // vars
     defaults_errors_messages: {
-        401: utils.translate("You are not logged in. Please log you in and retry."),
+        401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
         403: utils.translate("Access denied."),
         404: utils.translate("Element not found."),
-        500: utils.translate("Internal server error occured. An email has been sent to the support team."),
-        timeout: utils.translate("Connection timed out. Please retry later."),
-        unreachable: utils.translate("Server cannot be reached.")
+        500: utils.translate("An internal server error occured. An email has been sent to the support team."),
+        timeout: utils.translate("The connection timed out. Please retry later."),
+        unreachable: utils.translate("The server cannot be reached.")
     },
     methods: {
         /* ### fast copy - past not used in code ###
@@ -50,11 +50,8 @@ var MSAPI = {
             method: "GET",
             url: "/api/v2/search/",
             errors: {
-                401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
                 403: utils.translate("Unable to get search's results content because you cannot access to this channel."),
-                404: utils.translate("Requested channel does not exist."),
-                500: utils.translate("An error occured in medias server. Please try again later."),
-                timeout: utils.translate("Unable to get search's results. Request timed out.")
+                404: utils.translate("Requested channel does not exist.")
             }
         },
         search_annotations: {
@@ -67,57 +64,38 @@ var MSAPI = {
         },
         get_latest_content: {
             method: "GET",
-            url: "/api/v2/latest/",
-            errors: {
-                401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
-                403: utils.translate("Unable to get latest content because you cannot access to this channel."),
-                404: utils.translate("Requested channel does not exist."),
-                500: utils.translate("An error occured in medias server. Please try again later."),
-                timeout: utils.translate("Unable to get latest content. Request timed out.")
-            }
+            url: "/api/v2/latest/"
         },
         get_channels_content: {
             method: "GET",
             url: "/api/v2/channels/content/",
             errors: {
-                401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
                 403: utils.translate("Unable to get channel's content because you cannot access to this channel."),
-                404: utils.translate("Unable to get channel's content because you cannot access to this channel."),
-                500: utils.translate("An error occured in medias server. Please try again later."),
-                timeout: utils.translate("Unable to get channel's content. Request timed out.")
+                404: utils.translate("Requested channel does not exist.")
             }
         },
         get_channels: {
             method: "GET",
             url: "/api/v2/channels/get/",
             errors: {
-                401: utils.translate("Unable to get channel's information because you are not logged in."),
                 403: utils.translate("Unable to get channel's information because you cannot access to this channel."),
-                404: utils.translate("Channel does not exist."),
-                500: utils.translate("An error occured in channels server. Please try again later."),
-                timeout: utils.translate("Unable to get channel's information. Request timed out.")
+                404: utils.translate("Requested channel does not exist.")
             }
         },
         get_channels_tree: {
             method: "GET",
             url: "/api/v2/channels/tree/",
             errors: {
-                401: utils.translate("Unable to get channels tree because you are not logged in."),
                 403: utils.translate("Unable to get channels tree because you cannot access to this channel."),
-                404: utils.translate("Channel does not exist."),
-                500: utils.translate("An error occured in medias server. Please try again later."),
-                timeout: utils.translate("Unable to get channels tree. Request timed out.")
+                404: utils.translate("Requested channel does not exist.")
             }
         },
         get_channels_path: {
             method: "GET",
             url: "/api/v2/channels/path/",
             errors: {
-                401: utils.translate("Unable to get channels path because you are not logged in."),
                 403: utils.translate("Unable to get channels path because you cannot access to this channel."),
-                404: utils.translate("Channel does not exist."),
-                500: utils.translate("An error occured in medias server. Please try again later."),
-                timeout: utils.translate("Unable to get channels path. Request timed out.")
+                404: utils.translate("Requested channel does not exist.")
             }
         },
         get_medias_list: {
@@ -128,11 +106,8 @@ var MSAPI = {
             method: "GET",
             url: "/api/v2/medias/get/",
             errors: {
-                401: utils.translate("Unable to get media's information because you are not logged in."),
                 403: utils.translate("Unable to get media's information because you cannot access to this media."),
-                404: utils.translate("Media does not exist."),
-                500: utils.translate("An error occured in medias server. Please try again later."),
-                timeout: utils.translate("Unable to get media's information. Request timed out.")
+                404: utils.translate("Media does not exist.")
             }
         },
         add_medias: {
@@ -167,11 +142,8 @@ var MSAPI = {
             method: "POST",
             url: "/api/v2/lives/stop/",
             errors: {
-                401: utils.translate("Your session has expired, please log you in again."),
                 403: utils.translate("You are not allowed to perform this action."),
-                404: utils.translate("Media does not exist."),
-                500: utils.translate("An error occured in medias server. Please try again later."),
-                timeout: utils.translate("Request timed out.")
+                404: utils.translate("Media does not exist.")
             }
         },
         lives_change_slides: {
