@@ -344,7 +344,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         $entry.addClass(item.extra_class);
     var html = this._get_entry_block_html(item, item_type, selectable, tab);
     if (this.display_mode == "thumbnail" && !this.use_overlay && item_type != "parent" && item_type != "current") {
-        html +=   "<div class=\"obj-block-info\" title=\""+utils.translate("Open information panel")+"\"></div>";
+        html +=   "<button type=\"button\" class=\"obj-block-info\" title=\""+utils.translate("Open information panel")+"\"></button>";
         if (item.can_edit) {
             html +=   "<a class=\"obj-block-edit\" title=\""+utils.translate("Edit")+"\" href=\""+this._get_btn_link(item, "edit")+"\"></a>";
         }
