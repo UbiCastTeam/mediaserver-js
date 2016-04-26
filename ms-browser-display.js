@@ -403,8 +403,11 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         }
     }
     if (!this.use_overlay && item_type == "current" && (item.can_edit || item.can_add_channel || item.can_add_video)) {
-        html += "<span class=\"item-entry-placeholder\"><button type=\"button\" class=\""+this.btn_class+"\"><i class=\"fa fa-navicon\"></i></button></span>";
         html += "<span class=\"item-entry-links\">";
+        html += "<span class=\"item-entry-links-placeholder\">";
+        html +=     "<button type=\"button\" class=\""+this.btn_class+"\"><i class=\"fa fa-bars\"></i></button>";
+        html += "</span>";
+        html += "<span class=\"item-entry-links-container\">";
         if (item.can_edit) {
             html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit")+"</a>";
             if (item.can_delete)
@@ -419,6 +422,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
                 html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\""+this._get_btn_link(item, "add_video")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a video")+"</a>";
             }
         }
+        html += "</span>";
         html += "</span>";
     }
     if (item.can_edit && !(item_type == "parent" || item_type == "current")) {
@@ -515,6 +519,10 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
 };
 MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectable) {
     var html = "<div class=\"item-entry-links\">";
+    /*html += "<div class=\"item-entry-links-placeholder\">";
+    html +=     "<button type=\"button\" class=\""+this.btn_class+"\"><i class=\"fa fa-bars\"></i></button>";
+    html += "</div>";*/
+    html += "<div class=\"item-entry-links-container\">";
     var url_view = this.use_overlay ? "" : this._get_btn_link(item, "view");
     if ((item_type == "channel" || item_type == "parent")) {
         var txt = utils.translate("Display channel");
@@ -545,6 +553,7 @@ MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectabl
                 html += "<button type=\"button\" class=\""+this.btn_class+" item-entry-pick-delete-media\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</button>";
         }
     }
+    html += "</div>";
     html += "</div>";
     return html;
 };

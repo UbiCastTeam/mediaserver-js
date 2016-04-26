@@ -72,30 +72,8 @@
     font-weight: bold;
     line-height: normal;
 }
-
 .ms-browser .ms-browser-display-btn-place {
     top: 8px;
-}
-.ms-browser .item-type-parent {
-    top: 10px;
-    right: 10px;
-    position: absolute;
-    z-index: 1;
-
-    border-color: transparent !important;
-    border-radius: 0;
-    background: transparent !important;
-}
-.ms-browser .item-type-parent .item-entry-link {
-    display: none;
-}
-.ms-browser .item-type-parent .item-entry-links {
-    display: block;
-    position: static;
-    line-height: normal;
-}
-.ms-browser .cb-message {
-    position: relative;
 }
 
 /* ms-items */
@@ -114,21 +92,46 @@
 .ms-items .item-entry-link.clickable:hover {
     cursor: pointer;
 }
-.ms-items .item-entry.item-type-current .item-entry-link.clickable,
-.ms-items .item-entry.item-type-current .item-entry-link.clickable:hover {
-    cursor: auto !important;
+.ms-items .item-type-parent {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    z-index: 1;
 
-    color: inherit;
+    border-color: transparent !important;
+    border-radius: 0;
+    background: transparent !important;
 }
-.ms-items .item-entry.item-type-current .item-entry-links {
-    visibility: hidden;
+.ms-items .item-type-parent .item-entry-link {
+    display: none;
+}
+.ms-items .item-entry.item-type-parent .item-entry-links {
     display: block;
-    padding-right: 4px;
-    float: right;
     position: static;
     line-height: normal;
 }
-.ms-items .item-entry.item-type-current:hover .item-entry-links {
+.ms-items .item-entry.item-type-parent .item-entry-links-container {
+    display: block;
+}
+.ms-items .item-entry.item-type-current .item-entry-links {
+    padding-right: 0;
+    float: right;
+    position: relative;
+    line-height: normal;
+}
+.ms-items .item-entry.item-type-current .item-entry-links-container {
+    display: block;
+}
+.ms-items .item-entry.item-type-current .item-entry-links-placeholder {
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+.ms-items .item-entry.item-type-current .item-entry-links-container,
+.ms-items .item-entry.item-type-current:hover .item-entry-links-placeholder {
+    visibility: hidden;
+}
+.ms-items .item-entry.item-type-current:hover .item-entry-links-container {
     visibility: visible;
 }
 .ms-items .item-entry.selected {

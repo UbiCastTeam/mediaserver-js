@@ -567,7 +567,6 @@
     position: absolute;
     right: 5px;
     bottom: 5px;
-    display: none;
     text-align: right;
 }
 .ms-items .item-entry-small .item-entry-links {
@@ -575,7 +574,11 @@
     bottom: 0;
     line-height: 45px;
 }
-.ms-items .item-entry:hover .item-entry-links {
+.ms-items .item-entry-links-container,
+.ms-items .item-entry:hover .item-entry-links-placeholder {
+    display: none;
+}
+.ms-items .item-entry:hover .item-entry-links-container {
     display: block;
 }
 
