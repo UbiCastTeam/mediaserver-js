@@ -174,6 +174,8 @@ MSBrowserSearch.prototype.parse_url = function () {
                     value = true;
                 else if (value == "off")
                     value = false;
+                else
+                    value = window.decodeURIComponent(value);
             }
             else {
                 attr = tuples[i];
