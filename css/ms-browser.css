@@ -226,6 +226,7 @@
 }
 .ms-browser .ms-browser-top-btn.active {
     background: #fff;
+    color: #222;
 }
 .ms-browser .ms-browser-top-menu {
     padding: 8px;
