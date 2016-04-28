@@ -54,10 +54,6 @@ var MSAPI = {
                 404: utils.translate("Requested channel does not exist.")
             }
         },
-        search_annotations: {
-            method: "GET",
-            url: "/api/v2/search/annotations/moderate/"
-        },
         get_channels_list: {
             method: "GET",
             url: "/api/v2/channels/"
@@ -156,55 +152,59 @@ var MSAPI = {
         },
         list_media_annotations: {
             method: "GET",
-            url: "/api/v2/social/annotations/list/"
+            url: "/api/v2/annotations/list/"
         },
         list_media_user_annotations: {
             method: "GET",
-            url: "/api/v2/social/annotations/list/moderate"
+            url: "/api/v2/annotations/list/moderate"
         },
         list_annotations_types: {
             method: "GET",
-            url: "/api/v2/social/annotations/types/list/"
+            url: "/api/v2/annotations/types/list/"
         },
         vote_for_annotation: {
             method: "POST",
-            url: "/api/v2/social/annotations/vote/"
+            url: "/api/v2/annotations/vote/"
         },
         post_annotation: {
             method: "POST",
-            url: "/api/v2/social/annotations/post/"
+            url: "/api/v2/annotations/post/"
         },
         validate_annotation: {
             method: "POST",
-            url: "/api/v2/social/annotations/validate/"
+            url: "/api/v2/annotations/validate/"
         },
         unvalidate_annotation: {
             method: "POST",
-            url: "/api/v2/social/annotations/unvalidate/"
+            url: "/api/v2/annotations/unvalidate/"
         },
         delete_annotation: {
             method: "POST",
-            url: "/api/v2/social/annotations/delete/"
+            url: "/api/v2/annotations/delete/"
         },
         list_media_slides: {
             method: "GET",
-            url: "/api/v2/social/annotations/slides/list/"
+            url: "/api/v2/annotations/slides/list/"
         },
         list_media_resources: {
             method: "GET",
-            url: "/api/v2/social/annotations/resources/list/"
+            url: "/api/v2/annotations/resources/list/"
         },
         list_media_chapters: {
             method: "GET",
-            url: "/api/v2/social/annotations/chapters/list/"
+            url: "/api/v2/annotations/chapters/list/"
         },
         list_media_activities: {
             method: "GET",
-            url: "/api/v2/social/annotations/activities/list/"
+            url: "/api/v2/annotations/activities/list/"
         },
         email_notification: {
             method: "POST",
-            url: "/api/v2/social/annotations/notification/"
+            url: "/api/v2/annotations/notification/"
+        },
+        search_annotations: {
+            method: "GET",
+            url: "/api/v2/annotations/search/"
         }
     },
     ajax_call: function (method, data, callback, async, file, xhr_function) {
