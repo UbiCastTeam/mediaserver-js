@@ -175,7 +175,7 @@ MSBrowserSearch.prototype.parse_url = function () {
                 else if (value == "off")
                     value = false;
                 else
-                    value = window.decodeURIComponent(value);
+                    value = window.decodeURIComponent(value.replace(/\+/g, "%20"));
             }
             else {
                 attr = tuples[i];
