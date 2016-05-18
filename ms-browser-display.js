@@ -373,7 +373,8 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         else
             href = "href=\""+this._get_btn_link(item, "view")+"\"";
     }
-    var html = "<"+markup+" "+href+"class=\"item-entry-link "+(selectable || item_type == "channel" || item_type == "parent" ? "clickable" : "")+"\">";
+    var clickable = (selectable || item_type == "channel" || item_type == "parent") && (this.use_overlay || item_type != "current");
+    var html = "<"+markup+" "+href+"class=\"item-entry-link "+(clickable ? "clickable" : "")+"\">";
     if (this.use_overlay || item_type != "current" || !item.hide_image) {
         if (item.thumb)
             if (this.display_mode == "thumbnail" && !(item_type == "parent" || item_type == "current"))
