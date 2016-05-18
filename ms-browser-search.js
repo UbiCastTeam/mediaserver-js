@@ -128,7 +128,7 @@ MSBrowserSearch.prototype.on_show = function () {
 MSBrowserSearch.prototype.on_url_change = function () {
     if (!this.initialized)
         return;
-    // Example of search url: http://192.168.42.8:8000/search/?search=test&in_titles=on&in_descriptions=on&in_keywords=on&in_licenses=on&in_companies=on&in_annotations=on&in_photos=on&for_channels=on&for_videos=on&for_lives=on&for_photos=on
+    // Example of search url: http://192.168.42.8:8000/search/?text=test&in_titles=on&in_descriptions=on&in_keywords=on&in_licenses=on&in_companies=on&in_annotations=on&in_photos=on&for_channels=on&for_videos=on&for_lives=on&for_photos=on
     var data = this.parse_url();
 
     var dc = this.browser.displayable_content;
@@ -154,8 +154,8 @@ MSBrowserSearch.prototype.on_url_change = function () {
         }
     }
 
-    if (data.search) {
-        $("#ms_browser_search_text", this.$menu).val(data.search);
+    if (data.text) {
+        $("#ms_browser_search_text", this.$menu).val(data.text);
         this.on_search_submit(true);
     }
 };
@@ -197,7 +197,7 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
         return;
     this.browser.display_loading();
     var dc = this.browser.displayable_content;
-    var url_query = "search="+search;
+    var url_query = "text="+search;
     // get fields to search in
     var fields = "";
     var i, field, value;
