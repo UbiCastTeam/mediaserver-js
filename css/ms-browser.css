@@ -4,7 +4,6 @@
     padding: 0;
     position: relative;
     display: block;
-    overflow: hidden;
 }
 .ms-browser.in-overlay {
     width: 900px;
@@ -65,6 +64,10 @@
 .ms-browser .ms-browser-clear {
     clear: both;
     overflow: hidden;
+}
+.ms-browser .hidden-visibility {
+    visibility: hidden;
+    height: 1px;
 }
 
 
@@ -249,7 +252,15 @@
 .ms-browser .ms-browser-top-menu div + div {
     margin-top: 8px;
 }
-
+#open_hidden_categories:hover {
+    cursor: pointer;
+}
+#hidden_categories {
+    min-width: 190px;
+}
+#hidden_categories label {
+    white-space: pre-wrap;
+}
 /* loading and message */
 .ms-browser .ms-browser-message,
 .ms-browser .ms-browser-loading {

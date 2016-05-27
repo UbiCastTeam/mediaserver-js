@@ -141,6 +141,8 @@ MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
         data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
+    if (this.browser.filter_categories.length > 0)
+        data.categories = this.browser.filter_categories;
     data.order_by = this.order;
     var obj = this;
     MSAPI.ajax_call("get_channels_content", data, function (response) {

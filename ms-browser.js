@@ -13,6 +13,7 @@ function MSBrowser(options) {
     this.displayable_content = "cvlp";
     this.filter_editable = null;
     this.filter_validated = null;
+    this.filter_categories = [];
     this.parent_selection_oid = null; // special for channel parent selection
     this.initial_oid = null;
     this.initial_state = null;
@@ -30,6 +31,7 @@ function MSBrowser(options) {
     this.display_mode = "list";
     this.displayed = "channels";
     this.current_selection = null;
+    this.site_settings_categories = [];
 
     this.url_login = "/login/";
     this.url_channels = "/channels/";
@@ -126,16 +128,16 @@ MSBrowser.prototype.init = function () {
         $(window).bind("hashchange", function () {
             obj.on_hash_change();
         });
-    }
-    else {
+    } else {
         this.overlay = new OverlayDisplayManager();
     }
+    // initialize categories
+    this.load_categories();
     $(window).resize(function () {
         obj.on_resize();
     });
     this.on_resize();
 };
-
 MSBrowser.prototype.open = function () {
     if (!this.use_overlay)
         return;
@@ -249,7 +251,6 @@ MSBrowser.prototype._pick = function (oid, result, action, no_close) {
 MSBrowser.prototype.get_last_pick = function () {
     return this.current_selection;
 };
-
 /* events handlers */
 MSBrowser.prototype.on_resize = function () {
     if (this.use_overlay) {
@@ -302,4 +303,11 @@ MSBrowser.prototype.on_hash_change = function () {
     else if (window.location.pathname == this.url_latest) {
         this.change_tab("latest", true);
     }
+};
+MSBrowser.prototype.load_categories = function () {
+    var obj = this;
+    MSAPI.ajax_call("list_categories", {}, function (response) {
+        obj.site_settings_categories = response.data;
+        obj.display_categories();
+    });
 };

@@ -102,6 +102,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         html += " <label for=\"ms_browser_filter_validated\">"+utils.translate("Published:")+"</label>";
         html += " <select id=\"ms_browser_filter_validated\">"+opt_html+"</select>";
     }
+
     html += "</div>";
     // TODO: pagination
     // html += "<div><b class=\"ms-browser-top-menu-title\">"+utils.translate("Number of elements per page:")+"</b><br/>";
@@ -127,6 +128,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     $(".ms-browser-filters select", this.$top_menu).change({ obj: this }, function (evt) {
         evt.data.obj.toggle_filter($(this));
     });
+
     return this.$top_menu;
 };
 MSBrowser.prototype.toggle_menu = function (menu) {
@@ -355,12 +357,12 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     $entry.append($entry_block);
     if (this.display_mode == "thumbnail")
         this._set_thumbnail_info_box_html(item_type, selectable, oid, $entry, item, tab);
-    
+
     html = this._get_entry_links_html(item, item_type, selectable);
     var $entry_links = $(html);
     this._set_on_click_entry_links($entry_links, item, item_type, selectable);
     $entry.append($entry_links);
-    
+
     return $entry;
 };
 MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectable, tab) {
@@ -452,7 +454,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
             html +=          ", "+item.views_last_month+" "+utils.translate("this month");
         html += "</span>";
     }
-    if (item_type != "parent" && item_type != "current" && this.display_mode == "thumbnail") 
+    if (item_type != "parent" && item_type != "current" && this.display_mode == "thumbnail")
         html +=         "<span class=\"item-entry-title\">"+utils.escape_html(item.title)+"</span>";
     if (tab == "latest")
         html +=         "<span class=\"item-entry-type\">"+utils.translate("Type:")+" "+utils.translate(item_type)+"</span>";
@@ -580,7 +582,7 @@ MSBrowser.prototype._get_btn_link = function (item, action) {
         if (prefix && !item.slug) {
             this.get_info_for_oid(item.oid, false, function (data) {
                 item = data.info;
-            }); 
+            });
         }
         if (prefix && item.slug)
             return prefix + item.slug;
@@ -737,4 +739,38 @@ MSBrowser.prototype.box_open_info = function ($entry) {
 MSBrowser.prototype.box_hide_info = function () {
     $(".overlay-info:visible").fadeOut("fast");
     $(".obj-block-info.info-displayed").removeClass("info-displayed");
+};
+MSBrowser.prototype.display_categories = function () {
+    var obj = this;
+    if (this.site_settings_categories.length > 0) {
+        var html = " <br/>";
+        html += " <button type=\"button\" id=\"open_hidden_categories\" class=\"std-btn\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\"></i></button>";
+        html += " <div id=\"hidden_categories\" class=\"hidden-visibility\">";
+        for (var i = 0; i < this.site_settings_categories.length; i++) {
+            var slug = this.site_settings_categories[i][0];
+            var label = this.site_settings_categories[i][1];
+            html += " <label for=\"" + slug + "\"><input class=\"checkbox\" id=\"" + slug + "\" type=\"checkbox\" value=\"" + slug + "\"/>" + label + "</label>";
+        }
+        html += " </div>";
+        $(".ms-browser-filters", this.$top_menu).append(html);
+        $("#open_hidden_categories", this.$top_menu).click(function () {
+            if ($("#hidden_categories").hasClass("hidden-visibility")) {
+                $(".fa", this).removeClass("fa-angle-down").addClass("fa-angle-up");
+                $("#hidden_categories").removeClass("hidden-visibility");
+            } else {
+                $("#hidden_categories").addClass("hidden-visibility");
+                $(".fa", this).removeClass("fa-angle-up").addClass("fa-angle-down");
+            }
+        });
+        $("#hidden_categories .checkbox", this.$top_menu).click(function () {
+            var checked = this.checked;
+            if (checked)
+                obj.filter_categories.push(this.value);
+            else
+                obj.filter_categories.splice(obj.filter_categories.indexOf(this.value), 1);
+            obj.channels.refresh_display(true);
+            obj.search.refresh_display(true);
+            obj.latest.refresh_display(true);
+        });
+    }
 };

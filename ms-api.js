@@ -205,6 +205,10 @@ var MSAPI = {
         search_annotations: {
             method: "GET",
             url: "/api/v2/annotations/search/"
+        },
+        list_categories: {
+            method: "GET",
+            url: "/api/v2/categories"
         }
     },
     ajax_call: function (method, data, callback, async, file, xhr_function) {
