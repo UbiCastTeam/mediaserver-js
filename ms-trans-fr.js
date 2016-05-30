@@ -23,6 +23,7 @@ utils.add_translations({
     "April": "avril",
     "at": "le",
     "August": "ao&ucirc;t",
+    "Categories": "Catégories",
     "categories": "catégories",
     "channel": "chaîne",
     "Channel's content": "Contenu de la chaîne",
