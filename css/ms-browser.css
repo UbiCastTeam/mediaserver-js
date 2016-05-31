@@ -159,6 +159,9 @@
 .ms-browser .ms-browser-section-links {
     float: right;
 }
+.ms-browser .ms-browser-section-links + h3 + div {
+    clear: both;
+}
 .ms-browser .ms-browser-search-title,
 .ms-browser .ms-browser-top-menu-title,
 .ms-browser .ms-browser-section-title {
