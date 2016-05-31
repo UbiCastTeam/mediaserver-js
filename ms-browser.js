@@ -14,6 +14,7 @@ function MSBrowser(options) {
     this.filter_editable = null;
     this.filter_validated = null;
     this.filter_categories = [];
+    this.filter_no_categories = false;
     this.parent_selection_oid = null; // special for channel parent selection
     this.initial_oid = null;
     this.initial_state = null;

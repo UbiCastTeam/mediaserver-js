@@ -746,6 +746,7 @@ MSBrowser.prototype.display_categories = function () {
         var html = " <br/>";
         html += " <button type=\"button\" id=\"open_hidden_categories\" class=\"std-btn\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\"></i></button>";
         html += " <div id=\"hidden_categories\" class=\"hidden-visibility\">";
+        html += " <label for=\"filter_no_categories\"><input id=\"filter_no_categories\" type=\"checkbox\"/>" + utils.translate("Unspecified") + "</label><br />";
         for (var i = 0; i < this.site_settings_categories.length; i++) {
             var slug = this.site_settings_categories[i][0];
             var label = this.site_settings_categories[i][1];
@@ -764,6 +765,8 @@ MSBrowser.prototype.display_categories = function () {
         });
         $("#hidden_categories .checkbox", this.$top_menu).click(function () {
             var checked = this.checked;
+            obj.filter_no_categories = false;
+            $("#filter_no_categories", obj.$top_menu).prop("checked", false);
             if (checked)
                 obj.filter_categories.push(this.value);
             else
@@ -771,6 +774,22 @@ MSBrowser.prototype.display_categories = function () {
             obj.channels.refresh_display(true);
             obj.search.refresh_display(true);
             obj.latest.refresh_display(true);
+        });
+        $("#filter_no_categories", this.$top_menu).click(function () {
+            var checked = this.checked;
+            if (checked) {
+                obj.filter_categories = [];
+                $("#hidden_categories .checkbox", obj.$top_menu).prop("checked", false);
+                obj.filter_no_categories = true;
+                obj.channels.refresh_display(true);
+                obj.search.refresh_display(true);
+                obj.latest.refresh_display(true);
+            } else {
+                obj.filter_no_categories = false;
+                obj.channels.refresh_display(true);
+                obj.search.refresh_display(true);
+                obj.latest.refresh_display(true);
+            }
         });
     }
 };

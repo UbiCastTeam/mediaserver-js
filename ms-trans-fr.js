@@ -163,5 +163,6 @@ utils.add_translations({
     "views": "vues",
     "yes": "oui",
     "unspecified": "non spécifié",
+    "Unspecified": "Non spécifié",
     "You are not logged in or your session has expired. Please login and retry.": "Vous n'êtes pas connecté ou votre session a expiré. Veuillez vous reconnecter puis réessayez."
 }, "fr");

@@ -94,8 +94,12 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
         data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
-    if (this.browser.filter_categories.length > 0)
-        data.categories = this.browser.filter_categories;
+    if (this.browser.filter_no_categories) {
+        data.no_categories = true;
+    } else {
+        if (this.browser.filter_categories.length > 0)
+            data.categories = this.browser.filter_categories;
+    }
 
     var start_value = 0;
     if (this.start_date) {
