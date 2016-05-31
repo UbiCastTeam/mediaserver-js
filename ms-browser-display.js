@@ -91,7 +91,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         html +=     "<option value=\""+key+"\">"+sorting_values[index][key]+"</option>";
     html += "</select></div>";
     // filters
-    var opt_html = "<option value=\"\">"+utils.translate("all")+"</option>";
+    var opt_html = "<option value=\"\">"+utils.translate("unspecified")+"</option>";
     opt_html += "<option value=\"yes\">"+utils.translate("yes")+"</option>";
     opt_html += "<option value=\"no\">"+utils.translate("no")+"</option>";
     html += "<div class=\"ms-browser-filters\"><b class=\"ms-browser-top-menu-title\">"+utils.translate("Filters:")+"</b><br/>";
