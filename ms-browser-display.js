@@ -746,11 +746,11 @@ MSBrowser.prototype.display_categories = function () {
         var html = " <br/>";
         html += " <button type=\"button\" id=\"open_hidden_categories\" class=\"std-btn\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\"></i></button>";
         html += " <div id=\"hidden_categories\" class=\"hidden-visibility\">";
-        html += " <label for=\"filter_no_categories\"><input id=\"filter_no_categories\" type=\"checkbox\"/>" + utils.translate("Unspecified") + "</label><br />";
+        html += " <label for=\"filter_no_categories\"><input id=\"filter_no_categories\" type=\"checkbox\"/><span>" + utils.translate("Unspecified") + "</span></label><br />";
         for (var i = 0; i < this.site_settings_categories.length; i++) {
             var slug = this.site_settings_categories[i][0];
             var label = this.site_settings_categories[i][1];
-            html += " <label for=\"" + slug + "\"><input class=\"checkbox\" id=\"" + slug + "\" type=\"checkbox\" value=\"" + slug + "\"/>" + label + "</label>";
+            html += " <label for=\"" + slug + "\"><input class=\"checkbox\" id=\"" + slug + "\" type=\"checkbox\" value=\"" + slug + "\"/><span>" + label + "</span></label>";
         }
         html += " </div>";
         $(".ms-browser-filters", this.$top_menu).append(html);

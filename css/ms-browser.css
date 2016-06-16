@@ -243,7 +243,7 @@
     right: 0;
     display: none;
     line-height: 24px;
-    white-space:nowrap;
+    white-space: nowrap;
     border: 1px solid #ccc;
     border-radius: 3px;
     background: #fff;
@@ -255,14 +255,29 @@
 .ms-browser .ms-browser-top-menu div + div {
     margin-top: 8px;
 }
-#open_hidden_categories:hover {
+.ms-browser #open_hidden_categories:hover {
     cursor: pointer;
 }
-#hidden_categories {
-    min-width: 190px;
+.ms-browser #hidden_categories {
+    width: 400px;
 }
-#hidden_categories label {
+.ms-browser #hidden_categories {
+    overflow: hidden;
+}
+.ms-browser #hidden_categories label {
+    margin-right: 8px;
+    float: left;
+    display: block;
+    max-width: 100%;
+}
+.ms-browser #hidden_categories label input {
+    display: inline-block;
+    vertical-align: top;
+}
+.ms-browser #hidden_categories label span {
     white-space: pre-wrap;
+    word-break: break-all;
+    display: inline-block;
 }
 /* loading and message */
 .ms-browser .ms-browser-message,
