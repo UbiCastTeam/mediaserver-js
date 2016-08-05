@@ -19,7 +19,7 @@ function MSBrowser(options) {
     this.initial_oid = null;
     this.initial_state = null;
     this.on_pick = null;
-    this.btn_class = "std-btn";
+    this.btn_class = "button";
     this.display_itunes_rss = true;
     // vars
     this.use_overlay = true;

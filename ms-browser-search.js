@@ -58,12 +58,12 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     html +=     "<form class=\"ms-browser-search-block\" method=\"get\" action=\".\" onsubmit=\"javascript: return false;\">";
     html +=         "<label class=\"ms-browser-search-title\" for=\"ms_browser_search_text\">"+utils.translate("Search:")+"</label>";
     html +=         " <div class=\"ms-browser-search-input\"><input id=\"ms_browser_search_text\" type=\"text\" value=\"\">";
-    html +=         " <button type=\"submit\" class=\"std-btn\" id=\"ms_browser_search_start\">"+utils.translate("Go")+"</button></div>";
+    html +=         " <button type=\"submit\" class=\"button\" id=\"ms_browser_search_start\">"+utils.translate("Go")+"</button></div>";
     html +=     "</form>";
     html +=     "<div class=\"ms-browser-search-block ms-browser-search-in\">";
     html +=         "<div class=\"ms-browser-search-title\">"+utils.translate("Search in:")+"</div>";
-    html +=         " <div><button type=\"button\" class=\"std-btn\" id=\"ms_browser_search_in_all\">"+utils.translate("all")+"</button>";
-    html +=         " <button type=\"button\" class=\"std-btn\" id=\"ms_browser_search_in_none\">"+utils.translate("none")+"</button></div>";
+    html +=         " <div><button type=\"button\" class=\"button\" id=\"ms_browser_search_in_all\">"+utils.translate("all")+"</button>";
+    html +=         " <button type=\"button\" class=\"button\" id=\"ms_browser_search_in_none\">"+utils.translate("none")+"</button></div>";
     for (i=0; i < this.search_in_fields.length; i++) {
         field = this.search_in_fields[i];
         if (this.should_be_displayed(dc, field.items)) {
@@ -75,8 +75,8 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     if (dc.length > 1) {
         html += "<div class=\"ms-browser-search-block ms-browser-search-for\">";
         html +=     "<div class=\"ms-browser-search-title\">"+utils.translate("Search for:")+"</div>";
-        html +=         " <div><button type=\"button\" class=\"std-btn\" id=\"ms_browser_search_for_all\">"+utils.translate("all")+"</button>";
-        html +=         " <button type=\"button\" class=\"std-btn\" id=\"ms_browser_search_for_none\">"+utils.translate("none")+"</button></div>";
+        html +=         " <div><button type=\"button\" class=\"button\" id=\"ms_browser_search_for_all\">"+utils.translate("all")+"</button>";
+        html +=         " <button type=\"button\" class=\"button\" id=\"ms_browser_search_for_none\">"+utils.translate("none")+"</button></div>";
         for (i=0; i < this.search_for_fields.length; i++) {
             field = this.search_for_fields[i];
             if (this.should_be_displayed(dc, field.items)) {

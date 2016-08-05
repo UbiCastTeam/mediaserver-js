@@ -37,7 +37,7 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
         html +=     "<input id=\"latest_display_channels\" type=\"checkbox\">";
         html +=     " <label for=\"latest_display_channels\">"+utils.translate("display channels")+"</label>";
         html += "</p>";
-        html += "<p><button type=\"button\" class=\"std-btn ms-browser-latest-refresh\">"+utils.translate("Apply")+"</button></p>";
+        html += "<p><button type=\"button\" class=\"button ms-browser-latest-refresh\">"+utils.translate("Apply")+"</button></p>";
     }
     html += "</div>";
     this.$menu = $(html);
@@ -52,8 +52,8 @@ MSBrowserLatest.prototype.get_content_jq = function () {
     html +=     "<div class=\"ms-browser-block\">";
     html +=         "<div class=\"ms-browser-latest-place\"></div>";
     html +=         "<div class=\"ms-browser-latest-btns\">";
-    html +=             "<button type=\"button\" class=\"std-btn ms-browser-latest-more-5\">"+utils.translate("Display 5 more items")+"</button>";
-    html +=             "<button type=\"button\" class=\"std-btn ms-browser-latest-more-20\">"+utils.translate("Display 20 more items")+"</button>";
+    html +=             "<button type=\"button\" class=\"button ms-browser-latest-more-5\">"+utils.translate("Display 5 more items")+"</button>";
+    html +=             "<button type=\"button\" class=\"button ms-browser-latest-more-20\">"+utils.translate("Display 20 more items")+"</button>";
     html +=         "</div>";
     html +=     "</div>";
     html += "</div>";

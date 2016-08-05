@@ -81,8 +81,8 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     html += "<div id=\"ms_browser_display_menu\" class=\"ms-browser-top-menu\">";
     // display mode
     html += "<div><b class=\"ms-browser-top-menu-title\">"+utils.translate("Display mode:")+"</b><br/>";
-    html += "<button type=\"button\" class=\"std-btn "+(this.display_mode == "list" ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
-    html += "<button type=\"button\" class=\"std-btn "+(this.display_mode == "thumbnail" ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
+    html += "<button type=\"button\" class=\"button "+(this.display_mode == "list" ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
+    html += "<button type=\"button\" class=\"button "+(this.display_mode == "thumbnail" ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
     // channel sorting
     html += "<div class=\"ms-browser-channel-order\"><label class=\"ms-browser-top-menu-title\" for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label><br/>";
     html += " <select id=\"ms_browser_order_channel\">";
@@ -744,7 +744,7 @@ MSBrowser.prototype.display_categories = function () {
     var obj = this;
     if (this.site_settings_categories.length > 0) {
         var html = " <br/>";
-        html += " <button type=\"button\" id=\"open_hidden_categories\" class=\"std-btn\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\"></i></button>";
+        html += " <button type=\"button\" id=\"open_hidden_categories\" class=\"button\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\"></i></button>";
         html += " <div id=\"hidden_categories\" class=\"hidden-visibility\">";
         html += " <label for=\"filter_no_categories\"><input id=\"filter_no_categories\" type=\"checkbox\"/><span>" + utils.translate("Unspecified") + "</span></label><br />";
         for (var i = 0; i < this.site_settings_categories.length; i++) {

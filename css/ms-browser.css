@@ -72,18 +72,18 @@
 
 
 /* buttons */
-.ms-browser .std-btn {
+.ms-browser .button {
     padding: 3px 8px;
     cursor: pointer;
 }
-.ms-browser button.std-btn {
+.ms-browser button.button {
     padding: 2px 7px;
 }
-.ms-browser .std-btn + .std-btn {
+.ms-browser .button + .button {
     margin-left: 8px;
 }
-.ms-browser br + .std-btn,
-.ms-browser br + .std-btn + .std-btn {
+.ms-browser br + .button,
+.ms-browser br + .button + .button {
     margin-top: 8px;
 }
 
