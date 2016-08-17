@@ -26,6 +26,19 @@
     border-bottom: 5px solid #aaa;
     border-radius: 4px;
 }
+.ms-browser .ms-browser-tab {
+    color: #FFF;
+}
+.ms-browser .ms-browser-tab.active {
+    background: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.ms-browser .ms-browser-tab:hover {
+    background: none;
+    color: white;
+    text-decoration: underline;
+}
 .ms-browser .ms-browser-panel {
     border: 0 none;
     border-radius: 0;
