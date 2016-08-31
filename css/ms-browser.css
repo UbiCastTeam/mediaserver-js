@@ -367,7 +367,9 @@
     display: none;
     padding-left: 20px;
 }
-.ms-channels-tree li .list-none,
+.ms-channels-tree li .list-none {
+    margin-right: 23px;
+}
 .ms-channels-tree li .list-entry {
     padding: 0;
     display: block;
@@ -383,20 +385,10 @@
     border: 1px solid #ccc;
     border-radius: 2px;
     box-sizing: content-box;
-}
-.ms-channels-tree li .list-none:before {
-    font: normal normal normal 14px/1 Sans;
-    content: "•";
+    margin-right: 5px;
 }
 .ms-channels-tree li .list-entry {
     cursor: pointer;
-}
-.ms-channels-tree li .list-entry:before {
-    font: normal normal normal 14px/1 FontAwesome;
-    content: "\f0da";
-}
-.ms-channels-tree li .list-entry.opened:before {
-    content: "\f0d7";
 }
 .ms-channels-tree .channel-btn {
     display: block;
