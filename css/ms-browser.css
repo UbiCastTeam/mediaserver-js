@@ -117,15 +117,13 @@
     left: 350px;
 }
 .ms-browser.in-overlay .ms-browser-main .ms-browser-panel {
-    border-left: 1px solid #888;
+    border-left: 1px solid #DDD;
 }
 .ms-browser .ms-browser-header {
     line-height: 24px;
     height: 24px;
     padding: 4px 6px;
-    background: #ddd;
-    background: -moz-linear-gradient(top, #eee, #ccc);
-    background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+    background: #DDD;
 }
 .ms-browser.in-overlay .ms-browser-header {
     bottom: auto;
@@ -222,7 +220,7 @@
 }
 
 /* filters menu and button */
-.ms-browser .ms-browser-top-btns {
+.ms-browser-top-btns {
     line-height: 24px;
     position: absolute;
     z-index: 1;
@@ -230,11 +228,11 @@
     right: 8px;
     height: 24px;
 }
-.ms-browser .ms-browser-top-btn.active {
+.ms-browser-top-btns .ms-browser-top-btn.active {
     background: #fff;
     color: #222;
 }
-.ms-browser .ms-browser-top-menu {
+.ms-browser-top-btns .ms-browser-top-menu {
     padding: 8px;
     padding-left: 16px;
     position: absolute;
@@ -249,32 +247,32 @@
     background: #fff;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
-.ms-browser .ms-browser-top-menu.active {
+.ms-browser-top-btns .ms-browser-top-menu.active {
     display: block;
 }
-.ms-browser .ms-browser-top-menu div + div {
+.ms-browser-top-btns .ms-browser-top-menu div + div {
     margin-top: 8px;
 }
-.ms-browser #open_hidden_categories:hover {
+.ms-browser-top-btns #open_hidden_categories:hover {
     cursor: pointer;
 }
-.ms-browser #hidden_categories {
+.ms-browser-top-btns #hidden_categories {
     width: 400px;
 }
-.ms-browser #hidden_categories {
+.ms-browser-top-btns #hidden_categories {
     overflow: hidden;
 }
-.ms-browser #hidden_categories label {
+.ms-browser-top-btns #hidden_categories label {
     margin-right: 8px;
     float: left;
     display: block;
     max-width: 100%;
 }
-.ms-browser #hidden_categories label input {
+.ms-browser-top-btns #hidden_categories label input {
     display: inline-block;
     vertical-align: top;
 }
-.ms-browser #hidden_categories label span {
+.ms-browser-top-btns #hidden_categories label span {
     white-space: pre-wrap;
     word-break: break-all;
     display: inline-block;
@@ -386,6 +384,7 @@
     border-radius: 2px;
     box-sizing: content-box;
     margin-right: 5px;
+    outline: none;
 }
 .ms-channels-tree li .list-entry {
     cursor: pointer;
@@ -424,11 +423,8 @@
     overflow: hidden;
     margin: 4px;
     margin-bottom: 8px;
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #CCC;
     border-radius: 3px;
-    background: #eee;
-    background: -moz-linear-gradient(top, #fff, #ddd);
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
 }
 .ms-items .item-entry * {
     box-sizing: content-box;
@@ -440,16 +436,21 @@
     border: 2px solid #52ac49;
 }
 .ms-items .item-entry.selectable {
-    border-color: #bce;
-    background: #def;
-    background: -moz-linear-gradient(top, #fff, #def);
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#def));
+    border-bottom: 2px solid #bce;
+}
+.ms-items .item-entry.selectable .item-entry-title {
+    color: #78a;
 }
 .ms-items .item-entry.selected {
-    border-color: #cdc;
-    background: #efe;
-    background: -moz-linear-gradient(top, #fff, #dfd);
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dfd));
+    border-bottom: 2px solid #cdc;
+}
+.ms-items .item-entry-small,
+.ms-items .item-entry-small.selectable,
+.ms-items .item-entry-small.selected {
+    border: none;
+}
+.ms-items .item-entry.selected .item-entry-title {
+    color: #8a8;
 }
 .ms-items .item-entry-preview {
     line-height: 90px;
@@ -498,9 +499,9 @@
     color: #086E9A;
 }
 .ms-items .item-entry-content {
-    display: block;
+    display: inline-block;
+    width: calc(100% - 300px);
     padding: 10px;
-    padding-left: 130px;
 }
 .ms-items .item-entry-small .item-entry-content {
     line-height: 45px;
@@ -509,13 +510,15 @@
 }
 
 .ms-items .item-entry-top-bar {
-    font-size: 100%;
-    font-weight: bold;
     display: block;
     overflow: hidden;
     margin-bottom: 4px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #888;
+}
+.ms-items .item-entry-top-bar .item-entry-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 5px 0;
 }
 .ms-items .item-entry-small .item-entry-content .item-entry-top-bar {
     margin-bottom: 0;
@@ -573,7 +576,6 @@
     margin-left: 10px;
     color: #666;
 }
-.ms-items .item-entry-date,
 .ms-items .item-entry-annotations,
 .ms-items .item-entry-parent {
     font-style: italic;

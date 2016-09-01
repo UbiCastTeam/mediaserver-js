@@ -52,7 +52,7 @@ MSBrowserChannels.prototype.on_show = function () {
         return;
     this.initialized = true;
 
-    this.default_logo_src = $("#mainlogo img").attr("src");
+    this.default_logo_src = $("#mainlogo .header_logo").attr("src");
     this.default_fav_src = $("#").attr("src");
 
     // tree manager
@@ -203,9 +203,9 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             $("head").append(csslinks);
 
             if (response.info.logo_url)
-                $("#mainlogo img").attr("src", response.info.logo_url);
+                $("#mainlogo .header-logo").attr("src", response.info.logo_url);
             else
-                $("#mainlogo img").attr("src", this.default_logo_src);
+                $("#mainlogo .header-logo").attr("src", this.default_logo_src);
             if (response.info.favicon_url)
                 $("#favicon_link").attr("href", response.info.favicon_url);
             else
