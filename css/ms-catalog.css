@@ -1,6 +1,23 @@
 /* CSS for MediaServer browser */
 /* Additional CSS for non overlay use */
-
+#global .main-title .item-entry-preview,
+#global .main-title h1 {
+    display: inline-block;
+    vertical-align: middle;
+}
+#global .main-title .item-entry-preview,
+#global .main-title .item-entry-preview img {
+    max-width: 100px;
+    max-height: 100px;
+}
+#global .main-title h1 {
+    max-width: 1400px;
+    font-size: 1.5em;
+}
+#global .main-title .channel-description-text {
+    display: block;
+    cursor: pointer;
+}
 /* ms-browser */
 .ms-browser .main-block {
     border: none;

@@ -388,6 +388,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
                     (this.use_overlay || item_type != "current");
 
     var html = "<" + markup + " " + href + " class=\"item-entry-link " + (clickable ? "clickable" : "") + "\">";
+    var $title_place = $("#global .main-title h1");
 
     /******************* Image preview ****************/
 
@@ -398,7 +399,12 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
                 image_preview += "<span class=\"item-entry-preview obj-block-link\"" + 
                           "style=\"background-image: url(" + item.thumb + ");\"></span>";
             } else {
-                image_preview += "<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>";
+                if (!this.use_overlay && item_type == "current") {
+                    $(".item-entry-preview", $title_place.parent()).remove();
+                    $title_place.before("<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>");
+                } else {
+                    image_preview += "<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>";
+                }
             }
         } else {
             image_preview += "<span class=\"item-entry-preview\"><span class=\"item-" + item_type + "-icon\"></span></span>";
@@ -411,10 +417,13 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     var content = "<span class=\"item-entry-content\">";
 
     /******************* Top bar ****************/
-
     var top_bar = "<span class=\"item-entry-top-bar\">";
     if (is_parent_or_current || this.display_mode != "thumbnail") {
-        top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
+        if (!this.use_overlay && item_type == "current") {
+            $title_place.html(utils.escape_html(item.title));
+        } else {
+            top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
+        }
         if (!this.use_overlay && item_type == "current") {
             if (item.views) {
                 top_bar += "<span class=\"item-entry-annotations\">" + item.views + " " + utils.translate("views");
@@ -465,7 +474,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         links += "    </span>";
         links += "</span>";
     }
-    top_bar += links;
+    $title_place.after(links);
 
     /********** Status **********/
 
@@ -552,7 +561,11 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     /***************************** Current Channel data *************************/
 
     if (!this.use_overlay && tab == "channels" && item_type == "current") {
-        html += "<div class=\"channel-description-text\">" + item.description + "</div>";
+        var $desc = $("<small class=\"channel-description-text\">" + item.short_description + "</small>");
+        $desc.click(function () {
+            this.innerHTML = item.description;
+        });
+        $title_place.append($desc);
         html += "<div class=\"channel-description-rss\"> ";
         if (this.display_itunes_rss) {
             html += utils.translate("Subscribe to channel's videos RSS:") + "<br/> ";
@@ -601,10 +614,15 @@ MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectabl
         var txt = utils.translate("Display channel");
         if (item_type == "parent")
             txt = utils.translate("Display parent channel");
-        if (this.use_overlay)
+        if (this.use_overlay) {
             html += "<button type=\"button\" class=\""+this.btn_class+" item-entry-display\"><i class=\"fa fa-chevron-right\"></i> "+txt+"</button>";
-        else
-            html += "<a class=\""+this.btn_class+" item-entry-display\" href=\""+url_view+"\"><i class=\"fa fa-chevron-right\"></i> "+txt+"</a>";
+        } else {
+            if (item_type == "parent") {
+                $(".navbar .back").attr("href", url_view);
+            } else {
+                html += "<a class=\""+this.btn_class+" item-entry-display\" href=\""+url_view+"\"><i class=\"fa fa-chevron-right\"></i> "+txt+"</a>";
+            }
+        }
     }
     if (this.use_overlay) {
         if (selectable) {
@@ -613,8 +631,7 @@ MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectabl
             else
                 html += "<button type=\"button\" class=\""+this.btn_class+" main item-entry-pick\"><i class=\"fa fa-check\"></i> "+utils.translate("Select this media")+"</button>";
         }
-    }
-    else {
+    } else {
         if (item_type != "parent" && item_type != "current") {
             if (item_type != "channel" && item.validated) {
                 html += "<a class=\""+this.btn_class+" item-entry-pick-view-media\" href=\""+url_view+"\"><i class=\"fa fa-chevron-right\"></i> "+utils.translate("See")+"</a>";
