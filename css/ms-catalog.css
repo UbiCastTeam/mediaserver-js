@@ -1,22 +1,28 @@
 /* CSS for MediaServer browser */
 /* Additional CSS for non overlay use */
-#global .main-title .item-entry-preview,
-#global .main-title h1 {
-    display: inline-block;
-    vertical-align: middle;
-}
-#global .main-title .item-entry-preview,
-#global .main-title .item-entry-preview img {
-    max-width: 100px;
-    max-height: 100px;
+#global .main-title {
+    border-bottom: 2px solid #DDD;
+    padding: 0 20px;
 }
 #global .main-title h1 {
-    max-width: 1400px;
-    font-size: 1.5em;
+    margin: 0;
+    padding: 15px;
+}
+#global .main-title .channel-description-rss {
+    padding: 0 15px;
 }
 #global .main-title .channel-description-text {
     display: block;
     cursor: pointer;
+    font-size: 0.7em;
+}
+#global .main-title .item-entry-links {
+    float:right;
+    text-align: right;
+    visibility: hidden;
+}
+#global .main-title:hover .item-entry-links {
+    visibility: visible;
 }
 /* ms-browser */
 .ms-browser .main-block {
@@ -99,7 +105,37 @@
 .ms-browser .ms-browser-display-btn-place {
     top: 8px;
 }
-
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .ms-browser-section-title {
+    font-size: 1.5em;
+    padding: 15px;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section {
+    border-top: 2px solid #DDD;
+    border-bottom: 2px solid #DDD;
+    padding: 0 20px;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section:first-child {
+    border: none;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section:last-child {
+    border-bottom: none;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .column-2 {
+    vertical-align: top;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a {
+    border-right: 1px solid #EEE;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a .item-entry {
+    margin-right: 25px;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-b .item-entry {
+    margin-left: 25px; 
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a .item-entry:last-child,
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-b .item-entry:last-child {
+    border: none;
+}
 /* ms-items */
 .ms-items .item-entry-preview {
     width: 240px;
@@ -138,27 +174,6 @@
 .ms-items .item-entry.item-type-parent .item-entry-links-container {
     display: block;
 }
-.ms-items .item-entry.item-type-current .item-entry-links {
-    padding-right: 0;
-    float: right;
-    position: relative;
-    line-height: normal;
-}
-.ms-items .item-entry.item-type-current .item-entry-links-container {
-    display: block;
-}
-.ms-items .item-entry.item-type-current .item-entry-links-placeholder {
-    top: 0;
-    right: 0;
-    position: absolute;
-}
-.ms-items .item-entry.item-type-current .item-entry-links-container,
-.ms-items .item-entry.item-type-current:hover .item-entry-links-placeholder {
-    visibility: hidden;
-}
-.ms-items .item-entry.item-type-current:hover .item-entry-links-container {
-    visibility: visible;
-}
 .ms-items .item-entry.selected {
     border-color: #ccc;
 }
@@ -171,45 +186,14 @@
 .ms-items .item-entry.selected .item-entry-title {
     color: #666;
 }
-.ms-items .item-entry.item-type-current .item-entry-preview {
-    margin: 10px;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-}
-.ms-items .item-entry.item-type-current .item-entry-title {
-    font-size: 20px;
-}
-.ms-items .item-entry.item-type-current .channel-description-rss,
-.ms-items .item-entry.item-type-current .channel-description-text {
-    padding: 5px 10px;
-}
-.ms-items .item-entry.item-type-current .channel-description-rss {
-    line-height: 24px;
-}
-.ms-items .item-entry.item-type-current .channel-description-rss a + a {
-    margin-left: 10px;
-}
 .ms-items .item-entry-small .item-entry-content {
     margin-left: 10px;
     line-height: normal;
 }
 .ms-items .item-entry.thumbnail.selectable,
 .ms-items .item-entry.selectable {
-    border-color: #ccc;
+    border-color: #EEE;
 }
-
-.ms-items .item-entry.item-type-current .item-entry-content {
-    padding: 0;
-}
-.ms-items .item-entry.item-type-current .item-entry-link .item-entry-title {
-    padding-top: 30px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-    display: block;
-    line-height: 150%;
-}
-
 .ms-items .item-entry .item-entry-placeholder {
     padding-right: 4px;
     float: right;

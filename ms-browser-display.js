@@ -288,18 +288,31 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         if (!cat_oid || cat_oid == "0") {
             if (!this.use_overlay && tab == "channels") {
                 var html = this.get_top_section_add_buttons(data.can_add_channel, data.can_add_video);
+                $("#global .main-title .commands-place").empty();
                 if (html !== "")
-                    $section.append(html);
+                    $("#global .main-title .commands-place").append(html);
+                $(".channel-description-rss", $("#global .main-title")).remove();
+                $("#global .main-title h1").html(utils.translate("All channels"));
+                document.title = utils.translate("All channels");
+            } else {
+                $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Channels")+"</h3>");
             }
-            $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Channels")+"</h3>");
-        }
-        else
+        } else {
             $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Sub channels")+"</h3>");
-        for (i=0; i < data.channels.length; i++) {
+        }
+        var $sub_section_a = $("<span class=\"column-2\"><div class=\"sub-section-a\"></div></span>");
+        var $sub_section_b = $("<span class=\"column-2\"><div class=\"sub-section-b\"></div></span>");
+        for (i = 0; i < data.channels.length; i++) {
             if (data.channels[i].parent_oid === undefined && cat_oid)
                 data.channels[i].parent_oid = cat_oid;
-            $section.append(this.get_content_entry("channel", data.channels[i], selectable, tab));
+            var sub_section = $(".sub-section-a", $sub_section_a);
+            if ((i + 1) % 2 === 0) {
+                sub_section = $(".sub-section-b", $sub_section_b);
+            }
+            sub_section.append(this.get_content_entry("channel", data.channels[i], selectable, tab));
         }
+        $section.append($sub_section_a);
+        $section.append($sub_section_b);
         $container.append($section);
     }
     if (data.live_streams && data.live_streams.length > 0) {
@@ -307,9 +320,17 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         selectable = this.selectable_content.indexOf("l") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
         $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Live streams")+"</h3>");
-        for (i=0; i < data.live_streams.length; i++) {
-            $section.append(this.get_content_entry("live", data.live_streams[i], selectable, tab));
+        var $sub_section_a = $("<span class=\"column-2\"><div class=\"sub-section-a\"></div></span>");
+        var $sub_section_b = $("<span class=\"column-2\"><div class=\"sub-section-b\"></div></span>");
+        for (i = 0; i < data.live_streams.length; i++) {
+            var sub_section = $(".sub-section-a", $sub_section_a);
+            if ((i + 1) % 2 === 0) {
+                sub_section = $(".sub-section-b", $sub_section_b);
+            }
+            sub_section.append(this.get_content_entry("live", data.live_streams[i], selectable, tab));
         }
+        $section.append($sub_section_a);
+        $section.append($sub_section_b);
         $container.append($section);
     }
     if (data.videos && data.videos.length > 0) {
@@ -317,9 +338,17 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         selectable = this.selectable_content.indexOf("v") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
         $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Videos")+"</h3>");
-        for (i=0; i < data.videos.length; i++) {
-            $section.append(this.get_content_entry("video", data.videos[i], selectable, tab));
+        var $sub_section_a = $("<span class=\"column-2\"><div class=\"sub-section-a\"></div></span>");
+        var $sub_section_b = $("<span class=\"column-2\"><div class=\"sub-section-b\"></div></span>");
+        for (i = 0; i < data.videos.length; i++) {
+            var sub_section = $(".sub-section-a", $sub_section_a);
+            if ((i + 1) % 2 === 0) {
+                sub_section = $(".sub-section-b", $sub_section_b);
+            }
+            sub_section.append(this.get_content_entry("video", data.videos[i], selectable, tab));
         }
+        $section.append($sub_section_a);
+        $section.append($sub_section_b);
         $container.append($section);
     }
     if (data.photos_groups && data.photos_groups.length > 0) {
@@ -327,9 +356,17 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         selectable = this.selectable_content.indexOf("p") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
         $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Photos groups")+"</h3>");
-        for (i=0; i < data.photos_groups.length; i++) {
-            $section.append(this.get_content_entry("photos", data.photos_groups[i], selectable, tab));
+        var $sub_section_a = $("<span class=\"column-2\"><div class=\"sub-section-a\"></div></span>");
+        var $sub_section_b = $("<span class=\"column-2\"><div class=\"sub-section-b\"></div></span>");
+        for (i = 0; i < data.photos_groups.length; i++) {
+            var sub_section = $(".sub-section-a", $sub_section_a);
+            if ((i + 1) % 2 === 0) {
+                sub_section = $(".sub-section-b", $sub_section_b);
+            }
+            sub_section.append(this.get_content_entry("photos", data.photos_groups[i], selectable, tab));
         }
+        $section.append($sub_section_a);
+        $section.append($sub_section_b);
         $container.append($section);
     }
 };
@@ -366,7 +403,8 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var $entry_links = $(html);
     this._set_on_click_entry_links($entry_links, item, item_type, selectable);
     $entry.append($entry_links);
-
+    if (!this.use_overlay && (item_type == "current" || item_type == "parent"))
+        return;
     return $entry;
 };
 MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectable, tab) {
@@ -399,10 +437,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
                 image_preview += "<span class=\"item-entry-preview obj-block-link\"" + 
                           "style=\"background-image: url(" + item.thumb + ");\"></span>";
             } else {
-                if (!this.use_overlay && item_type == "current") {
-                    $(".item-entry-preview", $title_place.parent()).remove();
-                    $title_place.before("<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>");
-                } else {
+                if (this.use_overlay || item_type != "current") {
                     image_preview += "<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>";
                 }
             }
@@ -420,23 +455,11 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     var top_bar = "<span class=\"item-entry-top-bar\">";
     if (is_parent_or_current || this.display_mode != "thumbnail") {
         if (!this.use_overlay && item_type == "current") {
+            $("#global .main-title .commands-place").empty();
             $title_place.html(utils.escape_html(item.title));
+            document.title = utils.escape_html(item.title);
         } else {
             top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
-        }
-        if (!this.use_overlay && item_type == "current") {
-            if (item.views) {
-                top_bar += "<span class=\"item-entry-annotations\">" + item.views + " " + utils.translate("views");
-                if (item.views_last_month)
-                    top_bar += ", " + item.views_last_month + " " + utils.translate("this month");
-                top_bar += "</span>";
-            }
-            if (item.comments) {
-                top_bar += "<span class=\"item-entry-annotations\">" + item.comments + " " + utils.translate("annotations");
-                if (item.comments_last_month)
-                    top_bar += ", " + item.comments_last_month + " " + utils.translate("this month");
-                top_bar += "</span>";
-            }
         }
     }
 
@@ -445,21 +468,8 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     var links = "";
     if (!this.use_overlay && item_type == "current" && (item.can_edit || item.can_add_channel || item.can_add_video)) {
         links += "<span class=\"item-entry-links\">";
-        links += "    <span class=\"item-entry-links-placeholder\">";
-        links += "         <button type=\"button\" class=\"" + this.btn_class + "\"><i class=\"fa fa-bars\"></i></button>";
-        links += "    </span>";
         links += "    <span class=\"item-entry-links-container\">";
-        if (item.can_edit) {
-            links += "<a class=\"" + this.btn_class + " item-entry-pick item-entry-pick-edit-media default\" href=\"" + 
-                       this._get_btn_link(item, "edit") + "\"><i class=\"fa fa-pencil\"></i> " + 
-                       utils.translate("Edit") + "</a>";
-            if (item.can_delete)
-                links += "<button type=\"button\" class=\"" + this.btn_class + 
-                         " item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\"></i> " + 
-                         utils.translate("Delete") + "</button>";
-        }
         if (item.can_add_channel || item.can_add_video) {
-            links += "<br/>";
             if (item.can_add_channel) {
                 links += "<a class=\"" + this.btn_class + " item-entry-pick item-entry-pick-add-channel\" href=\"" +
                           this._get_btn_link(item, "add_channel") + "\"><i class=\"fa fa-plus\"></i> " +
@@ -471,8 +481,18 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
                           utils.translate("Add a video")+"</a>";
             }
         }
+        if (item.can_edit) {
+            links += "<a class=\"" + this.btn_class + " item-entry-pick item-entry-pick-edit-media default\" href=\"" + 
+                       this._get_btn_link(item, "edit") + "\"><i class=\"fa fa-pencil\"></i> " + 
+                       utils.translate("Edit") + "</a>";
+            if (item.can_delete)
+                links += "<button type=\"button\" class=\"" + this.btn_class + 
+                         " item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\"></i> " + 
+                         utils.translate("Delete") + "</button>";
+        }
         links += "    </span>";
         links += "</span>";
+        $(".item-entry-links", $title_place.parent()).remove();
     }
     $title_place.after(links);
 
@@ -566,20 +586,37 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
             this.innerHTML = item.description;
         });
         $title_place.append($desc);
-        html += "<div class=\"channel-description-rss\"> ";
+        var rss = "<p class=\"channel-description-rss inline-block\"> ";
         if (this.display_itunes_rss) {
-            html += utils.translate("Subscribe to channel's videos RSS:") + "<br/> ";
-            html += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/rss.xml\">";
-            html +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("standard") + "</a>";
-            html += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/itunes-video.xml\">";
-            html +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes") + "</a>";
-            html += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/itunes-audio.xml\">";
-            html +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes (audio only)") + "</a>";
+            rss += " <span class=\"inline-block\">" + utils.translate("Subscribe to channel's videos RSS:") + "</span>";
+            rss += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/rss.xml\">";
+            rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("standard") + "</a>";
+            rss += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/itunes-video.xml\">";
+            rss +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes") + "</a>";
+            rss += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/itunes-audio.xml\">";
+            rss +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes (audio only)") + "</a>";
         } else {
-            html += " <a class=\"nowrap\" href=\"/channels/" + item.oid + "/rss.xml\">";
-            html +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("Subscribe to channel's videos RSS") + "</a>";
+            rss += " <a class=\"nowrap\" href=\"/channels/" + item.oid + "/rss.xml\">";
+            rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("Subscribe to channel's videos RSS") + "</a>";
         }
-        html += "</div>";
+        rss += "</p>";
+        $(".channel-description-rss", $title_place.parent()).remove();
+        $title_place.parent().append(rss);
+        var anno_and_views = "";
+        if (item.views) {
+            anno_and_views += "<span class=\"inline-block\">" + item.views + " " + utils.translate("views");
+            if (item.views_last_month)
+                anno_and_views += ", " + item.views_last_month + " " + utils.translate("this month");
+            anno_and_views += "</span>";
+        }
+        if (item.comments) {
+            anno_and_views += " <span class=\"inline-block\">" + item.comments + " " + utils.translate("annotations");
+            if (item.comments_last_month)
+                anno_and_views += ", " + item.comments_last_month + " " + utils.translate("this month");
+            anno_and_views += "</span>";
+        }
+        anno_and_views += "<br />";
+        $(".channel-description-rss", $title_place.parent()).prepend(anno_and_views);
     }
     return html;
 };
@@ -604,6 +641,7 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
     }
 };
 MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectable) {
+    var is_parent_or_current = item_type == "parent" || item_type == "current";
     var html = "<div class=\"item-entry-links\">";
     /*html += "<div class=\"item-entry-links-placeholder\">";
     html +=     "<button type=\"button\" class=\""+this.btn_class+"\"><i class=\"fa fa-bars\"></i></button>";

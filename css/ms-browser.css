@@ -167,6 +167,7 @@
     font-weight: bold;
     text-decoration: italic;
     color: #666;
+    padding: 4px;
 }
 .ms-browser .ms-browser-top-menu-title,
 .ms-browser .ms-browser-search-title {
@@ -500,7 +501,7 @@
 }
 .ms-items .item-entry-content {
     display: inline-block;
-    width: calc(100% - 300px);
+    width: calc(100% - 140px);
     padding: 10px;
 }
 .ms-items .item-entry-small .item-entry-content {
@@ -569,18 +570,14 @@
     display: block;
 }
 .ms-items .item-entry-views,
-.ms-items .item-entry-comments,
+.ms-items .item-entry-annotations,
+.ms-items .item-entry-parent,
 .ms-items .item-entry-type {
     display: block;
-    float: right;
-    margin-left: 10px;
     color: #666;
 }
-.ms-items .item-entry-annotations,
-.ms-items .item-entry-parent {
+.ms-items .item-entry-annotations {
     font-style: italic;
-    display: block;
-    color: #666;
 }
 .ms-items .item-entry-annotations {
     padding: 5px 10px;
