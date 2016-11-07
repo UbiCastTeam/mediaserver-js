@@ -51,8 +51,7 @@ MSBrowserChannels.prototype.on_show = function () {
     if (this.initialized)
         return;
     this.initialized = true;
-
-    this.default_logo_src = $("#mainlogo .header_logo").attr("src");
+    this.default_logo_src = $("#mainlogo .header-logo").attr("src");
     this.default_fav_src = $("#").attr("src");
 
     // tree manager
@@ -193,24 +192,25 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         current_info.extra_class = "item-entry-small";
         current_info.selectable = !this.browser.parent_selection_oid || response.selectable;
         this.$content.append(this.browser.get_content_entry("current", current_info, this.browser.selectable_content.indexOf("c") != -1, "channels"));
-        // channel's custom CSS
-        if (!this.browser.use_overlay) {
-            $("head .csslistlink").remove();
+    }
+    // channel's custom CSS
+    if (!this.browser.use_overlay) {
+        $("head .csslistlink").remove();
+        if (response.info) {
             var csslinks = "";
             for (var index in response.info.css_list) {
                 csslinks += "<link class=\"csslistlink\" rel=\"stylesheet\" type=\"text/css\" href=\""+response.info.css_list[index]+"\"/>";
             }
             $("head").append(csslinks);
-
-            if (response.info.logo_url)
-                $("#mainlogo .header-logo").attr("src", response.info.logo_url);
-            else
-                $("#mainlogo .header-logo").attr("src", this.default_logo_src);
-            if (response.info.favicon_url)
-                $("#favicon_link").attr("href", response.info.favicon_url);
-            else
-                $("#favicon_link").attr("href", this.default_fav_src);
         }
+        if (response.info && response.info.logo_url)
+            $("#mainlogo .header-logo").attr("src", response.info.logo_url);
+        else
+            $("#mainlogo .header-logo").attr("src", this.default_logo_src);
+        if (response.info && response.info.favicon_url)
+            $("#favicon_link").attr("href", response.info.favicon_url);
+        else
+            $("#favicon_link").attr("href", this.default_fav_src);
     }
 
     var nb_channels = response.channels ? response.channels.length : 0;

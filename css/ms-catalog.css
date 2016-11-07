@@ -17,16 +17,24 @@
     font-size: 0.7em;
 }
 #global .main-title .item-entry-links {
-    float:right;
     text-align: right;
-    visibility: hidden;
-}
-#global .main-title:hover .item-entry-links {
-    visibility: visible;
 }
 /* ms-browser */
 .ms-browser .main-block {
     border: none;
+}
+.ms-browser-section-links,
+.ms-browser-top-btns {
+    display: inline-block;
+    margin: 5px;
+}
+.ms-browser-top-btns {
+    line-height: inherit;
+    position: static;
+    z-index: inherit;
+    top: auto;
+    right: auto;
+    height: auto;
 }
 .ms-browser .ms-browser-main {
     margin: 0;
@@ -111,8 +119,7 @@
 }
 .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section {
     border-top: 2px solid #DDD;
-    border-bottom: 2px solid #DDD;
-    padding: 0 20px;
+    padding: 20px 20px;
 }
 .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section:first-child {
     border: none;
@@ -120,21 +127,10 @@
 .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section:last-child {
     border-bottom: none;
 }
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .column-2 {
-    vertical-align: top;
-}
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a {
-    border-right: 1px solid #EEE;
-}
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a .item-entry {
-    margin-right: 25px;
-}
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-b .item-entry {
-    margin-left: 25px; 
-}
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a .item-entry:last-child,
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-b .item-entry:last-child {
-    border: none;
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry {
+    display: inline-block;
+    margin: 10px;
+    width: calc(50% - 20px);
 }
 /* ms-items */
 .ms-items .item-entry-content {
@@ -328,17 +324,9 @@
 
 }
 @media (max-width: 800px) {
-    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a {
-        border-right: none;
-    }
-    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a .item-entry {
-        margin-right: inherit;
-    }
-    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-b .item-entry {
-        margin-left: inherit;
-    }
-    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .sub-section-a .item-entry:last-child {
-        border-bottom: 1px solid #EEE;
+    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry {
+        display: block;
+        width: 100%;
     }
 }
 @media (max-width: 600px) {
