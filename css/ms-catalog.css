@@ -117,18 +117,6 @@
 .ms-items .item-entry.item-type-current .item-entry-links-container {
     display: block;
 }
-.ms-items .item-entry.item-type-current .item-entry-links-placeholder {
-    top: 0;
-    right: 0;
-    position: absolute;
-}
-.ms-items .item-entry.item-type-current .item-entry-links-container,
-.ms-items .item-entry.item-type-current:hover .item-entry-links-placeholder {
-    visibility: hidden;
-}
-.ms-items .item-entry.item-type-current:hover .item-entry-links-container {
-    visibility: visible;
-}
 .ms-items .item-entry.selected {
     border-color: #ccc;
     background: #def;
