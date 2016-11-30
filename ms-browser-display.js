@@ -44,7 +44,7 @@ MSBrowser.prototype.build_widget = function () {
     if (this.use_overlay) {
         $content_place.prepend(this.get_top_menu_jq());
     } else {
-        $("#global header .commands-place").append(this.get_top_menu_jq());
+        $("nav .buttons-left").append(this.get_top_menu_jq());
     }
     $content_place.prepend(this.latest.get_content_jq());
     $content_place.prepend(this.search.get_content_jq());
@@ -466,8 +466,9 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         links += "    </span>";
         links += "</span>";
         $(".item-entry-links", $title_place.parent()).remove();
+        $("nav .button-right").empty();
     }
-    $("#global header .commands-place").append(links);
+    $("nav .button-right").append(links);
 
     /********** Status **********/
 
