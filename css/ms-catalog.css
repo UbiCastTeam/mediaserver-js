@@ -11,8 +11,11 @@ nav.navbar .button-right {
     line-height: 39px;
 }
 #global .main-title {
-    border-bottom: 2px solid #DDD;
-    padding: 0 20px;
+    background: #EEE;
+    padding: 5px 20px;
+    -webkit-box-shadow: inset 0px 5px 5px -6px #666;
+    -moz-box-shadow: inset 0px 5px 5px -6px #666;
+    box-shadow: inset 0px 5px 5px -6px #666;
 }
 #global .main-title h1 {
     margin: 0;
@@ -123,23 +126,31 @@ nav.navbar .button-right {
     top: 8px;
 }
 .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .ms-browser-section-title {
-    font-size: 1.5em;
+    font-size: 1.8em;
+    border-bottom: 4px solid #EEE;
     padding: 15px;
 }
 .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section {
-    border-top: 2px solid #DDD;
     padding: 20px 20px;
-}
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section:first-child {
-    border: none;
-}
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section:last-child {
-    border-bottom: none;
 }
 .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry {
     display: inline-block;
     margin: 10px;
     width: calc(50% - 20px);
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry.thumbnail {
+    width: 240px;
+    background: none;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry.thumbnail .item-entry-preview,
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry.thumbnail .item-entry-content,
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry.thumbnail .item-entry-bottom-bar {
+    position: static;
+    display: inline-block;
+    width: 100%;
+}
+.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry.thumbnail .item-entry-preview {
+    height: 135px;
 }
 /* ms-items */
 .ms-items .item-entry-content {
