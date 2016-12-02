@@ -421,10 +421,10 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
 
     /********************* Content ********************/
 
-    var content = "<span class=\"item-entry-content\">";
+    var content = "<div class=\"item-entry-content\">";
 
     /******************* Top bar ****************/
-    var top_bar = "<span class=\"item-entry-top-bar\">";
+    var top_bar = "<div class=\"item-entry-top-bar\">";
     if (is_parent_or_current || this.display_mode != "thumbnail") {
         if (!this.use_overlay && item_type == "current") {
             $("#global .main-title .commands-place .item-entry-links").remove();
@@ -503,9 +503,9 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
             top_bar += "<br /> <span class=\"item-entry-date\">" + utils.translate("Created on") + " " +
                         utils.get_date_display(item.creation) + "</span>";
         if (item.short_description)
-            top_bar += "<p>" + item.short_description + "</p>";
+            top_bar += "<div class=\"item-entry-description\">" + item.short_description + "</div>";
     }
-    top_bar += "</span>";
+    top_bar += "</div>";
     content += top_bar;
 
     /******************* Bottom bar ****************/
@@ -533,7 +533,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
 
     bottom_bar += "</span>";
     content += bottom_bar;
-
+    content += "</div>";
     html += content;
     html += "</" + markup + ">";
 

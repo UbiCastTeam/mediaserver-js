@@ -627,7 +627,8 @@
 .ms-items .item-entry.thumbnail .item-entry-links,
 .ms-items .item-entry.thumbnail .item-entry-views,
 .ms-items .item-entry.thumbnail .item-entry-parent,
-.ms-items .item-entry.thumbnail .item-entry-type {
+.ms-items .item-entry.thumbnail .item-entry-type,
+.ms-items .item-entry.thumbnail .item-entry-description {
     display: none;
 }
 .ms-items .item-entry.thumbnail .item-entry-top-bar {
