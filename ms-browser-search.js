@@ -265,7 +265,7 @@ MSBrowserSearch.prototype._on_ajax_error = function (response) {
 
     var message;
     if (!this.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
-        var login_url = this.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
+        var login_url = this.browser.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
         message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
     }
     else
