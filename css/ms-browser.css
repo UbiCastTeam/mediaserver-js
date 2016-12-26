@@ -595,8 +595,7 @@
     bottom: 0;
     line-height: 45px;
 }
-.ms-items .item-entry-links-container,
-.ms-items .item-entry:hover .item-entry-links-placeholder {
+.ms-items .item-entry-links-container {
     display: none;
 }
 .ms-items .item-entry:hover .item-entry-links-container {

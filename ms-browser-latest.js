@@ -35,7 +35,7 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
     if (dc.length > 1 && dc.indexOf("c") != -1) {
         html += "<p>";
         html +=     "<input id=\"latest_display_channels\" type=\"checkbox\">";
-        html +=     " <label for=\"latest_display_channels\">"+utils.translate("display channels")+"</label>";
+        html +=     " <label for=\"latest_display_channels\">"+utils.translate("Display channels")+"</label>";
         html += "</p>";
         html += "<p><button type=\"button\" class=\"button ms-browser-latest-refresh\">"+utils.translate("Apply")+"</button></p>";
     }
@@ -46,22 +46,23 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
     return this.$menu;
 };
 MSBrowserLatest.prototype.get_content_jq = function () {
+    var more_label = utils.translate("Display {count} more items");
     var html = "";
     html += "<div id=\"ms_browser_latest\" class=\"ms-browser-content\" style=\"display: none;\">";
     html +=     "<div class=\"ms-browser-header\"><h1>"+utils.translate("Latest content added")+"</h1></div>";
     html +=     "<div class=\"ms-browser-block\">";
     html +=         "<div class=\"ms-browser-latest-place\"></div>";
     html +=         "<div class=\"ms-browser-latest-btns\">";
-    html +=             "<button type=\"button\" class=\"button ms-browser-latest-more-5\">"+utils.translate("Display 5 more items")+"</button>";
-    html +=             "<button type=\"button\" class=\"button ms-browser-latest-more-20\">"+utils.translate("Display 20 more items")+"</button>";
+    html +=             "<button type=\"button\" class=\"button ms-browser-latest-more-10\">"+more_label.replace(/\{count\}/, "10")+"</button>";
+    html +=             "<button type=\"button\" class=\"button ms-browser-latest-more-30\">"+more_label.replace(/\{count\}/, "30")+"</button>";
     html +=         "</div>";
     html +=     "</div>";
     html += "</div>";
     this.$panel = $(html);
     this.$content = $(".ms-browser-latest-place", this.$panel);
     // events
-    $(".ms-browser-latest-more-5", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.display_more(5); });
-    $(".ms-browser-latest-more-20", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.display_more(20); });
+    $(".ms-browser-latest-more-10", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.display_more(10); });
+    $(".ms-browser-latest-more-30", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.display_more(30); });
     return this.$panel;
 };
 
@@ -137,7 +138,7 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
 MSBrowserLatest.prototype._on_ajax_error = function (response) {
     var message;
     if (!this.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
-        var login_url = this.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
+        var login_url = this.browser.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
         message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
     }
     else
