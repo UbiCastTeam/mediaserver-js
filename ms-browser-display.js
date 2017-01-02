@@ -440,12 +440,12 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
 
     var links = "";
     if (!this.use_overlay && item_type == "current" && (item.can_edit || item.can_add_channel || item.can_add_video)) {
-        html += "<span class=\"item-entry-links\">";
-        html += "<span class=\"item-entry-links-container\">";
+        links += "<span class=\"item-entry-links\">";
+        links += "<span class=\"item-entry-links-container\">";
         if (item.can_edit) {
-            html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit")+"</a>";
+            links += "<a class=\""+this.btn_class+" default item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit")+"</a>";
             if (item.can_delete)
-                html += "<button type=\"button\" class=\""+this.btn_class+" item-entry-pick-delete-media\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</button>";
+                links += "<button type=\"button\" class=\""+this.btn_class+" danger item-entry-pick-delete-media\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</button>";
         }
         if (item.can_add_channel || item.can_add_video) {
             if (item.can_add_channel) {
