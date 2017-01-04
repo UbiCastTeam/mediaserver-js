@@ -362,9 +362,24 @@ nav.navbar .button-right {
 
 }
 @media (max-width: 800px) {
+    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section {
+        padding: 2px;
+    }
     .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry {
         display: block;
+        margin: 5px 0;
         width: 100%;
+    }
+    .ms-browser .ms-browser-section-links {
+        float: none;
+        text-align: center;
+        display: block;
+    }
+    .ms-items .item-entry-unlisted,
+    .ms-items .item-entry-notpublished,
+    .ms-items .item-entry-published,
+    .ms-items .item-entry-notready {
+        margin-right: 22px;
     }
 }
 @media (max-width: 600px) {
@@ -373,9 +388,21 @@ nav.navbar .button-right {
     }
     .ms-items .item-entry-content {
         width: 100%;
-        padding: 5px;
+        padding: 15px;
+    }
+    nav.navbar .button-right {
+        float: none;
     }
 }
 @media (max-width: 340px) {
-
+    .ms-items .item-entry .item-entry-links {
+        display: none;
+    }
+    .ms-items .item-entry-top-bar .item-entry-title {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 5px;
+        left: 15px;
+    }
 }
