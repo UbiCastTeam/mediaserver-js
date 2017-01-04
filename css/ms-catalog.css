@@ -63,6 +63,9 @@ nav.navbar .button-right {
     right: auto;
     height: auto;
 }
+.ms-browser .ms-browser-section {
+    overflow: visible;
+}
 .ms-browser .ms-browser-main {
     margin: 0;
 }
@@ -354,7 +357,7 @@ nav.navbar .button-right {
 @media (max-width: 1280px) {
     .ms-items .item-entry-preview {
         width: 120px;
-        height: 68px;
+        height: 91px;
     }
     .ms-items .item-entry-content {
         width: calc(100% - 175px);
