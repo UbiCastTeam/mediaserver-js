@@ -669,6 +669,9 @@
 }
 .ms-items .item-entry.thumbnail .item-entry-title {
     padding: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .ms-items .item-entry.thumbnail .obj-block-info,
 .ms-items .item-entry.thumbnail .obj-block-edit {
