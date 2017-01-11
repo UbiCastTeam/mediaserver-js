@@ -47,9 +47,6 @@ nav.navbar .button-right {
     right: auto;
 }
 /* ms-browser */
-.ms-browser .main-block {
-    border: none;
-}
 .ms-browser-section-links,
 .ms-browser-top-btns {
     display: inline-block;
