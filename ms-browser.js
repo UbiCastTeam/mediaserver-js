@@ -80,7 +80,7 @@ MSBrowser.prototype.init = function () {
 
     var $messages;
     if (!this.use_overlay)
-        $messages = $(".messages-block").detach(); // get Django messages
+        $messages = $(".messages").detach(); // get Django messages
 
     // get elements
     this.init_options.browser = this;
