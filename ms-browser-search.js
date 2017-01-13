@@ -94,6 +94,11 @@ MSBrowserSearch.prototype.get_menu_catalog_jq = function () {
     $(".ms-browser-search-in input[type=checkbox], .ms-browser-search-for input[type=checkbox]", $menu).click({obj: this}, function (event) {
         event.data.obj.on_search_submit();
     });
+    $("#top_search_form form").submit({obj: this}, function (event) {
+        $("#ms_browser_search_text").val($("#top_search_input").val());
+        event.data.obj.on_search_submit();
+        return false;
+    });
     return $menu;
 };
 MSBrowserSearch.prototype.get_menu_jq = function () {
