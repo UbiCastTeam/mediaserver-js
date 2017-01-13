@@ -543,6 +543,7 @@
     height: 16px;
     line-height: 16px;
     text-align: center;
+    cursor: help;
 }
 .ms-items .item-entry-unlisted:before,
 .ms-items .item-entry-notpublished:before,

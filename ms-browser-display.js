@@ -122,17 +122,29 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     });
     $("#ms_browser_display_as_list", this.$top_menu).click({ obj: this }, function (evt) {
         evt.data.obj.display_as_list();
+        evt.data.obj.toggle_menu("display");
     });
     $("#ms_browser_display_as_thumbnails", this.$top_menu).click({ obj: this }, function (evt) {
         evt.data.obj.display_as_thumbnails();
+        evt.data.obj.toggle_menu("display");
     });
     $("#ms_browser_order_channel", this.$top_menu).change({ obj: this }, function (evt) {
         evt.data.obj.channels.set_order($(this).val());
+        evt.data.obj.toggle_menu("display");
     });
     $(".ms-browser-filters select", this.$top_menu).change({ obj: this }, function (evt) {
         evt.data.obj.toggle_filter($(this));
+        evt.data.obj.toggle_menu("display");
     });
-
+    $(document).click({ obj: this }, function (evt) {
+        var container = $("#ms_browser_display_menu");
+        var button = $("#ms_browser_display_btn");
+        if (!container.is(evt.target) && container.has(evt.target).length === 0 &&
+            !button.is(evt.target) && button.has(evt.target).length === 0) {
+            button.removeClass("active");
+            container.removeClass("active");
+        }
+    });
     return this.$top_menu;
 };
 MSBrowser.prototype.toggle_menu = function (menu) {
