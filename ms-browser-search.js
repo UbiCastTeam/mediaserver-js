@@ -49,7 +49,53 @@ MSBrowserSearch.prototype.should_be_displayed = function (dc, items) {
     }
     return false;
 };
+MSBrowserSearch.prototype.get_menu_catalog_jq = function () {
+    var dc = this.browser.displayable_content;
+    var html = "<div id=\"ms_browser_search_menu\" style=\"text-align: right;\">";
+    html += "<input id=\"ms_browser_search_text\" type=\"hidden\" value=\"\">";
+    html += "<span class=\"relative\">";
+    html += "<button class=\"button js-display marged\" data-display-id=\"search_look_in\">" + this.translate("Fields") + "</button>";
+    html += "<div class=\"dropdown ms-browser-search-in\" id=\"search_look_in\">";
 
+    for (var i = 0; i < this.search_in_fields.length; i++) {
+        var field = this.search_in_fields[i];
+        if (this.should_be_displayed(dc, field.items)) {
+            html += "<div><input id=\"ms_browser_search_" + field.name + "\" type=\"checkbox\" " + (field.initial ? "checked=\"checked\"" : "") + ">";
+            html += "<label for=\"ms_browser_search_" + field.name + "\">" + utils.escape_html(utils.translate(field.label)) + "</label></div>";
+        }
+    }
+    html += "</div>";
+    html += "</span>";
+    html += "<span class=\"relative\">";
+    html += "<button class=\"button js-display marged\" data-display-id=\"search_look_for\">" + this.translate("Type") + "</button>";
+    html += "<div class=\"dropdown ms-browser-search-for\" id=\"search_look_for\">";
+    for (i = 0; i < this.search_for_fields.length; i++) {
+        var field = this.search_for_fields[i];
+        if (this.should_be_displayed(dc, field.items)) {
+            html += "<div><input id=\"ms_browser_search_" + field.name + "\" type=\"checkbox\" " + (field.initial ? "checked=\"checked\"" : "") + ">";
+            html += "<label for=\"ms_browser_search_" + field.name + "\">" + utils.escape_html(utils.translate(field.label)) + "</label></div>";
+        }
+    }
+    html += "</div>";
+    html += "</span>";
+    html += "</div>";
+    var $menu = $(html);
+    $(".js-display", $menu).click(function (event) {
+        event.stopPropagation();
+        $(".dropdown").removeClass("active");
+        var id = $(this).attr("data-display-id");
+        var $ele = $("#" + id);
+        if ($ele.hasClass("active")) {
+            $ele.removeClass("active");
+        } else {
+            $ele.addClass("active");
+        }
+    });
+    $(".ms-browser-search-in input[type=checkbox], .ms-browser-search-for input[type=checkbox]", $menu).click({obj: this}, function (event) {
+        event.data.obj.on_search_submit();
+    });
+    return $menu;
+};
 MSBrowserSearch.prototype.get_menu_jq = function () {
     var dc = this.browser.displayable_content;
     var i, field;
@@ -87,7 +133,11 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
         html += "</div>";
     }
     html += "</div>";
-    this.$menu = $(html);
+    if (!this.use_overlay) {
+        this.$menu = this.get_menu_catalog_jq();
+    } else {
+        this.$menu = $(html);
+    }
     // events
     $("form", this.$menu).submit({ obj: this }, function (evt) { evt.data.obj.on_search_submit(); });
     $("#ms_browser_search_in_all", this.$menu).click({ obj: this }, function (evt) {

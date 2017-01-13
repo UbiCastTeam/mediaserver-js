@@ -213,7 +213,19 @@ MSBrowser.prototype.display_as_thumbnails = function () {
 };
 MSBrowser.prototype.get_active_tab = function () {
     var $active = $(".ms-browser-tab.active", this.$menu);
-    return $active.length > 0 ? $active.attr("id").replace(/_tab/g, "").replace(/ms_browser_/g, "") : null;
+    var name = $active.length > 0 ? $active.attr("id").replace(/_tab/g, "").replace(/ms_browser_/g, "") : null;
+    if (!name && !this.use_overlay) {
+        if ($(".ms-browser").hasClass("channels")) {
+            name = "channels";
+        }
+        else if ($(".ms-browser").hasClass("search")) {
+            name = "search";
+        }
+        else if ($(".ms-browser").hasClass("latest")) {
+            name = "latest";
+        }
+    }
+    return name;
 };
 MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
     var previous = this.get_active_tab();
@@ -229,11 +241,20 @@ MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
     $("#ms_browser_"+tab+"_menu", this.$menu).css("display", "block");
     $("#ms_browser_"+tab, this.$main).css("display", "block");
 
-    if (tab == "latest")
+    if (!this.use_overlay) {
+        this.$menu.hide();
+    }
+    if (tab == "latest") {
+        $(".ms-browser").removeClass("search").removeClass("channels").addClass("latest");
         this.latest.on_show();
-    if (tab == "search")
+    }
+    if (tab == "search") {
+        $(".ms-browser").removeClass("latest").removeClass("channels").addClass("search");
+        this.$menu.show();
         this.search.on_show();
+    }
     if (tab == "channels") {
+        $(".ms-browser").removeClass("search").removeClass("latest").addClass("channels");
         this.channels.on_show();
         $("#ms_browser_display_menu .ms-browser-channel-order", this.$main).css("display", "");
     }
