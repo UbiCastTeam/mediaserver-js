@@ -91,7 +91,7 @@ MSBrowserSearch.prototype.get_menu_catalog_jq = function () {
             $ele.addClass("active");
         }
     });
-    $(".dropdown", $menu).click(function () {
+    $(".dropdown", $menu).click(function (event) {
         event.stopPropagation();
     });
     $(".ms-browser-search-in input[type=checkbox], .ms-browser-search-for input[type=checkbox]", $menu).click(
@@ -357,10 +357,11 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
             results.push(nb_live_streams + " " + utils.translate("live stream(s)"));
         if (nb_photos_groups > 0)
             results.push(nb_photos_groups + " " + utils.translate("photos group(s)"));
-        var text = "<p class=\"marged\"><b>" + utils.translate("Matching items:") + "</b> " + results.join(", ") + "</p>";
+        var text = "<p id=\"matching_items_place\" class=\"marged\"><b>" + utils.translate("Matching items:") + "</b> " + results.join(", ") + "</p>";
         if (this.browser.use_overlay) {
             this.$content.append(text);
         } else {
+            $("#matching_items_place").remove();
             $("#global .main-title").append(text);
         }
         this.browser.display_content(this.$content, response, null, "search");
