@@ -190,6 +190,10 @@ nav.navbar .button-right {
 .ms-items .item-entry.selected .item-entry-title {
     color: #666;
 }
+.ms-items .item-entry .item-entry-content .item-entry-description {
+    max-height: 69px;
+    overflow: auto;
+}
 .ms-items .item-entry-small .item-entry-content {
     margin-left: 10px;
     line-height: normal;
@@ -325,11 +329,11 @@ nav.navbar .button-right {
 .overlay-info a.white:hover {
     color: #fff;
 }
-.overlay-info-content a {
-    color: #abd8ef;
+.overlay-info-content .overlay-info-table a {
+    color: #3D6B7F;
     text-decoration: underline;
 }
-.overlay-info-content a:hover {
+.overlay-info-content .overlay-info-table a:hover {
     color: #fff;
     text-decoration: underline;
 }
