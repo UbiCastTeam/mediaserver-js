@@ -221,6 +221,8 @@ nav.navbar .button-right {
     width: 240px;
     background: #FFF;
     border: none;
+    float: none;
+    display: inline-block;
 }
 .ms-items .item-entry.thumbnail .item-entry-preview,
 .ms-items .item-entry.thumbnail .item-entry-content,
