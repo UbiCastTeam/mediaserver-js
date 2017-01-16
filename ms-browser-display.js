@@ -463,7 +463,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         if (!this.use_overlay && item_type == "current") {
             $("#global .main-title .commands-place .item-entry-links").remove();
             $("#global .main-title .commands-place .ms-browser-section-links").remove();
-            $title_place.html("<a class=\"item-entry-preview\" " + link + "><img src=\"" + item.thumb + "\"/></a> " + utils.escape_html(item.title));
+            $title_place.html("<a class=\"item-entry-preview\" " + link + "><img src=\"" + item.thumb + "\"/></a> <span class=\"inline-block\">" + utils.escape_html(item.title)) + "</span>";
             document.title = utils.escape_html(item.title);
         } else {
             top_bar += "<a class=\"item-entry-title\" " + link + ">" + utils.escape_html(item.title) + "</a>";

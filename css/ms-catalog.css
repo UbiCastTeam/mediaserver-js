@@ -394,6 +394,10 @@ nav.navbar .button-right {
     nav.navbar .button-right {
         float: none;
     }
+    #global .main-title h1 {
+        text-align: center;
+        max-width: 100%;
+    }
 }
 @media (max-width: 340px) {
     .ms-items .item-entry .item-entry-links {
