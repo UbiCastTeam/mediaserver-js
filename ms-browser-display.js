@@ -585,10 +585,12 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     /***************************** Current Channel data *************************/
 
     if (!this.use_overlay && tab == "channels" && item_type == "current") {
-        var $desc = $("<small class=\"channel-description-text\">" + item.short_description + "</small>");
-        $desc.click(function () {
-            this.innerHTML = item.description;
-        });
+        var $desc = $("<small class=\"channel-description-text" + (item.short_description != item.description ? " small" : "") + "\">" + item.short_description + "</small>");
+        if (item.short_description != item.description) {
+            $desc.click(function () {
+                this.innerHTML = item.description;
+            });
+        }
         $title_place.append($desc);
         var rss = "<p class=\"channel-description-rss\"> ";
         if (this.display_itunes_rss) {

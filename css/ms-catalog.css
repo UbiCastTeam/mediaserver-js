@@ -31,8 +31,10 @@ nav.navbar .button-right {
 }
 #global .main-title .channel-description-text {
     display: block;
-    cursor: pointer;
     font-size: 0.7em;
+}
+#global .main-title .channel-description-text.small {
+    cursor: pointer;
 }
 #global .main-title .item-entry-links {
     text-align: right;
