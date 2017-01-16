@@ -54,7 +54,7 @@ MSBrowserSearch.prototype.get_menu_catalog_jq = function () {
     var html = "<div id=\"ms_browser_search_menu\" style=\"text-align: right;\">";
     html += "<input id=\"ms_browser_search_text\" type=\"hidden\" value=\"\">";
     html += "<span class=\"relative\">";
-    html += "<button class=\"button js-display marged\" data-display-id=\"search_look_in\">" + this.translate("Fields") + "</button>";
+    html += "<button id=\"button_search_look_in\" class=\"button default js-display marged\" data-display-id=\"search_look_in\">" + this.translate("Search in") + " <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
     html += "<div class=\"dropdown ms-browser-search-in\" id=\"search_look_in\">";
 
     for (var i = 0; i < this.search_in_fields.length; i++) {
@@ -67,7 +67,7 @@ MSBrowserSearch.prototype.get_menu_catalog_jq = function () {
     html += "</div>";
     html += "</span>";
     html += "<span class=\"relative\">";
-    html += "<button class=\"button js-display marged\" data-display-id=\"search_look_for\">" + this.translate("Type") + "</button>";
+    html += "<button id=\"button_search_look_for\" class=\"button default js-display marged\" data-display-id=\"search_look_for\">" + this.translate("Search for") + " <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
     html += "<div class=\"dropdown ms-browser-search-for\" id=\"search_look_for\">";
     for (i = 0; i < this.search_for_fields.length; i++) {
         var field = this.search_for_fields[i];
@@ -82,16 +82,21 @@ MSBrowserSearch.prototype.get_menu_catalog_jq = function () {
     var $menu = $(html);
     $(".js-display", $menu).click(function (event) {
         event.stopPropagation();
-        $(".dropdown").removeClass("active");
         var id = $(this).attr("data-display-id");
         var $ele = $("#" + id);
         if ($ele.hasClass("active")) {
             $ele.removeClass("active");
         } else {
+            $(".dropdown").removeClass("active");
             $ele.addClass("active");
         }
     });
-    $(".ms-browser-search-in input[type=checkbox], .ms-browser-search-for input[type=checkbox]", $menu).click({obj: this}, function (event) {
+    $(".dropdown", $menu).click(function () {
+        event.stopPropagation();
+    });
+    $(".ms-browser-search-in input[type=checkbox], .ms-browser-search-for input[type=checkbox]", $menu).click(
+        {obj: this}, function (event) {
+        event.stopPropagation();
         event.data.obj.on_search_submit();
     });
     $("#top_search_form form").submit({obj: this}, function (event) {
