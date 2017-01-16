@@ -99,11 +99,6 @@ MSBrowserSearch.prototype.get_menu_catalog_jq = function () {
         event.stopPropagation();
         event.data.obj.on_search_submit();
     });
-    $("#top_search_form form").submit({obj: this}, function (event) {
-        $("#ms_browser_search_text").val($("#top_search_input").val());
-        event.data.obj.on_search_submit();
-        return false;
-    });
     return $menu;
 };
 MSBrowserSearch.prototype.get_menu_jq = function () {
@@ -183,6 +178,13 @@ MSBrowserSearch.prototype.on_show = function () {
     this.initialized = true;
 
     this.on_url_change();
+    if (!this.browser.use_overlay && this.browser.get_active_tab() == "search") {
+        $("#top_search_form form").submit({obj: this}, function (event) {
+            $("#ms_browser_search_text").val($("#top_search_input").val());
+            event.data.obj.on_search_submit();
+            return false;
+        });
+    }
 };
 
 MSBrowserSearch.prototype.on_url_change = function () {
