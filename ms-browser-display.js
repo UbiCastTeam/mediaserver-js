@@ -38,12 +38,13 @@ MSBrowser.prototype.build_widget = function () {
     this.$main = $(".ms-browser-main", this.$widget);
     var $menu_place = $(".ms-browser-panel", this.$menu);
     $menu_place.append(this.channels.get_menu_jq());
-    $menu_place.append(this.search.get_menu_jq());
     $menu_place.append(this.latest.get_menu_jq());
     var $content_place = $(".ms-browser-panel", this.$main);
     if (this.use_overlay) {
+        $menu_place.append(this.search.get_menu_jq());
         $content_place.prepend(this.get_top_menu_jq());
     } else {
+        $("nav .button-right").append(this.search.get_menu_jq());
         $("nav .buttons-left").append(this.get_top_menu_jq());
     }
     $content_place.prepend(this.latest.get_content_jq());

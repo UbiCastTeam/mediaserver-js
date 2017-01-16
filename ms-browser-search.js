@@ -143,10 +143,10 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
         html += "</div>";
     }
     html += "</div>";
-    if (!this.use_overlay) {
-        this.$menu = this.get_menu_catalog_jq();
-    } else {
+    if (this.browser.use_overlay) {
         this.$menu = $(html);
+    } else {
+        this.$menu = this.get_menu_catalog_jq();
     }
     // events
     $("form", this.$menu).submit({ obj: this }, function (evt) { evt.data.obj.on_search_submit(); });
@@ -324,7 +324,7 @@ MSBrowserSearch.prototype._on_ajax_error = function (response) {
     this.last_response = null;
 
     var message;
-    if (!this.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
+    if (!this.browser.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.browser.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
         message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
     }
@@ -350,18 +350,23 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
     if (has_items) {
         var results = [];
         if (nb_channels > 0)
-            results.push(nb_channels+" "+utils.translate("channel(s)"));
+            results.push(nb_channels + " " + utils.translate("channel(s)"));
         if (nb_videos > 0)
-            results.push(nb_videos+" "+utils.translate("video(s)"));
+            results.push(nb_videos + " " + utils.translate("video(s)"));
         if (nb_live_streams > 0)
-            results.push(nb_live_streams+" "+utils.translate("live stream(s)"));
+            results.push(nb_live_streams + " " + utils.translate("live stream(s)"));
         if (nb_photos_groups > 0)
-            results.push(nb_photos_groups+" "+utils.translate("photos group(s)"));
-        this.$content.append("<p><b>"+utils.translate("Matching items:")+"</b> "+results.join(", ")+"</p>");
+            results.push(nb_photos_groups + " " + utils.translate("photos group(s)"));
+        var text = "<p class=\"marged\"><b>" + utils.translate("Matching items:") + "</b> " + results.join(", ") + "</p>";
+        if (this.browser.use_overlay) {
+            this.$content.append(text);
+        } else {
+            $("#global .main-title").append(text);
+        }
         this.browser.display_content(this.$content, response, null, "search");
     }
     else
-        this.$content.html("<div class=\"info\">"+utils.translate("No results.")+"</div>");
+        this.$content.html("<div class=\"info\">" + utils.translate("No results.") + "</div>");
 };
 
 MSBrowserSearch.prototype.refresh_display = function (reset) {

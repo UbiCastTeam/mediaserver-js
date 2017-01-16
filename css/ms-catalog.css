@@ -99,19 +99,11 @@ nav.navbar .button-right {
     background-color: #1d4b5f;
     background-image: none;
 }
-.ms-browser .ms-browser-menu {
-    float: none;
-    width: auto;
-    background: #FFF;
-    padding: 5px 20px;
-    border-top: 1px solid #DDD;
-    box-shadow: 0px 2px 1px 0px #DDD;
-}
-.ms-browser .ms-browser-menu .dropdown {
+#ms_browser_search_menu .dropdown {
     min-width: 150px;
     padding: 5px;
 }
-.ms-browser .ms-browser-menu .ms-browser-search-block {
+#ms_browser_search_menu .ms-browser-search-block {
     display: inline-block;
 }
 .ms-browser .ms-browser-filters-menu {
