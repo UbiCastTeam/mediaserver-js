@@ -137,6 +137,9 @@ nav.navbar .buttons-right {
 .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section {
     padding: 20px 20px;
 }
+.ms-browser-block .current-item-desc {
+    padding: 10px;
+}
 /* ms-items */
 .ms-items .item-entry-content {
     display: inline-block;
@@ -216,12 +219,15 @@ nav.navbar .buttons-right {
 .ms-items .item-entry.thumbnail:hover .item-entry-bottom-bar > * {
     color: #666;
 }
+.ms-browser-block .current-item-desc,
 .ms-items .item-entry {
-    display: inline-block;
     margin: 10px;
-    width: calc(50% - 20px);
     background: #FFF;
     box-shadow: 2px 2px 1px 0px #DDD;
+}
+.ms-items .item-entry {
+    display: inline-block;
+    width: calc(50% - 20px);
 }
 .ms-items .item-entry.thumbnail {
     width: 240px;

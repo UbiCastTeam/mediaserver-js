@@ -432,7 +432,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
 
     var html = "<" + markup + " " + href + " class=\"item-entry-link " + (clickable ? "clickable" : "") + "\">";
     var $title_place = $("#global .main-title h1");
-
+    var $content_place = $("#ms_browser_channels .ms-browser-block");
     /******************* Image preview ****************/
 
     var image_preview = "";
@@ -493,7 +493,6 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         }
         links += "    </span>";
         links += "</span>";
-        $(".item-entry-links", $title_place.parent()).remove();
         $("#commands_place").empty();
     }
     $("#commands_place").append(links);
@@ -583,14 +582,15 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     /***************************** Current Channel data *************************/
 
     if (!this.use_overlay && tab == "channels" && item_type == "current") {
-        var $desc = $("<small class=\"channel-description-text" + (item.short_description != item.description ? " small" : "") + "\">" + item.short_description + "</small>");
+        var $current_item_desc = $("<div class=\"current-item-desc\"></div>");
+        var $desc = $("<div class=\"channel-description-text" + (item.short_description != item.description ? " small" : "") + "\">" + item.short_description + "</div>");
         if (item.short_description != item.description) {
             $desc.click(function () {
                 this.innerHTML = item.description;
             });
         }
-        $title_place.append($desc);
-        var rss = "<p class=\"channel-description-rss\"> ";
+        $current_item_desc.append($desc);
+        var rss = "<div id=\"channel_description_rss\" class=\"channel-description-rss\"> ";
         if (this.display_itunes_rss) {
             rss += " <span class=\"inline-block\">" + utils.translate("Subscribe to channel's videos RSS:") + "</span>";
             rss += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/rss.xml\">";
@@ -603,9 +603,8 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
             rss += " <a class=\"nowrap\" href=\"/channels/" + item.oid + "/rss.xml\">";
             rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("Subscribe to channel's videos RSS") + "</a>";
         }
-        rss += "</p>";
-        $(".channel-description-rss", $title_place.parent()).remove();
-        $title_place.parent().append(rss);
+        rss += "</div>";
+        $current_item_desc.append(rss);
         var anno_and_views = "";
         if (item.views) {
             anno_and_views += "<span class=\"inline-block\">" + item.views + " " + utils.translate("views");
@@ -620,7 +619,8 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
             anno_and_views += "</span>";
         }
         anno_and_views += "<br />";
-        $(".channel-description-rss", $title_place.parent()).prepend(anno_and_views);
+        $("#channel_description_rss").prepend(anno_and_views);
+        $content_place.prepend($current_item_desc);
     }
     return html;
 };
