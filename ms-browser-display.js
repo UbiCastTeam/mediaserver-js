@@ -44,7 +44,7 @@ MSBrowser.prototype.build_widget = function () {
         $menu_place.append(this.search.get_menu_jq());
         $content_place.prepend(this.get_top_menu_jq());
     } else {
-        $("nav .button-right").append(this.search.get_menu_jq());
+        $("#commands_place").append(this.search.get_menu_jq());
         $("nav .buttons-left").append(this.get_top_menu_jq());
     }
     $content_place.prepend(this.latest.get_content_jq());
@@ -323,10 +323,9 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         if (!cat_oid || cat_oid == "0") {
             if (!this.use_overlay && tab == "channels") {
                 var html = this.get_top_section_add_buttons(data.can_add_channel, data.can_add_video);
-                $("#global .main-title .commands-place .item-entry-links").remove();
-                $("#global .main-title .commands-place .ms-browser-section-links").remove();
+                $("#commands_place").empty();
                 if (html !== "")
-                    $("#global .main-title .commands-place").append(html);
+                    $("#commands_place").append(html);
                 $(".channel-description-rss", $("#global .main-title")).remove();
                 $("#global .main-title h1").html(utils.translate("All channels"));
                 document.title = utils.translate("All channels");
@@ -461,8 +460,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     var top_bar = "<div class=\"item-entry-top-bar\">";
     if (is_parent_or_current || this.display_mode != "thumbnail") {
         if (!this.use_overlay && item_type == "current") {
-            $("#global .main-title .commands-place .item-entry-links").remove();
-            $("#global .main-title .commands-place .ms-browser-section-links").remove();
+            $("#commands_place").empty();
             $title_place.html("<a class=\"item-entry-preview\" " + link + "><img src=\"" + item.thumb + "\"/></a> <span class=\"inline-block\">" + utils.escape_html(item.title)) + "</span>";
             document.title = utils.escape_html(item.title);
         } else {
@@ -496,9 +494,9 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         links += "    </span>";
         links += "</span>";
         $(".item-entry-links", $title_place.parent()).remove();
-        $("nav .button-right").empty();
+        $("#commands_place").empty();
     }
-    $("nav .button-right").append(links);
+    $("#commands_place").append(links);
 
     /********** Status **********/
 

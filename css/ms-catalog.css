@@ -5,10 +5,11 @@ nav.navbar .buttons-left .back {
 nav.navbar .links {
     display: none;
 }
-nav.navbar .button-right {
+nav.navbar .buttons-right {
     float: right;
     vertical-align: middle;
     line-height: 39px;
+    width: auto;
 }
 .hidden-visibility {
     visibility: hidden;
@@ -49,7 +50,6 @@ nav.navbar .button-right {
     right: auto;
 }
 /* ms-browser */
-.ms-browser-section-links,
 .ms-browser-top-btns {
     display: inline-block;
     margin: 5px;
@@ -391,7 +391,7 @@ nav.navbar .button-right {
         width: 100%;
         padding: 15px;
     }
-    nav.navbar .button-right {
+    nav.navbar .buttons-right {
         float: none;
     }
     #global .main-title h1 {
