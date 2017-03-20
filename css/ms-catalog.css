@@ -27,17 +27,17 @@ nav.navbar .buttons-right {
     margin: 0;
     padding: 15px;
 }
-#global .main-title .channel-description-rss {
+#global .ms-browser-content .channel-description-rss {
     padding: 0 15px;
 }
-#global .main-title .channel-description-text {
+#global .ms-browser-content .channel-description-text {
     display: block;
     font-size: 0.7em;
 }
-#global .main-title .channel-description-text.small {
+#global .ms-browser-content .channel-description-text.small {
     cursor: pointer;
 }
-#global .main-title .item-entry-links {
+#global .ms-browser-content .item-entry-links {
     text-align: right;
 }
 .ms-browser-top-btns .ms-browser-top-menu {
