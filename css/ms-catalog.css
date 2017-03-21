@@ -94,13 +94,6 @@ nav.navbar .buttons-right {
     border: 0 none;
     border-radius: 0;
 }
-.ms-browser .ms-browser-main .ms-browser-panel .ms-browser-header {
-    padding: 6px 8px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #1d4b5f;
-    background-image: none;
-}
 #ms_browser_search_menu .dropdown {
     min-width: 150px;
     padding: 5px;
@@ -111,21 +104,8 @@ nav.navbar .buttons-right {
 .ms-browser .ms-browser-filters-menu {
     z-index: 10;
 }
-.ms-browser .ms-browser-panel-search .ms-browser-header span {
-    display: block;
-}
-.ms-browser .ms-browser-panel-search .ms-browser-header span,
 .ms-browser .ms-browser-filters-btn-place {
     color: white;
-}
-.ms-browser .ms-browser-header {
-    height: auto;
-}
-.ms-browser .ms-browser-main .ms-browser-header {
-    padding: 4px 6px;
-    font-size: 22px;
-    font-weight: bold;
-    line-height: normal;
 }
 .ms-browser .ms-browser-display-btn-place {
     top: 8px;
@@ -338,7 +318,6 @@ nav.navbar .buttons-right {
     color: #fff;
 }
 .overlay-info-content .overlay-info-table a {
-    color: #3D6B7F;
     text-decoration: underline;
 }
 .overlay-info-content .overlay-info-table a:hover {

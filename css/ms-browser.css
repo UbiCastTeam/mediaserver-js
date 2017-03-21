@@ -19,7 +19,7 @@
 
 .ms-browser a {
     text-decoration: none;
-    color: #1d4b5f;
+    color: #004C5C;
 }
 .ms-browser a:hover {
     text-decoration: none;
@@ -393,7 +393,7 @@
 .ms-channels-tree .channel-btn {
     display: block;
     cursor: pointer;
-    color: #1D4B5F;
+    color: #004C5C;
     text-align: left;
     background: transparent;
     border: 0 none;
@@ -494,7 +494,7 @@
 }
 .ms-items .item-entry-link.clickable {
     cursor: pointer;
-    color: #1D4B5F;
+    color: #004C5C;
 }
 .ms-items .item-entry-link.clickable:hover {
     color: #086E9A;
