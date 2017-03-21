@@ -200,7 +200,7 @@ MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callba
                     html += "<a href=\""+this.channels_base_url+channel[this.channels_url_field]+"\" class=\"channel-btn" + (channel.channels ? "" : " aside-list-btn") + "\">"+utils.escape_html(channel.title)+"</a>";
                 html += "</div>";
                 if (channel.channels)
-                    html += "<ul class=\"list green\" id=\"" + this.id_prefix + "tree_channel_"+channel.oid+"\"></ul>";
+                    html += "<ul class=\"list border-color-green\" id=\"" + this.id_prefix + "tree_channel_"+channel.oid+"\"></ul>";
                 html += "</li>";
             }
             var $html = $(html);
