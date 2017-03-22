@@ -15,7 +15,7 @@ nav.navbar .buttons-right {
     visibility: hidden;
     height: 1px;
 }
-#global {
+#container {
     background: #EEE;
 }
 #global .main-title {
