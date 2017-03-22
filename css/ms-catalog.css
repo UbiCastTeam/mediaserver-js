@@ -367,6 +367,10 @@ nav.navbar .buttons-right {
     .ms-items .item-entry-notready {
         margin-right: 22px;
     }
+    nav.navbar .buttons-left,
+    nav.navbar .buttons-right {
+        width: auto;
+    }
 }
 @media (max-width: 600px) {
     .ms-items .item-entry-preview {
@@ -375,9 +379,6 @@ nav.navbar .buttons-right {
     .ms-items .item-entry-content {
         width: 100%;
         padding: 15px;
-    }
-    nav.navbar .buttons-right {
-        float: none;
     }
     #global .main-title h1 {
         text-align: center;

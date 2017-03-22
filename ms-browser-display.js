@@ -81,7 +81,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         { "views-asc": utils.translate("Number of views, ascending") }
     ];
     var html = "<div class=\"ms-browser-top-btns\">";
-    html += "<button type=\"button\" id=\"ms_browser_display_btn\" class=\"ms-browser-top-btn "+this.btn_class+"\">"+utils.translate("Display")+"</button>";
+    html += "<button type=\"button\" title=\"" + utils.translate("Display") + "\" id=\"ms_browser_display_btn\" class=\"ms-browser-top-btn "+this.btn_class+"\"><i class=\"fa fa-tv\" aria-hidden=\"true\"></i> <span class=\"hidden-below-1280\">"+utils.translate("Display")+"</span></button>";
 
     html += "<div id=\"ms_browser_display_menu\" class=\"ms-browser-top-menu\">";
     // display mode
@@ -461,7 +461,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     if (is_parent_or_current || this.display_mode != "thumbnail") {
         if (!this.use_overlay && item_type == "current") {
             $("#commands_place").empty();
-            $title_place.html("<a class=\"item-entry-preview\" " + link + "><img src=\"" + item.thumb + "\"/></a> <span class=\"inline-block\">" + utils.escape_html(item.title)) + "</span>";
+            $title_place.html("<a class=\"item-entry-preview\" " + link + "><img src=\"" + item.thumb + "\"/></a> <span class=\"inline-block\">" + utils.escape_html(item.title) + "</span>");
             document.title = utils.escape_html(item.title);
         } else {
             top_bar += "<a class=\"item-entry-title\" " + link + ">" + utils.escape_html(item.title) + "</a>";
@@ -475,20 +475,26 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         links += "<span class=\"item-entry-links\">";
         links += "<span class=\"item-entry-links-container\">";
         if (item.can_edit) {
-            links += "<a class=\""+this.btn_class+" default item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit")+"</a>";
+            links += "<a title=\"" + utils.translate("Edit") + "\" class=\""+this.btn_class+" default item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Edit")+"</span></a>";
             if (item.can_delete)
-                links += "<button type=\"button\" class=\""+this.btn_class+" danger item-entry-pick-delete-media\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</button>";
+                links += "<button title=\"" + utils.translate("Delete") + "\" type=\"button\" class=\""+this.btn_class+" danger item-entry-pick-delete-media\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Delete")+"</span></button>";
         }
         if (item.can_add_channel || item.can_add_video) {
             if (item.can_add_channel) {
-                links += "<a class=\"" + this.btn_class + " item-entry-pick item-entry-pick-add-channel\" href=\"" +
-                          this._get_btn_link(item, "add_channel") + "\"><i class=\"fa fa-plus\"></i> " +
-                          utils.translate("Add a sub channel")+"</a>";
+                add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
+                "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
+                links += "<a title=\"" + utils.translate("Add a sub channel") + "\" class=\"" + this.btn_class + " item-entry-pick item-entry-pick-add-channel\" href=\"" +
+                          this._get_btn_link(item, "add_channel") + "\">" + add_channel_icon + 
+                          " <span class=\"hidden-below-800\">" +
+                          utils.translate("Add a sub channel")+"</span></a>";
             }
             if (item.can_add_video) {
-                links += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\"" +
-                          this._get_btn_link(item, "add_video") + "\"><i class=\"fa fa-plus\"></i> " +
-                          utils.translate("Add a video")+"</a>";
+                add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
+                "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
+                links += "<a title=\"" + utils.translate("Add a video") + "\" class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\"" +
+                          this._get_btn_link(item, "add_video") + "\">" + add_video_icon + 
+                          " <span class=\"hidden-below-800\">" +
+                          utils.translate("Add a video")+"</span></a>";
             }
         }
         links += "    </span>";
