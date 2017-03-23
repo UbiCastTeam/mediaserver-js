@@ -209,6 +209,9 @@ nav.navbar .buttons-right {
     display: inline-block;
     width: calc(50% - 20px);
 }
+.ms-items .item-entry > .item-entry-link {
+    color: inherit;
+}
 .ms-items .item-entry.thumbnail {
     width: 240px;
     background: #FFF;
@@ -281,14 +284,14 @@ nav.navbar .buttons-right {
     right: 2px;
     top: 2px;
     position: absolute;
-    width: 20px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
     text-align: center;
     display: block;
+    padding: 0;
     cursor: pointer;
 }
 .overlay-info .overlay-info-close i {
-    font-size: 120%;
     display: block;
 }
 .overlay-info-content {

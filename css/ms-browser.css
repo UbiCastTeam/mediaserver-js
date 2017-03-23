@@ -609,6 +609,9 @@
     padding: 0;
     display: block;
 }
+.ms-items .item-entry.thumbnail > .item-entry-link {
+    height: 100%;
+}
 .ms-items .item-entry.thumbnail .item-entry-preview,
 .ms-items .item-entry.thumbnail .item-entry-content,
 .ms-items .item-entry.thumbnail .item-entry-top-bar,
