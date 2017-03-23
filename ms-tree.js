@@ -9,6 +9,7 @@ function MSTreeManager(options) {
     // params
     this.$place = null;
     this.display_root = false;
+    this.display_personal = false;
     this.auto_init = true;
     this.current_channel_oid = "0";
     this.on_change = null;
@@ -24,11 +25,14 @@ function MSTreeManager(options) {
     this.loaded = false;
     this.loading = false;
     this.content = {};
-
+    this.has_personal_channel = false;
+    this.personal_channel_info = null;
+    
     utils.setup_class(this, options, [
         // allowed options
         "$place",
         "display_root",
+        "display_personal",
         "auto_init",
         "current_channel_oid",
         "on_change",
@@ -84,6 +88,13 @@ MSTreeManager.prototype.init = function () {
             // expand tree for selected channel
             if (obj.current_channel_oid)
                 obj.expand_tree(obj.current_channel_oid);
+        }
+        if (obj.display_personal && obj.has_personal_channel) {
+            var $btn = $("<button type=\"button\" class=\"std-btn channel-personal-btn\">"+utils.translate("My channel")+"</button>");
+            $btn.click({ obj: obj }, function (evt) {
+                evt.data.obj.open_personal_channel();
+            });
+            obj.$widget.prepend($btn);
         }
         obj.$place.html("");
         obj.$place.append(obj.$widget);
@@ -217,6 +228,8 @@ MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callba
             });
         }
         this.content[parent_oid].loaded = true;
+        if (result.personal_channel)
+            this.has_personal_channel = true;
     }
     else if (result.error) {
         $target.html("<li><div class=\"error\">"+result.error+"</div></li>");
@@ -300,12 +313,11 @@ MSTreeManager.prototype.set_active = function (oid) {
     this.open_tree(oid);
 };
 
-
 MSTreeManager.prototype.load_path = function (oid, callback) {
     var data = { oid: oid };
     var scallback = function (response) {
         if (!response.success)
-        console.log("Error getting path for oid "+oid+". Error: "+response.error);
+            console.log("Error getting path for oid "+oid+". Error: "+response.error);
         callback(response);
     };
     var ecallback = function (xhr, textStatus, thrownError) {
@@ -328,6 +340,28 @@ MSTreeManager.prototype.load_path = function (oid, callback) {
             else
                 ecallback(response.xhr, response.textStatus, response.thrownError);
         });
+    }
+};
+
+MSTreeManager.prototype.open_personal_channel = function () {
+    var obj = this;
+    var callback = function (response) {
+        if (response.success) {
+            obj.personal_channel_info = response;
+            $(".channel-personal-btn", obj.$widget).html(utils.translate("My channel"));
+            obj.expand_tree(response.oid);
+            if (obj.on_change)
+                obj.on_change(response.oid);
+        } else {
+            $(".channel-personal-btn", obj.$widget).html(utils.translate("My channel") + " (" + response.xhr.status + ")");
+        }
+    };
+    if (!this.personal_channel_info) {
+        MSAPI.ajax_call("get_channels_personal", {}, function (response) {
+            callback(response);
+        });
+    } else {
+        callback(this.personal_channel_info);
     }
 };
 

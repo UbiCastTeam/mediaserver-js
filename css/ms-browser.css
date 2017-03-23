@@ -390,6 +390,12 @@
 .ms-channels-tree li .list-entry {
     cursor: pointer;
 }
+.ms-channels-tree .channel-personal-btn {
+    float: right;
+}
+.ms-channels-tree #tree_channel_0 {
+    clear: both;
+}
 .ms-channels-tree .channel-btn {
     display: block;
     cursor: pointer;

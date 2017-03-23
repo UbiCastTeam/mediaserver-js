@@ -54,13 +54,13 @@ var MSAPI = {
                 404: utils.translate("Requested channel does not exist.")
             }
         },
-        get_channels_list: {
-            method: "GET",
-            url: "/api/v2/channels/"
-        },
         get_latest_content: {
             method: "GET",
             url: "/api/v2/latest/"
+        },
+        get_channels_list: {
+            method: "GET",
+            url: "/api/v2/channels/"
         },
         get_channels_content: {
             method: "GET",
@@ -93,6 +93,10 @@ var MSAPI = {
                 403: utils.translate("Unable to get channels path because you cannot access to this channel."),
                 404: utils.translate("Requested channel does not exist.")
             }
+        },
+        get_channels_personal: {
+            method: "GET",
+            url: "/api/v2/channels/personal/"
         },
         get_medias_list: {
             method: "GET",
@@ -156,7 +160,7 @@ var MSAPI = {
         },
         list_media_user_annotations: {
             method: "GET",
-            url: "/api/v2/annotations/list/moderate"
+            url: "/api/v2/annotations/list/moderate/"
         },
         list_annotations_types: {
             method: "GET",
@@ -208,7 +212,7 @@ var MSAPI = {
         },
         list_categories: {
             method: "GET",
-            url: "/api/v2/categories"
+            url: "/api/v2/categories/"
         }
     },
     ajax_call: function (method, data, callback, async, file, xhr_function) {

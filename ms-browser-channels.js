@@ -59,6 +59,7 @@ MSBrowserChannels.prototype.on_show = function () {
     var params = {
         $place: $("<div class=\"ms-channels-tree\"></div>"),
         display_root: this.browser.displayable_content.indexOf("c") != -1,
+        display_personal: this.browser.use_overlay,
         current_channel_oid: this.current_channel_oid,
         on_data_retrieved: function (data) { obj.browser.update_catalog(data); }
     };
@@ -112,7 +113,7 @@ MSBrowserChannels.prototype._on_channel_error = function (response) {
     this.last_response = null;
 
     var message;
-    if (!this.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
+    if (!this.browser.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.browser.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
         message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this channel")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
     }
@@ -171,7 +172,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
 
     this.last_response = response;
 
-    if (!this.use_overlay && this.display_mode == "thumbnail")
+    if (!this.browser.use_overlay && this.display_mode == "thumbnail")
         this.browser.box_hide_info();
 
     this.$content.html("");
