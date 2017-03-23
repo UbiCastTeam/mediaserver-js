@@ -645,6 +645,9 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
         }
     }
     else if (item.can_delete) {
+        if (item_type == "current") {
+            $entry_block = $("#commands_place");
+        }
         $(".item-entry-pick-delete-media", $entry_block).click({ obj: this, oid: oid }, function (event) {
             event.data.obj.pick(event.data.oid, "delete");
         });
