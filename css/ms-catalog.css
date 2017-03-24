@@ -129,7 +129,7 @@ nav.navbar .buttons-right {
 .ms-items .item-entry-preview {
     width: 240px;
     height: 135px;
-
+    line-height: 135px;
     margin: 10px 25px 10px 10px;
 }
 .ms-items .item-entry-annotations ul {
