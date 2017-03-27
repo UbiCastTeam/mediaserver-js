@@ -70,8 +70,10 @@ MSBrowserLatest.prototype.on_show = function () {
     if (this.initialized)
         return;
     this.initialized = true;
-
-    // TODO restore values from cookies
+    if (!this.browser.use_overlay) {
+        $("#ms_browser_search_menu").hide();
+        $("#ms_browser_latest").prepend($("#ms_browser_latest_menu").detach());
+    }
     this.load_latest();
 };
 
@@ -164,14 +166,6 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         if (item.date_label && item.date_label != this.date_label) {
             this.date_label = item.date_label;
             this.$section = $("<div class=\"ms-browser-section\"></div>");
-            if (first_section) {
-                if (!this.browser.use_overlay) {
-                    var html = this.browser.get_top_section_add_buttons(this.can_add_channel, this.can_add_video);
-                    if (html != "")
-                        this.$section.append(html);
-                }
-                first_section = false;
-            }
             this.$section.append("<h3 class=\"ms-browser-section-title\">"+item.date_label+"</h3>");
             this.$content.append(this.$section);
         }

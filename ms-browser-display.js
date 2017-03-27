@@ -305,10 +305,14 @@ MSBrowser.prototype.get_top_section_add_buttons = function (can_add_channel, can
         return "";
     var html = "<div class=\"ms-browser-section-links\">";
     if (can_add_channel) {
-        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-channel\" href=\""+this._get_btn_link(null, "add_channel")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a channel")+"</a>";
+        var add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
+        "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
+        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-channel\" href=\""+this._get_btn_link(null, "add_channel")+"\">" + add_channel_icon + " <span class=\"hidden-below-800\">"+utils.translate("Add a channel")+"</span></a>";
     }
     if (can_add_video) {
-        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\""+this._get_btn_link(null, "add_video")+"\"><i class=\"fa fa-plus\"></i> "+utils.translate("Add a video")+"</a>";
+        var add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
+        "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
+        html += "<a class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\""+this._get_btn_link(null, "add_video")+"\">" + add_video_icon + " <span class=\"hidden-below-800\">"+utils.translate("Add a video")+"</span></a>";
     }
     html += "</div>";
     return html;
@@ -483,18 +487,18 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         }
         if (item.can_add_channel || item.can_add_video) {
             if (item.can_add_channel) {
-                add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
+                var add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
                 "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
                 links += "<a title=\"" + utils.translate("Add a sub channel") + "\" class=\"" + this.btn_class + " item-entry-pick item-entry-pick-add-channel\" href=\"" +
-                          this._get_btn_link(item, "add_channel") + "\">" + add_channel_icon + 
+                          this._get_btn_link(item, "add_channel") + "\">" + add_channel_icon +
                           " <span class=\"hidden-below-800\">" +
                           utils.translate("Add a sub channel")+"</span></a>";
             }
             if (item.can_add_video) {
-                add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
+                var add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
                 "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
                 links += "<a title=\"" + utils.translate("Add a video") + "\" class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\"" +
-                          this._get_btn_link(item, "add_video") + "\">" + add_video_icon + 
+                          this._get_btn_link(item, "add_video") + "\">" + add_video_icon +
                           " <span class=\"hidden-below-800\">" +
                           utils.translate("Add a video")+"</span></a>";
             }
