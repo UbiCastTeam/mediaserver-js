@@ -390,6 +390,9 @@
 .ms-channels-tree li .list-entry {
     cursor: pointer;
 }
+.ms-channels-tree li .list-entry .fa {
+    padding-left: 0px;
+}
 .ms-channels-tree .channel-personal-btn {
     float: right;
 }
