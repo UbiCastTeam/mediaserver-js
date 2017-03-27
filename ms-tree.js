@@ -27,7 +27,7 @@ function MSTreeManager(options) {
     this.content = {};
     this.has_personal_channel = false;
     this.personal_channel_info = null;
-    
+
     utils.setup_class(this, options, [
         // allowed options
         "$place",
@@ -59,7 +59,12 @@ MSTreeManager.prototype.init = function () {
         return console.log("No place defined for tree.");
     if (!this.$place.length)
         return console.log("Place for tree doesn't exist. Requested place: '"+this.$place+"'.");
-    this.id_prefix = this.slugify(this.$place.selector);
+
+    this.id_prefix = "";
+    while ($("#" + this.id_prefix + "tree_channel_0").length) {
+        this.id_prefix += "_";
+    }
+
     this.loading = true;
     // display link for root if display_root
     var html = "<div>";
@@ -363,12 +368,4 @@ MSTreeManager.prototype.open_personal_channel = function () {
     } else {
         callback(this.personal_channel_info);
     }
-};
-
-MSTreeManager.prototype.slugify = function (text) {
-    return text.toString().toLowerCase().trim()
-           .replace(/\s+/g, "-")
-           .replace(/&/g, "-and-")
-           .replace(/[^\w\-]+/g, "")
-           .replace(/\-\-+/g, "-");
 };
