@@ -32,7 +32,6 @@ nav.navbar .buttons-right {
 }
 #global .ms-browser-content .channel-description-text {
     display: block;
-    font-size: 0.7em;
 }
 #global .ms-browser-content .channel-description-text.small {
     cursor: pointer;
