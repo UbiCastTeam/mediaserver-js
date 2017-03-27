@@ -221,8 +221,6 @@ nav.navbar .buttons-right {
 .ms-items .item-entry.thumbnail .item-entry-preview,
 .ms-items .item-entry.thumbnail .item-entry-content,
 .ms-items .item-entry.thumbnail .item-entry-bottom-bar {
-    position: static;
-    display: inline-block;
     width: 238px;
 }
 .ms-items .item-entry.thumbnail .item-entry-preview {
@@ -347,7 +345,12 @@ nav.navbar .buttons-right {
     .ms-items .item-entry-content {
         width: calc(100% - 175px);
     }
-
+    .ms-items .item-entry-preview img {
+        vertical-align: top;
+    }
+    .ms-items .item-entry .item-entry-content .item-entry-description {
+        max-height: 42px;
+    }
 }
 @media (max-width: 800px) {
     .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section {
@@ -379,23 +382,25 @@ nav.navbar .buttons-right {
         display: none;
     }
     .ms-items .item-entry-content {
-        width: 100%;
-        padding: 15px;
+        width: calc(100% - 10px);
+        padding: 5px;
     }
     #global .main-title h1 {
         text-align: center;
         max-width: 100%;
+    }
+    .ms-items .item-entry.thumbnail .item-entry-bottom-bar {
+        text-align: center;
     }
 }
 @media (max-width: 340px) {
     .ms-items .item-entry .item-entry-links {
         display: none;
     }
-    .ms-items .item-entry-top-bar .item-entry-title {
+    .ms-items .item-entry.thumbnail .item-entry-preview,
+    .ms-items .item-entry.thumbnail .item-entry-content,
+    .ms-items .item-entry.thumbnail .item-entry-top-bar,
+    .ms-items .item-entry.thumbnail .item-entry-bottom-bar {
         position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 5px;
-        left: 15px;
     }
 }
