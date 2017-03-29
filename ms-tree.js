@@ -95,7 +95,7 @@ MSTreeManager.prototype.init = function () {
                 obj.expand_tree(obj.current_channel_oid);
         }
         if (obj.display_personal && obj.has_personal_channel) {
-            var $btn = $("<button type=\"button\" class=\"std-btn channel-personal-btn\">"+utils.translate("My channel")+"</button>");
+            var $btn = $("<button type=\"button\" class=\"button channel-personal-btn\">"+utils.translate("My channel")+"</button>");
             $btn.click({ obj: obj }, function (evt) {
                 evt.data.obj.open_personal_channel();
             });
