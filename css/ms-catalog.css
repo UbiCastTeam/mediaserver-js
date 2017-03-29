@@ -119,6 +119,13 @@ nav.navbar .buttons-right {
 .ms-browser-block .current-item-desc {
     padding: 10px;
 }
+#ms_browser_latest_menu {
+    width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    background: white;
+    box-shadow: 2px 2px 1px 0px #DDD;
+}
 /* ms-items */
 .ms-items .item-entry-content {
     display: inline-block;

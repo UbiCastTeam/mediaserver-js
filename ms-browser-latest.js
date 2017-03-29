@@ -30,8 +30,8 @@ function MSBrowserLatest(options) {
 MSBrowserLatest.prototype.get_menu_jq = function () {
     var dc = this.browser.displayable_content;
     var html = "";
-    html += "<div id=\"ms_browser_latest_menu\" class=\"ms-browser-block\" style=\"display: none;\">";
-    html +=     "<div class=\"info\">"+utils.translate("This list presents all media and channels ordered by add date.")+"</div>";
+    html += "<div id=\"ms_browser_latest_menu\" class=\"ms-browser-block messages\" style=\"display: none;\">";
+    html +=     "<div class=\"message info\">"+utils.translate("This list presents all media and channels ordered by add date.")+"</div>";
     if (dc.length > 1 && dc.indexOf("c") != -1) {
         html += "<p>";
         html +=     "<input id=\"latest_display_channels\" type=\"checkbox\">";
