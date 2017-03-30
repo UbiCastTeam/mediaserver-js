@@ -182,7 +182,7 @@ nav.navbar .buttons-right {
     color: #666;
 }
 .ms-items .item-entry .item-entry-content .item-entry-description {
-    max-height: 69px;
+    max-height: 31px;
     overflow: auto;
 }
 .ms-items .item-entry-small .item-entry-content {
@@ -214,6 +214,7 @@ nav.navbar .buttons-right {
 .ms-items .item-entry {
     display: inline-block;
     width: calc(50% - 20px);
+    min-height: 133px;
 }
 .ms-items .item-entry > .item-entry-link {
     color: inherit;
@@ -356,7 +357,7 @@ nav.navbar .buttons-right {
         vertical-align: top;
     }
     .ms-items .item-entry .item-entry-content .item-entry-description {
-        max-height: 42px;
+        display: none;
     }
 }
 @media (max-width: 800px) {
