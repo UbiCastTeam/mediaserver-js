@@ -371,7 +371,7 @@ nav.navbar .buttons-right {
     }
     .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry.thumbnail {
         display: inline-block;
-        margin: 10px 40px;
+        margin: 10px;
         width: 240px;
     }
     .ms-browser .ms-browser-section-links {
