@@ -739,3 +739,8 @@
     height: 135px;
     font-size: inherit;
 }
+@media (max-width: 800px) {
+    .ms-browser.in-overlay .ms-browser-main {
+        left: 0;
+    }
+}

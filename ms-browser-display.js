@@ -9,7 +9,7 @@
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
     var html = "<div class=\"ms-browser "+(this.use_overlay ? "in-overlay" : "")+"\">";
-    html += "<div class=\"ms-browser-menu\">";
+    html += "<div class=\"ms-browser-menu "+(this.use_overlay ? "hidden-below-800" : "")+"\">";
     html +=     "<div class=\"ms-browser-panel\">";
     html +=         "<div class=\"ms-browser-header\">";
     if (!this.use_overlay) {
@@ -666,29 +666,22 @@ MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectabl
         var txt = utils.translate("Display channel");
         if (item_type == "parent")
             txt = utils.translate("Display parent channel");
-        if (this.use_overlay) {
-            html += "<button type=\"button\" class=\""+this.btn_class+" item-entry-display\"><i class=\"fa fa-chevron-right\"></i> "+txt+"</button>";
-        } else {
-            if (item_type == "parent") {
-                $(".navbar .back").attr("href", url_view);
-            } else {
-                if (this.use_overlay)
-                    html += "<a class=\""+this.btn_class+" item-entry-display\" href=\""+url_view+"\"><i class=\"fa fa-chevron-right\"></i> "+txt+"</a>";
-            }
+        if (!this.use_overlay && item_type == "parent") {
+            $(".navbar .back").attr("href", url_view);
         }
     }
     if (this.use_overlay) {
         if (selectable) {
             if (item_type == "channel" || is_parent_or_current)
-                html += "<button type=\"button\" class=\""+this.btn_class+" main item-entry-pick\"><i class=\"fa fa-check\"></i> "+utils.translate("Select this channel")+"</button>";
+                html += "<button type=\"button\" class=\""+this.btn_class+" main item-entry-pick\"><i class=\"fa fa-check\"></i> <span class=\"hidden-below-800\">"+utils.translate("Select this channel")+"</span></button>";
             else
-                html += "<button type=\"button\" class=\""+this.btn_class+" main item-entry-pick\"><i class=\"fa fa-check\"></i> "+utils.translate("Select this media")+"</button>";
+                html += "<button type=\"button\" class=\""+this.btn_class+" main item-entry-pick\"><i class=\"fa fa-check\"></i> <span class=\"hidden-below-800\">"+utils.translate("Select this media")+"</span></button>";
         }
     } else {
         if (item_type != "parent" && item_type != "current") {
             if (item_type != "channel" && item.validated) {
                 if (this.use_overlay)
-                    html += "<a class=\""+this.btn_class+" item-entry-pick-view-media\" href=\""+url_view+"\"><i class=\"fa fa-chevron-right\"></i> "+utils.translate("See")+"</a>";
+                    html += "<a class=\""+this.btn_class+" default item-entry-pick-view-media\" href=\""+url_view+"\"><i class=\"fa fa-eye\"></i> "+utils.translate("See")+"</a>";
             }
             if (item.can_edit) {
                 html += "<a class=\""+this.btn_class+" item-entry-pick-edit-media default\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit") +"</a>";
