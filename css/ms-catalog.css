@@ -214,10 +214,10 @@ nav.navbar .buttons-right {
 .ms-items .item-entry {
     display: inline-block;
     width: calc(50% - 20px);
-    min-height: 133px;
 }
 .ms-items .item-entry > .item-entry-link {
     color: inherit;
+    min-height: 133px;
 }
 .ms-items .item-entry.thumbnail {
     width: 240px;
@@ -383,7 +383,7 @@ nav.navbar .buttons-right {
     .ms-items .item-entry-notpublished,
     .ms-items .item-entry-published,
     .ms-items .item-entry-notready {
-        margin-right: 22px;
+        margin-right: 3px;
     }
     nav.navbar .buttons-left,
     nav.navbar .buttons-right {
@@ -392,10 +392,13 @@ nav.navbar .buttons-right {
 }
 @media (max-width: 600px) {
     .ms-items .item-entry-preview {
-        display: none;
+        margin: 0;
+    }
+    .ms-items .item-entry > .item-entry-link {
+        min-height: 90px
     }
     .ms-items .item-entry-content {
-        width: calc(100% - 10px);
+        width: calc(100% - 130px);
         padding: 5px;
     }
     #global .main-title h1 {
