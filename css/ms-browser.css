@@ -688,15 +688,19 @@
 }
 .ms-items .item-entry.thumbnail .obj-block-info,
 .ms-items .item-entry.thumbnail .obj-block-edit {
-    padding: 5px;
     top: 0;
     right: 0;
     position: absolute;
-    width: 32px;
-    height: 32px;
     display: none;
     cursor: pointer;
     border: none;
+    background: white;
+    padding: 0;
+    margin: 5px;
+    width: 28px;
+}
+.ms-items .item-entry.thumbnail:hover .obj-block-info {
+    border-radius: 100%;
 }
 .ms-items .item-entry.thumbnail:hover .obj-block-info,
 .ms-items .item-entry.thumbnail:hover .obj-block-edit {
@@ -704,6 +708,7 @@
 }
 .ms-items .item-entry.thumbnail .obj-block-edit {
     top: 42px;
+    border-radius: 4px;
 }
 .ms-items .item-entry.thumbnail .info-displayed {
     background-position: 100% 50%;
