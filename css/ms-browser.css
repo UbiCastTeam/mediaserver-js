@@ -704,10 +704,6 @@
 }
 .ms-items .item-entry.thumbnail .obj-block-edit {
     top: 42px;
-    background: transparent url('../images/thumb_edit.png') 50% 50% no-repeat;
-}
-.ms-items .item-entry.thumbnail .obj-block-info {
-    background: transparent url('../images/thumb_info.png') 0 50% no-repeat;
 }
 .ms-items .item-entry.thumbnail .info-displayed {
     background-position: 100% 50%;
