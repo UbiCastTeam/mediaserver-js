@@ -743,4 +743,10 @@
     .ms-browser.in-overlay .ms-browser-main {
         left: 0;
     }
+    .ms-browser-top-btns .ms-browser-top-menu {
+        left: -230px;
+    }
+    .ms-items .item-entry-links-container {
+        display: inline-block;
+    }
 }
