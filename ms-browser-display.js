@@ -397,9 +397,9 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         $entry.addClass(item.extra_class);
     var html = this._get_entry_block_html(item, item_type, selectable, tab);
     if (this.display_mode == "thumbnail" && !this.use_overlay && item_type != "parent" && item_type != "current") {
-        html +=   "<button type=\"button\" class=\"button-text obj-block-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info-circle fa-2x\" aria-hidden=\"true\"></i></button>";
+        html +=   "<button type=\"button\" class=\"button-text obj-block-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
         if (item.can_edit) {
-            html +=   "<a class=\"obj-block-edit\" title=\""+utils.translate("Edit")+"\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil-square fa-2x\" aria-hidden=\"true\"></i></a>";
+            html +=   "<a class=\"obj-block-edit\" title=\""+utils.translate("Edit")+"\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
         }
         html += "<div class=\"overlay-info\" id=\"item_entry_"+oid+"_"+tab+"_info\" style=\"display: none;\"></div>";
     }
