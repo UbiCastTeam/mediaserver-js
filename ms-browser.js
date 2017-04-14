@@ -75,7 +75,7 @@ MSBrowser.prototype.init = function () {
     if (utils.get_cookie("catalog-display_mode") == "thumbnail") {
         this.display_mode = "thumbnail";
         if (!this.use_overlay)
-            $("#container").addClass("wide").removeClass("wide-1280");
+            $("#container").addClass("wide").removeClass("max-width-1200");
     }
 
     var $messages;

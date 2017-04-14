@@ -188,7 +188,7 @@ MSBrowser.prototype.display_as_list = function () {
     $("#ms_browser_display_as_thumbnails", this.$main).removeClass("active");
     $("#ms_browser_display_as_list", this.$main).addClass("active");
     if (!this.use_overlay)
-        $("#global").addClass("wide-1280").removeClass("wide");
+        $("#global").addClass("max-width-1200").removeClass("wide");
     utils.set_cookie("catalog-display_mode", this.display_mode);
     $("#ms_browser_display_btn", this.$main).removeClass("active");
     $("#ms_browser_display_menu", this.$main).removeClass("active");
@@ -203,7 +203,7 @@ MSBrowser.prototype.display_as_thumbnails = function () {
     $("#ms_browser_display_as_list", this.$main).removeClass("active");
     $("#ms_browser_display_as_thumbnails", this.$main).addClass("active");
     if (!this.use_overlay) {
-        $("#global").addClass("wide").removeClass("wide-1280");
+        $("#global").addClass("wide").removeClass("max-width-1200");
     }
     utils.set_cookie("catalog-display_mode", this.display_mode);
     $("#ms_browser_display_btn", this.$main).removeClass("active");
