@@ -229,6 +229,7 @@ MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callba
                 });
             }
             $(".channel-toggle", $html).click({ obj: this }, function (evt) {
+                evt.stopPropagation();
                 evt.data.obj.toggle_channel($(this).attr("data-ref"));
             });
         }
