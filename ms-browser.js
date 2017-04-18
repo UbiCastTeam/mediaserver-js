@@ -20,6 +20,7 @@ function MSBrowser(options) {
     this.initial_state = null;
     this.on_pick = null;
     this.btn_class = "button";
+    this.iframe = false;
     this.display_itunes_rss = true;
     // vars
     this.use_overlay = true;
@@ -52,6 +53,7 @@ function MSBrowser(options) {
         "initial_state",
         "on_pick",
         "btn_class",
+        "iframe",
         "display_itunes_rss"
     ]);
 
@@ -81,6 +83,13 @@ MSBrowser.prototype.init = function () {
     var $messages;
     if (!this.use_overlay)
         $messages = $(".messages").detach(); // get Django messages
+
+    if (this.iframe) {
+        this.url_login = "/login/iframe/";
+        this.url_channels += "?iframe";
+        this.url_search += "?iframe";
+        this.url_latest += "?iframe";
+    }
 
     // get elements
     this.init_options.browser = this;

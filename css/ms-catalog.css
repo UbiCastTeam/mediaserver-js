@@ -154,18 +154,6 @@ nav.navbar .buttons-right {
 .ms-items .item-entry.item-type-parent .item-entry-links-container {
     display: block;
 }
-.ms-items .item-entry.selected {
-    border-color: #ccc;
-}
-.ms-items .item-entry.selected {
-    border-color: #ccc;
-}
-.ms-items .item-entry-link.clickable,
-.ms-items .item-entry-link.clickable:hover,
-.ms-items .item-entry.selectable .item-entry-title,
-.ms-items .item-entry.selected .item-entry-title {
-    color: #666;
-}
 .ms-items .item-entry .item-entry-content .item-entry-description {
     max-height: 31px;
     overflow: auto;
