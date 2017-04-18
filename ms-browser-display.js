@@ -397,9 +397,9 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         $entry.addClass(item.extra_class);
     var html = this._get_entry_block_html(item, item_type, selectable, tab);
     if (this.display_mode == "thumbnail" && !this.use_overlay && item_type != "parent" && item_type != "current") {
-        html +=   "<button type=\"button\" class=\"button-text obj-block-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
+        html +=   "<button type=\"button\" class=\"button-text item-entry-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
         if (item.can_edit) {
-            html +=   "<a class=\"obj-block-edit\" title=\""+utils.translate("Edit")+"\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
+            html +=   "<a class=\"item-entry-edit\" title=\""+utils.translate("Edit")+"\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
         }
         html += "<div class=\"overlay-info\" id=\"item_entry_"+oid+"_"+tab+"_info\" style=\"display: none;\"></div>";
     }
@@ -435,18 +435,13 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     var html = "<" + markup + " " + href + " class=\"item-entry-link " + (clickable ? "clickable" : "") + "\">";
     var $title_place = $("#global .main-title h1");
     var $content_place = $("#ms_browser_channels .ms-browser-block");
-    /******************* Image preview ****************/
+    /********************** Image preview ****************/
 
     var image_preview = "";
     if (this.use_overlay || item_type != "current" || !item.hide_image) {
         if (item.thumb) {
-            if (this.display_mode == "thumbnail" && !is_parent_or_current) {
-                image_preview += "<span class=\"item-entry-preview obj-block-link\"" +
-                          "style=\"background-image: url(" + item.thumb + ");\"></span>";
-            } else {
-                if (this.use_overlay || item_type != "current") {
-                    image_preview += "<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>";
-                }
+            if (this.use_overlay || item_type != "current") {
+                image_preview += "<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>";
             }
         } else {
             image_preview += "<span class=\"item-entry-preview\"><span class=\"item-" + item_type + "-icon\"></span></span>";
@@ -454,11 +449,10 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     }
     html += image_preview;
 
-    /********************* Content ********************/
-
+    /********************** Content ********************/
     var content = "<span class=\"item-entry-content\">";
 
-    /******************* Top bar ****************/
+    /********************** Top bar ****************/
     var top_bar = "<span class=\"item-entry-top-bar\">";
     if (is_parent_or_current || this.display_mode != "thumbnail") {
         if (!this.use_overlay && item_type == "current") {
@@ -466,16 +460,11 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
             $title_place.html("<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span> <span class=\"inline-block\">" + utils.escape_html(item.title) + "</span>");
             document.title = utils.escape_html(item.title);
         } else {
-            if (this.use_overlay) {
-                top_bar += "<a class=\"item-entry-title\" " + link + ">" + utils.escape_html(item.title) + "</a>";
-            } else {
-                top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
-            }
+            top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
         }
     }
 
-    /*********** Links ************/
-
+    /********************** Links ************/
     var links = "";
     if (!this.use_overlay && item_type == "current" && (item.can_edit || item.can_add_channel || item.can_add_video)) {
         links += "<span class=\"item-entry-links\">";
@@ -509,8 +498,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     }
     $("#commands_place").append(links);
 
-    /********** Status **********/
-
+    /********************** Status **********/
     var status = "";
     if (item.can_edit && !is_parent_or_current) {
         if (item_type == "channel") {
@@ -547,8 +535,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     top_bar += "</span>";
     content += top_bar;
 
-    /******************* Bottom bar ****************/
-
+    /********************** Bottom bar ****************/
     var bottom_bar = "<span class=\"item-entry-bottom-bar\">";
     if (item.views && !is_parent_or_current) {
         bottom_bar += "<span class=\"item-entry-views\">" + item.views + " " + utils.translate("views");
@@ -575,7 +562,6 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
     html += "</" + markup + ">";
 
     /********************** Search data **********************/
-
     if (item.annotations && !this.use_overlay && tab == "search") {
         html += "<span class=\"item-entry-annotations\"><span>" + utils.translate("Annotations") + ":</span><ul>";
         for (var i=0; i < item.annotations.length; i++) {
@@ -589,8 +575,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         html += "</ul></span>";
     }
 
-    /***************************** Current Channel data *************************/
-
+    /********************** Current Channel data *************************/
     if (!this.use_overlay && tab == "channels" && item_type == "current") {
         var $current_item_desc = $("<div class=\"current-item-desc\"></div>");
         var $desc = $("<div class=\"channel-description-text" + (item.short_description != item.description ? " small" : "") + "\">" + item.short_description + "</div>");
@@ -817,7 +802,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     return $info;
 };
 MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectable, oid, $entry, item, tab) {
-    $(".obj-block-info", $entry).click({ obj: this, $entry: $entry }, function (event) {
+    $(".item-entry-info", $entry).click({ obj: this, $entry: $entry }, function (event) {
         var info_id = "#"+$entry.attr("id")+"_info";
         if ($(info_id, event.data.$entry).html() !== "") {
             event.data.obj.box_open_info($entry);
@@ -846,7 +831,7 @@ MSBrowser.prototype.box_open_info = function ($entry) {
         // move box in body if not already done
         $info_box.addClass("moved").detach().appendTo("body");
     if (!$info_box.is(":visible")) {
-        var block = $(".obj-block-link", $entry);
+        var block = $(".item-entry-preview", $entry);
         var top = parseInt(block.offset().top, 10) - 1;
         var left = (parseInt(block.offset().left, 10) + block.width());
         var right = "auto";
@@ -857,14 +842,14 @@ MSBrowser.prototype.box_open_info = function ($entry) {
         $info_box.css("left", left + "px");
         $info_box.css("right", right + "px");
         $info_box.css("top", top + "px");
-        $(".obj-block-info", $entry).addClass("info-displayed");
+        $(".item-entry-info", $entry).addClass("info-displayed");
         $info_box.fadeIn("fast");
 
         if (this.box_click_handler)
             $(document).unbind("click", this.box_click_handler);
         var obj = this;
         this.box_click_handler = function (event) {
-            if (!$(event.target).closest(info_id).length && !$(event.target).closest(".obj-block-info").length && $(info_id).is(":visible"))
+            if (!$(event.target).closest(info_id).length && !$(event.target).closest(".item-entry-info").length && $(info_id).is(":visible"))
                 obj.box_hide_info();
         };
         $(document).click(this.box_click_handler);
@@ -872,7 +857,7 @@ MSBrowser.prototype.box_open_info = function ($entry) {
 };
 MSBrowser.prototype.box_hide_info = function () {
     $(".overlay-info:visible").fadeOut("fast");
-    $(".obj-block-info.info-displayed").removeClass("info-displayed");
+    $(".item-entry-info.info-displayed").removeClass("info-displayed");
 };
 MSBrowser.prototype.display_categories = function () {
     var obj = this;
