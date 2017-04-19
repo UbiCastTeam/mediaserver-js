@@ -286,14 +286,6 @@ nav.navbar .buttons-right {
 
 }
 @media (max-width: 1280px) {
-    .ms-items .item-entry-preview {
-        width: 120px;
-        height: 91px;
-        line-height: 91px;
-    }
-    .ms-items .item-entry-content {
-        width: calc(100% - 175px);
-    }
     .ms-items .item-entry .item-entry-content .item-entry-description {
         display: none;
     }
@@ -329,15 +321,8 @@ nav.navbar .buttons-right {
     }
 }
 @media (max-width: 600px) {
-    .ms-items .item-entry-preview {
-        margin: 0;
-    }
     .ms-items .item-entry > .item-entry-link {
         min-height: 90px
-    }
-    .ms-items .item-entry-content {
-        width: calc(100% - 130px);
-        padding: 5px;
     }
     #global .main-title h1 {
         text-align: center;

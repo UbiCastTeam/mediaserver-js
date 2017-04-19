@@ -718,6 +718,16 @@
     width: 100%;
     height: 100%;
 }
+@media (max-width: 1280px) {
+    .ms-items .item-entry-preview {
+        width: 120px;
+        height: 91px;
+        line-height: 91px;
+    }
+    .ms-items .item-entry-content {
+        width: calc(100% - 175px);
+    }
+}
 @media (max-width: 800px) {
     .ms-browser.in-overlay .ms-browser-main {
         left: 0;
@@ -727,5 +737,14 @@
     }
     .ms-items .item-entry-links-container {
         display: inline-block;
+    }
+}
+@media (max-width: 600px) {
+    .ms-items .item-entry-preview {
+        margin: 0;
+    }
+    .ms-items .item-entry-content {
+        width: calc(100% - 130px);
+        padding: 5px;
     }
 }
