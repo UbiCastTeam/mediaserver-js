@@ -289,12 +289,10 @@ nav.navbar .buttons-right {
     .ms-items .item-entry-preview {
         width: 120px;
         height: 91px;
+        line-height: 91px;
     }
     .ms-items .item-entry-content {
         width: calc(100% - 175px);
-    }
-    .ms-items .item-entry-preview img {
-        vertical-align: top;
     }
     .ms-items .item-entry .item-entry-content .item-entry-description {
         display: none;
