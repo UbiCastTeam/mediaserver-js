@@ -430,7 +430,8 @@
 
 
 /* channel content list */
-.ms-items .item-entry {
+.ms-items .item-entry,
+.ms-browser-block .current-item-desc {
     margin: 10px;
     position: relative;
     display: block;
