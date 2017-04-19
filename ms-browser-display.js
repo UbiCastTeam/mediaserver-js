@@ -666,13 +666,13 @@ MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectabl
         if (item_type != "parent" && item_type != "current") {
             if (item_type != "channel" && item.validated) {
                 if (this.use_overlay)
-                    html += "<a class=\""+this.btn_class+" default item-entry-pick-view-media\" href=\""+url_view+"\"><i class=\"fa fa-eye\"></i> "+utils.translate("See")+"</a>";
+                    html += "<a class=\""+this.btn_class+" default item-entry-pick-view-media\" href=\""+url_view+"\"><i class=\"fa fa-eye\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
             }
             if (item.can_edit) {
-                html += "<a class=\""+this.btn_class+" item-entry-pick-edit-media default\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> "+utils.translate("Edit") +"</a>";
+                html += "<a class=\""+this.btn_class+" item-entry-pick-edit-media default\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> <span class=\"hidden-below-440\">"+utils.translate("Edit") +"</span></a>";
             }
             if (item.can_delete)
-                html += "<button type=\"button\" class=\""+this.btn_class+" item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\"></i> "+utils.translate("Delete")+"</button>";
+                html += "<button type=\"button\" class=\""+this.btn_class+" item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\"></i> <span class=\"hidden-below-440\">"+utils.translate("Delete")+"</span></button>";
         }
     }
     html += "</span>";
