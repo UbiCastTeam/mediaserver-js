@@ -196,6 +196,7 @@ nav.navbar .buttons-right {
     margin-top: 12px;
 }
 .overlay-info {
+    max-width: 95%;
     top: 0;
     left: auto;
     right: auto;
@@ -318,6 +319,10 @@ nav.navbar .buttons-right {
     nav.navbar .buttons-left,
     nav.navbar .buttons-right {
         width: auto;
+    }
+    .overlay-info {
+        left: auto!important;
+        right: auto!important;
     }
 }
 @media (max-width: 600px) {
