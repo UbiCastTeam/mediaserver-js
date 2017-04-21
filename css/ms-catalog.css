@@ -332,11 +332,3 @@ nav.navbar .buttons-right {
         text-align: center;
     }
 }
-@media (max-width: 340px) {
-    .ms-items .item-entry.thumbnail .item-entry-preview,
-    .ms-items .item-entry.thumbnail .item-entry-content,
-    .ms-items .item-entry.thumbnail .item-entry-top-bar,
-    .ms-items .item-entry.thumbnail .item-entry-bottom-bar {
-        position: absolute;
-    }
-}
