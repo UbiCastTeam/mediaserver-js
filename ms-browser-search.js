@@ -10,7 +10,7 @@ function MSBrowserSearch(options) {
     this.browser = null;
     // vars
     this.$menu = null;
-    this.$panel = null;
+    this.$content = null;
     this.last_response = null;
     this.search_in_fields = [
         { name: "in_title", label: "titles", initial: true, items: null },
@@ -49,72 +49,22 @@ MSBrowserSearch.prototype.should_be_displayed = function (dc, items) {
     }
     return false;
 };
-MSBrowserSearch.prototype.get_menu_catalog_jq = function () {
-    var dc = this.browser.displayable_content;
-    var html = "<div id=\"ms_browser_search_menu\" style=\"text-align: right;\">";
-    html += "<input id=\"ms_browser_search_text\" type=\"hidden\" value=\"\">";
-    html += "<span class=\"relative\">";
-    html += "<button id=\"button_search_look_in\" class=\"button default js-display marged\" data-display-id=\"search_look_in\">" + this.translate("Search in") + " <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
-    html += "<div class=\"dropdown ms-browser-search-in\" id=\"search_look_in\">";
-
-    for (var i = 0; i < this.search_in_fields.length; i++) {
-        var field = this.search_in_fields[i];
-        if (this.should_be_displayed(dc, field.items)) {
-            html += "<div><input id=\"ms_browser_search_" + field.name + "\" type=\"checkbox\" " + (field.initial ? "checked=\"checked\"" : "") + ">";
-            html += "<label for=\"ms_browser_search_" + field.name + "\">" + utils.escape_html(utils.translate(field.label)) + "</label></div>";
-        }
-    }
-    html += "</div>";
-    html += "</span>";
-    html += "<span class=\"relative\">";
-    html += "<button id=\"button_search_look_for\" class=\"button default js-display marged\" data-display-id=\"search_look_for\">" + this.translate("Search for") + " <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
-    html += "<div class=\"dropdown ms-browser-search-for\" id=\"search_look_for\">";
-    for (i = 0; i < this.search_for_fields.length; i++) {
-        var field = this.search_for_fields[i];
-        if (this.should_be_displayed(dc, field.items)) {
-            html += "<div><input id=\"ms_browser_search_" + field.name + "\" type=\"checkbox\" " + (field.initial ? "checked=\"checked\"" : "") + ">";
-            html += "<label for=\"ms_browser_search_" + field.name + "\">" + utils.escape_html(utils.translate(field.label)) + "</label></div>";
-        }
-    }
-    html += "</div>";
-    html += "</span>";
-    html += "</div>";
-    var $menu = $(html);
-    $(".js-display", $menu).click(function (event) {
-        event.stopPropagation();
-        var id = $(this).attr("data-display-id");
-        var $ele = $("#" + id);
-        if ($ele.hasClass("active")) {
-            $ele.removeClass("active");
-        } else {
-            $(".dropdown").removeClass("active");
-            $ele.addClass("active");
-        }
-    });
-    $(".dropdown", $menu).click(function (event) {
-        event.stopPropagation();
-    });
-    $(".ms-browser-search-in input[type=checkbox], .ms-browser-search-for input[type=checkbox]", $menu).click(
-        {obj: this}, function (event) {
-        event.stopPropagation();
-        event.data.obj.on_search_submit();
-    });
-    return $menu;
-};
 MSBrowserSearch.prototype.get_menu_jq = function () {
     var dc = this.browser.displayable_content;
     var i, field;
     var html = "";
-    html += "<div id=\"ms_browser_search_menu\" class=\"ms-browser-block\" style=\"display: none;\">";
-    html +=     "<form class=\"ms-browser-search-block\" method=\"get\" action=\".\" onsubmit=\"javascript: return false;\">";
-    html +=         "<label class=\"ms-browser-search-title\" for=\"ms_browser_search_text\">"+utils.translate("Search:")+"</label>";
-    html +=         " <div class=\"ms-browser-search-input\"><input id=\"ms_browser_search_text\" type=\"text\" value=\"\">";
-    html +=         " <button type=\"submit\" class=\"button\" id=\"ms_browser_search_start\">"+utils.translate("Go")+"</button></div>";
-    html +=     "</form>";
-    html +=     "<div class=\"ms-browser-search-block ms-browser-search-in\">";
-    html +=         "<div class=\"ms-browser-search-title\">"+utils.translate("Search in:")+"</div>";
-    html +=         " <div><button type=\"button\" class=\"button\" id=\"ms_browser_search_in_all\">"+utils.translate("all")+"</button>";
-    html +=         " <button type=\"button\" class=\"button\" id=\"ms_browser_search_in_none\">"+utils.translate("none")+"</button></div>";
+    html += "<div id=\"ms_browser_search_menu\" style=\"display: none;\">";
+    html += "<form class=\"ms-browser-search-form\" method=\"get\" action=\".\" onsubmit=\"javascript: return false;\" "+(this.browser.use_overlay ? "" : "style=\"display: none;\"")+">";
+    html +=     "<label for=\"ms_browser_search_text\">"+utils.translate("Search:")+"</label>";
+    html +=     " <input id=\"ms_browser_search_text\" type=\"text\" value=\"\">";
+    html +=     " <button type=\"submit\" class=\"button\" id=\"ms_browser_search_start\">"+utils.translate("Go")+"</button>";
+    html += "</form>";
+    html +=     "<div class=\"ms-browser-dropdown\" id=\"ms_browser_search_in_dropdown\">";
+    html +=         "<button type=\"button\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\">"+utils.translate("Search in")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
+
+    html +=         "<div class=\"ms-browser-dropdown-menu ms-browser-search-in\">";
+    html +=             " <div><button type=\"button\" class=\"button\" id=\"ms_browser_search_in_all\">"+utils.translate("all")+"</button>";
+    html +=             " <button type=\"button\" class=\"button\" id=\"ms_browser_search_in_none\">"+utils.translate("none")+"</button></div>";
     for (i=0; i < this.search_in_fields.length; i++) {
         field = this.search_in_fields[i];
         if (this.should_be_displayed(dc, field.items)) {
@@ -122,10 +72,13 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
             html += " <label for=\"ms_browser_search_"+field.name+"\">"+utils.escape_html(utils.translate(field.label))+"</label></div>";
         }
     }
+    html +=         "</div>";
     html +=     "</div>";
     if (dc.length > 1) {
-        html += "<div class=\"ms-browser-search-block ms-browser-search-for\">";
-        html +=     "<div class=\"ms-browser-search-title\">"+utils.translate("Search for:")+"</div>";
+        html += "<div class=\"ms-browser-dropdown\" id=\"ms_browser_search_for_dropdown\">";
+        html +=     "<button type=\"button\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\">"+utils.translate("Search for")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
+
+        html +=     "<div class=\"ms-browser-dropdown-menu ms-browser-search-for\">";
         html +=         " <div><button type=\"button\" class=\"button\" id=\"ms_browser_search_for_all\">"+utils.translate("all")+"</button>";
         html +=         " <button type=\"button\" class=\"button\" id=\"ms_browser_search_for_none\">"+utils.translate("none")+"</button></div>";
         for (i=0; i < this.search_for_fields.length; i++) {
@@ -135,44 +88,43 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
                 html += " <label for=\"ms_browser_search_"+field.name+"\">"+utils.escape_html(utils.translate(field.label))+"</label></div>";
             }
         }
+        html +=     "</div>";
         html += "</div>";
     }
     html += "</div>";
-    if (this.browser.use_overlay) {
-        this.$menu = $(html);
-    } else {
-        this.$menu = this.get_menu_catalog_jq();
-    }
+    this.$menu = $(html);
     // events
-    $("form", this.$menu).submit({ obj: this }, function (evt) { evt.data.obj.on_search_submit(); });
-    $("#ms_browser_search_in_all", this.$menu).click({ obj: this }, function (evt) {
-        $(".ms-browser-search-in input[type=checkbox]", evt.data.obj.$main).prop("checked", true);
+    this.browser.setup_dropdown($("#ms_browser_search_in_dropdown", this.$menu));
+    this.browser.setup_dropdown($("#ms_browser_search_for_dropdown", this.$menu));
+    $("form", this.$menu).submit({ obj: this }, function (event) { event.data.obj.on_search_submit(); });
+    $("#ms_browser_search_in_all", this.$menu).click({ obj: this }, function (event) {
+        $(".ms-browser-search-in input[type=checkbox]", event.data.obj.$main).prop("checked", true);
     });
-    $("#ms_browser_search_in_none", this.$menu).click({ obj: this }, function (evt) {
-        $(".ms-browser-search-in input[type=checkbox]", evt.data.obj.$main).prop("checked", false);
+    $("#ms_browser_search_in_none", this.$menu).click({ obj: this }, function (event) {
+        $(".ms-browser-search-in input[type=checkbox]", event.data.obj.$main).prop("checked", false);
     });
-    $("#ms_browser_search_for_all", this.$menu).click({ obj: this }, function (evt) {
-        $(".ms-browser-search-for input[type=checkbox]", evt.data.obj.$main).prop("checked", true);
+    $("#ms_browser_search_for_all", this.$menu).click({ obj: this }, function (event) {
+        $(".ms-browser-search-for input[type=checkbox]", event.data.obj.$main).prop("checked", true);
     });
-    $("#ms_browser_search_for_none", this.$menu).click({ obj: this }, function (evt) {
-        $(".ms-browser-search-for input[type=checkbox]", evt.data.obj.$main).prop("checked", false);
+    $("#ms_browser_search_for_none", this.$menu).click({ obj: this }, function (event) {
+        $(".ms-browser-search-for input[type=checkbox]", event.data.obj.$main).prop("checked", false);
+    });
+    $("input[type=checkbox]", this.$menu).change({obj: this}, function (event) {
+        event.data.obj.on_search_submit();
     });
     return this.$menu;
 };
 MSBrowserSearch.prototype.get_content_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_search\" class=\"ms-browser-content\" style=\"display: none;\">";
-    html +=     "<div class=\"ms-browser-header\"><h1>"+utils.translate("Search results")+"</h1></div>";
-    html +=     "<div class=\"ms-browser-block\">";
-    html +=         "<div class=\"info\">"+utils.translate("Use the input in the left column to search for something.")+"</div>";
-    html +=     "</div>";
+    html +=     "<div class=\"messages\"><div class=\"message info\">"+utils.translate("Use the input in the left column to search for something.")+"</div></div>";
     html += "</div>";
-    this.$panel = $(html);
-    this.$content = $(".ms-browser-block", this.$panel);
-    return this.$panel;
+    this.$content = $(html);
+    return this.$content;
 };
 
 MSBrowserSearch.prototype.on_show = function () {
+    this.browser.set_title(this.current_title ? this.current_title : utils.translate("Search"));
     if (this.initialized)
         return;
     this.initialized = true;
@@ -308,8 +260,10 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
             data.categories = this.browser.filter_categories;
     }
     // change url
+    var title = utils.translate("Search results for:")+" "+search;
+    this.current_title = title;
+    this.browser.set_title(title);
     if (!this.browser.use_overlay && !no_pushstate) {
-        var title = utils.translate("Result for")+" "+search;
         var url = this.browser.url_search+"?"+url_query;
         window.history.pushState({"ms_tab": "search", "search": search}, title, url);
     }
@@ -359,17 +313,12 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
             results.push(nb_live_streams + " " + utils.translate("live stream(s)"));
         if (nb_photos_groups > 0)
             results.push(nb_photos_groups + " " + utils.translate("photos group(s)"));
-        var text = "<p id=\"matching_items_place\" class=\"marged\"><b>" + utils.translate("Matching items:") + "</b> " + results.join(", ") + "</p>";
-        if (this.browser.use_overlay) {
-            this.$content.append(text);
-        } else {
-            $("#matching_items_place").remove();
-            $("#global .main-title").append(text);
-        }
+        var text = "<div class=\"ms-browser-search-matching\"><b>" + utils.translate("Matching items:") + "</b> " + results.join(", ") + "</div>";
+        this.$content.append(text);
         this.browser.display_content(this.$content, response, null, "search");
     }
     else
-        this.$content.html("<div class=\"info\">" + utils.translate("No results.") + "</div>");
+        this.$content.html("<div class=\"messages\"><div class=\"message info\">" + utils.translate("No results.") + "</div></div>");
 };
 
 MSBrowserSearch.prototype.refresh_display = function (reset) {

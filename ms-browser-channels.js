@@ -12,7 +12,6 @@ function MSBrowserChannels(options) {
     this.current_channel_oid = "0";
     // vars
     this.$menu = null;
-    this.$panel = null;
     this.$content = null;
     this.tree_manager = null;
     this.order = "default";
@@ -29,7 +28,7 @@ function MSBrowserChannels(options) {
 
 MSBrowserChannels.prototype.get_menu_jq = function () {
     var html = "";
-    html += "<div id=\"ms_browser_channels_menu\" class=\"ms-browser-block\" style=\"display: none;\">";
+    html += "<div id=\"ms_browser_channels_menu\" style=\"display: none;\">";
     html += "</div>";
     this.$menu = $(html);
     return this.$menu;
@@ -37,39 +36,55 @@ MSBrowserChannels.prototype.get_menu_jq = function () {
 MSBrowserChannels.prototype.get_content_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_channels\" class=\"ms-browser-content\" style=\"display: none;\">";
-    html +=     "<div class=\"ms-browser-header\"><h1>"+utils.translate("Channel's content")+"</h1></div>";
-    html +=     "<div class=\"ms-browser-block\">";
-    html +=         "<div class=\"info\">"+utils.translate("Select a channel to display its content.")+"</div>";
+    html +=     "<div class=\"ms-browser-tree-place ms-channels-tree\">";
+    html +=         "<div><i class=\"fa fa-spinner fa-spin\"></i> "+utils.translate("Loading...")+"</div>";
+    html +=     "</div>";
+    html +=     "<div class=\"ms-browser-channels-place\">";
+    html +=         "<div class=\"messages\"><div class=\"message info\">"+utils.translate("Select a channel to display its content.")+"</div></div>";
     html +=     "</div>";
     html += "</div>";
-    this.$panel = $(html);
-    this.$content = $(".ms-browser-block", this.$panel);
-    return this.$panel;
+    this.$content = $(html);
+    this.$place = $(".ms-browser-channels-place", this.$content);
+    return this.$content;
+};
+
+MSBrowserChannels.prototype.refresh_title = function () {
+    var item = this.last_response ? this.last_response.info : undefined;
+    if (item && item.oid != "0") {
+        var html = "<span class=\"item-entry-preview\"><img src=\""+item.thumb+"\"/></span> "+utils.escape_html(item.title);
+        if (this.browser.current_selection && this.browser.current_selection.oid == item.oid)
+            html = "<span class=\"selected\">"+html+"</span>";
+        this.browser.set_title(item.title, html);
+    } else
+        this.browser.set_title(utils.translate("Main channels"));
 };
 
 MSBrowserChannels.prototype.on_show = function () {
+    this.refresh_title();
     if (this.initialized)
         return;
     this.initialized = true;
+
     this.default_logo_src = $("#mainlogo .header-logo").attr("src");
     this.default_fav_src = $("#").attr("src");
 
     // tree manager
     var obj = this;
-    var params = {
-        $place: $("<div class=\"ms-channels-tree\"></div>"),
-        display_root: this.browser.displayable_content.indexOf("c") != -1,
-        display_personal: this.browser.use_overlay,
-        current_channel_oid: this.current_channel_oid,
-        on_data_retrieved: function (data) { obj.browser.update_catalog(data); }
-    };
-    if (this.browser.use_overlay) {
-        params.on_change = function (oid) {
-            obj.display_channel(oid);
+    if (this.browser.tree_manager) {
+        var params = {
+            $place: $(".ms-browser-tree-place", this.$content),
+            display_root: this.browser.displayable_content.indexOf("c") != -1,
+            display_personal: true,
+            current_channel_oid: this.current_channel_oid,
+            on_data_retrieved: function (data) { obj.browser.update_catalog(data); }
         };
+        if (this.browser.use_overlay) {
+            params.on_change = function (oid) {
+                obj.display_channel(oid);
+            };
+        }
+        this.tree_manager = new MSTreeManager(params);
     }
-    this.tree_manager = new MSTreeManager(params);
-    this.$menu.append(this.tree_manager.$place);
 
     // load first channel
     if (this.init_options.initial_state && this.init_options.initial_state.channel_slug)
@@ -98,7 +113,8 @@ MSBrowserChannels.prototype.display_channel = function (oid) {
     if (!this.initialized)
         return;
     this.browser.display_loading();
-    this.tree_manager.set_active(oid);
+    if (this.tree_manager)
+        this.tree_manager.set_active(oid);
     if (oid != "0") {
         var obj = this;
         this.browser.get_info_for_oid(oid, true, function (response) {
@@ -107,6 +123,13 @@ MSBrowserChannels.prototype.display_channel = function (oid) {
     }
     else
         this._on_channel_info(null, oid);
+};
+MSBrowserChannels.prototype.display_parent = function () {
+    if (!this.current_channel_oid)
+        return;
+    var oid = this.current_channel_oid;
+    var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : "0";
+    this.display_channel(parent_oid);
 };
 
 MSBrowserChannels.prototype._on_channel_error = function (response) {
@@ -119,7 +142,7 @@ MSBrowserChannels.prototype._on_channel_error = function (response) {
     }
     else
         message = "<div class=\"error\">"+response.error+"</div>";
-    this.$content.html(message);
+    this.$place.html(message);
 };
 
 MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
@@ -175,27 +198,99 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     if (!this.browser.use_overlay && this.display_mode == "thumbnail")
         this.browser.box_hide_info();
 
-    this.$content.html("");
+    // update top bar
+    this.$menu.html("");
+    var $entry_links;
     if (oid != "0") {
-        // parent channel link
+        // back to parent button
         var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : "0";
         var parent_title = (parent_oid && this.browser.catalog[parent_oid]) ? this.browser.catalog[parent_oid].title : utils.translate("Parent channel");
-        this.$content.append(this.browser.get_content_entry("parent", {
+        var parent = {
             oid: parent_oid,
             title: parent_title,
-            extra_class: "item-entry-small",
-            selectable: !this.browser.parent_selection_oid || response.parent_selectable,
-            slug: response.info.parent_slug
-        }, parent_oid != "0" && this.browser.selectable_content.indexOf("c") != -1, "channels"));
-        // current channel link
-        var current_info = response.info;
-        current_info.oid = oid;
-        current_info.extra_class = "item-entry-small";
-        current_info.selectable = !this.browser.parent_selection_oid || response.selectable;
-        this.$content.append(this.browser.get_content_entry("current", current_info, this.browser.selectable_content.indexOf("c") != -1, "channels"));
+            slug: response.info.parent_slug,
+        };
+        var $back;
+        if (!this.browser.use_overlay) {
+            $back = $("<a class=\"button "+this.browser.btn_class+"\" title=\""+utils.translate("Parent channel")+"\" href=\""+this.browser._get_btn_link(parent, "view")+"\"></a>");
+        } else {
+            $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+"\" title=\""+utils.translate("Parent channel")+"\"></button>");
+            $back.click({ obj: this, oid: parent.oid }, function (event) {
+                event.data.obj.display_channel(event.data.oid);
+            });
+        }
+        $back.html("<i class=\"fa fa-chevron-circle-left fa-fw fa-2x\" aria-hidden=\"true\"></i>");
+        if (!this.browser.use_overlay && $(".navbar .back.button-text").length > 0) {
+            $back.addClass("back").addClass("button-text");
+            $(".navbar .back.button-text").replaceWith($back);
+        } else {
+            this.$menu.append($back);
+        }
+        // current channel buttons
+        var current_selectable = this.browser.selectable_content.indexOf("c") != -1;
+        $entry_links = this.browser._get_entry_links(response.info, "current", current_selectable);
+    } else {
+        response.oid = "0";
+        $entry_links = this.browser._get_entry_links(response, "current", false);
+        if (!this.browser.use_overlay && $(".navbar .back.button-text").length > 0)
+            $(".navbar .back.button-text").attr("href", "..");
     }
-    // channel's custom CSS
-    if (!this.browser.use_overlay) {
+    if ($entry_links)
+        this.$menu.append($entry_links);
+
+    // update list place
+    this.$place.html("");
+    if (this.browser.use_overlay) {
+        this.$place.scrollTop(0);
+    } else {
+        // current Channel data
+        if (oid != "0") {
+            var $current_item_desc = $("<div class=\"item-description\"></div>");
+            if (response.info.short_description) {
+                var $desc = $("<div class=\"channel-description-text\">" + response.info.short_description + "</div>");
+                if (response.info.short_description != response.info.description) {
+                    $desc.addClass("short-desc");
+                    $desc.click({ description: response.info.description }, function (event) {
+                        $(this).html(event.data.description).unbind("click").removeClass("short-desc");
+                    });
+                }
+                $current_item_desc.append($desc);
+            }
+            if (response.info.views || response.info.comments) {
+                var anno_and_views = "<div class=\"right channel-description-stats\">";
+                if (response.info.views) {
+                    anno_and_views += "<span class=\"inline-block\">" + response.info.views + " " + utils.translate("views");
+                    if (response.info.views_last_month)
+                        anno_and_views += ", " + response.info.views_last_month + " " + utils.translate("this month");
+                    anno_and_views += "</span>";
+                }
+                if (response.info.comments) {
+                    anno_and_views += " <span class=\"inline-block\">" + response.info.comments + " " + utils.translate("annotations");
+                    if (response.info.comments_last_month)
+                        anno_and_views += ", " + response.info.comments_last_month + " " + utils.translate("this month");
+                    anno_and_views += "</span>";
+                }
+                anno_and_views += "</div>";
+                $current_item_desc.append(anno_and_views);
+            }
+            var rss = "<div id=\"channel_description_rss\" class=\"channel-description-rss\"> ";
+            if (this.display_itunes_rss) {
+                rss += " <span class=\"inline-block\">" + utils.translate("Subscribe to channel's videos RSS:") + "</span>";
+                rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";
+                rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("standard") + "</a>";
+                rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/itunes-video.xml\">";
+                rss +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes") + "</a>";
+                rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/itunes-audio.xml\">";
+                rss +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes (audio only)") + "</a>";
+            } else {
+                rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";
+                rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("Subscribe to channel's videos RSS") + "</a>";
+            }
+            rss += "</div>";
+            $current_item_desc.append(rss);
+            this.$place.append($current_item_desc);
+        }
+        // channel's custom CSS
         $("head .csslistlink").remove();
         if (response.info) {
             var csslinks = "";
@@ -220,17 +315,22 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     var nb_photos_groups = response.photos_groups ? response.photos_groups.length : 0;
     var has_items = nb_channels > 0 || nb_videos > 0 || nb_live_streams > 0 || nb_photos_groups > 0;
     // channel display
+    this.refresh_title();
     if (has_items)
-        this.browser.display_content(this.$content, response, oid, "channels");
+        this.browser.display_content(this.$place, response, oid, "channels");
     else {
+        var msg;
         if (this.browser.selectable_content.indexOf("c") != -1) {
             if (this.browser.displayable_content.length > 1)
-                this.$content.append("<div class=\"info\">"+utils.translate("This channel contains no sub channels and no medias.")+"</div>");
+                msg = "This channel contains no sub channels and no medias.";
             else
-                this.$content.append("<div class=\"info\">"+utils.translate("This channel contains no sub channels.")+"</div>");
+                msg = "This channel contains no sub channels.";
         }
         else
-            this.$content.append("<div class=\"info\">"+utils.translate("This channel contains no media.")+"</div>");
+            msg = "This channel contains no media.";
+        msg = utils.translate(msg) + "<br/>";
+        msg += utils.translate("Some contents may still exist in this channel but if it is the case your account is not allowed to see them.");
+        this.$place.append("<div class=\"messages\"><div class=\"message info\">"+msg+"</div></div>");
     }
 };
 

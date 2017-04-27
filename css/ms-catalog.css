@@ -2,181 +2,74 @@
 nav.navbar .buttons-left .back {
     font-size: 1.1em;
 }
+nav.navbar .buttons-left > div {
+    display: inline-block;
+}
 nav.navbar .links {
     display: none;
 }
+nav.navbar .buttons-left,
 nav.navbar .buttons-right {
-    float: right;
+    width: auto;
     vertical-align: middle;
     line-height: 39px;
-    width: auto;
 }
-.hidden-visibility {
-    visibility: hidden;
-    height: 1px;
-}
-#global .main-title {
-    background: #FFF;
-    padding: 5px 20px;
-    box-shadow: 0px 2px 1px 0px #DDD;
-}
-#global .main-title h1 {
-    margin: 0;
-    padding: 15px;
-}
-#global .ms-browser-content .channel-description-rss {
-    padding: 0 15px;
-}
-#global .ms-browser-content .channel-description-text {
-    display: block;
-}
-#global .ms-browser-content .channel-description-text.small {
-    cursor: pointer;
-}
-#global .ms-browser-content .item-entry-links {
-    text-align: right;
-}
-.ms-browser-top-btns .ms-browser-top-menu {
-    padding: 8px;
-    padding-left: 16px;
-    position: absolute;
-    z-index: 4;
-    top: 55px;
-    left: 10px;
-    right: auto;
+nav.navbar .buttons-right {
+    float: right;
 }
 /* ms-browser */
-.ms-browser-top-btns {
-    display: inline-block;
-    margin: 5px;
-}
-.ms-browser-top-btns {
-    line-height: inherit;
-    position: static;
-    z-index: inherit;
-    top: auto;
-    right: auto;
-    height: auto;
-}
-.ms-browser .ms-browser-section {
-    overflow: visible;
-}
-.ms-browser .ms-browser-main {
-    margin: 0;
-}
-.ms-browser .ms-browser-block {
-    min-height: 100px;
-}
 .ms-browser .ms-browser-header {
     display: none;
 }
-.ms-browser .ms-browser-main {
-    border: none;
-}
-.ms-browser .ms-browser-tab {
-    color: #FFF;
-}
-.ms-browser .ms-browser-tab.active {
-    background: none;
-    font-weight: bold;
-    text-decoration: underline;
-}
-.ms-browser .ms-browser-tab:hover {
-    background: none;
-    color: white;
-    text-decoration: underline;
+.ms-browser .ms-browser-section {
+    overflow: visible;
 }
 .ms-browser .ms-browser-panel {
     border: 0 none;
     border-radius: 0;
 }
-#ms_browser_search_menu .dropdown {
-    min-width: 150px;
-    padding: 5px;
-}
-#ms_browser_search_menu .ms-browser-search-block {
-    display: inline-block;
-}
-.ms-browser .ms-browser-filters-menu {
-    z-index: 10;
-}
-.ms-browser .ms-browser-filters-btn-place {
-    color: white;
-}
-.ms-browser .ms-browser-display-btn-place {
-    top: 8px;
-}
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .ms-browser-section-title {
+.ms-browser .ms-browser-main .ms-browser-section .ms-browser-section-title {
     font-size: 1.8em;
     padding: 15px;
 }
-.ms-browser .ms-browser-main .ms-browser-block .ms-browser-section {
+.ms-browser .ms-browser-main .ms-browser-section {
     padding: 20px 20px;
 }
-.ms-browser-block .current-item-desc {
-    padding: 10px;
+.ms-browser .ms-browser-channels-place {
+    padding: 0;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    position: static;
+    overflow: visible;
+    background: transparent;
+    width: auto;
 }
-#ms_browser_latest_menu {
-    width: 300px;
-    margin: 0 auto;
-    padding: 10px;
-    background: white;
-    box-shadow: 2px 2px 1px 0px #DDD;
+.ms-browser .ms-browser-tree-place {
+    display: none;
+}
+/* channels tab */
+.ms-browser-content .channel-description-text {
+    margin: 10px;
+}
+.ms-browser-content .channel-description-text.short-desc {
+    cursor: pointer;
+}
+.ms-browser-content .channel-description-stats,
+.ms-browser-content .channel-description-rss {
+    padding: 0 15px;
+}
+.ms-browser-content .channel-description-rss a {
+    margin-left: 10px;
+}
+.ms-browser-content .item-entry-links {
+    text-align: right;
 }
 /* ms-items */
-.ms-items .item-entry {
-    display: inline-block;
-    width: calc(50% - 20px);
-}
-.ms-items .item-entry-link.clickable {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-}
-.ms-items .item-entry.item-type-parent {
-    top: 10px;
-    right: 10px;
-    position: absolute;
-    z-index: 1;
-
-    border-color: transparent !important;
-    border-radius: 0;
-    background: transparent !important;
-}
-.ms-items .item-entry.item-type-parent .item-entry-link {
-    display: none;
-}
-.ms-items .item-entry.item-type-parent .item-entry-links {
-    display: block;
-    position: static;
-    line-height: normal;
-}
-.ms-items .item-entry.item-type-parent .item-entry-links-container {
-    display: block;
-}
-.ms-items .item-entry .item-entry-content .item-entry-description {
-    max-height: 31px;
-    overflow: auto;
-}
-.ms-items .item-entry-small .item-entry-content {
-    margin-left: 10px;
-    line-height: normal;
-}
-.ms-items .item-entry.selectable,
-.ms-items .item-entry.thumbnail.selectable {
-    border: none;
-}
-.ms-items .item-entry .item-entry-placeholder {
-    padding-right: 4px;
-    float: right;
-    display: block;
-    height: 0;
-}
-.ms-items .item-entry:hover .item-entry-placeholder {
-    display: none;
-}
-.ms-items .item-entry > .item-entry-link {
-    min-height: 133px;
+.ms-items .item-entry,
+.ms-items .item-entry.selectable {
+    border-bottom: 1px solid #ccc;
 }
 /* overlay-info */
 .overlay-info .overlay-info-content .item-entry-links {
@@ -188,9 +81,6 @@ nav.navbar .buttons-right {
     z-index: 10;
 
     width: 500px !important;
-}
-.overlay-info div.fieldset-content {
-    padding: 2px;
 }
 .overlay-info form + form {
     margin-top: 12px;
@@ -246,9 +136,6 @@ nav.navbar .buttons-right {
     padding-left: 12px;
     padding-right: 12px;
 }
-.overlay-info fieldset {
-    margin-bottom: 12px;
-}
 .overlay-info table.overlay-info-table td {
     padding: 4px 0;
     vertical-align: top;
@@ -292,23 +179,18 @@ nav.navbar .buttons-right {
     }
 }
 @media (max-width: 800px) {
-    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section {
+    .ms-browser .ms-browser-section {
         padding: 2px;
-    }
-    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry {
-        display: block;
-        margin: 5px 0;
-        width: 100%;
-    }
-    .ms-browser .ms-browser-main .ms-browser-block .ms-browser-section .item-entry.thumbnail {
-        display: inline-block;
-        margin: 10px;
-        width: 240px;
     }
     .ms-browser .ms-browser-section-links {
         float: none;
         text-align: center;
         display: block;
+    }
+    .ms-items .item-entry.thumbnail {
+        display: inline-block;
+        margin: 10px;
+        width: 240px;
     }
     .ms-items .item-entry-unlisted,
     .ms-items .item-entry-notpublished,

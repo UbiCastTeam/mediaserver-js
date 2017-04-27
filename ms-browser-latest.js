@@ -10,7 +10,8 @@ function MSBrowserLatest(options) {
     this.browser = null;
     // vars
     this.$menu = null;
-    this.$panel = null;
+    this.$content = null;
+    this.$place = null;
     this.last_response = null;
     this.more = false;
     this.start_date = "";
@@ -30,50 +31,44 @@ function MSBrowserLatest(options) {
 MSBrowserLatest.prototype.get_menu_jq = function () {
     var dc = this.browser.displayable_content;
     var html = "";
-    html += "<div id=\"ms_browser_latest_menu\" class=\"ms-browser-block messages\" style=\"display: none;\">";
-    html +=     "<div class=\"message info\">"+utils.translate("This list presents all media and channels ordered by add date.")+"</div>";
+    html += "<div id=\"ms_browser_latest_menu\" style=\"display: none;\">";
     if (dc.length > 1 && dc.indexOf("c") != -1) {
-        html += "<p>";
-        html +=     "<input id=\"latest_display_channels\" type=\"checkbox\">";
-        html +=     " <label for=\"latest_display_channels\">"+utils.translate("Display channels")+"</label>";
-        html += "</p>";
-        html += "<p><button type=\"button\" class=\"button ms-browser-latest-refresh\">"+utils.translate("Apply")+"</button></p>";
+        html += "<input id=\"latest_display_channels\" type=\"checkbox\">";
+        html += " <label for=\"latest_display_channels\">"+utils.translate("Display channels")+"</label>";
     }
     html += "</div>";
     this.$menu = $(html);
     // events
-    $(".ms-browser-latest-refresh", this.$menu).click({ obj: this }, function (evt) { evt.data.obj.refresh_display(true); });
+    $("#latest_display_channels", this.$menu).change({ obj: this }, function (event) { event.data.obj.refresh_display(true); });
     return this.$menu;
 };
 MSBrowserLatest.prototype.get_content_jq = function () {
     var more_label = utils.translate("Display {count} more items");
     var html = "";
     html += "<div id=\"ms_browser_latest\" class=\"ms-browser-content\" style=\"display: none;\">";
-    html +=     "<div class=\"ms-browser-header\"><h1>"+utils.translate("Latest content added")+"</h1></div>";
-    html +=     "<div class=\"ms-browser-block\">";
-    html +=         "<div class=\"ms-browser-latest-place\"></div>";
-    html +=         "<div class=\"ms-browser-latest-btns\">";
-    html +=             "<button type=\"button\" class=\"button ms-browser-latest-more-10\">"+more_label.replace(/\{count\}/, "10")+"</button>";
-    html +=             "<button type=\"button\" class=\"button ms-browser-latest-more-30\">"+more_label.replace(/\{count\}/, "30")+"</button>";
-    html +=         "</div>";
+    html +=     "<div class=\"messages\">";
+    html +=         "<div class=\"message info\">"+utils.translate("This list presents all media and channels ordered by add date.")+"</div>";
+    html +=     "</div>";
+    html +=     "<div class=\"ms-browser-latest-place\"></div>";
+    html +=     "<div class=\"ms-browser-latest-btns\">";
+    html +=         "<button type=\"button\" class=\"button ms-browser-latest-more-10\">"+more_label.replace(/\{count\}/, "10")+"</button>";
+    html +=         "<button type=\"button\" class=\"button ms-browser-latest-more-30\">"+more_label.replace(/\{count\}/, "30")+"</button>";
     html +=     "</div>";
     html += "</div>";
-    this.$panel = $(html);
-    this.$content = $(".ms-browser-latest-place", this.$panel);
+    this.$content = $(html);
+    this.$place = $(".ms-browser-latest-place", this.$content);
     // events
-    $(".ms-browser-latest-more-10", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.display_more(10); });
-    $(".ms-browser-latest-more-30", this.$panel).click({ obj: this }, function (evt) { evt.data.obj.display_more(30); });
-    return this.$panel;
+    $(".ms-browser-latest-more-10", this.$content).click({ obj: this }, function (event) { event.data.obj.display_more(10); });
+    $(".ms-browser-latest-more-30", this.$content).click({ obj: this }, function (event) { event.data.obj.display_more(30); });
+    return this.$content;
 };
 
 MSBrowserLatest.prototype.on_show = function () {
+    this.browser.set_title(utils.translate("Latest content added"));
     if (this.initialized)
         return;
     this.initialized = true;
-    if (!this.browser.use_overlay) {
-        $("#ms_browser_search_menu").hide();
-        $("#ms_browser_latest").prepend($("#ms_browser_latest_menu").detach());
-    }
+
     this.load_latest();
 };
 
@@ -145,7 +140,7 @@ MSBrowserLatest.prototype._on_ajax_error = function (response) {
     }
     else
         message = "<div class=\"error\">"+response.error+"</div>";
-    this.$content.html(message);
+    this.$place.html(message);
 };
 
 MSBrowserLatest.prototype._on_ajax_response = function (response) {
@@ -167,11 +162,11 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
             this.date_label = item.date_label;
             this.$section = $("<div class=\"ms-browser-section\"></div>");
             this.$section.append("<h3 class=\"ms-browser-section-title\">"+item.date_label+"</h3>");
-            this.$content.append(this.$section);
+            this.$place.append(this.$section);
         }
         else if (!this.$section) {
             this.$section = $("<div class=\"ms-browser-section\"></div>");
-            this.$content.append(this.$section);
+            this.$place.append(this.$section);
             console.log("A browser section is missing in latest tab. This should not happen.", item.date_label, this.date_label);
         }
         var type = "channel";
@@ -185,9 +180,9 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         this.$section.append(this.browser.get_content_entry(type, item, selectable, "latest"));
     }
     if (this.more)
-        $(".ms-browser-latest-btns", this.$panel).css("display", "block");
+        $(".ms-browser-latest-btns", this.$content).css("display", "block");
     else
-        $(".ms-browser-latest-btns", this.$panel).css("display", "none");
+        $(".ms-browser-latest-btns", this.$content).css("display", "none");
 };
 
 MSBrowserLatest.prototype.display_more = function (count) {
@@ -201,7 +196,7 @@ MSBrowserLatest.prototype.refresh_display = function (reset) {
     if (this.last_response) {
         this.date_label = "";
         this.$section = null;
-        this.$content.html("");
+        this.$place.html("");
         this._on_ajax_response(this.last_response);
     }
     else {
@@ -209,7 +204,7 @@ MSBrowserLatest.prototype.refresh_display = function (reset) {
         this.start_date = "";
         this.date_label = "";
         this.$section = null;
-        this.$content.html("");
+        this.$place.html("");
         this.load_latest();
     }
 };

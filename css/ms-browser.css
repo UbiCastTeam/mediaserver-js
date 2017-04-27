@@ -1,14 +1,12 @@
 /* CSS for MediaServer browser */
-.ms-browser {
+.ms-browser-container {
     margin: 0;
     padding: 0;
     position: relative;
     display: block;
     background: #eee !important;
 }
-.ms-browser.in-overlay {
-    width: 900px;
-    height: 100%;
+.ms-browser-container.in-overlay {
     text-align: left;
 }
 
@@ -17,21 +15,18 @@
     margin: 0;
     padding: 0;
 }
-
-.ms-browser a {
+.ms-browser-container a {
     text-decoration: none;
     color: #1C73BF;
 }
-.ms-browser a:hover {
+.ms-browser-container a:hover {
     text-decoration: none;
     color: #004C5C;
 }
-
 .ms-browser img {
     vertical-align: middle;
     border: 0 none;
 }
-
 .ms-browser ul,
 .ms-browser ol {
     padding-left: 24px;
@@ -40,48 +35,37 @@
     margin-top: 4px;
     margin-bottom: 4px;
 }
-
 .ms-browser table {
     border-spacing: 0;
     border-collapse: collapse;
 }
-
 .ms-browser p {
     margin: 8px 0;
 }
-
-.ms-browser fieldset {
-    margin: 4px;
-    border-radius: 3px;
-}
-.ms-browser legend {
-    padding: 0 5px;
-}
-
 .ms-browser option {
     padding: 2px 5px;
 }
-
 .ms-browser .ms-browser-clear {
     clear: both;
     overflow: hidden;
-}
-.ms-browser .hidden-visibility {
-    visibility: hidden;
-    height: 1px;
 }
 
 
 /* buttons */
 .ms-browser .button {
+    margin-right: 8px;
     padding: 3px 8px;
     cursor: pointer;
+    transition-duration: .3s;
+    transition-property: background;
 }
 .ms-browser button.button {
     padding: 2px 7px;
 }
-.ms-browser .button + .button {
-    margin-left: 8px;
+.ms-browser .button.active,
+.ms-browser button.button.active {
+    color: #fff;
+    background: #aaa;
 }
 .ms-browser br + .button,
 .ms-browser br + .button + .button {
@@ -90,67 +74,66 @@
 
 
 /* structure */
-.ms-browser.in-overlay .ms-browser-menu,
-.ms-browser.in-overlay .ms-browser-main,
-.ms-browser.in-overlay .ms-browser-panel,
 .ms-browser.in-overlay .ms-browser-header,
-.ms-browser.in-overlay .ms-browser-block {
+.ms-browser.in-overlay .ms-browser-bar,
+.ms-browser.in-overlay .ms-browser-main {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
 }
-
-.ms-browser .ms-browser-menu {
-    width: 350px;
-    float: left;
-    background: #fff;
-}
-.ms-browser.in-overlay .ms-browser-menu {
-    float: none;
-    right: auto;
-}
-.ms-browser .ms-browser-main {
-    margin-left: 350px;
-}
-.ms-browser.in-overlay .ms-browser-main {
-    margin-left: 0;
-    left: 350px;
-}
-.ms-browser.in-overlay .ms-browser-main .ms-browser-panel {
-    border-left: 1px solid #DDD;
-}
 .ms-browser .ms-browser-header {
-    line-height: 24px;
-    height: 24px;
-    padding: 4px 6px;
-    background: #DDD;
+    padding: 5px;
+    height: 40px;
+    line-height: 40px;
 }
 .ms-browser.in-overlay .ms-browser-header {
     bottom: auto;
 }
-.ms-browser.in-overlay .ms-browser-header h1 {
+.ms-browser .ms-browser-menu {
+    display: none;
+}
+.ms-browser.in-overlay .ms-browser-menu {
+    float: left;
+    display: block;
+    width: 300px;
+}
+.ms-browser .ms-browser-title {
+    margin-left: 300px;
+    font-size: 200%;
     font-weight: bold;
-    font-size: inherit;
-    line-height: inherit;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 100%;
+    overflow: hidden;
 }
-.ms-browser .ms-browser-panel-search .ms-browser-header span {
-    font-style: italic;
-    font-size: 80%;
-    margin-left: 24px;
-    color: #444;
+.ms-browser .ms-browser-title img {
+    max-height: 40px;
 }
-.ms-browser .ms-browser-block {
+.ms-browser .ms-browser-bar {
     padding: 5px;
-    position: relative;
+    height: 30px;
+    line-height: 30px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
-.ms-browser .ms-browser-menu .ms-browser-block {
-    overflow: auto;
+.ms-browser.in-overlay .ms-browser-bar {
+    top: 50px;
+    bottom: auto;
 }
-.ms-browser.in-overlay .ms-browser-block {
-    top: 32px;
-    position: absolute;
+.ms-browser .ms-browser-bar-left {
+    float: left;
+}
+.ms-browser .ms-browser-bar-right {
+    float: right;
+}
+.ms-browser.in-overlay .ms-browser-main {
+    top: 92px;
     overflow: auto;
 }
 .ms-browser .ms-browser-section {
@@ -162,8 +145,7 @@
 .ms-browser .ms-browser-section-links + h3 + div {
     clear: both;
 }
-.ms-browser .ms-browser-search-title,
-.ms-browser .ms-browser-top-menu-title,
+.ms-browser .ms-browser-menu-title,
 .ms-browser .ms-browser-section-title {
     font-size: 125%;
     font-weight: bold;
@@ -171,115 +153,94 @@
     color: #404040;
     padding: 4px;
 }
-.ms-browser .ms-browser-top-menu-title,
-.ms-browser .ms-browser-search-title {
+.ms-browser .ms-browser-menu-title {
     margin-bottom: 4px;
     margin-left: -8px;
 }
-.ms-browser .ms-browser-search-block {
-    margin-bottom: 16px;
-    margin-left: 15px;
-}
-.ms-browser .ms-browser-search-input {
-    margin-top: 8px;
-}
-.ms-browser .ms-browser-search-input input {
-    width: auto;
-    padding: 3px;
-}
-.ms-browser .ms-browser-search-input #ms_browser_search {
-    width: 72%;
-}
-.ms-browser .ms-browser-latest-btns {
-    margin: 8px 5px;
-    text-align: center;
+.ms-browser .ms-browser-content {
+    padding: 10px;
 }
 
 /* buttons */
 .ms-browser .ms-browser-tab {
-    padding: 0 4px;
-    font-weight: normal;
-    line-height: 24px;
-    cursor: pointer;
-    display: inline; /* fallback */
-    display: inline-block;
-    color: inherit;
-    background: transparent;
-    transition-duration: .3s;
-    transition-property: background;
-    border: 0 none;
-    border-radius: 3px;
-}
-.ms-browser .ms-browser-tab:hover {
-    background: #ccc;
-}
-.ms-browser .ms-browser-tab.active {
-    color: #fff;
-    background: #888;
-    cursor: default;
+    font-weight: bold;
 }
 .ms-browser .ms-browser-tab + .ms-browser-tab {
     margin-left: 5px;
 }
 
-/* filters menu and button */
-.ms-browser-top-btns {
-    line-height: 24px;
+/* dropdown */
+.ms-browser-dropdown {
+    margin-left: 10px;
+    z-index: 2;
+    position: relative;
+    display: inline-block;
+    line-height: 36px;
+}
+.ms-browser.in-overlay .ms-browser-dropdown {
+    line-height: inherit;
+}
+.ms-browser-dropdown .ms-browser-dropdown-button.active {
+    background: #aaa;
+    color: #fff;
+}
+.ms-browser-dropdown .ms-browser-dropdown-menu {
+    top: 100%;
+    left: 0;
     position: absolute;
-    z-index: 1;
-    top: 4px;
-    right: 8px;
-    height: 24px;
-}
-.ms-browser-top-btns .ms-browser-top-btn.active {
-    background: #fff;
-    color: #222;
-}
-.ms-browser-top-btns .ms-browser-top-menu {
     padding: 8px;
     padding-left: 16px;
-    position: absolute;
     z-index: 4;
-    top: 25px;
-    right: 0;
     display: none;
     line-height: 24px;
     white-space: nowrap;
+    text-align: left;
     border: 1px solid #ccc;
     border-radius: 4px;
     background: #fff;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
-.ms-browser-top-btns .ms-browser-top-menu.active {
+.ms-browser-dropdown-right .ms-browser-dropdown-menu {
+    left: auto;
+    right: 0;
+}
+.ms-browser-dropdown .ms-browser-dropdown-menu.active {
     display: block;
 }
-.ms-browser-top-btns .ms-browser-top-menu div + div {
+.ms-browser-dropdown .ms-browser-dropdown-menu div + div {
     margin-top: 8px;
 }
-.ms-browser-top-btns #open_hidden_categories:hover {
+
+/* filters menu */
+.ms-browser-filters #open_hidden_categories:hover {
     cursor: pointer;
 }
-.ms-browser-top-btns #hidden_categories {
+.ms-browser-filters #hidden_categories {
     width: 400px;
 }
-.ms-browser-top-btns #hidden_categories {
+.ms-browser-filters #hidden_categories {
     overflow: hidden;
 }
-.ms-browser-top-btns #hidden_categories label {
+.ms-browser-filters #hidden_categories label {
     margin-right: 8px;
     float: left;
     display: block;
     max-width: 100%;
 }
-.ms-browser-top-btns #hidden_categories label input {
+.ms-browser-filters #hidden_categories label input {
     display: inline-block;
     vertical-align: top;
 }
-.ms-browser-top-btns #hidden_categories label span {
+.ms-browser-filters #hidden_categories label span {
     white-space: pre-wrap;
     word-break: break-all;
     display: inline-block;
 }
+.ms-browser-filters .hidden-visibility {
+    visibility: hidden;
+    height: 1px;
+}
+
 /* loading and message */
 .ms-browser .ms-browser-message,
 .ms-browser .ms-browser-loading {
@@ -309,9 +270,11 @@
 .ms-browser .error {
     margin: 10px;
     padding: 10px;
-    display: block;
+    display: block;  /* fallback */
+    display: inline-block;
     overflow: hidden;
     line-height: normal;
+    text-align: left;
     min-height: 0;
     color: #222;
     background: #fff;
@@ -355,7 +318,25 @@
     content: "\f06a";
 }
 
-
+/* channels tab */
+.ms-browser .ms-browser-tree-place,
+.ms-browser .ms-browser-channels-place {
+    padding: 10px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    overflow: auto;
+}
+.ms-browser .ms-browser-tree-place {
+    left: auto;
+    width: 280px;
+    background: #fff;
+}
+.ms-browser .ms-browser-channels-place {
+    right: 300px;
+}
 /* channels tree */
 .ms-channels-tree ul {
     padding-left: 0;
@@ -428,10 +409,27 @@
     color: #666;
 }
 
+/* search tab */
+.ms-browser .ms-browser-search-form {
+    display: inline;
+}
+.ms-browser .ms-browser-search-form input {
+    width: auto;
+    padding: 3px;
+}
+.ms-browser .ms-browser-search-matching {
+    padding: 10px 30px;
+}
+
+/* latest tab */
+.ms-browser .ms-browser-latest-btns {
+    margin: 8px 5px;
+    text-align: center;
+}
 
 /* channel content list */
 .ms-items .item-entry,
-.ms-browser-block .current-item-desc {
+.ms-items .item-description {
     margin: 10px;
     position: relative;
     display: block;
@@ -440,6 +438,13 @@
     box-shadow: 2px 2px 1px 0px #ddd;
     border-bottom: 3px solid #ccc;
     border-radius: 3px;
+}
+.ms-items .item-entry {
+    display: inline-block;
+    width: calc(50% - 20px);
+}
+.ms-items .item-description {
+    padding: 10px;
 }
 .ms-items .item-entry * {
     box-sizing: content-box;
@@ -453,8 +458,11 @@
 .ms-items .item-entry.selected .item-entry-title {
     color: #008750;
 }
+.ms-browser-title .selected {
+    color: #008750;
+}
 .ms-items .item-entry-preview {
-    margin: 10px 25px 10px 10px;
+    margin: 10px 15px 10px 10px;
     width: 240px;
     height: 135px;
     line-height: 135px;
@@ -609,6 +617,10 @@
 .ms-items .item-entry:hover .item-entry-links-container {
     display: block;
 }
+.ms-items .item-entry .item-entry-description {
+    max-height: 40px;
+    overflow: auto;
+}
 
 /* thumbnail mode */
 .ms-items .item-entry.thumbnail {
@@ -647,14 +659,6 @@
     line-height: 99px;
 }
 
-.ms-items .item-entry.thumbnail .item-entry-date,
-.ms-items .item-entry.thumbnail .item-entry-links,
-.ms-items .item-entry.thumbnail .item-entry-views,
-.ms-items .item-entry.thumbnail .item-entry-parent,
-.ms-items .item-entry.thumbnail .item-entry-type,
-.ms-items .item-entry.thumbnail .item-entry-description {
-    display: none;
-}
 .ms-items .item-entry.thumbnail .item-entry-top-bar {
     padding-right: 10px;
     left: 0;
@@ -714,11 +718,12 @@
     padding: 5px;
 }
 
-.ms-items .item-entry.thumbnail > div.item-entry-link.clickable {
-    width: 100%;
-    height: 100%;
-}
 @media (max-width: 1280px) {
+    .in-overlay .ms-items .ms-browser-channels-place .item-entry.list {
+        display: block;
+        margin: 5px 0;
+        width: auto;
+    }
     .ms-items .item-entry-preview {
         width: 120px;
         height: 91px;
@@ -729,11 +734,10 @@
     }
 }
 @media (max-width: 800px) {
-    .ms-browser.in-overlay .ms-browser-main {
-        left: 0;
-    }
-    .ms-browser-top-btns .ms-browser-top-menu {
-        left: -230px;
+    .ms-items .item-entry.list {
+        display: block;
+        margin: 5px 0;
+        width: auto;
     }
     .ms-items .item-entry-links-container {
         display: inline-block;

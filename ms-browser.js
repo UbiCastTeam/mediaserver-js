@@ -19,7 +19,8 @@ function MSBrowser(options) {
     this.initial_oid = null;
     this.initial_state = null;
     this.on_pick = null;
-    this.btn_class = "button";
+    this.btn_class = "";
+    this.tree_manager = true;
     this.iframe = false;
     this.display_itunes_rss = true;
     // vars
@@ -53,6 +54,7 @@ function MSBrowser(options) {
         "initial_state",
         "on_pick",
         "btn_class",
+        "tree_manager",
         "iframe",
         "display_itunes_rss"
     ]);
@@ -77,7 +79,7 @@ MSBrowser.prototype.init = function () {
     if (utils.get_cookie("catalog-display_mode") == "thumbnail") {
         this.display_mode = "thumbnail";
         if (!this.use_overlay)
-            $("#container").addClass("wide").removeClass("max-width-1200");
+            $("#container").removeClass("max-width-1200");
     }
 
     var $messages;
@@ -126,14 +128,10 @@ MSBrowser.prototype.init = function () {
                 }, 5000);
             }, 500);
         }
-        // listen to navigation history changes
-        window.onpopstate = function (event) {
-            obj.on_hash_change(event.target.location);
-        };
         // listen to scroll to fix left menu if required
-        $(window).scroll(function () {
+        /*$(window).scroll(function () {
             obj.on_scroll();
-        });
+        });*/
         // listen to hash changes
         $(window).bind("hashchange", function () {
             obj.on_hash_change();
@@ -216,7 +214,7 @@ MSBrowser.prototype.pick = function (oid, action, no_close) {
     if (oid === null || oid === undefined) {
         // deselect
         if (this.current_selection && this.current_selection.oid)
-            $("#item_entry_"+this.current_selection.oid+"_"+this.displayed, this.$main).removeClass("selected");
+            $(".item-entry-"+this.current_selection.oid, this.$main).removeClass("selected");
         return;
     }
     if (this.catalog[oid] && this.catalog[oid].is_full) {
@@ -242,9 +240,9 @@ MSBrowser.prototype._pick = function (oid, result, action, no_close) {
     else {
         // change current selection
         if (this.current_selection && this.current_selection.oid)
-            $("#item_entry_"+this.current_selection.oid+"_"+this.displayed, this.$main).removeClass("selected");
+            $(".item-entry-"+this.current_selection.oid, this.$main).removeClass("selected");
         this.current_selection = this.catalog[oid];
-        $("#item_entry_"+oid+"_"+this.displayed, this.$main).addClass("selected");
+        $(".item-entry-"+this.current_selection.oid, this.$main).addClass("selected");
         if (this.overlay && !no_close)
             this.overlay.hide();
         if (this.on_pick)
@@ -264,39 +262,15 @@ MSBrowser.prototype.get_last_pick = function () {
 /* events handlers */
 MSBrowser.prototype.on_resize = function () {
     if (this.use_overlay) {
-        var width = $(window).width() - 100;
-        if (width < 900)
-            width = 900;
-        else if (width > 1200)
-            width = 1200;
+        var width = $(window).width() - 70;
         this.$widget.width(width);
         var height = $(window).height() - 100;
         this.$widget.height(height);
     }
-    else {
-        var max_height = $(window).height() - 120;
-        if (max_height < 100)
-            max_height = 100;
-        $(".ms-browser .ms-browser-menu .ms-browser-panel .ms-browser-block").css("max-height", max_height+"px");
-    }
-};
-MSBrowser.prototype.on_scroll = function () {
-    var scroll_top = $(window).scrollTop();
-    if (!this.$cb_left || !this.$cb_left.length)
-        this.$cb_left = $(".ms-browser-menu");
-
-    if (!this.left_menu_offset) {
-        this.left_menu_offset = $(".ms-browser-menu").offset().top - 12;
-    }
-    if (scroll_top > this.left_menu_offset) {
-        if ($(".ms-browser-main .ms-browser-block:visible").height() > $(".ms-browser-block", this.$cb_left).height() && !this.$cb_left.hasClass("fixed"))
-            this.$cb_left.addClass("fixed");
-    }
-    else if (this.$cb_left.hasClass("fixed"))
-        this.$cb_left.removeClass("fixed");
 };
 MSBrowser.prototype.on_hash_change = function () {
-    if (window.location.pathname == this.url_channels) {
+    var path = window.location.pathname + window.location.search;
+    if (path == this.url_channels) {
         var slug = window.location.hash;
         if (slug && slug[0] == "#")
             slug = slug.substring(1);
@@ -306,11 +280,11 @@ MSBrowser.prototype.on_hash_change = function () {
             this.channels.display_channel("0");
         this.change_tab("channels", true);
     }
-    else if (window.location.pathname == this.url_search) {
+    else if (path == this.url_search) {
         this.search.on_url_change();
         this.change_tab("search", true);
     }
-    else if (window.location.pathname == this.url_latest) {
+    else if (path == this.url_latest) {
         this.change_tab("latest", true);
     }
 };

@@ -8,23 +8,28 @@
 
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
-    var html = "<div class=\"ms-browser "+(this.use_overlay ? "in-overlay" : "")+"\">";
-    html += "<div class=\"ms-browser-menu "+(this.use_overlay ? "hidden-below-800" : "")+"\">";
-    html +=     "<div class=\"ms-browser-panel\">";
-    html +=         "<div class=\"ms-browser-header\">";
+    var html = "<div class=\"ms-browser ms-browser-container "+(this.use_overlay ? "in-overlay" : "")+"\">";
+    html += "<div class=\"ms-browser-header\">";
+    html +=     "<div class=\"ms-browser-menu\">";
     if (!this.use_overlay) {
-        html += "<a id=\"ms_browser_channels_tab\" class=\"ms-browser-tab\" href=\""+this.url_channels+"\">"+utils.translate("Channels")+"</a>";
-        html += "<a id=\"ms_browser_search_tab\" class=\"ms-browser-tab\" href=\""+this.url_search+"\">"+utils.translate("Search")+"</a>";
-        html += "<a id=\"ms_browser_latest_tab\" class=\"ms-browser-tab\" href=\""+this.url_latest+"\">"+utils.translate("Latest content")+"</a>";
+        html += "<a id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_channels+"\">"+utils.translate("Channels")+"</a>";
+        html += "<a id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_search+"\">"+utils.translate("Search")+"</a>";
+        html += "<a id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_latest+"\">"+utils.translate("Latest content")+"</a>";
+    } else {
+        html += "<button type=\"button\" id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\">"+utils.translate("Channels")+"</button>";
+        html += "<button type=\"button\" id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\">"+utils.translate("Search")+"</button>";
+        html += "<button type=\"button\" id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\">"+utils.translate("Latest content")+"</button>";
     }
-    else {
-        html += "<button type=\"button\" id=\"ms_browser_channels_tab\" class=\"ms-browser-tab\">"+utils.translate("Channels")+"</button>";
-        html += "<button type=\"button\" id=\"ms_browser_search_tab\" class=\"ms-browser-tab\">"+utils.translate("Search")+"</button>";
-        html += "<button type=\"button\" id=\"ms_browser_latest_tab\" class=\"ms-browser-tab\">"+utils.translate("Latest content")+"</button>";
-    }
-    html +=         "</div>";
     html +=     "</div>";
+    html +=     "<div class=\"ms-browser-title\"></div>";
     html += "</div>";
+    if (this.use_overlay) {
+        html += "<div class=\"ms-browser-bar\">";
+        html +=     "<div class=\"ms-browser-bar-left\"></div>";
+        html +=     "<div class=\"ms-browser-bar-right\"></div>";
+        html +=     "<div class=\"ms-browser-clear\"></div>";
+        html += "</div>";
+    }
     html += "<div class=\"ms-browser-main ms-items\">";
     html +=     "<div class=\"ms-browser-panel\">";
     html +=         "<div class=\"ms-browser-clear\"></div>";
@@ -34,36 +39,41 @@ MSBrowser.prototype.build_widget = function () {
     html += "</div>";
     html += "</div>";
     this.$widget = $(html);
-    this.$menu = $(".ms-browser-menu", this.$widget);
-    this.$main = $(".ms-browser-main", this.$widget);
-    var $menu_place = $(".ms-browser-panel", this.$menu);
-    $menu_place.append(this.channels.get_menu_jq());
-    $menu_place.append(this.latest.get_menu_jq());
-    var $content_place = $(".ms-browser-panel", this.$main);
+    var $left_buttons, $right_buttons;
     if (this.use_overlay) {
-        $menu_place.append(this.search.get_menu_jq());
-        $content_place.prepend(this.get_top_menu_jq());
+        $left_buttons = $(".ms-browser-bar-left", this.$widget);
+        $right_buttons = $(".ms-browser-bar-right", this.$widget);
+        $right_buttons.addClass("ms-browser-dropdown-right");
     } else {
-        $("#commands_place").append(this.search.get_menu_jq());
-        $("nav .buttons-left").append(this.get_top_menu_jq());
+        $right_buttons = $("nav .buttons-left");
+        $left_buttons = $("#commands_place");
+        $left_buttons.addClass("ms-browser-dropdown-right");
     }
-    $content_place.prepend(this.latest.get_content_jq());
-    $content_place.prepend(this.search.get_content_jq());
-    $content_place.prepend(this.channels.get_content_jq());
+    $left_buttons.addClass("ms-browser");
+    $right_buttons.addClass("ms-browser");
+    $left_buttons.append(this.latest.get_menu_jq());
+    $left_buttons.append(this.search.get_menu_jq());
+    $left_buttons.append(this.channels.get_menu_jq());
+    $right_buttons.append(this.get_top_menu_jq());
+    this.$main = $(".ms-browser-main", this.$widget);
+    this.$main.append(this.latest.get_content_jq());
+    this.$main.append(this.search.get_content_jq());
+    this.$main.append(this.channels.get_content_jq());
+    this.$menu = $(".ms-browser-menu", this.$widget);
 
     // get initial media or channel info
     if (this.place)
         $(this.place).html(this.$widget);
 
     // events
-    $("#ms_browser_channels_tab", this.$menu).click({ obj: this }, function (evt) {
-        evt.data.obj.change_tab("channels"); return false;
+    $("#ms_browser_channels_tab", this.$menu).click({ obj: this }, function (event) {
+        event.data.obj.change_tab("channels"); return false;
     });
-    $("#ms_browser_search_tab", this.$menu).click({ obj: this }, function (evt) {
-        evt.data.obj.change_tab("search"); return false;
+    $("#ms_browser_search_tab", this.$menu).click({ obj: this }, function (event) {
+        event.data.obj.change_tab("search"); return false;
     });
-    $("#ms_browser_latest_tab", this.$menu).click({ obj: this }, function (evt) {
-        evt.data.obj.change_tab("latest"); return false;
+    $("#ms_browser_latest_tab", this.$menu).click({ obj: this }, function (event) {
+        event.data.obj.change_tab("latest"); return false;
     });
 };
 MSBrowser.prototype.get_top_menu_jq = function () {
@@ -81,15 +91,16 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         { "views-asc": utils.translate("Number of views, ascending") }
     ];
     var html = "<div class=\"ms-browser-top-btns\">";
-    html += "<button type=\"button\" title=\"" + utils.translate("Display") + "\" id=\"ms_browser_display_btn\" class=\"ms-browser-top-btn "+this.btn_class+"\"><i class=\"fa fa-tv\" aria-hidden=\"true\"></i> <span class=\"hidden-below-1280\">"+utils.translate("Display")+"</span></button>";
+    html += "<div class=\"ms-browser-dropdown\" id=\"ms_browser_display_dropdown\">";
+    html += "<button type=\"button\" title=\"" + utils.translate("Display") + "\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\"><i class=\"fa fa-tv\" aria-hidden=\"true\"></i> <span class=\"hidden-below-1280\">"+utils.translate("Display")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></span></button>";
 
-    html += "<div id=\"ms_browser_display_menu\" class=\"ms-browser-top-menu\">";
+    html += "<div class=\"ms-browser-dropdown-menu\">";
     // display mode
-    html += "<div><b class=\"ms-browser-top-menu-title\">"+utils.translate("Display mode:")+"</b><br/>";
+    html += "<div><b class=\"ms-browser-menu-title\">"+utils.translate("Display mode:")+"</b><br/>";
     html += "<button type=\"button\" class=\"button "+(this.display_mode == "list" ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
     html += "<button type=\"button\" class=\"button "+(this.display_mode == "thumbnail" ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
     // channel sorting
-    html += "<div class=\"ms-browser-channel-order\"><label class=\"ms-browser-top-menu-title\" for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label><br/>";
+    html += "<div class=\"ms-browser-channel-order\"><label class=\"ms-browser-menu-title\" for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label><br/>";
     html += " <select id=\"ms_browser_order_channel\">";
     for (var index in sorting_values)
         for (var key in sorting_values[index])
@@ -99,7 +110,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     var opt_html = "<option value=\"\">"+utils.translate("unspecified")+"</option>";
     opt_html += "<option value=\"yes\">"+utils.translate("yes")+"</option>";
     opt_html += "<option value=\"no\">"+utils.translate("no")+"</option>";
-    html += "<div class=\"ms-browser-filters\"><b class=\"ms-browser-top-menu-title\">"+utils.translate("Filters:")+"</b><br/>";
+    html += "<div class=\"ms-browser-filters\"><b class=\"ms-browser-menu-title\">"+utils.translate("Filters:")+"</b><br/>";
     html += " <label for=\"ms_browser_filter_editable\">"+utils.translate("Editable:")+"</label>";
     html += " <select id=\"ms_browser_filter_editable\">"+opt_html+"</select>";
     if (this.displayable_content.length > 1 || this.displayable_content != "c") {
@@ -110,62 +121,86 @@ MSBrowser.prototype.get_top_menu_jq = function () {
 
     html += "</div>";
     // TODO: pagination
-    // html += "<div><b class=\"ms-browser-top-menu-title\">"+utils.translate("Number of elements per page:")+"</b><br/>";
+    // html += "<div><b class=\"ms-browser-menu-title\">"+utils.translate("Number of elements per page:")+"</b><br/>";
     // html += "    <input type=\"number\" class=\"center\" id=\"elements_per_page\" value=\"30\"/>";
     // html += "<button type=\"button\">"+utils.translate("Ok")+"</button></div>";
+    html += "</div>";
     html += "</div>";
 
     html += "</div>";
     this.$top_menu = $(html);
     // events
-    $("#ms_browser_display_btn", this.$top_menu).click({ obj: this }, function (evt) {
-        evt.data.obj.toggle_menu("display");
+    var $dropdown = $("#ms_browser_display_dropdown", this.$top_menu);
+    this.setup_dropdown($dropdown);
+    $("#ms_browser_display_as_list", $dropdown).click({ obj: this, $dropdown: $dropdown }, function (event) {
+        event.data.obj.display_as_list();
+        event.data.obj.close_dropdown(event.data.$dropdown);
     });
-    $("#ms_browser_display_as_list", this.$top_menu).click({ obj: this }, function (evt) {
-        evt.data.obj.display_as_list();
-        evt.data.obj.toggle_menu("display");
+    $("#ms_browser_display_as_thumbnails", $dropdown).click({ obj: this, $dropdown: $dropdown }, function (event) {
+        event.data.obj.display_as_thumbnails();
+        event.data.obj.close_dropdown(event.data.$dropdown);
     });
-    $("#ms_browser_display_as_thumbnails", this.$top_menu).click({ obj: this }, function (evt) {
-        evt.data.obj.display_as_thumbnails();
-        evt.data.obj.toggle_menu("display");
+    $("#ms_browser_order_channel", $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
+        event.data.obj.channels.set_order($(this).val());
+        event.data.obj.close_dropdown(event.data.$dropdown);
     });
-    $("#ms_browser_order_channel", this.$top_menu).change({ obj: this }, function (evt) {
-        evt.data.obj.channels.set_order($(this).val());
-        evt.data.obj.toggle_menu("display");
-    });
-    $(".ms-browser-filters select", this.$top_menu).change({ obj: this }, function (evt) {
-        evt.data.obj.toggle_filter($(this));
-        evt.data.obj.toggle_menu("display");
-    });
-    $(document).click({ obj: this }, function (evt) {
-        var container = $("#ms_browser_display_menu");
-        var button = $("#ms_browser_display_btn");
-        if (!container.is(evt.target) && container.has(evt.target).length === 0 &&
-            !button.is(evt.target) && button.has(evt.target).length === 0) {
-            button.removeClass("active");
-            container.removeClass("active");
-        }
+    $(".ms-browser-filters select", $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
+        event.data.obj.toggle_filter($(this));
+        event.data.obj.close_dropdown(event.data.$dropdown);
     });
     return this.$top_menu;
 };
-MSBrowser.prototype.toggle_menu = function (menu) {
-    var $btn, $menu;
-    if (menu == "display") {
-        $btn = $("#ms_browser_display_btn");
-        $menu = $("#ms_browser_display_menu");
+MSBrowser.prototype.set_title = function (text, html) {
+    if (!html)
+        html = text;
+    if (this.use_overlay)
+        $(".ms-browser-title", this.$widget).html(html);
+    else {
+        $("#global .main-title h1").html(html);
+        if (document.title) {
+            if (!this.document_tilte_suffix) {
+                var index = document.title.indexOf(" - ");
+                if (index != -1)
+                    this.document_tilte_suffix = document.title.substring(index);
+                else
+                    this.document_tilte_suffix = " - MediaServer";
+            }
+            document.title = text + this.document_tilte_suffix;
+        }
     }
-    if (!$btn)
-        return;
+};
+
+MSBrowser.prototype.setup_dropdown = function ($dropdown) {
+    $(".ms-browser-dropdown-button", $dropdown).click({ $dropdown: $dropdown }, function (event) {
+        var $btn = $(".ms-browser-dropdown-button", event.data.$dropdown);
+        var $menu = $(".ms-browser-dropdown-menu", event.data.$dropdown);
+        if ($btn.hasClass("active")) {
+            $btn.removeClass("active");
+            $menu.removeClass("active");
+        } else {
+            $btn.addClass("active");
+            $menu.addClass("active");
+        }
+    });
+    $(document).click({ $dropdown: $dropdown }, function (event) {
+        var $btn = $(".ms-browser-dropdown-button", event.data.$dropdown);
+        var $menu = $(".ms-browser-dropdown-menu", event.data.$dropdown);
+        if (!$menu.is(event.target) && $menu.has(event.target).length === 0 &&
+            !$btn.is(event.target) && $btn.has(event.target).length === 0) {
+            $btn.removeClass("active");
+            $menu.removeClass("active");
+        }
+    });
+};
+MSBrowser.prototype.close_dropdown = function ($dropdown) {
+    var $btn = $(".ms-browser-dropdown-button", $dropdown);
+    var $menu = $(".ms-browser-dropdown-menu", $dropdown);
     if ($btn.hasClass("active")) {
         $btn.removeClass("active");
         $menu.removeClass("active");
-    } else {
-        $(".ms-browser-top-btn.active").removeClass("active");
-        $(".ms-browser-top-menu.active").removeClass("active");
-        $btn.addClass("active");
-        $menu.addClass("active");
     }
 };
+
 MSBrowser.prototype.toggle_filter = function ($select) {
     var name = $select.attr("id").substring("ms_browser_".length);
     var value = null;
@@ -182,32 +217,27 @@ MSBrowser.prototype.toggle_filter = function ($select) {
     }
 };
 MSBrowser.prototype.display_as_list = function () {
-    if ($("#ms_browser_display_as_list", this.$main).hasClass("active"))
+    if ($("#ms_browser_display_as_list", this.$top_menu).hasClass("active"))
         return;
     this.display_mode = "list";
-    $("#ms_browser_display_as_thumbnails", this.$main).removeClass("active");
-    $("#ms_browser_display_as_list", this.$main).addClass("active");
+    $("#ms_browser_display_as_thumbnails", this.$top_menu).removeClass("active");
+    $("#ms_browser_display_as_list", this.$top_menu).addClass("active");
     if (!this.use_overlay)
-        $("#global").addClass("max-width-1200").removeClass("wide");
+        $("#global").addClass("max-width-1200");
     utils.set_cookie("catalog-display_mode", this.display_mode);
-    $("#ms_browser_display_btn", this.$main).removeClass("active");
-    $("#ms_browser_display_menu", this.$main).removeClass("active");
     this.channels.refresh_display();
     this.search.refresh_display();
     this.latest.refresh_display();
 };
 MSBrowser.prototype.display_as_thumbnails = function () {
-    if ($("#ms_browser_display_as_thumbnails", this.$main).hasClass("active"))
+    if ($("#ms_browser_display_as_thumbnails", this.$top_menu).hasClass("active"))
         return;
     this.display_mode = "thumbnail";
-    $("#ms_browser_display_as_list", this.$main).removeClass("active");
-    $("#ms_browser_display_as_thumbnails", this.$main).addClass("active");
-    if (!this.use_overlay) {
-        $("#global").addClass("wide").removeClass("max-width-1200");
-    }
+    $("#ms_browser_display_as_list", this.$top_menu).removeClass("active");
+    $("#ms_browser_display_as_thumbnails", this.$top_menu).addClass("active");
+    if (!this.use_overlay)
+        $("#global").removeClass("max-width-1200");
     utils.set_cookie("catalog-display_mode", this.display_mode);
-    $("#ms_browser_display_btn", this.$main).removeClass("active");
-    $("#ms_browser_display_menu", this.$main).removeClass("active");
     this.channels.refresh_display();
     this.search.refresh_display();
     this.latest.refresh_display();
@@ -233,35 +263,28 @@ MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
     if (previous == tab)
         return;
 
-    if (previous) {
-        $("#ms_browser_"+previous+"_tab", this.$menu).removeClass("active");
-        $("#ms_browser_"+previous+"_menu", this.$menu).css("display", "none");
-        $("#ms_browser_"+previous, this.$main).css("display", "none");
-    }
-    $("#ms_browser_"+tab+"_tab", this.$menu).addClass("active");
-    $("#ms_browser_"+tab+"_menu", this.$menu).css("display", "block");
-    $("#ms_browser_"+tab, this.$main).css("display", "block");
-
     if (!this.use_overlay) {
         this.$menu.hide();
     }
-    if (tab == "latest") {
-        $(".ms-browser").removeClass("search").removeClass("channels").addClass("latest");
-        this.latest.on_show();
+
+    if (previous && this[previous]) {
+        $(".ms-browser").removeClass(previous);
+        $("#ms_browser_"+previous+"_tab", this.$menu).removeClass("active");
+        this[previous].$menu.css("display", "none");
+        this[previous].$content.css("display", "none");
     }
-    if (tab == "search") {
-        $(".ms-browser").removeClass("latest").removeClass("channels").addClass("search");
-        this.$menu.show();
-        this.search.on_show();
+    $(".ms-browser").addClass(tab);
+    $("#ms_browser_"+tab+"_tab", this.$menu).addClass("active");
+    if (this[tab]) {
+        this[tab].$menu.css("display", "");
+        this[tab].$content.css("display", "");
+        this[tab].on_show();
     }
-    if (tab == "channels") {
-        $(".ms-browser").removeClass("search").removeClass("latest").addClass("channels");
-        this.channels.on_show();
-        $("#ms_browser_display_menu .ms-browser-channel-order", this.$main).css("display", "");
-    }
-    else {
-        $("#ms_browser_display_menu .ms-browser-channel-order", this.$main).css("display", "none");
-    }
+    // special case
+    if (tab == "channels")
+        $(".ms-browser-channel-order", this.$top_menu).css("display", "");
+    else
+        $(".ms-browser-channel-order", this.$top_menu).css("display", "none");
 
     if (!this.use_overlay && !no_pushstate) {
         var url;
@@ -300,43 +323,13 @@ MSBrowser.prototype.hide_loading = function () {
     $(".ms-browser-loading", this.$widget).css("display", "");
 };
 
-MSBrowser.prototype.get_top_section_add_buttons = function (can_add_channel, can_add_video) {
-    if (!can_add_channel && !can_add_video)
-        return "";
-    var html = "<div class=\"ms-browser-section-links\">";
-    if (can_add_channel) {
-        var add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
-        "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
-        html += "<a title=\"" + utils.translate("Add a sub channel") + "\" class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-channel\" href=\""+this._get_btn_link(null, "add_channel")+"\">" + add_channel_icon + " <span class=\"hidden-below-800\">"+utils.translate("Add a channel")+"</span></a>";
-    }
-    if (can_add_video) {
-        var add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
-        "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
-        html += "<a title=\"" + utils.translate("Add a video") + "\" class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\""+this._get_btn_link(null, "add_video")+"\">" + add_video_icon + " <span class=\"hidden-below-800\">"+utils.translate("Add a video")+"</span></a>";
-    }
-    html += "</div>";
-    return html;
-};
-
 MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) {
     var i, selectable, $section;
     if (data.channels && data.channels.length > 0) {
         // sub channels
         selectable = this.selectable_content.indexOf("c") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
-        if (!cat_oid || cat_oid == "0") {
-            if (!this.use_overlay && tab == "channels") {
-                var html = this.get_top_section_add_buttons(data.can_add_channel, data.can_add_video);
-                $("#commands_place").empty();
-                if (html !== "")
-                    $("#commands_place").append(html);
-                $(".channel-description-rss", $("#global .main-title")).remove();
-                $("#global .main-title h1").html(utils.translate("All channels"));
-                document.title = utils.translate("All channels");
-            } else {
-                $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Channels")+"</h3>");
-            }
-        } else {
+        if (cat_oid && cat_oid != "0") {
             $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Sub channels")+"</h3>");
         }
 
@@ -385,10 +378,9 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var oid = item.oid;
     var selectable = gselectable && (!this.parent_selection_oid || item.selectable);
     var $entry = null;
-    $entry = $("<div class=\"item-entry item-type-"+item_type+"\"></div>");
+    $entry = $("<div class=\"item-entry item-type-"+item_type+" item-entry-"+oid+"\"></div>");
     $entry.attr("id", "item_entry_"+oid+"_"+tab);
-    if (item_type != "parent" && item_type != "current")
-        $entry.addClass(this.display_mode);
+    $entry.addClass(this.display_mode);
     if (this.current_selection && this.current_selection.oid == oid)
         $entry.addClass("selected");
     if (selectable)
@@ -396,7 +388,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     if (item.extra_class)
         $entry.addClass(item.extra_class);
     var html = this._get_entry_block_html(item, item_type, selectable, tab);
-    if (this.display_mode == "thumbnail" && !this.use_overlay && item_type != "parent" && item_type != "current") {
+    if (this.display_mode == "thumbnail" && !this.use_overlay) {
         html +=   "<button type=\"button\" class=\"button-text item-entry-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
         if (item.can_edit) {
             html +=   "<a class=\"item-entry-edit\" title=\""+utils.translate("Edit")+"\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
@@ -406,23 +398,20 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var $entry_block = $(html);
     this._set_on_click_entry_block($entry_block, oid, item_type, item, selectable);
     $entry.append($entry_block);
-    if (this.display_mode == "thumbnail")
+    if (this.display_mode == "thumbnail") {
         this._set_thumbnail_info_box_html(item_type, selectable, oid, $entry, item, tab);
-
-    html = this._get_entry_links_html(item, item_type, selectable);
-    var $entry_links = $(html);
-    this._set_on_click_entry_links($entry_links, item, item_type, selectable);
-    $entry.append($entry_links);
-    if (!this.use_overlay && (item_type == "current" || item_type == "parent"))
-        return;
+    } else {
+        var $entry_links = this._get_entry_links(item, item_type, selectable);
+        if ($entry_links)
+            $entry.append($entry_links);
+    }
     return $entry;
 };
 MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectable, tab) {
-    var is_parent_or_current = item_type == "parent" || item_type == "current";
     var markup = "div";
     var href = "";
     var link = "";
-    if (!this.use_overlay && item.slug && item_type != "parent" && item_type != "current") {
+    if (!this.use_overlay && item.slug) {
         if (item_type != "channel" && !item.validated && item.can_edit)
             link = "href=\""+this._get_btn_link(item, "edit")+"\"";
         else
@@ -430,19 +419,15 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         markup = "a";
         href = link;
     }
-    var clickable = this.use_overlay && (selectable || item_type == "channel" || item_type == "parent");
+    var clickable = this.use_overlay && (selectable || item_type == "channel");
 
-    var html = "<" + markup + " " + href + " class=\"item-entry-link " + (clickable ? "clickable" : "") + "\">";
-    var $title_place = $("#global .main-title h1");
-    var $content_place = $("#ms_browser_channels .ms-browser-block");
+    var html = "<" + markup + " " + href + " class=\"item-entry-link" + (clickable ? " clickable" : "") + "\"" + (clickable && this.display_mode == "thumbnail" && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
+
     /********************** Image preview ****************/
-
     var image_preview = "";
-    if (this.use_overlay || item_type != "current" || !item.hide_image) {
+    if (this.use_overlay || !item.hide_image) {
         if (item.thumb) {
-            if (this.use_overlay || item_type != "current") {
-                image_preview += "<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>";
-            }
+            image_preview += "<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>";
         } else {
             image_preview += "<span class=\"item-entry-preview\"><span class=\"item-" + item_type + "-icon\"></span></span>";
         }
@@ -454,53 +439,13 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
 
     /********************** Top bar ****************/
     var top_bar = "<span class=\"item-entry-top-bar\">";
-    if (is_parent_or_current || this.display_mode != "thumbnail") {
-        if (!this.use_overlay && item_type == "current") {
-            $("#commands_place").empty();
-            $title_place.html("<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span> <span class=\"inline-block\">" + utils.escape_html(item.title) + "</span>");
-            document.title = utils.escape_html(item.title);
-        } else {
-            top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
-        }
+    if (this.display_mode != "thumbnail") {
+        top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
     }
-
-    /********************** Links ************/
-    var links = "";
-    if (!this.use_overlay && item_type == "current" && (item.can_edit || item.can_add_channel || item.can_add_video)) {
-        links += "<span class=\"item-entry-links\">";
-        links += "<span class=\"item-entry-links-container\">";
-        if (item.can_edit) {
-            links += "<a title=\"" + utils.translate("Edit") + "\" class=\""+this.btn_class+" default item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Edit")+"</span></a>";
-            if (item.can_delete)
-                links += "<button title=\"" + utils.translate("Delete") + "\" type=\"button\" class=\""+this.btn_class+" danger item-entry-pick-delete-media\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Delete")+"</span></button>";
-        }
-        if (item.can_add_channel || item.can_add_video) {
-            if (item.can_add_channel) {
-                var add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
-                "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
-                links += "<a title=\"" + utils.translate("Add a sub channel") + "\" class=\"" + this.btn_class + " item-entry-pick item-entry-pick-add-channel\" href=\"" +
-                          this._get_btn_link(item, "add_channel") + "\">" + add_channel_icon +
-                          " <span class=\"hidden-below-800\">" +
-                          utils.translate("Add a sub channel")+"</span></a>";
-            }
-            if (item.can_add_video) {
-                var add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
-                "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
-                links += "<a title=\"" + utils.translate("Add a video") + "\" class=\""+this.btn_class+" item-entry-pick item-entry-pick-add-video\" href=\"" +
-                          this._get_btn_link(item, "add_video") + "\">" + add_video_icon +
-                          " <span class=\"hidden-below-800\">" +
-                          utils.translate("Add a video")+"</span></a>";
-            }
-        }
-        links += "    </span>";
-        links += "</span>";
-        $("#commands_place").empty();
-    }
-    $("#commands_place").append(links);
 
     /********************** Status **********/
     var status = "";
-    if (item.can_edit && !is_parent_or_current) {
+    if (item.can_edit) {
         if (item_type == "channel") {
             if (item.unlisted)
                 status += "<span class=\"item-entry-unlisted\" title=\"" +
@@ -525,7 +470,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
 
     if (item.duration)
         top_bar +=         "<span class=\"item-entry-duration\">" + item.duration + "</span>";
-    if (!is_parent_or_current) {
+    if (this.display_mode != "thumbnail") {
         if (item.creation)
             top_bar += "<br /> <span class=\"item-entry-date\">" + utils.translate("Created on") + " " +
                         utils.get_date_display(item.creation) + "</span>";
@@ -537,27 +482,29 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
 
     /********************** Bottom bar ****************/
     var bottom_bar = "<span class=\"item-entry-bottom-bar\">";
-    if (item.views && !is_parent_or_current) {
-        bottom_bar += "<span class=\"item-entry-views\">" + item.views + " " + utils.translate("views");
-        if (item.views_last_month)
-            bottom_bar += ", " + item.views_last_month + " " + utils.translate("this month");
-        bottom_bar += "</span>";
-    }
-    if (item_type != "parent" && item_type != "current" && this.display_mode == "thumbnail")
+    if (this.display_mode == "thumbnail") {
         bottom_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
-    if (tab == "latest")
-        bottom_bar += "<span class=\"item-entry-type\">" + utils.translate("Type:") + " " +
-                        utils.translate(item_type) + "</span>";
-    if (tab == "latest" && item.add_date)
-        bottom_bar += "<span class=\"item-entry-date\">" + utils.translate("Added on") + " " +
-                        utils.get_date_display(item.add_date) + "</span>";
-    if (tab == "latest" && item.parent_title)
-        bottom_bar += "<span class=\"item-entry-parent\">" + utils.translate("Parent channel:") + " " +
-                        item.parent_title + "</span>";
-
+    } else {
+        if (item.views) {
+            bottom_bar += "<span class=\"item-entry-views\">" + item.views + " " + utils.translate("views");
+            if (item.views_last_month)
+                bottom_bar += ", " + item.views_last_month + " " + utils.translate("this month");
+            bottom_bar += "</span>";
+        }
+        if (tab == "latest")
+            bottom_bar += "<span class=\"item-entry-type\">" + utils.translate("Type:") + " " +
+                            utils.translate(item_type) + "</span>";
+        if (tab == "latest" && item.add_date)
+            bottom_bar += "<span class=\"item-entry-date\">" + utils.translate("Added on") + " " +
+                            utils.get_date_display(item.add_date) + "</span>";
+        if (tab == "latest" && item.parent_title)
+            bottom_bar += "<span class=\"item-entry-parent\">" + utils.translate("Parent channel:") + " " +
+                            item.parent_title + "</span>";
+    }
     bottom_bar += "</span>";
     content += bottom_bar;
     content += "</span>";
+
     html += content;
     html += "</" + markup + ">";
 
@@ -574,49 +521,6 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         }
         html += "</ul></span>";
     }
-
-    /********************** Current Channel data *************************/
-    if (!this.use_overlay && tab == "channels" && item_type == "current") {
-        var $current_item_desc = $("<div class=\"current-item-desc\"></div>");
-        var $desc = $("<div class=\"channel-description-text" + (item.short_description != item.description ? " small" : "") + "\">" + item.short_description + "</div>");
-        if (item.short_description != item.description) {
-            $desc.click(function () {
-                this.innerHTML = item.description;
-            });
-        }
-        $current_item_desc.append($desc);
-        var rss = "<div id=\"channel_description_rss\" class=\"channel-description-rss\"> ";
-        if (this.display_itunes_rss) {
-            rss += " <span class=\"inline-block\">" + utils.translate("Subscribe to channel's videos RSS:") + "</span>";
-            rss += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/rss.xml\">";
-            rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("standard") + "</a>";
-            rss += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/itunes-video.xml\">";
-            rss +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes") + "</a>";
-            rss += " <a class=\"nowrap marged\" href=\"/channels/" + item.oid + "/itunes-audio.xml\">";
-            rss +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes (audio only)") + "</a>";
-        } else {
-            rss += " <a class=\"nowrap\" href=\"/channels/" + item.oid + "/rss.xml\">";
-            rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("Subscribe to channel's videos RSS") + "</a>";
-        }
-        rss += "</div>";
-        $current_item_desc.append(rss);
-        var anno_and_views = "";
-        if (item.views) {
-            anno_and_views += "<span class=\"inline-block\">" + item.views + " " + utils.translate("views");
-            if (item.views_last_month)
-                anno_and_views += ", " + item.views_last_month + " " + utils.translate("this month");
-            anno_and_views += "</span>";
-        }
-        if (item.comments) {
-            anno_and_views += " <span class=\"inline-block\">" + item.comments + " " + utils.translate("annotations");
-            if (item.comments_last_month)
-                anno_and_views += ", " + item.comments_last_month + " " + utils.translate("this month");
-            anno_and_views += "</span>";
-        }
-        anno_and_views += "<br />";
-        $("#channel_description_rss").prepend(anno_and_views);
-        $content_place.prepend($current_item_desc);
-    }
     return html;
 };
 MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, item_type, item, selectable) {
@@ -625,7 +529,6 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
             $entry_block.click({ obj: this, oid: oid }, function (event) {
                 event.data.obj.channels.display_channel(event.data.oid);
                 event.data.obj.change_tab("channels");
-                //event.data.obj.channels.tree_manager.expand_tree(event.data.oid);
             });
         } else if (selectable) {
             $entry_block.click({ obj: this, oid: oid }, function (event) {
@@ -634,93 +537,73 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
         }
     }
     else if (item.can_delete) {
-        if (item_type == "current") {
-            $entry_block = $("#commands_place");
-        }
         $(".item-entry-pick-delete-media", $entry_block).click({ obj: this, oid: oid }, function (event) {
             event.data.obj.pick(event.data.oid, "delete");
         });
     }
 };
-MSBrowser.prototype._get_entry_links_html = function (item, item_type, selectable) {
-    var is_parent_or_current = item_type == "parent" || item_type == "current";
-    var html = "<span class=\"item-entry-links\">";
-    html += "<span class=\"item-entry-links-container\">";
-    var url_view = this.use_overlay ? "" : this._get_btn_link(item, "view");
-    if ((item_type == "channel" || item_type == "parent")) {
-        var txt = utils.translate("Display channel");
-        if (item_type == "parent")
-            txt = utils.translate("Display parent channel");
-        if (!this.use_overlay && item_type == "parent") {
-            $(".navbar .back").attr("href", url_view);
-        }
-    }
+
+MSBrowser.prototype._get_entry_links = function (item, item_type, selectable) {
+    var html = "";
     if (this.use_overlay) {
         if (selectable) {
-            if (item_type == "channel" || is_parent_or_current)
-                html += "<button type=\"button\" class=\""+this.btn_class+" main item-entry-pick\"><i class=\"fa fa-check\"></i> <span class=\"hidden-below-800\">"+utils.translate("Select this channel")+"</span></button>";
-            else
-                html += "<button type=\"button\" class=\""+this.btn_class+" main item-entry-pick\"><i class=\"fa fa-check\"></i> <span class=\"hidden-below-800\">"+utils.translate("Select this media")+"</span></button>";
+            var selected = this.current_selection && this.current_selection.oid == item.oid;
+            var icon = selected ? "fa-check-circle" : "fa-check";
+            var label;
+            if (item_type == "channel" || item_type == "current") {
+                if (selected)
+                    label = utils.translate("This channel is selected");
+                else
+                    label = utils.translate("Select this channel");
+            } else {
+                if (selected)
+                    label = utils.translate("This media is selected");
+                else
+                    label = utils.translate("Select this media");
+            }
+            html += "<button type=\"button\" class=\""+this.btn_class+" button main item-entry-pick\"><i class=\"fa "+icon+"\"></i> <span class=\"hidden-below-800\">"+utils.translate(label)+"</span></button>";
         }
     } else {
-        if (item_type != "parent" && item_type != "current") {
+        if (item_type == "current") {
+            if (item.can_edit) {
+                html += "<a title=\"" + utils.translate("Edit") + "\" class=\""+this.btn_class+" button default item-entry-pick item-entry-pick-edit-media\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Edit")+"</span></a>";
+                if (item.can_delete)
+                    html += "<button title=\"" + utils.translate("Delete") + "\" type=\"button\" class=\""+this.btn_class+" button danger item-entry-pick-delete-media\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Delete")+"</span></button>";
+            }
+            if (item.can_add_channel || item.can_add_video) {
+                if (item.can_add_channel) {
+                    var add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
+                    "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
+                    html += "<a title=\"" + utils.translate("Add a sub channel") + "\" class=\"" + this.btn_class + " button item-entry-pick item-entry-pick-add-channel\" href=\"" +
+                              this._get_btn_link(item, "add_channel") + "\">" + add_channel_icon +
+                              " <span class=\"hidden-below-800\">" +
+                              utils.translate("Add a sub channel")+"</span></a>";
+                }
+                if (item.can_add_video) {
+                    var add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
+                    "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
+                    html += "<a title=\"" + utils.translate("Add a video") + "\" class=\""+this.btn_class+" button item-entry-pick item-entry-pick-add-video\" href=\"" +
+                              this._get_btn_link(item, "add_video") + "\">" + add_video_icon +
+                              " <span class=\"hidden-below-800\">" +
+                              utils.translate("Add a video")+"</span></a>";
+                }
+            }
+        } else {
             if (item_type != "channel" && item.validated) {
-                if (this.use_overlay)
-                    html += "<a class=\""+this.btn_class+" default item-entry-pick-view-media\" href=\""+url_view+"\"><i class=\"fa fa-eye\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
+                html += "<a class=\""+this.btn_class+" button default item-entry-pick-view-media\" href=\""+(this.use_overlay ? "" : this._get_btn_link(item, "view"))+"\"><i class=\"fa fa-eye\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
             }
             if (item.can_edit) {
-                html += "<a class=\""+this.btn_class+" item-entry-pick-edit-media default\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> <span class=\"hidden-below-440\">"+utils.translate("Edit") +"</span></a>";
+                html += "<a class=\""+this.btn_class+" button item-entry-pick-edit-media default\" href=\""+this._get_btn_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> <span class=\"hidden-below-440\">"+utils.translate("Edit") +"</span></a>";
             }
             if (item.can_delete)
-                html += "<button type=\"button\" class=\""+this.btn_class+" item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\"></i> <span class=\"hidden-below-440\">"+utils.translate("Delete")+"</span></button>";
+                html += "<button type=\"button\" class=\""+this.btn_class+" button item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\"></i> <span class=\"hidden-below-440\">"+utils.translate("Delete")+"</span></button>";
         }
     }
-    html += "</span>";
-    html += "</span>";
-    return html;
-};
-MSBrowser.prototype._get_btn_link = function (item, action) {
-    var type = "";
-    var prefix = "";
-    if (item && item.oid) {
-        type = item.oid[0];
-    }
-    if (!action && (!type || type === "" || type === "0") && (!item || item.oid == "0")) {
-        return "/channels/#";
-    }
-    if (action == "view") {
-        if (type == "c") {
-            prefix = "/channels/#";
-        } else if (type == "l") {
-            prefix = "/lives/";
-        } else if (type == "v") {
-            prefix = "/videos/";
-        } else if (type == "p") {
-            prefix = "/photos/";
-        }
-        if (prefix && !item.slug) {
-            this.get_info_for_oid(item.oid, false, function (data) {
-                item = data.info;
-            });
-        }
-        if (prefix && item.slug)
-            return prefix + item.slug;
-        else
-            return "";
-    } else if (action == "edit") {
-        return "/edit/"+item.oid+"/";
-    } else if (action == "add_channel") {
-        if (item)
-            return "/add-content/channel/?in="+item.oid;
-        return "/add-content/channel/";
-    } else if (action == "add_video") {
-        if (item)
-            return "/add-content/?in="+item.oid+"#add_video";
-        return "/add-content/#add_video";
-    }
-    return "";
-};
-MSBrowser.prototype._set_on_click_entry_links = function ($entry_links, item, item_type, selectable) {
+    if (!html)
+        return null;
+    html = "<span class=\"item-entry-links\"><span class=\"item-entry-links-container\">"+html+"</span></span>";
+    var $entry_links = $(html);
+    // events
     if (item_type == "channel" || item_type == "parent") {
         $(".item-entry-display", $entry_links).click({ obj: this, item: item }, function (event) {
             if (event.data.obj.use_overlay)
@@ -737,11 +620,73 @@ MSBrowser.prototype._set_on_click_entry_links = function ($entry_links, item, it
             event.data.obj.pick(event.data.item.oid, "delete");
         });
     }
+    return $entry_links;
+};
+MSBrowser.prototype._get_btn_link = function (item, action) {
+    var url = "";
+    var type = "";
+    if (item && item.oid) {
+        type = item.oid[0];
+    }
+    if (!action && (!type || type === "" || type === "0") && (!item || item.oid == "0")) {
+        url = "/channels/#";
+    } else if (action == "view") {
+        if (!item.slug && item.oid != "0") {
+            // FIXME: the following call is asynchronous and won't work
+            this.get_info_for_oid(item.oid, false, function (data) {
+                item = data.info;
+            });
+        }
+        if (type == "0") {
+            url = "/channels/#";
+        } else if (type == "c") {
+            url = "/channels/#" + item.slug;
+        } else {
+            if (type == "l") {
+                url = "/lives/" + item.slug + "/";
+            } else if (type == "v") {
+                url = "/videos/" + item.slug + "/";
+            } else if (type == "p") {
+                url = "/photos/" + item.slug + "/";
+            }
+            if (url && this.iframe)
+                url += "iframe/";
+        }
+    } else if (action == "edit") {
+        if (this.iframe)
+            url = "/edit/"+item.oid+"/";
+        else
+            url = "/edit/iframe/"+item.oid+"/";
+    } else if (action == "add_channel") {
+        if (item && item.oid != "0")
+            url = "/add-content/channel/?in="+item.oid;
+        else
+            url = "/add-content/channel/";
+    } else if (action == "add_video") {
+        if (item && item.oid != "0")
+            url = "/add-content/?in="+item.oid+"#add_video";
+        else
+            url = "/add-content/#add_video";
+    }
+    // add iframe in url if not already done
+    if (this.iframe && url.indexOf("/iframe/") == -1) {
+        if (url.indexOf("?") != -1) {
+            url = url.replace(/\?/, "?iframe&");
+        } else {
+            hash_pos = url.indexOf("#");
+            if (hash_pos != -1)
+                url = url.substring(0, hash_pos) + "?iframe" + url.substring(hash_pos);
+            else
+                url += "?iframe";
+        }
+    }
+    return url;
 };
 MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, selectable, tab) {
-    var html = "<div class=\"overlay-info-title\">";
-    html += "<button type=\"button\" class=\"overlay-info-close "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\"></i></button>";
-    html += "<h3><a href=\""+this._get_btn_link(item, "view")+"\">"+item.title+"</a></h3>";
+    var html = "<div>";
+    html += "<div class=\"overlay-info-title\">";
+    html +=     "<button type=\"button\" class=\"overlay-info-close button "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\"></i></button>";
+    html +=     "<h3><a href=\""+this._get_btn_link(item, "view")+"\">"+item.title+"</a></h3>";
     html += "</div>";
     html += "<div class=\"overlay-info-content\">";
     if (item.annotations && !this.use_overlay && tab == "search") {
@@ -790,15 +735,15 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
         html += "<hr/>";
         html += "<div class=\"float-container\">"+item.short_description+"</div>";
     }
-    html += "<div>";
-    html += this._get_entry_links_html(item, item_type, selectable);
     html += "</div>";
     html += "</div>";
     var $info = $(html);
+    var $entry_links = this._get_entry_links(item, item_type, selectable);
+    if ($entry_links)
+        $(".overlay-info-content", $info).append($entry_links);
     $(".overlay-info-close", $info).click({ obj: this }, function (event) {
         event.data.obj.box_hide_info();
     });
-    this._set_on_click_entry_links($info, item, item_type, selectable);
     return $info;
 };
 MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectable, oid, $entry, item, tab) {
@@ -815,6 +760,7 @@ MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectab
         } else {
             event.data.obj.get_info_for_oid(oid, true, function (data) {
                 var item = data.info;
+                event.data.obj.update_catalog(data.info);
                 var $element = event.data.obj._get_thumbnail_info_box_html(item, item_type, selectable, tab);
                 $(info_id, event.data.$entry).append($element);
                 event.data.obj.box_open_info($entry);
