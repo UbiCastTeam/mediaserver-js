@@ -23,13 +23,11 @@ MSBrowser.prototype.build_widget = function () {
     html +=     "</div>";
     html +=     "<div class=\"ms-browser-title\"></div>";
     html += "</div>";
-    if (this.use_overlay) {
-        html += "<div class=\"ms-browser-bar\">";
-        html +=     "<div class=\"ms-browser-bar-left\"></div>";
-        html +=     "<div class=\"ms-browser-bar-right\"></div>";
-        html +=     "<div class=\"ms-browser-clear\"></div>";
-        html += "</div>";
-    }
+    html += "<div class=\"ms-browser-bar\">";
+    html +=     "<div class=\"ms-browser-bar-left\"></div>";
+    html +=     "<div class=\"ms-browser-bar-right\"></div>";
+    html +=     "<div class=\"ms-browser-clear\"></div>";
+    html += "</div>";
     html += "<div class=\"ms-browser-main ms-items\">";
     html +=     "<div class=\"ms-browser-panel\">";
     html +=         "<div class=\"ms-browser-clear\"></div>";
@@ -40,14 +38,14 @@ MSBrowser.prototype.build_widget = function () {
     html += "</div>";
     this.$widget = $(html);
     var $left_buttons, $right_buttons;
-    if (this.use_overlay) {
-        $left_buttons = $(".ms-browser-bar-left", this.$widget);
-        $right_buttons = $(".ms-browser-bar-right", this.$widget);
-        $right_buttons.addClass("ms-browser-dropdown-right");
-    } else {
+    if (!this.use_overlay && $("nav .buttons-left").length > 0) {
         $right_buttons = $("nav .buttons-left");
         $left_buttons = $("#commands_place");
         $left_buttons.addClass("ms-browser-dropdown-right");
+    } else {
+        $left_buttons = $(".ms-browser-bar-left", this.$widget);
+        $right_buttons = $(".ms-browser-bar-right", this.$widget);
+        $right_buttons.addClass("ms-browser-dropdown-right");
     }
     $left_buttons.addClass("ms-browser");
     $right_buttons.addClass("ms-browser");
@@ -153,20 +151,21 @@ MSBrowser.prototype.get_top_menu_jq = function () {
 MSBrowser.prototype.set_title = function (text, html) {
     if (!html)
         html = text;
-    if (this.use_overlay)
-        $(".ms-browser-title", this.$widget).html(html);
-    else {
+
+    if (!this.use_overlay && $("#global .main-title h1").length > 0)
         $("#global .main-title h1").html(html);
-        if (document.title) {
-            if (!this.document_tilte_suffix) {
-                var index = document.title.indexOf(" - ");
-                if (index != -1)
-                    this.document_tilte_suffix = document.title.substring(index);
-                else
-                    this.document_tilte_suffix = " - MediaServer";
-            }
-            document.title = text + this.document_tilte_suffix;
+    else
+        $(".ms-browser-title", this.$widget).html(html);
+
+    if (!this.use_overlay && document.title) {
+        if (!this.document_tilte_suffix) {
+            var index = document.title.indexOf(" - ");
+            if (index != -1)
+                this.document_tilte_suffix = document.title.substring(index);
+            else
+                this.document_tilte_suffix = " - MediaServer";
         }
+        document.title = text + this.document_tilte_suffix;
     }
 };
 
@@ -262,10 +261,6 @@ MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
     var previous = this.get_active_tab();
     if (previous == tab)
         return;
-
-    if (!this.use_overlay) {
-        this.$menu.hide();
-    }
 
     if (previous && this[previous]) {
         $(".ms-browser").removeClass(previous);

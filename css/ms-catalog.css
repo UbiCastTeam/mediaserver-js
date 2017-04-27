@@ -18,8 +18,17 @@ nav.navbar .buttons-right {
     float: right;
 }
 /* ms-browser */
-.ms-browser .ms-browser-header {
+.ms-browser .ms-browser-header,
+.ms-browser .ms-browser-bar,
+.ms-browser .ms-browser-search-form {
     display: none;
+}
+.iframe .ms-browser .ms-browser-header,
+.iframe .ms-browser .ms-browser-bar {
+    display: block;
+}
+.iframe .ms-browser .ms-browser-search-form {
+    display: inline;
 }
 .ms-browser .ms-browser-section {
     overflow: visible;

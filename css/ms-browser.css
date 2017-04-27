@@ -92,9 +92,6 @@
     bottom: auto;
 }
 .ms-browser .ms-browser-menu {
-    display: none;
-}
-.ms-browser.in-overlay .ms-browser-menu {
     float: left;
     display: block;
     width: 300px;
@@ -114,8 +111,6 @@
 }
 .ms-browser .ms-browser-bar {
     padding: 5px;
-    height: 30px;
-    line-height: 30px;
     background: #fff;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
@@ -125,6 +120,8 @@
 .ms-browser.in-overlay .ms-browser-bar {
     top: 50px;
     bottom: auto;
+    height: 30px;
+    line-height: 30px;
 }
 .ms-browser .ms-browser-bar-left {
     float: left;
