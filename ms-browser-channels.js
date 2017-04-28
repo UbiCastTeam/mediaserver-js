@@ -212,7 +212,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         };
         var $back;
         if (!this.browser.use_overlay) {
-            $back = $("<a class=\"button "+this.browser.btn_class+"\" title=\""+utils.translate("Parent channel")+"\" href=\""+this.browser._get_btn_link(parent, "view")+"\"></a>");
+            $back = $("<a class=\"button "+this.browser.btn_class+"\" title=\""+utils.translate("Parent channel")+"\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
         } else {
             $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+"\" title=\""+utils.translate("Parent channel")+"\"></button>");
             $back.click({ obj: this, oid: parent.oid }, function (event) {
@@ -228,10 +228,10 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         }
         // current channel buttons
         var current_selectable = this.browser.selectable_content.indexOf("c") != -1;
-        $entry_links = this.browser._get_entry_links(response.info, "current", current_selectable);
+        $entry_links = this.browser.get_entry_links(response.info, "current", current_selectable);
     } else {
         response.oid = "0";
-        $entry_links = this.browser._get_entry_links(response, "current", false);
+        $entry_links = this.browser.get_entry_links(response, "current", false);
         if (!this.browser.use_overlay && $(".navbar .back.button-text").length > 0)
             $(".navbar .back.button-text").attr("href", "..");
     }
