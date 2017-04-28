@@ -88,7 +88,7 @@ MSBrowser.prototype.init = function () {
 
     var url_data = this.parse_url();
 
-    if (url_data.iframe_mode) {
+    if (!this.use_overlay && url_data.iframe_mode) {
         this.iframe_mode = true;
         this.url_login = "/login/iframe/";
         this.url_channels += "?iframe";
@@ -96,7 +96,7 @@ MSBrowser.prototype.init = function () {
         this.url_latest += "?iframe";
     }
 
-    if (url_data.lti) {
+    if (!this.use_overlay && url_data.lti) {
         this.lti_mode = true;
         this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "lti";
         this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "lti";
