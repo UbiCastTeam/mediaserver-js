@@ -128,13 +128,13 @@ MSBrowser.prototype.init = function () {
                 }, 5000);
             }, 500);
         }
-        // listen to scroll to fix left menu if required
-        /*$(window).scroll(function () {
-            obj.on_scroll();
-        });*/
+        // listen to navigation history changes
+        window.onpopstate = function (event) {
+            obj.on_url_change(event.target.location);
+        };
         // listen to hash changes
         $(window).bind("hashchange", function () {
-            obj.on_hash_change();
+            obj.on_url_change();
         });
     } else {
         this.overlay = new OverlayDisplayManager();
@@ -268,9 +268,9 @@ MSBrowser.prototype.on_resize = function () {
         this.$widget.height(height);
     }
 };
-MSBrowser.prototype.on_hash_change = function () {
+MSBrowser.prototype.on_url_change = function () {
     var path = window.location.pathname + window.location.search;
-    if (path == this.url_channels) {
+    if (path.indexOf(this.url_channels) == 0) {
         var slug = window.location.hash;
         if (slug && slug[0] == "#")
             slug = slug.substring(1);
@@ -280,11 +280,11 @@ MSBrowser.prototype.on_hash_change = function () {
             this.channels.display_channel("0");
         this.change_tab("channels", true);
     }
-    else if (path == this.url_search) {
+    else if (path.indexOf(this.url_search) == 0) {
         this.search.on_url_change();
         this.change_tab("search", true);
     }
-    else if (path == this.url_latest) {
+    else if (path.indexOf(this.url_latest) == 0) {
         this.change_tab("latest", true);
     }
 };

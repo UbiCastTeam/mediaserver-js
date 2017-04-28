@@ -111,6 +111,7 @@
 }
 .ms-browser .ms-browser-bar {
     padding: 5px;
+    line-height: 30px;
     background: #fff;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
@@ -172,10 +173,6 @@
     z-index: 2;
     position: relative;
     display: inline-block;
-    line-height: 36px;
-}
-.ms-browser.in-overlay .ms-browser-dropdown {
-    line-height: inherit;
 }
 .ms-browser-dropdown .ms-browser-dropdown-button.active {
     background: #aaa;

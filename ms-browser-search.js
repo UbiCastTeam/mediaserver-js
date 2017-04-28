@@ -264,7 +264,11 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
     this.current_title = title;
     this.browser.set_title(title);
     if (!this.browser.use_overlay && !no_pushstate) {
-        var url = this.browser.url_search+"?"+url_query;
+        var url = this.browser.url_search;
+        if (url.indexOf("?") < 0)
+            url += "?"+url_query;
+        else
+            url += "&"+url_query;
         window.history.pushState({"ms_tab": "search", "search": search}, title, url);
     }
     // execute search request

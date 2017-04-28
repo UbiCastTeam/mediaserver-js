@@ -1,4 +1,10 @@
 /* Additional CSS for non overlay use */
+html.iframe {
+    background: #eee;
+}
+html.iframe .ms-browser-container {
+    background: transparent !important;
+}
 nav.navbar .buttons-left .back {
     font-size: 1.1em;
 }
@@ -44,6 +50,7 @@ nav.navbar .buttons-right {
 .ms-browser .ms-browser-main .ms-browser-section {
     padding: 20px 20px;
 }
+/* channels tab */
 .ms-browser .ms-browser-channels-place {
     padding: 0;
     top: auto;
@@ -58,7 +65,6 @@ nav.navbar .buttons-right {
 .ms-browser .ms-browser-tree-place {
     display: none;
 }
-/* channels tab */
 .ms-browser-content .channel-description-text {
     margin: 10px;
 }
