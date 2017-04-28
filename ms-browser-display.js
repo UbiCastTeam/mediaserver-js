@@ -584,6 +584,9 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 }
             }
         } else {
+            if (item_type != "channel" && this.lti_mode) {
+                html += "<button type=\"button\" class=\""+this.btn_class+" button default item-entry-copy\" data-link=\""+(this.use_overlay ? "" : this.get_button_link(item, "lti", true))+"\"><i class=\"fa fa-chain\"></i> <span class=\"hidden-below-440\">"+utils.translate("Copy LTI link")+"</span></button>";
+            }
             if (item_type != "channel" && item.validated) {
                 html += "<a class=\""+this.btn_class+" button default item-entry-pick-view-media\" href=\""+(this.use_overlay ? "" : this.get_button_link(item, "view"))+"\"><i class=\"fa fa-eye\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
             }
@@ -615,9 +618,38 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
             event.data.obj.pick(event.data.item.oid, "delete");
         });
     }
+    var $copy_btn = $(".item-entry-copy", $entry_links);
+    if ($copy_btn.length > 0) {
+        $(".item-entry-copy", $entry_links).click(function(event) {
+            var $btn = $(this);
+            var to_copy = $btn.attr("data-link");
+            // invisible inputs cannot be copied
+            var $temp_input = $("<input type=\"text\" style=\"position: absolute; left: -10000px; top: 0;\"/>").val(to_copy);
+            $("body").append($temp_input);
+            $temp_input.select();
+            var successful, msg;
+            try {
+                successful = document.execCommand("copy");
+                msg = successful ? "copied" : "cannot copy";
+            } catch (err) {
+                successful = false;
+                msg = "failed to copy";
+                console.log("Failed to copy to clipboard: " + err);
+            }
+            msg = "<i class=\"fa " + (successful ? "fa-check" : "fa-warning") + "\"></i> " + utils.translate(msg);
+            $btn.append("<span class=\"copy-msg\">" + msg + "</span>");
+            $btn.addClass("copied");
+            setTimeout(function () {
+                $btn.removeClass("copied");
+                $(".copy-msg", $btn).remove();
+            }, 1000);
+            $temp_input.remove();
+        });
+    }
+
     return $entry_links;
 };
-MSBrowser.prototype.get_button_link = function (item, action) {
+MSBrowser.prototype.get_button_link = function (item, action, absolute) {
     var url = "";
     var type = "";
     if (item && item.oid) {
@@ -644,11 +676,13 @@ MSBrowser.prototype.get_button_link = function (item, action) {
             } else if (type == "p") {
                 url = "/photos/" + item.slug + "/";
             }
-            if (url && this.iframe)
+            if (url && this.iframe_mode)
                 url += "iframe/";
         }
+    } else if (action == "lti") {
+        url = "/lti/"+item.oid+"/";
     } else if (action == "edit") {
-        if (this.iframe)
+        if (this.iframe_mode)
             url = "/edit/iframe/"+item.oid+"/";
         else
             url = "/edit/"+item.oid+"/";
@@ -663,16 +697,35 @@ MSBrowser.prototype.get_button_link = function (item, action) {
         else
             url = "/add-content/#add_video";
     }
-    // add iframe in url if not already done
-    if (this.iframe && url.indexOf("/iframe/") == -1) {
-        if (url.indexOf("?") != -1) {
-            url = url.replace(/\?/, "?iframe&");
-        } else {
-            hash_pos = url.indexOf("#");
-            if (hash_pos != -1)
-                url = url.substring(0, hash_pos) + "?iframe" + url.substring(hash_pos);
-            else
-                url += "?iframe";
+
+    if (absolute) {
+        url = window.location.protocol + "//" + window.location.host + url;
+    }
+
+    if (action != "lti") {
+        // add lti in url if not already done
+        if (this.lti_mode) {
+            if (url.indexOf("?") != -1) {
+                url = url.replace(/\?/, "?lti&");
+            } else {
+                hash_pos = url.indexOf("#");
+                if (hash_pos != -1)
+                    url = url.substring(0, hash_pos) + "?lti" + url.substring(hash_pos);
+                else
+                    url += "?lti";
+            }
+        }
+        // add iframe in url if not already done
+        if (this.iframe_mode && url.indexOf("/iframe/") == -1) {
+            if (url.indexOf("?") != -1) {
+                url = url.replace(/\?/, "?iframe&");
+            } else {
+                hash_pos = url.indexOf("#");
+                if (hash_pos != -1)
+                    url = url.substring(0, hash_pos) + "?iframe" + url.substring(hash_pos);
+                else
+                    url += "?iframe";
+            }
         }
     }
     return url;

@@ -143,7 +143,7 @@ MSBrowserSearch.prototype.on_url_change = function () {
     if (!this.initialized)
         return;
     // Example of search url: http://192.168.42.8:8000/search/?text=test&in_titles=on&in_descriptions=on&in_keywords=on&in_licenses=on&in_companies=on&in_annotations=on&in_photos=on&for_channels=on&for_videos=on&for_lives=on&for_photos=on
-    var data = this.parse_url();
+    var data = this.browser.parse_url();
 
     var dc = this.browser.displayable_content;
     var i, field, value;
@@ -172,37 +172,6 @@ MSBrowserSearch.prototype.on_url_change = function () {
         $("#ms_browser_search_text", this.$menu).val(data.text);
         this.on_search_submit(true);
     }
-};
-
-MSBrowserSearch.prototype.parse_url = function () {
-    var data = {};
-    var query = window.location.search ? window.location.search.substring(1) : null;
-    if (query) {
-        var tuples = query.split("&");
-        for (var i=0; i < tuples.length; i++) {
-            var attr, value;
-            if (tuples[i].indexOf("=") != -1) {
-                attr = tuples[i].substring(0, tuples[i].indexOf("="));
-                value = tuples[i].substring(attr.length + 1);
-                if (value == "on")
-                    value = true;
-                else if (value == "off")
-                    value = false;
-                else
-                    value = window.decodeURIComponent(value.replace(/\+/g, "%20"));
-            }
-            else {
-                attr = tuples[i];
-                value = true;
-            }
-            if (attr.substring(0, 3) == "in_")
-                data.has_in_vals = true;
-            else if (attr.substring(0, 4) == "for_")
-                data.has_for_vals = true;
-            data[attr] = value;
-        }
-    }
-    return data;
 };
 
 MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
@@ -269,7 +238,10 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
             url += "?"+url_query;
         else
             url += "&"+url_query;
-        window.history.pushState({"ms_tab": "search", "search": search}, title, url);
+        if (!this.last_url || this.last_url != url) {
+            this.last_url = url;
+            window.history.pushState({"ms_tab": "search", "search": search}, title, url);
+        }
     }
     // execute search request
     var obj = this;

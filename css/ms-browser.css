@@ -711,6 +711,26 @@
 .ms-items .item-entry.thumbnail .item-entry-edit .fa {
     padding: 5px;
 }
+.ms-items .item-entry-copy {
+    position: relative;
+}
+.ms-items .item-entry-copy .copy-msg {
+    display: none;
+}
+.ms-items .item-entry-copy.copied > * {
+    visibility: hidden;
+}
+.ms-items .item-entry-copy.copied > .copy-msg {
+    visibility: visible;
+    padding-top: 2px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    text-align: center;
+    display: block;
+}
 
 @media (max-width: 1280px) {
     .in-overlay .ms-items .ms-browser-channels-place .item-entry.list {

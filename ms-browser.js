@@ -21,10 +21,11 @@ function MSBrowser(options) {
     this.on_pick = null;
     this.btn_class = "";
     this.tree_manager = true;
-    this.iframe = false;
     this.display_itunes_rss = true;
     // vars
     this.use_overlay = true;
+    this.iframe_mode = false;
+    this.lti_mode = false;
     this.$widget = null;
     this.$menu = null;
     this.$main = null;
@@ -55,7 +56,6 @@ function MSBrowser(options) {
         "on_pick",
         "btn_class",
         "tree_manager",
-        "iframe",
         "display_itunes_rss"
     ]);
 
@@ -86,11 +86,22 @@ MSBrowser.prototype.init = function () {
     if (!this.use_overlay)
         $messages = $(".messages").detach(); // get Django messages
 
-    if (this.iframe) {
+    var url_data = this.parse_url();
+
+    if (url_data.iframe_mode) {
+        this.iframe_mode = true;
         this.url_login = "/login/iframe/";
         this.url_channels += "?iframe";
         this.url_search += "?iframe";
         this.url_latest += "?iframe";
+    }
+
+    if (url_data.lti) {
+        this.lti_mode = true;
+        this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "lti";
+        this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "lti";
+        this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "lti";
+        this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "lti";
     }
 
     // get elements
@@ -259,18 +270,40 @@ MSBrowser.prototype._pick = function (oid, result, action, no_close) {
 MSBrowser.prototype.get_last_pick = function () {
     return this.current_selection;
 };
-/* events handlers */
-MSBrowser.prototype.on_resize = function () {
-    if (this.use_overlay) {
-        var width = $(window).width() - 70;
-        this.$widget.width(width);
-        var height = $(window).height() - 100;
-        this.$widget.height(height);
+MSBrowser.prototype.parse_url = function () {
+    var data = {};
+    var query = window.location.search ? window.location.search.substring(1) : null;
+    if (query) {
+        var tuples = query.split("&");
+        for (var i=0; i < tuples.length; i++) {
+            var attr, value;
+            if (tuples[i].indexOf("=") != -1) {
+                attr = tuples[i].substring(0, tuples[i].indexOf("="));
+                value = tuples[i].substring(attr.length + 1);
+                if (value == "on")
+                    value = true;
+                else if (value == "off")
+                    value = false;
+                else
+                    value = window.decodeURIComponent(value.replace(/\+/g, "%20"));
+            }
+            else {
+                attr = tuples[i];
+                value = true;
+            }
+            if (attr.substring(0, 3) == "in_")
+                data.has_in_vals = true;
+            else if (attr.substring(0, 4) == "for_")
+                data.has_for_vals = true;
+            data[attr] = value;
+        }
     }
+    return data;
 };
+/* events handlers */
 MSBrowser.prototype.on_url_change = function () {
     var path = window.location.pathname + window.location.search;
-    if (path.indexOf(this.url_channels) == 0) {
+    if (path.indexOf(this.url_channels) === 0) {
         var slug = window.location.hash;
         if (slug && slug[0] == "#")
             slug = slug.substring(1);
@@ -280,12 +313,20 @@ MSBrowser.prototype.on_url_change = function () {
             this.channels.display_channel("0");
         this.change_tab("channels", true);
     }
-    else if (path.indexOf(this.url_search) == 0) {
+    else if (path.indexOf(this.url_search) === 0) {
         this.search.on_url_change();
         this.change_tab("search", true);
     }
-    else if (path.indexOf(this.url_latest) == 0) {
+    else if (path.indexOf(this.url_latest) === 0) {
         this.change_tab("latest", true);
+    }
+};
+MSBrowser.prototype.on_resize = function () {
+    if (this.use_overlay) {
+        var width = $(window).width() - 70;
+        this.$widget.width(width);
+        var height = $(window).height() - 100;
+        this.$widget.height(height);
     }
 };
 MSBrowser.prototype.load_categories = function () {
