@@ -229,7 +229,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             this.$menu.append($back);
         }
         // current channel buttons
-        var current_selectable = this.browser.selectable_content.indexOf("c") != -1;
+        var current_selectable = this.browser.selectable_content.indexOf("c") != -1 && (!this.browser.parent_selection_oid || response.selectable);
         $entry_links = this.browser.get_entry_links(response.info, "current", current_selectable);
     } else {
         response.oid = "0";
