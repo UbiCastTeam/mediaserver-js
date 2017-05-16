@@ -39,10 +39,6 @@ nav.navbar .buttons-right {
 .ms-browser .ms-browser-section {
     overflow: visible;
 }
-.ms-browser .ms-browser-panel {
-    border: 0 none;
-    border-radius: 0;
-}
 .ms-browser .ms-browser-main .ms-browser-section .ms-browser-section-title {
     font-size: 1.8em;
     padding: 15px;
@@ -82,8 +78,9 @@ nav.navbar .buttons-right {
     text-align: right;
 }
 /* ms-items */
-.ms-items .item-entry,
-.ms-items .item-entry.selectable {
+.ms-items .item-entry-link,
+.ms-items .selectable .item-entry-link,
+.ms-items .selected .item-entry-link {
     border-bottom: 1px solid #ccc;
 }
 /* overlay-info */

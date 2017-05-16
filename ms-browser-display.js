@@ -26,11 +26,9 @@ MSBrowser.prototype.build_widget = function () {
     html += "<div class=\"ms-browser-bar\">";
     html += "</div>";
     html += "<div class=\"ms-browser-main ms-items\">";
-    html +=     "<div class=\"ms-browser-panel\">";
-    html +=         "<div class=\"ms-browser-clear\"></div>";
-    html +=         "<div class=\"ms-browser-loading\"><div><i class=\"fa fa-spinner fa-spin\"></i> "+utils.translate("Loading...")+"</div></div>";
-    html +=         "<div class=\"ms-browser-message\"><div></div></div>";
-    html +=     "</div>";
+    html +=     "<div class=\"ms-browser-clear\"></div>";
+    html +=     "<div class=\"ms-browser-loading\"><div><i class=\"fa fa-spinner fa-spin\"></i> "+utils.translate("Loading...")+"</div></div>";
+    html +=     "<div class=\"ms-browser-message\"><div></div></div>";
     html += "</div>";
     html += "</div>";
     this.$widget = $(html);
@@ -44,6 +42,7 @@ MSBrowser.prototype.build_widget = function () {
         $bar_buttons.addClass("ms-browser-dropdown-right");
     } else {
         $top_buttons = $(".ms-browser-header", this.$widget);
+        $top_buttons.addClass("ms-browser-dropdown-right");
         $top_buttons.prepend(this.get_top_menu_jq());
         $bar_buttons = $(".ms-browser-bar", this.$widget);
         $bar_buttons.addClass("ms-browser-dropdown-right");
@@ -86,7 +85,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         { "views-desc": utils.translate("Number of views, descending") },
         { "views-asc": utils.translate("Number of views, ascending") }
     ];
-    var html = "<div class=\"ms-browser-top-buttons ms-browser-dropdown-right\">";
+    var html = "<div class=\"ms-browser-top-buttons\">";
     html += "<div class=\"ms-browser-dropdown\" id=\"ms_browser_display_dropdown\">";
     html += "<button type=\"button\" title=\"" + utils.translate("Display") + "\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\"><i class=\"fa fa-tv\" aria-hidden=\"true\"></i> <span class=\"hidden-below-1280\">"+utils.translate("Display")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></span></button>";
 
@@ -419,14 +418,14 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     var html = "<" + markup + " " + href + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
 
     /********************** Image preview ****************/
-    var image_preview = "";
-    if (this.use_overlay || !item.hide_image) {
-        if (item.thumb) {
-            image_preview += "<span class=\"item-entry-preview\"><img src=\"" + item.thumb + "\"/></span>";
-        } else {
-            image_preview += "<span class=\"item-entry-preview\"><span class=\"item-" + item_type + "-icon\"></span></span>";
-        }
+    var image_preview = "<span class=\"item-entry-preview\">";
+    if (item.thumb) {
+        image_preview += "<img src=\"" + item.thumb + "\"/>";
     }
+    if (!this.use_overlay && item_type != "channel") {
+        image_preview += "<span class=\"item-entry-preview-play\"><i class=\"fa fa-play fa-4x\" aria-hidden=\"true\"></i></span>";
+    }
+    image_preview += "</span>";
     html += image_preview;
 
     /********************** Content ********************/
