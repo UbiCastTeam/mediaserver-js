@@ -88,7 +88,7 @@ MSBrowser.prototype.init = function () {
 
     var url_data = this.parse_url();
 
-    if (!this.use_overlay && url_data.iframe_mode) {
+    if (!this.use_overlay && url_data.iframe) {
         this.iframe_mode = true;
         this.url_login = "/login/iframe/";
         this.url_channels += "?iframe";
