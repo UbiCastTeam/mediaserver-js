@@ -212,18 +212,20 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         };
         var $back;
         if (!this.browser.use_overlay) {
-            $back = $("<a class=\"button "+this.browser.btn_class+"\" title=\""+utils.translate("Parent channel")+"\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
+            $back = $("<a class=\"button "+this.browser.btn_class+"\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
         } else {
-            $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+"\" title=\""+utils.translate("Parent channel")+"\"></button>");
+            $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+"\"></button>");
             $back.click({ obj: this, oid: parent.oid }, function (event) {
                 event.data.obj.display_channel(event.data.oid);
             });
         }
-        $back.html("<i class=\"fa fa-chevron-circle-left fa-fw fa-2x\" aria-hidden=\"true\"></i>");
         if (!this.browser.use_overlay && $(".navbar .back.button-text").length > 0) {
+            $back.html("<i class=\"fa fa-chevron-circle-left fa-fw fa-2x\" aria-hidden=\"true\"></i>");
+            $back.attr("title", utils.translate("Parent channel"));
             $back.addClass("back").addClass("button-text");
             $(".navbar .back.button-text").replaceWith($back);
         } else {
+            $back.html("<i class=\"fa fa-chevron-circle-left\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Parent channel")+"</span>");
             this.$menu.append($back);
         }
         // current channel buttons

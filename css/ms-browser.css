@@ -91,13 +91,17 @@
 .ms-browser.in-overlay .ms-browser-header {
     bottom: auto;
 }
-.ms-browser .ms-browser-menu {
+.ms-browser .ms-browser-header .ms-browser-top-buttons {
+    float: right;
+    display: block;
+}
+.ms-browser .ms-browser-header .ms-browser-menu {
     float: left;
     display: block;
     width: 300px;
 }
 .ms-browser .ms-browser-title {
-    margin-left: 300px;
+    margin: 0 300px;
     font-size: 200%;
     font-weight: bold;
     word-wrap: break-word;
@@ -105,6 +109,7 @@
     white-space: nowrap;
     height: 100%;
     overflow: hidden;
+    text-align: center;
 }
 .ms-browser .ms-browser-title img {
     max-height: 40px;
@@ -112,6 +117,7 @@
 .ms-browser .ms-browser-bar {
     padding: 5px;
     line-height: 30px;
+    text-align: center;
     background: #fff;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
@@ -123,12 +129,6 @@
     bottom: auto;
     height: 30px;
     line-height: 30px;
-}
-.ms-browser .ms-browser-bar-left {
-    float: left;
-}
-.ms-browser .ms-browser-bar-right {
-    float: right;
 }
 .ms-browser.in-overlay .ms-browser-main {
     top: 92px;
@@ -324,12 +324,12 @@
     overflow: auto;
 }
 .ms-browser .ms-browser-tree-place {
-    left: auto;
+    right: auto;
     width: 280px;
     background: #fff;
 }
 .ms-browser .ms-browser-channels-place {
-    right: 300px;
+    left: 300px;
 }
 /* channels tree */
 .ms-channels-tree ul {
@@ -422,34 +422,50 @@
 }
 
 /* channel content list */
-.ms-items .item-entry,
-.ms-items .item-description {
+.ms-items .item-entry {
     margin: 10px;
     position: relative;
     display: block;
+    display: inline-block;
+    width: calc(50% - 20px);
+}
+.ms-items .item-description {
+    margin: 10px;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 2px 2px 1px 0px #ddd;
+}
+.ms-items .item-entry * {
+    box-sizing: content-box;
+}
+.ms-items .item-entry-link {
+    display: block;
+    color: inherit;
     overflow: hidden;
     background: #fff;
     box-shadow: 2px 2px 1px 0px #ddd;
     border-bottom: 3px solid #ccc;
     border-radius: 3px;
 }
-.ms-items .item-entry {
-    display: inline-block;
-    width: calc(50% - 20px);
+.ms-items .clickable .item-entry-link {
+    cursor: pointer;
+    color: #145284;
 }
-.ms-items .item-description {
-    padding: 10px;
+.ms-items .clickable .item-entry-link:hover {
+    color: #086E9A;
+    box-shadow: 0 0 5px 0px #086E9A;
 }
-.ms-items .item-entry * {
-    box-sizing: content-box;
-}
-.ms-items .item-entry.selectable {
+.ms-items .selectable .item-entry-link {
     border-bottom: 3px solid #1C73BF;
 }
-.ms-items .item-entry.selected {
+.ms-items .selected .item-entry-link {
     border-bottom: 3px solid #008750;
 }
-.ms-items .item-entry.selected .item-entry-title {
+.ms-items .selected .item-entry-link:hover {
+    color: #008750;
+    box-shadow: 0 0 5px 0px #008750;
+}
+.ms-items .selected .item-entry-link {
     color: #008750;
 }
 .ms-browser-title .selected {
@@ -491,18 +507,6 @@
 }
 .ms-items .item-entry-preview .item-parent-icon {
     background-image: url('../images/32_parent.png');
-}
-.ms-items .item-entry-link {
-    display: block;
-    overflow: hidden;
-    color: inherit;
-}
-.ms-items .item-entry-link.clickable {
-    cursor: pointer;
-    color: #145284;
-}
-.ms-items .item-entry-link.clickable:hover {
-    color: #086E9A;
 }
 .ms-items .item-entry-content {
     padding: 10px;
@@ -619,7 +623,6 @@
 /* thumbnail mode */
 .ms-items .item-entry.thumbnail {
     padding: 0;
-    overflow: hidden;
     width: 240px;
     cursor: auto;
     display: inline-block;
@@ -660,6 +663,7 @@
     position: absolute;
     background: #fff;
     width: auto;
+    border-top-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
 .ms-items .item-entry.thumbnail .item-entry-unlisted,

@@ -24,9 +24,6 @@ MSBrowser.prototype.build_widget = function () {
     html +=     "<div class=\"ms-browser-title\"></div>";
     html += "</div>";
     html += "<div class=\"ms-browser-bar\">";
-    html +=     "<div class=\"ms-browser-bar-left\"></div>";
-    html +=     "<div class=\"ms-browser-bar-right\"></div>";
-    html +=     "<div class=\"ms-browser-clear\"></div>";
     html += "</div>";
     html += "<div class=\"ms-browser-main ms-items\">";
     html +=     "<div class=\"ms-browser-panel\">";
@@ -37,22 +34,23 @@ MSBrowser.prototype.build_widget = function () {
     html += "</div>";
     html += "</div>";
     this.$widget = $(html);
-    var $left_buttons, $right_buttons;
+    var $bar_buttons, $top_buttons;
     if (!this.use_overlay && $("nav .buttons-left").length > 0) {
-        $right_buttons = $("nav .buttons-left");
-        $left_buttons = $("#commands_place");
-        $left_buttons.addClass("ms-browser-dropdown-right");
+        $top_buttons = $("nav .buttons-left");
+        $top_buttons.addClass("ms-browser");
+        $top_buttons.append(this.get_top_menu_jq());
+        $bar_buttons = $("#commands_place");
+        $bar_buttons.addClass("ms-browser");
+        $bar_buttons.addClass("ms-browser-dropdown-right");
     } else {
-        $left_buttons = $(".ms-browser-bar-left", this.$widget);
-        $right_buttons = $(".ms-browser-bar-right", this.$widget);
-        $right_buttons.addClass("ms-browser-dropdown-right");
+        $top_buttons = $(".ms-browser-header", this.$widget);
+        $top_buttons.prepend(this.get_top_menu_jq());
+        $bar_buttons = $(".ms-browser-bar", this.$widget);
+        $bar_buttons.addClass("ms-browser-dropdown-right");
     }
-    $left_buttons.addClass("ms-browser");
-    $right_buttons.addClass("ms-browser");
-    $left_buttons.append(this.latest.get_menu_jq());
-    $left_buttons.append(this.search.get_menu_jq());
-    $left_buttons.append(this.channels.get_menu_jq());
-    $right_buttons.append(this.get_top_menu_jq());
+    $bar_buttons.append(this.latest.get_menu_jq());
+    $bar_buttons.append(this.search.get_menu_jq());
+    $bar_buttons.append(this.channels.get_menu_jq());
     this.$main = $(".ms-browser-main", this.$widget);
     this.$main.append(this.latest.get_content_jq());
     this.$main.append(this.search.get_content_jq());
@@ -88,7 +86,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         { "views-desc": utils.translate("Number of views, descending") },
         { "views-asc": utils.translate("Number of views, ascending") }
     ];
-    var html = "<div class=\"ms-browser-top-btns\">";
+    var html = "<div class=\"ms-browser-top-buttons ms-browser-dropdown-right\">";
     html += "<div class=\"ms-browser-dropdown\" id=\"ms_browser_display_dropdown\">";
     html += "<button type=\"button\" title=\"" + utils.translate("Display") + "\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\"><i class=\"fa fa-tv\" aria-hidden=\"true\"></i> <span class=\"hidden-below-1280\">"+utils.translate("Display")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></span></button>";
 
@@ -372,6 +370,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     this.update_catalog(item);
     var oid = item.oid;
     var selectable = gselectable && (!this.parent_selection_oid || item.selectable);
+    var clickable = this.use_overlay && (selectable || item_type == "channel");
     var $entry = null;
     $entry = $("<div class=\"item-entry item-type-"+item_type+" item-entry-"+oid+"\"></div>");
     $entry.attr("id", "item_entry_"+oid+"_"+tab);
@@ -380,9 +379,11 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         $entry.addClass("selected");
     if (selectable)
         $entry.addClass("selectable");
+    if (clickable)
+        $entry.addClass("clickable");
     if (item.extra_class)
         $entry.addClass(item.extra_class);
-    var html = this._get_entry_block_html(item, item_type, selectable, tab);
+    var html = this._get_entry_block_html(item, item_type, clickable, tab);
     if (this.display_mode == "thumbnail" && !this.use_overlay) {
         html +=   "<button type=\"button\" class=\"button-text item-entry-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
         if (item.can_edit) {
@@ -402,7 +403,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     }
     return $entry;
 };
-MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectable, tab) {
+MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable, tab) {
     var markup = "div";
     var href = "";
     var link = "";
@@ -414,9 +415,8 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
         markup = "a";
         href = link;
     }
-    var clickable = this.use_overlay && (selectable || item_type == "channel");
 
-    var html = "<" + markup + " " + href + " class=\"item-entry-link" + (clickable ? " clickable" : "") + "\"" + (clickable && this.display_mode == "thumbnail" && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
+    var html = "<" + markup + " " + href + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
 
     /********************** Image preview ****************/
     var image_preview = "";
@@ -486,15 +486,16 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, selectabl
                 bottom_bar += ", " + item.views_last_month + " " + utils.translate("this month");
             bottom_bar += "</span>";
         }
-        if (tab == "latest")
+        if (tab == "latest") {
             bottom_bar += "<span class=\"item-entry-type\">" + utils.translate("Type:") + " " +
                             utils.translate(item_type) + "</span>";
-        if (tab == "latest" && item.add_date)
-            bottom_bar += "<span class=\"item-entry-date\">" + utils.translate("Added on") + " " +
-                            utils.get_date_display(item.add_date) + "</span>";
-        if (tab == "latest" && item.parent_title)
-            bottom_bar += "<span class=\"item-entry-parent\">" + utils.translate("Parent channel:") + " " +
-                            item.parent_title + "</span>";
+            if (item.add_date)
+                bottom_bar += "<span class=\"item-entry-date\">" + utils.translate("Added on") + " " +
+                                utils.get_date_display(item.add_date) + "</span>";
+            if (item.parent_title)
+                bottom_bar += "<span class=\"item-entry-parent\">" + utils.translate("Parent channel:") + " " +
+                                item.parent_title + "</span>";
+        }
     }
     bottom_bar += "</span>";
     content += bottom_bar;
