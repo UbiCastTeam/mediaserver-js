@@ -384,11 +384,13 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         $entry.addClass(item.extra_class);
     var html = this._get_entry_block_html(item, item_type, clickable, tab);
     if (this.display_mode == "thumbnail" && !this.use_overlay) {
-        html +=   "<button type=\"button\" class=\"button-text item-entry-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
+        html += "<div class=\"item-entry-buttons\">";
+        html +=   "<button type=\"button\" class=\"item-entry-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
         if (item.can_edit) {
-            html +=   "<a class=\"item-entry-edit\" title=\""+utils.translate("Edit")+"\" href=\""+this.get_button_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
+            html += "<a title=\""+utils.translate("Edit")+"\" href=\""+this.get_button_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
         }
-        html += "<div class=\"overlay-info\" id=\"item_entry_"+oid+"_"+tab+"_info\" style=\"display: none;\"></div>";
+        html +=   "<div class=\"overlay-info ms-items\" id=\"item_entry_"+oid+"_"+tab+"_info\" style=\"display: none;\"></div>";
+        html += "</div>";
     }
     var $entry_block = $(html);
     this._set_on_click_entry_block($entry_block, oid, item_type, item, selectable);

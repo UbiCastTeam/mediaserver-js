@@ -692,11 +692,13 @@
     overflow: hidden;
     display: block;
 }
-.ms-items .item-entry.thumbnail .item-entry-info,
-.ms-items .item-entry.thumbnail .item-entry-edit {
+.ms-items .item-entry.thumbnail .item-entry-buttons {
     top: 0;
     right: 0;
     position: absolute;
+}
+.ms-items .item-entry.thumbnail .item-entry-buttons a,
+.ms-items .item-entry.thumbnail .item-entry-buttons button {
     display: none;
     cursor: pointer;
     border: none;
@@ -709,15 +711,11 @@
     font-size: 1.5em;
 }
 .ms-items .item-entry.thumbnail .item-entry-info.info-displayed,
-.ms-items .item-entry.thumbnail:hover .item-entry-info,
-.ms-items .item-entry.thumbnail:hover .item-entry-edit {
+.ms-items .item-entry.thumbnail:hover .item-entry-buttons a,
+.ms-items .item-entry.thumbnail:hover .item-entry-buttons button {
     display: block;
 }
-.ms-items .item-entry.thumbnail .item-entry-edit {
-    top: 42px;
-}
-.ms-items .item-entry.thumbnail .item-entry-info .fa,
-.ms-items .item-entry.thumbnail .item-entry-edit .fa {
+.ms-items .item-entry.thumbnail .item-entry-buttons .fa {
     padding: 5px;
 }
 .ms-items .item-entry-copy {

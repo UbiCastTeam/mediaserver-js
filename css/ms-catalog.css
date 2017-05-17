@@ -84,10 +84,11 @@ nav.navbar .buttons-right {
     border-bottom: 1px solid #ccc;
 }
 /* overlay-info */
-.overlay-info .overlay-info-content .item-entry-links {
+.overlay-info .overlay-info-content .item-entry-links,
+.overlay-info .overlay-info-content .item-entry-links-container {
     position: static;
-
     display: block;
+    text-align: left;
 }
 .overlay-info {
     z-index: 10;
