@@ -508,7 +508,7 @@
 .ms-items .item-entry-preview .item-entry-preview-play {
     display: none;
     color: #fff;
-    text-shadow: 0 0 15px #000;
+    text-shadow: 0 0 5px #404040;
 }
 .ms-items .item-entry-link:hover .item-entry-preview .item-entry-preview-play {
     display: block;
