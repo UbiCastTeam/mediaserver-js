@@ -409,10 +409,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     var href = "";
     var link = "";
     if (!this.use_overlay && item.slug) {
-        if (item_type != "channel" && !item.validated && item.can_edit)
-            link = "href=\""+this.get_button_link(item, "edit")+"\"";
-        else
-            link = "href=\""+this.get_button_link(item, "view")+"\"";
+        link = "href=\""+this.get_button_link(item, "view")+"\"";
         markup = "a";
         href = link;
     }
@@ -586,7 +583,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
             if (item_type != "channel" && this.lti_mode) {
                 html += "<button type=\"button\" class=\""+this.btn_class+" button default item-entry-copy\" data-link=\""+(this.use_overlay ? "" : this.get_button_link(item, "lti", true))+"\"><i class=\"fa fa-chain\"></i> <span class=\"hidden-below-440\">"+utils.translate("Copy LTI link")+"</span></button>";
             }
-            if (item_type != "channel" && item.validated) {
+            if (item_type != "channel" && (this.lti_mode || item.can_edit || item.can_delete)) {
                 html += "<a class=\""+this.btn_class+" button default item-entry-pick-view-media\" href=\""+(this.use_overlay ? "" : this.get_button_link(item, "view"))+"\"><i class=\"fa fa-eye\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
             }
             if (item.can_edit) {
