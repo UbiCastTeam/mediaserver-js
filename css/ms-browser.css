@@ -527,8 +527,7 @@
 .ms-items .item-entry-top-bar {
     display: block;
     overflow: hidden;
-    margin-bottom: 4px;
-    padding-bottom: 4px;
+    margin-bottom: 5px;
 }
 .ms-items .item-entry-top-bar .item-entry-title {
     font-size: 1.2em;
@@ -584,6 +583,11 @@
 .ms-items .item-entry-bottom-bar {
     display: block;
 }
+.ms-items .item-entry-bottom-bar span + span {
+    margin-top: 5px;
+}
+.ms-items .item-entry-date,
+.ms-items .item-entry .item-entry-description,
 .ms-items .item-entry-views,
 .ms-items .item-entry-annotations,
 .ms-items .item-entry-parent,

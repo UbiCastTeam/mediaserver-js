@@ -463,16 +463,8 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         }
     }
     top_bar += status;
-
     if (item.duration)
         top_bar +=         "<span class=\"item-entry-duration\">" + item.duration + "</span>";
-    if (this.display_mode != "thumbnail") {
-        if (item.creation)
-            top_bar += "<br /> <span class=\"item-entry-date\">" + utils.translate("Created on") + " " +
-                        utils.get_date_display(item.creation) + "</span>";
-        if (item.short_description)
-            top_bar += "<span class=\"item-entry-description block\">" + $(item.short_description).text() + "</span>";
-    }
     top_bar += "</span>";
     content += top_bar;
 
@@ -481,6 +473,11 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     if (this.display_mode == "thumbnail") {
         bottom_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
     } else {
+        if (item.creation)
+            bottom_bar += "<span class=\"item-entry-date\">" + utils.translate("Created on") + " " +
+                        utils.get_date_display(item.creation) + "</span>";
+        if (item.short_description)
+            bottom_bar += "<span class=\"item-entry-description\">" + $(item.short_description).text() + "</span>";
         if (item.views) {
             bottom_bar += "<span class=\"item-entry-views\">" + item.views + " " + utils.translate("views");
             if (item.views_last_month)
