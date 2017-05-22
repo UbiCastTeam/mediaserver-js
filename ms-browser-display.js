@@ -583,7 +583,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
             if (item_type != "channel" && this.lti_mode) {
                 html += "<button type=\"button\" class=\""+this.btn_class+" button default item-entry-copy\" data-link=\""+(this.use_overlay ? "" : this.get_button_link(item, "lti", true))+"\"><i class=\"fa fa-chain\"></i> <span class=\"hidden-below-440\">"+utils.translate("Copy LTI link")+"</span></button>";
             }
-            if (item_type != "channel" && (this.lti_mode || item.can_edit || item.can_delete)) {
+            if ((item_type != "channel" && this.lti_mode) || item.can_edit || item.can_delete) {
                 html += "<a class=\""+this.btn_class+" button default item-entry-pick-view-media\" href=\""+(this.use_overlay ? "" : this.get_button_link(item, "view"))+"\"><i class=\"fa fa-eye\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
             }
             if (item.can_edit) {
