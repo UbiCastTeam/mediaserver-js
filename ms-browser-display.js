@@ -12,13 +12,13 @@ MSBrowser.prototype.build_widget = function () {
     html += "<div class=\"ms-browser-header\">";
     html +=     "<div class=\"ms-browser-menu\">";
     if (!this.use_overlay) {
-        html += "<a id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_channels+"\">"+utils.translate("Channels")+"</a>";
-        html += "<a id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_search+"\">"+utils.translate("Search")+"</a>";
-        html += "<a id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_latest+"\">"+utils.translate("Latest content")+"</a>";
+        html += "<a id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_channels+"\"><i class=\"fa fa-folder-open\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Channels")+"</span></a>";
+        html += "<a id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_search+"\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Search")+"</span></a>";
+        html += "<a id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_latest+"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Latest content")+"</span></a>";
     } else {
-        html += "<button type=\"button\" id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\">"+utils.translate("Channels")+"</button>";
-        html += "<button type=\"button\" id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\">"+utils.translate("Search")+"</button>";
-        html += "<button type=\"button\" id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\">"+utils.translate("Latest content")+"</button>";
+        html += "<button type=\"button\" id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-folder-open\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Channels")+"</span></button>";
+        html += "<button type=\"button\" id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Search")+"</span></button>";
+        html += "<button type=\"button\" id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Latest content")+"</span></button>";
     }
     html +=     "</div>";
     html +=     "<div class=\"ms-browser-title\"></div>";

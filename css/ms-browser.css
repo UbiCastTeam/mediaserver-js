@@ -64,7 +64,7 @@
 .ms-browser .button.active,
 .ms-browser button.button.active {
     color: #fff;
-    background: #aaa;
+    background: #404040;
 }
 .ms-browser br + .button,
 .ms-browser br + .button + .button {
@@ -95,20 +95,20 @@
     display: block;
 }
 .ms-browser .ms-browser-header .ms-browser-menu {
+    padding-right: 5px;
     float: left;
     display: block;
-    width: 300px;
 }
 .ms-browser .ms-browser-title {
-    margin: 0 300px;
+    padding-right: 200px;
     font-size: 200%;
     font-weight: bold;
     word-wrap: break-word;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
     height: 100%;
     overflow: hidden;
-    text-align: center;
 }
 .ms-browser .ms-browser-title img {
     max-height: 40px;
@@ -160,6 +160,9 @@
 
 /* buttons */
 .ms-browser .ms-browser-tab {
+    margin: 0;
+}
+.ms-browser .ms-browser-tab.active {
     font-weight: bold;
 }
 .ms-browser .ms-browser-tab + .ms-browser-tab {
@@ -173,8 +176,14 @@
     position: relative;
     display: inline-block;
 }
+.ms-browser .ms-browser-dropdown + .ms-browser-dropdown {
+    z-index: 1;
+}
+.ms-browser .ms-browser-header .ms-browser-dropdown {
+    z-index: 4;
+}
 .ms-browser-dropdown .ms-browser-dropdown-button.active {
-    background: #aaa;
+    background: #404040;
     color: #fff;
 }
 .ms-browser-dropdown .ms-browser-dropdown-menu {
@@ -183,7 +192,7 @@
     position: absolute;
     padding: 8px;
     padding-left: 16px;
-    z-index: 4;
+    z-index: 5;
     display: none;
     line-height: 24px;
     white-space: nowrap;
@@ -210,8 +219,6 @@
 }
 .ms-browser-filters #hidden_categories {
     width: 400px;
-}
-.ms-browser-filters #hidden_categories {
     overflow: hidden;
 }
 .ms-browser-filters #hidden_categories label {
@@ -471,7 +478,7 @@
     color: #008750;
 }
 .ms-items .item-entry-preview {
-    margin: 10px 15px 10px 10px;
+    margin: 10px;
     width: 240px;
     height: 135px;
     line-height: 135px;
@@ -479,12 +486,6 @@
     float: left;
     display: block;
     position: relative;
-}
-.ms-items .item-entry-small .item-entry-preview {
-    margin: 5px 20px 5px 5px;
-    line-height: 45px;
-    width: 60px;
-    height: 45px;
 }
 .ms-items .item-entry-preview img {
     max-width: 100%;
@@ -513,14 +514,9 @@
     display: block;
 }
 .ms-items .item-entry-content {
-    padding: 10px;
-    display: inline-block;
-    width: calc(100% - 300px);
-}
-.ms-items .item-entry-small .item-entry-content {
-    padding-top: 15px;
+    margin: 10px;
+    margin-left: 260px;
     display: block;
-    width: auto;
 }
 
 .ms-items .item-entry-top-bar {
@@ -532,11 +528,6 @@
     font-size: 1.2em;
     font-weight: bold;
     padding: 5px 0;
-}
-.ms-items .item-entry-small .item-entry-content .item-entry-top-bar {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border: 0 none;
 }
 .ms-items .item-entry-duration {
     display: block;
@@ -612,11 +603,6 @@
     bottom: 5px;
     text-align: right;
 }
-.ms-items .item-entry-small .item-entry-links {
-    top: 0;
-    bottom: 0;
-    line-height: 45px;
-}
 .ms-items .item-entry-links-container {
     display: none;
 }
@@ -637,10 +623,6 @@
     text-align: center;
     line-height: inherit;
 }
-.ms-items .item-entry.thumbnail.small {
-    width: 176px;
-    font-size: inherit;
-}
 .ms-items .item-entry.thumbnail > .item-entry-link {
     height: 100%;
 }
@@ -658,10 +640,6 @@
 .ms-items .item-entry.thumbnail .item-entry-preview {
     height: 135px;
     line-height: 135px;
-}
-.ms-items .item-entry.thumbnail.small .item-entry-preview {
-    height: 99px;
-    line-height: 99px;
 }
 
 .ms-items .item-entry.thumbnail .item-entry-top-bar {
@@ -743,9 +721,14 @@
 }
 
 @media (max-width: 1280px) {
+    .ms-browser .ms-browser-title {
+        padding: 0;
+    }
+    .ms-browser .ms-browser-content {
+        padding: 0;
+    }
     .in-overlay .ms-items .ms-browser-channels-place .item-entry.list {
         display: block;
-        margin: 5px 0;
         width: auto;
     }
     .ms-items .item-entry-preview {
@@ -754,25 +737,89 @@
         line-height: 91px;
     }
     .ms-items .item-entry-content {
-        width: calc(100% - 175px);
+        margin-left: 140px;
+    }
+    .ms-items .item-entry .item-entry-description {
+        display: none;
+    }
+}
+@media (max-width: 1000px) {
+    .ms-items .item-entry.thumbnail {
+        width: 176px;
+        font-size: inherit;
+    }
+    .ms-items .item-entry.thumbnail .item-entry-preview {
+        height: 99px;
+        line-height: 99px;
     }
 }
 @media (max-width: 800px) {
+    .ms-browser .ms-browser-tree-place {
+        display: none;
+    }
+    .ms-browser .ms-browser-channels-place {
+        left: 0;
+    }
+    .ms-browser.in-overlay .ms-browser-header,
+    .ms-browser.in-overlay .ms-browser-bar,
+    .ms-browser.in-overlay .ms-browser-main,
+    .ms-browser .ms-browser-tree-place,
+    .ms-browser .ms-browser-channels-place {
+        position: static;
+    }
+    .ms-browser .ms-browser-channels-place {
+        padding: 10px 0;
+    }
+    .ms-browser.in-overlay .ms-browser-bar,
+    .ms-browser .ms-browser-header {
+        height: auto;
+    }
+    .ms-browser-dropdown-right .ms-browser-dropdown-menu {
+        right: -10px;
+    }
+    .ms-browser .ms-browser-title {
+        padding: 0;
+        width: 100%;
+        font-size: 150%;
+    }
+    .ms-browser-filters #hidden_categories {
+        width: auto;
+    }
+    .ms-items .item-entry-top-bar .item-entry-title {
+        font-size: inherit;
+    }
     .ms-items .item-entry.list {
         display: block;
-        margin: 5px 0;
+        margin: 10px 0;
         width: auto;
     }
     .ms-items .item-entry-links-container {
         display: inline-block;
+    }
+    .ms-items .item-entry-unlisted,
+    .ms-items .item-entry-notpublished,
+    .ms-items .item-entry-published,
+    .ms-items .item-entry-notready {
+        margin-right: 3px;
     }
 }
 @media (max-width: 600px) {
     .ms-items .item-entry-preview {
         margin: 0;
     }
+    .ms-items .item-entry-preview {
+        margin: 5px;
+        width: 60px;
+        height: 45px;
+        line-height: 45px;
+    }
     .ms-items .item-entry-content {
-        width: calc(100% - 130px);
-        padding: 5px;
+        margin: 5px;
+        margin-left: 70px;
+    }
+}
+@media (max-width: 450px) {
+    .ms-browser .ms-browser-search-form input {
+        width: 50%;
     }
 }

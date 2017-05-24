@@ -55,7 +55,7 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_search_menu\" style=\"display: none;\">";
     html += "<form class=\"ms-browser-search-form\" method=\"get\" action=\".\" onsubmit=\"javascript: return false;\">";
-    html +=     "<label for=\"ms_browser_search_text\">"+utils.translate("Search:")+"</label>";
+    html +=     "<label for=\"ms_browser_search_text\"><span class=\"hidden-below-800\">"+utils.translate("Search:")+"</span></label>";
     html +=     " <input id=\"ms_browser_search_text\" type=\"text\" value=\"\">";
     html +=     " <button type=\"submit\" class=\"button\" id=\"ms_browser_search_start\">"+utils.translate("Go")+"</button>";
     html += "</form>";
