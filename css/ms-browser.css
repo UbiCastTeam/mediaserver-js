@@ -4,10 +4,11 @@
     padding: 0;
     position: relative;
     display: block;
-    background: #eee !important;
+    background: #eee;
 }
 .ms-browser-container.in-overlay {
     text-align: left;
+    background: #eee !important;
 }
 
 /* base */
@@ -58,9 +59,7 @@
     cursor: pointer;
     transition-duration: .3s;
     transition-property: background;
-}
-.ms-browser button.button {
-    padding: 2px 7px;
+    box-sizing: border-box;
 }
 .ms-browser .button.active,
 .ms-browser button.button.active {
