@@ -46,6 +46,12 @@
 .ms-browser option {
     padding: 2px 5px;
 }
+.ms-browser label {
+    display: inline;
+}
+.ms-browser input {
+    margin: 0;
+}
 .ms-browser .ms-browser-clear {
     clear: both;
     overflow: hidden;
@@ -54,6 +60,7 @@
 
 /* buttons */
 .ms-browser .button {
+    margin: 0;
     margin-right: 8px;
     padding: 3px 8px;
     cursor: pointer;
