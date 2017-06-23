@@ -271,6 +271,9 @@
 }
 
 /* messages */
+.ms-browser .messages {
+    text-align: center;
+}
 .ms-browser .info,
 .ms-browser .success,
 .ms-browser .warning,
@@ -283,10 +286,8 @@
     line-height: normal;
     text-align: left;
     min-height: 0;
-    color: #222;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    color: #fff;
+    background: #222;
     box-shadow: 2px 2px 1px 0px #ddd;
 }
 .ms-browser .info:before,
@@ -297,29 +298,25 @@
     font: normal normal normal 14px/1 FontAwesome;
 }
 .ms-browser .info {
-    color: #006ba8;
-    border-color: #006ba8;
+    background: #1C73BF;
 }
 .ms-browser .info:before {
     content: "\f05a";
 }
 .ms-browser .success {
-    color: #006002;
-    border-color: #006002;
+    background: #008750;
 }
 .ms-browser .success:before {
     content: "\f058";
 }
 .ms-browser .warning {
-    color: #a85500;
-    border-color: #a85500;
+    background: #F7B407;
 }
 .ms-browser .warning:before {
     content: "\f071";
 }
 .ms-browser .error {
-    color: #a80000;
-    border-color: #a80000;
+    background: #DB263D;
 }
 .ms-browser .error:before {
     content: "\f06a";

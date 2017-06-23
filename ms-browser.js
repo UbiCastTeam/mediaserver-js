@@ -82,10 +82,6 @@ MSBrowser.prototype.init = function () {
             $("#container").removeClass("max-width-1200");
     }
 
-    var $messages;
-    if (!this.use_overlay)
-        $messages = $(".messages").detach(); // get Django messages
-
     var url_data = this.parse_url();
 
     if (!this.use_overlay && url_data.iframe) {
@@ -128,17 +124,6 @@ MSBrowser.prototype.init = function () {
 
     var obj = this;
     if (!this.use_overlay) {
-        // display Django messages if any
-        if ($messages.length > 0) {
-            $messages.attr("class", "");
-            setTimeout(function () {
-                $(".ms-browser-message", obj.$widget).html("").append($messages);
-                $(".ms-browser-message", obj.$widget).css("display", "block");
-                setTimeout(function () {
-                    $(".ms-browser-message", obj.$widget).css("display", "");
-                }, 5000);
-            }, 500);
-        }
         // listen to navigation history changes
         window.onpopstate = function (event) {
             obj.on_url_change(event.target.location);
