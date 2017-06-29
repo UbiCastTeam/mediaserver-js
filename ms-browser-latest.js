@@ -141,13 +141,17 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
 };
 
 MSBrowserLatest.prototype._on_ajax_error = function (response) {
-    var message;
-    if (!this.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
+    var message = "<div class=\"messages\">";
+    if (!this.browser.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.browser.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
-        message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
+        message += "<div class=\"item-description\">";
+        message += "<div class=\"message error\">"+response.error+"</div>";
+        message += "<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p>";
+        message += "</div>";
+    } else {
+        message += "<div class=\"message error\">"+response.error+"</div>";
     }
-    else
-        message = "<div class=\"error\">"+response.error+"</div>";
+    message += "</div>";
     this.$place.html(message);
 };
 
@@ -186,6 +190,10 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
             type = "photos";
         var selectable = this.browser.selectable_content.indexOf(item.type) != -1;
         this.$section.append(this.browser.get_content_entry(type, item, selectable, "latest"));
+    }
+    if (this.$section === null) {
+        var $msg = $("<div class=\"messages\"><div class=\"message info\">"+utils.translate("No contents.")+"</div></div>");
+        this.$place.append($msg);
     }
     if (this.more)
         $(".ms-browser-latest-btns", this.$content).css("display", "block");

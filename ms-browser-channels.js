@@ -55,8 +55,11 @@ MSBrowserChannels.prototype.refresh_title = function () {
         if (this.browser.current_selection && this.browser.current_selection.oid == item.oid)
             html = "<span class=\"selected\">"+html+"</span>";
         this.browser.set_title(item.title, html);
-    } else
+    } else if (this.browser.lti_mode) {
+        this.browser.set_title(utils.translate("My channel"));
+    } else {
         this.browser.set_title(utils.translate("Main channels"));
+    }
 };
 
 MSBrowserChannels.prototype.on_show = function () {
@@ -107,6 +110,8 @@ MSBrowserChannels.prototype.display_personal_channel = function () {
             if (response.success) {
                 obj.personal_channel_oid = response.oid;
                 obj.display_channel(response.oid);
+            } else if (response.error_code == 403) {
+                obj._on_channel_error({ error: utils.translate("You are not allowed to have a personnal channel.") });
             } else {
                 obj._on_channel_error(response);
             }
@@ -153,13 +158,17 @@ MSBrowserChannels.prototype.display_parent = function () {
 MSBrowserChannels.prototype._on_channel_error = function (response) {
     this.last_response = null;
 
-    var message;
+    var message = "<div class=\"messages\">";
     if (!this.browser.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.browser.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
-        message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this channel")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
+        message += "<div class=\"item-description\">";
+        message += "<div class=\"message error\">"+response.error+"</div>";
+        message += "<p>"+utils.translate("Please login to access this channel")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p>";
+        message += "</div>";
+    } else {
+        message += "<div class=\"message error\">"+response.error+"</div>";
     }
-    else
-        message = "<div class=\"error\">"+response.error+"</div>";
+    message += "</div>";
     this.$place.html(message);
 };
 

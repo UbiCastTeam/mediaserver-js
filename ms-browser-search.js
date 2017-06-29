@@ -263,13 +263,17 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
 MSBrowserSearch.prototype._on_ajax_error = function (response) {
     this.last_response = null;
 
-    var message;
+    var message = "<div class=\"messages\">";
     if (!this.browser.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.browser.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
-        message = "<div>"+response.error+"<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p></div>";
+        message += "<div class=\"item-description\">";
+        message += "<div class=\"message error\">"+response.error+"</div>";
+        message += "<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p>";
+        message += "</div>";
+    } else {
+        message += "<div class=\"message error\">"+response.error+"</div>";
     }
-    else
-        message = "<div class=\"error\">"+response.error+"</div>";
+    message += "</div>";
     this.$content.html(message);
 };
 

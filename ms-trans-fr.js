@@ -82,6 +82,7 @@ utils.add_translations({
     "Media does not exist.": "Le média n'existe pas.",
     "My channel": "Ma chaîne",
     "My media": "Mes médias",
+    "No contents.": "Pas de contenu.",
     "No information about error.": "Informations sur le média",
     "No information about media.": "Pas d'informations sur le média",
     "No results.": "Pas de résultats.",
@@ -171,5 +172,6 @@ utils.add_translations({
     "Views": "Vues",
     "views": "vues",
     "yes": "oui",
+    "You are not allowed to have a personnal channel.": "Vous n'avez pas la permission de disposer d'une chaîne personnelle.",
     "You are not logged in or your session has expired. Please login and retry.": "Vous n'êtes pas connecté ou votre session a expiré. Veuillez vous reconnecter puis réessayez."
 }, "fr");
