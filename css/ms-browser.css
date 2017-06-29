@@ -51,6 +51,8 @@
 }
 .ms-browser input {
     margin: 0;
+    padding: 3px;
+    box-sizing: border-box;
 }
 .ms-browser .ms-browser-clear {
     clear: both;
@@ -221,6 +223,10 @@
 }
 
 /* filters menu */
+.ms-browser-filters select,
+.ms-browser-filters input {
+    margin: 4px;
+}
 .ms-browser-filters #open_hidden_categories:hover {
     cursor: pointer;
 }

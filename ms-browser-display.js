@@ -115,15 +115,22 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     var opt_html = "<option value=\"\">"+utils.translate("unspecified")+"</option>";
     opt_html += "<option value=\"yes\">"+utils.translate("yes")+"</option>";
     opt_html += "<option value=\"no\">"+utils.translate("no")+"</option>";
-    html += "<div class=\"ms-browser-filters\"><b class=\"ms-browser-menu-title\">"+utils.translate("Filters:")+"</b><br/>";
+    html += "<div class=\"ms-browser-filters\"><b class=\"ms-browser-menu-title\">"+utils.translate("Filters:")+"</b>";
+    html += " <form id=\"ms_browser_filters_form\">";
     html += " <label for=\"ms_browser_filter_editable\">"+utils.translate("Editable:")+"</label>";
     html += " <select id=\"ms_browser_filter_editable\">"+opt_html+"</select>";
     if (this.displayable_content.length > 1 || this.displayable_content != "c") {
         html += " <br/>";
         html += " <label for=\"ms_browser_filter_validated\">"+utils.translate("Published:")+"</label>";
         html += " <select id=\"ms_browser_filter_validated\">"+opt_html+"</select>";
+        if (!this.lti_mode) {
+            html += " <br/>";
+            html += " <label for=\"ms_browser_filter_speaker\">"+utils.translate("Speaker:")+"</label>";
+            html += " <input type=\"text\" id=\"ms_browser_filter_speaker\" value=\"\"/>";
+            html += " <button type=\"submit\" class=\"button\">"+utils.translate("Ok")+"</button>";
+        }
     }
-
+    html += " </form>";
     html += "</div>";
     // TODO: pagination
     // html += "<div><b class=\"ms-browser-menu-title\">"+utils.translate("Number of elements per page:")+"</b><br/>";
@@ -149,9 +156,13 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         event.data.obj.channels.set_order($(this).val());
         event.data.obj.close_dropdown(event.data.$dropdown);
     });
-    $(".ms-browser-filters select", $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
-        event.data.obj.toggle_filter($(this));
+    $("#ms_browser_filters_form select", $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
+        $("#ms_browser_filters_form", event.data.$dropdown).submit();
+    });
+    $("#ms_browser_filters_form", $dropdown).submit({ obj: this, $dropdown: $dropdown }, function (event) {
+        event.data.obj.on_filters_submit($(this));
         event.data.obj.close_dropdown(event.data.$dropdown);
+        return false;
     });
     return this.$top_menu;
 };
@@ -207,16 +218,31 @@ MSBrowser.prototype.close_dropdown = function ($dropdown) {
     }
 };
 
-MSBrowser.prototype.toggle_filter = function ($select) {
-    var name = $select.attr("id").substring("ms_browser_".length);
-    var value = null;
-    switch ($select.val()) {
-        case "yes": value = true; break;
-        case "no": value = false; break;
-        default: break;
+MSBrowser.prototype.on_filters_submit = function ($form) {
+    var inputs = [
+        { type: "choice", id: "ms_browser_filter_editable", name: "filter_editable" },
+        { type: "choice", id: "ms_browser_filter_validated", name: "filter_validated" },
+        { type: "text", id: "ms_browser_filter_speaker", name: "filter_speaker" },
+    ];
+    var changed = false;
+    for (var i = 0; i < inputs.length; i++) {
+        var $input = $("#" + inputs[i].id, $form);
+        if ($input.length > 0) {
+            var value = $input.val();
+            if (inputs[i].type == "choice") {
+                switch (value) {
+                    case "yes": value = true; break;
+                    case "no": value = false; break;
+                    default: value = null; break;
+                }
+            }
+            if (this[inputs[i].name] !== value) {
+                this[inputs[i].name] = value;
+                changed = true;
+            }
+        }
     }
-    if (name == "filter_editable" || name == "filter_validated" || name == "filter_speaker") {
-        this[name] = value;
+    if (changed) {
         this.channels.refresh_display(true);
         this.latest.refresh_display(true);
         this.search.refresh_display(true);
@@ -860,8 +886,7 @@ MSBrowser.prototype.box_hide_info = function () {
 MSBrowser.prototype.display_categories = function () {
     var obj = this;
     if (this.site_settings_categories.length > 0) {
-        var html = " <br/>";
-        html += " <button type=\"button\" id=\"open_hidden_categories\" class=\"button\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\"></i></button>";
+        var html = " <button type=\"button\" id=\"open_hidden_categories\" class=\"button\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\"></i></button>";
         html += " <div id=\"hidden_categories\" class=\"hidden-visibility\">";
         html += " <label for=\"filter_no_categories\"><input id=\"filter_no_categories\" type=\"checkbox\"/><span>" + utils.translate("Unspecified") + "</span></label><br />";
         for (var i = 0; i < this.site_settings_categories.length; i++) {

@@ -100,8 +100,6 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
         data.validated = this.browser.filter_validated ? "yes" : "no";
     if (this.browser.filter_speaker !== null)
         data.speaker = this.browser.filter_speaker;
-    else if (this.browser.lti_mode)
-        data.speaker = "self";
     if (this.browser.filter_no_categories) {
         data.no_categories = true;
     } else {

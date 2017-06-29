@@ -96,6 +96,7 @@ MSBrowser.prototype.init = function () {
 
     if (!this.use_overlay && url_data.lti) {
         this.lti_mode = true;
+        this.filter_speaker = "self";
         this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "lti";
         this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "lti";
         this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "lti";

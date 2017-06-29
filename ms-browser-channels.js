@@ -182,7 +182,7 @@ MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
         data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
-    if (this.browser.filter_speaker !== null)
+    if (!this.browser.lti_mode && this.browser.filter_speaker !== null)
         data.speaker = this.browser.filter_speaker;
     if (this.browser.filter_no_categories) {
         data.no_categories = true;
