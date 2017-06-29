@@ -87,15 +87,33 @@ MSBrowserChannels.prototype.on_show = function () {
     }
 
     // load first channel
-    if (this.init_options.initial_state && this.init_options.initial_state.channel_slug)
+    if (this.init_options.initial_state && this.init_options.initial_state.channel_slug) {
         this.display_channel_by_slug(this.init_options.initial_state.channel_slug);
-    else
+    } else if (this.browser.lti_mode) {
+        this.display_personal_channel();
+    } else {
         this.display_channel(this.current_channel_oid);
+    }
 };
 
 MSBrowserChannels.prototype.set_order = function (order) {
     this.order = order ? order : "default";
     this.refresh_display(true);
+};
+MSBrowserChannels.prototype.display_personal_channel = function () {
+    var obj = this;
+    if (!this.personal_channel_oid) {
+        MSAPI.ajax_call("get_channels_personal", {}, function (response) {
+            if (response.success) {
+                obj.personal_channel_oid = response.oid;
+                obj.display_channel(response.oid);
+            } else {
+                obj._on_channel_error(response);
+            }
+        });
+    } else {
+        obj.display_channel(this.personal_channel_oid);
+    }
 };
 MSBrowserChannels.prototype.display_channel_by_slug = function (slug) {
     var obj = this;
@@ -164,6 +182,8 @@ MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
         data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
+    if (this.browser.filter_speaker !== null)
+        data.speaker = this.browser.filter_speaker;
     if (this.browser.filter_no_categories) {
         data.no_categories = true;
     } else {
@@ -203,30 +223,32 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     var $entry_links;
     if (oid != "0") {
         // back to parent button
-        var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : "0";
-        var parent_title = (parent_oid && this.browser.catalog[parent_oid]) ? this.browser.catalog[parent_oid].title : utils.translate("Parent channel");
-        var parent = {
-            oid: parent_oid,
-            title: parent_title,
-            slug: response.info.parent_slug,
-        };
-        var $back;
-        if (!this.browser.use_overlay) {
-            $back = $("<a class=\"button "+this.browser.btn_class+"\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
-        } else {
-            $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+"\"></button>");
-            $back.click({ obj: this, oid: parent.oid }, function (event) {
-                event.data.obj.display_channel(event.data.oid);
-            });
-        }
-        if (!this.browser.use_overlay && $(".navbar .back.button-text").length > 0) {
-            $back.html("<i class=\"fa fa-chevron-circle-left fa-fw fa-2x\" aria-hidden=\"true\"></i>");
-            $back.attr("title", utils.translate("Parent channel"));
-            $back.addClass("back").addClass("button-text");
-            $(".navbar .back.button-text").replaceWith($back);
-        } else {
-            $back.html("<i class=\"fa fa-chevron-circle-left\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Parent channel")+"</span>");
-            this.$menu.append($back);
+        if (!this.browser.lti_mode || oid != this.personal_channel_oid) {
+            var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : "0";
+            var parent_title = (parent_oid && this.browser.catalog[parent_oid]) ? this.browser.catalog[parent_oid].title : utils.translate("Parent channel");
+            var parent = {
+                oid: parent_oid,
+                title: parent_title,
+                slug: response.info.parent_slug,
+            };
+            var $back;
+            if (!this.browser.use_overlay) {
+                $back = $("<a class=\"button "+this.browser.btn_class+"\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
+            } else {
+                $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+"\"></button>");
+                $back.click({ obj: this, oid: parent.oid }, function (event) {
+                    event.data.obj.display_channel(event.data.oid);
+                });
+            }
+            if (!this.browser.use_overlay && $(".navbar .back.button-text").length > 0) {
+                $back.html("<i class=\"fa fa-chevron-circle-left fa-fw fa-2x\" aria-hidden=\"true\"></i>");
+                $back.attr("title", utils.translate("Parent channel"));
+                $back.addClass("back").addClass("button-text");
+                $(".navbar .back.button-text").replaceWith($back);
+            } else {
+                $back.html("<i class=\"fa fa-chevron-circle-left\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Parent channel")+"</span>");
+                this.$menu.append($back);
+            }
         }
         // current channel buttons
         var current_selectable = this.browser.selectable_content.indexOf("c") != -1 && (!this.browser.parent_selection_oid || response.selectable);
@@ -341,6 +363,8 @@ MSBrowserChannels.prototype.refresh_display = function (reset) {
         this.last_response = null;
     if (this.last_response)
         this._on_channel_content(this.last_response, this.current_channel_oid);
+    else if (this.browser.lti_mode)
+        this.display_personal_channel();
     else
         this.display_channel(this.current_channel_oid);
 };

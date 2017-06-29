@@ -13,6 +13,7 @@ function MSBrowser(options) {
     this.displayable_content = "cvlp";
     this.filter_editable = null;
     this.filter_validated = null;
+    this.filter_speaker = null;
     this.filter_categories = [];
     this.filter_no_categories = false;
     this.parent_selection_oid = null; // special for channel parent selection
@@ -39,8 +40,8 @@ function MSBrowser(options) {
 
     this.url_login = "/login/";
     this.url_channels = "/channels/";
-    this.url_search = "/search/";
     this.url_latest = "/latest/";
+    this.url_search = "/search/";
 
     utils.setup_class(this, options, [
         // allowed options
@@ -50,6 +51,7 @@ function MSBrowser(options) {
         "displayable_content",
         "filter_editable",
         "filter_validated",
+        "filter_speaker",
         "parent_selection_oid",
         "initial_oid",
         "initial_state",
@@ -88,16 +90,16 @@ MSBrowser.prototype.init = function () {
         this.iframe_mode = true;
         this.url_login = "/login/iframe/";
         this.url_channels += "?iframe";
-        this.url_search += "?iframe";
         this.url_latest += "?iframe";
+        this.url_search += "?iframe";
     }
 
     if (!this.use_overlay && url_data.lti) {
         this.lti_mode = true;
         this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "lti";
         this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "lti";
-        this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "lti";
         this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "lti";
+        this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "lti";
     }
 
     // get elements
@@ -109,8 +111,8 @@ MSBrowser.prototype.init = function () {
             this.init_options.current_channel_oid = this.current_selection.parent_oid;
     }
     this.channels = new MSBrowserChannels(this.init_options);
-    this.search = new MSBrowserSearch(this.init_options);
     this.latest = new MSBrowserLatest(this.init_options);
+    this.search = new MSBrowserSearch(this.init_options);
 
     this.build_widget();
 
@@ -294,16 +296,18 @@ MSBrowser.prototype.on_url_change = function () {
             slug = slug.substring(1);
         if (slug)
             this.channels.display_channel_by_slug(slug);
+        else if (this.lti_mode)
+            this.channels.display_personal_channel();
         else
             this.channels.display_channel("0");
         this.change_tab("channels", true);
     }
+    else if (path.indexOf(this.url_latest) === 0) {
+        this.change_tab("latest", true);
+    }
     else if (path.indexOf(this.url_search) === 0) {
         this.search.on_url_change();
         this.change_tab("search", true);
-    }
-    else if (path.indexOf(this.url_latest) === 0) {
-        this.change_tab("latest", true);
     }
 };
 MSBrowser.prototype.on_resize = function () {

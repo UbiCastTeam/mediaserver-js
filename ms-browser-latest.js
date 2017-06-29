@@ -28,8 +28,14 @@ function MSBrowserLatest(options) {
     this.init_options = options ? options : {};
 }
 
-MSBrowserLatest.prototype.get_menu_jq = function () {
+MSBrowserLatest.prototype.get_displayable_content = function () {
     var dc = this.browser.displayable_content;
+    if (dc.length > 1 && this.browser.lti_mode && dc.indexOf("c") != -1)
+        dc = dc.replace(/c/g, "");
+    return dc;
+};
+MSBrowserLatest.prototype.get_menu_jq = function () {
+    var dc = this.get_displayable_content();
     var html = "";
     html += "<div id=\"ms_browser_latest_menu\" style=\"display: none;\">";
     if (dc.length > 1 && dc.indexOf("c") != -1) {
@@ -77,7 +83,7 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
         return;
     this.latest_loading = true;
 
-    var dc = this.browser.displayable_content;
+    var dc = this.get_displayable_content();
     var data = {};
     if (dc)
         data.content = dc;
@@ -92,6 +98,10 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
         data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
+    if (this.browser.filter_speaker !== null)
+        data.speaker = this.browser.filter_speaker;
+    else if (this.browser.lti_mode)
+        data.speaker = "self";
     if (this.browser.filter_no_categories) {
         data.no_categories = true;
     } else {

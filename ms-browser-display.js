@@ -8,17 +8,27 @@
 
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
+    var channels_label, search_label, latest_label;
+    if (this.lti_mode) {
+        channels_label = utils.translate("My channel");
+        latest_label = utils.translate("My media");
+        search_label = utils.translate("Search in my media");
+    } else {
+        channels_label = utils.translate("Channels");
+        latest_label = utils.translate("Latest content");
+        search_label = utils.translate("Search");
+    }
     var html = "<div class=\"ms-browser ms-browser-container "+(this.use_overlay ? "in-overlay" : "")+"\">";
     html += "<div class=\"ms-browser-header\">";
     html +=     "<div class=\"ms-browser-menu\">";
     if (!this.use_overlay) {
-        html += "<a id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_channels+"\"><i class=\"fa fa-folder-open\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Channels")+"</span></a>";
-        html += "<a id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_search+"\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Search")+"</span></a>";
-        html += "<a id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_latest+"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Latest content")+"</span></a>";
+        html += "<a id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_channels+"\"><i class=\"fa fa-folder-open\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+channels_label+"</span></a>";
+        html += "<a id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_latest+"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+latest_label+"</span></a>";
+        html += "<a id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_search+"\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+search_label+"</span></a>";
     } else {
-        html += "<button type=\"button\" id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-folder-open\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Channels")+"</span></button>";
-        html += "<button type=\"button\" id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Search")+"</span></button>";
-        html += "<button type=\"button\" id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Latest content")+"</span></button>";
+        html += "<button type=\"button\" id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-folder-open\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+channels_label+"</span></button>";
+        html += "<button type=\"button\" id=\"ms_browser_latest_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+latest_label+"</span></button>";
+        html += "<button type=\"button\" id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+search_label+"</span></button>";
     }
     html +=     "</div>";
     html +=     "<div class=\"ms-browser-title\"></div>";
@@ -48,12 +58,12 @@ MSBrowser.prototype.build_widget = function () {
         $bar_buttons.addClass("ms-browser-dropdown-right");
     }
     $bar_buttons.append(this.latest.get_menu_jq());
-    $bar_buttons.append(this.search.get_menu_jq());
     $bar_buttons.append(this.channels.get_menu_jq());
+    $bar_buttons.append(this.search.get_menu_jq());
     this.$main = $(".ms-browser-main", this.$widget);
     this.$main.append(this.latest.get_content_jq());
-    this.$main.append(this.search.get_content_jq());
     this.$main.append(this.channels.get_content_jq());
+    this.$main.append(this.search.get_content_jq());
     this.$menu = $(".ms-browser-menu", this.$widget);
 
     // get initial media or channel info
@@ -64,11 +74,11 @@ MSBrowser.prototype.build_widget = function () {
     $("#ms_browser_channels_tab", this.$menu).click({ obj: this }, function (event) {
         event.data.obj.change_tab("channels"); return false;
     });
-    $("#ms_browser_search_tab", this.$menu).click({ obj: this }, function (event) {
-        event.data.obj.change_tab("search"); return false;
-    });
     $("#ms_browser_latest_tab", this.$menu).click({ obj: this }, function (event) {
         event.data.obj.change_tab("latest"); return false;
+    });
+    $("#ms_browser_search_tab", this.$menu).click({ obj: this }, function (event) {
+        event.data.obj.change_tab("search"); return false;
     });
 };
 MSBrowser.prototype.get_top_menu_jq = function () {
@@ -205,11 +215,11 @@ MSBrowser.prototype.toggle_filter = function ($select) {
         case "no": value = false; break;
         default: break;
     }
-    if (name == "filter_editable" || name == "filter_validated") {
+    if (name == "filter_editable" || name == "filter_validated" || name == "filter_speaker") {
         this[name] = value;
         this.channels.refresh_display(true);
-        this.search.refresh_display(true);
         this.latest.refresh_display(true);
+        this.search.refresh_display(true);
     }
 };
 MSBrowser.prototype.display_as_list = function () {
@@ -222,8 +232,8 @@ MSBrowser.prototype.display_as_list = function () {
         $("#global").addClass("max-width-1200");
     utils.set_cookie("catalog-display_mode", this.display_mode);
     this.channels.refresh_display();
-    this.search.refresh_display();
     this.latest.refresh_display();
+    this.search.refresh_display();
 };
 MSBrowser.prototype.display_as_thumbnails = function () {
     if ($("#ms_browser_display_as_thumbnails", this.$top_menu).hasClass("active"))
@@ -235,8 +245,8 @@ MSBrowser.prototype.display_as_thumbnails = function () {
         $("#global").removeClass("max-width-1200");
     utils.set_cookie("catalog-display_mode", this.display_mode);
     this.channels.refresh_display();
-    this.search.refresh_display();
     this.latest.refresh_display();
+    this.search.refresh_display();
 };
 MSBrowser.prototype.get_active_tab = function () {
     var $active = $(".ms-browser-tab.active", this.$menu);
@@ -244,12 +254,10 @@ MSBrowser.prototype.get_active_tab = function () {
     if (!name && !this.use_overlay) {
         if ($(".ms-browser").hasClass("channels")) {
             name = "channels";
-        }
-        else if ($(".ms-browser").hasClass("search")) {
-            name = "search";
-        }
-        else if ($(".ms-browser").hasClass("latest")) {
+        } else if ($(".ms-browser").hasClass("latest")) {
             name = "latest";
+        } else if ($(".ms-browser").hasClass("search")) {
+            name = "search";
         }
     }
     return name;
@@ -280,10 +288,10 @@ MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
 
     if (!this.use_overlay && !no_pushstate) {
         var url;
-        if (tab == "latest")
-            url = this.url_latest;
-        else if (tab == "search")
+        if (tab == "search")
             url = this.url_search;
+        else if (tab == "latest")
+            url = this.url_latest;
         else
             url = this.url_channels + window.location.hash;
         window.history.pushState({"ms_tab": tab}, tab, url);
@@ -881,8 +889,8 @@ MSBrowser.prototype.display_categories = function () {
             else
                 obj.filter_categories.splice(obj.filter_categories.indexOf(this.value), 1);
             obj.channels.refresh_display(true);
-            obj.search.refresh_display(true);
             obj.latest.refresh_display(true);
+            obj.search.refresh_display(true);
         });
         $("#filter_no_categories", this.$top_menu).click(function () {
             var checked = this.checked;
@@ -891,13 +899,13 @@ MSBrowser.prototype.display_categories = function () {
                 $("#hidden_categories .checkbox", obj.$top_menu).prop("checked", false);
                 obj.filter_no_categories = true;
                 obj.channels.refresh_display(true);
-                obj.search.refresh_display(true);
                 obj.latest.refresh_display(true);
+                obj.search.refresh_display(true);
             } else {
                 obj.filter_no_categories = false;
                 obj.channels.refresh_display(true);
-                obj.search.refresh_display(true);
                 obj.latest.refresh_display(true);
+                obj.search.refresh_display(true);
             }
         });
     }

@@ -40,6 +40,12 @@ function MSBrowserSearch(options) {
     this.init_options = options ? options : {};
 }
 
+MSBrowserSearch.prototype.get_displayable_content = function () {
+    var dc = this.browser.displayable_content;
+    if (dc.length > 1 && this.browser.lti_mode && dc.indexOf("c") != -1)
+        dc = dc.replace(/c/g, "");
+    return dc;
+};
 MSBrowserSearch.prototype.should_be_displayed = function (dc, items) {
     if (!items)
         return true;
@@ -50,7 +56,7 @@ MSBrowserSearch.prototype.should_be_displayed = function (dc, items) {
     return false;
 };
 MSBrowserSearch.prototype.get_menu_jq = function () {
-    var dc = this.browser.displayable_content;
+    var dc = this.get_displayable_content();
     var i, field;
     var html = "";
     html += "<div id=\"ms_browser_search_menu\" style=\"display: none;\">";
@@ -145,7 +151,7 @@ MSBrowserSearch.prototype.on_url_change = function () {
     // Example of search url: http://192.168.42.8:8000/search/?text=test&in_titles=on&in_descriptions=on&in_keywords=on&in_licenses=on&in_companies=on&in_annotations=on&in_photos=on&for_channels=on&for_videos=on&for_lives=on&for_photos=on
     var data = this.browser.parse_url();
 
-    var dc = this.browser.displayable_content;
+    var dc = this.get_displayable_content();
     var i, field, value;
     for (i=0; i < this.search_in_fields.length; i++) {
         field = this.search_in_fields[i];
@@ -179,7 +185,7 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
     if (!search)
         return;
     this.browser.display_loading();
-    var dc = this.browser.displayable_content;
+    var dc = this.get_displayable_content();
     var url_query = "text="+search;
     // get fields to search in
     var fields = "";
@@ -222,6 +228,10 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
         data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)
         data.validated = this.browser.filter_validated ? "yes" : "no";
+    if (this.browser.filter_speaker !== null)
+        data.speaker = this.browser.filter_speaker;
+    else if (this.browser.lti_mode)
+        data.speaker = "self";
     if (this.browser.filter_no_categories) {
         data.no_categories = true;
     } else {
