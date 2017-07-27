@@ -245,8 +245,8 @@ var MSAPI = {
             dataType: "json",
             cache: false,
             success: function (response) {
-                if (!response.success)
-                    response.error = response.error ? response.error : utils.translate("No information about error.");
+                if (!response.success && !response.error)
+                    response.error = response.message ? response.message : utils.translate("No information about error.");
                 if (callback)
                     return callback(response);
             },
