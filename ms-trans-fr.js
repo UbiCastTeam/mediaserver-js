@@ -14,7 +14,7 @@ utils.add_translations({
     "Added on": "Ajouté le",
     "all": "tout",
     "An error occured during request:": "Une erreur est survenue pendant la requête :",
-    "An error occured in medias server. Please try again later.": "La requête a échoué. Veuillez réessayer plus tard.",
+    "An error occured in the server. Please try again later.": "La requête a échoué. Veuillez réessayer plus tard.",
     "An internal server error occured. An email has been sent to the support team.": "Une erreur interne au serveur est survenue. Un email a été envoyé à l'équipe de support afin de résoudre le problème.",
     "Annotations last month": "Annotations ce mois",
     "Annotations": "Annotations",
