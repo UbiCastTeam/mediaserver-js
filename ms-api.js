@@ -150,6 +150,10 @@ var MSAPI = {
             method: "POST",
             url: "/api/v2/lives/change-slide/"
         },
+        lives_change_status: {
+            method: "POST",
+            url: "/api/v2/lives/change-status/"
+        },
         lives_get_viewers: {
             method: "GET",
             url: "/api/v2/lives/get-viewers/"
