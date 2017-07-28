@@ -21,7 +21,7 @@ function MSBrowserSearch(options) {
         { name: "in_company", label: "companies", initial: false, items: "vlp" },
         { name: "in_location", label: "locations", initial: false, items: "vlp" },
         { name: "in_categories", label: "categories", initial: false, items: "vlp" },
-        { name: "in_annotations", label: "annotations", initial: false, items: "vlp" },
+        { name: "in_annotations", label: "comments, slides, ...", initial: false, items: "vlp" },
         { name: "in_photos", label: "photos", initial: false, items: "p" },
         { name: "in_extref", label: "external references", initial: true, items: null }
     ];

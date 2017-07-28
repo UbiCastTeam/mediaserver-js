@@ -35,6 +35,7 @@ utils.add_translations({
     "chapters": "chapitres",
     "Click to display the content of this channel": "Cliquez pour afficher cette chaîne",
     "Click to select this media": "Cliquez pour sélectionner ce média",
+    "comments, slides, ...": "commentaires, diapositives, ...",
     "companies": "sociétés",
     "Created on": "Créé le",
     "Creation date, ascending": "Date de création, croissante",
