@@ -173,7 +173,7 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         if (item.date_label && item.date_label != this.date_label) {
             this.date_label = item.date_label;
             this.$section = $("<div class=\"ms-browser-section\"></div>");
-            this.$section.append("<h3 class=\"ms-browser-section-title\">"+item.date_label+"</h3>");
+            this.$section.append("<h3>"+item.date_label+"</h3>");
             this.$place.append(this.$section);
         }
         else if (!this.$section) {

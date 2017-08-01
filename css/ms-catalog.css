@@ -39,10 +39,6 @@ nav.navbar .buttons-right {
 .ms-browser .ms-browser-section {
     overflow: visible;
 }
-.ms-browser .ms-browser-main .ms-browser-section .ms-browser-section-title {
-    font-size: 1.8em;
-    padding: 15px;
-}
 .ms-browser .ms-browser-main .ms-browser-section {
     padding: 20px 20px;
 }

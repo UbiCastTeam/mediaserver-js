@@ -101,11 +101,11 @@ MSBrowser.prototype.get_top_menu_jq = function () {
 
     html += "<div class=\"ms-browser-dropdown-menu\">";
     // display mode
-    html += "<div><b class=\"ms-browser-menu-title\">"+utils.translate("Display mode:")+"</b><br/>";
+    html += "<div><h4>"+utils.translate("Display mode:")+"</h4>";
     html += "<button type=\"button\" class=\"button "+(this.display_mode == "list" ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
     html += "<button type=\"button\" class=\"button "+(this.display_mode == "thumbnail" ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
     // channel sorting
-    html += "<div class=\"ms-browser-channel-order\"><label class=\"ms-browser-menu-title\" for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label><br/>";
+    html += "<div class=\"ms-browser-channel-order\"><h4><label for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label></h4>";
     html += " <select id=\"ms_browser_order_channel\">";
     for (var index in sorting_values)
         for (var key in sorting_values[index])
@@ -115,7 +115,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     var opt_html = "<option value=\"\">"+utils.translate("unspecified")+"</option>";
     opt_html += "<option value=\"yes\">"+utils.translate("yes")+"</option>";
     opt_html += "<option value=\"no\">"+utils.translate("no")+"</option>";
-    html += "<div class=\"ms-browser-filters\"><b class=\"ms-browser-menu-title\">"+utils.translate("Filters:")+"</b>";
+    html += "<div class=\"ms-browser-filters\"><h4>"+utils.translate("Filters:")+"</h4>";
     html += " <form id=\"ms_browser_filters_form\">";
     html += " <label for=\"ms_browser_filter_editable\">"+utils.translate("Editable:")+"</label>";
     html += " <select id=\"ms_browser_filter_editable\">"+opt_html+"</select>";
@@ -133,7 +133,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     html += " </form>";
     html += "</div>";
     // TODO: pagination
-    // html += "<div><b class=\"ms-browser-menu-title\">"+utils.translate("Number of elements per page:")+"</b><br/>";
+    // html += "<div><h4>"+utils.translate("Number of elements per page:")+"</h4>";
     // html += "    <input type=\"number\" class=\"center\" id=\"elements_per_page\" value=\"30\"/>";
     // html += "<button type=\"button\">"+utils.translate("Ok")+"</button></div>";
     html += "</div>";
@@ -356,7 +356,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         selectable = this.selectable_content.indexOf("c") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
         if (cat_oid && cat_oid != "0") {
-            $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Sub channels")+"</h3>");
+            $section.append("<h3>"+utils.translate("Sub channels")+"</h3>");
         }
 
         for (i = 0; i < data.channels.length; i++) {
@@ -371,7 +371,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         // live streams
         selectable = this.selectable_content.indexOf("l") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
-        $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Live streams")+"</h3>");
+        $section.append("<h3>"+utils.translate("Live streams")+"</h3>");
 
         for (i = 0; i < data.live_streams.length; i++) {
             $section.append(this.get_content_entry("live", data.live_streams[i], selectable, tab));
@@ -382,7 +382,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         // videos
         selectable = this.selectable_content.indexOf("v") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
-        $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Videos")+"</h3>");
+        $section.append("<h3>"+utils.translate("Videos")+"</h3>");
         for (i = 0; i < data.videos.length; i++) {
             $section.append(this.get_content_entry("video", data.videos[i], selectable, tab));
         }
@@ -392,7 +392,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         // photos groups
         selectable = this.selectable_content.indexOf("p") != -1;
         $section = $("<div class=\"ms-browser-section\"></div>");
-        $section.append("<h3 class=\"ms-browser-section-title\">"+utils.translate("Photos groups")+"</h3>");
+        $section.append("<h3>"+utils.translate("Photos groups")+"</h3>");
         for (i = 0; i < data.photos_groups.length; i++) {
             $section.append(this.get_content_entry("photos", data.photos_groups[i], selectable, tab));
         }

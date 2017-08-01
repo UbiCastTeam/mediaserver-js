@@ -151,15 +151,19 @@
 .ms-browser .ms-browser-section-links + h3 + div {
     clear: both;
 }
-.ms-browser .ms-browser-menu-title,
-.ms-browser .ms-browser-section-title {
-    font-size: 125%;
+.ms-browser h3,
+.ms-browser h4 {
+    padding: 5px 10px;
     font-weight: bold;
     text-decoration: italic;
     color: #404040;
-    padding: 4px;
 }
-.ms-browser .ms-browser-menu-title {
+.ms-browser.in-overlay h3,
+.ms-browser h4 {
+    font-size: 125%;
+}
+.ms-browser h4 {
+    padding: 0;
     margin-bottom: 4px;
     margin-left: -8px;
 }
