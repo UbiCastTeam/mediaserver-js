@@ -255,6 +255,15 @@ MSBrowser.prototype._pick = function (oid, result, action, no_close) {
         }
     }
 };
+MSBrowser.prototype.remove = function (oid) {
+    // remove given oid from display without reloading page
+    // this do not remove the object in the server
+    if (!oid || !this.catalog[oid])
+        return;
+    this.channels.remove(oid);
+    this.latest.remove(oid);
+    this.search.remove(oid);
+};
 MSBrowser.prototype.get_last_pick = function () {
     return this.current_selection;
 };

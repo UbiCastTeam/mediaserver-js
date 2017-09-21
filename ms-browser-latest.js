@@ -224,3 +224,7 @@ MSBrowserLatest.prototype.refresh_display = function (reset) {
         this.load_latest();
     }
 };
+
+MSBrowserLatest.prototype.remove = function (oid) {
+    this.browser.remove_oid_from_tab(this, oid);
+};

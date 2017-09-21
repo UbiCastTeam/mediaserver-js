@@ -233,18 +233,20 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
     if (oid != "0") {
         // back to parent button
         if (!this.browser.lti_mode || oid != this.personal_channel_oid) {
-            var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : "0";
-            var parent_title = (parent_oid && this.browser.catalog[parent_oid]) ? this.browser.catalog[parent_oid].title : utils.translate("Parent channel");
+            var parent_oid = response.info.parent_oid ? response.info.parent_oid : "0";
+            var parent_title = response.info.parent_title ? response.info.parent_title : utils.translate("Parent channel");
             var parent = {
                 oid: parent_oid,
                 title: parent_title,
                 slug: response.info.parent_slug,
             };
+            if (response.info.parent_oid && response.info.parent_slug)
+                this.browser.update_catalog(parent);
             var $back;
             if (!this.browser.use_overlay) {
-                $back = $("<a class=\"button "+this.browser.btn_class+"\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
+                $back = $("<a class=\"button "+this.browser.btn_class+" back-button\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
             } else {
-                $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+"\"></button>");
+                $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+" back-button\"></button>");
                 $back.click({ obj: this, oid: parent.oid }, function (event) {
                     event.data.obj.display_channel(event.data.oid);
                 });
@@ -376,4 +378,18 @@ MSBrowserChannels.prototype.refresh_display = function (reset) {
         this.display_personal_channel();
     else
         this.display_channel(this.current_channel_oid);
+};
+
+MSBrowserChannels.prototype.remove = function (oid) {
+    if (this.current_channel_oid == oid) {
+        // display parent channel
+        var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : "0";
+        if (!this.browser.use_overlay && this.browser.catalog[parent_oid] && this.browser.catalog[parent_oid].slug) {
+            window.location.hash = "#"+this.browser.catalog[parent_oid].slug;
+        } else {
+            this.display_channel(parent_oid);
+        }
+    } else {
+        this.browser.remove_oid_from_tab(this, oid);
+    }
 };

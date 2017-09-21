@@ -935,3 +935,24 @@ MSBrowser.prototype.display_categories = function () {
         });
     }
 };
+MSBrowser.prototype.remove_oid_from_tab = function (tab_obj, oid) {
+    $(".item-entry-"+oid, tab_obj.$content).remove();
+    if (tab_obj.last_response) {
+        var sections = ["items", "channels", "live_streams", "videos", "photos_groups"];
+        for (var j = 0; j < sections.length; j++) {
+            var index = -1;
+            if (tab_obj.last_response[sections[j]]) {
+                for (var i = 0; i < tab_obj.last_response[sections[j]].length; i++) {
+                    if (tab_obj.last_response[sections[j]][i].oid == oid) {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            if (index != -1) {
+                tab_obj.last_response[sections[j]].splice(index, 1);
+                break;
+            }
+        }
+    }
+};

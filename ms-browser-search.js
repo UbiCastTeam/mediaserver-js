@@ -317,3 +317,7 @@ MSBrowserSearch.prototype.refresh_display = function (reset) {
     else
         this.on_search_submit(true);
 };
+
+MSBrowserSearch.prototype.remove = function (oid) {
+    this.browser.remove_oid_from_tab(this, oid);
+};
