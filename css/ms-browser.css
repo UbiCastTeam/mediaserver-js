@@ -430,6 +430,7 @@
 .ms-browser .ms-browser-search-form input {
     width: auto;
     padding: 3px;
+    line-height: normal;
 }
 .ms-browser .ms-browser-search-matching {
     padding: 10px 30px;
