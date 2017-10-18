@@ -331,7 +331,9 @@ MSBrowser.prototype.on_resize = function () {
 MSBrowser.prototype.load_categories = function () {
     var obj = this;
     MSAPI.ajax_call("list_categories", {}, function (response) {
-        obj.site_settings_categories = response.data;
-        obj.display_categories();
+        if (response.data) {
+            obj.site_settings_categories = response.data;
+            obj.display_categories();
+        }
     });
 };
