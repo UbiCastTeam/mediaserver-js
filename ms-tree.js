@@ -147,14 +147,14 @@ MSTreeManager.prototype.load_tree = function (parent_oid, callback) {
             if (xhr.status == 404)
                 return obj._ajax_cb({ success: false, error: utils.translate("Channel does not exist.") }, parent_oid, $target, callback);
             if (xhr.status == 500)
-                return obj._ajax_cb({ success: false, error: utils.translate("An error occured in the server. Please try again later.") }, parent_oid, $target, callback);
+                return obj._ajax_cb({ success: false, error: utils.translate("An error occurred in the server. Please try again later.") }, parent_oid, $target, callback);
         }
         if (textStatus == "timeout")
             obj._ajax_cb({ success: false, error: utils.translate("Unable to get channels tree. Request timed out.") }, parent_oid, $target, callback);
         else if (textStatus == "error")
             obj._ajax_cb({ success: false, error: utils.translate("The server cannot be reached.") }, parent_oid, $target, callback);
         else
-            obj._ajax_cb({ success: false, error: utils.translate("An error occured during request:")+"<br/>&nbsp;&nbsp;&nbsp;&nbsp;"+textStatus+" "+thrownError }, parent_oid, $target, callback);
+            obj._ajax_cb({ success: false, error: utils.translate("An error occurred during request:")+"<br/>&nbsp;&nbsp;&nbsp;&nbsp;"+textStatus+" "+thrownError }, parent_oid, $target, callback);
     };
     if (this.tree_url) {
         $.ajax({

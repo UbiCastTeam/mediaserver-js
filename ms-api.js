@@ -24,7 +24,7 @@ var MSAPI = {
         401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
         403: utils.translate("Access denied."),
         404: utils.translate("Element not found."),
-        500: utils.translate("An internal server error occured. An email has been sent to the support team."),
+        500: utils.translate("An internal server error occurred. An email has been sent to the support team."),
         timeout: utils.translate("The connection timed out. Please retry later."),
         unreachable: utils.translate("The server cannot be reached.")
     },
