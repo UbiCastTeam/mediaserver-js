@@ -213,7 +213,7 @@ MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callba
                 if (this.on_change)
                     html += "<button type=\"button\" data-ref=\""+channel.oid+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</button>";
                 else
-                    html += "<a href=\""+this.channels_base_url+channel[this.channels_url_field]+"\" class=\"channel-btn" + (channel.channels ? "" : " aside-list-btn") + "\">"+utils.escape_html(channel.title)+"</a>";
+                    html += "<a href=\""+this.channels_base_url+channel[this.channels_url_field]+"\" class=\"channel-btn aside-list-btn" + (channel.channels ? "" : " aside-list-btn") + "\">"+utils.escape_html(channel.title)+"</a>";
                 html += "</div>";
                 if (channel.channels)
                     html += "<ul class=\"list border-color-blue\" id=\"" + this.id_prefix + "tree_channel_"+channel.oid+"\"></ul>";
