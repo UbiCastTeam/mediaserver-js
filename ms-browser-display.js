@@ -723,9 +723,9 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
             url = "/add-content/channel/";
     } else if (action == "add_video") {
         if (item && item.oid != "0")
-            url = "/add-content/?in="+item.oid+"#add_video";
+            url = "/add-content/?in="+item.oid+"#add_media_by_upload";
         else
-            url = "/add-content/#add_video";
+            url = "/add-content/#add_media_by_upload";
     }
 
     if (absolute) {
