@@ -508,7 +508,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             bottom_bar += "<span class=\"item-entry-date\">" + utils.translate("Created on") + " " +
                         utils.get_date_display(item.creation) + "</span>";
         if (item.short_description)
-            bottom_bar += "<span class=\"item-entry-description\">" + $(item.short_description).text() + "</span>";
+            bottom_bar += "<span class=\"item-entry-description\">" + $("<div>" + item.short_description + "</div>").text() + "</span>";
         if (item.views) {
             bottom_bar += "<span class=\"item-entry-views\">" + item.views + " " + utils.translate("views");
             if (item.views_last_month)
