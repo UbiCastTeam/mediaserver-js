@@ -51,9 +51,16 @@ MSBrowserChannels.prototype.get_content_jq = function () {
 MSBrowserChannels.prototype.refresh_title = function () {
     var item = this.last_response ? this.last_response.info : undefined;
     if (item && item.oid != "0") {
-        var html = "<span class=\"item-entry-preview\"><img src=\""+item.thumb+"\"/></span> "+utils.escape_html(item.title);
-        if (this.browser.current_selection && this.browser.current_selection.oid == item.oid)
+        var html = "<span class=\"item-entry-preview\"><img src=\""+item.thumb+"\"/></span>";
+        html += "<span class=\"channel-titles-place\">";
+        if (!this.browser.use_overlay && item.parent_title) {
+            html += "<a class=\"parent-channel-title\" href=\"#" + item.parent_slug + "\">"+utils.escape_html(item.parent_title)+"</a>";
+        }
+        html += "<span class=\"channel-title\">"+utils.escape_html(item.title)+"</span>";
+        html += "</span>";
+        if (this.browser.current_selection && this.browser.current_selection.oid == item.oid) {
             html = "<span class=\"selected\">"+html+"</span>";
+        }
         this.browser.set_title(item.title, html);
     } else if (this.browser.lti_mode) {
         this.browser.set_title(utils.translate("My channel"));
