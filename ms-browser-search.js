@@ -25,6 +25,16 @@ function MSBrowserSearch(options) {
         { name: "in_photos", label: "photos", initial: false, items: "p" },
         { name: "in_extref", label: "external references", initial: true, items: null }
     ];
+    if (options.default_search_in) {
+        for (var i = 0; i < this.search_in_fields.length; i++) {
+            var name = this.search_in_fields[i].name.replace("in_", "");
+            if (options.default_search_in.indexOf(name) !== -1) {
+                this.search_in_fields[i].initial = true;
+            } else {
+                this.search_in_fields[i].initial = false;
+            }
+        }
+    }
     this.search_for_fields = [
         { name: "for_channels", label: "channels", initial: true, items: "c" },
         { name: "for_videos", label: "videos", initial: true, items: "v" },

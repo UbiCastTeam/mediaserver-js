@@ -43,6 +43,8 @@ function MSBrowser(options) {
     this.url_latest = "/latest/";
     this.url_search = "/search/";
 
+    this.default_search_in = [];
+
     utils.setup_class(this, options, [
         // allowed options
         "title",
@@ -58,7 +60,8 @@ function MSBrowser(options) {
         "on_pick",
         "btn_class",
         "tree_manager",
-        "display_itunes_rss"
+        "display_itunes_rss",
+        "default_search_in"
     ]);
 
     MSAPI.configure(options);
