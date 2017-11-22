@@ -492,6 +492,9 @@
 .ms-browser-title .selected {
     color: #008750;
 }
+.ms-browser-title .item-entry-preview {
+    margin-right: 10px;
+}
 .ms-items .item-entry-preview {
     margin: 10px;
     width: 240px;

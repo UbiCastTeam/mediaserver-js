@@ -23,6 +23,11 @@ nav.navbar .buttons-right {
 nav.navbar .buttons-right {
     float: right;
 }
+h1 .item-entry-preview img {
+    margin-right: 10px;
+    max-width: 100px;
+    max-height: 100px;
+}
 h1 .channel-titles-place {
     display: inline-block;
     vertical-align: middle;
