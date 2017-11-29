@@ -22,8 +22,7 @@ function MSBrowserLatest(options) {
 
     utils.setup_class(this, options, [
         // allowed options
-        "browser",
-        "display_itunes_rss"
+        "browser"
     ]);
     this.init_options = options ? options : {};
 }
@@ -38,14 +37,37 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
     var dc = this.get_displayable_content();
     var html = "";
     html += "<div id=\"ms_browser_latest_menu\" style=\"display: none;\">";
-    if (dc.length > 1 && dc.indexOf("c") != -1) {
-        html += "<input id=\"latest_display_channels\" type=\"checkbox\">";
-        html += " <label for=\"latest_display_channels\">"+utils.translate("Display channels")+"</label>";
+    if (dc.length > 1) {
+        html +=     "<div class=\"ms-browser-dropdown\" id=\"ms_browser_latest_types_dropdown\">";
+        html +=         "<button type=\"button\" class=\"button ms-browser-dropdown-button "+this.browser.btn_class+"\">"+utils.translate("Content types")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
+        html +=         "<div class=\"ms-browser-dropdown-menu ms-browser-latest-types\">";
+        html +=             "<h4>"+utils.translate("Content types to display:")+"</h4>";
+        if (dc.indexOf("c") != -1) {
+            html += "<p><input id=\"latest_display_channel\" type=\"checkbox\">";
+            html += " <label for=\"latest_display_channel\">"+utils.translate("channels")+"</label></p>";
+        }
+        if (dc.indexOf("v") != -1) {
+            html += "<p><input id=\"latest_display_video\" type=\"checkbox\" checked=\"checked\">";
+            html += " <label for=\"latest_display_video\">"+utils.translate("videos")+"</label></p>";
+        }
+        if (dc.indexOf("l") != -1) {
+            html += "<p><input id=\"latest_display_live\" type=\"checkbox\" checked=\"checked\">";
+            html += " <label for=\"latest_display_live\">"+utils.translate("live streams")+"</label></p>";
+        }
+        if (dc.indexOf("p") != -1) {
+            html += "<p><input id=\"latest_display_photos\" type=\"checkbox\" checked=\"checked\">";
+            html += " <label for=\"latest_display_photos\">"+utils.translate("photos")+"</label></p>";
+        }
+        html +=         "</div>";
+        html +=     "</div>";
     }
     html += "</div>";
     this.$menu = $(html);
     // events
-    $("#latest_display_channels", this.$menu).change({ obj: this }, function (event) { event.data.obj.refresh_display(true); });
+    if (dc.length > 1) {
+        this.browser.setup_dropdown($("#ms_browser_latest_types_dropdown", this.$menu));
+        $(".ms-browser-latest-types input", this.$menu).change({ obj: this }, function (event) { event.data.obj.refresh_display(true); });
+    }
     return this.$menu;
 };
 MSBrowserLatest.prototype.get_content_jq = function () {
@@ -85,15 +107,18 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
 
     var dc = this.get_displayable_content();
     var data = {};
-    if (dc)
-        data.content = dc;
-    if (dc.length > 1 && dc.indexOf("c") != -1 && !$("#latest_display_channels", this.$main).is(":checked")) {
+    if (dc.length > 1) {
         data.content = "";
-        for (var i=0; i < dc.length; i++) {
-            if (dc[i] != "c")
-                data.content += dc[i];
-        }
-    }
+        if (dc.indexOf("c") != -1 && $("#latest_display_channel", this.$menu).is(":checked"))
+            data.content += "c";
+        if (dc.indexOf("v") != -1 && $("#latest_display_video", this.$menu).is(":checked"))
+            data.content += "v";
+        if (dc.indexOf("l") != -1 && $("#latest_display_live", this.$menu).is(":checked"))
+            data.content += "l";
+        if (dc.indexOf("p") != -1 && $("#latest_display_photos", this.$menu).is(":checked"))
+            data.content += "p";
+    } else if (dc)
+        data.content = dc;
     if (this.browser.filter_editable !== null)
         data.editable = this.browser.filter_editable ? "yes" : "no";
     if (this.browser.filter_validated !== null)

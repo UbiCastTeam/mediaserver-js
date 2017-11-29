@@ -44,8 +44,7 @@ function MSBrowserSearch(options) {
 
     utils.setup_class(this, options, [
         // allowed options
-        "browser",
-        "display_itunes_rss"
+        "browser"
     ]);
     this.init_options = options ? options : {};
 }
@@ -70,13 +69,13 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     var i, field;
     var html = "";
     html += "<div id=\"ms_browser_search_menu\" style=\"display: none;\">";
-    html += "<form class=\"ms-browser-search-form\" method=\"get\" action=\".\" onsubmit=\"javascript: return false;\">";
-    html +=     "<label for=\"ms_browser_search_text\"><span class=\"hidden-below-800\">"+utils.translate("Search:")+"</span></label>";
-    html +=     " <input id=\"ms_browser_search_text\" type=\"text\" value=\"\">";
-    html +=     " <button type=\"submit\" class=\"button\" id=\"ms_browser_search_start\">"+utils.translate("Go")+"</button>";
-    html += "</form>";
+    html +=     "<form class=\"ms-browser-search-form\" method=\"get\" action=\".\" onsubmit=\"javascript: return false;\">";
+    html +=         "<label for=\"ms_browser_search_text\"><span class=\"hidden-below-800\">"+utils.translate("Search:")+"</span></label>";
+    html +=         " <input id=\"ms_browser_search_text\" type=\"text\" value=\"\">";
+    html +=         " <button type=\"submit\" class=\"button\" id=\"ms_browser_search_start\">"+utils.translate("Go")+"</button>";
+    html +=     "</form>";
     html +=     "<div class=\"ms-browser-dropdown\" id=\"ms_browser_search_in_dropdown\">";
-    html +=         "<button type=\"button\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\">"+utils.translate("Search in")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
+    html +=         "<button type=\"button\" class=\"button ms-browser-dropdown-button "+this.browser.btn_class+"\">"+utils.translate("Search in")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
 
     html +=         "<div class=\"ms-browser-dropdown-menu ms-browser-search-in\">";
     html +=             " <div><button type=\"button\" class=\"button\" id=\"ms_browser_search_in_all\">"+utils.translate("all")+"</button>";
@@ -92,7 +91,7 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     html +=     "</div>";
     if (dc.length > 1) {
         html += "<div class=\"ms-browser-dropdown\" id=\"ms_browser_search_for_dropdown\">";
-        html +=     "<button type=\"button\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\">"+utils.translate("Search for")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
+        html +=     "<button type=\"button\" class=\"button ms-browser-dropdown-button "+this.browser.btn_class+"\">"+utils.translate("Search for")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
 
         html +=     "<div class=\"ms-browser-dropdown-menu ms-browser-search-for\">";
         html +=         " <div><button type=\"button\" class=\"button\" id=\"ms_browser_search_for_all\">"+utils.translate("all")+"</button>";

@@ -37,6 +37,8 @@ utils.add_translations({
     "Click to select this media": "Cliquez pour sélectionner ce média",
     "comments, slides, ...": "commentaires, diapositives, ...",
     "companies": "sociétés",
+    "Content types to display:": "Types de contenu à afficher:",
+    "Content types": "Types de contenu",
     "Created on": "Créé le",
     "Creation date, ascending": "Date de création, croissante",
     "Creation date, descending": "Date de création, décroissante",
