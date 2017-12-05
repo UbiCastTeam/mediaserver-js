@@ -265,12 +265,12 @@
     top: 20px;
     left: 40%;
     display: none;
-    padding: 5px;
+    padding: 10px;
     color: #fff;
-    border: 1px solid #ccc;
     border-radius: 3px;
     background: #000;
     background: rgba(0, 0, 0, .7);
+    z-index: 1;
 }
 .ms-browser .ms-browser-message {
     background: #fff;
@@ -284,15 +284,16 @@
 .ms-browser .messages {
     text-align: center;
 }
-.ms-browser .info,
-.ms-browser .success,
-.ms-browser .warning,
-.ms-browser .error {
+.ms-browser .message.info,
+.ms-browser .message.success,
+.ms-browser .message.warning,
+.ms-browser .message.error {
     margin: 10px;
     padding: 10px;
+    padding-left: 40px;
     display: block;  /* fallback */
     display: inline-block;
-    overflow: hidden;
+    position: relative;
     line-height: normal;
     text-align: left;
     min-height: 0;
@@ -300,35 +301,41 @@
     background: #222;
     box-shadow: 2px 2px 1px 0px #ddd;
 }
-.ms-browser .info:before,
-.ms-browser .success:before,
-.ms-browser .warning:before,
-.ms-browser .error:before {
-    padding-right: 5px;
-    font: normal normal normal 14px/1 FontAwesome;
+.ms-browser .message.info:before,
+.ms-browser .message.success:before,
+.ms-browser .message.warning:before,
+.ms-browser .message.error:before {
+    top: 50%;
+    left: 0;
+    margin-top: -10px;
+    line-height: 20px;
+    width: 40px;
+    position: absolute;
+    text-align: center;
+    font: normal normal normal 20px/1 FontAwesome;
 }
-.ms-browser .info {
+.ms-browser .message.info {
     background: #1C73BF;
 }
-.ms-browser .info:before {
+.ms-browser .message.info:before {
     content: "\f05a";
 }
-.ms-browser .success {
+.ms-browser .message.success {
     background: #008750;
 }
-.ms-browser .success:before {
+.ms-browser .message.success:before {
     content: "\f058";
 }
-.ms-browser .warning {
+.ms-browser .message.warning {
     background: #F7B407;
 }
-.ms-browser .warning:before {
+.ms-browser .message.warning:before {
     content: "\f071";
 }
-.ms-browser .error {
+.ms-browser .message.error {
     background: #DB263D;
 }
-.ms-browser .error:before {
+.ms-browser .message.error:before {
     content: "\f06a";
 }
 
