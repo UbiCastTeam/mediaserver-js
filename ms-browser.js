@@ -33,7 +33,7 @@ function MSBrowser(options) {
     this.overlay = null;
 
     this.catalog = {};
-    this.display_mode = "list";
+    this.display_as_thumbnails = false;
     this.displayed = "channels";
     this.current_selection = null;
     this.site_settings_categories = [];
@@ -82,7 +82,7 @@ MSBrowser.prototype.init = function () {
     this.initialized = true;
 
     if (utils.get_cookie("catalog-display_mode") == "thumbnail") {
-        this.display_mode = "thumbnail";
+        this.display_as_thumbnails = true;
         if (!this.use_overlay)
             $("#container").removeClass("max-width-1200");
     }

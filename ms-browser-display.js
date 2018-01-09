@@ -102,8 +102,8 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     html += "<div class=\"ms-browser-dropdown-menu\">";
     // display mode
     html += "<div><h4>"+utils.translate("Display mode:")+"</h4>";
-    html += "<button type=\"button\" class=\"button "+(this.display_mode == "list" ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
-    html += "<button type=\"button\" class=\"button "+(this.display_mode == "thumbnail" ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
+    html += "<button type=\"button\" class=\"button "+(!this.display_as_thumbnails ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
+    html += "<button type=\"button\" class=\"button "+(this.display_as_thumbnails ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
     // channel sorting
     html += "<div class=\"ms-browser-channel-order\"><h4><label for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label></h4>";
     html += " <select id=\"ms_browser_order_channel\">";
@@ -251,12 +251,12 @@ MSBrowser.prototype.on_filters_submit = function ($form) {
 MSBrowser.prototype.display_as_list = function () {
     if ($("#ms_browser_display_as_list", this.$top_menu).hasClass("active"))
         return;
-    this.display_mode = "list";
+    this.display_as_thumbnails = false;
     $("#ms_browser_display_as_thumbnails", this.$top_menu).removeClass("active");
     $("#ms_browser_display_as_list", this.$top_menu).addClass("active");
     if (!this.use_overlay)
         $("#global").addClass("max-width-1200");
-    utils.set_cookie("catalog-display_mode", this.display_mode);
+    utils.set_cookie("catalog-display_mode", "list");
     this.channels.refresh_display();
     this.latest.refresh_display();
     this.search.refresh_display();
@@ -264,12 +264,12 @@ MSBrowser.prototype.display_as_list = function () {
 MSBrowser.prototype.display_as_thumbnails = function () {
     if ($("#ms_browser_display_as_thumbnails", this.$top_menu).hasClass("active"))
         return;
-    this.display_mode = "thumbnail";
+    this.display_as_thumbnails = true;
     $("#ms_browser_display_as_list", this.$top_menu).removeClass("active");
     $("#ms_browser_display_as_thumbnails", this.$top_menu).addClass("active");
     if (!this.use_overlay)
         $("#global").removeClass("max-width-1200");
-    utils.set_cookie("catalog-display_mode", this.display_mode);
+    utils.set_cookie("catalog-display_mode", "thumbnail");
     this.channels.refresh_display();
     this.latest.refresh_display();
     this.search.refresh_display();
@@ -407,7 +407,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var $entry = null;
     $entry = $("<div class=\"item-entry item-type-"+item_type+" item-entry-"+oid+"\"></div>");
     $entry.attr("id", "item_entry_"+oid+"_"+tab);
-    $entry.addClass(this.display_mode);
+    $entry.addClass(this.display_as_thumbnails ? "thumbnail" : "list");
     if (this.current_selection && this.current_selection.oid == oid)
         $entry.addClass("selected");
     if (selectable)
@@ -417,7 +417,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     if (item.extra_class)
         $entry.addClass(item.extra_class);
     var html = this._get_entry_block_html(item, item_type, clickable, tab);
-    if (this.display_mode == "thumbnail" && !this.use_overlay) {
+    if (this.display_as_thumbnails && !this.use_overlay) {
         html += "<div class=\"item-entry-buttons\">";
         html +=   "<button type=\"button\" class=\"item-entry-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
         if (item.can_edit) {
@@ -429,7 +429,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var $entry_block = $(html);
     this._set_on_click_entry_block($entry_block, oid, item_type, item, selectable);
     $entry.append($entry_block);
-    if (this.display_mode == "thumbnail") {
+    if (this.display_as_thumbnails) {
         this._set_thumbnail_info_box_html(item_type, selectable, oid, $entry, item, tab);
     } else {
         var $entry_links = this.get_entry_links(item, item_type, selectable);
@@ -466,7 +466,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
 
     /********************** Top bar ****************/
     var top_bar = "<span class=\"item-entry-top-bar\">";
-    if (this.display_mode != "thumbnail") {
+    if (!this.display_as_thumbnails) {
         top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
     }
 
@@ -501,7 +501,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
 
     /********************** Bottom bar ****************/
     var bottom_bar = "<span class=\"item-entry-bottom-bar\">";
-    if (this.display_mode == "thumbnail") {
+    if (this.display_as_thumbnails) {
         bottom_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
     } else {
         if (item.creation)

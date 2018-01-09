@@ -231,7 +231,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
 
     this.last_response = response;
 
-    if (!this.browser.use_overlay && this.display_mode == "thumbnail")
+    if (!this.browser.use_overlay && this.browser.display_as_thumbnails)
         this.browser.box_hide_info();
 
     // update top bar
