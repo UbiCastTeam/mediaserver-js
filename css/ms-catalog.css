@@ -124,7 +124,8 @@ h1 .channel-titles-place .channel-title {
     border: 1px solid #aaa;
     color: #fff;
     overflow: hidden;
-    background: transparent url("../images/black_mask.png") 0 0 repeat;
+    background: #222;
+    background: rgba(0, 0, 0, 0.75);
     border-radius: 3px;
 }
 .overlay-info-title {
