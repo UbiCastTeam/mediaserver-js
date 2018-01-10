@@ -47,15 +47,15 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
             html += " <label for=\"latest_display_channel\">"+utils.translate("channels")+"</label></p>";
         }
         if (dc.indexOf("v") != -1) {
-            html += "<p><input id=\"latest_display_video\" type=\"checkbox\" checked=\"checked\">";
+            html += "<p><input id=\"latest_display_video\" type=\"checkbox\">";
             html += " <label for=\"latest_display_video\">"+utils.translate("videos")+"</label></p>";
         }
         if (dc.indexOf("l") != -1) {
-            html += "<p><input id=\"latest_display_live\" type=\"checkbox\" checked=\"checked\">";
+            html += "<p><input id=\"latest_display_live\" type=\"checkbox\">";
             html += " <label for=\"latest_display_live\">"+utils.translate("live streams")+"</label></p>";
         }
         if (dc.indexOf("p") != -1) {
-            html += "<p><input id=\"latest_display_photos\" type=\"checkbox\" checked=\"checked\">";
+            html += "<p><input id=\"latest_display_photos\" type=\"checkbox\">";
             html += " <label for=\"latest_display_photos\">"+utils.translate("photos")+"</label></p>";
         }
         html +=         "</div>";
@@ -66,7 +66,20 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
     // events
     if (dc.length > 1) {
         this.browser.setup_dropdown($("#ms_browser_latest_types_dropdown", this.$menu));
-        $(".ms-browser-latest-types input", this.$menu).change({ obj: this }, function (event) { event.data.obj.refresh_display(true); });
+        $(".ms-browser-latest-types input", this.$menu).change({ obj: this }, function (event) {
+            event.data.obj.refresh_display(true);
+            var type_letter = this.id.split("_")[2][0];
+            var types = utils.get_cookie("catalog-lastest_types");
+            if (!types)
+                types = "vlp";
+            if (this.checked) {
+                if (types.indexOf(type_letter) == -1)
+                    types += type_letter;
+            } else {
+                types = types.replace(new RegExp(type_letter), "");
+            }
+            utils.set_cookie("catalog-lastest_types", types);
+        });
     }
     return this.$menu;
 };
@@ -96,6 +109,17 @@ MSBrowserLatest.prototype.on_show = function () {
     if (this.initialized)
         return;
     this.initialized = true;
+
+    var dc = this.get_displayable_content();
+    if (dc.length > 1) {
+        var types = utils.get_cookie("catalog-lastest_types");
+        if (!types)
+            types = "vlp";
+        $(".ms-browser-latest-types #latest_display_channel", this.$menu).prop("checked", types.indexOf("c") != -1);
+        $(".ms-browser-latest-types #latest_display_video", this.$menu).prop("checked", types.indexOf("v") != -1);
+        $(".ms-browser-latest-types #latest_display_live", this.$menu).prop("checked", types.indexOf("l") != -1);
+        $(".ms-browser-latest-types #latest_display_photos", this.$menu).prop("checked", types.indexOf("p") != -1);
+    }
 
     this.load_latest();
 };
