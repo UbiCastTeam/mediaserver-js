@@ -229,33 +229,31 @@
 }
 
 /* filters menu */
-.ms-browser-filters select,
-.ms-browser-filters input {
+#ms_browser_display_dropdown select,
+#ms_browser_display_dropdown input,
+#ms_browser_display_dropdown button {
     margin: 4px;
 }
-.ms-browser-filters #open_hidden_categories:hover {
-    cursor: pointer;
-}
-.ms-browser-filters #hidden_categories {
+#ms_browser_display_dropdown #hidden_categories {
     width: 400px;
     overflow: hidden;
 }
-.ms-browser-filters #hidden_categories label {
+#ms_browser_display_dropdown #hidden_categories label {
     margin-right: 8px;
     float: left;
     display: block;
     max-width: 100%;
 }
-.ms-browser-filters #hidden_categories label input {
+#ms_browser_display_dropdown #hidden_categories label input {
     display: inline-block;
     vertical-align: top;
 }
-.ms-browser-filters #hidden_categories label span {
+#ms_browser_display_dropdown #hidden_categories label span {
     white-space: pre-wrap;
     word-break: break-all;
     display: inline-block;
 }
-.ms-browser-filters .hidden-visibility {
+#ms_browser_display_dropdown .hidden-visibility {
     visibility: hidden;
     height: 1px;
 }
@@ -562,6 +560,7 @@
     margin-left: 10px;
     color: #666;
 }
+.ms-items .item-entry-layout,
 .ms-items .item-entry-unlisted,
 .ms-items .item-entry-notpublished,
 .ms-items .item-entry-published,
@@ -569,18 +568,40 @@
     margin-left: 10px;
     display: block;
     float: right;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
     text-align: center;
     cursor: help;
 }
+.ms-items .item-entry-layout {
+    display: none;
+}
+.show-types-icons .ms-items .item-entry-layout {
+    display: block;
+}
+.ms-items .item-entry-layout:before,
 .ms-items .item-entry-unlisted:before,
 .ms-items .item-entry-notpublished:before,
 .ms-items .item-entry-published:before,
 .ms-items .item-entry-notready:before {
     color: #666;
     font: normal normal normal 16px/1 FontAwesome;
+}
+.ms-items .item-entry-layout.layout-channel:before {
+    content: "\f07c";
+}
+.ms-items .item-entry-layout.layout-photos:before {
+    content: "\f03e";
+}
+.ms-items .item-entry-layout.layout-live:before {
+    content: "\f09e";
+}
+.ms-items .item-entry-layout.layout-video:before {
+    content: "\f03d";
+}
+.ms-items .item-entry-layout.layout-composition:before {
+    content: "\f009";
+}
+.ms-items .item-entry-layout.layout-webinar:before {
+    content: "\f2c3";
 }
 .ms-items .item-entry-unlisted:before {
     content: "\f070";
@@ -603,12 +624,12 @@
 .ms-items .item-entry-bottom-bar span + span {
     margin-top: 5px;
 }
+.ms-items .item-entry-type,
 .ms-items .item-entry-date,
 .ms-items .item-entry .item-entry-description,
 .ms-items .item-entry-views,
 .ms-items .item-entry-annotations,
-.ms-items .item-entry-parent,
-.ms-items .item-entry-type {
+.ms-items .item-entry-parent {
     display: block;
     color: #666;
 }
@@ -670,7 +691,7 @@
 }
 
 .ms-items .item-entry.thumbnail .item-entry-top-bar {
-    padding-right: 10px;
+    padding-right: 5px;
     left: 0;
     top: 0;
     position: absolute;
@@ -679,11 +700,13 @@
     border-top-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+.ms-items .item-entry.thumbnail .item-entry-layout,
 .ms-items .item-entry.thumbnail .item-entry-unlisted,
 .ms-items .item-entry.thumbnail .item-entry-notpublished,
 .ms-items .item-entry.thumbnail .item-entry-published,
 .ms-items .item-entry.thumbnail .item-entry-notready,
 .ms-items .item-entry.thumbnail .item-entry-duration {
+    margin-left: 5px;
     padding: 5px;
     float: left;
     font-style: italic;
@@ -809,7 +832,7 @@
         width: 100%;
         font-size: 150%;
     }
-    .ms-browser-filters #hidden_categories {
+    #ms_browser_display_dropdown #hidden_categories {
         width: auto;
     }
     .ms-items .item-entry-top-bar .item-entry-title {
@@ -823,6 +846,7 @@
     .ms-items .item-entry-links-container {
         display: inline-block;
     }
+    .ms-items .item-entry-layout,
     .ms-items .item-entry-unlisted,
     .ms-items .item-entry-notpublished,
     .ms-items .item-entry-published,

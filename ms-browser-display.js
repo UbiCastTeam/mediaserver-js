@@ -18,7 +18,7 @@ MSBrowser.prototype.build_widget = function () {
         latest_label = utils.translate("Latest content");
         search_label = utils.translate("Search");
     }
-    var html = "<div class=\"ms-browser ms-browser-container "+(this.use_overlay ? "in-overlay" : "")+"\">";
+    var html = "<div class=\"ms-browser ms-browser-container"+(this.use_overlay ? " in-overlay" : "")+(this.display_types_icons ? " show-types-icons" : "")+"\">";
     html += "<div class=\"ms-browser-header\">";
     html +=     "<div class=\"ms-browser-menu\">";
     if (!this.use_overlay) {
@@ -103,7 +103,9 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     // display mode
     html += "<div><h4>"+utils.translate("Display mode:")+"</h4>";
     html += "<button type=\"button\" class=\"button "+(!this.display_as_thumbnails ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
-    html += "<button type=\"button\" class=\"button "+(this.display_as_thumbnails ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button></div>";
+    html += "<button type=\"button\" class=\"button "+(this.display_as_thumbnails ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button><br/>";
+    html += "<input id=\"ms_browser_display_types_icons\" type=\"checkbox\" "+(this.display_types_icons ? "checked=\"checked\"" : "")+">";
+    html += " <label for=\"ms_browser_display_types_icons\">"+utils.translate("display elements type icons")+"</label></div>";
     // channel sorting
     html += "<div class=\"ms-browser-channel-order\"><h4><label for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label></h4>";
     html += " <select id=\"ms_browser_order_channel\">";
@@ -145,11 +147,15 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     var $dropdown = $("#ms_browser_display_dropdown", this.$top_menu);
     this.setup_dropdown($dropdown);
     $("#ms_browser_display_as_list", $dropdown).click({ obj: this, $dropdown: $dropdown }, function (event) {
-        event.data.obj.display_as_list();
+        event.data.obj.set_display_as_list();
         event.data.obj.close_dropdown(event.data.$dropdown);
     });
     $("#ms_browser_display_as_thumbnails", $dropdown).click({ obj: this, $dropdown: $dropdown }, function (event) {
-        event.data.obj.display_as_thumbnails();
+        event.data.obj.set_display_as_thumbnails();
+        event.data.obj.close_dropdown(event.data.$dropdown);
+    });
+    $("#ms_browser_display_types_icons", $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
+        event.data.obj.set_display_types_icons(this.checked);
         event.data.obj.close_dropdown(event.data.$dropdown);
     });
     $("#ms_browser_order_channel", $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
@@ -248,7 +254,7 @@ MSBrowser.prototype.on_filters_submit = function ($form) {
         this.search.refresh_display(true);
     }
 };
-MSBrowser.prototype.display_as_list = function () {
+MSBrowser.prototype.set_display_as_list = function () {
     if ($("#ms_browser_display_as_list", this.$top_menu).hasClass("active"))
         return;
     this.display_as_thumbnails = false;
@@ -261,7 +267,7 @@ MSBrowser.prototype.display_as_list = function () {
     this.latest.refresh_display();
     this.search.refresh_display();
 };
-MSBrowser.prototype.display_as_thumbnails = function () {
+MSBrowser.prototype.set_display_as_thumbnails = function () {
     if ($("#ms_browser_display_as_thumbnails", this.$top_menu).hasClass("active"))
         return;
     this.display_as_thumbnails = true;
@@ -273,6 +279,14 @@ MSBrowser.prototype.display_as_thumbnails = function () {
     this.channels.refresh_display();
     this.latest.refresh_display();
     this.search.refresh_display();
+};
+MSBrowser.prototype.set_display_types_icons = function (checked) {
+    this.display_types_icons = checked;
+    if (checked)
+        this.$widget.addClass("show-types-icons");
+    else
+        this.$widget.removeClass("show-types-icons");
+    utils.set_cookie("catalog-display_types_icons", checked ? "yes" : "no");
 };
 MSBrowser.prototype.get_active_tab = function () {
     var $active = $(".ms-browser-tab.active", this.$menu);
@@ -466,36 +480,61 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
 
     /********************** Top bar ****************/
     var top_bar = "<span class=\"item-entry-top-bar\">";
-    if (!this.display_as_thumbnails) {
-        top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
+    // type icon
+    if (item_type == "channel") {
+        top_bar += "<span class=\"item-entry-layout layout-channel\" title=\"" +
+                    utils.translate("This element is a channel") + "\"></span>";
+    } else {
+        if (item_type == "photos") {
+            top_bar += "<span class=\"item-entry-layout layout-photos\" title=\"" +
+                        utils.translate("This element is a photos group") + "\"></span>";
+        } else {
+            top_bar += "<span class=\"item-entry-layout ";
+            if (item.layout)
+                top_bar += "layout-" + item.layout;
+            else
+                top_bar += "layout-video";
+            top_bar += "\" title=\"";
+            top_bar += utils.translate(item_type == "live" ? "This element is a live stream" : "This element is a video");
+            if (item.layout) {
+                if (item.layout == "composition") {
+                    top_bar += " (" + utils.translate("dynamic RichMedia") + ")";
+                } else if (item.layout == "webinar") {
+                    top_bar += " (" + utils.translate("classic RichMedia") + ")";
+                } else {
+                    top_bar += " (" + item.layout.replace(/_/, " ") + ")";
+                }
+            }
+            top_bar += "\"></span>";
+        }
     }
-
-    /********************** Status **********/
-    var status = "";
+    // element top_bar
     if (item.can_edit) {
         if (item_type == "channel") {
             if (item.unlisted)
-                status += "<span class=\"item-entry-unlisted\" title=\"" +
+                top_bar += "<span class=\"item-entry-unlisted\" title=\"" +
                             utils.translate("This channel is unlisted") + "\"></span>";
-        }
-        else {
+        } else {
             if (!item.validated)
-                status += "<span class=\"item-entry-notpublished\" title=\"" +
+                top_bar += "<span class=\"item-entry-notpublished\" title=\"" +
                             utils.translate("This media is not published") + "\"></span>";
             else if (item.unlisted)
-                status += "<span class=\"item-entry-unlisted\" title=\"" +
+                top_bar += "<span class=\"item-entry-unlisted\" title=\"" +
                             utils.translate("This media is published and unlisted") + "\"></span>";
             else
-                status += "<span class=\"item-entry-published\" title=\"" +
+                top_bar += "<span class=\"item-entry-published\" title=\"" +
                             utils.translate("This media is published") + "\"></span>";
             if (item_type == "video" && !item.ready)
-                status += "<span class=\"item-entry-notready\" title=\"" +
-                            utils.translate("This video is being processed") + "\"></span>";
+                top_bar += "<span class=\"item-entry-notready\" title=\"" +
+                            utils.translate("This video is not ready") + "\"></span>";
         }
     }
-    top_bar += status;
+    // duration
     if (item.duration)
-        top_bar +=         "<span class=\"item-entry-duration\">" + item.duration + "</span>";
+        top_bar += "<span class=\"item-entry-duration\">" + item.duration + "</span>";
+    // title
+    if (!this.display_as_thumbnails)
+        top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
     top_bar += "</span>";
     content += top_bar;
 

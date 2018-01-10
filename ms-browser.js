@@ -22,6 +22,7 @@ function MSBrowser(options) {
     this.on_pick = null;
     this.btn_class = "";
     this.tree_manager = true;
+    this.display_types_icons = false;
     this.display_itunes_rss = true;
     // vars
     this.use_overlay = true;
@@ -60,6 +61,7 @@ function MSBrowser(options) {
         "on_pick",
         "btn_class",
         "tree_manager",
+        "display_types_icons",
         "display_itunes_rss",
         "default_search_in"
     ]);
@@ -85,6 +87,10 @@ MSBrowser.prototype.init = function () {
         this.display_as_thumbnails = true;
         if (!this.use_overlay)
             $("#container").removeClass("max-width-1200");
+    }
+
+    if (utils.get_cookie("catalog-display_types_icons") == "yes") {
+        this.display_types_icons = true;
     }
 
     var url_data = this.parse_url();
