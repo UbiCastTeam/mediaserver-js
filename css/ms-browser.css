@@ -456,6 +456,7 @@
     display: block;
     display: inline-block;
     width: calc(50% - 20px);
+    vertical-align: top;
 }
 .ms-items .item-description {
     margin: 10px;
