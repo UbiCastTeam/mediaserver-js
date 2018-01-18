@@ -123,6 +123,13 @@
 .ms-browser .ms-browser-title img {
     max-height: 40px;
 }
+.ms-browser .ms-browser-title .parent-channel-title {
+    color: #777;
+    font-size: 80%;
+}
+.ms-browser .ms-browser-title .parent-channel-title:after {
+    content: " > ";
+}
 .ms-browser .ms-browser-bar {
     padding: 5px;
     line-height: 30px;
