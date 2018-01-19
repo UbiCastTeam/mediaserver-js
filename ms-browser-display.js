@@ -643,7 +643,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                               " <span class=\"hidden-below-800\">" +
                               utils.translate("Add a sub channel")+"</span></a>";
                 }
-                if (item.can_add_video) {
+                if (item.oid != "0" && item.can_add_video) {
                     var add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
                     "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
                     html += "<a title=\"" + utils.translate("Add a video") + "\" class=\""+this.btn_class+" button item-entry-pick item-entry-pick-add-video\" href=\"" +
@@ -756,10 +756,7 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
         else
             url = "/edit/"+item.oid+"/";
     } else if (action == "add_channel") {
-        if (item && item.oid != "0")
-            url = "/add-content/channel/?in="+item.oid;
-        else
-            url = "/add-content/channel/";
+        url = "/add-content/channel/?in="+(item && item.oid != "0" ? item.oid : "root");
     } else if (action == "add_video") {
         if (item && item.oid != "0")
             url = "/add-content/?in="+item.oid+"#add_media_by_upload";
