@@ -574,7 +574,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
 
     /********************** Search data **********************/
     if (item.annotations && !this.use_overlay && tab == "search") {
-        html += "<span class=\"item-entry-annotations\"><span>" + utils.translate("Annotations") + ":</span><ul>";
+        html += "<span class=\"item-entry-annotations\"><span>" + utils.translate("Matching annotations:") + "</span><ul>";
         for (var i=0; i < item.annotations.length; i++) {
             var annotation = item.annotations[i];
             html += "<li><a href=\"/videos/" + item.slug + "/#start=" + annotation.time + "&autoplay\">";
@@ -799,7 +799,7 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
 MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, selectable, tab) {
     var html = "<div>";
     html += "<div class=\"overlay-info-title\">";
-    html +=     "<button type=\"button\" class=\"overlay-info-close button "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\"></i></button>";
+    html +=     "<button type=\"button\" class=\"overlay-info-close button default "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\"></i></button>";
     html +=     "<h3><a href=\""+this.get_button_link(item, "view")+"\">"+item.title+"</a></h3>";
     html += "</div>";
     html += "<div class=\"overlay-info-content\">";

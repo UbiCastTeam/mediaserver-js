@@ -82,6 +82,7 @@ utils.add_translations({
     "locations": "emplacements",
     "Main channels": "Chaînes principales",
     "March": "mars",
+    "Matching annotations:": "Annotations correspondantes:",
     "Matching chapters:": "Chapitres correspodants :",
     "Matching items:": "Élément correspodants:",
     "May": "mai",

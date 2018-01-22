@@ -642,11 +642,14 @@
     color: #666;
 }
 .ms-items .item-entry-annotations {
-    font-style: italic;
-}
-.ms-items .item-entry-annotations {
+    margin: 0 10px;
     padding: 5px 10px;
     padding-bottom: 0;
+    font-style: italic;
+    text-align: left;
+    background: #fff;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 .ms-items .item-entry-annotations ul {
     overflow: auto;
