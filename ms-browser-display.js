@@ -926,8 +926,8 @@ MSBrowser.prototype.display_categories = function () {
         html += " <div id=\"hidden_categories\" class=\"hidden-visibility\">";
         html += " <label for=\"filter_no_categories\"><input id=\"filter_no_categories\" type=\"checkbox\"/><span>" + utils.translate("Unspecified") + "</span></label><br />";
         for (var i = 0; i < this.site_settings_categories.length; i++) {
-            var slug = this.site_settings_categories[i][0];
-            var label = this.site_settings_categories[i][1];
+            var slug = utils.escape_attr(this.site_settings_categories[i][0]);
+            var label = utils.escape_html(this.site_settings_categories[i][1]);
             html += " <label for=\"" + slug + "\"><input class=\"checkbox\" id=\"" + slug + "\" type=\"checkbox\" value=\"" + slug + "\"/><span>" + label + "</span></label>";
         }
         html += " </div>";

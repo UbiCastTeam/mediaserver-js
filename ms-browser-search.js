@@ -246,7 +246,7 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
             data.categories = this.browser.filter_categories;
     }
     // change url
-    var title = utils.translate("Search results for:")+" "+search;
+    var title = utils.escape_html(utils.translate("Search results for:")+" "+search);
     this.current_title = title;
     this.browser.set_title(title);
     if (!this.browser.use_overlay && !no_pushstate) {
@@ -276,11 +276,11 @@ MSBrowserSearch.prototype._on_ajax_error = function (response) {
     if (!this.browser.use_overlay && (response.error_code == "403" || response.error_code == "401")) {
         var login_url = this.browser.url_login+"?next="+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : "");
         message += "<div class=\"item-description\">";
-        message += "<div class=\"message error\">"+response.error+"</div>";
+        message += "<div class=\"message error\">"+utils.escape_html(response.error)+"</div>";
         message += "<p>"+utils.translate("Please login to access this page")+"<br /> <a href=\""+login_url+"\">"+utils.translate("Sign in")+"</a></p>";
         message += "</div>";
     } else {
-        message += "<div class=\"message error\">"+response.error+"</div>";
+        message += "<div class=\"message error\">"+utils.escape_html(response.error)+"</div>";
     }
     message += "</div>";
     this.$content.html(message);
@@ -310,7 +310,7 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
             results.push(nb_live_streams + " " + utils.translate("live stream(s)"));
         if (nb_photos_groups > 0)
             results.push(nb_photos_groups + " " + utils.translate("photos group(s)"));
-        var text = "<div class=\"ms-browser-search-matching\"><b>" + utils.translate("Matching items:") + "</b> " + results.join(", ") + "</div>";
+        var text = "<div class=\"ms-browser-search-matching\"><b>" + utils.translate("Matching items:") + "</b> " + utils.escape_html(results.join(", ")) + "</div>";
         this.$content.append(text);
         this.browser.display_content(this.$content, response, null, "search");
     }
