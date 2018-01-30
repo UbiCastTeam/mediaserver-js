@@ -153,7 +153,7 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
         data.no_categories = true;
     } else {
         if (this.browser.filter_categories.length > 0)
-            data.categories = this.browser.filter_categories;
+            data.categories = this.browser.filter_categories.join("\n");
     }
 
     var start_value = 0;

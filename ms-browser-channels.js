@@ -204,7 +204,7 @@ MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
         data.no_categories = true;
     } else {
         if (this.browser.filter_categories.length > 0)
-            data.categories = this.browser.filter_categories;
+            data.categories = this.browser.filter_categories.join("\n");
     }
     data.order_by = this.order;
     var obj = this;

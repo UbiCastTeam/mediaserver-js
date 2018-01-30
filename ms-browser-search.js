@@ -243,7 +243,7 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
         data.no_categories = true;
     } else {
         if (this.browser.filter_categories.length > 0)
-            data.categories = this.browser.filter_categories;
+            data.categories = this.browser.filter_categories.join("\n");
     }
     // change url
     var title = utils.escape_html(utils.translate("Search results for:")+" "+search);
