@@ -24,7 +24,8 @@ function MSTreeManager(options) {
     this.$widget = null;
     this.loaded = false;
     this.loading = false;
-    this.content = {};
+    this.content = {"0": {oid: "0", parent_oid: null}};
+    this.loading_queue = {};
     this.has_personal_channel = false;
     this.personal_channel_info = null;
 
@@ -43,6 +44,7 @@ function MSTreeManager(options) {
         "tree_url",
         "path_url"
     ]);
+    this.initial_oid = this.current_channel_oid;
     MSAPI.configure(options);
     if (this.auto_init) {
         var obj = this;
@@ -60,12 +62,13 @@ MSTreeManager.prototype.init = function () {
     if (!this.$place.length)
         return console.log("Place for tree doesn't exist. Requested place: '"+this.$place+"'.");
 
+    this.loading = true;
+
     this.id_prefix = "";
-    while ($("#" + this.id_prefix + "tree_channel_0").length) {
+    while ($("#" + this.id_prefix + "tree_channel_0").length > 0) {
         this.id_prefix += "_";
     }
 
-    this.loading = true;
     // display link for root if display_root
     var html = "<div>";
     if (this.display_root) {
@@ -86,13 +89,13 @@ MSTreeManager.prototype.init = function () {
 
     // load root
     var obj = this;
+    this.loading = false;
     this.load_tree("0", function (result) {
-        obj.loading = false;
         obj.loaded = true;
         if (result.success) {
-            // expand tree for selected channel
-            if (obj.current_channel_oid)
-                obj.expand_tree(obj.current_channel_oid);
+            // open tree for selected channel
+            if (obj.initial_oid && obj.current_channel_oid == obj.initial_oid)
+                obj.open_tree(obj.current_channel_oid);
         }
         if (obj.display_personal && obj.has_personal_channel) {
             var $btn = $("<button type=\"button\" class=\"button channel-personal-btn\">"+utils.translate("My channel")+"</button>");
@@ -101,60 +104,70 @@ MSTreeManager.prototype.init = function () {
             });
             obj.$widget.prepend($btn);
         }
-        obj.$place.html("");
+        obj.$place.empty();
         obj.$place.append(obj.$widget);
         if (obj.on_tree_loaded)
             obj.on_tree_loaded();
     });
 };
-MSTreeManager.prototype.load_tree = function (parent_oid, callback) {
-    if (this.content[parent_oid] && (this.content[parent_oid].loaded || this.content[parent_oid].loading)) {
+MSTreeManager.prototype.load_tree = function (oid, callback) {
+    if (oid === undefined)
+        return;
+    if (this.content[oid] && this.content[oid].loaded) {
         if (callback)
-            callback({ success: true });
+            callback({ success: true, oid: oid });
         return;
     }
-    if (!this.content[parent_oid])
-        this.content[parent_oid] = { oid: parent_oid };
-    this.content[parent_oid].loading = true;
+    if (this.loading) {
+        // add loading to queue
+        this.loading_queue[oid] = callback;
+        return;
+    }
+
+    this.loading = true;
+    if (!this.content[oid])
+        this.content[oid] = { oid: oid };
 
     var data = { recursive: "no" };
-    if (parent_oid != "0")
-        data.parent_oid = parent_oid;
+    if (oid != "0")
+        data.parent_oid = oid;
     var obj = this;
     // get place to display channel tree
-    var $target = $("#" + this.id_prefix + "tree_channel_" + parent_oid, this.$widget);
+    var $target = $("#" + this.id_prefix + "tree_channel_" + oid, this.$widget);
     if (!$target.length) {
-        this.content[parent_oid].loading = false;
+        // channel has no sub channels, nothing to load
+        this.loading = false;
         if (callback)
-            callback({ success: false, error: "Target does not exist." });
+            callback({ success: true, oid: oid });
         return;
     }
     // display loading if it is too long
-    this.content[parent_oid].timeout = setTimeout(function () {
-        obj.content[parent_oid].timeout = null;
+    this.content[oid].timeout = setTimeout(function () {
+        obj.content[oid].timeout = null;
         $target.html("<li><div class=\"loading\">"+utils.translate("Loading")+"...</div></li>");
     }, 500);
     // load channel tree
     var scallback = function (response) {
-        obj._ajax_cb(response, parent_oid, $target, callback);
+        obj._on_tree_loaded(response, oid, $target, callback);
     };
     var ecallback = function (xhr, textStatus, thrownError) {
         if (xhr.status) {
             if (xhr.status == 401)
-                return obj._ajax_cb({ success: false, error: utils.translate("Unable to get channels tree because you are not logged in.") }, parent_oid, $target, callback);
+                return obj._on_tree_loaded({ success: false, error: utils.translate("Unable to get channels tree because you are not logged in.") }, oid, $target, callback);
             if (xhr.status == 403)
-                return obj._ajax_cb({ success: false, error: utils.translate("Unable to get channels tree because you cannot access to this channel.") }, parent_oid, $target, callback);
+                return obj._on_tree_loaded({ success: false, error: utils.translate("Unable to get channels tree because you cannot access to this channel.") }, oid, $target, callback);
             if (xhr.status == 404)
-                return obj._ajax_cb({ success: false, error: utils.translate("Channel does not exist.") }, parent_oid, $target, callback);
+                return obj._on_tree_loaded({ success: false, error: utils.translate("Channel does not exist.") }, oid, $target, callback);
             if (xhr.status == 500)
-                return obj._ajax_cb({ success: false, error: utils.translate("An error occurred in the server. Please try again later.") }, parent_oid, $target, callback);
+                return obj._on_tree_loaded({ success: false, error: utils.translate("An error occurred in the server. Please try again later.") }, oid, $target, callback);
         }
-        if (textStatus == "timeout")
-            obj._ajax_cb({ success: false, error: utils.translate("Unable to get channels tree. Request timed out.") }, parent_oid, $target, callback);
-        else if (textStatus == "error")
-            obj._ajax_cb({ success: false, error: utils.translate("The server cannot be reached.") }, parent_oid, $target, callback);
-        else
-            obj._ajax_cb({ success: false, error: utils.translate("An error occurred during request:")+"<br/>&nbsp;&nbsp;&nbsp;&nbsp;"+textStatus+" "+thrownError }, parent_oid, $target, callback);
+        if (textStatus == "timeout") {
+            obj._on_tree_loaded({ success: false, error: utils.translate("Unable to get channels tree. Request timed out.") }, oid, $target, callback);
+        } else if (textStatus == "error") {
+            obj._on_tree_loaded({ success: false, error: utils.translate("The server cannot be reached.") }, oid, $target, callback);
+        } else {
+            obj._on_tree_loaded({ success: false, error: utils.translate("An error occurred during request:")+"<br/>&nbsp;&nbsp;&nbsp;&nbsp;"+textStatus+" "+thrownError }, oid, $target, callback);
+        }
     };
     if (this.tree_url) {
         $.ajax({
@@ -174,28 +187,28 @@ MSTreeManager.prototype.load_tree = function (parent_oid, callback) {
         });
     }
 };
-MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callback) {
-    if (this.content[parent_oid].timeout) {
-        clearTimeout(this.content[parent_oid].timeout);
-        delete this.content[parent_oid].timeout;
+MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callback) {
+    if (this.content[oid].timeout) {
+        clearTimeout(this.content[oid].timeout);
+        delete this.content[oid].timeout;
     }
+    var next_load;
     if (result.success) {
         if (result.channels) {
             // get html
             var html = "";
             for (var i=0; i < result.channels.length; i++) {
                 var channel = result.channels[i];
-                if (parent_oid != "0") {
-                    channel.parent_oid = parent_oid;
-                    channel.parent_title = this.content[parent_oid] ? this.content[parent_oid].title : "load error";
-                }
-                else {
+                if (oid != "0") {
+                    channel.parent_oid = oid;
+                    channel.parent_title = this.content[oid] ? this.content[oid].title : "load error";
+                } else {
                     channel.parent_oid = "0";
                     channel.parent_title = utils.translate("Root");
                 }
-                if (!this.content[channel.oid])
+                if (!this.content[channel.oid]) {
                     this.content[channel.oid] = channel;
-                else {
+                } else {
                     for (var field in channel) {
                         this.content[channel.oid][field] = channel[field];
                     }
@@ -203,13 +216,13 @@ MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callba
                 if (this.on_data_retrieved)
                     this.on_data_retrieved(channel);
                 var button = "";
-                if (channel.channels)
+                if (channel.channels) {
                     button = "<button type=\"button\" data-ref=\"" + channel.oid +
                                "\" class=\"channel-toggle button-text list-entry\">" +
                                  "<i class=\"fa fa-fw fa-angle-right\" aria-hidden=\"true\"></i>" +
                              "</button>";
-                html += "<li><div id=\"" + this.id_prefix + "tree_channel_" + channel.oid + "_link\" class=\"aside-list-btn" +
-                        (this.current_channel_oid == channel.oid ? " channel-active" : "") + "\">" + button;
+                }
+                html += "<li><div id=\"" + this.id_prefix + "tree_channel_" + channel.oid + "_link\" class=\"aside-list-btn" + (this.current_channel_oid == channel.oid ? " channel-active" : "") + "\">" + button;
                 if (this.on_change)
                     html += "<button type=\"button\" data-ref=\""+channel.oid+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</button>";
                 else
@@ -218,9 +231,13 @@ MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callba
                 if (channel.channels)
                     html += "<ul class=\"list border-color-blue\" id=\"" + this.id_prefix + "tree_channel_"+channel.oid+"\"></ul>";
                 html += "</li>";
+                if (this.loading_queue[channel.oid] !== undefined) {
+                    next_load = {oid: channel.oid, cb: this.loading_queue[channel.oid]};
+                    delete this.loading_queue[channel.oid];
+                }
             }
             var $html = $(html);
-            $target.html("");
+            $target.empty();
             $target.append($html);
             // bind click events
             if (this.on_change) {
@@ -233,70 +250,74 @@ MSTreeManager.prototype._ajax_cb = function (result, parent_oid, $target, callba
                 evt.data.obj.toggle_channel($(this).attr("data-ref"));
             });
         }
-        this.content[parent_oid].loaded = true;
+        this.content[oid].loaded = true;
         if (result.personal_channel)
             this.has_personal_channel = true;
-    }
-    else if (result.error) {
+    } else if (result.error) {
         $target.html("<li><div class=\"error\">"+result.error+"</div></li>");
-    }
-    else {
+    } else {
         $target.html("<li><div class=\"error\">"+utils.translate("No information about error.")+"</div></li>");
     }
-    this.content[parent_oid].loading = false;
 
-    if (callback)
+    this.loading = false;
+    if (next_load)
+        this.load_tree(next_load.oid, next_load.cb);
+    if (callback) {
+        result.oid = oid;
         callback(result);
-};
-MSTreeManager.prototype.expand_tree = function (oid) {
-    if (oid == "0" || !this.loaded || this.loading)
-        return;
-    // get path of channel and open all levels
-    var obj = this;
-    var callback = function (path) {
-        if (path.length > 0) {
-            var cat_oid = path.shift().oid;
-            obj.load_tree(cat_oid, function (result) {
-                if (result.success)
-                    callback(path);
-            });
-        }
-        else {
-            var cat = obj.content[oid];
-            while (cat) {
-                $("#" + obj.id_prefix + "tree_channel_" + cat.oid, obj.$widget).css("display", "block").addClass("active");
-                $("#" + obj.id_prefix + "tree_channel_" + cat.oid + "_link .channel-toggle", obj.$widget).addClass("fa-rotate-90");
-                cat = obj.content[cat.parent_oid];
-            }
-        }
-    };
-    // check that the path is known
-    if (!this.content[oid] || this.content[oid].parent_oid === undefined) {
-        this.load_path(oid, function (result) {
-            var path = result.path;
-            if (!path)
-                path = [];
-            if (!obj.content[oid])
-                obj.content[oid] = { oid: oid };
-            path.push(obj.content[oid]);
-            callback(path);
-        });
-    }
-    else {
-        var path = [];
-        var cat = obj.content[oid];
-        while (cat) {
-            path.push(cat);
-            cat = obj.content[cat.parent_oid];
-        }
-        path.reverse();
-        callback(path);
     }
 };
 MSTreeManager.prototype.open_tree = function (oid) {
-    $("#" + this.id_prefix + "tree_channel_" + oid, this.$widget).css("display", "block").addClass("active");
-    $("#" + this.id_prefix + "tree_channel_" + oid + "_link .channel-toggle", this.$widget).addClass("fa-rotate-90");
-    this.load_tree(oid);
+    if (oid == "0")
+        return;
+    // check that the path is known
+    var obj = this;
+    var on_path_known = function () {
+        var oids = [];
+        var channel = obj.content[oid];
+        while (channel) {
+            oids.push(channel.oid);
+            channel = obj.content[channel.parent_oid];
+        }
+        oids.reverse();
+        for (var i=0; i < oids.length; i ++) {
+            if (oids[i] != "0") {
+                obj.load_tree(oids[i], function (result) {
+                    $("#" + obj.id_prefix + "tree_channel_" + result.oid, obj.$widget).css("display", "block").addClass("active");
+                    $("#" + obj.id_prefix + "tree_channel_" + result.oid + "_link .channel-toggle", obj.$widget).addClass("fa-rotate-90");
+                });
+            }
+        }
+    };
+    if (!this.content[oid])
+        this.content[oid] = { oid: oid };
+    if (this.content[oid].parent_oid === undefined) {
+        this.load_path(oid, function (result) {
+            var path = [];
+            if (result.path && result.path.length > 0)
+                path = result.path;
+            path.push(obj.content[oid]);
+            for (var i=0; i < path.length; i ++) {
+                var channel = path[i];
+                if (i > 0)
+                    channel.parent_oid = path[i - 1].oid;
+                else
+                    channel.parent_oid = "0";
+                if (!obj.content[channel.oid]) {
+                    obj.content[channel.oid] = channel;
+                } else {
+                    for (var field in channel) {
+                        obj.content[channel.oid][field] = channel[field];
+                    }
+                }
+                if (obj.on_data_retrieved)
+                    obj.on_data_retrieved(channel);
+            }
+            on_path_known();
+        });
+    } else {
+        on_path_known();
+    }
 };
 MSTreeManager.prototype.close_tree = function (oid) {
     $("#" + this.id_prefix + "tree_channel_" + oid, this.$widget).css("display", "none").removeClass("active");
@@ -355,7 +376,7 @@ MSTreeManager.prototype.open_personal_channel = function () {
         if (response.success) {
             obj.personal_channel_info = response;
             $(".channel-personal-btn", obj.$widget).html(utils.translate("My channel"));
-            obj.expand_tree(response.oid);
+            obj.open_tree(response.oid);
             if (obj.on_change)
                 obj.on_change(response.oid);
         } else {

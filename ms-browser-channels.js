@@ -76,7 +76,7 @@ MSBrowserChannels.prototype.on_show = function () {
     this.initialized = true;
 
     this.default_logo_src = $("#mainlogo .header-logo").attr("src");
-    this.default_fav_src = $("#").attr("src");
+    this.default_fav_src = $("#favicon_link").attr("src");
 
     // tree manager
     var obj = this;
