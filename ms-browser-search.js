@@ -132,7 +132,7 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
 MSBrowserSearch.prototype.get_content_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_search\" class=\"ms-browser-content\" style=\"display: none;\">";
-    html +=     "<div class=\"messages\"><div class=\"message info\">"+utils.translate("Use the input in the left column to search for something.")+"</div></div>";
+    html +=     "<div class=\"messages\"><div class=\"message info\">"+utils.translate("Use the input above to search for something.")+"</div></div>";
     html += "</div>";
     this.$content = $(html);
     return this.$content;

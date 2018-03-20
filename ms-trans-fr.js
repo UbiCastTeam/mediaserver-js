@@ -179,7 +179,7 @@ utils.add_translations({
     "unspecified": "non spécifié",
     "Unspecified": "Non spécifié",
     "Use channel's default sorting": "Utiliser le tri par défaut des chaînes",
-    "Use the input in the left column to search for something.": "Utilisez le champ de texte à gauche pour rechercher du contenu.",
+    "Use the input above to search for something.": "Utilisez le champ de texte ci dessus pour rechercher du contenu.",
     "video": "vidéo",
     "video(s)": "vidéo(s)",
     "videos": "vidéos",
