@@ -276,6 +276,14 @@ MSBrowser.prototype.remove = function (oid) {
 MSBrowser.prototype.get_last_pick = function () {
     return this.current_selection;
 };
+MSBrowser.prototype.get_selected_oid = function () {
+    if (!this.initialized)
+        return this.initial_oid;
+    else if (this.current_selection)
+        return this.current_selection.oid;
+    else
+        return null;
+};
 MSBrowser.prototype.parse_url = function () {
     var data = {};
     var query = window.location.search ? window.location.search.substring(1) : null;
