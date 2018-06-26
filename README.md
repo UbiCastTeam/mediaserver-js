@@ -19,7 +19,7 @@ Modules:
 
    	Example of imports:
     ```javascript
-	require('./utils.js');
+	require('./utils-js/utils.js');
 	require('./ms-api.js');
 	require('./ms-browser.js');
 	require('./ms-browser-display.js');
@@ -30,7 +30,7 @@ Modules:
     ```
     or
     ```html
-	<script type="text/javascript" src="utils.js"></script>
+	<script type="text/javascript" src="utils-js/utils.js"></script>
 	<script type="text/javascript" src="ms-api.js"></script>
 	<script type="text/javascript" src="ms-browser.js"></script>
 	<script type="text/javascript" src="ms-browser-display.js"></script>
