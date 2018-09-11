@@ -637,7 +637,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
             if (item.can_add_channel || item.can_add_video) {
                 if (item.can_add_channel) {
                     var add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
-                    "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
+                    " <i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
                     html += "<a title=\"" + utils.translate("Add a sub channel") + "\" class=\"" + this.btn_class + " button item-entry-pick item-entry-pick-add-channel\" href=\"" +
                               this.get_button_link(item, "add_channel") + "\">" + add_channel_icon +
                               " <span class=\"hidden-below-800\">" +
@@ -645,7 +645,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 }
                 if (item.oid != "0" && item.can_add_video) {
                     var add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
-                    "<i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
+                    " <i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
                     html += "<a title=\"" + utils.translate("Add a video") + "\" class=\""+this.btn_class+" button item-entry-pick item-entry-pick-add-video\" href=\"" +
                               this.get_button_link(item, "add_video") + "\">" + add_video_icon +
                               " <span class=\"hidden-below-800\">" +
