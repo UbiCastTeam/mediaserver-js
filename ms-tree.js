@@ -144,7 +144,8 @@ MSTreeManager.prototype.load_tree = function (oid, callback) {
     // display loading if it is too long
     this.content[oid].timeout = setTimeout(function () {
         obj.content[oid].timeout = null;
-        $target.html("<li><div class=\"loading\">"+utils.translate("Loading")+"...</div></li>");
+        $target.css("display", "block");
+        $target.html("<li><i class=\"fa fa-spinner fa-spin\"></i> "+utils.translate("Loading")+"...</li>");
     }, 500);
     // load channel tree
     var scallback = function (response) {
