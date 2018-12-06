@@ -106,7 +106,7 @@ var MSAPI = {
             method: "GET",
             url: "/api/v2/medias/get/",
             errors: {
-                403: utils.translate("Unable to get media's information because you cannot access to this media."),
+                403: utils.translate("Unable to get media information because you cannot access to this media."),
                 404: utils.translate("Media does not exist.")
             }
         },
