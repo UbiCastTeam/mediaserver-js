@@ -26,6 +26,7 @@ function MSBrowser(options) {
     this.display_itunes_rss = true;
     // vars
     this.use_overlay = true;
+    this.pick_mode = true;
     this.iframe_mode = false;
     this.lti_mode = false;
     this.$widget = null;
@@ -95,12 +96,33 @@ MSBrowser.prototype.init = function () {
 
     var url_data = this.parse_url();
 
+    if (!this.use_overlay)
+        this.pick_mode = false;
+
     if (!this.use_overlay && url_data.iframe) {
         this.iframe_mode = true;
         this.url_login = "/login/iframe/";
         this.url_channels += "?iframe";
         this.url_latest += "?iframe";
         this.url_search += "?iframe";
+        if (url_data.pick) {
+            this.pick_mode = true;
+            if (url_data.pick.toString().match(/^[cvlp]+$/)) {
+                this.selectable_content = url_data.pick;
+                this.displayable_content = url_data.pick;
+                if (this.displayable_content.indexOf("c") < 0)
+                    this.displayable_content = "c" + this.displayable_content;
+            } else {
+                this.selectable_content = "cvlp";
+                this.displayable_content = "cvlp";
+            }
+            this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+            this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+            this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+            this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+            if (!this.initial_oid && url_data.initial)
+                this.initial_oid = url_data.initial.toString();
+        }
     }
 
     if (!this.use_overlay && url_data.lti) {
@@ -241,7 +263,7 @@ MSBrowser.prototype._pick = function (oid, result, action, no_close) {
         console.log("Unable to get info about initial selection:"+result.error);
         return;
     }
-    if (!this.use_overlay) {
+    if (!this.pick_mode) {
         if (action == "delete" && window.delete_form_manager)
             window.delete_form_manager.show(oid, this.catalog[oid].title);
     }
@@ -255,6 +277,8 @@ MSBrowser.prototype._pick = function (oid, result, action, no_close) {
             this.overlay.hide();
         if (this.on_pick)
             this.on_pick(this.catalog[oid]);
+        else if (!this.use_overlay && window.parent)
+            window.parent.postMessage(this.catalog[oid], "*");
         // select and open channel
         if (this.channels) {
             if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))

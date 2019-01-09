@@ -249,7 +249,7 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
     var title = utils.escape_html(utils.translate("Search results for:")+" "+search);
     this.current_title = title;
     this.browser.set_title(title);
-    if (!this.browser.use_overlay && !no_pushstate) {
+    if (!this.browser.pick_mode && !no_pushstate) {
         var url = this.browser.url_search;
         if (url.indexOf("?") < 0)
             url += "?"+url_query;

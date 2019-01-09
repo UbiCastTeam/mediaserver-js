@@ -49,6 +49,8 @@ MSBrowserChannels.prototype.get_content_jq = function () {
 };
 
 MSBrowserChannels.prototype.refresh_title = function () {
+    if (this.browser.get_active_tab() != "channels")
+        return;
     var item = this.last_response ? this.last_response.info : undefined;
     if (item && item.oid != "0") {
         var html = "<span class=\"item-entry-preview\"><img src=\""+item.thumb+"\"/></span>";
@@ -88,7 +90,7 @@ MSBrowserChannels.prototype.on_show = function () {
             current_channel_oid: this.current_channel_oid,
             on_data_retrieved: function (data) { obj.browser.update_catalog(data); }
         };
-        if (this.browser.use_overlay) {
+        if (this.browser.pick_mode) {
             params.on_change = function (oid) {
                 obj.display_channel(oid);
             };
@@ -250,7 +252,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             if (response.info.parent_oid && response.info.parent_slug)
                 this.browser.update_catalog(parent);
             var $back;
-            if (!this.browser.use_overlay) {
+            if (!this.browser.pick_mode) {
                 $back = $("<a class=\"button "+this.browser.btn_class+" back-button\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
             } else {
                 $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+" back-button\"></button>");
@@ -391,7 +393,7 @@ MSBrowserChannels.prototype.remove = function (oid) {
     if (this.current_channel_oid == oid) {
         // display parent channel
         var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : "0";
-        if (!this.browser.use_overlay && this.browser.catalog[parent_oid] && this.browser.catalog[parent_oid].slug) {
+        if (!this.browser.pick_mode && this.browser.catalog[parent_oid] && this.browser.catalog[parent_oid].slug) {
             window.location.hash = "#"+this.browser.catalog[parent_oid].slug;
         } else {
             this.display_channel(parent_oid);

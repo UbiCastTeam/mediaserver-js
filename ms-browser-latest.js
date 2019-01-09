@@ -105,7 +105,7 @@ MSBrowserLatest.prototype.get_content_jq = function () {
 };
 
 MSBrowserLatest.prototype.on_show = function () {
-    this.browser.set_title(utils.translate("Latest content added"));
+    this.browser.set_title("latest", utils.translate("Latest content added"));
     if (this.initialized)
         return;
     this.initialized = true;
