@@ -146,7 +146,7 @@ MSTreeManager.prototype.load_tree = function (oid, callback) {
     this.content[oid].timeout = setTimeout(function () {
         obj.content[oid].timeout = null;
         $target.css("display", "block");
-        $target.html("<li style=\"display: block;\"><i class=\"fa fa-spinner fa-spin\"></i> "+utils.translate("Loading")+"...</li>");
+        $target.html("<li style=\"display: block;\"><i class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i> "+utils.translate("Loading")+"...</li>");
     }, 500);
     // load channel tree
     var scallback = function (response) {

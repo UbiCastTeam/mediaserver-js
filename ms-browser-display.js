@@ -38,7 +38,7 @@ MSBrowser.prototype.build_widget = function () {
     html += "</div>";
     html += "<div class=\"ms-browser-main ms-items\">";
     html +=     "<div class=\"ms-browser-clear\"></div>";
-    html +=     "<div class=\"ms-browser-loading\"><div><i class=\"fa fa-spinner fa-spin\"></i> "+utils.translate("Loading...")+"</div></div>";
+    html +=     "<div class=\"ms-browser-loading\"><div><i class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i> "+utils.translate("Loading...")+"</div></div>";
     html +=     "<div class=\"ms-browser-message\"><div></div></div>";
     html += "</div>";
     html += "</div>";
@@ -626,7 +626,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 else
                     label = utils.translate("Select this media");
             }
-            html += "<button type=\"button\" class=\""+this.btn_class+" button main item-entry-pick\"><i class=\"fa "+icon+"\"></i> <span class=\"hidden-below-800\">"+utils.translate(label)+"</span></button>";
+            html += "<button type=\"button\" class=\""+this.btn_class+" button main item-entry-pick\"><i class=\"fa "+icon+"\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate(label)+"</span></button>";
         }
     } else {
         if (item_type == "current") {
@@ -655,16 +655,16 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
             }
         } else {
             if (item_type != "channel" && this.lti_mode) {
-                html += "<button type=\"button\" class=\""+this.btn_class+" button default item-entry-copy\" data-link=\""+this.get_button_link(item, "lti", true)+"\"><i class=\"fa fa-chain\"></i> <span class=\"hidden-below-440\">"+utils.translate("Copy LTI link")+"</span></button>";
+                html += "<button type=\"button\" class=\""+this.btn_class+" button default item-entry-copy\" data-link=\""+this.get_button_link(item, "lti", true)+"\"><i class=\"fa fa-chain\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("Copy LTI link")+"</span></button>";
             }
             if ((item_type != "channel" && this.lti_mode) || item.can_edit || item.can_delete) {
-                html += "<a class=\""+this.btn_class+" button default item-entry-pick-view-media\" href=\""+this.get_button_link(item, "view")+"\"><i class=\"fa fa-eye\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
+                html += "<a class=\""+this.btn_class+" button default item-entry-pick-view-media\" href=\""+this.get_button_link(item, "view")+"\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
             }
             if (item.can_edit) {
-                html += "<a class=\""+this.btn_class+" button item-entry-pick-edit-media default\" href=\""+this.get_button_link(item, "edit")+"\"><i class=\"fa fa-pencil\"></i> <span class=\"hidden-below-440\">"+utils.translate("Edit") +"</span></a>";
+                html += "<a class=\""+this.btn_class+" button item-entry-pick-edit-media default\" href=\""+this.get_button_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("Edit") +"</span></a>";
             }
             if (item.can_delete)
-                html += "<button type=\"button\" class=\""+this.btn_class+" button item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\"></i> <span class=\"hidden-below-440\">"+utils.translate("Delete")+"</span></button>";
+                html += "<button type=\"button\" class=\""+this.btn_class+" button item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("Delete")+"</span></button>";
         }
     }
     if (!html)
@@ -706,7 +706,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 msg = "failed to copy";
                 console.log("Failed to copy to clipboard: " + err);
             }
-            msg = "<i class=\"fa " + (successful ? "fa-check" : "fa-warning") + "\"></i> " + utils.translate(msg);
+            msg = "<i class=\"fa " + (successful ? "fa-check" : "fa-warning") + "\" aria-hidden=\"true\"></i> " + utils.translate(msg);
             $btn.append("<span class=\"copy-msg\">" + msg + "</span>");
             $btn.addClass("copied");
             setTimeout(function () {
@@ -801,7 +801,7 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
 MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, selectable, tab) {
     var html = "<div>";
     html += "<div class=\"overlay-info-title\">";
-    html +=     "<button type=\"button\" class=\"overlay-info-close button default "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\"></i></button>";
+    html +=     "<button type=\"button\" class=\"overlay-info-close button default "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\" aria-label=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\" aria-hidden=\"true\"></i></button>";
     html +=     "<h3><a href=\""+this.get_button_link(item, "view")+"\">"+item.title+"</a></h3>";
     html += "</div>";
     html += "<div class=\"overlay-info-content\">";
@@ -924,7 +924,7 @@ MSBrowser.prototype.box_hide_info = function () {
 MSBrowser.prototype.display_categories = function () {
     var obj = this;
     if (this.site_settings_categories.length > 0) {
-        var html = " <button type=\"button\" id=\"open_hidden_categories\" class=\"button\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\"></i></button>";
+        var html = " <button type=\"button\" id=\"open_hidden_categories\" class=\"button\">" + utils.translate("Categories") + " <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
         html += " <div id=\"hidden_categories\" class=\"hidden-visibility\">";
         html += " <label for=\"filter_no_categories\"><input id=\"filter_no_categories\" type=\"checkbox\"/><span>" + utils.translate("Unspecified") + "</span></label><br />";
         for (var i = 0; i < this.site_settings_categories.length; i++) {

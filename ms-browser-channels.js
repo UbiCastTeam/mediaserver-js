@@ -38,7 +38,7 @@ MSBrowserChannels.prototype.get_content_jq = function () {
     var html = "";
     html += "<div id=\"ms_browser_channels\" class=\"ms-browser-content\" style=\"display: none;\">";
     html +=     "<div class=\"ms-browser-tree-place ms-channels-tree\">";
-    html +=         "<div><i class=\"fa fa-spinner fa-spin\"></i> "+utils.translate("Loading...")+"</div>";
+    html +=         "<div><i class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i> "+utils.translate("Loading...")+"</div>";
     html +=     "</div>";
     html +=     "<div class=\"ms-browser-channels-place\">";
     html +=         "<div class=\"messages\"><div class=\"message info\">"+utils.translate("Select a channel to display its content.")+"</div></div>";
@@ -322,14 +322,14 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             if (this.display_itunes_rss) {
                 rss += " <span class=\"inline-block\">" + utils.translate("Subscribe to channel's videos RSS:") + "</span>";
                 rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";
-                rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("standard") + "</a>";
+                rss +=     "<i class=\"fa fa-rss\" aria-hidden=\"true\"></i> " + utils.translate("standard") + "</a>";
                 rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/itunes-video.xml\">";
-                rss +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes") + "</a>";
+                rss +=     "<i class=\"fa fa-apple\" aria-hidden=\"true\"></i> " + utils.translate("iTunes") + "</a>";
                 rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/itunes-audio.xml\">";
-                rss +=     "<i class=\"fa fa-apple\"></i> " + utils.translate("iTunes (audio only)") + "</a>";
+                rss +=     "<i class=\"fa fa-apple\" aria-hidden=\"true\"></i> " + utils.translate("iTunes (audio only)") + "</a>";
             } else {
                 rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";
-                rss +=     "<i class=\"fa fa-rss\"></i> " + utils.translate("Subscribe to channel's videos RSS") + "</a>";
+                rss +=     "<i class=\"fa fa-rss\" aria-hidden=\"true\"></i> " + utils.translate("Subscribe to channel's videos RSS") + "</a>";
             }
             rss += "</div>";
             $current_item_desc.append(rss);
