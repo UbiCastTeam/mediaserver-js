@@ -4,6 +4,7 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals utils, MSAPI, MSTreeManager */
+"use strict";
 
 function MSBrowserChannels(options) {
     // params
@@ -247,7 +248,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             var parent = {
                 oid: parent_oid,
                 title: parent_title,
-                slug: response.info.parent_slug,
+                slug: response.info.parent_slug
             };
             if (response.info.parent_oid && response.info.parent_slug)
                 this.browser.update_catalog(parent);

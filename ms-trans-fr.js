@@ -3,6 +3,8 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
+/* globals utils */
+"use strict";
 
 utils.add_translations({
     "Access denied.": "Accès refusé.",

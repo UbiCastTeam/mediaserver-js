@@ -5,6 +5,7 @@
  * TODO Pass urls to the lib from django url*
  *******************************************/
 /* globals utils */
+"use strict";
 
 var MSAPI = {
     // params

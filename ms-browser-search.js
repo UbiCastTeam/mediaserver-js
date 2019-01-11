@@ -4,6 +4,7 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals utils, MSAPI */
+"use strict";
 
 function MSBrowserSearch(options) {
     // params

@@ -5,6 +5,7 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals MSBrowser, utils */
+"use strict";
 
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
@@ -228,7 +229,7 @@ MSBrowser.prototype.on_filters_submit = function ($form) {
     var inputs = [
         { type: "choice", id: "ms_browser_filter_editable", name: "filter_editable" },
         { type: "choice", id: "ms_browser_filter_validated", name: "filter_validated" },
-        { type: "text", id: "ms_browser_filter_speaker", name: "filter_speaker" },
+        { type: "text", id: "ms_browser_filter_speaker", name: "filter_speaker" }
     ];
     var changed = false;
     for (var i = 0; i < inputs.length; i++) {
@@ -689,7 +690,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
     }
     var $copy_btn = $(".item-entry-copy", $entry_links);
     if ($copy_btn.length > 0) {
-        $(".item-entry-copy", $entry_links).click(function(event) {
+        $(".item-entry-copy", $entry_links).click(function() {
             var $btn = $(this);
             var to_copy = $btn.attr("data-link");
             // invisible inputs cannot be copied
@@ -768,6 +769,7 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
         url = window.location.protocol + "//" + window.location.host + url;
     }
 
+    var hash_pos;
     if (action != "lti") {
         // add lti in url if not already done
         if (this.lti_mode) {

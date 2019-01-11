@@ -4,6 +4,7 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals utils, MSAPI */
+"use strict";
 
 function MSBrowserLatest(options) {
     // params
@@ -216,7 +217,6 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
 
     this.start_date = response.max_date;
     this.more = response.more === true;
-    var first_section = this.$section === null;
     for (var i=0; i < response.items.length; i++) {
         var item = response.items[i];
         if (item.date_label && item.date_label != this.date_label) {
