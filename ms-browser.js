@@ -240,7 +240,7 @@ MSBrowser.prototype.get_info = function (data, is_media, full, callback) {
         callback(response);
     });
 };
-MSBrowser.prototype.pick = function (oid, action, no_close) {
+MSBrowser.prototype.pick = function (oid, action, initial_pick) {
     if (oid === null || oid === undefined) {
         // deselect
         if (this.current_selection && this.current_selection.oid)
@@ -248,16 +248,16 @@ MSBrowser.prototype.pick = function (oid, action, no_close) {
         return;
     }
     if (this.catalog[oid] && this.catalog[oid].is_full) {
-        this._pick(oid, { success: true, info: this.catalog[oid] }, action, no_close);
+        this._pick(oid, { success: true, info: this.catalog[oid] }, action, initial_pick);
         return;
     }
     // load info if no info are available
     var obj = this;
     this.get_info_for_oid(oid, true, function (result) {
-        obj._pick(oid, result, action, no_close);
+        obj._pick(oid, result, action, initial_pick);
     });
 };
-MSBrowser.prototype._pick = function (oid, result, action, no_close) {
+MSBrowser.prototype._pick = function (oid, result, action, initial_pick) {
     if (!result.success) {
         // this should never happen
         console.log("Unable to get info about initial selection:"+result.error);
@@ -273,12 +273,12 @@ MSBrowser.prototype._pick = function (oid, result, action, no_close) {
             $(".item-entry-"+this.current_selection.oid, this.$main).removeClass("selected");
         this.current_selection = this.catalog[oid];
         $(".item-entry-"+this.current_selection.oid, this.$main).addClass("selected");
-        if (this.overlay && !no_close)
+        if (this.overlay && !initial_pick)
             this.overlay.hide();
         if (this.on_pick)
             this.on_pick(this.catalog[oid]);
         else if (!this.use_overlay && window.parent)
-            window.parent.postMessage(this.catalog[oid], "*");
+            window.parent.postMessage({element: this.catalog[oid], initial_pick: (initial_pick ? true : false)}, "*");
         // select and open channel
         if (this.channels) {
             if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))
