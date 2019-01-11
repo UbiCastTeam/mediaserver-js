@@ -781,15 +781,18 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
         // add iframe in url if not already done
         if (this.iframe_mode && !url.match(/(\?|\&|\/)iframe/))
             url += (url.indexOf("?") < 0 ? "?" : "&") + "iframe";
-        // add pick in url if not already done
-        if (this.pick_mode && !url.match(/(\?|\&)pick/))
-            url += (url.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-        // add mine in url if not already done
-        if (this.filter_speaker == "self" && !url.match(/(\?|\&)mine/))
-            url += (url.indexOf("?") < 0 ? "?" : "&") + "mine";
         // add lti in url if not already done
         if (this.lti_mode && !url.match(/(\?|\&)lti/))
             url += (url.indexOf("?") < 0 ? "?" : "&") + "lti";
+        // add mine in url if not already done
+        if (this.filter_speaker == "self" && !url.match(/(\?|\&)mine/))
+            url += (url.indexOf("?") < 0 ? "?" : "&") + "mine";
+        // add pick in url if not already done
+        if (this.pick_mode && !url.match(/(\?|\&)pick/))
+            url += (url.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+        // add pick in url if not already done
+        if (this.pick_mode && this.initial_oid && !url.match(/(\?|\&)initial/))
+            url += (url.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
     }
     return url + hash;
 };

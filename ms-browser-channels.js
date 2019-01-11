@@ -102,7 +102,7 @@ MSBrowserChannels.prototype.on_show = function () {
     // load first channel
     if (this.init_options.initial_state && this.init_options.initial_state.channel_slug) {
         this.display_channel_by_slug(this.init_options.initial_state.channel_slug);
-    } else if (this.browser.lti_mode) {
+    } else if (this.browser.filter_speaker == "self") {
         this.display_personal_channel();
     } else {
         this.display_channel(this.current_channel_oid);

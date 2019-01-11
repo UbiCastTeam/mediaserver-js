@@ -121,8 +121,13 @@ MSBrowser.prototype.init = function () {
                 this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
                 this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
                 this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-                if (!this.initial_oid && url_data.initial)
+                if (!this.initial_oid && url_data.initial) {
                     this.initial_oid = url_data.initial.toString();
+                    this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
+                    this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
+                    this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
+                    this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
+                }
             }
         }
 
@@ -351,22 +356,24 @@ MSBrowser.prototype.parse_url = function () {
 /* events handlers */
 MSBrowser.prototype.on_url_change = function () {
     var path = window.location.pathname + window.location.search;
-    if (path.indexOf(this.url_channels) === 0) {
+    if (path.indexOf("/channels/") === 0) {
         var slug = window.location.hash;
         if (slug && slug[0] == "#")
             slug = slug.substring(1);
-        if (slug)
+        if (slug) {
             this.channels.display_channel_by_slug(slug);
-        else if (this.lti_mode)
-            this.channels.display_personal_channel();
-        else
-            this.channels.display_channel("0");
+        } else if (!this.pick_mode) {
+            if (this.filter_speaker == "self")
+                this.channels.display_personal_channel();
+            else
+                this.channels.display_channel("0");
+        }
         this.change_tab("channels", true);
     }
-    else if (path.indexOf(this.url_latest) === 0) {
+    else if (path.indexOf("/latest/") === 0) {
         this.change_tab("latest", true);
     }
-    else if (path.indexOf(this.url_search) === 0) {
+    else if (path.indexOf("/search/") === 0) {
         this.search.on_url_change();
         this.change_tab("search", true);
     }
