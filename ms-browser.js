@@ -100,9 +100,6 @@ MSBrowser.prototype.init = function () {
     if (!this.use_overlay) {
         this.pick_mode = false;
 
-        if (url_data.mine)
-            this.filter_speaker = "self";
-
         if (url_data.iframe) {
             this.iframe_mode = true;
             this.url_login = "/login/iframe/";
@@ -127,6 +124,14 @@ MSBrowser.prototype.init = function () {
                 if (!this.initial_oid && url_data.initial)
                     this.initial_oid = url_data.initial.toString();
             }
+        }
+
+        if (url_data.mine) {
+            this.filter_speaker = "self";
+            this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "mine";
+            this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "mine";
+            this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "mine";
+            this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "mine";
         }
 
         if (url_data.lti) {

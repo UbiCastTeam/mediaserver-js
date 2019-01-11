@@ -10,7 +10,7 @@
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
     var channels_label, search_label, latest_label;
-    if (this.lti_mode) {
+    if (this.filter_speaker == "self") {
         channels_label = utils.translate("My channel");
         latest_label = utils.translate("My media");
         search_label = utils.translate("Search in my media");
@@ -126,7 +126,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         html += " <br/>";
         html += " <label for=\"ms_browser_filter_validated\">"+utils.translate("Published:")+"</label>";
         html += " <select id=\"ms_browser_filter_validated\">"+opt_html+"</select>";
-        if (!this.lti_mode) {
+        if (this.filter_speaker != "self") {
             html += " <br/>";
             html += " <label for=\"ms_browser_filter_speaker\">"+utils.translate("Speaker:")+"</label>";
             html += " <input type=\"text\" id=\"ms_browser_filter_speaker\" value=\"\"/>";
@@ -228,9 +228,10 @@ MSBrowser.prototype.close_dropdown = function ($dropdown) {
 MSBrowser.prototype.on_filters_submit = function ($form) {
     var inputs = [
         { type: "choice", id: "ms_browser_filter_editable", name: "filter_editable" },
-        { type: "choice", id: "ms_browser_filter_validated", name: "filter_validated" },
-        { type: "text", id: "ms_browser_filter_speaker", name: "filter_speaker" }
+        { type: "choice", id: "ms_browser_filter_validated", name: "filter_validated" }
     ];
+    if (this.filter_speaker != "self")
+        inputs.push({ type: "text", id: "ms_browser_filter_speaker", name: "filter_speaker" });
     var changed = false;
     for (var i = 0; i < inputs.length; i++) {
         var $input = $("#" + inputs[i].id, $form);
@@ -721,12 +722,14 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
 };
 MSBrowser.prototype.get_button_link = function (item, action, absolute) {
     var url = "";
+    var hash = "";
     var type = "";
     if (item && item.oid) {
         type = item.oid[0];
     }
     if (!action && (!type || type === "" || type === "0") && (!item || item.oid == "0")) {
         url = "/channels/#";
+        hash = "#";
     } else if (action == "view") {
         if (!item.slug && item.oid != "0") {
             // FIXME: the following call is asynchronous and won't work
@@ -735,9 +738,11 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
             });
         }
         if (type == "0") {
-            url = "/channels/#";
+            url = "/channels/";
+            hash = "#";
         } else if (type == "c") {
-            url = "/channels/#" + item.slug;
+            url = "/channels/";
+            hash = "#" + item.slug;
         } else {
             if (type == "l") {
                 url = "/lives/" + item.slug + "/";
@@ -759,44 +764,34 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
     } else if (action == "add_channel") {
         url = "/add-content/channel/?in="+(item && item.oid != "0" ? item.oid : "root");
     } else if (action == "add_video") {
+        url = "/add-content/";
+        hash = "#add_media_by_upload";
         if (item && item.oid != "0")
-            url = "/add-content/?in="+item.oid+"#add_media_by_upload";
-        else
-            url = "/add-content/#add_media_by_upload";
+            url += "?in="+item.oid;
+    } else {
+        console.error("Unrecognized action specified in MSBrowser.prototype.get_button_link call:", item, action, absolute);
+        return "";
     }
 
     if (absolute) {
         url = window.location.protocol + "//" + window.location.host + url;
     }
 
-    var hash_pos;
-    if (action != "lti") {
-        // add lti in url if not already done
-        if (this.lti_mode) {
-            if (url.indexOf("?") != -1) {
-                url = url.replace(/\?/, "?lti&");
-            } else {
-                hash_pos = url.indexOf("#");
-                if (hash_pos != -1)
-                    url = url.substring(0, hash_pos) + "?lti" + url.substring(hash_pos);
-                else
-                    url += "?lti";
-            }
-        }
+    if (!this.use_overlay && action != "lti") {
         // add iframe in url if not already done
-        if (this.iframe_mode && url.indexOf("/iframe/") == -1) {
-            if (url.indexOf("?") != -1) {
-                url = url.replace(/\?/, "?iframe&");
-            } else {
-                hash_pos = url.indexOf("#");
-                if (hash_pos != -1)
-                    url = url.substring(0, hash_pos) + "?iframe" + url.substring(hash_pos);
-                else
-                    url += "?iframe";
-            }
-        }
+        if (this.iframe_mode && !url.match(/(\?|\&|\/)iframe/))
+            url += (url.indexOf("?") < 0 ? "?" : "&") + "iframe";
+        // add pick in url if not already done
+        if (this.pick_mode && !url.match(/(\?|\&)pick/))
+            url += (url.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+        // add mine in url if not already done
+        if (this.filter_speaker == "self" && !url.match(/(\?|\&)mine/))
+            url += (url.indexOf("?") < 0 ? "?" : "&") + "mine";
+        // add lti in url if not already done
+        if (this.lti_mode && !url.match(/(\?|\&)lti/))
+            url += (url.indexOf("?") < 0 ? "?" : "&") + "lti";
     }
-    return url;
+    return url + hash;
 };
 MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, selectable, tab) {
     var html = "<div>";
