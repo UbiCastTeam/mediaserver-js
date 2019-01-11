@@ -97,42 +97,46 @@ MSBrowser.prototype.init = function () {
 
     var url_data = this.parse_url();
 
-    if (!this.use_overlay)
+    if (!this.use_overlay) {
         this.pick_mode = false;
 
-    if (!this.use_overlay && url_data.iframe) {
-        this.iframe_mode = true;
-        this.url_login = "/login/iframe/";
-        this.url_channels += "?iframe";
-        this.url_latest += "?iframe";
-        this.url_search += "?iframe";
-        if (url_data.pick) {
-            this.pick_mode = true;
-            if (url_data.pick.toString().match(/^[cvlp]+$/)) {
-                this.selectable_content = url_data.pick;
-                this.displayable_content = url_data.pick;
-                if (this.displayable_content.indexOf("c") < 0)
-                    this.displayable_content = "c" + this.displayable_content;
-            } else {
-                this.selectable_content = "cvlp";
-                this.displayable_content = "cvlp";
-            }
-            this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-            this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-            this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-            this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-            if (!this.initial_oid && url_data.initial)
-                this.initial_oid = url_data.initial.toString();
-        }
-    }
+        if (url_data.mine)
+            this.filter_speaker = "self";
 
-    if (!this.use_overlay && url_data.lti) {
-        this.lti_mode = true;
-        this.filter_speaker = "self";
-        this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "lti";
-        this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "lti";
-        this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "lti";
-        this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "lti";
+        if (url_data.iframe) {
+            this.iframe_mode = true;
+            this.url_login = "/login/iframe/";
+            this.url_channels += "?iframe";
+            this.url_latest += "?iframe";
+            this.url_search += "?iframe";
+            if (url_data.pick) {
+                this.pick_mode = true;
+                if (url_data.pick.toString().match(/^[cvlp]+$/)) {
+                    this.selectable_content = url_data.pick;
+                    this.displayable_content = url_data.pick;
+                    if (this.displayable_content.indexOf("c") < 0)
+                        this.displayable_content = "c" + this.displayable_content;
+                } else {
+                    this.selectable_content = "cvlp";
+                    this.displayable_content = "cvlp";
+                }
+                this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+                this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+                this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+                this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
+                if (!this.initial_oid && url_data.initial)
+                    this.initial_oid = url_data.initial.toString();
+            }
+        }
+
+        if (url_data.lti) {
+            this.lti_mode = true;
+            this.filter_speaker = "self";
+            this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "lti";
+            this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "lti";
+            this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "lti";
+            this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "lti";
+        }
     }
 
     // get elements
