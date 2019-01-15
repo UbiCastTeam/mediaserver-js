@@ -397,7 +397,6 @@
     border-radius: 2px;
     box-sizing: content-box;
     margin-right: 5px;
-    outline: none;
 }
 .ms-channels-tree li .list-entry {
     cursor: pointer;
