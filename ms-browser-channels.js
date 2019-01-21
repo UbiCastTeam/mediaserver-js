@@ -54,7 +54,7 @@ MSBrowserChannels.prototype.refresh_title = function () {
         return;
     var item = this.last_response ? this.last_response.info : undefined;
     if (item && item.oid != "0") {
-        var html = "<span class=\"item-entry-preview\"><img src=\""+item.thumb+"\"/></span>";
+        var html = "<span class=\"item-entry-preview\"><img src=\""+item.thumb+"\" alt=\""+utils.escape_html(item.title)+"\"/></span>";
         html += "<span class=\"channel-titles-place\">";
         if (!this.browser.use_overlay && item.parent_title) {
             html += "<a class=\"parent-channel-title\" href=\"#" + item.parent_slug + "\">"+utils.escape_html(item.parent_title)+"</a>";
