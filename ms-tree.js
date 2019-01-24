@@ -71,7 +71,7 @@ MSTreeManager.prototype.init = function () {
     }
 
     // display link for root if display_root
-    var html = "<div>";
+    var html = "<span>";
     if (this.display_root) {
         html += "<div id=\"" + this.id_prefix + "tree_channel_0_link\" "+(this.current_channel_oid == "0" ? "class=\"channel-active\"" : "")+">";
         if (this.on_change)
@@ -80,14 +80,13 @@ MSTreeManager.prototype.init = function () {
             html += "<a href=\""+this.channels_base_url+"\" class=\"channel-btn\">"+utils.translate("Root")+"</a>";
         html += "</div>";
     }
-    html += "<ul class=\"list border-color-blue active\" id=\"" + this.id_prefix + "tree_channel_0\"></ul></div>";
+    html += "<ul class=\"list js-active-item border-color-blue active\" id=\"" + this.id_prefix + "tree_channel_0\"></ul></span>";
     this.$widget = $(html);
     if (this.display_root && this.on_change) {
         $(".channel-btn", this.$widget).click({ obj: this }, function (evt) {
             evt.data.obj.on_change($(this).attr("data-ref"));
         });
     }
-
     // load root
     var obj = this;
     this.loading = false;
@@ -224,12 +223,13 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
                                  "<i class=\"fa fa-fw fa-angle-right\" aria-hidden=\"true\"></i>" +
                              "</button>";
                 }
-                html += "<li><div id=\"" + this.id_prefix + "tree_channel_" + channel.oid + "_link\" class=\"aside-list-btn" + (this.current_channel_oid == channel.oid ? " channel-active" : "") + "\">" + button;
+                html += "<li><span id=\"" + this.id_prefix + "tree_channel_" + channel.oid + "_link\" data-ref=\"" + channel.oid +
+                               "\" class=\"" + (!this.on_change ? "aside-list-btn" : "") + (this.current_channel_oid == channel.oid ? " channel-active" : "") + "\">" + button;
                 if (this.on_change)
                     html += "<button type=\"button\" data-ref=\""+channel.oid+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</button>";
                 else
-                    html += "<a href=\""+this.channels_base_url+channel[this.channels_url_field]+"\" class=\"channel-btn aside-list-btn" + (channel.channels ? "" : " aside-list-btn") + "\">"+utils.escape_html(channel.title)+"</a>";
-                html += "</div>";
+                    html += "<a href=\""+this.channels_base_url+channel[this.channels_url_field]+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</a>";
+                html += "</span>";
                 if (channel.channels)
                     html += "<ul class=\"list border-color-blue\" id=\"" + this.id_prefix + "tree_channel_"+channel.oid+"\"></ul>";
                 html += "</li>";
@@ -251,14 +251,18 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
                 evt.stopPropagation();
                 evt.data.obj.toggle_channel($(this).attr("data-ref"));
             });
+            $(".aside-list-btn", $html).click({ obj: this }, function (evt) {
+                evt.stopPropagation();
+                evt.data.obj.toggle_channel($(this).attr("data-ref"));
+            });
         }
         this.content[oid].loaded = true;
         if (result.personal_channel)
             this.has_personal_channel = true;
     } else if (result.error) {
-        $target.html("<li><div class=\"error\">"+result.error+"</div></li>");
+        $target.html("<li class=\"error\">"+result.error+"</li>");
     } else {
-        $target.html("<li><div class=\"error\">"+utils.translate("No information about error.")+"</div></li>");
+        $target.html("<li class=\"error\">"+utils.translate("No information about error.")+"</li>");
     }
 
     this.loading = false;
