@@ -818,32 +818,33 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
         html += "<hr/>";
     }
     html += "<table class=\"overlay-info-table\">";
+    html += "<caption class=\"sr-only\">" + utils.translate("Media information") + "</caption>";
     if (item.creation && item_type == "video") {
         html += "<tr>";
-        html +=     "<td class=\"overlay-info-label\">"+utils.translate("Recording date")+" :</td>";
+        html +=     "<th scope=\"row\" class=\"overlay-info-label\">"+utils.translate("Recording date")+" :</th>";
         html +=     "<td>"+utils.get_date_display(item.creation)+"</td>";
         html += "</tr>";
     }
     if (item.add_date) {
         html += "<tr>";
-        html +=     "<td class=\"overlay-info-label\">"+utils.translate("Publishing date")+" :</td>";
+        html +=     "<th scope=\"row\" class=\"overlay-info-label\">"+utils.translate("Publishing date")+" :</th>";
         html +=     "<td>"+utils.get_date_display(item.add_date)+"</td>";
         html += "</tr>";
     }
     if (item.duration) {
         html += "<tr>";
-        html +=     "<td class=\"overlay-info-label\">"+utils.translate("Duration")+" :</td>";
+        html +=     "<th scope=\"row\" class=\"overlay-info-label\">"+utils.translate("Duration")+" :</th>";
         html +=     "<td>"+item.duration+"</td>";
         html += "</tr>";
     }
     if (item.views_last_month)
-        html +=         "<tr><td class=\"overlay-info-label\">"+utils.translate("Views last month")+" :</td><td>"+item.views_last_month+"</td></tr>";
+        html +=         "<tr><th scope=\"row\" class=\"overlay-info-label\">"+utils.translate("Views last month")+" :</th><td>"+item.views_last_month+"</td></tr>";
     if (item.views)
-        html +=         "<tr><td class=\"overlay-info-label\">"+utils.translate("Views")+" :</td><td>"+item.views+"</td></tr>";
+        html +=         "<tr><th scope=\"row\" class=\"overlay-info-label\">"+utils.translate("Views")+" :</th><td>"+item.views+"</td></tr>";
     if (item.comments_last_month)
-        html +=         "<tr><td class=\"overlay-info-label\">"+utils.translate("Annotations last month")+" :</td><td>"+item.comments_last_month+"</td></tr>";
+        html +=         "<tr><th scope=\"row\" class=\"overlay-info-label\">"+utils.translate("Annotations last month")+" :</th><td>"+item.comments_last_month+"</td></tr>";
     if (item.comments)
-        html +=         "<tr><td class=\"overlay-info-label\">"+utils.translate("Annotations")+" :</td><td>"+item.comments+"</td></tr>";
+        html +=         "<tr><th scope=\"row\" class=\"overlay-info-label\">"+utils.translate("Annotations")+" :</th><td>"+item.comments+"</td></tr>";
     html += "</table>";
     if (item.short_description) {
         html += "<hr/>";
