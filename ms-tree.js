@@ -71,7 +71,7 @@ MSTreeManager.prototype.init = function () {
     }
 
     // display link for root if display_root
-    var html = "<span>";
+    var html = "<div>";
     if (this.display_root) {
         html += "<div id=\"" + this.id_prefix + "tree_channel_0_link\" "+(this.current_channel_oid == "0" ? "class=\"channel-active\"" : "")+">";
         if (this.on_change)
@@ -80,7 +80,7 @@ MSTreeManager.prototype.init = function () {
             html += "<a href=\""+this.channels_base_url+"\" class=\"channel-btn\">"+utils.translate("Root")+"</a>";
         html += "</div>";
     }
-    html += "<ul class=\"list js-active-item border-color-blue active\" id=\"" + this.id_prefix + "tree_channel_0\"></ul></span>";
+    html += "<ul class=\"list js-active-item border-color-blue active\" id=\"" + this.id_prefix + "tree_channel_0\"></ul></div>";
     this.$widget = $(html);
     if (this.display_root && this.on_change) {
         $(".channel-btn", this.$widget).click({ obj: this }, function (evt) {
