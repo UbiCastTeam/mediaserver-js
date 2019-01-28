@@ -115,15 +115,19 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     $("form", this.$menu).submit({ obj: this }, function (event) { event.data.obj.on_search_submit(); });
     $("#ms_browser_search_in_all", this.$menu).click({ obj: this }, function (event) {
         $(".ms-browser-search-in input[type=checkbox]", event.data.obj.$main).prop("checked", true);
+        event.data.obj.on_search_submit();
     });
     $("#ms_browser_search_in_none", this.$menu).click({ obj: this }, function (event) {
         $(".ms-browser-search-in input[type=checkbox]", event.data.obj.$main).prop("checked", false);
+        event.data.obj.on_search_submit();
     });
     $("#ms_browser_search_for_all", this.$menu).click({ obj: this }, function (event) {
         $(".ms-browser-search-for input[type=checkbox]", event.data.obj.$main).prop("checked", true);
+        event.data.obj.on_search_submit();
     });
     $("#ms_browser_search_for_none", this.$menu).click({ obj: this }, function (event) {
         $(".ms-browser-search-for input[type=checkbox]", event.data.obj.$main).prop("checked", false);
+        event.data.obj.on_search_submit();
     });
     $("input[type=checkbox]", this.$menu).change({obj: this}, function (event) {
         event.data.obj.on_search_submit();
