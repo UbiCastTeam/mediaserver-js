@@ -549,7 +549,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             bottom_bar += "<span class=\"item-entry-date\">" + utils.translate("Created on") + " " +
                         utils.get_date_display(item.creation) + "</span>";
         if (item.short_description)
-            bottom_bar += "<span class=\"item-entry-description\">" + $("<div>" + item.short_description + "</div>").text() + "</span>";
+            bottom_bar += "<span class=\"item-entry-description\">" + $("<span>" + item.short_description + "</span>").text() + "</span>";
         if (item.views) {
             bottom_bar += "<span class=\"item-entry-views\">" + item.views + " " + utils.translate("views");
             if (item.views_last_month)
@@ -575,17 +575,34 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     html += "</" + markup + ">";
 
     /********************** Search data **********************/
-    if (item.annotations && !this.pick_mode && tab == "search") {
-        html += "<span class=\"item-entry-annotations\"><span>" + utils.translate("Matching annotations:") + "</span><ul>";
-        for (var i=0; i < item.annotations.length; i++) {
-            var annotation = item.annotations[i];
-            html += "<li><a href=\"/videos/" + item.slug + "/#start=" + annotation.time + "&autoplay\">";
-            if (annotation.title)
-                html += annotation.title;
-            html += " (" + annotation.time_display + ") ";
-            html += "</a></li>";
+    if (!this.display_as_thumbnails && !this.pick_mode && tab == "search" && (item.annotations || item.photos)) {
+        html += "<div class=\"item-entry-extra\">";
+        var i;
+        if (item.annotations) {
+            html += "<span>" + utils.translate("Matching annotations:") + "</span><ul>";
+            for (i=0; i < item.annotations.length; i++) {
+                var annotation = item.annotations[i];
+                html += "<li><a href=\"" + this.get_button_link(item, "view") + "#start=" + annotation.time + "&autoplay\">";
+                if (annotation.title)
+                    html += annotation.title;
+                html += " (" + annotation.time_display + ") ";
+                html += "</a></li>";
+            }
+            html += "</ul>";
         }
-        html += "</ul></span>";
+        if (item.photos) {
+            html += "<span>" + utils.translate("Matching photos:") + "</span><ul>";
+            for (i=0; i < item.photos.length; i++) {
+                var photo = item.photos[i];
+                html += "<li><a href=\"" + this.get_button_link(item, "view") + "#" + photo.index + "\">";
+                if (photo.title)
+                    html += photo.title;
+                html += " (#" + photo.index + ") ";
+                html += "</a></li>";
+            }
+            html += "</ul>";
+        }
+        html += "</div>";
     }
     return html;
 };
@@ -670,7 +687,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
     }
     if (!html)
         return null;
-    html = "<span class=\"item-entry-links\"><span class=\"item-entry-links-container\">"+html+"</span></span>";
+    html = "<div class=\"item-entry-links\"><div class=\"item-entry-links-container\">"+html+"</div></div>";
     var $entry_links = $(html);
     // events
     if (item_type == "channel" || item_type == "parent") {
@@ -803,18 +820,34 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     html +=     "<h3><a href=\""+this.get_button_link(item, "view")+"\">"+item.title+"</a></h3>";
     html += "</div>";
     html += "<div class=\"overlay-info-content\">";
-    if (item.annotations && !this.pick_mode && tab == "search") {
-        html += "<div><b>"+utils.translate("Matching annotations:")+"</b></div>";
-        html += "<ul>";
-        for (var i=0; i < item.annotations.length; i++) {
-            var annotation = item.annotations[i];
-            html += "<li><a href=\"/videos/"+item.slug+"/#start="+annotation.time+"&autoplay\">";
-            if (annotation.title)
-                html += annotation.title;
-            html += " ("+annotation.time_display+") ";
-            html += "</a></li>";
+    if (!this.pick_mode && tab == "search" && (item.annotations || item.photos)) {
+        var i;
+        if (item.annotations) {
+            html += "<div><b>"+utils.translate("Matching annotations:")+"</b></div>";
+            html += "<ul>";
+            for (i=0; i < item.annotations.length; i++) {
+                var annotation = item.annotations[i];
+                html += "<li><a href=\""+this.get_button_link(item, "view")+"#start="+annotation.time+"&autoplay\">";
+                if (annotation.title)
+                    html += annotation.title;
+                html += " ("+annotation.time_display+") ";
+                html += "</a></li>";
+            }
+            html += "</ul>";
         }
-        html += "</ul>";
+        if (item.photos) {
+            html += "<div><b>"+utils.translate("Matching photos:")+"</b></div>";
+            html += "<ul>";
+            for (i=0; i < item.photos.length; i++) {
+                var photo = item.photos[i];
+                html += "<li><a href=\""+this.get_button_link(item, "view")+"#"+photo.index+"\">";
+                if (photo.title)
+                    html += photo.title;
+                html += " (#"+photo.index+") ";
+                html += "</a></li>";
+            }
+            html += "</ul>";
+        }
         html += "<hr/>";
     }
     html += "<table class=\"overlay-info-table\">";

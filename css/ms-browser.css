@@ -635,12 +635,12 @@
 .ms-items .item-entry-date,
 .ms-items .item-entry .item-entry-description,
 .ms-items .item-entry-views,
-.ms-items .item-entry-annotations,
+.ms-items .item-entry-extra,
 .ms-items .item-entry-parent {
     display: block;
     color: #666;
 }
-.ms-items .item-entry-annotations {
+.ms-items .item-entry-extra {
     margin: 0 10px;
     padding: 5px 10px;
     padding-bottom: 0;
@@ -650,7 +650,7 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-.ms-items .item-entry-annotations ul {
+.ms-items .item-entry-extra ul {
     overflow: auto;
     max-height: 100px;
 }
