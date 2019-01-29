@@ -373,6 +373,8 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         $section = $("<div class=\"ms-browser-section\"></div>");
         if (cat_oid && cat_oid != "0") {
             $section.append("<h3>"+utils.translate("Sub channels")+"</h3>");
+        } else if (tab == "search") {
+            $section.append("<h3>"+utils.translate("Channels")+"</h3>");
         }
 
         for (i = 0; i < data.channels.length; i++) {
