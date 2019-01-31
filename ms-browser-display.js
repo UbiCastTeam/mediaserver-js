@@ -460,7 +460,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     var markup = "div";
     var href = "";
     var link = "";
-    if ((!this.pick_mode || this.use_overlay && item_type == "channel") && item.slug) {
+    if (!this.use_overlay && item.slug) {
         link = "href=\""+this.get_button_link(item, "view")+"\"";
         markup = "a";
         href = link;
@@ -578,7 +578,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
 
     /********************** Search data **********************/
     if (!this.display_as_thumbnails && !this.pick_mode && tab == "search" && (item.annotations || item.photos)) {
-        html += "<div class=\"item-entry-extra\">";
+        html += "<span class=\"item-entry-extra\">";
         var i;
         if (item.annotations) {
             html += "<span>" + utils.translate("Matching annotations:") + "</span><ul>";
@@ -604,7 +604,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             }
             html += "</ul>";
         }
-        html += "</div>";
+        html += "</span>";
     }
     return html;
 };
@@ -689,7 +689,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
     }
     if (!html)
         return null;
-    html = "<div class=\"item-entry-links\"><div class=\"item-entry-links-container\">"+html+"</div></div>";
+    html = "<span class=\"item-entry-links\"><span class=\"item-entry-links-container\">"+html+"</span></span>";
     var $entry_links = $(html);
     // events
     if (item_type == "channel" || item_type == "parent") {
