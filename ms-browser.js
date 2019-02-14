@@ -295,7 +295,7 @@ MSBrowser.prototype._pick = function (oid, result, action, initial_pick) {
         else if (!this.use_overlay && window.parent)
             window.parent.postMessage({element: this.catalog[oid], initial_pick: (initial_pick ? true : false)}, "*");
         // select and open channel
-        if (this.channels) {
+        if (this.channels && (!initial_pick || !this.initial_state || !this.initial_state.channel_slug)) {
             if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))
                 this.channels.display_channel(oid);
             else
@@ -339,8 +339,7 @@ MSBrowser.prototype.parse_url = function () {
                     value = false;
                 else
                     value = window.decodeURIComponent(value.replace(/\+/g, "%20"));
-            }
-            else {
+            } else {
                 attr = tuples[i];
                 value = true;
             }
@@ -369,11 +368,9 @@ MSBrowser.prototype.on_url_change = function () {
                 this.channels.display_channel("0");
         }
         this.change_tab("channels", true);
-    }
-    else if (path.indexOf("/latest/") === 0) {
+    } else if (path.indexOf("/latest/") === 0) {
         this.change_tab("latest", true);
-    }
-    else if (path.indexOf("/search/") === 0) {
+    } else if (path.indexOf("/search/") === 0) {
         this.search.on_url_change();
         this.change_tab("search", true);
     }

@@ -374,7 +374,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         var msg;
         if (this.browser.selectable_content.indexOf("c") != -1) {
             if (this.browser.displayable_content.length > 1)
-                msg = "This channel contains no sub channels and no medias.";
+                msg = "This channel contains no sub channels and no media.";
             else
                 msg = "This channel contains no sub channels.";
         }
