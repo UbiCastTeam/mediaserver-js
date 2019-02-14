@@ -291,6 +291,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         // current Channel data
         if (oid != "0") {
             var $current_item_desc = $("<div class=\"item-description\"></div>");
+            var is_empty = true;
             if (response.info.short_description) {
                 var $desc = $("<div class=\"channel-description-text\">" + response.info.short_description + "</div>");
                 if (response.info.short_description != response.info.description) {
@@ -300,9 +301,10 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                     });
                 }
                 $current_item_desc.append($desc);
+                is_empty = false;
             }
             if (response.info.views || response.info.comments) {
-                var anno_and_views = "<div class=\"right channel-description-stats\">";
+                var anno_and_views = "<div class=\"" + (response.info.short_description || response.info.display_rss_links ? "right" : "align-right") + " channel-description-stats\">";
                 if (response.info.views) {
                     anno_and_views += "<span class=\"inline-block\">" + response.info.views + " " + utils.translate("views");
                     if (response.info.views_last_month)
@@ -317,25 +319,30 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 }
                 anno_and_views += "</div>";
                 $current_item_desc.append(anno_and_views);
+                is_empty = false;
             }
-            var rss = "<div id=\"channel_description_rss\" class=\"channel-description-rss\"> ";
-            if (this.display_itunes_rss) {
-                rss += " <span class=\"inline-block\">" + utils.translate("Subscribe to channel's videos RSS:") + "</span>";
-                rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";
-                rss +=     "<i class=\"fa fa-rss\" aria-hidden=\"true\"></i> " + utils.translate("standard") + "</a>";
-                rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/itunes-video.xml\">";
-                rss +=     "<i class=\"fa fa-apple\" aria-hidden=\"true\"></i> " + utils.translate("iTunes") + "</a>";
-                rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/itunes-audio.xml\">";
-                rss +=     "<i class=\"fa fa-apple\" aria-hidden=\"true\"></i> " + utils.translate("iTunes (audio only)") + "</a>";
-            } else {
-                rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";
-                rss +=     "<i class=\"fa fa-rss\" aria-hidden=\"true\"></i> " + utils.translate("Subscribe to channel's videos RSS") + "</a>";
+            if (response.info.display_rss_links) {
+                var rss = "<div id=\"channel_description_rss\" class=\"channel-description-rss\"> ";
+                if (this.display_itunes_rss) {
+                    rss += " <span class=\"inline-block\">" + utils.translate("Subscribe to channel videos RSS:") + "</span>";
+                    rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";
+                    rss +=     "<i class=\"fa fa-rss\" aria-hidden=\"true\"></i> " + utils.translate("standard") + "</a>";
+                    rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/itunes-video.xml\">";
+                    rss +=     "<i class=\"fa fa-apple\" aria-hidden=\"true\"></i> " + utils.translate("iTunes") + "</a>";
+                    rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/itunes-audio.xml\">";
+                    rss +=     "<i class=\"fa fa-apple\" aria-hidden=\"true\"></i> " + utils.translate("iTunes (audio only)") + "</a>";
+                } else {
+                    rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";
+                    rss +=     "<i class=\"fa fa-rss\" aria-hidden=\"true\"></i> " + utils.translate("Subscribe to channel videos RSS") + "</a>";
+                }
+                rss += "</div>";
+                $current_item_desc.append(rss);
+                is_empty = false;
             }
-            rss += "</div>";
-            $current_item_desc.append(rss);
-            this.$place.append($current_item_desc);
+            if (!is_empty)
+                this.$place.append($current_item_desc);
         }
-        // channel's custom CSS
+        // channel custom CSS
         $("head .csslistlink").remove();
         if (response.info) {
             var csslinks = "";

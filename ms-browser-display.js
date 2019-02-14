@@ -84,7 +84,7 @@ MSBrowser.prototype.build_widget = function () {
 };
 MSBrowser.prototype.get_top_menu_jq = function () {
     var sorting_values = [
-        { "default": utils.translate("Use channel's default sorting") },
+        { "default": utils.translate("Use channel default sorting") },
         { "creation_date-desc": utils.translate("Creation date, descending") },
         { "creation_date-asc": utils.translate("Creation date, ascending") },
         { "add_date-desc": utils.translate("Add date, descending") },

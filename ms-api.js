@@ -67,7 +67,7 @@ var MSAPI = {
             method: "GET",
             url: "/api/v2/channels/content/",
             errors: {
-                403: utils.translate("Unable to get channel's content because you cannot access to this channel."),
+                403: utils.translate("Unable to get channel content because you cannot access to this channel."),
                 404: utils.translate("Requested channel does not exist.")
             }
         },
@@ -75,7 +75,7 @@ var MSAPI = {
             method: "GET",
             url: "/api/v2/channels/get/",
             errors: {
-                403: utils.translate("Unable to get channel's information because you cannot access to this channel."),
+                403: utils.translate("Unable to get channel information because you cannot access to this channel."),
                 404: utils.translate("Requested channel does not exist.")
             }
         },

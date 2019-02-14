@@ -81,6 +81,9 @@ h1 .channel-titles-place .channel-title {
 .ms-browser-content .channel-description-text.short-desc {
     cursor: pointer;
 }
+.ms-browser-content .channel-description-stats span + span {
+    margin-left: 20px;
+}
 .ms-browser-content .channel-description-stats,
 .ms-browser-content .channel-description-rss {
     padding: 0 15px;
