@@ -20,7 +20,7 @@ MSBrowser.prototype.build_widget = function () {
         search_label = utils.translate("Search");
     }
     var html = "<div class=\"ms-browser ms-browser-container"+(this.use_overlay ? " in-overlay" : "")+(this.display_types_icons ? " show-types-icons" : "")+"\">";
-    html += "<div class=\"ms-browser-header\">";
+    html += "<div class=\"ms-browser-header\""+(this.hide_header ? " style=\"display: none;\"" : "")+">";
     html +=     "<div class=\"ms-browser-menu\">";
     if (!this.use_overlay) {
         html += "<a id=\"ms_browser_channels_tab\" class=\"ms-browser-tab button "+this.btn_class+"\" href=\""+this.url_channels+"\"><i class=\"fa fa-folder-open\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+channels_label+"</span></a>";
@@ -34,7 +34,7 @@ MSBrowser.prototype.build_widget = function () {
     html +=     "</div>";
     html +=     "<div class=\"ms-browser-title\"></div>";
     html += "</div>";
-    html += "<div class=\"ms-browser-bar\">";
+    html += "<div class=\"ms-browser-bar\""+(this.hide_header ? " style=\"display: none;\"" : "")+">";
     html += "</div>";
     html += "<div class=\"ms-browser-main ms-items\">";
     html +=     "<div class=\"ms-browser-clear\"></div>";

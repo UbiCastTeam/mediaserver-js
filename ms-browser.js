@@ -21,6 +21,7 @@ function MSBrowser(options) {
     this.initial_oid = null;
     this.initial_state = null;
     this.on_pick = null;
+    this.hide_header = false;
     this.btn_class = "";
     this.tree_manager = true;
     this.display_types_icons = false;
@@ -61,6 +62,7 @@ function MSBrowser(options) {
         "initial_oid",
         "initial_state",
         "on_pick",
+        "hide_header",
         "btn_class",
         "tree_manager",
         "display_types_icons",
