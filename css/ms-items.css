@@ -358,6 +358,9 @@
         height: 99px;
         line-height: 99px;
     }
+    .ms-items .item-entry.thumbnail .item-entry-middle-bar {
+        height: 99px;
+    }
 }
 @media (max-width: 800px) {
     .ms-items .item-entry-top-bar .item-entry-title {
