@@ -94,12 +94,6 @@ h1 .channel-titles-place .channel-title {
 .ms-browser-content .item-entry-links {
     text-align: right;
 }
-/* ms-items */
-.ms-items .item-entry-link,
-.ms-items .selectable .item-entry-link,
-.ms-items .selected .item-entry-link {
-    border-bottom: 1px solid #ccc;
-}
 /* overlay-info */
 .overlay-info .overlay-info-content .item-entry-links,
 .overlay-info .overlay-info-content .item-entry-links-container {

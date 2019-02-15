@@ -22,7 +22,7 @@
     overflow: hidden;
     background: #fff;
     box-shadow: 2px 2px 1px 0px #ddd;
-    border-bottom: 3px solid #ccc;
+    border-bottom: 1px solid #ccc;
     border-radius: 3px;
 }
 .ms-items .clickable .item-entry-link {
@@ -32,19 +32,12 @@
 .ms-items .item-entry .item-entry-link:hover {
     color: #086E9A;
     box-shadow: 0 0 5px 0px #086E9A;
+    text-decoration: none;
 }
-.ms-items .selectable .item-entry-link {
-    border-bottom: 3px solid #1C73BF;
-}
-.ms-items .selected .item-entry-link {
-    border-bottom: 3px solid #008750;
-}
+.ms-items .selected .item-entry-link,
 .ms-items .selected .item-entry-link:hover {
     color: #008750;
     box-shadow: 0 0 5px 0px #008750;
-}
-.ms-items .selected .item-entry-link {
-    color: #008750;
 }
 .ms-browser-title .selected {
     color: #008750;
@@ -245,8 +238,8 @@
 
 .ms-items .item-entry.thumbnail .item-entry-top-bar {
     padding-right: 5px;
-    left: 0;
     top: 0;
+    left: 0;
     position: absolute;
     background: #fff;
     width: auto;
@@ -264,14 +257,30 @@
     float: left;
     font-style: italic;
 }
+.ms-items .item-entry.thumbnail .item-entry-middle-bar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 135px;
+    position: absolute;
+}
+.ms-items .item-entry.thumbnail .item-entry-views {
+    padding: 3px 6px;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background: #fff;
+    width: auto;
+    border-top-left-radius: 3px;
+}
 .ms-items .item-entry.thumbnail .item-entry-top-bar > *,
 .ms-items .item-entry.thumbnail .item-entry-bottom-bar > * {
-    font-weight: bold;
     word-wrap: break-word;
 }
 .ms-items .item-entry.thumbnail .item-entry-title {
     padding: 10px;
     text-overflow: ellipsis;
+    font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
     display: block;
