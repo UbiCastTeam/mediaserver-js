@@ -138,7 +138,7 @@
 .ms-items .item-entry-layout.layout-channel:before {
     content: "\f07c";
 }
-.ms-items .item-entry-layout.layout-photos:before {
+.ms-items .item-entry-layout.layout-pgroup:before {
     content: "\f03e";
 }
 .ms-items .item-entry-layout.layout-live:before {

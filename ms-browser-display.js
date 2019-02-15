@@ -490,7 +490,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
                     utils.translate("This item is a channel") + "\"></span>";
     } else {
         if (item_type == "photos") {
-            top_bar += "<span class=\"item-entry-layout layout-photos\" title=\"" +
+            top_bar += "<span class=\"item-entry-layout layout-pgroup\" title=\"" +
                         utils.translate("This item is a photos group") + "\"></span>";
         } else {
             top_bar += "<span class=\"item-entry-layout ";
