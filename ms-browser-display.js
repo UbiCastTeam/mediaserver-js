@@ -106,7 +106,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     html += "<button type=\"button\" class=\"button "+(!this.display_as_thumbnails ? "active" : "")+"\" id=\"ms_browser_display_as_list\">"+utils.translate("list")+"</button>";
     html += "<button type=\"button\" class=\"button "+(this.display_as_thumbnails ? "active" : "")+"\" id=\"ms_browser_display_as_thumbnails\">"+utils.translate("thumbnails")+"</button><br/>";
     html += "<input id=\"ms_browser_display_types_icons\" type=\"checkbox\" "+(this.display_types_icons ? "checked=\"checked\"" : "")+">";
-    html += " <label for=\"ms_browser_display_types_icons\">"+utils.translate("display elements type icons")+"</label></div>";
+    html += " <label for=\"ms_browser_display_types_icons\">"+utils.translate("display items type icons")+"</label></div>";
     // channel sorting
     html += "<div class=\"ms-browser-channel-order\"><h4><label for=\"ms_browser_order_channel\">"+utils.translate("Sort by:")+"</label></h4>";
     html += " <select id=\"ms_browser_order_channel\">";
@@ -487,11 +487,11 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     // type icon
     if (item_type == "channel") {
         top_bar += "<span class=\"item-entry-layout layout-channel\" title=\"" +
-                    utils.translate("This element is a channel") + "\"></span>";
+                    utils.translate("This item is a channel") + "\"></span>";
     } else {
         if (item_type == "photos") {
             top_bar += "<span class=\"item-entry-layout layout-photos\" title=\"" +
-                        utils.translate("This element is a photos group") + "\"></span>";
+                        utils.translate("This item is a photos group") + "\"></span>";
         } else {
             top_bar += "<span class=\"item-entry-layout ";
             if (item.layout)
@@ -499,7 +499,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             else
                 top_bar += "layout-video";
             top_bar += "\" title=\"";
-            top_bar += utils.translate(item_type == "live" ? "This element is a live stream" : "This element is a video");
+            top_bar += utils.translate(item_type == "live" ? "This item is a live stream" : "This item is a video");
             if (item.layout) {
                 if (item.layout == "composition") {
                     top_bar += " (" + utils.translate("dynamic RichMedia") + ")";
