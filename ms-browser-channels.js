@@ -292,17 +292,6 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         if (oid != "0") {
             var $current_item_desc = $("<div class=\"item-description\"></div>");
             var is_empty = true;
-            if (response.info.short_description) {
-                var $desc = $("<div class=\"channel-description-text\">" + response.info.short_description + "</div>");
-                if (response.info.short_description != response.info.description) {
-                    $desc.addClass("short-desc");
-                    $desc.click({ description: response.info.description }, function (event) {
-                        $(this).html(event.data.description).unbind("click").removeClass("short-desc");
-                    });
-                }
-                $current_item_desc.append($desc);
-                is_empty = false;
-            }
             if (response.info.views || response.info.comments) {
                 var anno_and_views = "<div class=\"" + (response.info.short_description || response.info.display_rss_links ? "right" : "align-right") + " channel-description-stats\">";
                 if (response.info.views) {
@@ -319,6 +308,17 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 }
                 anno_and_views += "</div>";
                 $current_item_desc.append(anno_and_views);
+                is_empty = false;
+            }
+            if (response.info.short_description) {
+                var $desc = $("<div class=\"channel-description-text\">" + response.info.short_description + "</div>");
+                if (response.info.short_description != response.info.description) {
+                    $desc.addClass("short-desc");
+                    $desc.click({ description: response.info.description }, function (event) {
+                        $(this).html(event.data.description).unbind("click").removeClass("short-desc");
+                    });
+                }
+                $current_item_desc.append($desc);
                 is_empty = false;
             }
             if (response.info.display_rss_links) {
