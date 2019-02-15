@@ -295,6 +295,8 @@ MSBrowser.prototype._pick = function (oid, result, action, initial_pick) {
         else if (!this.use_overlay && window.parent)
             window.parent.postMessage({element: this.catalog[oid], initial_pick: (initial_pick ? true : false)}, "*");
         // select and open channel
+        if (result.info.parent_slug)
+            window.location.hash = "#" + result.info.parent_slug;
         if (this.channels && (!initial_pick || !this.initial_state || !this.initial_state.channel_slug)) {
             if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))
                 this.channels.display_channel(oid);
@@ -361,7 +363,7 @@ MSBrowser.prototype.on_url_change = function () {
             slug = slug.substring(1);
         if (slug) {
             this.channels.display_channel_by_slug(slug);
-        } else if (!this.pick_mode) {
+        } else {
             if (this.filter_speaker == "self")
                 this.channels.display_personal_channel();
             else

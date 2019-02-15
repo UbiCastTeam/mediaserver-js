@@ -460,7 +460,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     var markup = "div";
     var href = "";
     var link = "";
-    if (!this.use_overlay && item.slug) {
+    if (!this.use_overlay && item.slug && (!this.pick_mode || item_type == "channel")) {
         link = "href=\""+this.get_button_link(item, "view")+"\"";
         markup = "a";
         href = link;

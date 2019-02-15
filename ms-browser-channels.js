@@ -253,7 +253,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             if (response.info.parent_oid && response.info.parent_slug)
                 this.browser.update_catalog(parent);
             var $back;
-            if (!this.browser.pick_mode) {
+            if (!this.browser.use_overlay) {
                 $back = $("<a class=\"button "+this.browser.btn_class+" back-button\" href=\""+this.browser.get_button_link(parent, "view")+"\"></a>");
             } else {
                 $back = $("<button type=\"button\" class=\"button "+this.browser.btn_class+" back-button\"></button>");
