@@ -226,9 +226,9 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
                 html += "<li><span id=\"" + this.id_prefix + "tree_channel_" + channel.oid + "_link\" data-ref=\"" + channel.oid +
                                "\" class=\"" + (!this.on_change ? "aside-list-btn" : "") + (this.current_channel_oid == channel.oid ? " channel-active" : "") + "\">" + button;
                 if (this.on_change)
-                    html += "<button type=\"button\" data-ref=\""+channel.oid+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</button>";
+                    html += "<button " + (channel.language ? "lang=\"" + channel.language + "\"" : "") + " type=\"button\" data-ref=\""+channel.oid+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</button>";
                 else
-                    html += "<a href=\""+this.channels_base_url+channel[this.channels_url_field]+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</a>";
+                    html += "<a " + (channel.language ? "lang=\"" + channel.language + "\"" : "") + " href=\""+this.channels_base_url+channel[this.channels_url_field]+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</a>";
                 html += "</span>";
                 if (channel.channels)
                     html += "<ul class=\"list border-color-blue\" id=\"" + this.id_prefix + "tree_channel_"+channel.oid+"\"></ul>";

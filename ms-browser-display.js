@@ -460,13 +460,17 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     var markup = "div";
     var href = "";
     var link = "";
+    var lang = "";
     if (!this.use_overlay && item.slug && (!this.pick_mode || item_type == "channel")) {
-        link = "href=\""+this.get_button_link(item, "view")+"\"";
+        link = " href=\""+this.get_button_link(item, "view")+"\"";
         markup = "a";
         href = link;
+        if (item.language) {
+            lang = " lang=\"" + item.language + "\"";
+        }
     }
 
-    var html = "<" + markup + " " + href + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
+    var html = "<" + markup + href + lang + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
 
     /********************** Image preview ****************/
     var image_preview = "<span class=\"item-entry-preview\">";
