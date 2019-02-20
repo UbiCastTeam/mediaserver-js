@@ -57,9 +57,9 @@ MSBrowserChannels.prototype.refresh_title = function () {
         var html = "<span class=\"item-entry-preview\"><img src=\""+item.thumb+"\" alt=\""+utils.escape_html(item.title)+"\"/></span>";
         html += "<span class=\"channel-titles-place\">";
         if (!this.browser.use_overlay && item.parent_title) {
-            html += "<a class=\"parent-channel-title\" href=\"#" + item.parent_slug + "\">"+utils.escape_html(item.parent_title)+"</a>";
+            html += "<a class=\"parent-channel-title\" href=\"#" + item.parent_slug + "\"" + (item.parent_language ? "lang=\"" + item.parent_language + "\"" : "") + ">"+utils.escape_html(item.parent_title)+"</a>";
         }
-        html += "<span class=\"channel-title\">"+utils.escape_html(item.title)+"</span>";
+        html += "<span class=\"channel-title\"" + (item.language ? "lang=\"" + item.language + "\"" : "") + ">"+utils.escape_html(item.title)+"</span>";
         html += "</span>";
         if (this.browser.current_selection && this.browser.current_selection.oid == item.oid) {
             html = "<span class=\"selected\">"+html+"</span>";
