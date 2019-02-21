@@ -269,8 +269,8 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
     var obj = this;
     MSAPI.ajax_call("search", data, function (response) {
         obj._on_ajax_response(response);
-        if (window.ga)
-            window.ga("send", "pageview", "/ajax_search?search="+data.search+"&fields="+data.fields);
+        if (window.ga_pageview)
+            window.ga_pageview("ajax search", "/ajax_search?search="+data.search+"&fields="+data.fields);
     });
 };
 
