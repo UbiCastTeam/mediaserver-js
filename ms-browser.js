@@ -297,7 +297,7 @@ MSBrowser.prototype._pick = function (oid, result, action, initial_pick) {
         else if (!this.use_overlay && window.parent)
             window.parent.postMessage({element: this.catalog[oid], initial_pick: (initial_pick ? true : false)}, "*");
         // select and open channel
-        if (result.info.parent_slug)
+        if (!this.use_overlay && result.info.parent_slug)
             window.location.hash = "#" + result.info.parent_slug;
         if (this.channels && (!initial_pick || !this.initial_state || !this.initial_state.channel_slug)) {
             if (oid.indexOf("c") === 0 || !isNaN(parseInt(oid, 10)))
