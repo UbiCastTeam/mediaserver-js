@@ -98,7 +98,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     ];
     var html = "<div class=\"ms-browser-top-buttons\">";
     html += "<div class=\"ms-browser-dropdown\" id=\"ms_browser_display_dropdown\">";
-    html += "<button type=\"button\" title=\"" + utils.translate("Display") + "\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\"><i class=\"fa fa-tv\" aria-hidden=\"true\"></i> <span class=\"hidden-below-1280\">"+utils.translate("Display")+" <i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></span></button>";
+    html += "<button type=\"button\" title=\"" + utils.translate("Display") + "\" class=\"button ms-browser-dropdown-button "+this.btn_class+"\"><i class=\"fa fa-tv\" aria-hidden=\"true\"></i> <span class=\"hidden-below-1280\">"+utils.translate("Display")+" </span><i class=\"fa fa-angle-down\" aria-hidden=\"true\"></i></button>";
 
     html += "<div class=\"ms-browser-dropdown-menu\">";
     // display mode
