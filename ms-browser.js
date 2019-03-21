@@ -46,6 +46,7 @@ function MSBrowser(options) {
     this.url_channels = "/channels/";
     this.url_latest = "/latest/";
     this.url_search = "/search/";
+    this.url_post_link = "/lti/post-link/";
 
     this.default_search_in = [];
 
@@ -101,53 +102,65 @@ MSBrowser.prototype.init = function () {
 
     if (!this.use_overlay) {
         this.pick_mode = false;
+        var url_params = [];
 
         if (url_data.iframe) {
             this.iframe_mode = true;
             this.url_login = "/login/iframe/";
-            this.url_channels += "?iframe";
-            this.url_latest += "?iframe";
-            this.url_search += "?iframe";
-            if (url_data.pick) {
-                this.pick_mode = true;
-                if (url_data.pick.toString().match(/^[cvlp]+$/)) {
-                    this.selectable_content = url_data.pick;
-                    this.displayable_content = url_data.pick;
-                    if (this.displayable_content.indexOf("c") < 0)
-                        this.displayable_content = "c" + this.displayable_content;
-                } else {
-                    this.selectable_content = "cvlp";
-                    this.displayable_content = "cvlp";
-                }
-                this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-                this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-                this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-                this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-                if (!this.initial_oid && url_data.initial) {
-                    this.initial_oid = url_data.initial.toString();
-                    this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
-                    this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
-                    this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
-                    this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
-                }
-            }
+            url_params.push("iframe");
         }
 
         if (url_data.mine) {
             this.filter_speaker = "self";
-            this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "mine";
-            this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "mine";
-            this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "mine";
-            this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "mine";
+            url_params.push("mine");
         }
 
         if (url_data.lti) {
             this.lti_mode = true;
             this.filter_speaker = "self";
-            this.url_login += (this.url_login.indexOf("?") < 0 ? "?" : "&") + "lti";
-            this.url_channels += (this.url_channels.indexOf("?") < 0 ? "?" : "&") + "lti";
-            this.url_latest += (this.url_latest.indexOf("?") < 0 ? "?" : "&") + "lti";
-            this.url_search += (this.url_search.indexOf("?") < 0 ? "?" : "&") + "lti";
+            url_params.push("lti");
+        }
+
+        if (url_data.pick) {
+            this.pick_mode = true;
+            if (url_data.pick.toString().match(/^[cvlp]+$/)) {
+                this.selectable_content = url_data.pick;
+                this.displayable_content = url_data.pick;
+                if (this.displayable_content.indexOf("c") < 0)
+                    this.displayable_content = "c" + this.displayable_content;
+            } else {
+                this.selectable_content = "vlp";
+                this.displayable_content = "cvlp";
+            }
+            url_params.push("pick=" + this.selectable_content);
+            if (!this.initial_oid && url_data.initial) {
+                this.initial_oid = url_data.initial.toString();
+                url_params.push("initial=" + this.initial_oid);
+            }
+        }
+
+        if (url_data["return"] && url_data["return"].toString().indexOf("https://") === 0 && url_data["return"].toString().length > 8) {
+            if (!this.pick_mode) {
+                this.pick_mode = true;
+                this.selectable_content = "vlp";
+                this.displayable_content = "cvlp";
+                url_params.push("pick=" + this.selectable_content);
+            }
+            url_params.push("return=" + url_data["return"]);
+            var pl_url = this.url_post_link + "?return=" + url_data["return"];
+            this.on_pick = function (item, initial_pick) {
+                if (initial_pick)
+                    return;
+                window.location = pl_url + "&oid=" + item.oid;
+            };
+        }
+
+        if (url_params.length > 0) {
+            var to_add = "?" + url_params.join("&");
+            this.url_login += to_add;
+            this.url_channels += to_add;
+            this.url_latest += to_add;
+            this.url_search += to_add;
         }
     }
 
@@ -283,8 +296,7 @@ MSBrowser.prototype._pick = function (oid, result, action, initial_pick) {
     if (!this.pick_mode) {
         if (action == "delete" && window.delete_form_manager)
             window.delete_form_manager.show(oid, this.catalog[oid].title);
-    }
-    else {
+    } else {
         // change current selection
         if (this.current_selection && this.current_selection.oid)
             $(".item-entry-"+this.current_selection.oid, this.$main).removeClass("selected");
@@ -293,7 +305,7 @@ MSBrowser.prototype._pick = function (oid, result, action, initial_pick) {
         if (this.overlay && !initial_pick)
             this.overlay.hide();
         if (this.on_pick)
-            this.on_pick(this.catalog[oid]);
+            this.on_pick(this.catalog[oid], initial_pick);
         else if (!this.use_overlay && window.parent)
             window.parent.postMessage({element: this.catalog[oid], initial_pick: (initial_pick ? true : false)}, "*");
         // select and open channel
