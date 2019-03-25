@@ -19,11 +19,11 @@
 }
 .ms-browser-container a {
     text-decoration: none;
-    color: #1C73BF;
+    color: #003BC3;
 }
 .ms-browser-container a:hover {
     text-decoration: none;
-    color: #004C5C;
+    color: #000F32;
 }
 .ms-browser img {
     vertical-align: middle;
@@ -322,7 +322,7 @@
     font: normal normal normal 20px/1 FontAwesome;
 }
 .ms-browser .message.info {
-    background: #1C73BF;
+    background: #003BC3;
 }
 .ms-browser .message.info:before {
     content: "\f05a";
@@ -413,7 +413,7 @@
 .ms-channels-tree .channel-btn {
     display: block;
     cursor: pointer;
-    color: #145284;
+    color: #000F32;
     text-align: left;
     background: transparent;
     border: 0 none;

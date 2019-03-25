@@ -27,7 +27,7 @@
 }
 .ms-items .clickable .item-entry-link {
     cursor: pointer;
-    color: #145284;
+    color: #000F32;
 }
 .ms-items .item-entry .item-entry-link:hover {
     color: #086E9A;
