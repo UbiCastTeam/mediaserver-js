@@ -23,7 +23,7 @@ utils.add_translations({
     "annotations": "annotations",
     "Apply": "Appliquer",
     "April": "avril",
-    "at": "le",
+    "at": "à",
     "August": "ao&ucirc;t",
     "Categories": "Catégories",
     "categories": "catégories",
