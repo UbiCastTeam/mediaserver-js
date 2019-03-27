@@ -371,9 +371,6 @@
         margin: 10px 0;
         width: auto;
     }
-    .ms-items .item-entry-links-container {
-        display: inline-block;
-    }
     .ms-items .item-entry-layout,
     .ms-items .item-entry-unlisted,
     .ms-items .item-entry-notpublished,
@@ -395,5 +392,12 @@
     .ms-items .item-entry-content {
         margin: 5px;
         margin-left: 70px;
+    }
+    .ms-items .item-entry-preview-play .fa-4x {
+        font-size: 2em;
+    }
+    .ms-items .item-description {
+        margin: 5px;
+        padding: 5px;
     }
 }
