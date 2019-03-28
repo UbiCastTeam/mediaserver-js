@@ -42,17 +42,9 @@ h1 .channel-titles-place .channel-title {
     display: inline-block;
 }
 /* ms-browser */
-.ms-browser .ms-browser-header,
-.ms-browser .ms-browser-bar,
-.ms-browser .ms-browser-search-form {
+.iframe .ms-browser.no-header .ms-items .item-description,
+.iframe .ms-browser.no-header h3 {
     display: none;
-}
-.iframe .ms-browser .ms-browser-header,
-.iframe .ms-browser .ms-browser-bar {
-    display: block;
-}
-.iframe .ms-browser .ms-browser-search-form {
-    display: inline;
 }
 .ms-browser .ms-browser-section {
     overflow: visible;

@@ -455,6 +455,13 @@
     text-align: center;
 }
 
+/* no header adjustments */
+.ms-browser.no-header .ms-browser-header,
+.ms-browser.no-header .ms-browser-bar,
+.ms-browser.no-header .ms-browser-search-form {
+    display: none;
+}
+
 @media (max-width: 1280px) {
     .ms-browser .ms-browser-title {
         padding: 0;
