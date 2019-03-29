@@ -139,7 +139,7 @@ MSBrowser.prototype.init = function () {
             }
         }
 
-        if (url_data["return"] && url_data["return"].toString().indexOf("https://") === 0 && url_data["return"].toString().length > 8) {
+        if (url_data["return"] && ((window.parent && url_data["return"].toString() == "postMessageAPI") || (url_data["return"].toString().indexOf("https://") === 0 && url_data["return"].toString().length > 8))) {
             if (!this.pick_mode) {
                 this.pick_mode = true;
                 this.selectable_content = "vlp";
@@ -147,11 +147,18 @@ MSBrowser.prototype.init = function () {
                 url_params.push("pick=" + this.selectable_content);
             }
             url_params.push("return=" + url_data["return"]);
-            var pl_url = this.url_post_link + "?return=" + url_data["return"];
+            var return_target;
+            if (window.parent && url_data["return"].toString() == "postMessageAPI")
+                return_target = "postMessageAPI";
+            else
+                return_target = this.url_post_link + "?return=" + url_data["return"];
             this.on_pick = function (item, initial_pick) {
                 if (initial_pick)
                     return;
-                window.location = pl_url + "&oid=" + item.oid;
+                if (return_target == "postMessageAPI")
+                    window.parent.postMessage({item: item, initial_pick: (initial_pick ? true : false)}, "*");
+                else
+                    window.location = return_target + "&oid=" + item.oid;
             };
         }
 
@@ -306,8 +313,6 @@ MSBrowser.prototype._pick = function (oid, result, action, initial_pick) {
             this.overlay.hide();
         if (this.on_pick)
             this.on_pick(this.catalog[oid], initial_pick);
-        else if (!this.use_overlay && window.parent)
-            window.parent.postMessage({element: this.catalog[oid], initial_pick: (initial_pick ? true : false)}, "*");
         // select and open channel
         if (!this.use_overlay && result.info.parent_slug)
             window.location.hash = "#" + result.info.parent_slug;
