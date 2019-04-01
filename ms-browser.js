@@ -155,10 +155,14 @@ MSBrowser.prototype.init = function () {
             this.on_pick = function (item, initial_pick) {
                 if (initial_pick)
                     return;
-                if (return_target == "postMessageAPI")
-                    window.parent.postMessage({item: item, initial_pick: (initial_pick ? true : false)}, "*");
-                else
+                if (return_target == "postMessageAPI") {
+                    var top_frame = window.opener ? window.opener.parent : window.parent;
+                    top_frame.postMessage({item: item, initial_pick: (initial_pick ? true : false)}, "*");
+                    if (window.opener)
+                        window.close();
+                } else {
                     window.location = return_target + "&oid=" + item.oid;
+                }
             };
         }
 
