@@ -139,7 +139,7 @@ MSBrowser.prototype.init = function () {
             }
         }
 
-        if (url_data["return"] && ((window.parent && url_data["return"].toString() == "postMessageAPI") || (url_data["return"].toString().indexOf("https://") === 0 && url_data["return"].toString().length > 8))) {
+        if (url_data["return"] && ((window.parent && url_data["return"].toString().indexOf("postMessageAPI") === 0) || (url_data["return"].toString().indexOf("https://") === 0 && url_data["return"].toString().length > 8))) {
             if (!this.pick_mode) {
                 this.pick_mode = true;
                 this.selectable_content = "vlp";
@@ -148,16 +148,17 @@ MSBrowser.prototype.init = function () {
             }
             url_params.push("return=" + url_data["return"]);
             var return_target;
-            if (window.parent && url_data["return"].toString() == "postMessageAPI")
-                return_target = "postMessageAPI";
+            if (window.parent && url_data["return"].toString().indexOf("postMessageAPI") === 0)
+                return_target = url_data["return"];
             else
                 return_target = this.url_post_link + "?return=" + url_data["return"];
             this.on_pick = function (item, initial_pick) {
                 if (initial_pick)
                     return;
-                if (return_target == "postMessageAPI") {
+                if (return_target.indexOf("postMessageAPI") === 0) {
                     var top_frame = window.opener ? window.opener.parent : window.parent;
-                    top_frame.postMessage({item: item, initial_pick: (initial_pick ? true : false)}, "*");
+                    var target_name = return_target.substring("postMessageAPI".length).replace(/^:+|:+$/g, "");
+                    top_frame.postMessage({item: item, initial_pick: (initial_pick ? true : false), target: target_name}, "*");
                     if (window.opener)
                         window.close();
                 } else {
