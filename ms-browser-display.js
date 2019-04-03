@@ -507,17 +507,18 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             else
                 top_bar += "layout-video";
             top_bar += "\" title=\"";
-            top_bar += utils.translate(item_type == "live" ? "This item is a live stream" : "This item is a video");
+            var title_text = utils.translate(item_type == "live" ? "This item is a live stream" : "This item is a video");
             if (item.layout) {
                 if (item.layout == "composition") {
-                    top_bar += " (" + utils.translate("dynamic RichMedia") + ")";
+                    title_text += " (" + utils.translate("dynamic RichMedia") + ")";
                 } else if (item.layout == "webinar") {
-                    top_bar += " (" + utils.translate("classic RichMedia") + ")";
+                    title_text += " (" + utils.translate("classic RichMedia") + ")";
                 } else {
-                    top_bar += " (" + item.layout.replace(/_/, " ") + ")";
+                    title_text += " (" + item.layout.replace(/_/, " ") + ")";
                 }
             }
-            top_bar += "\"></span>";
+            top_bar += title_text;
+            top_bar += "\"><span class=\"sr-only\">" + title_text + "</span></span>";
         }
     }
     // element top_bar
@@ -525,20 +526,25 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         if (item_type == "channel") {
             if (item.unlisted)
                 top_bar += "<span class=\"item-entry-unlisted\" title=\"" +
-                            utils.translate("This channel is unlisted") + "\"></span>";
+                            utils.translate("This channel is unlisted") + "\"><span class=\"sr-only\"></span>" +
+                            utils.translate("This channel is unlisted") + "</span>";
         } else {
             if (!item.validated)
                 top_bar += "<span class=\"item-entry-notpublished\" title=\"" +
-                            utils.translate("This media is not published") + "\"></span>";
+                            utils.translate("This media is not published") + "\"><span class=\"sr-only\">" +
+                            utils.translate("This media is not published") + "</span></span>";
             else if (item.unlisted)
                 top_bar += "<span class=\"item-entry-unlisted\" title=\"" +
-                            utils.translate("This media is published and unlisted") + "\"></span>";
+                            utils.translate("This media is published and unlisted") + "\"><span class=\"sr-only\">" +
+                            utils.translate("This media is published and unlisted") + "</span></span>";
             else
                 top_bar += "<span class=\"item-entry-published\" title=\"" +
-                            utils.translate("This media is published") + "\"></span>";
+                            utils.translate("This media is published") + "\"><span class=\"sr-only\">" +
+                            utils.translate("This media is published") + "</span></span>";
             if (item_type == "video" && !item.ready)
                 top_bar += "<span class=\"item-entry-notready\" title=\"" +
-                            utils.translate("This video is not ready") + "\"></span>";
+                            utils.translate("This video is not ready") + "\"><span class=\"sr-only\">" +
+                            utils.translate("This video is not ready") + "</span></span>";
         }
     }
     // duration
