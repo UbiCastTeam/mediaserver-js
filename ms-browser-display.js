@@ -526,8 +526,8 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         if (item_type == "channel") {
             if (item.unlisted)
                 top_bar += "<span class=\"item-entry-unlisted\" title=\"" +
-                            utils.translate("This channel is unlisted") + "\"><span class=\"sr-only\"></span>" +
-                            utils.translate("This channel is unlisted") + "</span>";
+                            utils.translate("This channel is unlisted") + "\"><span class=\"sr-only\">" +
+                            utils.translate("This channel is unlisted") + "</span></span>";
         } else {
             if (!item.validated)
                 top_bar += "<span class=\"item-entry-notpublished\" title=\"" +
