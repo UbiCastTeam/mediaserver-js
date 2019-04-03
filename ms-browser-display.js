@@ -443,7 +443,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         html += "<div class=\"item-entry-buttons\">";
         html +=   "<button type=\"button\" class=\"item-entry-info\" title=\""+utils.translate("Open information panel")+"\"><i class=\"fa fa-info color-blue\" aria-hidden=\"true\"></i></button>";
         if (item.can_edit) {
-            html += "<a title=\""+utils.translate("Edit")+"\" href=\""+this.get_button_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
+            html += "<a title=\""+utils.translate("Edit")+"\" href=\""+this.get_button_link(item, "edit")+"\""+this.links_target+"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
         }
         html +=   "<div class=\"overlay-info ms-items\" id=\"item_entry_"+oid+"_"+tab+"_info\" style=\"display: none;\"></div>";
         html += "</div>";
@@ -463,18 +463,18 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
 MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable, tab) {
     var markup = "div";
     var href = "";
-    var link = "";
-    var lang = "";
     if (!this.use_overlay && item.slug && (!this.pick_mode || item_type == "channel")) {
-        link = " href=\""+this.get_button_link(item, "view")+"\"";
         markup = "a";
-        href = link;
+        href = " href=\""+this.get_button_link(item, "view")+"\"";
+        if (item_type != "channel") {
+            href += this.links_target;
+        }
         if (item.language) {
-            lang = " lang=\"" + item.language + "\"";
+            href += " lang=\"" + item.language + "\"";
         }
     }
 
-    var html = "<" + markup + href + lang + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
+    var html = "<" + markup + href + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
 
     /********************** Image preview ****************/
     var image_preview = "<span class=\"item-entry-preview\">";
@@ -592,7 +592,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             html += "<span>" + utils.translate("Matching annotations:") + "</span><ul>";
             for (i=0; i < item.annotations.length; i++) {
                 var annotation = item.annotations[i];
-                html += "<li><a href=\"" + this.get_button_link(item, "view") + "#start=" + annotation.time + "&autoplay\">";
+                html += "<li><a href=\"" + this.get_button_link(item, "view") + "#start=" + annotation.time + "&autoplay\""+this.links_target+">";
                 if (annotation.title)
                     html += annotation.title;
                 html += " (" + annotation.time_display + ") ";
@@ -604,7 +604,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             html += "<span>" + utils.translate("Matching photos:") + "</span><ul>";
             for (i=0; i < item.photos.length; i++) {
                 var photo = item.photos[i];
-                html += "<li><a href=\"" + this.get_button_link(item, "view") + "#" + photo.index + "\">";
+                html += "<li><a href=\"" + this.get_button_link(item, "view") + "#" + photo.index + "\""+this.links_target+">";
                 if (photo.title)
                     html += photo.title;
                 html += " (#" + photo.index + ") ";
@@ -659,7 +659,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
     } else {
         if (item_type == "current") {
             if (item.can_edit) {
-                html += "<a title=\"" + utils.translate("Edit") + "\" class=\""+this.btn_class+" button default item-entry-pick item-entry-pick-edit-media\" href=\""+this.get_button_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Edit")+"</span></a>";
+                html += "<a title=\"" + utils.translate("Edit") + "\" class=\""+this.btn_class+" button default item-entry-pick item-entry-pick-edit-media\" href=\""+this.get_button_link(item, "edit")+"\""+this.links_target+"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Edit")+"</span></a>";
                 if (item.can_delete)
                     html += "<button title=\"" + utils.translate("Delete") + "\" type=\"button\" class=\""+this.btn_class+" button danger item-entry-pick-delete-media\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Delete")+"</span></button>";
             }
@@ -667,18 +667,20 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 if (item.can_add_channel) {
                     var add_channel_icon = "<i class=\"fa fa-folder\" aria-hidden=\"true\"></i>" +
                     " <i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
-                    html += "<a title=\"" + utils.translate("Add a sub channel") + "\" class=\"" + this.btn_class + " button item-entry-pick item-entry-pick-add-channel\" href=\"" +
-                              this.get_button_link(item, "add_channel") + "\">" + add_channel_icon +
-                              " <span class=\"hidden-below-800\">" +
-                              utils.translate("Add a sub channel")+"</span></a>";
+                    html += "<a title=\"" + utils.translate("Add a sub channel") + "\"" +
+                            " class=\"" + this.btn_class + " button item-entry-pick item-entry-pick-add-channel\" href=\"" +
+                            this.get_button_link(item, "add_channel") + "\"" + this.links_target + ">" + add_channel_icon +
+                            " <span class=\"hidden-below-800\">" +
+                            utils.translate("Add a sub channel")+"</span></a>";
                 }
                 if (item.oid != "0" && item.can_add_video) {
                     var add_video_icon = "<i class=\"fa fa-film\" aria-hidden=\"true\"></i>" +
                     " <i class=\"fa fa-plus color-green\" aria-hidden=\"true\"></i>";
-                    html += "<a title=\"" + utils.translate("Add a video") + "\" class=\""+this.btn_class+" button item-entry-pick item-entry-pick-add-video\" href=\"" +
-                              this.get_button_link(item, "add_video") + "\">" + add_video_icon +
-                              " <span class=\"hidden-below-800\">" +
-                              utils.translate("Add a video")+"</span></a>";
+                    html += "<a title=\"" + utils.translate("Add a video") + "\"" +
+                            " class=\""+this.btn_class+" button item-entry-pick item-entry-pick-add-video\" href=\"" +
+                            this.get_button_link(item, "add_video") + "\"" + this.links_target + ">" + add_video_icon +
+                            " <span class=\"hidden-below-800\">" +
+                            utils.translate("Add a video")+"</span></a>";
                 }
             }
         } else {
@@ -686,10 +688,10 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 html += "<button type=\"button\" class=\""+this.btn_class+" button default item-entry-copy\" data-link=\""+this.get_button_link(item, "lti", true)+"\"><i class=\"fa fa-chain\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("Copy LTI link")+"</span></button>";
             }
             if ((item_type != "channel" && this.lti_mode) || item.can_edit || item.can_delete) {
-                html += "<a class=\""+this.btn_class+" button default item-entry-pick-view-media\" href=\""+this.get_button_link(item, "view")+"\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
+                html += "<a class=\""+this.btn_class+" button default item-entry-pick-view-media\" href=\""+this.get_button_link(item, "view")+"\""+this.links_target+"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("See")+"</span></a>";
             }
             if (item.can_edit) {
-                html += "<a class=\""+this.btn_class+" button item-entry-pick-edit-media default\" href=\""+this.get_button_link(item, "edit")+"\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("Edit") +"</span></a>";
+                html += "<a class=\""+this.btn_class+" button item-entry-pick-edit-media default\" href=\""+this.get_button_link(item, "edit")+"\""+this.links_target+"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("Edit") +"</span></a>";
             }
             if (item.can_delete)
                 html += "<button type=\"button\" class=\""+this.btn_class+" button item-entry-pick-delete-media danger\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> <span class=\"hidden-below-440\">"+utils.translate("Delete")+"</span></button>";
@@ -827,7 +829,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     var html = "<div>";
     html += "<div class=\"overlay-info-title\">";
     html +=     "<button type=\"button\" class=\"overlay-info-close button default "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\" aria-label=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\" aria-hidden=\"true\"></i></button>";
-    html +=     "<h3><a href=\""+this.get_button_link(item, "view")+"\">"+item.title+"</a></h3>";
+    html +=     "<h3><a href=\""+this.get_button_link(item, "view")+"\""+this.links_target+">"+item.title+"</a></h3>";
     html += "</div>";
     html += "<div class=\"overlay-info-content\">";
     if (!this.pick_mode && tab == "search" && (item.annotations || item.photos)) {
@@ -837,7 +839,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
             html += "<ul>";
             for (i=0; i < item.annotations.length; i++) {
                 var annotation = item.annotations[i];
-                html += "<li><a href=\""+this.get_button_link(item, "view")+"#start="+annotation.time+"&autoplay\">";
+                html += "<li><a href=\""+this.get_button_link(item, "view")+"#start="+annotation.time+"&autoplay\""+this.links_target+">";
                 if (annotation.title)
                     html += annotation.title;
                 html += " ("+annotation.time_display+") ";
@@ -850,7 +852,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
             html += "<ul>";
             for (i=0; i < item.photos.length; i++) {
                 var photo = item.photos[i];
-                html += "<li><a href=\""+this.get_button_link(item, "view")+"#"+photo.index+"\">";
+                html += "<li><a href=\""+this.get_button_link(item, "view")+"#"+photo.index+"\""+this.links_target+">";
                 if (photo.title)
                     html += photo.title;
                 html += " (#"+photo.index+") ";

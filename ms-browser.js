@@ -31,6 +31,7 @@ function MSBrowser(options) {
     this.pick_mode = true;
     this.iframe_mode = false;
     this.lti_mode = false;
+    this.links_target = "";
     this.$widget = null;
     this.$menu = null;
     this.$main = null;
@@ -119,6 +120,11 @@ MSBrowser.prototype.init = function () {
             this.lti_mode = true;
             this.filter_speaker = "self";
             url_params.push("lti");
+        }
+
+        if (url_data.newtab) {
+            this.links_target = " target=\"_blank\"";
+            url_params.push("newtab");
         }
 
         if (url_data.pick) {
