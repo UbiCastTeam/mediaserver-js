@@ -190,6 +190,7 @@ utils.add_translations({
     "Views": "Vues",
     "views": "vues",
     "yes": "oui",
+    "selected": "sélectionné",
     "You are not allowed to have a personnal channel.": "Vous n'avez pas la permission de disposer d'une chaîne personnelle.",
     "You are not logged in or your session has expired. Please login and retry.": "Vous n'êtes pas connecté ou votre session a expiré. Veuillez vous reconnecter puis réessayez."
 }, "fr");

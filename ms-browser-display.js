@@ -430,8 +430,10 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     $entry = $("<div class=\"item-entry item-type-"+item_type+" item-entry-"+oid+"\"></div>");
     $entry.attr("id", "item_entry_"+oid+"_"+tab);
     $entry.addClass(this.display_as_thumbnails ? "thumbnail" : "list");
-    if (this.current_selection && this.current_selection.oid == oid)
+    if (this.current_selection && this.current_selection.oid == oid) {
         $entry.addClass("selected");
+        $entry.attr("title", item.title + " " + utils.translate("selected"));
+    }
     if (selectable)
         $entry.addClass("selectable");
     if (clickable)
