@@ -465,8 +465,10 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
 MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable, tab) {
     var markup = "div";
     var href = "";
+    var button_style = " tabindex=\"0\" role=\"button\"";
     if (!this.use_overlay && item.slug && (!this.pick_mode || item_type == "channel")) {
         markup = "a";
+        button_style = "";
         href = " href=\""+this.get_button_link(item, "view")+"\"";
         if (item_type != "channel") {
             href += this.links_target;
@@ -476,7 +478,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         }
     }
 
-    var html = "<" + markup + href + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
+    var html = "<" + markup + href + button_style + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
 
     /********************** Image preview ****************/
     var image_preview = "<span class=\"item-entry-preview\">";
@@ -630,12 +632,20 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
             $entry_block.click({ obj: this, oid: oid }, function (event) {
                 event.data.obj.channels.display_channel(event.data.oid);
                 event.data.obj.change_tab("channels");
+                utils.focus_first_descendant($("#ms_browser_channels .ms-browser-channels-place")[0]);
             });
         } else if (selectable) {
             $entry_block.click({ obj: this, oid: oid }, function (event) {
                 event.data.obj.pick(event.data.oid);
             });
         }
+        $entry_block.keydown(function (event) {
+            if (event.which == "13") { // enter
+                event.preventDefault();
+                event.stopPropagation();
+                $(this).trigger("click");
+            }
+        });
     }
     else if (item.can_delete) {
         $(".item-entry-pick-delete-media", $entry_block).click({ obj: this, oid: oid }, function (event) {
