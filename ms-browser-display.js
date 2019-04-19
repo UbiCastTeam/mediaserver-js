@@ -479,7 +479,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     /********************** Image preview ****************/
     var image_preview = "<span class=\"item-entry-preview\">";
     if (item.thumb) {
-        image_preview += "<img src=\"" + item.thumb + "\" alt=\""+utils.translate("Preview image")+"\"/>";
+        image_preview += "<img src=\"" + item.thumb + "\" alt=\"\"/>";
     }
     if (!this.pick_mode && item_type != "channel") {
         image_preview += "<span class=\"item-entry-preview-play\"><i class=\"fa fa-play fa-4x\" aria-hidden=\"true\"></i></span>";
