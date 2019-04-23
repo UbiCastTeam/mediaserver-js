@@ -75,9 +75,9 @@ MSTreeManager.prototype.init = function () {
     if (this.display_root) {
         html += "<div id=\"" + this.id_prefix + "tree_channel_0_link\" "+(this.current_channel_oid == "0" ? "class=\"channel-active\"" : "")+">";
         if (this.on_change)
-            html += "<button type=\"button\" data-ref=\"0\" class=\"channel-btn\">"+utils.translate("Root")+"</button>";
+            html += "<button type=\"button\" data-ref=\"0\" class=\"channel-btn\""+(this.current_channel_oid == "0" ? "title=\""+utils.translate("Root")+" "+ utils.translate("selected")+"\"" : "")+">"+utils.translate("Root")+"</button>";
         else
-            html += "<a href=\""+this.channels_base_url+"\" class=\"channel-btn\">"+utils.translate("Root")+"</a>";
+            html += "<a href=\""+this.channels_base_url+"\" class=\"channel-btn\""+(this.current_channel_oid == "0" ? "title=\""+utils.translate("Root")+" "+ utils.translate("selected")+"\"" : "")+">"+utils.translate("Root")+"</a>";
         html += "</div>";
     }
     html += "<ul class=\"list js-active-item border-color-blue active\" id=\"" + this.id_prefix + "tree_channel_0\"></ul></div>";
@@ -226,7 +226,7 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
                 html += "<li><span id=\"" + this.id_prefix + "tree_channel_" + channel.oid + "_link\" data-ref=\"" + channel.oid +
                                "\" class=\"" + (!this.on_change ? "aside-list-btn" : "") + (this.current_channel_oid == channel.oid ? " channel-active" : "") + "\">" + button;
                 if (this.on_change)
-                    html += "<button " + (channel.language ? "lang=\"" + channel.language + "\"" : "") + " type=\"button\" data-ref=\""+channel.oid+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</button>";
+                    html += "<button " + (channel.language ? "lang=\"" + channel.language + "\"" : "") + " type=\"button\" data-ref=\""+channel.oid+"\" class=\"channel-btn\"" + (this.current_channel_oid == channel.oid ? " title=\""+utils.escape_html(channel.title)+" " + utils.translate("selected") + "\"" : "") +">"+utils.escape_html(channel.title)+"</button>";
                 else
                     html += "<a " + (channel.language ? "lang=\"" + channel.language + "\"" : "") + " href=\""+this.channels_base_url+channel[this.channels_url_field]+"\" class=\"channel-btn\">"+utils.escape_html(channel.title)+"</a>";
                 html += "</span>";
@@ -340,9 +340,11 @@ MSTreeManager.prototype.toggle_channel = function (oid) {
 MSTreeManager.prototype.set_active = function (oid) {
     if (this.current_channel_oid == oid)
         return;
-    $("#" + this.id_prefix + "tree_channel_" + this.current_channel_oid + "_link", this.$widget).removeClass("channel-active");
+    $(".channel-active button", this.$widget).removeAttr("title");
+    $(".channel-active", this.$widget).removeClass("channel-active");
     this.current_channel_oid = oid;
     $("#" + this.id_prefix + "tree_channel_" + this.current_channel_oid + "_link", this.$widget).addClass("channel-active");
+    $("#" + this.id_prefix + "tree_channel_" + this.current_channel_oid + "_link button", this.$widget).attr("title", $("#" + this.id_prefix + "tree_channel_" + this.current_channel_oid + "_link", this.$widget).text() + " " + utils.translate("selected"));
     this.open_tree(oid);
 };
 
