@@ -32,7 +32,7 @@ MSBrowser.prototype.build_widget = function () {
         html += "<button type=\"button\" id=\"ms_browser_search_tab\" class=\"ms-browser-tab button "+this.btn_class+"\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+search_label+"</span></button>";
     }
     html +=     "</div>";
-    html +=     "<div class=\"ms-browser-title\"></div>";
+    html +=     "<h2 class=\"ms-browser-title\"></h2>";
     html += "</div>";
     html += "<div class=\"ms-browser-bar\">";
     html += "</div>";
