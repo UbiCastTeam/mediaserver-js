@@ -473,9 +473,6 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         if (item_type != "channel") {
             href += this.links_target;
         }
-        if (item.language) {
-            href += " lang=\"" + item.language + "\"";
-        }
     }
 
     var html = "<" + markup + href + button_style + " class=\"item-entry-link\"" + (clickable && item_type != "channel" ? " title=\"" + utils.translate("Click to select this media") + "\"" : "") + ">";
@@ -483,7 +480,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     /********************** Image preview ****************/
     var image_preview = "<span class=\"item-entry-preview\">";
     if (item.thumb) {
-        image_preview += "<img src=\"" + item.thumb + "\" alt=\"\"/>";
+        image_preview += "<img src=\"" + item.thumb + "\" alt=\"\"" + (item.language ? " lang=\"" + item.language + "\"" : "") + "/>";
     }
     if (!this.pick_mode && item_type != "channel") {
         image_preview += "<span class=\"item-entry-preview-play\"><i class=\"fa fa-play fa-4x\" aria-hidden=\"true\"></i></span>";
@@ -556,14 +553,14 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         top_bar += "<span class=\"item-entry-duration\">" + item.duration + "</span>";
     // title
     if (!this.display_as_thumbnails)
-        top_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
+        top_bar += "<span class=\"item-entry-title\"" + (item.language ? " lang=\"" + item.language + "\"" : "") + ">" + utils.escape_html(item.title) + "</span>";
     top_bar += "</span>";
     content += top_bar;
 
     /********************** Bottom bar ****************/
     var bottom_bar = "<span class=\"item-entry-bottom-bar\">";
     if (this.display_as_thumbnails) {
-        bottom_bar += "<span class=\"item-entry-title\">" + utils.escape_html(item.title) + "</span>";
+        bottom_bar += "<span class=\"item-entry-title\"" + (item.language ? " lang=\"" + item.language + "\"" : "") + ">" + utils.escape_html(item.title) + "</span>";
     } else {
         if (item.creation)
             bottom_bar += "<span class=\"item-entry-date\">" + utils.translate("Created on") + " " +
