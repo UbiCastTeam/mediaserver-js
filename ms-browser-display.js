@@ -181,10 +181,13 @@ MSBrowser.prototype.set_title = function (text, html) {
     if (!html)
         html = text;
 
-    if (!this.use_overlay && $("#global .main-title h1").length > 0)
+    if (!this.use_overlay && $("#global .main-title h1").length > 0) {
         $("#global .main-title h1").html(html);
-    else
+        $("#global .main-title h1").attr("tabindex", "-1");
+        $("#global .main-title h1").focus();
+    } else {
         $(".ms-browser-title", this.$widget).html(html);
+    }
 
     if (!this.use_overlay && document.title) {
         if (!this.document_tilte_suffix) {
