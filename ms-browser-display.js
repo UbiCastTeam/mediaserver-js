@@ -465,6 +465,10 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         if ($entry_links)
             $entry.append($entry_links);
     }
+    $(".item-entry-link", $entry).focus(function (event) {
+        $(".item-entry").removeClass("focus");
+        $(this).parent().addClass("focus");
+    });
     return $entry;
 };
 MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable, tab) {

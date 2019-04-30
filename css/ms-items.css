@@ -304,6 +304,8 @@
     font-size: 1.5em;
 }
 .ms-items .item-entry.thumbnail .item-entry-info.info-displayed,
+.ms-items .item-entry.thumbnail.focus .item-entry-buttons a,
+.ms-items .item-entry.thumbnail.focus .item-entry-buttons button,
 .ms-items .item-entry.thumbnail:hover .item-entry-buttons a,
 .ms-items .item-entry.thumbnail:hover .item-entry-buttons button {
     display: block;
