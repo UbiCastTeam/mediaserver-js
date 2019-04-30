@@ -264,6 +264,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             if (!this.browser.use_overlay && $(".navbar .back.button-text").length > 0) {
                 $back.html("<i class=\"fa fa-chevron-circle-up fa-fw fa-2x\" aria-hidden=\"true\"></i>");
                 $back.attr("title", utils.translate("Parent channel"));
+                $back.attr("aria-label", utils.translate("Parent channel"));
                 $back.addClass("back").addClass("button-text");
                 $(".navbar .back.button-text").replaceWith($back);
             } else {
