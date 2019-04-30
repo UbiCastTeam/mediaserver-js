@@ -200,7 +200,8 @@
 .ms-items .item-entry-links-container {
     display: none;
 }
-.ms-items .item-entry:hover .item-entry-links-container {
+.ms-items .item-entry:hover .item-entry-links-container,
+.ms-items .item-entry.focus .item-entry-links-container {
     display: block;
 }
 .ms-items .item-entry .item-entry-description {
