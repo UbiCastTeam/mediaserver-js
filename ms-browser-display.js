@@ -375,10 +375,11 @@ MSBrowser.prototype.hide_loading = function () {
 MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) {
     var i, selectable, $section;
     var markup = (this.pick_mode ? "h3" : "h2");
+    var section_html = "<ul class=\"ms-browser-section\"></ul>";
     if (data.channels && data.channels.length > 0) {
         // sub channels
         selectable = this.selectable_content.indexOf("c") != -1;
-        $section = $("<div class=\"ms-browser-section\"></div>");
+        $section = $(section_html);
         if (cat_oid && cat_oid != "0") {
             $section.append("<" + markup + ">"+utils.translate("Sub channels")+"</" + markup + ">");
         } else if (tab == "search") {
@@ -396,7 +397,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.live_streams && data.live_streams.length > 0) {
         // live streams
         selectable = this.selectable_content.indexOf("l") != -1;
-        $section = $("<div class=\"ms-browser-section\"></div>");
+        $section = $(section_html);
         $section.append("<" + markup + ">"+utils.translate("Live streams")+"</" + markup + ">");
 
         for (i = 0; i < data.live_streams.length; i++) {
@@ -407,7 +408,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.videos && data.videos.length > 0) {
         // videos
         selectable = this.selectable_content.indexOf("v") != -1;
-        $section = $("<div class=\"ms-browser-section\"></div>");
+        $section = $(section_html);
         $section.append("<" + markup + ">"+utils.translate("Videos")+"</" + markup + ">");
         for (i = 0; i < data.videos.length; i++) {
             $section.append(this.get_content_entry("video", data.videos[i], selectable, tab));
@@ -417,7 +418,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.photos_groups && data.photos_groups.length > 0) {
         // photos groups
         selectable = this.selectable_content.indexOf("p") != -1;
-        $section = $("<div class=\"ms-browser-section\"></div>");
+        $section = $(section_html);
         $section.append("<" + markup + ">"+utils.translate("Photos groups")+"</" + markup + ">");
         for (i = 0; i < data.photos_groups.length; i++) {
             $section.append(this.get_content_entry("photos", data.photos_groups[i], selectable, tab));
@@ -431,7 +432,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var selectable = gselectable && (!this.parent_selection_oid || item.selectable);
     var clickable = this.pick_mode && (selectable || item_type == "channel");
     var $entry = null;
-    $entry = $("<div class=\"item-entry item-type-"+item_type+" item-entry-"+oid+"\"></div>");
+    $entry = $("<li class=\"item-entry item-type-"+item_type+" item-entry-"+oid+"\"></li>");
     $entry.attr("id", "item_entry_"+oid+"_"+tab);
     $entry.addClass(this.display_as_thumbnails ? "thumbnail" : "list");
     if (this.current_selection && this.current_selection.oid == oid) {
@@ -467,7 +468,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     return $entry;
 };
 MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable, tab) {
-    var markup = "div";
+    var markup = "span";
     var href = "";
     var button_style = " tabindex=\"0\" role=\"button\"";
     if (!this.use_overlay && item.slug && (!this.pick_mode || item_type == "channel")) {
