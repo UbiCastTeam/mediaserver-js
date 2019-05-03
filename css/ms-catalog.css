@@ -123,11 +123,12 @@ h1 .channel-titles-place .channel-title {
     background: -moz-linear-gradient(top, #fff, #ddd);
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
 }
-.overlay-info h3 {
+.overlay-info h1 {
     margin: 0;
     padding: 0;
+    font-size: 1.3em;
 }
-.overlay-info h3 a {
+.overlay-info h1 a {
     padding: 4px 8px;
     padding-right: 30px;
     display: block;

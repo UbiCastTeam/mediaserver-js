@@ -9,6 +9,8 @@
 
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
+    this.last_overlay_focus = document.activeElement;
+    this.previous_focus = null;
     var channels_label, search_label, latest_label;
     if (this.filter_speaker == "self") {
         channels_label = utils.translate("My channel");
@@ -452,7 +454,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         if (item.can_edit) {
             html += "<a title=\""+utils.translate("Edit")+"\" href=\""+this.get_button_link(item, "edit")+"\""+this.links_target+"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i></a>";
         }
-        html +=   "<div class=\"overlay-info ms-items\" id=\"item_entry_"+oid+"_"+tab+"_info\" style=\"display: none;\"></div>";
+        html +=   "<div class=\"overlay-info ms-items\" id=\"item_entry_"+oid+"_"+tab+"_info\" style=\"display: none;\" role=\"dialog\" tabindex=\"-1\" aria-labelledby=\"item_entry_"+item.oid+"_"+tab+"_info_title\" aria-modal=\"true\"></div>";
         html += "</div>";
     }
     var $entry_block = $(html);
@@ -850,10 +852,11 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
     return url + hash;
 };
 MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, selectable, tab) {
-    var html = "<div>";
-    html += "<div class=\"overlay-info-title\">";
+    var html = "<div><div tabindex=\"0\"></div>";
+    html += "<div class=\"trap-focus\">";
+    html += "<div class=\"overlay-info-title\" id=\"item_entry_"+item.oid+"_"+tab+"_info_title\" >";
     html +=     "<button type=\"button\" class=\"overlay-info-close button default "+this.btn_class+"\" title=\""+utils.translate("Hide this window")+"\" aria-label=\""+utils.translate("Hide this window")+"\"><i class=\"fa fa-close\" aria-hidden=\"true\"></i></button>";
-    html +=     "<h3><a href=\""+this.get_button_link(item, "view")+"\""+this.links_target+">"+item.title+"</a></h3>";
+    html +=     "<h1><a href=\""+this.get_button_link(item, "view")+"\""+this.links_target+">"+item.title+"</a></h1>";
     html += "</div>";
     html += "<div class=\"overlay-info-content\">";
     if (!this.pick_mode && tab == "search" && (item.annotations || item.photos)) {
@@ -921,6 +924,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     }
     html += "</div>";
     html += "</div>";
+    html += "<div tabindex=\"0\"></div></div>";
     var $info = $(html);
     var $entry_links = this.get_entry_links(item, item_type, selectable);
     if ($entry_links)
@@ -928,11 +932,20 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     $(".overlay-info-close", $info).click({ obj: this }, function (event) {
         event.data.obj.box_hide_info();
     });
+    $(document).keydown({ obj: this }, function (event) {
+        if (!$("#item_entry_"+item.oid+"_"+tab+"_info").length)
+            return;
+        if (event.keyCode == 27) {
+            event.stopImmediatePropagation();
+            event.data.obj.box_hide_info();
+        }
+    });
     return $info;
 };
 MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectable, oid, $entry, item, tab) {
     $(".item-entry-info", $entry).click({ obj: this, $entry: $entry }, function (event) {
         var info_id = "#"+$entry.attr("id")+"_info";
+        event.data.obj.previous_focus = this;
         if ($(info_id, event.data.$entry).html() !== "") {
             event.data.obj.box_open_info($entry);
             return;
@@ -952,7 +965,20 @@ MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectab
         }
     });
 };
-
+MSBrowser.prototype.trap_focus = function (element, event) {
+    if (utils.ignore_until_focus_changes) {
+      return;
+    }
+    if (element.contains(event.target)) {
+      this.last_overlay_focus = event.target;
+    } else {
+      utils.focus_first_descendant(element);
+      if (this.last_overlay_focus == document.activeElement) {
+        utils.focus_last_descendant(element);
+      }
+      this.last_overlay_focus = document.activeElement;
+    }
+};
 MSBrowser.prototype.box_open_info = function ($entry) {
     this.box_hide_info();
     var info_id = "#"+$entry.attr("id")+"_info";
@@ -974,6 +1000,9 @@ MSBrowser.prototype.box_open_info = function ($entry) {
         $info_box.css("top", top + "px");
         $(".item-entry-info", $entry).addClass("info-displayed");
         $info_box.fadeIn("fast");
+        this.last_overlay_focus = document.activeElement;
+        $info_box.focusin(this.trap_focus.bind(this, $(".trap-focus", $info_box)[0]));
+        utils.focus_first_descendant($(".trap-focus", $info_box)[0]);
 
         if (this.box_click_handler)
             $(document).unbind("click", this.box_click_handler);
@@ -986,8 +1015,15 @@ MSBrowser.prototype.box_open_info = function ($entry) {
     }
 };
 MSBrowser.prototype.box_hide_info = function () {
-    $(".overlay-info:visible").fadeOut("fast");
-    $(".item-entry-info.info-displayed").removeClass("info-displayed");
+    if ($(".overlay-info:visible").length) {
+        $(".overlay-info:visible").off("focusin");
+        this.last_overlay_focus = document.activeElement;
+        $(".overlay-info:visible").fadeOut("fast");
+        $(".item-entry-info.info-displayed").removeClass("info-displayed");
+        if (this.previous_focus) {
+            this.previous_focus.focus();
+        }
+    }
 };
 MSBrowser.prototype.display_categories = function () {
     var obj = this;
