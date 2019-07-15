@@ -218,7 +218,7 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
                     this.on_data_retrieved(channel);
                 var button = "";
                 if (channel.channels) {
-                    button = "<button type=\"button\" data-ref=\"" + channel.oid +
+                    button = "<button type=\"button\" aria-expanded=\"false\" aria-controls=\"tree_channel_" + channel.oid + "\" aria-label=\"" + channel.title + "\" data-ref=\"" + channel.oid +
                                "\" class=\"channel-toggle button-text list-entry\">" +
                                  "<i class=\"fa fa-fw fa-angle-right\" aria-hidden=\"true\"></i>" +
                              "</button>";
@@ -291,6 +291,7 @@ MSTreeManager.prototype.open_tree = function (oid) {
                 obj.load_tree(oids[i], function (result) {
                     $("#" + obj.id_prefix + "tree_channel_" + result.oid, obj.$widget).css("display", "block").addClass("active");
                     $("#" + obj.id_prefix + "tree_channel_" + result.oid + "_link .channel-toggle", obj.$widget).addClass("fa-rotate-90");
+                    $("#" + obj.id_prefix + "tree_channel_" + result.oid + "_link .channel-toggle", obj.$widget).attr("aria-expanded", true);
                 });
             }
         }
@@ -327,6 +328,7 @@ MSTreeManager.prototype.open_tree = function (oid) {
 };
 MSTreeManager.prototype.close_tree = function (oid) {
     $("#" + this.id_prefix + "tree_channel_" + oid, this.$widget).css("display", "none").removeClass("active");
+    $("#" + this.id_prefix + "tree_channel_" + oid + "_link .channel-toggle", this.$widget).attr("aria-expanded", false);
     $("#" + this.id_prefix + "tree_channel_" + oid + "_link .channel-toggle", this.$widget).removeClass("fa-rotate-90");
 };
 MSTreeManager.prototype.toggle_channel = function (oid) {
