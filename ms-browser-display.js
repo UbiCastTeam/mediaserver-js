@@ -832,22 +832,8 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
         url = window.location.protocol + "//" + window.location.host + url;
     }
 
-    if (!this.use_overlay && action != "lti") {
-        // add iframe in url if not already done
-        if (this.iframe_mode && !url.match(/(\?|\&|\/)iframe/))
-            url += (url.indexOf("?") < 0 ? "?" : "&") + "iframe";
-        // add lti in url if not already done
-        if (this.lti_mode && !url.match(/(\?|\&)lti/))
-            url += (url.indexOf("?") < 0 ? "?" : "&") + "lti";
-        // add mine in url if not already done
-        if (this.filter_speaker == "self" && !url.match(/(\?|\&)mine/))
-            url += (url.indexOf("?") < 0 ? "?" : "&") + "mine";
-        // add pick in url if not already done
-        if (this.pick_mode && !url.match(/(\?|\&)pick/))
-            url += (url.indexOf("?") < 0 ? "?" : "&") + "pick=" + this.selectable_content;
-        // add pick in url if not already done
-        if (this.pick_mode && this.initial_oid && !url.match(/(\?|\&)initial/))
-            url += (url.indexOf("?") < 0 ? "?" : "&") + "initial=" + this.initial_oid;
+    if (this.links_url_params && action != "lti") {
+        url += (url.indexOf("?") < 0 ? "?" : "&") + this.links_url_params;
     }
     return url + hash;
 };

@@ -31,6 +31,7 @@ function MSBrowser(options) {
     this.pick_mode = true;
     this.iframe_mode = false;
     this.lti_mode = false;
+    this.links_url_params = "";
     this.links_target = "";
     this.$widget = null;
     this.$menu = null;
@@ -174,11 +175,11 @@ MSBrowser.prototype.init = function () {
         }
 
         if (url_params.length > 0) {
-            var to_add = "?" + url_params.join("&");
-            this.url_login += to_add;
-            this.url_channels += to_add;
-            this.url_latest += to_add;
-            this.url_search += to_add;
+            this.links_url_params = url_params.join("&");
+            this.url_login += "?" + this.links_url_params;
+            this.url_channels += "?" + this.links_url_params;
+            this.url_latest += "?" + this.links_url_params;
+            this.url_search += "?" + this.links_url_params;
         }
     }
 
