@@ -24,6 +24,7 @@ utils.add_translations({
     "April": "avril",
     "at": "à",
     "August": "ao&ucirc;t",
+    "B": "o",
     "cannot copy": "impossible de copier",
     "Categories": "Catégories",
     "categories": "catégories",
