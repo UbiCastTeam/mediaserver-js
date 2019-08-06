@@ -1,11 +1,10 @@
-/*******************************************
- * MediaServer - API Manager                *
- * Copyright: UbiCast, all rights reserved  *
- * Author: Stephane Schoorens               *
- * TODO Pass urls to the lib from django url*
- *******************************************/
+/*********************************************
+ * MediaServer - API Manager                 *
+ * Copyright: UbiCast, all rights reserved   *
+ * Author: Stephane Schoorens                *
+ * TODO Pass urls to the lib from django url *
+ *********************************************/
 /* globals utils */
-"use strict";
 
 var MSAPI = {
     // params
@@ -24,25 +23,12 @@ var MSAPI = {
     defaults_errors_messages: {
         401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
         403: utils.translate("Access denied."),
-        404: utils.translate("Element not found."),
+        404: utils.translate("Item not found."),
         500: utils.translate("An internal server error occurred. An email has been sent to the support team."),
         timeout: utils.translate("The connection timed out. Please retry later."),
         unreachable: utils.translate("The server cannot be reached.")
     },
-    methods: {
-        /* ### fast copy - past not used in code ###
-        generic: {
-            method: "",
-            url: "",
-            errors: {
-                401: utils.translate(""),
-                403: utils.translate(""),
-                404: utils.translate(""),
-                500: utils.translate(""),
-                timeout: utils.translate("")
-            }
-        },
-        ########################################## */
+    calls: {
         ping: {
             method: "GET",
             url: "/api/v2/"
@@ -220,17 +206,27 @@ var MSAPI = {
             url: "/api/v2/categories/"
         }
     },
-    ajax_call: function (method, data, callback, async, file, xhr_function) {
-        if (typeof MSAPI.methods[method] === "undefined")
-            throw new Error("Unknown method.");
+    ajax_call: function (call_or_uri, data, callback, async, file, xhr_function) {
+        // call_or_uri can be either an API call name ("list_categories" for example) or an uri like "GET:/api/v2/categories/"
+        var call_info = MSAPI.calls[call_or_uri];
+        if (!call_info) {
+            var splitted = call_or_uri.split(":");
+            if (splitted.length == 1) {
+                call_info = {method: "GET", url: splitted[0]};
+            } else if (splitted.length == 2) {
+                call_info = {method: splitted[0], url: splitted[1]};
+            } else {
+                throw new Error("Invalid call or uri.");
+            }
+        }
 
         var url = MSAPI.base_url;
         if (MSAPI.use_proxy)
-            data.action = MSAPI.methods[method].url;
+            data.action = call_info.url;
         else {
             if (!MSAPI.base_url)
                 data.local = "yes";  // To get urls with no host
-            url += MSAPI.methods[method].url;
+            url += call_info.url;
         }
         if (typeof url === "undefined" || url === "undefined")
             throw new Error("No url to call.");
@@ -241,7 +237,7 @@ var MSAPI = {
 
         var ajax_data = {
             url: url,
-            method: MSAPI.methods[method].method,
+            method: call_info.method,
             data: data,
             dataType: "json",
             cache: false,
@@ -260,7 +256,7 @@ var MSAPI = {
                 else if (textStatus == "timeout")
                     reason = "timeout";
 
-                var msg = MSAPI.methods[method].errors && reason in MSAPI.methods[method].errors ? MSAPI.methods[method].errors[reason] : "";
+                var msg = call_info.errors && reason in call_info.errors ? call_info.errors[reason] : "";
                 if (!msg)
                     msg = reason in MSAPI.defaults_errors_messages ? MSAPI.defaults_errors_messages[reason] : utils.translate("Request failed:")+" "+thrownError;
 

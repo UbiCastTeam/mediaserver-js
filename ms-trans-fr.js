@@ -4,7 +4,6 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals utils */
-"use strict";
 
 utils.add_translations({
     "Access denied.": "Accès refusé.",
@@ -25,13 +24,13 @@ utils.add_translations({
     "April": "avril",
     "at": "à",
     "August": "ao&ucirc;t",
+    "cannot copy": "impossible de copier",
     "Categories": "Catégories",
     "categories": "catégories",
     "channel": "chaîne",
     "Channel's content": "Contenu de la chaîne",
     "channel(s)": "chaîne(s)",
     "Channel:": "Chaîne :",
-    "cannot copy": "impossible de copier",
     "Channels list": "Liste des chaînes",
     "channels": "chaînes",
     "Channels": "Chaînes",
@@ -64,13 +63,13 @@ utils.add_translations({
     "Edit this channel": "Éditer cette chaîne",
     "Edit": "Éditer",
     "Editable:": "Éditable:",
-    "Element not found.": "Élément introuvable.",
     "failed to copy": "échec de la copie",
     "February": "f&eacute;vrier",
     "Filters:": "Filtres :",
     "Go": "Envoyer",
     "Hide this window": "Fermer cette fenêtre",
     "Information about media": "Informations sur le média",
+    "Item not found.": "Élément introuvable.",
     "iTunes (audio only)": "iTunes (audio uniquement)",
     "January": "janvier",
     "July": "juillet",
