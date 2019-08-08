@@ -4,7 +4,6 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals MSAPI, utils, OverlayDisplayManager, MSBrowserChannels, MSBrowserSearch, MSBrowserLatest */
-"use strict";
 
 function MSBrowser(options) {
     // params

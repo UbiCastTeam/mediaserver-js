@@ -4,7 +4,6 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals utils, MSAPI, MSTreeManager */
-"use strict";
 
 function MSBrowserChannels(options) {
     // params

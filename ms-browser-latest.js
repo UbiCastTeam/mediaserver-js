@@ -4,7 +4,6 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals utils, MSAPI */
-"use strict";
 
 function MSBrowserLatest(options) {
     // params

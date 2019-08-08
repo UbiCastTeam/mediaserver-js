@@ -5,7 +5,6 @@
 * Author: Stephane Diemer                  *
 *******************************************/
 /* globals MSBrowser, utils */
-"use strict";
 
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
