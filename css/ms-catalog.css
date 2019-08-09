@@ -67,11 +67,16 @@ h1 .channel-titles-place .channel-title {
 .ms-browser .ms-browser-tree-place {
     display: none;
 }
-.ms-browser-content .channel-description-text {
+.ms-browser-content .channel-description-text,
+.ms-browser-content .channel-storage-usage {
     margin: 10px;
 }
 .ms-browser-content .channel-description-text.short-desc {
     cursor: pointer;
+}
+.ms-browser-content .channel-storage-usage .progress-bar {
+    margin: 0 10px;
+    width: 150px !important;
 }
 .ms-browser-content .channel-description-stats span + span {
     margin-left: 20px;

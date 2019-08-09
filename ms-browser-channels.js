@@ -270,6 +270,11 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 $back.html("<i class=\"fa fa-chevron-circle-up\" aria-hidden=\"true\"></i> <span class=\"hidden-below-800\">"+utils.translate("Parent channel")+"</span>");
                 this.$menu.append($back);
             }
+            if (this.browser.pick_mode) {
+                var available_storage_html = MSAPI.get_available_storage_display(response.info);
+                if (available_storage_html)
+                    this.$menu.append(available_storage_html + " ");
+            }
         }
         // current channel buttons
         var current_selectable = this.browser.selectable_content.indexOf("c") != -1 && (!this.browser.parent_selection_oid || response.selectable);
@@ -292,8 +297,9 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         if (oid != "0") {
             var $current_item_desc = $("<div class=\"item-description\"></div>");
             var is_empty = true;
+            var storage_display = response.info.can_edit ? MSAPI.get_storage_display(response.info) : "";
             if (response.info.views || response.info.comments) {
-                var anno_and_views = "<div class=\"" + (response.info.short_description || response.info.display_rss_links ? "right" : "align-right") + " channel-description-stats\">";
+                var anno_and_views = "<div class=\"" + (response.info.short_description || response.info.display_rss_links || storage_display ? "right" : "align-right") + " channel-description-stats\">";
                 if (response.info.views) {
                     anno_and_views += "<span class=\"inline-block\">" + response.info.views + " " + utils.translate("views");
                     if (response.info.views_last_month)
@@ -321,8 +327,15 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 $current_item_desc.append($desc);
                 is_empty = false;
             }
+            if (storage_display) {
+                storage_display = "<div class=\"channel-storage-usage\">" + utils.translate("Storage usage:") + " " + storage_display + "</div>";
+                $current_item_desc.append(storage_display);
+                if (!window.uwlb)
+                    $(".tooltip-btn", $current_item_desc).click(function () { $("span", this).toggle(); });
+                is_empty = false;
+            }
             if (response.info.display_rss_links) {
-                var rss = "<div id=\"channel_description_rss\" class=\"channel-description-rss\"> ";
+                var rss = "<div class=\"channel-description-rss\"> ";
                 if (this.display_itunes_rss) {
                     rss += " <span class=\"inline-block\">" + utils.translate("Subscribe to channel videos RSS:") + "</span>";
                     rss += " <a class=\"nowrap\" href=\"/channels/" + response.info.oid + "/rss.xml\">";

@@ -466,7 +466,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
         if ($entry_links)
             $entry.append($entry_links);
     }
-    $(".item-entry-link", $entry).focus(function (event) {
+    $(".item-entry-link", $entry).focus(function () {
         $(".item-entry").removeClass("focus");
         $(this).parent().addClass("focus");
     });

@@ -283,5 +283,43 @@ var MSAPI = {
             ajax_data.xhr = xhr_function;
         }
         return $.ajax(ajax_data);
+    },
+    get_storage_display: function (item) {
+        var html = '';
+        if (item.storage_used !== null && item.storage_used !== undefined) {
+            html = '<span class="storage-usage">' + utils.get_size_display(item.storage_used);
+            if (item.storage_quota > 0) {
+                html += ' / ' + item.storage_quota + ' G' + utils.translate('B') + '';
+                var storage_used_percents = Math.round(100 * (item.storage_used / 1073741824) / item.storage_quota);
+                if (storage_used_percents > 100)
+                    storage_used_percents = 100;
+                var storage_class = '';
+                if (item.storage_warning && storage_used_percents > item.storage_warning)
+                    storage_class = ' red';
+                html += '<span class="progress-bar inline-block' + storage_class + '" aria-hidden="true" style="width: 100%; vertical-align: middle;">' +
+                '<span class="progress-level" style="width: ' + storage_used_percents + '%"></span>' +
+                '<span class="progress-label">' + storage_used_percents + ' %</span>' +
+                '</span>';
+            }
+            html += '</span>';
+            var storage_available = MSAPI.get_available_storage_display(item);
+            if (storage_available) {
+                html += ' ' + storage_available;
+            }
+        }
+        return html;
+    },
+    get_available_storage_display: function (item) {
+        var html = '';
+        if (item.storage_available !== null && item.storage_available !== undefined) {
+            html += '<span class="storage-available nowrap">';
+            if (item.storage_available > 0)
+                html += '<span class="' + (item.storage_available > 5 * 1073741824 ? '' : 'orange') + ' ">' + utils.translate('Available space:') + ' ' + utils.get_size_display(item.storage_available) + '</span>';
+            else
+                html += '<span class="red">' + utils.translate('No available space') + '</span>';
+            html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + utils.translate('The available storage is the lowest value of this channel and its parents.') + '</span></button>';
+            html += '</span>';
+        }
+        return html;
     }
 };
