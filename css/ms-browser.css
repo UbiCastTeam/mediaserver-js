@@ -93,9 +93,6 @@
 .ms-browser .tooltip-button {
     padding: 2px;
 }
-.ms-browser .tooltip-content {
-    padding: 2px 8px;
-}
 .ms-browser .tooltip-hidden-content {
     display: none;
 }
