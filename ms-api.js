@@ -312,11 +312,18 @@ var MSAPI = {
     get_available_storage_display: function (item) {
         var html = '';
         if (item.storage_available !== null && item.storage_available !== undefined) {
+            var storage_class = '';
+            if (item.storage_quota > 0) {
+                var storage_used_percents = 100 * (item.storage_used / 1073741824) / item.storage_quota;
+                if (item.storage_warning && storage_used_percents > item.storage_warning)
+                    storage_class = ' orange';
+            }
             html += '<span class="storage-available nowrap">';
-            if (item.storage_available > 0)
-                html += '<span class="' + (item.storage_available > 5 * 1073741824 ? '' : 'orange') + ' ">' + utils.translate('Available space:') + ' ' + utils.get_size_display(item.storage_available) + '</span>';
-            else
+            if (item.storage_available > 0) {
+                html += '<span class="' + storage_class + ' ">' + utils.translate('Available space:') + ' ' + utils.get_size_display(item.storage_available) + '</span>';
+            } else {
                 html += '<span class="red">' + utils.translate('No available space') + '</span>';
+            }
             html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + utils.translate('The available storage is the lowest value of this channel and its parents.') + '</span></button>';
             html += '</span>';
         }
