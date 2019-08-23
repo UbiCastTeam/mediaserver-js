@@ -327,11 +327,30 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 $current_item_desc.append($desc);
                 is_empty = false;
             }
+            if (response.info.items_count) {
+                var results = [];
+                if (response.info.channels_count)
+                    results.push(response.info.channels_count + ' ' + utils.translate('channel(s)'));
+                if (response.info.videos_count)
+                    results.push(response.info.videos_count + ' ' + utils.translate('video(s)'));
+                if (response.info.lives_count)
+                    results.push(response.info.lives_count + ' ' + utils.translate('live stream(s)'));
+                if (response.info.pgroups_count)
+                    results.push(response.info.pgroups_count + ' ' + utils.translate('photos group(s)'));
+                var count_display = '<div class="channel-items-count">' + utils.translate('Channel content:');
+                count_display += ' <span>' + utils.escape_html(results.join(', ')) + '</span>';
+                count_display += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + utils.translate('Sub channels items are included in counts.') + '</span></button>';
+                count_display += '</div>';
+                $current_item_desc.append(count_display);
+                if (!window.uwlb)
+                    $('.channel-items-count .tooltip-btn', $current_item_desc).click(function () { $('span', this).toggle(); });
+                is_empty = false;
+            }
             if (storage_display) {
-                storage_display = "<div class=\"channel-storage-usage\">" + utils.translate("Storage usage:") + " " + storage_display + "</div>";
+                storage_display = '<div class="channel-storage-usage">' + utils.translate('Storage usage:') + ' ' + storage_display + '</div>';
                 $current_item_desc.append(storage_display);
                 if (!window.uwlb)
-                    $(".tooltip-btn", $current_item_desc).click(function () { $("span", this).toggle(); });
+                    $('.channel-storage-usage .tooltip-btn', $current_item_desc).click(function () { $('span', this).toggle(); });
                 is_empty = false;
             }
             if (response.info.display_rss_links) {
