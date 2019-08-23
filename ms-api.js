@@ -8,215 +8,215 @@
 
 var MSAPI = {
     // params
-    base_url: "",
+    base_url: '',
     use_proxy: false,
     extra_data: null,
     configure: function (options) {
-        if ("base_url" in options)
+        if ('base_url' in options)
             MSAPI.base_url = options.base_url;
-        if ("use_proxy" in options)
+        if ('use_proxy' in options)
             MSAPI.use_proxy = options.use_proxy;
-        if ("extra_data" in options)
+        if ('extra_data' in options)
             MSAPI.extra_data = options.extra_data;
     },
     // vars
     defaults_errors_messages: {
-        401: utils.translate("You are not logged in or your session has expired. Please login and retry."),
-        403: utils.translate("Access denied."),
-        404: utils.translate("Item not found."),
-        500: utils.translate("An internal server error occurred. An email has been sent to the support team."),
-        timeout: utils.translate("The connection timed out. Please retry later."),
-        unreachable: utils.translate("The server cannot be reached.")
+        401: utils.translate('You are not logged in or your session has expired. Please login and retry.'),
+        403: utils.translate('Access denied.'),
+        404: utils.translate('Item not found.'),
+        500: utils.translate('An internal server error occurred. An email has been sent to the support team.'),
+        timeout: utils.translate('The connection timed out. Please retry later.'),
+        unreachable: utils.translate('The server cannot be reached.')
     },
     calls: {
         ping: {
-            method: "GET",
-            url: "/api/v2/"
+            method: 'GET',
+            url: '/api/v2/'
         },
         search: {
-            method: "GET",
-            url: "/api/v2/search/",
+            method: 'GET',
+            url: '/api/v2/search/',
             errors: {
-                403: utils.translate("Unable to get search's results content because you cannot access to this channel."),
-                404: utils.translate("Requested channel does not exist.")
+                403: utils.translate('Unable to get search\'s results content because you cannot access to this channel.'),
+                404: utils.translate('Requested channel does not exist.')
             }
         },
         get_latest_content: {
-            method: "GET",
-            url: "/api/v2/latest/"
+            method: 'GET',
+            url: '/api/v2/latest/'
         },
         get_channels_list: {
-            method: "GET",
-            url: "/api/v2/channels/"
+            method: 'GET',
+            url: '/api/v2/channels/'
         },
         get_channels_content: {
-            method: "GET",
-            url: "/api/v2/channels/content/",
+            method: 'GET',
+            url: '/api/v2/channels/content/',
             errors: {
-                403: utils.translate("Unable to get channel content because you cannot access to this channel."),
-                404: utils.translate("Requested channel does not exist.")
+                403: utils.translate('Unable to get channel content because you cannot access to this channel.'),
+                404: utils.translate('Requested channel does not exist.')
             }
         },
         get_channels: {
-            method: "GET",
-            url: "/api/v2/channels/get/",
+            method: 'GET',
+            url: '/api/v2/channels/get/',
             errors: {
-                403: utils.translate("Unable to get channel information because you cannot access to this channel."),
-                404: utils.translate("Requested channel does not exist.")
+                403: utils.translate('Unable to get channel information because you cannot access to this channel.'),
+                404: utils.translate('Requested channel does not exist.')
             }
         },
         get_channels_tree: {
-            method: "GET",
-            url: "/api/v2/channels/tree/",
+            method: 'GET',
+            url: '/api/v2/channels/tree/',
             errors: {
-                403: utils.translate("Unable to get channels tree because you cannot access to this channel."),
-                404: utils.translate("Requested channel does not exist.")
+                403: utils.translate('Unable to get channels tree because you cannot access to this channel.'),
+                404: utils.translate('Requested channel does not exist.')
             }
         },
         get_channels_path: {
-            method: "GET",
-            url: "/api/v2/channels/path/",
+            method: 'GET',
+            url: '/api/v2/channels/path/',
             errors: {
-                403: utils.translate("Unable to get channels path because you cannot access to this channel."),
-                404: utils.translate("Requested channel does not exist.")
+                403: utils.translate('Unable to get channels path because you cannot access to this channel.'),
+                404: utils.translate('Requested channel does not exist.')
             }
         },
         get_channels_personal: {
-            method: "GET",
-            url: "/api/v2/channels/personal/"
+            method: 'GET',
+            url: '/api/v2/channels/personal/'
         },
         get_medias_list: {
-            method: "GET",
-            url: "/api/v2/medias/"
+            method: 'GET',
+            url: '/api/v2/medias/'
         },
         get_medias: {
-            method: "GET",
-            url: "/api/v2/medias/get/",
+            method: 'GET',
+            url: '/api/v2/medias/get/',
             errors: {
-                403: utils.translate("Unable to get media information because you cannot access to this media."),
-                404: utils.translate("Media does not exist.")
+                403: utils.translate('Unable to get media information because you cannot access to this media.'),
+                404: utils.translate('Media does not exist.')
             }
         },
         add_medias: {
-            method: "POST",
-            url: "/api/v2/medias/add/"
+            method: 'POST',
+            url: '/api/v2/medias/add/'
         },
         medias_resources_check: {
-            method: "POST",
-            url: "/api/v2/medias/resources-check/"
+            method: 'POST',
+            url: '/api/v2/medias/resources-check/'
         },
         medias_trimming_child_init: {
-            method: "POST",
-            url: "/api/v2/medias/trimming-child-init/"
+            method: 'POST',
+            url: '/api/v2/medias/trimming-child-init/'
         },
         medias_get_upload_config: {
-            method: "GET",
-            url: "/api/v2/medias/get-upload-config/"
+            method: 'GET',
+            url: '/api/v2/medias/get-upload-config/'
         },
         get_lives_list: {
-            method: "GET",
-            url: "/api/v2/lives/"
+            method: 'GET',
+            url: '/api/v2/lives/'
         },
         prepare_lives: {
-            method: "POST",
-            url: "/api/v2/lives/prepare/"
+            method: 'POST',
+            url: '/api/v2/lives/prepare/'
         },
         start_lives: {
-            method: "POST",
-            url: "/api/v2/lives/start/"
+            method: 'POST',
+            url: '/api/v2/lives/start/'
         },
         stop_lives: {
-            method: "POST",
-            url: "/api/v2/lives/stop/",
+            method: 'POST',
+            url: '/api/v2/lives/stop/',
             errors: {
-                403: utils.translate("You are not allowed to perform this action."),
-                404: utils.translate("Media does not exist.")
+                403: utils.translate('You are not allowed to perform this action.'),
+                404: utils.translate('Media does not exist.')
             }
         },
         lives_change_slides: {
-            method: "POST",
-            url: "/api/v2/lives/change-slide/"
+            method: 'POST',
+            url: '/api/v2/lives/change-slide/'
         },
         lives_change_status: {
-            method: "POST",
-            url: "/api/v2/lives/change-status/"
+            method: 'POST',
+            url: '/api/v2/lives/change-status/'
         },
         lives_get_viewers: {
-            method: "GET",
-            url: "/api/v2/lives/get-viewers/"
+            method: 'GET',
+            url: '/api/v2/lives/get-viewers/'
         },
         list_media_annotations: {
-            method: "GET",
-            url: "/api/v2/annotations/list/"
+            method: 'GET',
+            url: '/api/v2/annotations/list/'
         },
         list_media_user_annotations: {
-            method: "GET",
-            url: "/api/v2/annotations/list/moderate/"
+            method: 'GET',
+            url: '/api/v2/annotations/list/moderate/'
         },
         list_annotations_types: {
-            method: "GET",
-            url: "/api/v2/annotations/types/list/"
+            method: 'GET',
+            url: '/api/v2/annotations/types/list/'
         },
         vote_for_annotation: {
-            method: "POST",
-            url: "/api/v2/annotations/vote/"
+            method: 'POST',
+            url: '/api/v2/annotations/vote/'
         },
         post_annotation: {
-            method: "POST",
-            url: "/api/v2/annotations/post/"
+            method: 'POST',
+            url: '/api/v2/annotations/post/'
         },
         validate_annotation: {
-            method: "POST",
-            url: "/api/v2/annotations/validate/"
+            method: 'POST',
+            url: '/api/v2/annotations/validate/'
         },
         unvalidate_annotation: {
-            method: "POST",
-            url: "/api/v2/annotations/unvalidate/"
+            method: 'POST',
+            url: '/api/v2/annotations/unvalidate/'
         },
         delete_annotation: {
-            method: "POST",
-            url: "/api/v2/annotations/delete/"
+            method: 'POST',
+            url: '/api/v2/annotations/delete/'
         },
         list_media_slides: {
-            method: "GET",
-            url: "/api/v2/annotations/slides/list/"
+            method: 'GET',
+            url: '/api/v2/annotations/slides/list/'
         },
         list_media_resources: {
-            method: "GET",
-            url: "/api/v2/annotations/resources/list/"
+            method: 'GET',
+            url: '/api/v2/annotations/resources/list/'
         },
         list_media_chapters: {
-            method: "GET",
-            url: "/api/v2/annotations/chapters/list/"
+            method: 'GET',
+            url: '/api/v2/annotations/chapters/list/'
         },
         list_media_activities: {
-            method: "GET",
-            url: "/api/v2/annotations/activities/list/"
+            method: 'GET',
+            url: '/api/v2/annotations/activities/list/'
         },
         email_notification: {
-            method: "POST",
-            url: "/api/v2/annotations/notification/"
+            method: 'POST',
+            url: '/api/v2/annotations/notification/'
         },
         search_annotations: {
-            method: "GET",
-            url: "/api/v2/annotations/search/"
+            method: 'GET',
+            url: '/api/v2/annotations/search/'
         },
         list_categories: {
-            method: "GET",
-            url: "/api/v2/categories/"
+            method: 'GET',
+            url: '/api/v2/categories/'
         }
     },
     ajax_call: function (call_or_uri, data, callback, async, file, xhr_function) {
-        // call_or_uri can be either an API call name ("list_categories" for example) or an uri like "GET:/api/v2/categories/"
+        // call_or_uri can be either an API call name ('list_categories' for example) or an uri like 'GET:/api/v2/categories/'
         var call_info = MSAPI.calls[call_or_uri];
         if (!call_info) {
-            var splitted = call_or_uri.split(":");
+            var splitted = call_or_uri.split(':');
             if (splitted.length == 1) {
-                call_info = {method: "GET", url: splitted[0]};
+                call_info = {method: 'GET', url: splitted[0]};
             } else if (splitted.length == 2) {
                 call_info = {method: splitted[0], url: splitted[1]};
             } else {
-                throw new Error("Invalid call or uri.");
+                throw new Error('Invalid call or uri.');
             }
         }
 
@@ -225,11 +225,11 @@ var MSAPI = {
             data.action = call_info.url;
         else {
             if (!MSAPI.base_url)
-                data.local = "yes";  // To get urls with no host
+                data.local = 'yes';  // To get urls with no host
             url += call_info.url;
         }
-        if (typeof url === "undefined" || url === "undefined")
-            throw new Error("No url to call.");
+        if (typeof url === 'undefined' || url === 'undefined')
+            throw new Error('No url to call.');
         if (MSAPI.extra_data)
             for (var field in MSAPI.extra_data) {
                 data[field] = MSAPI.extra_data[field];
@@ -239,26 +239,26 @@ var MSAPI = {
             url: url,
             method: call_info.method,
             data: data,
-            dataType: "json",
+            dataType: 'json',
             cache: false,
             success: function (response) {
                 if (!response.success && !response.error)
-                    response.error = response.message ? response.message : utils.translate("No information about error.");
+                    response.error = response.message ? response.message : utils.translate('No information about error.');
                 if (callback)
                     return callback(response);
             },
             error: function (xhr, textStatus, thrownError) {
-                var reason = "?";
+                var reason = '?';
                 if (xhr.status)
                     reason = xhr.status;
-                else if (textStatus == "error")
-                    reason = "unreachable";
-                else if (textStatus == "timeout")
-                    reason = "timeout";
+                else if (textStatus == 'error')
+                    reason = 'unreachable';
+                else if (textStatus == 'timeout')
+                    reason = 'timeout';
 
-                var msg = call_info.errors && reason in call_info.errors ? call_info.errors[reason] : "";
+                var msg = call_info.errors && reason in call_info.errors ? call_info.errors[reason] : '';
                 if (!msg)
-                    msg = reason in MSAPI.defaults_errors_messages ? MSAPI.defaults_errors_messages[reason] : utils.translate("Request failed:")+" "+thrownError;
+                    msg = reason in MSAPI.defaults_errors_messages ? MSAPI.defaults_errors_messages[reason] : utils.translate('Request failed:')+' '+thrownError;
 
                 return callback({
                     success: false,
@@ -271,12 +271,12 @@ var MSAPI = {
             }
         };
 
-        if (typeof async === "undefined" || async) {
+        if (typeof async === 'undefined' || async) {
             ajax_data.async = async;
         }
         if (file) {
             ajax_data.processData = false;
-            ajax_data.enctype = "multipart/form-data";
+            ajax_data.enctype = 'multipart/form-data';
             ajax_data.contentType = false;
         }
         if (xhr_function) {
