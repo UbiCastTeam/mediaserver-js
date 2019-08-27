@@ -272,8 +272,11 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             }
             if (this.browser.pick_mode) {
                 var available_storage_html = MSAPI.get_available_storage_display(response.info);
-                if (available_storage_html)
+                if (available_storage_html) {
                     this.$menu.append(available_storage_html + ' ');
+                    if (!window.uwlb)
+                        $('.tooltip-button', this.$menu).click(function () { $('span', this).toggle(); });
+                }
             }
         }
         // current channel buttons
@@ -343,14 +346,14 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 count_display += '</div>';
                 $current_item_desc.append(count_display);
                 if (!window.uwlb)
-                    $('.channel-items-count .tooltip-btn', $current_item_desc).click(function () { $('span', this).toggle(); });
+                    $('.channel-items-count .tooltip-button', $current_item_desc).click(function () { $('span', this).toggle(); });
                 is_empty = false;
             }
             if (storage_display) {
                 storage_display = '<div class="channel-storage-usage">' + utils.translate('Storage usage:') + ' ' + storage_display + '</div>';
                 $current_item_desc.append(storage_display);
                 if (!window.uwlb)
-                    $('.channel-storage-usage .tooltip-btn', $current_item_desc).click(function () { $('span', this).toggle(); });
+                    $('.channel-storage-usage .tooltip-button', $current_item_desc).click(function () { $('span', this).toggle(); });
                 is_empty = false;
             }
             if (response.info.display_rss_links) {
