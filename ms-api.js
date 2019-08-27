@@ -324,7 +324,7 @@ var MSAPI = {
             } else {
                 html += '<span class="red">' + utils.translate('No available space') + '</span>';
             }
-            html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + utils.translate('The available storage is the lowest value of this channel and its parents.') + '</span></button>';
+            html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + utils.translate('The storage quota of the parent channels can have an impact on the available space of this channel.') + '</span></button>';
             html += '</span>';
         }
         return html;
