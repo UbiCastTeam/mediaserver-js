@@ -97,7 +97,7 @@ MSTreeManager.prototype.init = function () {
                 obj.open_tree(obj.current_channel_oid);
         }
         if (obj.display_personal && obj.has_personal_channel) {
-            var $btn = $('<button type="button" class="button channel-personal-btn">'+utils.translate('My channel')+'</button>');
+            var $btn = $('<button type="button" class="button channel-personal-btn"><i class="fa fa-bookmark" aria-hidden="true"></i> <span>'+utils.translate('My channel')+'</span></button>');
             $btn.click({ obj: obj }, function (evt) {
                 evt.data.obj.open_personal_channel();
             });
@@ -384,12 +384,12 @@ MSTreeManager.prototype.open_personal_channel = function () {
     var callback = function (response) {
         if (response.success) {
             obj.personal_channel_info = response;
-            $('.channel-personal-btn', obj.$widget).html(utils.translate('My channel'));
+            $('.channel-personal-btn span', obj.$widget).html(utils.translate('My channel'));
             obj.open_tree(response.oid);
             if (obj.on_change)
                 obj.on_change(response.oid);
         } else {
-            $('.channel-personal-btn', obj.$widget).html(utils.translate('My channel') + ' (' + response.xhr.status + ')');
+            $('.channel-personal-btn span', obj.$widget).html(utils.translate('My channel') + ' (' + response.xhr.status + ')');
         }
     };
     if (!this.personal_channel_info) {
