@@ -168,7 +168,6 @@
 }
 .ms-browser .ms-browser-section {
     padding: 0;
-    overflow: hidden;
 }
 .ms-browser .ms-browser-section-links {
     float: right;
@@ -364,8 +363,8 @@
 }
 
 /* channels tab */
-.ms-browser .ms-browser-tree-place,
-.ms-browser .ms-browser-channels-place {
+.ms-browser.has-tree.in-overlay .ms-browser-tree-place,
+.ms-browser.has-tree.in-overlay .ms-browser-channels-place {
     padding: 10px;
     top: 0;
     bottom: 0;
@@ -374,12 +373,21 @@
     position: absolute;
     overflow: auto;
 }
-.ms-browser .ms-browser-tree-place {
-    right: auto;
+.ms-browser.has-tree .ms-browser-tree-place {
+    padding: 10px;
+    float: left;
     width: 280px;
     background: #fff;
 }
-.ms-browser .ms-browser-channels-place {
+.ms-browser.has-tree.in-overlay .ms-browser-tree-place {
+    float: none;
+    right: auto;
+}
+.ms-browser.has-tree .ms-browser-channels-place {
+    margin-left: 300px;
+}
+.ms-browser.has-tree.in-overlay .ms-browser-channels-place {
+    margin-left: 0;
     left: 300px;
 }
 /* channels tree */
@@ -488,21 +496,35 @@
     }
 }
 @media (max-width: 800px) {
-    .ms-browser .ms-browser-tree-place {
-        display: none;
+    .ms-browser.has-tree .ms-browser-tree-place {
+        width: 230px;
     }
+    .ms-browser.has-tree .ms-browser-channels-place {
+        margin-left: 250px;
+    }
+    .ms-browser.has-tree.in-overlay .ms-browser-channels-place {
+        left: 250px;
+    }
+}
+@media (max-width: 600px) {
     .ms-browser .ms-browser-channels-place {
         left: 0;
     }
     .ms-browser.in-overlay .ms-browser-header,
     .ms-browser.in-overlay .ms-browser-bar,
     .ms-browser.in-overlay .ms-browser-main,
-    .ms-browser .ms-browser-tree-place,
-    .ms-browser .ms-browser-channels-place {
+    .ms-browser.has-tree.in-overlay .ms-browser-tree-place,
+    .ms-browser.has-tree.in-overlay .ms-browser-channels-place {
         position: static;
+    }
+    .ms-browser.has-tree .ms-browser-tree-place {
+        display: none;
     }
     .ms-browser .ms-browser-channels-place {
         padding: 10px 0;
+    }
+    .ms-browser.has-tree .ms-browser-channels-place {
+        margin-left: 0;
     }
     .ms-browser.in-overlay .ms-browser-bar,
     .ms-browser .ms-browser-header {

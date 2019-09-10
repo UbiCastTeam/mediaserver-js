@@ -336,7 +336,7 @@
 }
 
 @media (max-width: 1280px) {
-    .in-overlay .ms-items .ms-browser-channels-place .item-entry.list {
+    .has-tree .ms-items .ms-browser-channels-place .item-entry.list {
         display: block;
         width: auto;
     }

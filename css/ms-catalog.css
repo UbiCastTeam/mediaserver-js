@@ -54,18 +54,7 @@ h1 .channel-titles-place .channel-title {
 }
 /* channels tab */
 .ms-browser .ms-browser-channels-place {
-    padding: 0;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    position: static;
-    overflow: visible;
-    background: transparent;
-    width: auto;
-}
-.ms-browser .ms-browser-tree-place {
-    display: none;
+    margin-top: 10px;
 }
 .ms-browser-content .channel-description-text,
 .ms-browser-content .channel-items-count,

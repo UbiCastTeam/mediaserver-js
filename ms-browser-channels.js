@@ -36,9 +36,11 @@ MSBrowserChannels.prototype.get_menu_jq = function () {
 MSBrowserChannels.prototype.get_content_jq = function () {
     var html = '';
     html += '<div id="ms_browser_channels" class="ms-browser-content" style="display: none;">';
-    html +=     '<div class="ms-browser-tree-place ms-channels-tree">';
-    html +=         '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+utils.translate('Loading...')+'</div>';
-    html +=     '</div>';
+    if (this.browser.tree_manager) {
+        html +=     '<div class="ms-browser-tree-place ms-channels-tree">';
+        html +=         '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+utils.translate('Loading...')+'</div>';
+        html +=     '</div>';
+    }
     html +=     '<div class="ms-browser-channels-place">';
     html +=         '<div class="messages"><div class="message info">'+utils.translate('Select a channel to display its content.')+'</div></div>';
     html +=     '</div>';

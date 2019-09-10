@@ -20,17 +20,17 @@ MSBrowser.prototype.build_widget = function () {
         latest_label = utils.translate('Latest content');
         search_label = utils.translate('Search');
     }
-    var html = '<div class="ms-browser ms-browser-container'+(this.use_overlay ? ' in-overlay' : '')+(this.display_types_icons ? ' show-types-icons' : '')+(this.hide_header ? ' no-header' : '')+'">';
+    var html = '<div class="ms-browser ms-browser-container'+(this.use_overlay ? ' in-overlay' : '')+(this.tree_manager ? ' has-tree' : '')+(this.display_types_icons ? ' show-types-icons' : '')+(this.hide_header ? ' no-header' : '')+'">';
     html += '<div class="ms-browser-header">';
     html +=     '<div class="ms-browser-menu">';
     if (!this.use_overlay) {
-        html += '<a id="ms_browser_channels_tab" class="ms-browser-tab button '+this.btn_class+'" href="'+this.url_channels+'"><i class="fa fa-folder-open" aria-hidden="true"></i> <span class="hidden-below-800">'+channels_label+'</span></a>';
-        html += '<a id="ms_browser_latest_tab" class="ms-browser-tab button '+this.btn_class+'" href="'+this.url_latest+'"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800">'+latest_label+'</span></a>';
-        html += '<a id="ms_browser_search_tab" class="ms-browser-tab button '+this.btn_class+'" href="'+this.url_search+'"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800">'+search_label+'</span></a>';
+        html += '<a id="ms_browser_channels_tab" class="ms-browser-tab button '+this.btn_class+'" href="'+this.url_channels+'" title="'+channels_label+'" aria-label="'+channels_label+'"><i class="fa fa-folder-open" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">'+channels_label+'</span></a>';
+        html += '<a id="ms_browser_latest_tab" class="ms-browser-tab button '+this.btn_class+'" href="'+this.url_latest+'" title="'+latest_label+'" aria-label="'+latest_label+'"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">'+latest_label+'</span></a>';
+        html += '<a id="ms_browser_search_tab" class="ms-browser-tab button '+this.btn_class+'" href="'+this.url_search+'" title="'+search_label+'" aria-label="'+search_label+'"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">'+search_label+'</span></a>';
     } else {
-        html += '<button type="button" id="ms_browser_channels_tab" class="ms-browser-tab button '+this.btn_class+'"><i class="fa fa-folder-open" aria-hidden="true"></i> <span class="hidden-below-800">'+channels_label+'</span></button>';
-        html += '<button type="button" id="ms_browser_latest_tab" class="ms-browser-tab button '+this.btn_class+'"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800">'+latest_label+'</span></button>';
-        html += '<button type="button" id="ms_browser_search_tab" class="ms-browser-tab button '+this.btn_class+'"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800">'+search_label+'</span></button>';
+        html += '<button type="button" id="ms_browser_channels_tab" class="ms-browser-tab button '+this.btn_class+'" title="'+channels_label+'" aria-label="'+channels_label+'"><i class="fa fa-folder-open" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">'+channels_label+'</span></button>';
+        html += '<button type="button" id="ms_browser_latest_tab" class="ms-browser-tab button '+this.btn_class+'" title="'+latest_label+'" aria-label="'+latest_label+'"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">'+latest_label+'</span></button>';
+        html += '<button type="button" id="ms_browser_search_tab" class="ms-browser-tab button '+this.btn_class+'" title="'+search_label+'" aria-label="'+search_label+'"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">'+search_label+'</span></button>';
     }
     html +=     '</div>';
     html +=     '<h2 class="ms-browser-title"></h2>';
