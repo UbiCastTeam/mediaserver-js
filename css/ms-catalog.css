@@ -53,9 +53,6 @@ h1 .channel-titles-place .channel-title {
     padding: 20px;
 }
 /* channels tab */
-.ms-browser .ms-browser-channels-place {
-    margin-top: 10px;
-}
 .ms-browser-content .channel-description-text,
 .ms-browser-content .channel-items-count,
 .ms-browser-content .channel-storage-usage {

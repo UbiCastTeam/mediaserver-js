@@ -449,7 +449,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var html = this._get_entry_block_html(item, item_type, clickable, tab);
     if (this.display_as_thumbnails && !this.pick_mode) {
         html += '<div class="item-entry-buttons">';
-        html +=   '<button type="button" class="item-entry-info" title="'+utils.translate('Open information panel')+'"><i class="fa fa-info color-blue" aria-hidden="true"></i></button>';
+        html +=   '<button type="button" class="item-entry-info" title="'+utils.translate('Open information panel')+'"><i class="fa fa-info" aria-hidden="true"></i></button>';
         if (item.can_edit) {
             html += '<a title="'+utils.translate('Edit')+'" href="'+this.get_button_link(item, 'edit')+'"'+this.links_target+'><i class="fa fa-pencil" aria-hidden="true"></i></a>';
         }

@@ -8,10 +8,9 @@
     vertical-align: top;
 }
 .ms-items .item-description {
-    margin: 10px;
     padding: 10px;
     background: #fff;
-    box-shadow: 2px 2px 1px 0px #ddd;
+    border-bottom: 3px solid #ddd;
 }
 .ms-items .item-entry * {
     box-sizing: content-box;
@@ -20,24 +19,26 @@
     display: block;
     color: inherit;
     overflow: hidden;
-    background: #fff;
-    box-shadow: 2px 2px 1px 0px #ddd;
-    border-bottom: 1px solid #ccc;
+    box-shadow: none;
+    background: #EFEFEF;
+    border-bottom: 3px solid #FFF;
     border-radius: 3px;
 }
 .ms-items .clickable .item-entry-link {
     cursor: pointer;
     color: #000F32;
 }
-.ms-items .item-entry .item-entry-link:hover {
-    color: #086E9A;
-    box-shadow: 0 0 5px 0px #086E9A;
-    text-decoration: none;
-}
 .ms-items .selected .item-entry-link,
 .ms-items .selected .item-entry-link:hover {
     color: #008750;
     box-shadow: 0 0 5px 0px #008750;
+}
+.ms-items .item-entry .item-entry-link:hover {
+    color: #086E9A;
+    box-shadow: none;
+    border-bottom: 3px solid #2CB6B5;
+    background: #EFEFEF;
+    text-decoration: none;
 }
 .ms-browser-title .selected {
     color: #008750;
@@ -94,8 +95,9 @@
 }
 .ms-items .item-entry-top-bar .item-entry-title {
     font-size: 1.2em;
-    font-weight: bold;
+    font-weight: 600;
     padding: 5px 0;
+    color: #404040;
 }
 .ms-items .item-entry-duration {
     display: block;
@@ -148,17 +150,19 @@
 }
 .ms-items .item-entry-unlisted:before {
     content: "\f070";
+    color: #EC804D;
 }
 .ms-items .item-entry-notpublished:before {
     content: "\f023";
+    color: #E65959;
 }
 .ms-items .item-entry-published:before {
     content: "\f058";
-    color: #080;
+    color: #43c0c0;
 }
 .ms-items .item-entry-notready:before {
     content: "\f085";
-    color: #850;
+    color: #EC804D;
 }
 
 .ms-items .item-entry-bottom-bar {
@@ -175,6 +179,10 @@
 .ms-items .item-entry-parent {
     display: block;
     color: #666;
+}
+.ms-items .item-entry-date {
+    font-style: italic;
+    font-size: 12px;
 }
 .ms-items .item-entry-extra {
     margin: 0 10px;
@@ -205,7 +213,7 @@
     display: block;
 }
 .ms-items .item-entry .item-entry-description {
-    max-height: 40px;
+    max-height: 60px;
     overflow: auto;
 }
 
@@ -258,6 +266,12 @@
     float: left;
     font-style: italic;
 }
+.ms-items .item-entry.thumbnail .item-entry-duration {
+    font-style: normal;
+    font-weight: 500;
+    color:#666;
+    padding-left: 0;
+}
 .ms-items .item-entry.thumbnail .item-entry-middle-bar {
     top: 135px;
     left: 0;
@@ -285,6 +299,9 @@
     white-space: nowrap;
     overflow: hidden;
     display: block;
+    font-weight: 600;
+    font-size: 1em;
+    color: #404040;
 }
 .ms-items .item-entry.thumbnail .item-entry-buttons {
     top: 0;
@@ -303,6 +320,13 @@
     height: 32px;
     border-radius: 4px;
     font-size: 1.5em;
+    background: #404040;
+    color: #FFF;
+}
+.ms-items .item-entry.thumbnail .item-entry-buttons a:hover,
+.ms-items .item-entry.thumbnail .item-entry-buttons button:hover {
+    background: #44afde;
+    color: #003636;
 }
 .ms-items .item-entry.thumbnail .item-entry-info.info-displayed,
 .ms-items .item-entry.thumbnail.focus .item-entry-buttons a,
@@ -400,7 +424,6 @@
         font-size: 2em;
     }
     .ms-items .item-description {
-        margin: 5px;
         padding: 5px;
     }
 }
