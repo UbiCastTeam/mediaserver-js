@@ -8,7 +8,6 @@
 }
 .ms-browser-container.in-overlay {
     text-align: left;
-    background: #eee !important;
 }
 
 /* base */
@@ -376,7 +375,7 @@
     padding: 10px;
     float: left;
     width: 280px;
-    background: #fff;
+    background: #eee;
 }
 .ms-browser.has-tree.in-overlay .ms-browser-tree-place {
     float: none;
