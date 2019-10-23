@@ -48,7 +48,8 @@
 .ms-browser label {
     display: inline;
 }
-.ms-browser input {
+.ms-browser input,
+.ms-browser select {
     margin: 0;
     padding: 3px;
     box-sizing: border-box;
