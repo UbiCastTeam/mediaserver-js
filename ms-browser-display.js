@@ -70,6 +70,7 @@ MSBrowser.prototype.build_widget = function () {
     this.$main.append(this.latest.get_content_jq());
     this.$main.append(this.channels.get_content_jq());
     this.$main.append(this.search.get_content_jq());
+    this.$main.append('<div class="ms-browser-clear"></div>');
     this.$menu = $('.ms-browser-menu', this.$widget);
 
     // get initial media or channel info

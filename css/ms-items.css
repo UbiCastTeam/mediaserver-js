@@ -19,29 +19,22 @@
     display: block;
     color: inherit;
     overflow: hidden;
-    box-shadow: none;
-    background: #EFEFEF;
-    border-bottom: 3px solid #FFF;
+    background: #efefef;
+    color: #404040;
+    border-bottom: 3px solid #fff;
     border-radius: 3px;
 }
 .ms-items .clickable .item-entry-link {
     cursor: pointer;
-    color: #000F32;
 }
 .ms-items .selected .item-entry-link,
 .ms-items .selected .item-entry-link:hover {
-    color: #008750;
-    box-shadow: 0 0 5px 0px #008750;
+    color: #354b75;
+    border-bottom: 3px solid #4466a6;
 }
 .ms-items .item-entry .item-entry-link:hover {
-    color: #086E9A;
-    box-shadow: none;
-    border-bottom: 3px solid #2CB6B5;
-    background: #EFEFEF;
+    border-bottom: 3px solid #2cb6b5;
     text-decoration: none;
-}
-.ms-browser-title .selected {
-    color: #008750;
 }
 .ms-browser-title .item-entry-preview {
     margin-right: 10px;
@@ -97,7 +90,6 @@
     font-size: 1.2em;
     font-weight: 600;
     padding: 5px 0;
-    color: #404040;
 }
 .ms-items .item-entry-duration {
     display: block;
@@ -179,10 +171,10 @@
 .ms-items .item-entry-parent {
     display: block;
     color: #666;
+    font-size: 0.9em;
 }
 .ms-items .item-entry-date {
     font-style: italic;
-    font-size: 12px;
 }
 .ms-items .item-entry-extra {
     margin: 0 10px;
@@ -359,7 +351,8 @@
     display: block;
 }
 
-@media (max-width: 1280px) {
+/* 82em ~ 1280px */
+@media (max-width: 82em) {
     .has-tree .ms-items .ms-browser-channels-place .item-entry.list {
         display: block;
         width: auto;
@@ -376,7 +369,8 @@
         display: none;
     }
 }
-@media (max-width: 1000px) {
+/* 64em ~ 1000px */
+@media (max-width: 64em) {
     .ms-items .item-entry.thumbnail {
         width: 176px;
         font-size: inherit;
@@ -389,7 +383,8 @@
         top: 99px;
     }
 }
-@media (max-width: 800px) {
+/* 51em ~ 800px */
+@media (max-width: 51em) {
     .ms-items .item-entry-top-bar .item-entry-title {
         font-size: inherit;
     }
@@ -406,7 +401,8 @@
         margin-right: 3px;
     }
 }
-@media (max-width: 600px) {
+/* 41em ~ 640px */
+@media (max-width: 41em) {
     .ms-items .item-entry-preview {
         margin: 0;
     }

@@ -108,9 +108,9 @@
     left: 0;
 }
 .ms-browser .ms-browser-header {
-    padding: 5px;
-    height: 40px;
-    line-height: 40px;
+    padding: 0.3em;
+    height: 3.2em;
+    line-height: 3.2em;
 }
 .ms-browser.in-overlay .ms-browser-header {
     bottom: auto;
@@ -125,7 +125,6 @@
     display: block;
 }
 .ms-browser .ms-browser-title {
-    padding-right: 200px;
     font-size: 200%;
     font-weight: bold;
     word-wrap: break-word;
@@ -136,7 +135,7 @@
     overflow: hidden;
 }
 .ms-browser .ms-browser-title img {
-    max-height: 40px;
+    max-height: 1.4em;
 }
 .ms-browser .ms-browser-title .parent-channel-title {
     color: #777;
@@ -146,8 +145,8 @@
     content: " > ";
 }
 .ms-browser .ms-browser-bar {
-    padding: 5px;
-    line-height: 30px;
+    padding: 0.3em;
+    line-height: 2.6em;
     text-align: center;
     background: #fff;
     border-top: 1px solid #ddd;
@@ -156,13 +155,12 @@
     z-index: 1;
 }
 .ms-browser.in-overlay .ms-browser-bar {
-    top: 50px;
+    top: 3.8em;
     bottom: auto;
-    height: 30px;
-    line-height: 30px;
+    height: 2.6em;
 }
 .ms-browser.in-overlay .ms-browser-main {
-    top: 92px;
+    top: 7em;
     overflow: auto;
 }
 .ms-browser .ms-browser-section {
@@ -364,7 +362,7 @@
 /* channels tab */
 .ms-browser.has-tree.in-overlay .ms-browser-tree-place,
 .ms-browser.has-tree.in-overlay .ms-browser-channels-place {
-    padding: 10px;
+    padding: 0.5em;
     top: 0;
     bottom: 0;
     left: 0;
@@ -373,9 +371,9 @@
     overflow: auto;
 }
 .ms-browser.has-tree .ms-browser-tree-place {
-    padding: 10px;
+    padding: 0.5em;
     float: left;
-    width: 280px;
+    width: 18em;
     background: #eee;
 }
 .ms-browser.has-tree.in-overlay .ms-browser-tree-place {
@@ -383,27 +381,27 @@
     right: auto;
 }
 .ms-browser.has-tree .ms-browser-channels-place {
-    margin-left: 300px;
+    margin-left: 19em;
 }
 .ms-browser.has-tree.in-overlay .ms-browser-channels-place {
     margin-left: 0;
-    left: 300px;
+    left: 19em;
 }
 /* channels tree */
 .ms-channels-tree ul {
     padding-left: 0;
 }
 .ms-channels-tree li {
-    line-height: 18px;
+    line-height: 1.3em;
     overflow: hidden;
     list-style: none;
 }
 .ms-channels-tree ul ul {
     display: none;
-    padding-left: 20px;
+    padding-left: 1.7em;
 }
 .ms-channels-tree li .list-none {
-    margin-right: 23px;
+    margin-right: 1.8em;
 }
 .ms-channels-tree li .list-entry {
     padding: 0;
@@ -412,9 +410,9 @@
     text-align: center;
     font-weight: normal;
     vertical-align: top;
-    line-height: 14px;
-    width: 16px;
-    height: 16px;
+    line-height: 1.1em;
+    width: 1.2em;
+    height: 1.2em;
     cursor: default;
     background: #fff;
     border: 1px solid #ccc;
@@ -426,7 +424,7 @@
     cursor: pointer;
 }
 .ms-channels-tree li .list-entry .fa {
-    padding-left: 0px;
+    padding-left: 0;
 }
 .ms-channels-tree .channel-personal-btn {
     float: right;
@@ -445,7 +443,7 @@
     box-sizing: content-box;
 }
 .ms-channels-tree li .channel-btn {
-    margin-left: 21px;
+    margin-left: 1.8em;
 }
 .ms-channels-tree .channel-btn:hover,
 .ms-channels-tree .channel-active .channel-btn {
@@ -486,7 +484,8 @@
     display: none;
 }
 
-@media (max-width: 1280px) {
+/* 64em ~ 1000px */
+@media (max-width: 64em) {
     .ms-browser .ms-browser-title {
         padding: 0;
     }
@@ -494,18 +493,20 @@
         padding: 0;
     }
 }
-@media (max-width: 800px) {
+/* 51em ~ 800px */
+@media (max-width: 51em) {
     .ms-browser.has-tree .ms-browser-tree-place {
-        width: 230px;
+        width: 15em;
     }
     .ms-browser.has-tree .ms-browser-channels-place {
-        margin-left: 250px;
+        margin-left: 16em;
     }
     .ms-browser.has-tree.in-overlay .ms-browser-channels-place {
-        left: 250px;
+        left: 16em;
     }
 }
-@media (max-width: 600px) {
+/* 41em ~ 640px */
+@media (max-width: 41em) {
     .ms-browser .ms-browser-channels-place {
         left: 0;
     }
@@ -541,7 +542,8 @@
         width: auto;
     }
 }
-@media (max-width: 450px) {
+/* 29em ~ 450px */
+@media (max-width: 29em) {
     .ms-browser .ms-browser-search-form input {
         width: 50%;
     }

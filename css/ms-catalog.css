@@ -1,9 +1,6 @@
 /* Additional CSS for non overlay use */
-html.iframe {
-    background: #eee;
-}
 html.iframe .ms-browser-container {
-    background: transparent !important;
+    background: #fff;
 }
 nav.navbar .buttons-left .back {
     font-size: 1.1em;
