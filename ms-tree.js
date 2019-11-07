@@ -64,6 +64,9 @@ MSTreeManager.prototype.init = function () {
 
     this.loading = true;
 
+    if (window.location.search)
+        this.channels_base_url = this.channels_base_url.substring(0, this.channels_base_url.length - 1) + window.location.search + '#';
+
     this.id_prefix = '';
     while ($('#' + this.id_prefix + 'tree_channel_0').length > 0) {
         this.id_prefix += '_';
@@ -199,13 +202,10 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
             var html = '';
             for (var i=0; i < result.channels.length; i++) {
                 var channel = result.channels[i];
-                if (oid != '0') {
+                if (oid != '0')
                     channel.parent_oid = oid;
-                    channel.parent_title = this.content[oid] ? this.content[oid].title : 'load error';
-                } else {
+                else
                     channel.parent_oid = '0';
-                    channel.parent_title = utils.translate('Root');
-                }
                 if (!this.content[channel.oid]) {
                     this.content[channel.oid] = channel;
                 } else {
@@ -224,13 +224,14 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
                 }
                 html += '<li><span id="' + this.id_prefix + 'tree_channel_' + channel.oid + '_link" data-ref="' + channel.oid +
                                '" class="' + (!this.on_change ? 'aside-list-btn' : '') + (this.current_channel_oid == channel.oid ? ' channel-active' : '') + '">' + button;
-                if (this.on_change)
-                    html += '<button ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' type="button" data-ref="'+channel.oid+'" class="channel-btn"' + (this.current_channel_oid == channel.oid ? ' title="'+utils.escape_html(channel.title)+' ' + utils.translate('selected') + '"' : '') +'>'+utils.escape_html(channel.title)+'</button>';
-                else
-                    html += '<a ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' href="'+this.channels_base_url+channel[this.channels_url_field]+'" class="channel-btn">'+utils.escape_html(channel.title)+'</a>';
+                if (this.on_change) {
+                    html += '<button ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' type="button" data-ref="' + channel.oid + '" class="channel-btn"' + (this.current_channel_oid == channel.oid ? ' title="' + utils.escape_html(channel.title) + ' ' + utils.translate('selected') + '"' : '') + '>' + utils.escape_html(channel.title) + '</button>';
+                } else {
+                    html += '<a ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' href="' + this.channels_base_url + channel[this.channels_url_field] + '" class="channel-btn">' + utils.escape_html(channel.title) + '</a>';
+                }
                 html += '</span>';
                 if (channel.channels)
-                    html += '<ul class="list border-color-blue" id="' + this.id_prefix + 'tree_channel_'+channel.oid+'"></ul>';
+                    html += '<ul class="list border-color-blue" id="' + this.id_prefix + 'tree_channel_' + channel.oid + '"></ul>';
                 html += '</li>';
                 if (this.loading_queue[channel.oid] !== undefined) {
                     next_load = {oid: channel.oid, cb: this.loading_queue[channel.oid]};
@@ -259,9 +260,9 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
         if (result.personal_channel)
             this.has_personal_channel = true;
     } else if (result.error) {
-        $target.html('<li class="error">'+result.error+'</li>');
+        $target.html('<li class="error">' + result.error + '</li>');
     } else {
-        $target.html('<li class="error">'+utils.translate('No information about error.')+'</li>');
+        $target.html('<li class="error">' + utils.translate('No information about error.') + '</li>');
     }
 
     this.loading = false;
@@ -388,6 +389,8 @@ MSTreeManager.prototype.open_personal_channel = function () {
             obj.open_tree(response.oid);
             if (obj.on_change)
                 obj.on_change(response.oid);
+            else
+                window.location.hash = '#' + response.slug;
         } else {
             $('.channel-personal-btn span', obj.$widget).html(utils.translate('My channel') + ' (' + response.xhr.status + ')');
         }

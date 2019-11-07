@@ -783,7 +783,7 @@ MSBrowser.prototype.get_button_link = function (item, action, absolute) {
         type = item.oid[0];
     }
     if (!action && (!type || type === '' || type === '0') && (!item || item.oid == '0')) {
-        url = '/channels/#';
+        url = '/channels/';
         hash = '#';
     } else if (action == 'view') {
         if (!item.slug && item.oid != '0') {

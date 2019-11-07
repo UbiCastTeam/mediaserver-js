@@ -431,7 +431,6 @@
     clear: both;
 }
 .ms-channels-tree .channel-btn {
-    margin-left: 1.6em;
     padding: 0.2em 0.4em;
     display: block;
     text-align: left;
@@ -444,6 +443,9 @@
     word-wrap: break-word;
     border-radius: 4px;
     box-sizing: content-box;
+}
+.ms-channels-tree li .channel-btn {
+    margin-left: 1.6em;
 }
 .ms-channels-tree .channel-btn:hover {
     text-decoration: underline;

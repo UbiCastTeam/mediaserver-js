@@ -57,8 +57,9 @@ MSBrowserChannels.prototype.refresh_title = function () {
     if (item && item.oid != '0') {
         var html = '<span class="item-entry-preview"><img src="'+item.thumb+'" alt="'+utils.escape_html(item.title)+'"/></span>';
         html += '<span class="channel-titles-place">';
-        if (!this.browser.use_overlay && item.parent_title) {
-            html += '<a class="parent-channel-title" href="#' + item.parent_slug + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>'+utils.escape_html(item.parent_title)+'</a>';
+        var parent_title = item.parent_oid && item.parent_oid != '0' ? item.parent_title : utils.translate('Root');
+        if (!this.browser.use_overlay && parent_title) {
+            html += '<a class="parent-channel-title" href="#' + (item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>'+utils.escape_html(parent_title)+'</a>';
         }
         html += '<span class="channel-title"' + (item.language ? 'lang="' + item.language + '"' : '') + '>'+utils.escape_html(item.title)+'</span>';
         html += '</span>';
