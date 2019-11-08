@@ -2,33 +2,24 @@
  * MediaServer - API Manager                 *
  * Copyright: UbiCast, all rights reserved   *
  * Author: Stephane Schoorens                *
- * TODO Pass urls to the lib from django url *
  *********************************************/
 /* globals utils */
 
-var MSAPI = {
+function MSAPIClient(options) {
     // params
-    base_url: '',
-    use_proxy: false,
-    extra_data: null,
-    configure: function (options) {
-        if ('base_url' in options)
-            MSAPI.base_url = options.base_url;
-        if ('use_proxy' in options)
-            MSAPI.use_proxy = options.use_proxy;
-        if ('extra_data' in options)
-            MSAPI.extra_data = options.extra_data;
-    },
+    this.base_url = '';
+    this.use_proxy = false;
+    this.extra_data = null;
     // vars
-    defaults_errors_messages: {
+    this.defaults_errors_messages = {
         401: utils.translate('You are not logged in or your session has expired. Please login and retry.'),
         403: utils.translate('Access denied.'),
         404: utils.translate('Item not found.'),
         500: utils.translate('An internal server error occurred. An email has been sent to the support team.'),
         timeout: utils.translate('The connection timed out. Please retry later.'),
         unreachable: utils.translate('The server cannot be reached.')
-    },
-    calls: {
+    };
+    this.calls = {
         ping: {
             method: 'GET',
             url: '/api/v2/'
@@ -205,128 +196,143 @@ var MSAPI = {
             method: 'GET',
             url: '/api/v2/categories/'
         }
-    },
-    ajax_call: function (call_or_uri, data, callback, async, file, xhr_function) {
-        // call_or_uri can be either an API call name ('list_categories' for example) or an uri like 'GET:/api/v2/categories/'
-        var call_info = MSAPI.calls[call_or_uri];
-        if (!call_info) {
-            var splitted = call_or_uri.split(':');
-            if (splitted.length == 1) {
-                call_info = {method: 'GET', url: splitted[0]};
-            } else if (splitted.length == 2) {
-                call_info = {method: splitted[0], url: splitted[1]};
-            } else {
-                throw new Error('Invalid call or uri.');
-            }
-        }
+    };
 
-        var url = MSAPI.base_url;
-        if (MSAPI.use_proxy)
-            data.action = call_info.url;
-        else {
-            if (!MSAPI.base_url)
-                data.local = 'yes';  // To get urls with no host
-            url += call_info.url;
+    this.configure(options);
+}
+MSAPIClient.prototype.configure = function (options) {
+    if (!options)
+        return;
+    if ('base_url' in options)
+        this.base_url = options.base_url;
+    if ('use_proxy' in options)
+        this.use_proxy = options.use_proxy;
+    if ('extra_data' in options)
+        this.extra_data = options.extra_data;
+};
+MSAPIClient.prototype.ajax_call = function (call_or_uri, data, callback, async, file, xhr_function) {
+    // call_or_uri can be either an API call name ('list_categories' for example) or an uri like 'GET:/api/v2/categories/'
+    var call_info = this.calls[call_or_uri];
+    if (!call_info) {
+        var splitted = call_or_uri.split(':');
+        if (splitted.length == 1) {
+            call_info = {method: 'GET', url: splitted[0]};
+        } else if (splitted.length == 2) {
+            call_info = {method: splitted[0], url: splitted[1]};
+        } else {
+            throw new Error('Invalid call or uri.');
         }
-        if (typeof url === 'undefined' || url === 'undefined')
-            throw new Error('No url to call.');
-        if (MSAPI.extra_data)
-            for (var field in MSAPI.extra_data) {
-                data[field] = MSAPI.extra_data[field];
-            }
-
-        var ajax_data = {
-            url: url,
-            method: call_info.method,
-            data: data,
-            dataType: 'json',
-            cache: false,
-            success: function (response) {
-                if (!response.success && !response.error)
-                    response.error = response.message ? response.message : utils.translate('No information about error.');
-                if (callback)
-                    return callback(response);
-            },
-            error: function (xhr, textStatus, thrownError) {
-                var reason = '?';
-                if (xhr.status)
-                    reason = xhr.status;
-                else if (textStatus == 'error')
-                    reason = 'unreachable';
-                else if (textStatus == 'timeout')
-                    reason = 'timeout';
-
-                var msg = call_info.errors && reason in call_info.errors ? call_info.errors[reason] : '';
-                if (!msg)
-                    msg = reason in MSAPI.defaults_errors_messages ? MSAPI.defaults_errors_messages[reason] : utils.translate('Request failed:')+' '+thrownError;
-
-                return callback({
-                    success: false,
-                    error: msg,
-                    error_code: xhr.status,
-                    xhr: xhr,
-                    textStatus: textStatus,
-                    thrownError: thrownError
-                });
-            }
-        };
-
-        if (typeof async === 'undefined' || async) {
-            ajax_data.async = async;
-        }
-        if (file) {
-            ajax_data.processData = false;
-            ajax_data.enctype = 'multipart/form-data';
-            ajax_data.contentType = false;
-        }
-        if (xhr_function) {
-            ajax_data.xhr = xhr_function;
-        }
-        return $.ajax(ajax_data);
-    },
-    get_storage_display: function (item) {
-        var html = '';
-        if (item.storage_used !== null && item.storage_used !== undefined) {
-            html = '<span class="storage-usage">' + utils.get_size_display(item.storage_used);
-            if (item.storage_quota > 0) {
-                html += ' / ' + item.storage_quota + ' G' + utils.translate('B') + '';
-                var storage_used_percents = Math.round(100 * (item.storage_used / 1073741824) / item.storage_quota);
-                if (storage_used_percents > 100)
-                    storage_used_percents = 100;
-                var storage_class = '';
-                if (item.storage_warning && storage_used_percents > item.storage_warning)
-                    storage_class = ' red';
-                html += '<span class="progress-bar inline-block' + storage_class + '" aria-hidden="true" style="width: 100%; vertical-align: middle;">' +
-                '<span class="progress-level" style="width: ' + storage_used_percents + '%"></span>' +
-                '<span class="progress-label">' + storage_used_percents + ' %</span>' +
-                '</span>';
-            }
-            html += '</span>';
-            var storage_available = MSAPI.get_available_storage_display(item);
-            if (storage_available) {
-                html += ' ' + storage_available;
-            }
-        }
-        return html;
-    },
-    get_available_storage_display: function (item) {
-        var html = '';
-        if (item.storage_available !== null && item.storage_available !== undefined) {
-            var storage_class = '';
-            if (item.storage_quota > 0) {
-                var storage_used_percents = 100 * (item.storage_used / 1073741824) / item.storage_quota;
-                if (item.storage_warning && storage_used_percents > item.storage_warning)
-                    storage_class = ' orange';
-            }
-            html += '<span class="storage-available nowrap">';
-            if (item.storage_available > 0) {
-                html += '<span class="' + storage_class + ' ">' + utils.translate('Available space:') + ' ' + utils.get_size_display(item.storage_available) + '</span>';
-            } else {
-                html += '<span class="red">' + utils.translate('No available space') + '</span>';
-            }
-            html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + utils.translate('The storage quota of the parent channels can have an impact on the available space of this channel.') + '</span></button>';
-            html += '</span>';
-        }
-        return html;
     }
+
+    var url = this.base_url;
+    if (this.use_proxy) {
+        data.action = call_info.url;
+    } else {
+        if (!this.base_url)
+            data.local = 'yes';  // To get urls with no host
+        url += call_info.url;
+    }
+    if (typeof url === 'undefined' || url === 'undefined') {
+        throw new Error('No url to call.');
+    }
+    if (this.extra_data) {
+        for (var field in this.extra_data) {
+            data[field] = this.extra_data[field];
+        }
+    }
+
+    var obj = this;
+    var ajax_data = {
+        url: url,
+        method: call_info.method,
+        data: data,
+        dataType: 'json',
+        cache: false,
+        success: function (response) {
+            if (!response.success && !response.error)
+                response.error = response.message ? response.message : utils.translate('No information about error.');
+            if (callback)
+                return callback(response);
+        },
+        error: function (xhr, textStatus, thrownError) {
+            var reason = '?';
+            if (xhr.status)
+                reason = xhr.status;
+            else if (textStatus == 'error')
+                reason = 'unreachable';
+            else if (textStatus == 'timeout')
+                reason = 'timeout';
+
+            var msg = call_info.errors && reason in call_info.errors ? call_info.errors[reason] : '';
+            if (!msg)
+                msg = reason in obj.defaults_errors_messages ? obj.defaults_errors_messages[reason] : utils.translate('Request failed:')+' '+thrownError;
+
+            return callback({
+                success: false,
+                error: msg,
+                error_code: xhr.status,
+                xhr: xhr,
+                textStatus: textStatus,
+                thrownError: thrownError
+            });
+        }
+    };
+
+    if (typeof async === 'undefined' || async) {
+        ajax_data.async = async;
+    }
+    if (file) {
+        ajax_data.processData = false;
+        ajax_data.enctype = 'multipart/form-data';
+        ajax_data.contentType = false;
+    }
+    if (xhr_function) {
+        ajax_data.xhr = xhr_function;
+    }
+    return $.ajax(ajax_data);
+};
+MSAPIClient.prototype.get_storage_display = function (item) {
+    var html = '';
+    if (item.storage_used !== null && item.storage_used !== undefined) {
+        html = '<span class="storage-usage">' + utils.get_size_display(item.storage_used);
+        if (item.storage_quota > 0) {
+            html += ' / ' + item.storage_quota + ' G' + utils.translate('B') + '';
+            var storage_used_percents = Math.round(100 * (item.storage_used / 1073741824) / item.storage_quota);
+            if (storage_used_percents > 100)
+                storage_used_percents = 100;
+            var storage_class = '';
+            if (item.storage_warning && storage_used_percents > item.storage_warning)
+                storage_class = ' red';
+            html += '<span class="progress-bar inline-block' + storage_class + '" aria-hidden="true" style="width: 100%; vertical-align: middle;">' +
+            '<span class="progress-level" style="width: ' + storage_used_percents + '%"></span>' +
+            '<span class="progress-label">' + storage_used_percents + ' %</span>' +
+            '</span>';
+        }
+        html += '</span>';
+        var storage_available = this.get_available_storage_display(item);
+        if (storage_available) {
+            html += ' ' + storage_available;
+        }
+    }
+    return html;
+};
+MSAPIClient.prototype.get_available_storage_display = function (item) {
+    var html = '';
+    if (item.storage_available !== null && item.storage_available !== undefined) {
+        var storage_class = '';
+        if (item.storage_quota > 0) {
+            var storage_used_percents = 100 * (item.storage_used / 1073741824) / item.storage_quota;
+            if (item.storage_warning && storage_used_percents > item.storage_warning)
+                storage_class = ' orange';
+        }
+        html += '<span class="storage-available nowrap">';
+        if (item.storage_available > 0) {
+            html += '<span class="' + storage_class + ' ">' + utils.translate('Available space:') + ' ' + utils.get_size_display(item.storage_available) + '</span>';
+        } else {
+            html += '<span class="red">' + utils.translate('No available space') + '</span>';
+        }
+        html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + utils.translate('The storage quota of the parent channels can have an impact on the available space of this channel.') + '</span></button>';
+        html += '</span>';
+    }
+    return html;
 };

@@ -3,7 +3,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals MSAPI, utils, OverlayDisplayManager, MSBrowserChannels, MSBrowserSearch, MSBrowserLatest */
+/* globals MSAPIClient, utils, OverlayDisplayManager, MSBrowserChannels, MSBrowserSearch, MSBrowserLatest */
 
 function MSBrowser(options) {
     // params
@@ -72,7 +72,7 @@ function MSBrowser(options) {
         'default_search_in'
     ]);
 
-    MSAPI.configure(options);
+    this.msapi = new MSAPIClient(options);
     this.init_options = options ? options : {};
     this.use_overlay = this.place ? false : true;
 
@@ -282,7 +282,7 @@ MSBrowser.prototype.get_info = function (data, is_media, full, callback) {
         data.full = 'yes';
     var method = is_media ? 'get_medias' : 'get_channels';
     var obj = this;
-    MSAPI.ajax_call(method, data, function (response) {
+    this.msapi.ajax_call(method, data, function (response) {
         if (response.success)
             obj.update_catalog(response.info, full);
         obj.hide_loading();
@@ -418,7 +418,7 @@ MSBrowser.prototype.on_resize = function () {
 };
 MSBrowser.prototype.load_categories = function () {
     var obj = this;
-    MSAPI.ajax_call('list_categories', {}, function (response) {
+    this.msapi.ajax_call('list_categories', {}, function (response) {
         if (response.data) {
             obj.site_settings_categories = response.data;
             obj.display_categories();

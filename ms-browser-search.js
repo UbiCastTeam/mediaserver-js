@@ -3,7 +3,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils, MSAPI */
+/* globals utils */
 
 function MSBrowserSearch(options) {
     // params
@@ -266,7 +266,7 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
     }
     // execute search request
     var obj = this;
-    MSAPI.ajax_call('search', data, function (response) {
+    this.browser.msapi.ajax_call('search', data, function (response) {
         obj._on_ajax_response(response);
         if (window.ga_pageview)
             window.ga_pageview('ajax search', '/ajax_search?search='+data.search+'&fields='+data.fields);

@@ -3,7 +3,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils, MSAPI, MSTreeManager */
+/* globals utils, MSTreeManager */
 
 function MSBrowserChannels(options) {
     // params
@@ -118,7 +118,7 @@ MSBrowserChannels.prototype.set_order = function (order) {
 MSBrowserChannels.prototype.display_personal_channel = function () {
     var obj = this;
     if (!this.personal_channel_oid) {
-        MSAPI.ajax_call('get_channels_personal', {}, function (response) {
+        this.browser.msapi.ajax_call('get_channels_personal', {}, function (response) {
             if (response.success) {
                 obj.personal_channel_oid = response.oid;
                 obj.display_channel(response.oid);
@@ -213,7 +213,7 @@ MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
     }
     data.order_by = this.order;
     var obj = this;
-    MSAPI.ajax_call('get_channels_content', data, function (response) {
+    this.browser.msapi.ajax_call('get_channels_content', data, function (response) {
         // Merge response
         if (response_info) {
             if (response_info.info)
@@ -274,7 +274,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 this.$menu.append($back);
             }
             if (this.browser.pick_mode) {
-                var available_storage_html = MSAPI.get_available_storage_display(response.info);
+                var available_storage_html = this.browser.msapi.get_available_storage_display(response.info);
                 if (available_storage_html) {
                     this.$menu.append(available_storage_html + ' ');
                     if (!window.uwlb)
@@ -303,7 +303,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         if (oid != '0') {
             var $current_item_desc = $('<div class="item-description"></div>');
             var is_empty = true;
-            var storage_display = response.info.can_edit ? MSAPI.get_storage_display(response.info) : '';
+            var storage_display = response.info.can_edit ? this.browser.msapi.get_storage_display(response.info) : '';
             if (response.info.views || response.info.comments) {
                 var anno_and_views = '<div class="' + (response.info.short_description || response.info.display_rss_links || storage_display ? 'right' : 'align-right') + ' channel-description-stats">';
                 if (response.info.views) {

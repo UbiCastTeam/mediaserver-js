@@ -3,7 +3,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils, MSAPI */
+/* globals utils, MSAPIClient */
 
 function MSTreeManager(options) {
     // params
@@ -45,7 +45,7 @@ function MSTreeManager(options) {
         'path_url'
     ]);
     this.initial_oid = this.current_channel_oid;
-    MSAPI.configure(options);
+    this.msapi = new MSAPIClient(options);
     if (this.auto_init) {
         var obj = this;
         $(document).ready(function () {
@@ -182,7 +182,7 @@ MSTreeManager.prototype.load_tree = function (oid, callback) {
             error: ecallback
         });
     } else {
-        MSAPI.ajax_call('get_channels_tree', data, function (response) {
+        this.msapi.ajax_call('get_channels_tree', data, function (response) {
             if (response.success)
                 scallback(response);
             else
@@ -371,7 +371,7 @@ MSTreeManager.prototype.load_path = function (oid, callback) {
             error: ecallback
         });
     } else {
-        MSAPI.ajax_call('get_channels_path', data, function (response) {
+        this.msapi.ajax_call('get_channels_path', data, function (response) {
             if (response.success)
                 scallback(response);
             else
@@ -396,7 +396,7 @@ MSTreeManager.prototype.open_personal_channel = function () {
         }
     };
     if (!this.personal_channel_info) {
-        MSAPI.ajax_call('get_channels_personal', {}, function (response) {
+        this.msapi.ajax_call('get_channels_personal', {}, function (response) {
             callback(response);
         });
     } else {

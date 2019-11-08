@@ -3,7 +3,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils, MSAPI */
+/* globals utils */
 
 function MSBrowserLatest(options) {
     // params
@@ -176,7 +176,7 @@ MSBrowserLatest.prototype.load_latest = function (count, end) {
         data.count = count;
     var obj = this;
     this.browser.display_loading();
-    MSAPI.ajax_call('get_latest_content', data, function (response) {
+    this.browser.msapi.ajax_call('get_latest_content', data, function (response) {
         if (response.items && response.items.length > 0) {
             // merge response items
             if (!obj.last_response)
