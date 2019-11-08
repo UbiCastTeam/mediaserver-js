@@ -22,6 +22,7 @@ function MSBrowser(options) {
     this.on_pick = null;
     this.hide_header = false;
     this.btn_class = '';
+    this.msapi = null;
     this.tree_manager = true;
     this.display_types_icons = false;
     this.display_itunes_rss = true;
@@ -55,6 +56,7 @@ function MSBrowser(options) {
         // allowed options
         'title',
         'place',
+        'msapi',
         'selectable_content',
         'displayable_content',
         'filter_editable',
@@ -72,7 +74,8 @@ function MSBrowser(options) {
         'default_search_in'
     ]);
 
-    this.msapi = new MSAPIClient(options);
+    if (!this.msapi)
+        this.msapi = new MSAPIClient(options);
     this.init_options = options ? options : {};
     this.use_overlay = this.place ? false : true;
 

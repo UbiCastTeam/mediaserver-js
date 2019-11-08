@@ -8,6 +8,7 @@
 function MSTreeManager(options) {
     // params
     this.$place = null;
+    this.msapi = null;
     this.display_root = false;
     this.display_personal = false;
     this.auto_init = true;
@@ -32,6 +33,7 @@ function MSTreeManager(options) {
     utils.setup_class(this, options, [
         // allowed options
         '$place',
+        'msapi',
         'display_root',
         'display_personal',
         'auto_init',
@@ -45,7 +47,8 @@ function MSTreeManager(options) {
         'path_url'
     ]);
     this.initial_oid = this.current_channel_oid;
-    this.msapi = new MSAPIClient(options);
+    if (!this.msapi)
+        this.msapi = new MSAPIClient(options);
     if (this.auto_init) {
         var obj = this;
         $(document).ready(function () {

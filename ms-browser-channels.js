@@ -88,6 +88,7 @@ MSBrowserChannels.prototype.on_show = function () {
     if (this.browser.tree_manager) {
         var params = {
             $place: $('.ms-browser-tree-place', this.$content),
+            msapi: this.browser.msapi,
             display_root: this.browser.displayable_content.indexOf('c') != -1,
             display_personal: true,
             current_channel_oid: this.current_channel_oid,
