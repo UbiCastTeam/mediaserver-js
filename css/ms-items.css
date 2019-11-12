@@ -52,7 +52,7 @@
 .ms-items .item-entry-preview img {
     max-width: 100%;
     max-height: 100%;
-    margin-top: -2px;
+    margin-top: -3px;
     vertical-align: middle;
 }
 .ms-items .item-entry-preview span {
@@ -284,13 +284,19 @@
 .ms-items .item-entry.thumbnail .item-entry-bottom-bar > * {
     word-wrap: break-word;
 }
-.ms-items .item-entry.thumbnail .item-entry-title {
+.ms-items .item-entry.thumbnail .item-entry-bottom-bar span {
+    margin: 0;
     padding: 10px;
+    display: block;
+}
+.ms-items .item-entry.thumbnail .item-entry-bottom-bar span + span {
+    padding-top: 0;
+}
+.ms-items .item-entry.thumbnail .item-entry-title {
     text-overflow: ellipsis;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
-    display: block;
     font-weight: 600;
     font-size: 1em;
     color: #404040;
@@ -313,12 +319,11 @@
     border-radius: 4px;
     font-size: 1.5em;
     background: #404040;
-    color: #FFF;
+    color: #fff;
 }
 .ms-items .item-entry.thumbnail .item-entry-buttons a:hover,
 .ms-items .item-entry.thumbnail .item-entry-buttons button:hover {
     background: #354b75;
-    color: #003636;
 }
 .ms-items .item-entry.thumbnail .item-entry-info.info-displayed,
 .ms-items .item-entry.thumbnail.focus .item-entry-buttons a,
