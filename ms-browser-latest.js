@@ -39,8 +39,8 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
     html += '<div id="ms_browser_latest_menu" style="display: none;">';
     if (dc.length > 1) {
         html +=     '<div class="ms-browser-dropdown" id="ms_browser_latest_types_dropdown">';
-        html +=         '<button type="button" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Content types')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
-        html +=         '<div class="ms-browser-dropdown-menu ms-browser-latest-types">';
+        html +=         '<button type="button" aria-controls="ms_browser_latest_types_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Content types')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+        html +=         '<div class="ms-browser-dropdown-menu ms-browser-latest-types" id="ms_browser_latest_types_dropdown_menu">';
         html +=             '<h4>'+utils.translate('Content types to display:')+'</h4>';
         if (dc.indexOf('c') != -1) {
             html += '<p><input id="latest_display_channel" type="checkbox">';

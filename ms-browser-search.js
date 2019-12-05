@@ -75,9 +75,9 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     html +=         ' <button type="submit" class="button" id="ms_browser_search_start">'+utils.translate('Go')+'</button>';
     html +=     '</form>';
     html +=     '<div class="ms-browser-dropdown" id="ms_browser_search_in_dropdown">';
-    html +=         '<button type="button" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Search in')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+    html +=         '<button type="button" aria-controls="ms_browser_search_in_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Search in')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
 
-    html +=         '<div class="ms-browser-dropdown-menu ms-browser-search-in">';
+    html +=         '<div class="ms-browser-dropdown-menu ms-browser-search-in" id="ms_browser_search_in_dropdown_menu">';
     html +=             ' <div><button type="button" class="button" id="ms_browser_search_in_all">'+utils.translate('all')+'</button>';
     html +=             ' <button type="button" class="button" id="ms_browser_search_in_none">'+utils.translate('none')+'</button></div>';
     for (i=0; i < this.search_in_fields.length; i++) {
@@ -91,9 +91,9 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     html +=     '</div>';
     if (dc.length > 1) {
         html += '<div class="ms-browser-dropdown" id="ms_browser_search_for_dropdown">';
-        html +=     '<button type="button" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Search for')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+        html +=     '<button type="button" aria-controls="ms_browser_search_for_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Search for')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
 
-        html +=     '<div class="ms-browser-dropdown-menu ms-browser-search-for">';
+        html +=     '<div class="ms-browser-dropdown-menu ms-browser-search-for" id="ms_browser_search_for_dropdown_menu">';
         html +=         ' <div><button type="button" class="button" id="ms_browser_search_for_all">'+utils.translate('all')+'</button>';
         html +=         ' <button type="button" class="button" id="ms_browser_search_for_none">'+utils.translate('none')+'</button></div>';
         for (i=0; i < this.search_for_fields.length; i++) {

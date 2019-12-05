@@ -104,9 +104,9 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     ];
     var html = '<div class="ms-browser-top-buttons">';
     html += '<div class="ms-browser-dropdown" id="ms_browser_display_dropdown">';
-    html += '<button type="button" title="' + utils.translate('Display') + '" class="button ms-browser-dropdown-button '+this.btn_class+'"><i class="fa fa-tv" aria-hidden="true"></i> <span class="hidden-below-1280">'+utils.translate('Display')+' </span><i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+    html += '<button aria-controls="ms_browser_display_dropdow_menu" aria-expanded="false" type="button" title="' + utils.translate('Display') + '" class="button ms-browser-dropdown-button '+this.btn_class+'"><i class="fa fa-tv" aria-hidden="true"></i> <span class="hidden-below-1280">'+utils.translate('Display')+' </span><i class="fa fa-angle-down" aria-hidden="true"></i></button>';
 
-    html += '<div class="ms-browser-dropdown-menu">';
+    html += '<div class="ms-browser-dropdown-menu" id="ms_browser_display_dropdow_menu">';
     // display mode
     html += '<div><h4>'+utils.translate('Display mode:')+'</h4>';
     html += '<button type="button" class="button '+(!this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_list">'+utils.translate('list')+'</button>';
@@ -209,9 +209,11 @@ MSBrowser.prototype.setup_dropdown = function ($dropdown) {
         var $menu = $('.ms-browser-dropdown-menu', event.data.$dropdown);
         if ($btn.hasClass('active')) {
             $btn.removeClass('active');
+            $btn.attr('aria-expanded', false);
             $menu.removeClass('active');
         } else {
             $btn.addClass('active');
+            $btn.attr('aria-expanded', true);
             $menu.addClass('active');
         }
     });
@@ -221,6 +223,7 @@ MSBrowser.prototype.setup_dropdown = function ($dropdown) {
         if (!$menu.is(event.target) && $menu.has(event.target).length === 0 &&
             !$btn.is(event.target) && $btn.has(event.target).length === 0) {
             $btn.removeClass('active');
+            $btn.attr('aria-expanded', false);
             $menu.removeClass('active');
         }
     });
@@ -230,6 +233,7 @@ MSBrowser.prototype.close_dropdown = function ($dropdown) {
     var $menu = $('.ms-browser-dropdown-menu', $dropdown);
     if ($btn.hasClass('active')) {
         $btn.removeClass('active');
+        $btn.attr('aria-expanded', false);
         $menu.removeClass('active');
     }
 };
