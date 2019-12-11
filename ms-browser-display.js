@@ -494,11 +494,12 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
 
     /********************** Image preview ****************/
     var image_preview = '<span class="item-entry-preview">';
+    image_preview += '<span class="item-entry-preview-aligner"></span>';
     if (item.thumb) {
         image_preview += '<img src="' + item.thumb + '" alt=""' + (item.language ? ' lang="' + item.language + '"' : '') + '/>';
     }
     if (!this.pick_mode && item_type != 'channel') {
-        image_preview += '<span class="item-entry-preview-play"><i class="fa fa-play fa-4x" aria-hidden="true"></i></span>';
+        image_preview += '<b class="item-entry-preview-play"><i class="fa fa-play fa-4x" aria-hidden="true"></i></b>';
     }
     image_preview += '</span>';
     html += image_preview;
