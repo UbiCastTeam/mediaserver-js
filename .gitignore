@@ -18,3 +18,5 @@ pip-log.txt
 .coverage
 .tox
 nosetests.xml
+
+*.tmp.js
