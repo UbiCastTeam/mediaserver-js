@@ -136,6 +136,8 @@ utils.add_translations({
     'Select a media': 'Sélectionner un média',
     'Select this channel': 'Sélectionner cette chaîne',
     'Select this media': 'Sélectionner ce média',
+    'selected setting': 'option sélectionnée',
+    'selected tab': 'onglet sélectionné',
     'September': 'septembre',
     'Sign in': 'Connection',
     'Some contents may still exist in this channel but if it is the case your account is not allowed to see them.': 'Du contenu peut tout de même être présent dans cette chaîne mais si c\'est le cas, votre compte utilisateur ne possède pas la permission de le voir.',

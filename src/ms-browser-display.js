@@ -109,8 +109,8 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     html += '<div class="ms-browser-dropdown-menu" id="ms_browser_display_dropdow_menu">';
     // display mode
     html += '<div><h4>'+utils.translate('Display mode:')+'</h4>';
-    html += '<button type="button" class="button '+(!this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_list">'+utils.translate('list')+'</button>';
-    html += '<button type="button" class="button '+(this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_thumbnails">'+utils.translate('thumbnails')+'</button><br/>';
+    html += '<button type="button" class="button '+(!this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_list" title="'+utils.translate('list')+(!this.display_as_thumbnails ? ' (' + utils.translate('selected setting') + ')' : '')+'">'+utils.translate('list')+'</button>';
+    html += '<button type="button" class="button '+(this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_thumbnails" title="'+utils.translate('thumbnails')+(this.display_as_thumbnails ? ' (' + utils.translate('selected setting') + ')' : '')+'">'+utils.translate('thumbnails')+'</button><br/>';
     html += '<input id="ms_browser_display_types_icons" type="checkbox" '+(this.display_types_icons ? 'checked="checked"' : '')+'>';
     html += ' <label for="ms_browser_display_types_icons">'+utils.translate('display items type icons')+'</label></div>';
     // channel sorting
@@ -155,28 +155,35 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     this.setup_dropdown($dropdown);
     $('#ms_browser_display_as_list', $dropdown).click({ obj: this, $dropdown: $dropdown }, function (event) {
         event.data.obj.set_display_as_list();
-        event.data.obj.close_dropdown(event.data.$dropdown);
     });
     $('#ms_browser_display_as_thumbnails', $dropdown).click({ obj: this, $dropdown: $dropdown }, function (event) {
         event.data.obj.set_display_as_thumbnails();
-        event.data.obj.close_dropdown(event.data.$dropdown);
     });
     $('#ms_browser_display_types_icons', $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
         event.data.obj.set_display_types_icons(this.checked);
-        event.data.obj.close_dropdown(event.data.$dropdown);
     });
     $('#ms_browser_order_channel', $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
         event.data.obj.channels.set_order($(this).val());
-        event.data.obj.close_dropdown(event.data.$dropdown);
     });
     $('#ms_browser_filters_form select', $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
         $('#ms_browser_filters_form', event.data.$dropdown).submit();
     });
     $('#ms_browser_filters_form', $dropdown).submit({ obj: this, $dropdown: $dropdown }, function (event) {
         event.data.obj.on_filters_submit($(this));
-        event.data.obj.close_dropdown(event.data.$dropdown);
         return false;
     });
+    // detect focus change
+    try {
+        this.focus_was_in_dropdown = false;
+        window.addEventListener('blur', function () {
+            this.check_focus_dropdown();
+        }.bind(this), true);
+        window.addEventListener('focus', function () {
+            this.check_focus_dropdown();
+        }.bind(this), true);
+    } catch (e) {
+        console.error('Failed to listen to focus changes: ' + e);
+    }
     return this.$top_menu;
 };
 MSBrowser.prototype.set_title = function (text, html) {
@@ -207,6 +214,7 @@ MSBrowser.prototype.setup_dropdown = function ($dropdown) {
     $('.ms-browser-dropdown-button', $dropdown).click({ $dropdown: $dropdown }, function (event) {
         var $btn = $('.ms-browser-dropdown-button', event.data.$dropdown);
         var $menu = $('.ms-browser-dropdown-menu', event.data.$dropdown);
+        $menu.attr('tabindex', '-1');
         if ($btn.hasClass('active')) {
             $btn.removeClass('active');
             $btn.attr('aria-expanded', false);
@@ -220,7 +228,7 @@ MSBrowser.prototype.setup_dropdown = function ($dropdown) {
     $(document).click({ $dropdown: $dropdown }, function (event) {
         var $btn = $('.ms-browser-dropdown-button', event.data.$dropdown);
         var $menu = $('.ms-browser-dropdown-menu', event.data.$dropdown);
-        if (!$menu.is(event.target) && $menu.has(event.target).length === 0 &&
+        if ($btn.hasClass('active') && !$menu.is(event.target) && $menu.has(event.target).length === 0 &&
             !$btn.is(event.target) && $btn.has(event.target).length === 0) {
             $btn.removeClass('active');
             $btn.attr('aria-expanded', false);
@@ -235,6 +243,26 @@ MSBrowser.prototype.close_dropdown = function ($dropdown) {
         $btn.removeClass('active');
         $btn.attr('aria-expanded', false);
         $menu.removeClass('active');
+    }
+};
+MSBrowser.prototype.check_focus_dropdown = function () {
+    // close dropdowns when focus quit the menu
+    if (!document.activeElement || document.activeElement == document.body)
+        return;
+    var is_focused = false;
+    var node = document.activeElement;
+    while (node) {
+        if (node.className && node.className.indexOf('ms-browser-dropdown-menu') != -1) {
+            is_focused = true;
+            this.focus_was_in_dropdown = true;
+            break;
+        }
+        node = node.parentNode;
+    }
+    if (!is_focused && this.focus_was_in_dropdown) {
+        this.focus_was_in_dropdown = false;
+        $('.ms-browser-dropdown-button.active').removeClass('active').attr('aria-expanded', false);
+        $('.ms-browser-dropdown-menu.active').removeClass('active');
     }
 };
 
@@ -270,11 +298,13 @@ MSBrowser.prototype.on_filters_submit = function ($form) {
     }
 };
 MSBrowser.prototype.set_display_as_list = function () {
-    if ($('#ms_browser_display_as_list', this.$top_menu).hasClass('active'))
+    var $as_thumb = $('#ms_browser_display_as_thumbnails', this.$top_menu);
+    var $as_list = $('#ms_browser_display_as_list', this.$top_menu);
+    if ($as_list.hasClass('active'))
         return;
     this.display_as_thumbnails = false;
-    $('#ms_browser_display_as_thumbnails', this.$top_menu).removeClass('active');
-    $('#ms_browser_display_as_list', this.$top_menu).addClass('active');
+    $as_thumb.removeClass('active').attr('title', $as_thumb.text());
+    $as_list.addClass('active').attr('title', $as_list.text() + ' (' + utils.translate('selected setting') + ')');
     if (!this.use_overlay)
         $('#global').addClass('max-width-1200');
     utils.set_cookie('catalog-display_mode', 'list');
@@ -283,11 +313,13 @@ MSBrowser.prototype.set_display_as_list = function () {
     this.search.refresh_display();
 };
 MSBrowser.prototype.set_display_as_thumbnails = function () {
-    if ($('#ms_browser_display_as_thumbnails', this.$top_menu).hasClass('active'))
+    var $as_thumb = $('#ms_browser_display_as_thumbnails', this.$top_menu);
+    var $as_list = $('#ms_browser_display_as_list', this.$top_menu);
+    if ($as_thumb.hasClass('active'))
         return;
     this.display_as_thumbnails = true;
-    $('#ms_browser_display_as_list', this.$top_menu).removeClass('active');
-    $('#ms_browser_display_as_thumbnails', this.$top_menu).addClass('active');
+    $as_list.removeClass('active').attr('title', $as_list.text());
+    $as_thumb.addClass('active').attr('title', $as_thumb.text() + ' (' + utils.translate('selected setting') + ')');
     if (!this.use_overlay)
         $('#global').removeClass('max-width-1200');
     utils.set_cookie('catalog-display_mode', 'thumbnail');
@@ -324,12 +356,12 @@ MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
 
     if (previous && this[previous]) {
         $('.ms-browser').removeClass(previous);
-        $('#ms_browser_'+previous+'_tab', this.$menu).removeClass('active');
+        $('#ms_browser_'+previous+'_tab', this.$menu).removeClass('active').attr('title', $('#ms_browser_'+previous+'_tab', this.$menu).text());
         this[previous].$menu.css('display', 'none');
         this[previous].$content.css('display', 'none');
     }
     $('.ms-browser').addClass(tab);
-    $('#ms_browser_'+tab+'_tab', this.$menu).addClass('active');
+    $('#ms_browser_'+tab+'_tab', this.$menu).addClass('active').attr('title', $('#ms_browser_'+tab+'_tab', this.$menu).text() + ' (' + utils.translate('selected tab') + ')');
     if (this[tab]) {
         this[tab].$menu.css('display', '');
         this[tab].$content.css('display', '');
@@ -653,7 +685,7 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
             });
         }
         $entry_block.keydown(function (event) {
-            if (event.which == '13') { // enter
+            if (event.which == '32' || event.which == '13') { // space or enter
                 event.preventDefault();
                 event.stopPropagation();
                 $(this).trigger('click');
@@ -958,16 +990,16 @@ MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectab
 };
 MSBrowser.prototype.trap_focus = function (element, event) {
     if (utils.ignore_until_focus_changes) {
-      return;
+        return;
     }
     if (element.contains(event.target)) {
-      this.last_overlay_focus = event.target;
+        this.last_overlay_focus = event.target;
     } else {
-      utils.focus_first_descendant(element);
-      if (this.last_overlay_focus == document.activeElement) {
-        utils.focus_last_descendant(element);
-      }
-      this.last_overlay_focus = document.activeElement;
+        utils.focus_first_descendant(element);
+        if (this.last_overlay_focus == document.activeElement) {
+            utils.focus_last_descendant(element);
+        }
+        this.last_overlay_focus = document.activeElement;
     }
 };
 MSBrowser.prototype.box_open_info = function ($entry) {
