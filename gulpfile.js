@@ -10,16 +10,7 @@ gulp.task('autobuild', function() {
 });
 
 gulp.task('build', function() {
-    /* build browser + api + tree */
-    gulp.src(['src/*.js'])
-    .pipe(concat('dist/ms-browser.js'))
-    .pipe(minify({
-        ext: { src: '.tmp.js', min: '.min.js' },
-        compress: { hoist_vars: true }
-    }))
-    .pipe(gulp.dest('.'));
-
-    /* build api */
+    /* build api + trans */
     gulp.src([
         'src/ms-trans-fr.js',
         'src/ms-api.js'
@@ -33,7 +24,6 @@ gulp.task('build', function() {
 
     /* build tree */
     gulp.src([
-        'src/ms-trans-fr.js',
         'src/ms-tree.js'
     ])
     .pipe(concat('dist/ms-tree.js'))
@@ -43,7 +33,40 @@ gulp.task('build', function() {
     }))
     .pipe(gulp.dest('.'));
 
-    return gulp.src(['src/css/*.css'])
+    /* build browser */
+    gulp.src([
+        'src/ms-browser*.js'
+    ])
+    .pipe(concat('dist/ms-browser.js'))
+    .pipe(minify({
+        ext: { src: '.tmp.js', min: '.min.js' },
+        compress: { hoist_vars: true }
+    }))
+    .pipe(gulp.dest('.'));
+
+    /* build browser + tree + api + trans */
+    gulp.src(['src/*.js'])
+    .pipe(concat('dist/ms-full.js'))
+    .pipe(minify({
+        ext: { src: '.tmp.js', min: '.min.js' },
+        compress: { hoist_vars: true }
+    }))
+    .pipe(gulp.dest('.'));
+
+    /* build MS specific css */
+    gulp.src(['src/css/ms-catalog.css'])
+    .pipe(concat('dist/ms-catalog.min.css'))
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(gulp.dest('.'));
+
+    /* build items css */
+    gulp.src(['src/css/ms-items.css'])
+    .pipe(concat('dist/ms-items.min.css'))
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(gulp.dest('.'));
+
+    /* build browser css */
+    return gulp.src(['src/css/ms-browser.css'])
     .pipe(concat('dist/ms-browser.min.css'))
     .pipe(cleanCSS({ compatibility: 'ie8' }))
     .pipe(gulp.dest('.'));
