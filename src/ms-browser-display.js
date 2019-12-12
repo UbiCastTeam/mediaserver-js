@@ -417,13 +417,13 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.channels && data.channels.length > 0) {
         // sub channels
         selectable = this.selectable_content.indexOf('c') != -1;
-        $section = $(section_html);
         if (cat_oid && cat_oid != '0') {
-            $section.append('<' + markup + '>'+utils.translate('Sub channels')+'</' + markup + '>');
+            $container.append('<' + markup + '>'+utils.translate('Sub channels')+'</' + markup + '>');
         } else if (tab == 'search') {
-            $section.append('<' + markup + '>'+utils.translate('Channels')+'</' + markup + '>');
+            $container.append('<' + markup + '>'+utils.translate('Channels')+'</' + markup + '>');
         }
 
+        $section = $(section_html);
         for (i = 0; i < data.channels.length; i++) {
             if (data.channels[i].parent_oid === undefined && cat_oid)
                 data.channels[i].parent_oid = cat_oid;
@@ -435,9 +435,9 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.live_streams && data.live_streams.length > 0) {
         // live streams
         selectable = this.selectable_content.indexOf('l') != -1;
-        $section = $(section_html);
-        $section.append('<' + markup + '>'+utils.translate('Live streams')+'</' + markup + '>');
+        $container.append('<' + markup + '>'+utils.translate('Live streams')+'</' + markup + '>');
 
+        $section = $(section_html);
         for (i = 0; i < data.live_streams.length; i++) {
             $section.append(this.get_content_entry('live', data.live_streams[i], selectable, tab));
         }
@@ -446,8 +446,9 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.videos && data.videos.length > 0) {
         // videos
         selectable = this.selectable_content.indexOf('v') != -1;
+        $container.append('<' + markup + '>'+utils.translate('Videos')+'</' + markup + '>');
+
         $section = $(section_html);
-        $section.append('<' + markup + '>'+utils.translate('Videos')+'</' + markup + '>');
         for (i = 0; i < data.videos.length; i++) {
             $section.append(this.get_content_entry('video', data.videos[i], selectable, tab));
         }
@@ -456,8 +457,9 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.photos_groups && data.photos_groups.length > 0) {
         // photos groups
         selectable = this.selectable_content.indexOf('p') != -1;
+        $container.append('<' + markup + '>'+utils.translate('Photos groups')+'</' + markup + '>');
+
         $section = $(section_html);
-        $section.append('<' + markup + '>'+utils.translate('Photos groups')+'</' + markup + '>');
         for (i = 0; i < data.photos_groups.length; i++) {
             $section.append(this.get_content_entry('photos', data.photos_groups[i], selectable, tab));
         }

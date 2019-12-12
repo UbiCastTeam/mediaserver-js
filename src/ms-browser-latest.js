@@ -220,12 +220,13 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         var item = response.items[i];
         if (item.date_label && item.date_label != this.date_label) {
             this.date_label = item.date_label;
-            this.$section = $('<div class="ms-browser-section"></div>');
-            this.$section.append('<h3>'+item.date_label+'</h3>');
+            var markup = (this.browser.pick_mode ? 'h3' : 'h2');
+            this.$place.append('<'+markup+'>'+item.date_label+'</'+markup+'>');
+            this.$section = $('<ul class="ms-browser-section"></ul>');
             this.$place.append(this.$section);
         }
         else if (!this.$section) {
-            this.$section = $('<div class="ms-browser-section"></div>');
+            this.$section = $('<ul class="ms-browser-section"></ul>');
             this.$place.append(this.$section);
             console.log('A browser section is missing in latest tab. This should not happen.', item.date_label, this.date_label);
         }

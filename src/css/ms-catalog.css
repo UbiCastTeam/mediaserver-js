@@ -46,8 +46,14 @@ h1 .channel-titles-place .channel-title {
 .ms-browser .ms-browser-section {
     overflow: visible;
 }
+.ms-browser .ms-browser-main h2,
+.ms-browser .ms-browser-main h3 {
+    padding: 20px;
+    padding-bottom: 10px;
+}
 .ms-browser .ms-browser-main .ms-browser-section {
     padding: 20px;
+    padding-top: 0;
 }
 /* channels tab */
 .ms-browser-content .channel-description-text,
