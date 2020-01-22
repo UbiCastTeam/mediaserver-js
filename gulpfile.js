@@ -66,8 +66,14 @@ gulp.task('build', function() {
     .pipe(gulp.dest('.'));
 
     /* build browser css */
-    return gulp.src(['src/css/ms-browser.css'])
+    gulp.src(['src/css/ms-browser.css'])
     .pipe(concat('dist/ms-browser.min.css'))
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(gulp.dest('.'));
+
+    /* build browser + items css (excluding catalog css) */
+    return gulp.src(['src/css/ms-items.css', 'src/css/ms-browser.css'])
+    .pipe(concat('dist/ms-full.min.css'))
     .pipe(cleanCSS({ compatibility: 'ie8' }))
     .pipe(gulp.dest('.'));
 });
