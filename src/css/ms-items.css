@@ -171,6 +171,7 @@
 .ms-items .item-entry-date,
 .ms-items .item-entry .item-entry-description,
 .ms-items .item-entry-views,
+.ms-items .item-entry-storage,
 .ms-items .item-entry-extra,
 .ms-items .item-entry-parent {
     display: block;

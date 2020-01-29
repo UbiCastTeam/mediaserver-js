@@ -612,16 +612,23 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     if (this.display_as_thumbnails) {
         bottom_bar += '<span class="item-entry-title"' + (item.language ? ' lang="' + item.language + '"' : '') + '>' + utils.escape_html(item.title) + '</span>';
     } else {
-        if (item.creation)
+        if (item.creation) {
             bottom_bar += '<span class="item-entry-date">' + utils.translate('Created on') + ' ' +
                         utils.get_date_display(item.creation) + '</span>';
-        if (item.short_description)
+        }
+        if (item.short_description) {
             bottom_bar += '<span class="item-entry-description">' + $('<span>' + item.short_description + '</span>').text() + '</span>';
+        }
         if (item.views) {
             bottom_bar += '<span class="item-entry-views">' + item.views + ' ' + utils.translate('views');
             if (item.views_last_month)
                 bottom_bar += ', ' + item.views_last_month + ' ' + utils.translate('this month');
             bottom_bar += '</span>';
+        }
+        if (item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
+            var storage_display = this.msapi.get_storage_minimal_display(item);
+            if (storage_display)
+                bottom_bar += '<span class="item-entry-storage">' + utils.translate('Storage usage:') + ' ' + storage_display + '</span>';
         }
         if (tab == 'latest') {
             bottom_bar += '<span class="item-entry-type">' + utils.translate('Type:') + ' ' +
@@ -934,14 +941,23 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
         html +=     '<td>'+item.duration+'</td>';
         html += '</tr>';
     }
-    if (item.views_last_month)
+    if (item.views_last_month) {
         html +=         '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Views last month')+' :</th><td>'+item.views_last_month+'</td></tr>';
-    if (item.views)
+    }
+    if (item.views) {
         html +=         '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Views')+' :</th><td>'+item.views+'</td></tr>';
-    if (item.comments_last_month)
+    }
+    if (item.comments_last_month) {
         html +=         '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Annotations last month')+' :</th><td>'+item.comments_last_month+'</td></tr>';
-    if (item.comments)
+    }
+    if (item.comments) {
         html +=         '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Annotations')+' :</th><td>'+item.comments+'</td></tr>';
+    }
+    if (item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
+        var storage_display = this.msapi.get_storage_minimal_display(item);
+        if (storage_display)
+            html +=     '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Storage usage')+' :</th><td>'+storage_display+'</td></tr>';
+    }
     html += '</table>';
     if (item.short_description) {
         html += '<hr/>';

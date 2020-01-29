@@ -316,6 +316,17 @@ MSAPIClient.prototype.get_storage_display = function (item) {
     }
     return html;
 };
+MSAPIClient.prototype.get_storage_minimal_display = function (item) {
+    var html = '';
+    if (item.storage_used !== null && item.storage_used !== undefined) {
+        html = '<span class="storage-usage">' + utils.get_size_display(item.storage_used);
+        if (item.storage_quota > 0) {
+            html += ' / ' + item.storage_quota + ' G' + utils.translate('B') + '';
+        }
+        html += '</span>';
+    }
+    return html;
+};
 MSAPIClient.prototype.get_available_storage_display = function (item) {
     var html = '';
     if (item.storage_available !== null && item.storage_available !== undefined) {

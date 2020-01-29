@@ -146,6 +146,7 @@ utils.add_translations({
     'Speaker:': 'Intervenant :',
     'speakers': 'intervenants',
     'standard': 'standard',
+    'Storage usage': 'Stockage utilisé',
     'Storage usage:': 'Stockage utilisé :',
     'Sub channels items are included in counts.': 'Les éléments contenus dans les sous chaînes sont inclus dans les comptes.',
     'Sub channels': 'Sous chaînes',
