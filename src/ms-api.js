@@ -296,8 +296,8 @@ MSAPIClient.prototype.get_storage_display = function (item) {
     if (item.storage_used !== null && item.storage_used !== undefined) {
         html = '<span class="storage-usage">' + utils.get_size_display(item.storage_used);
         if (item.storage_quota > 0) {
-            html += ' / ' + item.storage_quota + ' G' + utils.translate('B') + '';
-            var storage_used_percents = Math.round(100 * (item.storage_used / 1073741824) / item.storage_quota);
+            html += ' / ' + item.storage_quota + ' G' + utils.translate('B');
+            var storage_used_percents = Math.round(100 * (item.storage_used / 1000000000) / item.storage_quota);
             if (storage_used_percents > 100)
                 storage_used_percents = 100;
             var storage_class = '';
@@ -321,7 +321,7 @@ MSAPIClient.prototype.get_storage_minimal_display = function (item) {
     if (item.storage_used !== null && item.storage_used !== undefined) {
         html = '<span class="storage-usage">' + utils.get_size_display(item.storage_used);
         if (item.storage_quota > 0) {
-            html += ' / ' + item.storage_quota + ' G' + utils.translate('B') + '';
+            html += ' / ' + item.storage_quota + ' G' + utils.translate('B');
         }
         html += '</span>';
     }
@@ -332,7 +332,7 @@ MSAPIClient.prototype.get_available_storage_display = function (item) {
     if (item.storage_available !== null && item.storage_available !== undefined) {
         var storage_class = '';
         if (item.storage_quota > 0) {
-            var storage_used_percents = 100 * (item.storage_used / 1073741824) / item.storage_quota;
+            var storage_used_percents = 100 * (item.storage_used / 1000000000) / item.storage_quota;
             if (item.storage_warning && storage_used_percents > item.storage_warning)
                 storage_class = ' orange';
         }
