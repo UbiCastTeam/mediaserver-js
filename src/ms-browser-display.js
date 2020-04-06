@@ -135,7 +135,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         if (this.filter_speaker != 'self') {
             html += ' <br/>';
             html += ' <label for="ms_browser_filter_speaker">'+utils.translate('Speaker:')+'</label>';
-            html += ' <input type="text" id="ms_browser_filter_speaker" value=""/>';
+            html += ' <input type="text" id="ms_browser_filter_speaker" value="'+(this.filter_speaker ? this.filter_speaker : '')+'"/>';
             html += ' <button type="submit" class="button">'+utils.translate('Ok')+'</button>';
         }
     }

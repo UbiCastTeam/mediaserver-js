@@ -114,6 +114,11 @@ MSBrowser.prototype.init = function () {
             url_params.push('iframe');
         }
 
+        if (url_data.speaker) {
+            this.filter_speaker = url_data.speaker;
+            url_params.push('speaker=' + window.encodeURIComponent(this.filter_speaker));
+        }
+
         if (url_data.mine) {
             this.filter_speaker = 'self';
             url_params.push('mine');
@@ -145,7 +150,7 @@ MSBrowser.prototype.init = function () {
             url_params.push('pick=' + this.selectable_content);
             if (!this.initial_oid && url_data.initial) {
                 this.initial_oid = url_data.initial.toString();
-                url_params.push('initial=' + this.initial_oid);
+                url_params.push('initial=' + window.encodeURIComponent(this.initial_oid));
             }
         }
 
