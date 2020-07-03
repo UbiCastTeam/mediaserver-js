@@ -215,10 +215,6 @@ MSBrowser.prototype.init = function () {
 
     var obj = this;
     if (!this.use_overlay) {
-        // listen to navigation history changes
-        window.onpopstate = function (event) {
-            obj.on_url_change(event.target.location);
-        };
         // listen to hash changes
         $(window).bind('hashchange', function () {
             obj.on_url_change();

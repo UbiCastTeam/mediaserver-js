@@ -156,9 +156,9 @@ MSBrowserChannels.prototype.display_channel = function (oid) {
         this.browser.get_info_for_oid(oid, true, function (response) {
             obj._on_channel_info(response, oid);
         });
-    }
-    else
+    } else {
         this._on_channel_info(null, oid);
+    }
 };
 MSBrowserChannels.prototype.display_parent = function () {
     if (!this.current_channel_oid)
@@ -416,9 +416,9 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 msg = 'This channel contains no sub channels and no media.';
             else
                 msg = 'This channel contains no sub channels.';
-        }
-        else
+        } else {
             msg = 'This channel contains no media.';
+        }
         msg = utils.translate(msg) + '<br/>';
         msg += utils.translate('Some contents may still exist in this channel but if it is the case your account is not allowed to see them.');
         this.$place.append('<div class="messages"><div class="message info">'+msg+'</div></div>');
