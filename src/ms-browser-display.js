@@ -4,7 +4,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals MSBrowser, utils */
+/* globals MSBrowser, OverlayDisplayManager, utils */
 
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
@@ -730,30 +730,31 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
         }
     } else {
         if (item_type == 'current') {
+            if (item.can_see_stats) {
+                html += '<button type="button" title="' + utils.translate('Statistics') + '" class="'+this.btn_class+' button default item-entry-pick-stats-media"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate('Statistics')+'</span></button>';
+            }
             if (item.can_edit) {
                 html += '<a title="' + utils.translate('Edit') + '" class="'+this.btn_class+' button default item-entry-pick item-entry-pick-edit-media" href="'+this.get_button_link(item, 'edit')+'"'+this.links_target+'><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate('Edit')+'</span></a>';
                 if (item.can_delete)
-                    html += '<button title="' + utils.translate('Delete') + '" type="button" class="'+this.btn_class+' button danger item-entry-pick-delete-media"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate('Delete')+'</span></button>';
+                    html += '<button type="button" title="' + utils.translate('Delete') + '" class="'+this.btn_class+' button danger item-entry-pick-delete-media"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate('Delete')+'</span></button>';
             }
-            if (item.can_add_channel || item.can_add_video) {
-                if (item.can_add_channel) {
-                    var add_channel_icon = '<i class="fa fa-folder" aria-hidden="true"></i>' +
-                    ' <i class="fa fa-plus color-green" aria-hidden="true"></i>';
-                    html += '<a title="' + utils.translate('Add a sub channel') + '"' +
-                            ' class="' + this.btn_class + ' button item-entry-pick item-entry-pick-add-channel" href="' +
-                            this.get_button_link(item, 'add_channel') + '"' + this.links_target + '>' + add_channel_icon +
-                            ' <span class="hidden-below-800">' +
-                            utils.translate('Add a sub channel')+'</span></a>';
-                }
-                if (item.oid != '0' && item.can_add_video) {
-                    var add_video_icon = '<i class="fa fa-film" aria-hidden="true"></i>' +
-                    ' <i class="fa fa-plus color-green" aria-hidden="true"></i>';
-                    html += '<a title="' + utils.translate('Add a video') + '"' +
-                            ' class="'+this.btn_class+' button item-entry-pick item-entry-pick-add-video" href="' +
-                            this.get_button_link(item, 'add_video') + '"' + this.links_target + '>' + add_video_icon +
-                            ' <span class="hidden-below-800">' +
-                            utils.translate('Add a video')+'</span></a>';
-                }
+            if (item.can_add_channel) {
+                var add_channel_icon = '<i class="fa fa-folder" aria-hidden="true"></i>' +
+                ' <i class="fa fa-plus color-green" aria-hidden="true"></i>';
+                html += '<a title="' + utils.translate('Add a sub channel') + '"' +
+                        ' class="' + this.btn_class + ' button item-entry-pick item-entry-pick-add-channel" href="' +
+                        this.get_button_link(item, 'add_channel') + '"' + this.links_target + '>' + add_channel_icon +
+                        ' <span class="hidden-below-800">' +
+                        utils.translate('Add a sub channel')+'</span></a>';
+            }
+            if (item.oid != '0' && item.can_add_video) {
+                var add_video_icon = '<i class="fa fa-film" aria-hidden="true"></i>' +
+                ' <i class="fa fa-plus color-green" aria-hidden="true"></i>';
+                html += '<a title="' + utils.translate('Add a video') + '"' +
+                        ' class="'+this.btn_class+' button item-entry-pick item-entry-pick-add-video" href="' +
+                        this.get_button_link(item, 'add_video') + '"' + this.links_target + '>' + add_video_icon +
+                        ' <span class="hidden-below-800">' +
+                        utils.translate('Add a video')+'</span></a>';
             }
         } else {
             if (item_type != 'channel' && this.lti_mode) {
@@ -783,6 +784,11 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
     if (selectable) {
         $('.item-entry-pick', $entry_links).click({ obj: this, item: item }, function (event) {
             event.data.obj.pick(event.data.item.oid);
+        });
+    }
+    if (!this.pick_mode && item_type == 'current' && item.can_see_stats) {
+        $('.item-entry-pick-stats-media', $entry_links).click({ obj: this, item: item }, function (event) {
+            event.data.obj.open_statistics(event.data.item.oid);
         });
     }
     if (!this.pick_mode && item.can_delete) {
@@ -1138,4 +1144,14 @@ MSBrowser.prototype.remove_oid_from_tab = function (tab_obj, oid) {
             }
         }
     }
+};
+
+MSBrowser.prototype.open_statistics = function (oid) {
+    if (!this.overlay_stats) {
+        this.overlay_stats = new OverlayDisplayManager();
+    }
+    this.overlay_stats.show({
+        title: utils.translate('See statistics on this channel'),
+        iframe: '/statistics/iframe/' + oid + '/?period=last_year'
+    });
 };
