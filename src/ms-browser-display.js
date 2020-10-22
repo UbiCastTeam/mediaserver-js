@@ -561,9 +561,9 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             var title_text = utils.translate(item_type == 'live' ? 'This item is a live stream' : 'This item is a video');
             if (item.layout) {
                 if (item.layout == 'composition') {
-                    title_text += ' (' + utils.translate('dynamic RichMedia') + ')';
+                    title_text += ' (' + utils.translate('dynamic Rich Media') + ')';
                 } else if (item.layout == 'webinar') {
-                    title_text += ' (' + utils.translate('classic RichMedia') + ')';
+                    title_text += ' (' + utils.translate('classic Rich Media') + ')';
                 } else {
                     title_text += ' (' + item.layout.replace(/_/, ' ') + ')';
                 }
