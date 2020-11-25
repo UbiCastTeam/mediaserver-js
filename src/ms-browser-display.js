@@ -118,7 +118,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     html += ' <select id="ms_browser_order_channel">';
     for (var index in sorting_values)
         for (var key in sorting_values[index])
-        html +=     '<option value="'+key+'">'+sorting_values[index][key]+'</option>';
+        html +=     '<option value="'+key+'">'+utils.escape_html(sorting_values[index][key])+'</option>';
     html += '</select></div>';
     // filters
     var opt_html = '<option value="">'+utils.translate('unspecified')+'</option>';
@@ -617,7 +617,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
                         utils.get_date_display(item.creation) + '</span>';
         }
         if (item.short_description) {
-            bottom_bar += '<span class="item-entry-description">' + $('<span>' + item.short_description + '</span>').text() + '</span>';
+            bottom_bar += '<span class="item-entry-description">' + utils.escape_html($('<span>' + item.short_description + '</span>').text()) + '</span>';
         }
         if (item.views) {
             bottom_bar += '<span class="item-entry-views">' + item.views + ' ' + utils.translate('views');
@@ -638,7 +638,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
                                 utils.get_date_display(item.add_date) + '</span>';
             if (item.parent_title)
                 bottom_bar += '<span class="item-entry-parent">' + utils.translate('Parent channel:') + ' ' +
-                                item.parent_title + '</span>';
+                                utils.escape_html(item.parent_title) + '</span>';
         }
     }
     bottom_bar += '</span>';
@@ -658,7 +658,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
                 var annotation = item.annotations[i];
                 html += '<li><a href="' + this.get_button_link(item, 'view') + '#start=' + annotation.time + '&autoplay"'+this.links_target+'>';
                 if (annotation.title)
-                    html += annotation.title;
+                    html += utils.escape_html(annotation.title);
                 html += ' (' + annotation.time_display + ') ';
                 html += '</a></li>';
             }
@@ -670,7 +670,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
                 var photo = item.photos[i];
                 html += '<li><a href="' + this.get_button_link(item, 'view') + '#' + photo.index + '"'+this.links_target+'>';
                 if (photo.title)
-                    html += photo.title;
+                    html += utils.escape_html(photo.title);
                 html += ' (#' + photo.index + ') ';
                 html += '</a></li>';
             }
@@ -815,7 +815,7 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 console.log('Failed to copy to clipboard: ' + err);
             }
             msg = '<i class="fa ' + (successful ? 'fa-check' : 'fa-warning') + '" aria-hidden="true"></i> ' + utils.translate(msg);
-            $btn.append('<span class="copy-msg">' + msg + '</span>');
+            $btn.append('<span class="copy-msg">' + utils.escape_html(msg) + '</span>');
             $btn.addClass('copied');
             setTimeout(function () {
                 $btn.removeClass('copied');
@@ -894,7 +894,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     html += '<div class="trap-focus">';
     html += '<div class="overlay-info-title" id="item_entry_'+item.oid+'_'+tab+'_info_title" >';
     html +=     '<button type="button" class="overlay-info-close button default '+this.btn_class+'" title="'+utils.translate('Hide this window')+'" aria-label="'+utils.translate('Hide this window')+'"><i class="fa fa-close" aria-hidden="true"></i></button>';
-    html +=     '<h1><a href="'+this.get_button_link(item, 'view')+'"'+this.links_target+'>'+item.title+'</a></h1>';
+    html +=     '<h1><a href="'+this.get_button_link(item, 'view')+'"'+this.links_target+'>'+utils.escape_html(item.title)+'</a></h1>';
     html += '</div>';
     html += '<div class="overlay-info-content">';
     if (!this.pick_mode && tab == 'search' && (item.annotations || item.photos)) {
@@ -906,7 +906,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
                 var annotation = item.annotations[i];
                 html += '<li><a href="'+this.get_button_link(item, 'view')+'#start='+annotation.time+'&autoplay"'+this.links_target+'>';
                 if (annotation.title)
-                    html += annotation.title;
+                    html += utils.escape_html(annotation.title);
                 html += ' ('+annotation.time_display+') ';
                 html += '</a></li>';
             }
@@ -919,7 +919,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
                 var photo = item.photos[i];
                 html += '<li><a href="'+this.get_button_link(item, 'view')+'#'+photo.index+'"'+this.links_target+'>';
                 if (photo.title)
-                    html += photo.title;
+                    html += utils.escape_html(photo.title);
                 html += ' (#'+photo.index+') ';
                 html += '</a></li>';
             }
@@ -967,7 +967,7 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     html += '</table>';
     if (item.short_description) {
         html += '<hr/>';
-        html += '<div class="float-container">'+item.short_description+'</div>';
+        html += '<div class="float-container"><p>'+utils.escape_html($('<span>' + item.short_description + '</span>').text())+'</p></div>';
     }
     html += '</div>';
     html += '</div>';
