@@ -4,7 +4,9 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals MSBrowser, OverlayDisplayManager, utils */
+/* global jsu */
+/* global MSBrowser */
+/* global OverlayDisplayManager */
 
 MSBrowser.prototype.build_widget = function () {
     // build widget structure
@@ -12,13 +14,13 @@ MSBrowser.prototype.build_widget = function () {
     this.previous_focus = null;
     var channels_label, search_label, latest_label;
     if (this.filter_speaker == 'self') {
-        channels_label = utils.translate('My channel');
-        latest_label = utils.translate('My media');
-        search_label = utils.translate('Search in my media');
+        channels_label = jsu.translate('My channel');
+        latest_label = jsu.translate('My media');
+        search_label = jsu.translate('Search in my media');
     } else {
-        channels_label = utils.translate('Channels');
-        latest_label = utils.translate('Latest content');
-        search_label = utils.translate('Search');
+        channels_label = jsu.translate('Channels');
+        latest_label = jsu.translate('Latest content');
+        search_label = jsu.translate('Search');
     }
     var html = '<div class="ms-browser ms-browser-container'+(this.use_overlay ? ' in-overlay' : '')+(this.tree_manager ? ' has-tree' : '')+(this.display_types_icons ? ' show-types-icons' : '')+(this.hide_header ? ' no-header' : '')+'">';
     html += '<div class="ms-browser-header">';
@@ -39,7 +41,7 @@ MSBrowser.prototype.build_widget = function () {
     html += '</div>';
     html += '<div class="ms-browser-main ms-items">';
     html +=     '<div class="ms-browser-clear"></div>';
-    html +=     '<div class="ms-browser-loading"><div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+utils.translate('Loading...')+'</div></div>';
+    html +=     '<div class="ms-browser-loading"><div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+jsu.translate('Loading...')+'</div></div>';
     html +=     '<div class="ms-browser-message"><div></div></div>';
     html += '</div>';
     html += '</div>';
@@ -90,61 +92,61 @@ MSBrowser.prototype.build_widget = function () {
 };
 MSBrowser.prototype.get_top_menu_jq = function () {
     var sorting_values = [
-        { 'default': utils.translate('Use channel default sorting') },
-        { 'creation_date-desc': utils.translate('Creation date, descending') },
-        { 'creation_date-asc': utils.translate('Creation date, ascending') },
-        { 'add_date-desc': utils.translate('Add date, descending') },
-        { 'add_date-asc': utils.translate('Add date, ascending') },
-        { 'title-desc': utils.translate('Title, descending') },
-        { 'title-asc': utils.translate('Title, ascending') },
-        { 'comments-desc': utils.translate('Number of annotations, descending') },
-        { 'comments-asc': utils.translate('Number of annotations, ascending') },
-        { 'views-desc': utils.translate('Number of views, descending') },
-        { 'views-asc': utils.translate('Number of views, ascending') }
+        { 'default': jsu.translate('Use channel default sorting') },
+        { 'creation_date-desc': jsu.translate('Creation date, descending') },
+        { 'creation_date-asc': jsu.translate('Creation date, ascending') },
+        { 'add_date-desc': jsu.translate('Add date, descending') },
+        { 'add_date-asc': jsu.translate('Add date, ascending') },
+        { 'title-desc': jsu.translate('Title, descending') },
+        { 'title-asc': jsu.translate('Title, ascending') },
+        { 'comments-desc': jsu.translate('Number of annotations, descending') },
+        { 'comments-asc': jsu.translate('Number of annotations, ascending') },
+        { 'views-desc': jsu.translate('Number of views, descending') },
+        { 'views-asc': jsu.translate('Number of views, ascending') }
     ];
     var html = '<div class="ms-browser-top-buttons">';
     html += '<div class="ms-browser-dropdown" id="ms_browser_display_dropdown">';
-    html += '<button aria-controls="ms_browser_display_dropdow_menu" aria-expanded="false" type="button" title="' + utils.translate('Display') + '" class="button ms-browser-dropdown-button '+this.btn_class+'"><i class="fa fa-tv" aria-hidden="true"></i> <span class="hidden-below-1280">'+utils.translate('Display')+' </span><i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+    html += '<button aria-controls="ms_browser_display_dropdow_menu" aria-expanded="false" type="button" title="' + jsu.translate('Display') + '" class="button ms-browser-dropdown-button '+this.btn_class+'"><i class="fa fa-tv" aria-hidden="true"></i> <span class="hidden-below-1280">'+jsu.translate('Display')+' </span><i class="fa fa-angle-down" aria-hidden="true"></i></button>';
 
     html += '<div class="ms-browser-dropdown-menu" id="ms_browser_display_dropdow_menu">';
     // display mode
-    html += '<div><h4>'+utils.translate('Display mode:')+'</h4>';
-    html += '<button type="button" class="button '+(!this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_list" title="'+utils.translate('list')+(!this.display_as_thumbnails ? ' (' + utils.translate('selected setting') + ')' : '')+'">'+utils.translate('list')+'</button>';
-    html += '<button type="button" class="button '+(this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_thumbnails" title="'+utils.translate('thumbnails')+(this.display_as_thumbnails ? ' (' + utils.translate('selected setting') + ')' : '')+'">'+utils.translate('thumbnails')+'</button><br/>';
+    html += '<div><h4>'+jsu.translate('Display mode:')+'</h4>';
+    html += '<button type="button" class="button '+(!this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_list" title="'+jsu.translate('list')+(!this.display_as_thumbnails ? ' (' + jsu.translate('selected setting') + ')' : '')+'">'+jsu.translate('list')+'</button>';
+    html += '<button type="button" class="button '+(this.display_as_thumbnails ? 'active' : '')+'" id="ms_browser_display_as_thumbnails" title="'+jsu.translate('thumbnails')+(this.display_as_thumbnails ? ' (' + jsu.translate('selected setting') + ')' : '')+'">'+jsu.translate('thumbnails')+'</button><br/>';
     html += '<input id="ms_browser_display_types_icons" type="checkbox" '+(this.display_types_icons ? 'checked="checked"' : '')+'>';
-    html += ' <label for="ms_browser_display_types_icons">'+utils.translate('display items type icons')+'</label></div>';
+    html += ' <label for="ms_browser_display_types_icons">'+jsu.translate('display items type icons')+'</label></div>';
     // channel sorting
-    html += '<div class="ms-browser-channel-order"><h4><label for="ms_browser_order_channel">'+utils.translate('Sort by:')+'</label></h4>';
+    html += '<div class="ms-browser-channel-order"><h4><label for="ms_browser_order_channel">'+jsu.translate('Sort by:')+'</label></h4>';
     html += ' <select id="ms_browser_order_channel">';
     for (var index in sorting_values)
         for (var key in sorting_values[index])
-        html +=     '<option value="'+key+'">'+utils.escape_html(sorting_values[index][key])+'</option>';
+        html +=     '<option value="'+key+'">'+jsu.escapeHTML(sorting_values[index][key])+'</option>';
     html += '</select></div>';
     // filters
-    var opt_html = '<option value="">'+utils.translate('unspecified')+'</option>';
-    opt_html += '<option value="yes">'+utils.translate('yes')+'</option>';
-    opt_html += '<option value="no">'+utils.translate('no')+'</option>';
-    html += '<div class="ms-browser-filters"><h4>'+utils.translate('Filters:')+'</h4>';
+    var opt_html = '<option value="">'+jsu.translate('unspecified')+'</option>';
+    opt_html += '<option value="yes">'+jsu.translate('yes')+'</option>';
+    opt_html += '<option value="no">'+jsu.translate('no')+'</option>';
+    html += '<div class="ms-browser-filters"><h4>'+jsu.translate('Filters:')+'</h4>';
     html += ' <form id="ms_browser_filters_form">';
-    html += ' <label for="ms_browser_filter_editable">'+utils.translate('Editable:')+'</label>';
+    html += ' <label for="ms_browser_filter_editable">'+jsu.translate('Editable:')+'</label>';
     html += ' <select id="ms_browser_filter_editable">'+opt_html+'</select>';
     if (this.displayable_content.length > 1 || this.displayable_content != 'c') {
         html += ' <br/>';
-        html += ' <label for="ms_browser_filter_validated">'+utils.translate('Published:')+'</label>';
+        html += ' <label for="ms_browser_filter_validated">'+jsu.translate('Published:')+'</label>';
         html += ' <select id="ms_browser_filter_validated">'+opt_html+'</select>';
         if (this.filter_speaker != 'self') {
             html += ' <br/>';
-            html += ' <label for="ms_browser_filter_speaker">'+utils.translate('Speaker:')+'</label>';
+            html += ' <label for="ms_browser_filter_speaker">'+jsu.translate('Speaker:')+'</label>';
             html += ' <input type="text" id="ms_browser_filter_speaker" value="'+(this.filter_speaker ? this.filter_speaker : '')+'"/>';
-            html += ' <button type="submit" class="button">'+utils.translate('Ok')+'</button>';
+            html += ' <button type="submit" class="button">'+jsu.translate('Ok')+'</button>';
         }
     }
     html += ' </form>';
     html += '</div>';
     // TODO: pagination
-    // html += '<div><h4>'+utils.translate('Number of elements per page:')+'</h4>';
+    // html += '<div><h4>'+jsu.translate('Number of elements per page:')+'</h4>';
     // html += '    <input type="number" class="center" id="elements_per_page" value="30"/>';
-    // html += '<button type="button">'+utils.translate('Ok')+'</button></div>';
+    // html += '<button type="button">'+jsu.translate('Ok')+'</button></div>';
     html += '</div>';
     html += '</div>';
 
@@ -304,10 +306,10 @@ MSBrowser.prototype.set_display_as_list = function () {
         return;
     this.display_as_thumbnails = false;
     $as_thumb.removeClass('active').attr('title', $as_thumb.text());
-    $as_list.addClass('active').attr('title', $as_list.text() + ' (' + utils.translate('selected setting') + ')');
+    $as_list.addClass('active').attr('title', $as_list.text() + ' (' + jsu.translate('selected setting') + ')');
     if (!this.use_overlay)
         $('#global').addClass('max-width-1200');
-    utils.set_cookie('catalog-display_mode', 'list');
+    jsu.setCookie('catalog-display_mode', 'list');
     this.channels.refresh_display();
     this.latest.refresh_display();
     this.search.refresh_display();
@@ -319,10 +321,10 @@ MSBrowser.prototype.set_display_as_thumbnails = function () {
         return;
     this.display_as_thumbnails = true;
     $as_list.removeClass('active').attr('title', $as_list.text());
-    $as_thumb.addClass('active').attr('title', $as_thumb.text() + ' (' + utils.translate('selected setting') + ')');
+    $as_thumb.addClass('active').attr('title', $as_thumb.text() + ' (' + jsu.translate('selected setting') + ')');
     if (!this.use_overlay)
         $('#global').removeClass('max-width-1200');
-    utils.set_cookie('catalog-display_mode', 'thumbnail');
+    jsu.setCookie('catalog-display_mode', 'thumbnail');
     this.channels.refresh_display();
     this.latest.refresh_display();
     this.search.refresh_display();
@@ -333,7 +335,7 @@ MSBrowser.prototype.set_display_types_icons = function (checked) {
         this.$widget.addClass('show-types-icons');
     else
         this.$widget.removeClass('show-types-icons');
-    utils.set_cookie('catalog-display_types_icons', checked ? 'yes' : 'no');
+    jsu.setCookie('catalog-display_types_icons', checked ? 'yes' : 'no');
 };
 MSBrowser.prototype.get_active_tab = function () {
     var $active = $('.ms-browser-tab.active', this.$menu);
@@ -361,7 +363,7 @@ MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
         this[previous].$content.css('display', 'none');
     }
     $('.ms-browser').addClass(tab);
-    $('#ms_browser_'+tab+'_tab', this.$menu).addClass('active').attr('title', $('#ms_browser_'+tab+'_tab', this.$menu).text() + ' (' + utils.translate('selected tab') + ')');
+    $('#ms_browser_'+tab+'_tab', this.$menu).addClass('active').attr('title', $('#ms_browser_'+tab+'_tab', this.$menu).text() + ' (' + jsu.translate('selected tab') + ')');
     if (this[tab]) {
         this[tab].$menu.css('display', '');
         this[tab].$content.css('display', '');
@@ -418,9 +420,9 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
         // sub channels
         selectable = this.selectable_content.indexOf('c') != -1;
         if (cat_oid && cat_oid != '0') {
-            $container.append('<' + markup + '>'+utils.translate('Sub channels')+'</' + markup + '>');
+            $container.append('<' + markup + '>'+jsu.translate('Sub channels')+'</' + markup + '>');
         } else if (tab == 'search') {
-            $container.append('<' + markup + '>'+utils.translate('Channels')+'</' + markup + '>');
+            $container.append('<' + markup + '>'+jsu.translate('Channels')+'</' + markup + '>');
         }
 
         $section = $(section_html);
@@ -435,7 +437,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.live_streams && data.live_streams.length > 0) {
         // live streams
         selectable = this.selectable_content.indexOf('l') != -1;
-        $container.append('<' + markup + '>'+utils.translate('Live streams')+'</' + markup + '>');
+        $container.append('<' + markup + '>'+jsu.translate('Live streams')+'</' + markup + '>');
 
         $section = $(section_html);
         for (i = 0; i < data.live_streams.length; i++) {
@@ -446,7 +448,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.videos && data.videos.length > 0) {
         // videos
         selectable = this.selectable_content.indexOf('v') != -1;
-        $container.append('<' + markup + '>'+utils.translate('Videos')+'</' + markup + '>');
+        $container.append('<' + markup + '>'+jsu.translate('Videos')+'</' + markup + '>');
 
         $section = $(section_html);
         for (i = 0; i < data.videos.length; i++) {
@@ -457,7 +459,7 @@ MSBrowser.prototype.display_content = function ($container, data, cat_oid, tab) 
     if (data.photos_groups && data.photos_groups.length > 0) {
         // photos groups
         selectable = this.selectable_content.indexOf('p') != -1;
-        $container.append('<' + markup + '>'+utils.translate('Photos groups')+'</' + markup + '>');
+        $container.append('<' + markup + '>'+jsu.translate('Photos groups')+'</' + markup + '>');
 
         $section = $(section_html);
         for (i = 0; i < data.photos_groups.length; i++) {
@@ -477,7 +479,7 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     $entry.addClass(this.display_as_thumbnails ? 'thumbnail' : 'list');
     if (this.current_selection && this.current_selection.oid == oid) {
         $entry.addClass('selected');
-        $entry.attr('title', item.title + ' ' + utils.translate('selected'));
+        $entry.attr('title', item.title + ' ' + jsu.translate('selected'));
     }
     if (selectable)
         $entry.addClass('selectable');
@@ -488,9 +490,9 @@ MSBrowser.prototype.get_content_entry = function (item_type, item, gselectable, 
     var html = this._get_entry_block_html(item, item_type, clickable, tab);
     if (this.display_as_thumbnails && !this.pick_mode) {
         html += '<div class="item-entry-buttons">';
-        html +=   '<button type="button" class="item-entry-info" title="'+utils.translate('Open information panel')+'"><i class="fa fa-info" aria-hidden="true"></i></button>';
+        html +=   '<button type="button" class="item-entry-info" title="'+jsu.translate('Open information panel')+'"><i class="fa fa-info" aria-hidden="true"></i></button>';
         if (item.can_edit) {
-            html += '<a title="'+utils.translate('Edit')+'" href="'+this.get_button_link(item, 'edit')+'"'+this.links_target+'><i class="fa fa-pencil" aria-hidden="true"></i></a>';
+            html += '<a title="'+jsu.translate('Edit')+'" href="'+this.get_button_link(item, 'edit')+'"'+this.links_target+'><i class="fa fa-pencil" aria-hidden="true"></i></a>';
         }
         html +=   '<div class="overlay-info ms-items" id="item_entry_'+oid+'_'+tab+'_info" style="display: none;" role="dialog" tabindex="-1" aria-labelledby="item_entry_'+item.oid+'_'+tab+'_info_title" aria-modal="true"></div>';
         html += '</div>';
@@ -524,7 +526,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         }
     }
 
-    var html = '<' + markup + href + button_style + ' class="item-entry-link"' + (clickable && item_type != 'channel' ? ' title="' + utils.translate('Click to select this media') + '"' : '') + '>';
+    var html = '<' + markup + href + button_style + ' class="item-entry-link"' + (clickable && item_type != 'channel' ? ' title="' + jsu.translate('Click to select this media') + '"' : '') + '>';
 
     /********************** Image preview ****************/
     var image_preview = '<span class="item-entry-preview">';
@@ -546,11 +548,11 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
     // type icon
     if (item_type == 'channel') {
         top_bar += '<span class="item-entry-layout layout-channel" title="' +
-                    utils.translate('This item is a channel') + '"></span>';
+                    jsu.translate('This item is a channel') + '"></span>';
     } else {
         if (item_type == 'photos') {
             top_bar += '<span class="item-entry-layout layout-pgroup" title="' +
-                        utils.translate('This item is a photos group') + '"></span>';
+                        jsu.translate('This item is a photos group') + '"></span>';
         } else {
             top_bar += '<span class="item-entry-layout ';
             if (item.layout)
@@ -558,12 +560,12 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             else
                 top_bar += 'layout-video';
             top_bar += '" title="';
-            var title_text = utils.translate(item_type == 'live' ? 'This item is a live stream' : 'This item is a video');
+            var title_text = jsu.translate(item_type == 'live' ? 'This item is a live stream' : 'This item is a video');
             if (item.layout) {
                 if (item.layout == 'composition') {
-                    title_text += ' (' + utils.translate('dynamic Rich Media') + ')';
+                    title_text += ' (' + jsu.translate('dynamic Rich Media') + ')';
                 } else if (item.layout == 'webinar') {
-                    title_text += ' (' + utils.translate('classic Rich Media') + ')';
+                    title_text += ' (' + jsu.translate('classic Rich Media') + ')';
                 } else {
                     title_text += ' (' + item.layout.replace(/_/, ' ') + ')';
                 }
@@ -577,25 +579,25 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         if (item_type == 'channel') {
             if (item.unlisted)
                 top_bar += '<span class="item-entry-unlisted" title="' +
-                            utils.translate('This channel is unlisted') + '"><span class="sr-only">' +
-                            utils.translate('This channel is unlisted') + '</span></span>';
+                            jsu.translate('This channel is unlisted') + '"><span class="sr-only">' +
+                            jsu.translate('This channel is unlisted') + '</span></span>';
         } else {
             if (!item.validated)
                 top_bar += '<span class="item-entry-notpublished" title="' +
-                            utils.translate('This media is not published') + '"><span class="sr-only">' +
-                            utils.translate('This media is not published') + '</span></span>';
+                            jsu.translate('This media is not published') + '"><span class="sr-only">' +
+                            jsu.translate('This media is not published') + '</span></span>';
             else if (item.unlisted)
                 top_bar += '<span class="item-entry-unlisted" title="' +
-                            utils.translate('This media is published and unlisted') + '"><span class="sr-only">' +
-                            utils.translate('This media is published and unlisted') + '</span></span>';
+                            jsu.translate('This media is published and unlisted') + '"><span class="sr-only">' +
+                            jsu.translate('This media is published and unlisted') + '</span></span>';
             else
                 top_bar += '<span class="item-entry-published" title="' +
-                            utils.translate('This media is published') + '"><span class="sr-only">' +
-                            utils.translate('This media is published') + '</span></span>';
+                            jsu.translate('This media is published') + '"><span class="sr-only">' +
+                            jsu.translate('This media is published') + '</span></span>';
             if (item_type == 'video' && !item.ready)
                 top_bar += '<span class="item-entry-notready" title="' +
-                            utils.translate('This video is not ready') + '"><span class="sr-only">' +
-                            utils.translate('This video is not ready') + '</span></span>';
+                            jsu.translate('This video is not ready') + '"><span class="sr-only">' +
+                            jsu.translate('This video is not ready') + '</span></span>';
         }
     }
     // duration
@@ -603,42 +605,42 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         top_bar += '<span class="item-entry-duration">' + item.duration + '</span>';
     // title
     if (!this.display_as_thumbnails)
-        top_bar += '<span class="item-entry-title"' + (item.language ? ' lang="' + item.language + '"' : '') + '>' + utils.escape_html(item.title) + '</span>';
+        top_bar += '<span class="item-entry-title"' + (item.language ? ' lang="' + item.language + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
     top_bar += '</span>';
     content += top_bar;
 
     /********************** Bottom bar ****************/
     var bottom_bar = '<span class="item-entry-bottom-bar">';
     if (this.display_as_thumbnails) {
-        bottom_bar += '<span class="item-entry-title"' + (item.language ? ' lang="' + item.language + '"' : '') + '>' + utils.escape_html(item.title) + '</span>';
+        bottom_bar += '<span class="item-entry-title"' + (item.language ? ' lang="' + item.language + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
     } else {
         if (item.creation) {
-            bottom_bar += '<span class="item-entry-date">' + utils.translate('Created on') + ' ' +
-                        utils.get_date_display(item.creation) + '</span>';
+            bottom_bar += '<span class="item-entry-date">' + jsu.translate('Created on') + ' ' +
+                        jsu.getDateDisplay(item.creation) + '</span>';
         }
         if (item.short_description) {
-            bottom_bar += '<span class="item-entry-description">' + utils.escape_html($('<span>' + item.short_description + '</span>').text()) + '</span>';
+            bottom_bar += '<span class="item-entry-description">' + jsu.escapeHTML($('<span>' + item.short_description + '</span>').text()) + '</span>';
         }
         if (item.views) {
-            bottom_bar += '<span class="item-entry-views">' + item.views + ' ' + utils.translate('views');
+            bottom_bar += '<span class="item-entry-views">' + item.views + ' ' + jsu.translate('views');
             if (item.views_last_month)
-                bottom_bar += ', ' + item.views_last_month + ' ' + utils.translate('this month');
+                bottom_bar += ', ' + item.views_last_month + ' ' + jsu.translate('this month');
             bottom_bar += '</span>';
         }
         if (item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
             var storage_display = this.msapi.get_storage_minimal_display(item);
             if (storage_display)
-                bottom_bar += '<span class="item-entry-storage">' + utils.translate('Storage usage:') + ' ' + storage_display + '</span>';
+                bottom_bar += '<span class="item-entry-storage">' + jsu.translate('Storage usage:') + ' ' + storage_display + '</span>';
         }
         if (tab == 'latest') {
-            bottom_bar += '<span class="item-entry-type">' + utils.translate('Type:') + ' ' +
-                            utils.translate(item_type) + '</span>';
+            bottom_bar += '<span class="item-entry-type">' + jsu.translate('Type:') + ' ' +
+                            jsu.translate(item_type) + '</span>';
             if (item.add_date)
-                bottom_bar += '<span class="item-entry-date">' + utils.translate('Added on') + ' ' +
-                                utils.get_date_display(item.add_date) + '</span>';
+                bottom_bar += '<span class="item-entry-date">' + jsu.translate('Added on') + ' ' +
+                                jsu.getDateDisplay(item.add_date) + '</span>';
             if (item.parent_title)
-                bottom_bar += '<span class="item-entry-parent">' + utils.translate('Parent channel:') + ' ' +
-                                utils.escape_html(item.parent_title) + '</span>';
+                bottom_bar += '<span class="item-entry-parent">' + jsu.translate('Parent channel:') + ' ' +
+                                jsu.escapeHTML(item.parent_title) + '</span>';
         }
     }
     bottom_bar += '</span>';
@@ -653,24 +655,24 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
         html += '<span class="item-entry-extra">';
         var i;
         if (item.annotations) {
-            html += '<span>' + utils.translate('Matching annotations:') + '</span><ul>';
+            html += '<span>' + jsu.translate('Matching annotations:') + '</span><ul>';
             for (i=0; i < item.annotations.length; i++) {
                 var annotation = item.annotations[i];
                 html += '<li><a href="' + this.get_button_link(item, 'view') + '#start=' + annotation.time + '&autoplay"'+this.links_target+'>';
                 if (annotation.title)
-                    html += utils.escape_html(annotation.title);
+                    html += jsu.escapeHTML(annotation.title);
                 html += ' (' + annotation.time_display + ') ';
                 html += '</a></li>';
             }
             html += '</ul>';
         }
         if (item.photos) {
-            html += '<span>' + utils.translate('Matching photos:') + '</span><ul>';
+            html += '<span>' + jsu.translate('Matching photos:') + '</span><ul>';
             for (i=0; i < item.photos.length; i++) {
                 var photo = item.photos[i];
                 html += '<li><a href="' + this.get_button_link(item, 'view') + '#' + photo.index + '"'+this.links_target+'>';
                 if (photo.title)
-                    html += utils.escape_html(photo.title);
+                    html += jsu.escapeHTML(photo.title);
                 html += ' (#' + photo.index + ') ';
                 html += '</a></li>';
             }
@@ -686,7 +688,7 @@ MSBrowser.prototype._set_on_click_entry_block = function ($entry_block, oid, ite
             $entry_block.click({ obj: this, oid: oid }, function (event) {
                 event.data.obj.channels.display_channel(event.data.oid);
                 event.data.obj.change_tab('channels');
-                utils.focus_first_descendant($('#ms_browser_channels .ms-browser-channels-place')[0]);
+                jsu.focusFirstDescendant($('#ms_browser_channels .ms-browser-channels-place')[0]);
             });
         } else if (selectable) {
             $entry_block.click({ obj: this, oid: oid }, function (event) {
@@ -717,57 +719,57 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
             var label;
             if (item_type == 'channel' || item_type == 'current') {
                 if (selected)
-                    label = utils.translate('This channel is selected');
+                    label = jsu.translate('This channel is selected');
                 else
-                    label = utils.translate('Select this channel');
+                    label = jsu.translate('Select this channel');
             } else {
                 if (selected)
-                    label = utils.translate('This media is selected');
+                    label = jsu.translate('This media is selected');
                 else
-                    label = utils.translate('Select this media');
+                    label = jsu.translate('Select this media');
             }
-            html += '<button type="button" class="'+this.btn_class+' button main item-entry-pick"><i class="fa '+icon+'" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate(label)+'</span></button>';
+            html += '<button type="button" class="'+this.btn_class+' button main item-entry-pick"><i class="fa '+icon+'" aria-hidden="true"></i> <span class="hidden-below-800">'+jsu.translate(label)+'</span></button>';
         }
     } else {
         if (item_type == 'current') {
             if (item.can_see_stats) {
-                html += '<button type="button" title="' + utils.translate('Statistics') + '" class="'+this.btn_class+' button default item-entry-pick-stats-media"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate('Statistics')+'</span></button>';
+                html += '<button type="button" title="' + jsu.translate('Statistics') + '" class="'+this.btn_class+' button default item-entry-pick-stats-media"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span class="hidden-below-800">'+jsu.translate('Statistics')+'</span></button>';
             }
             if (item.can_edit) {
-                html += '<a title="' + utils.translate('Edit') + '" class="'+this.btn_class+' button default item-entry-pick item-entry-pick-edit-media" href="'+this.get_button_link(item, 'edit')+'"'+this.links_target+'><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate('Edit')+'</span></a>';
+                html += '<a title="' + jsu.translate('Edit') + '" class="'+this.btn_class+' button default item-entry-pick item-entry-pick-edit-media" href="'+this.get_button_link(item, 'edit')+'"'+this.links_target+'><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-800">'+jsu.translate('Edit')+'</span></a>';
                 if (item.can_delete)
-                    html += '<button type="button" title="' + utils.translate('Delete') + '" class="'+this.btn_class+' button danger item-entry-pick-delete-media"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate('Delete')+'</span></button>';
+                    html += '<button type="button" title="' + jsu.translate('Delete') + '" class="'+this.btn_class+' button danger item-entry-pick-delete-media"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-800">'+jsu.translate('Delete')+'</span></button>';
             }
             if (item.can_add_channel) {
                 var add_channel_icon = '<i class="fa fa-folder" aria-hidden="true"></i>' +
                 ' <i class="fa fa-plus color-green" aria-hidden="true"></i>';
-                html += '<a title="' + utils.translate('Add a sub channel') + '"' +
+                html += '<a title="' + jsu.translate('Add a sub channel') + '"' +
                         ' class="' + this.btn_class + ' button item-entry-pick item-entry-pick-add-channel" href="' +
                         this.get_button_link(item, 'add_channel') + '"' + this.links_target + '>' + add_channel_icon +
                         ' <span class="hidden-below-800">' +
-                        utils.translate('Add a sub channel')+'</span></a>';
+                        jsu.translate('Add a sub channel')+'</span></a>';
             }
             if (item.oid != '0' && item.can_add_video) {
                 var add_video_icon = '<i class="fa fa-film" aria-hidden="true"></i>' +
                 ' <i class="fa fa-plus color-green" aria-hidden="true"></i>';
-                html += '<a title="' + utils.translate('Add a video') + '"' +
+                html += '<a title="' + jsu.translate('Add a video') + '"' +
                         ' class="'+this.btn_class+' button item-entry-pick item-entry-pick-add-video" href="' +
                         this.get_button_link(item, 'add_video') + '"' + this.links_target + '>' + add_video_icon +
                         ' <span class="hidden-below-800">' +
-                        utils.translate('Add a video')+'</span></a>';
+                        jsu.translate('Add a video')+'</span></a>';
             }
         } else {
             if (item_type != 'channel' && this.lti_mode) {
-                html += '<button type="button" class="'+this.btn_class+' button default item-entry-copy" data-link="'+this.get_button_link(item, 'lti', true)+'"><i class="fa fa-chain" aria-hidden="true"></i> <span class="hidden-below-440">'+utils.translate('Copy LTI link')+'</span></button>';
+                html += '<button type="button" class="'+this.btn_class+' button default item-entry-copy" data-link="'+this.get_button_link(item, 'lti', true)+'"><i class="fa fa-chain" aria-hidden="true"></i> <span class="hidden-below-440">'+jsu.translate('Copy LTI link')+'</span></button>';
             }
             if ((item_type != 'channel' && this.lti_mode) || item.can_edit || item.can_delete) {
-                html += '<a class="'+this.btn_class+' button default item-entry-pick-view-media" href="'+this.get_button_link(item, 'view')+'"'+this.links_target+'><i class="fa fa-eye" aria-hidden="true"></i> <span class="hidden-below-440">'+utils.translate('See')+'</span></a>';
+                html += '<a class="'+this.btn_class+' button default item-entry-pick-view-media" href="'+this.get_button_link(item, 'view')+'"'+this.links_target+'><i class="fa fa-eye" aria-hidden="true"></i> <span class="hidden-below-440">'+jsu.translate('See')+'</span></a>';
             }
             if (item.can_edit) {
-                html += '<a class="'+this.btn_class+' button item-entry-pick-edit-media default" href="'+this.get_button_link(item, 'edit')+'"'+this.links_target+'><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-440">'+utils.translate('Edit') +'</span></a>';
+                html += '<a class="'+this.btn_class+' button item-entry-pick-edit-media default" href="'+this.get_button_link(item, 'edit')+'"'+this.links_target+'><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-440">'+jsu.translate('Edit') +'</span></a>';
             }
             if (item.can_delete)
-                html += '<button type="button" class="'+this.btn_class+' button item-entry-pick-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">'+utils.translate('Delete')+'</span></button>';
+                html += '<button type="button" class="'+this.btn_class+' button item-entry-pick-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">'+jsu.translate('Delete')+'</span></button>';
         }
     }
     if (!html)
@@ -814,8 +816,8 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 msg = 'failed to copy';
                 console.log('Failed to copy to clipboard: ' + err);
             }
-            msg = '<i class="fa ' + (successful ? 'fa-check' : 'fa-warning') + '" aria-hidden="true"></i> ' + utils.translate(msg);
-            $btn.append('<span class="copy-msg">' + utils.escape_html(msg) + '</span>');
+            msg = '<i class="fa ' + (successful ? 'fa-check' : 'fa-warning') + '" aria-hidden="true"></i> ' + jsu.translate(msg);
+            $btn.append('<span class="copy-msg">' + jsu.escapeHTML(msg) + '</span>');
             $btn.addClass('copied');
             setTimeout(function () {
                 $btn.removeClass('copied');
@@ -893,33 +895,33 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
     var html = '<div><div tabindex="0"></div>';
     html += '<div class="trap-focus">';
     html += '<div class="overlay-info-title" id="item_entry_'+item.oid+'_'+tab+'_info_title" >';
-    html +=     '<button type="button" class="overlay-info-close button default '+this.btn_class+'" title="'+utils.translate('Hide this window')+'" aria-label="'+utils.translate('Hide this window')+'"><i class="fa fa-close" aria-hidden="true"></i></button>';
-    html +=     '<h1><a href="'+this.get_button_link(item, 'view')+'"'+this.links_target+'>'+utils.escape_html(item.title)+'</a></h1>';
+    html +=     '<button type="button" class="overlay-info-close button default '+this.btn_class+'" title="'+jsu.translate('Hide this window')+'" aria-label="'+jsu.translate('Hide this window')+'"><i class="fa fa-close" aria-hidden="true"></i></button>';
+    html +=     '<h1><a href="'+this.get_button_link(item, 'view')+'"'+this.links_target+'>'+jsu.escapeHTML(item.title)+'</a></h1>';
     html += '</div>';
     html += '<div class="overlay-info-content">';
     if (!this.pick_mode && tab == 'search' && (item.annotations || item.photos)) {
         var i;
         if (item.annotations) {
-            html += '<div><b>'+utils.translate('Matching annotations:')+'</b></div>';
+            html += '<div><b>'+jsu.translate('Matching annotations:')+'</b></div>';
             html += '<ul>';
             for (i=0; i < item.annotations.length; i++) {
                 var annotation = item.annotations[i];
                 html += '<li><a href="'+this.get_button_link(item, 'view')+'#start='+annotation.time+'&autoplay"'+this.links_target+'>';
                 if (annotation.title)
-                    html += utils.escape_html(annotation.title);
+                    html += jsu.escapeHTML(annotation.title);
                 html += ' ('+annotation.time_display+') ';
                 html += '</a></li>';
             }
             html += '</ul>';
         }
         if (item.photos) {
-            html += '<div><b>'+utils.translate('Matching photos:')+'</b></div>';
+            html += '<div><b>'+jsu.translate('Matching photos:')+'</b></div>';
             html += '<ul>';
             for (i=0; i < item.photos.length; i++) {
                 var photo = item.photos[i];
                 html += '<li><a href="'+this.get_button_link(item, 'view')+'#'+photo.index+'"'+this.links_target+'>';
                 if (photo.title)
-                    html += utils.escape_html(photo.title);
+                    html += jsu.escapeHTML(photo.title);
                 html += ' (#'+photo.index+') ';
                 html += '</a></li>';
             }
@@ -928,46 +930,46 @@ MSBrowser.prototype._get_thumbnail_info_box_html = function (item, item_type, se
         html += '<hr/>';
     }
     html += '<table class="overlay-info-table">';
-    html += '<caption class="sr-only">' + utils.translate('Media information') + '</caption>';
+    html += '<caption class="sr-only">' + jsu.translate('Media information') + '</caption>';
     if (item.creation && item_type == 'video') {
         html += '<tr>';
-        html +=     '<th scope="row" class="overlay-info-label">'+utils.translate('Recording date')+' :</th>';
-        html +=     '<td>'+utils.get_date_display(item.creation)+'</td>';
+        html +=     '<th scope="row" class="overlay-info-label">'+jsu.translate('Recording date')+' :</th>';
+        html +=     '<td>'+jsu.getDateDisplay(item.creation)+'</td>';
         html += '</tr>';
     }
     if (item.add_date) {
         html += '<tr>';
-        html +=     '<th scope="row" class="overlay-info-label">'+utils.translate('Publishing date')+' :</th>';
-        html +=     '<td>'+utils.get_date_display(item.add_date)+'</td>';
+        html +=     '<th scope="row" class="overlay-info-label">'+jsu.translate('Publishing date')+' :</th>';
+        html +=     '<td>'+jsu.getDateDisplay(item.add_date)+'</td>';
         html += '</tr>';
     }
     if (item.duration) {
         html += '<tr>';
-        html +=     '<th scope="row" class="overlay-info-label">'+utils.translate('Duration')+' :</th>';
+        html +=     '<th scope="row" class="overlay-info-label">'+jsu.translate('Duration')+' :</th>';
         html +=     '<td>'+item.duration+'</td>';
         html += '</tr>';
     }
     if (item.views_last_month) {
-        html +=         '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Views last month')+' :</th><td>'+item.views_last_month+'</td></tr>';
+        html +=         '<tr><th scope="row" class="overlay-info-label">'+jsu.translate('Views last month')+' :</th><td>'+item.views_last_month+'</td></tr>';
     }
     if (item.views) {
-        html +=         '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Views')+' :</th><td>'+item.views+'</td></tr>';
+        html +=         '<tr><th scope="row" class="overlay-info-label">'+jsu.translate('Views')+' :</th><td>'+item.views+'</td></tr>';
     }
     if (item.comments_last_month) {
-        html +=         '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Annotations last month')+' :</th><td>'+item.comments_last_month+'</td></tr>';
+        html +=         '<tr><th scope="row" class="overlay-info-label">'+jsu.translate('Annotations last month')+' :</th><td>'+item.comments_last_month+'</td></tr>';
     }
     if (item.comments) {
-        html +=         '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Annotations')+' :</th><td>'+item.comments+'</td></tr>';
+        html +=         '<tr><th scope="row" class="overlay-info-label">'+jsu.translate('Annotations')+' :</th><td>'+item.comments+'</td></tr>';
     }
     if (item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
         var storage_display = this.msapi.get_storage_minimal_display(item);
         if (storage_display)
-            html +=     '<tr><th scope="row" class="overlay-info-label">'+utils.translate('Storage usage')+' :</th><td>'+storage_display+'</td></tr>';
+            html +=     '<tr><th scope="row" class="overlay-info-label">'+jsu.translate('Storage usage')+' :</th><td>'+storage_display+'</td></tr>';
     }
     html += '</table>';
     if (item.short_description) {
         html += '<hr/>';
-        html += '<div class="float-container"><p>'+utils.escape_html($('<span>' + item.short_description + '</span>').text())+'</p></div>';
+        html += '<div class="float-container"><p>'+jsu.escapeHTML($('<span>' + item.short_description + '</span>').text())+'</p></div>';
     }
     html += '</div>';
     html += '</div>';
@@ -1013,15 +1015,15 @@ MSBrowser.prototype._set_thumbnail_info_box_html = function (item_type, selectab
     });
 };
 MSBrowser.prototype.trap_focus = function (element, event) {
-    if (utils.ignore_until_focus_changes) {
+    if (jsu.ignoreUntilFocusChanges) {
         return;
     }
     if (element.contains(event.target)) {
         this.last_overlay_focus = event.target;
     } else {
-        utils.focus_first_descendant(element);
+        jsu.focusFirstDescendant(element);
         if (this.last_overlay_focus == document.activeElement) {
-            utils.focus_last_descendant(element);
+            jsu.focusLastDescendant(element);
         }
         this.last_overlay_focus = document.activeElement;
     }
@@ -1049,7 +1051,7 @@ MSBrowser.prototype.box_open_info = function ($entry) {
         $info_box.fadeIn('fast');
         this.last_overlay_focus = document.activeElement;
         $info_box.focusin(this.trap_focus.bind(this, $('.trap-focus', $info_box)[0]));
-        utils.focus_first_descendant($('.trap-focus', $info_box)[0]);
+        jsu.focusFirstDescendant($('.trap-focus', $info_box)[0]);
 
         if (this.box_click_handler)
             $(document).unbind('click', this.box_click_handler);
@@ -1075,12 +1077,12 @@ MSBrowser.prototype.box_hide_info = function () {
 MSBrowser.prototype.display_categories = function () {
     var obj = this;
     if (this.site_settings_categories.length > 0) {
-        var html = ' <button type="button" id="open_hidden_categories" class="button">' + utils.translate('Categories') + ' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+        var html = ' <button type="button" id="open_hidden_categories" class="button">' + jsu.translate('Categories') + ' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
         html += ' <div id="hidden_categories" class="hidden-visibility">';
-        html += ' <label for="filter_no_categories"><input id="filter_no_categories" type="checkbox"/><span>' + utils.translate('Unspecified') + '</span></label><br />';
+        html += ' <label for="filter_no_categories"><input id="filter_no_categories" type="checkbox"/><span>' + jsu.translate('Unspecified') + '</span></label><br />';
         for (var i = 0; i < this.site_settings_categories.length; i++) {
-            var slug = utils.escape_attr(this.site_settings_categories[i][0]);
-            var label = utils.escape_html(this.site_settings_categories[i][1]);
+            var slug = jsu.escapeAttribute(this.site_settings_categories[i][0]);
+            var label = jsu.escapeHTML(this.site_settings_categories[i][1]);
             html += ' <label for="' + slug + '"><input class="checkbox" id="' + slug + '" type="checkbox" value="' + slug + '"/><span>' + label + '</span></label>';
         }
         html += ' </div>';
@@ -1151,7 +1153,7 @@ MSBrowser.prototype.open_statistics = function (oid) {
         this.overlay_stats = new OverlayDisplayManager();
     }
     this.overlay_stats.show({
-        title: utils.translate('See statistics on this channel'),
+        title: jsu.translate('See statistics on this channel'),
         iframe: '/statistics/iframe/' + oid + '/?period=last_year'
     });
 };

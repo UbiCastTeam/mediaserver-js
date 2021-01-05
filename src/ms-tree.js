@@ -3,7 +3,8 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils, MSAPIClient */
+/* global jsu */
+/* global MSAPIClient */
 
 function MSTreeManager(options) {
     // params
@@ -30,7 +31,7 @@ function MSTreeManager(options) {
     this.has_personal_channel = false;
     this.personal_channel_info = null;
 
-    utils.setup_class(this, options, [
+    jsu.setObjectAttributes(this, options, [
         // allowed options
         '$place',
         'msapi',
@@ -80,9 +81,9 @@ MSTreeManager.prototype.init = function () {
     if (this.display_root) {
         html += '<div id="' + this.id_prefix + 'tree_channel_0_link" '+(this.current_channel_oid == '0' ? 'class="channel-active"' : '')+'>';
         if (this.on_change)
-            html += '<button type="button" data-ref="0" class="channel-btn"'+(this.current_channel_oid == '0' ? 'title="'+utils.translate('Root')+' '+ utils.translate('selected')+'"' : '')+'>'+utils.translate('Root')+'</button>';
+            html += '<button type="button" data-ref="0" class="channel-btn"'+(this.current_channel_oid == '0' ? 'title="'+jsu.translate('Root')+' '+ jsu.translate('selected')+'"' : '')+'>'+jsu.translate('Root')+'</button>';
         else
-            html += '<a href="'+this.channels_base_url+'" class="channel-btn"'+(this.current_channel_oid == '0' ? 'title="'+utils.translate('Root')+' '+ utils.translate('selected')+'"' : '')+'>'+utils.translate('Root')+'</a>';
+            html += '<a href="'+this.channels_base_url+'" class="channel-btn"'+(this.current_channel_oid == '0' ? 'title="'+jsu.translate('Root')+' '+ jsu.translate('selected')+'"' : '')+'>'+jsu.translate('Root')+'</a>';
         html += '</div>';
     }
     html += '<ul class="list js-active-item border-color-blue active" id="' + this.id_prefix + 'tree_channel_0"></ul></div>';
@@ -103,7 +104,7 @@ MSTreeManager.prototype.init = function () {
                 obj.open_tree(obj.current_channel_oid);
         }
         if (obj.display_personal && obj.has_personal_channel) {
-            var $btn = $('<button type="button" class="button channel-personal-btn"><i class="fa fa-bookmark" aria-hidden="true"></i> <span>'+utils.translate('My channel')+'</span></button>');
+            var $btn = $('<button type="button" class="button channel-personal-btn"><i class="fa fa-bookmark" aria-hidden="true"></i> <span>'+jsu.translate('My channel')+'</span></button>');
             $btn.click({ obj: obj }, function (evt) {
                 evt.data.obj.open_personal_channel();
             });
@@ -150,7 +151,7 @@ MSTreeManager.prototype.load_tree = function (oid, callback) {
     this.content[oid].timeout = setTimeout(function () {
         obj.content[oid].timeout = null;
         $target.css('display', 'block');
-        $target.html('<li style="display: block;"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+utils.translate('Loading')+'...</li>');
+        $target.html('<li style="display: block;"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+jsu.translate('Loading')+'...</li>');
     }, 500);
     // load channel tree
     var scallback = function (response) {
@@ -159,20 +160,20 @@ MSTreeManager.prototype.load_tree = function (oid, callback) {
     var ecallback = function (xhr, textStatus, thrownError) {
         if (xhr.status) {
             if (xhr.status == 401)
-                return obj._on_tree_loaded({ success: false, error: utils.translate('Unable to get channels tree because you are not logged in.') }, oid, $target, callback);
+                return obj._on_tree_loaded({ success: false, error: jsu.translate('Unable to get channels tree because you are not logged in.') }, oid, $target, callback);
             if (xhr.status == 403)
-                return obj._on_tree_loaded({ success: false, error: utils.translate('Unable to get channels tree because you cannot access to this channel.') }, oid, $target, callback);
+                return obj._on_tree_loaded({ success: false, error: jsu.translate('Unable to get channels tree because you cannot access to this channel.') }, oid, $target, callback);
             if (xhr.status == 404)
-                return obj._on_tree_loaded({ success: false, error: utils.translate('Channel does not exist.') }, oid, $target, callback);
+                return obj._on_tree_loaded({ success: false, error: jsu.translate('Channel does not exist.') }, oid, $target, callback);
             if (xhr.status == 500)
-                return obj._on_tree_loaded({ success: false, error: utils.translate('An error occurred in the server. Please try again later.') }, oid, $target, callback);
+                return obj._on_tree_loaded({ success: false, error: jsu.translate('An error occurred in the server. Please try again later.') }, oid, $target, callback);
         }
         if (textStatus == 'timeout') {
-            obj._on_tree_loaded({ success: false, error: utils.translate('Unable to get channels tree. Request timed out.') }, oid, $target, callback);
+            obj._on_tree_loaded({ success: false, error: jsu.translate('Unable to get channels tree. Request timed out.') }, oid, $target, callback);
         } else if (textStatus == 'error') {
-            obj._on_tree_loaded({ success: false, error: utils.translate('The server cannot be reached.') }, oid, $target, callback);
+            obj._on_tree_loaded({ success: false, error: jsu.translate('The server cannot be reached.') }, oid, $target, callback);
         } else {
-            obj._on_tree_loaded({ success: false, error: utils.translate('An error occurred during request:')+'<br/>&nbsp;&nbsp;&nbsp;&nbsp;'+textStatus+' '+thrownError }, oid, $target, callback);
+            obj._on_tree_loaded({ success: false, error: jsu.translate('An error occurred during request:')+'<br/>&nbsp;&nbsp;&nbsp;&nbsp;'+textStatus+' '+thrownError }, oid, $target, callback);
         }
     };
     if (this.tree_url) {
@@ -228,9 +229,9 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
                 html += '<li><span id="' + this.id_prefix + 'tree_channel_' + channel.oid + '_link" data-ref="' + channel.oid +
                                '" class="' + (!this.on_change ? 'aside-list-btn' : '') + (this.current_channel_oid == channel.oid ? ' channel-active' : '') + '">' + button;
                 if (this.on_change) {
-                    html += '<button ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' type="button" data-ref="' + channel.oid + '" class="channel-btn"' + (this.current_channel_oid == channel.oid ? ' title="' + utils.escape_html(channel.title) + ' ' + utils.translate('selected') + '"' : '') + '>' + utils.escape_html(channel.title) + '</button>';
+                    html += '<button ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' type="button" data-ref="' + channel.oid + '" class="channel-btn"' + (this.current_channel_oid == channel.oid ? ' title="' + jsu.escapeHTML(channel.title) + ' ' + jsu.translate('selected') + '"' : '') + '>' + jsu.escapeHTML(channel.title) + '</button>';
                 } else {
-                    html += '<a ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' href="' + this.channels_base_url + channel[this.channels_url_field] + '" class="channel-btn">' + utils.escape_html(channel.title) + '</a>';
+                    html += '<a ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' href="' + this.channels_base_url + channel[this.channels_url_field] + '" class="channel-btn">' + jsu.escapeHTML(channel.title) + '</a>';
                 }
                 html += '</span>';
                 if (channel.channels)
@@ -265,7 +266,7 @@ MSTreeManager.prototype._on_tree_loaded = function (result, oid, $target, callba
     } else if (result.error) {
         $target.html('<li class="error">' + result.error + '</li>');
     } else {
-        $target.html('<li class="error">' + utils.translate('No information about error.') + '</li>');
+        $target.html('<li class="error">' + jsu.translate('No information about error.') + '</li>');
     }
 
     this.loading = false;
@@ -349,7 +350,7 @@ MSTreeManager.prototype.set_active = function (oid) {
     $('.channel-active', this.$widget).removeClass('channel-active');
     this.current_channel_oid = oid;
     $('#' + this.id_prefix + 'tree_channel_' + this.current_channel_oid + '_link', this.$widget).addClass('channel-active');
-    $('#' + this.id_prefix + 'tree_channel_' + this.current_channel_oid + '_link button', this.$widget).attr('title', $('#' + this.id_prefix + 'tree_channel_' + this.current_channel_oid + '_link', this.$widget).text() + ' ' + utils.translate('selected'));
+    $('#' + this.id_prefix + 'tree_channel_' + this.current_channel_oid + '_link button', this.$widget).attr('title', $('#' + this.id_prefix + 'tree_channel_' + this.current_channel_oid + '_link', this.$widget).text() + ' ' + jsu.translate('selected'));
     this.open_tree(oid);
 };
 
@@ -388,14 +389,14 @@ MSTreeManager.prototype.open_personal_channel = function () {
     var callback = function (response) {
         if (response.success) {
             obj.personal_channel_info = response;
-            $('.channel-personal-btn span', obj.$widget).html(utils.translate('My channel'));
+            $('.channel-personal-btn span', obj.$widget).html(jsu.translate('My channel'));
             obj.open_tree(response.oid);
             if (obj.on_change)
                 obj.on_change(response.oid);
             else
                 window.location.hash = '#' + response.slug;
         } else {
-            $('.channel-personal-btn span', obj.$widget).html(utils.translate('My channel') + ' (' + response.xhr.status + ')');
+            $('.channel-personal-btn span', obj.$widget).html(jsu.translate('My channel') + ' (' + response.xhr.status + ')');
         }
     };
     if (!this.personal_channel_info) {

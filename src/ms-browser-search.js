@@ -3,7 +3,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils */
+/* global jsu */
 
 function MSBrowserSearch(options) {
     // params
@@ -42,7 +42,7 @@ function MSBrowserSearch(options) {
         { name: 'for_photos', label: 'photos groups', initial: true, items: 'p' }
     ];
 
-    utils.setup_class(this, options, [
+    jsu.setObjectAttributes(this, options, [
         // allowed options
         'browser'
     ]);
@@ -70,37 +70,37 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
     var html = '';
     html += '<div id="ms_browser_search_menu" style="display: none;">';
     html +=     '<form class="ms-browser-search-form" method="get" action="." onsubmit="javascript: return false;">';
-    html +=         '<label for="ms_browser_search_text"><span class="hidden-below-800">'+utils.translate('Search:')+'</span></label>';
+    html +=         '<label for="ms_browser_search_text"><span class="hidden-below-800">'+jsu.translate('Search:')+'</span></label>';
     html +=         ' <input id="ms_browser_search_text" type="text" value="">';
-    html +=         ' <button type="submit" class="button" id="ms_browser_search_start">'+utils.translate('Go')+'</button>';
+    html +=         ' <button type="submit" class="button" id="ms_browser_search_start">'+jsu.translate('Go')+'</button>';
     html +=     '</form>';
     html +=     '<div class="ms-browser-dropdown" id="ms_browser_search_in_dropdown">';
-    html +=         '<button type="button" aria-controls="ms_browser_search_in_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Search in')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+    html +=         '<button type="button" aria-controls="ms_browser_search_in_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+jsu.translate('Search in')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
 
     html +=         '<div class="ms-browser-dropdown-menu ms-browser-search-in" id="ms_browser_search_in_dropdown_menu">';
-    html +=             ' <div><button type="button" class="button" id="ms_browser_search_in_all">'+utils.translate('all')+'</button>';
-    html +=             ' <button type="button" class="button" id="ms_browser_search_in_none">'+utils.translate('none')+'</button></div>';
+    html +=             ' <div><button type="button" class="button" id="ms_browser_search_in_all">'+jsu.translate('all')+'</button>';
+    html +=             ' <button type="button" class="button" id="ms_browser_search_in_none">'+jsu.translate('none')+'</button></div>';
     for (i=0; i < this.search_in_fields.length; i++) {
         field = this.search_in_fields[i];
         if (this.should_be_displayed(dc, field.items)) {
             html += ' <div><input id="ms_browser_search_'+field.name+'" type="checkbox" '+(field.initial ? 'checked="checked"' : '')+'>';
-            html += ' <label for="ms_browser_search_'+field.name+'">'+utils.escape_html(utils.translate(field.label))+'</label></div>';
+            html += ' <label for="ms_browser_search_'+field.name+'">'+jsu.escapeHTML(jsu.translate(field.label))+'</label></div>';
         }
     }
     html +=         '</div>';
     html +=     '</div>';
     if (dc.length > 1) {
         html += '<div class="ms-browser-dropdown" id="ms_browser_search_for_dropdown">';
-        html +=     '<button type="button" aria-controls="ms_browser_search_for_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Search for')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+        html +=     '<button type="button" aria-controls="ms_browser_search_for_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+jsu.translate('Search for')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
 
         html +=     '<div class="ms-browser-dropdown-menu ms-browser-search-for" id="ms_browser_search_for_dropdown_menu">';
-        html +=         ' <div><button type="button" class="button" id="ms_browser_search_for_all">'+utils.translate('all')+'</button>';
-        html +=         ' <button type="button" class="button" id="ms_browser_search_for_none">'+utils.translate('none')+'</button></div>';
+        html +=         ' <div><button type="button" class="button" id="ms_browser_search_for_all">'+jsu.translate('all')+'</button>';
+        html +=         ' <button type="button" class="button" id="ms_browser_search_for_none">'+jsu.translate('none')+'</button></div>';
         for (i=0; i < this.search_for_fields.length; i++) {
             field = this.search_for_fields[i];
             if (this.should_be_displayed(dc, field.items)) {
                 html += ' <div><input id="ms_browser_search_'+field.name+'" type="checkbox" '+(field.initial ? 'checked="checked"' : '')+'>';
-                html += ' <label for="ms_browser_search_'+field.name+'">'+utils.escape_html(utils.translate(field.label))+'</label></div>';
+                html += ' <label for="ms_browser_search_'+field.name+'">'+jsu.escapeHTML(jsu.translate(field.label))+'</label></div>';
             }
         }
         html +=     '</div>';
@@ -136,14 +136,14 @@ MSBrowserSearch.prototype.get_menu_jq = function () {
 MSBrowserSearch.prototype.get_content_jq = function () {
     var html = '';
     html += '<div id="ms_browser_search" class="ms-browser-content" style="display: none;">';
-    html +=     '<div class="messages"><div class="message info">'+utils.translate('Use the input above to search for something.')+'</div></div>';
+    html +=     '<div class="messages"><div class="message info">'+jsu.translate('Use the input above to search for something.')+'</div></div>';
     html += '</div>';
     this.$content = $(html);
     return this.$content;
 };
 
 MSBrowserSearch.prototype.on_show = function () {
-    this.browser.set_title(this.current_title ? this.current_title : utils.translate('Search'));
+    this.browser.set_title(this.current_title ? this.current_title : jsu.translate('Search'));
     if (this.initialized)
         return;
     this.initialized = true;
@@ -250,7 +250,7 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
             data.categories = this.browser.filter_categories.join('\n');
     }
     // change url
-    var title = utils.escape_html(utils.translate('Search results for:')+' '+search);
+    var title = jsu.escapeHTML(jsu.translate('Search results for:')+' '+search);
     this.current_title = title;
     this.browser.set_title(title);
     if (!this.browser.pick_mode && !no_pushstate) {
@@ -280,11 +280,11 @@ MSBrowserSearch.prototype._on_ajax_error = function (response) {
     if (!this.browser.use_overlay && (response.error_code == '403' || response.error_code == '401')) {
         var login_url = this.browser.url_login+'?next='+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
         message += '<div class="item-description">';
-        message += '<div class="message error">'+utils.escape_html(response.error)+'</div>';
-        message += '<p>'+utils.translate('Please login to access this page')+'<br /> <a href="'+login_url+'">'+utils.translate('Sign in')+'</a></p>';
+        message += '<div class="message error">'+jsu.escapeHTML(response.error)+'</div>';
+        message += '<p>'+jsu.translate('Please login to access this page')+'<br /> <a href="'+login_url+'">'+jsu.translate('Sign in')+'</a></p>';
         message += '</div>';
     } else {
-        message += '<div class="message error">'+utils.escape_html(response.error)+'</div>';
+        message += '<div class="message error">'+jsu.escapeHTML(response.error)+'</div>';
     }
     message += '</div>';
     this.$content.html(message);
@@ -307,19 +307,19 @@ MSBrowserSearch.prototype._on_ajax_response = function (response) {
     if (has_items) {
         var results = [];
         if (nb_channels > 0)
-            results.push(nb_channels + ' ' + utils.translate('channel(s)'));
+            results.push(nb_channels + ' ' + jsu.translate('channel(s)'));
         if (nb_videos > 0)
-            results.push(nb_videos + ' ' + utils.translate('video(s)'));
+            results.push(nb_videos + ' ' + jsu.translate('video(s)'));
         if (nb_live_streams > 0)
-            results.push(nb_live_streams + ' ' + utils.translate('live stream(s)'));
+            results.push(nb_live_streams + ' ' + jsu.translate('live stream(s)'));
         if (nb_photos_groups > 0)
-            results.push(nb_photos_groups + ' ' + utils.translate('photos group(s)'));
-        var text = '<div class="ms-browser-search-matching"><b>' + utils.translate('Matching items:') + '</b> ' + utils.escape_html(results.join(', ')) + '</div>';
+            results.push(nb_photos_groups + ' ' + jsu.translate('photos group(s)'));
+        var text = '<div class="ms-browser-search-matching"><b>' + jsu.translate('Matching items:') + '</b> ' + jsu.escapeHTML(results.join(', ')) + '</div>';
         this.$content.append(text);
         this.browser.display_content(this.$content, response, null, 'search');
     }
     else
-        this.$content.html('<div class="messages"><div class="message info">' + utils.translate('No results.') + '</div></div>');
+        this.$content.html('<div class="messages"><div class="message info">' + jsu.translate('No results.') + '</div></div>');
 };
 
 MSBrowserSearch.prototype.refresh_display = function (reset) {

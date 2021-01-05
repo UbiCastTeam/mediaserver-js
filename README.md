@@ -7,7 +7,7 @@ Dependencies:
 -------------
 
 * jquery
-* utils.js (https://github.com/UbiCastTeam/utils-js.git)
+* jsu (https://github.com/UbiCastTeam/jsu.git)
 
 
 Modules:
@@ -23,11 +23,10 @@ Modules:
 
 * ms-browser.js:
 
-    A module to display the MediaServer content browser. `ms-api.js`, `ms-tree.js`, `utils.js` in the submodule and all files starting with `ms-browser` are required to use this module.
+    A module to display the MediaServer content browser. `ms-api.js`, `ms-tree.js` and all files starting with `ms-browser` are required to use this module.
 
     Example of imports:
     ```html
     <link rel="stylesheet" type="text/css" href="dist/ms-js.min.css"/>
-    <script type="text/javascript" src="utils-js/utils.js"></script>
     <script type="text/javascript" src="dist/ms-js.min.js"></script>
     ```

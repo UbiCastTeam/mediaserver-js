@@ -3,7 +3,8 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils, MSTreeManager */
+/* global jsu */
+/* global MSTreeManager */
 
 function MSBrowserChannels(options) {
     // params
@@ -17,7 +18,7 @@ function MSBrowserChannels(options) {
     this.order = 'default';
     this.last_response = null;
 
-    utils.setup_class(this, options, [
+    jsu.setObjectAttributes(this, options, [
         // allowed options
         'browser',
         'display_itunes_rss',
@@ -38,11 +39,11 @@ MSBrowserChannels.prototype.get_content_jq = function () {
     html += '<div id="ms_browser_channels" class="ms-browser-content" style="display: none;">';
     if (this.browser.tree_manager) {
         html +=     '<div class="ms-browser-tree-place ms-channels-tree">';
-        html +=         '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+utils.translate('Loading...')+'</div>';
+        html +=         '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+jsu.translate('Loading...')+'</div>';
         html +=     '</div>';
     }
     html +=     '<div class="ms-browser-channels-place">';
-    html +=         '<div class="messages"><div class="message info">'+utils.translate('Select a channel to display its content.')+'</div></div>';
+    html +=         '<div class="messages"><div class="message info">'+jsu.translate('Select a channel to display its content.')+'</div></div>';
     html +=     '</div>';
     html += '</div>';
     this.$content = $(html);
@@ -55,22 +56,22 @@ MSBrowserChannels.prototype.refresh_title = function () {
         return;
     var item = this.last_response ? this.last_response.info : undefined;
     if (item && item.oid != '0') {
-        var html = '<span class="item-entry-preview"><img src="'+item.thumb+'" alt="'+utils.escape_html(item.title)+'"/></span>';
+        var html = '<span class="item-entry-preview"><img src="'+item.thumb+'" alt="'+jsu.escapeHTML(item.title)+'"/></span>';
         html += '<span class="channel-titles-place">';
-        var parent_title = item.parent_oid && item.parent_oid != '0' ? item.parent_title : utils.translate('Root');
+        var parent_title = item.parent_oid && item.parent_oid != '0' ? item.parent_title : jsu.translate('Root');
         if (!this.browser.use_overlay && parent_title) {
-            html += '<a class="parent-channel-title" href="#' + (item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>'+utils.escape_html(parent_title)+'</a>';
+            html += '<a class="parent-channel-title" href="#' + (item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>'+jsu.escapeHTML(parent_title)+'</a>';
         }
-        html += '<span class="channel-title"' + (item.language ? 'lang="' + item.language + '"' : '') + '>'+utils.escape_html(item.title)+'</span>';
+        html += '<span class="channel-title"' + (item.language ? 'lang="' + item.language + '"' : '') + '>'+jsu.escapeHTML(item.title)+'</span>';
         html += '</span>';
         if (this.browser.current_selection && this.browser.current_selection.oid == item.oid) {
             html = '<span class="selected">'+html+'</span>';
         }
         this.browser.set_title(item.title, html);
     } else if (this.browser.lti_mode) {
-        this.browser.set_title(utils.translate('My channel'));
+        this.browser.set_title(jsu.translate('My channel'));
     } else {
-        this.browser.set_title(utils.translate('Main channels'));
+        this.browser.set_title(jsu.translate('Main channels'));
     }
 };
 
@@ -124,7 +125,7 @@ MSBrowserChannels.prototype.display_personal_channel = function () {
                 obj.personal_channel_oid = response.oid;
                 obj.display_channel(response.oid);
             } else if (response.error_code == 403) {
-                obj._on_channel_error({ error: utils.translate('You are not allowed to have a personnal channel.') });
+                obj._on_channel_error({ error: jsu.translate('You are not allowed to have a personnal channel.') });
             } else {
                 obj._on_channel_error(response);
             }
@@ -176,7 +177,7 @@ MSBrowserChannels.prototype._on_channel_error = function (response) {
         var login_url = this.browser.url_login+'?next='+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
         message += '<div class="item-description">';
         message += '<div class="message error">'+response.error+'</div>';
-        message += '<p>'+utils.translate('Please login to access this channel')+'<br /> <a href="'+login_url+'">'+utils.translate('Sign in')+'</a></p>';
+        message += '<p>'+jsu.translate('Please login to access this channel')+'<br /> <a href="'+login_url+'">'+jsu.translate('Sign in')+'</a></p>';
         message += '</div>';
     } else {
         message += '<div class="message error">'+response.error+'</div>';
@@ -247,7 +248,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         // back to parent button
         if (!this.browser.lti_mode || oid != this.personal_channel_oid) {
             var parent_oid = response.info.parent_oid ? response.info.parent_oid : '0';
-            var parent_title = response.info.parent_title ? response.info.parent_title : utils.translate('Parent channel');
+            var parent_title = response.info.parent_title ? response.info.parent_title : jsu.translate('Parent channel');
             var parent = {
                 oid: parent_oid,
                 title: parent_title,
@@ -266,12 +267,12 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             }
             if (!this.browser.use_overlay && $('.navbar .back.button-text').length > 0) {
                 $back.html('<i class="fa fa-chevron-circle-up fa-fw fa-2x" aria-hidden="true"></i>');
-                $back.attr('title', utils.translate('Parent channel'));
-                $back.attr('aria-label', utils.translate('Parent channel'));
+                $back.attr('title', jsu.translate('Parent channel'));
+                $back.attr('aria-label', jsu.translate('Parent channel'));
                 $back.addClass('back').addClass('button-text');
                 $('.navbar .back.button-text').replaceWith($back);
             } else {
-                $back.html('<i class="fa fa-chevron-circle-up" aria-hidden="true"></i> <span class="hidden-below-800">'+utils.translate('Parent channel')+'</span>');
+                $back.html('<i class="fa fa-chevron-circle-up" aria-hidden="true"></i> <span class="hidden-below-800">'+jsu.translate('Parent channel')+'</span>');
                 this.$menu.append($back);
             }
             if (this.browser.pick_mode) {
@@ -308,15 +309,15 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             if (response.info.views || response.info.comments) {
                 var anno_and_views = '<div class="' + (response.info.short_description || response.info.display_rss_links || storage_display ? 'right' : 'align-right') + ' channel-description-stats">';
                 if (response.info.views) {
-                    anno_and_views += '<span class="inline-block">' + response.info.views + ' ' + utils.translate('views');
+                    anno_and_views += '<span class="inline-block">' + response.info.views + ' ' + jsu.translate('views');
                     if (response.info.views_last_month)
-                        anno_and_views += ', ' + response.info.views_last_month + ' ' + utils.translate('this month');
+                        anno_and_views += ', ' + response.info.views_last_month + ' ' + jsu.translate('this month');
                     anno_and_views += '</span>';
                 }
                 if (response.info.comments) {
-                    anno_and_views += ' <span class="inline-block">' + response.info.comments + ' ' + utils.translate('annotations');
+                    anno_and_views += ' <span class="inline-block">' + response.info.comments + ' ' + jsu.translate('annotations');
                     if (response.info.comments_last_month)
-                        anno_and_views += ', ' + response.info.comments_last_month + ' ' + utils.translate('this month');
+                        anno_and_views += ', ' + response.info.comments_last_month + ' ' + jsu.translate('this month');
                     anno_and_views += '</span>';
                 }
                 anno_and_views += '</div>';
@@ -337,16 +338,16 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             if (response.info.items_count) {
                 var results = [];
                 if (response.info.channels_count)
-                    results.push(response.info.channels_count + ' ' + utils.translate('channel(s)'));
+                    results.push(response.info.channels_count + ' ' + jsu.translate('channel(s)'));
                 if (response.info.videos_count)
-                    results.push(response.info.videos_count + ' ' + utils.translate('video(s)'));
+                    results.push(response.info.videos_count + ' ' + jsu.translate('video(s)'));
                 if (response.info.lives_count)
-                    results.push(response.info.lives_count + ' ' + utils.translate('live stream(s)'));
+                    results.push(response.info.lives_count + ' ' + jsu.translate('live stream(s)'));
                 if (response.info.pgroups_count)
-                    results.push(response.info.pgroups_count + ' ' + utils.translate('photos group(s)'));
-                var count_display = '<div class="channel-items-count">' + utils.translate('Channel content:');
-                count_display += ' <span>' + utils.escape_html(results.join(', ')) + '</span>';
-                count_display += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + utils.translate('Sub channels items are included in counts.') + '</span></button>';
+                    results.push(response.info.pgroups_count + ' ' + jsu.translate('photos group(s)'));
+                var count_display = '<div class="channel-items-count">' + jsu.translate('Channel content:');
+                count_display += ' <span>' + jsu.escapeHTML(results.join(', ')) + '</span>';
+                count_display += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translate('Sub channels items are included in counts.') + '</span></button>';
                 count_display += '</div>';
                 $current_item_desc.append(count_display);
                 if (!window.uwlb)
@@ -354,7 +355,7 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
                 is_empty = false;
             }
             if (storage_display) {
-                storage_display = '<div class="channel-storage-usage">' + utils.translate('Storage usage:') + ' ' + storage_display + '</div>';
+                storage_display = '<div class="channel-storage-usage">' + jsu.translate('Storage usage:') + ' ' + storage_display + '</div>';
                 $current_item_desc.append(storage_display);
                 if (!window.uwlb)
                     $('.channel-storage-usage .tooltip-button', $current_item_desc).click(function () { $('span', this).toggle(); });
@@ -363,16 +364,16 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
             if (response.info.display_rss_links) {
                 var rss = '<div class="channel-description-rss"> ';
                 if (this.display_itunes_rss) {
-                    rss += ' <span class="inline-block">' + utils.translate('Subscribe to channel videos RSS:') + '</span>';
+                    rss += ' <span class="inline-block">' + jsu.translate('Subscribe to channel videos RSS:') + '</span>';
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">';
-                    rss +=     '<i class="fa fa-rss" aria-hidden="true"></i> ' + utils.translate('standard') + '</a>';
+                    rss +=     '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translate('standard') + '</a>';
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-video.xml">';
-                    rss +=     '<i class="fa fa-apple" aria-hidden="true"></i> ' + utils.translate('iTunes') + '</a>';
+                    rss +=     '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translate('iTunes') + '</a>';
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-audio.xml">';
-                    rss +=     '<i class="fa fa-apple" aria-hidden="true"></i> ' + utils.translate('iTunes (audio only)') + '</a>';
+                    rss +=     '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translate('iTunes (audio only)') + '</a>';
                 } else {
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">';
-                    rss +=     '<i class="fa fa-rss" aria-hidden="true"></i> ' + utils.translate('Subscribe to channel videos RSS') + '</a>';
+                    rss +=     '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translate('Subscribe to channel videos RSS') + '</a>';
                 }
                 rss += '</div>';
                 $current_item_desc.append(rss);
@@ -419,8 +420,8 @@ MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
         } else {
             msg = 'This channel contains no media.';
         }
-        msg = utils.translate(msg) + '<br/>';
-        msg += utils.translate('Some contents may still exist in this channel but if it is the case your account is not allowed to see them.');
+        msg = jsu.translate(msg) + '<br/>';
+        msg += jsu.translate('Some contents may still exist in this channel but if it is the case your account is not allowed to see them.');
         this.$place.append('<div class="messages"><div class="message info">'+msg+'</div></div>');
     }
 };

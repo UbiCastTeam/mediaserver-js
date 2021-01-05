@@ -3,9 +3,9 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils */
+/* global jsu */
 
-utils.add_translations({
+jsu.addTranslations({
     'Access denied.': 'Accès refusé.',
     'Add a channel': 'Ajouter une chaîne',
     'Add a sub channel': 'Ajouter une sous chaîne',

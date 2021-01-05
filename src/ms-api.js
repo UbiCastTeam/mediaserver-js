@@ -3,7 +3,7 @@
  * Copyright: UbiCast, all rights reserved   *
  * Author: Stephane Schoorens                *
  *********************************************/
-/* globals utils */
+/* global jsu */
 
 function MSAPIClient(options) {
     // params
@@ -12,12 +12,12 @@ function MSAPIClient(options) {
     this.extra_data = null;
     // vars
     this.defaults_errors_messages = {
-        401: utils.translate('You are not logged in or your session has expired. Please login and retry.'),
-        403: utils.translate('Access denied.'),
-        404: utils.translate('Item not found.'),
-        500: utils.translate('An internal server error occurred. An email has been sent to the support team.'),
-        timeout: utils.translate('The connection timed out. Please retry later.'),
-        unreachable: utils.translate('The server cannot be reached.')
+        401: jsu.translate('You are not logged in or your session has expired. Please login and retry.'),
+        403: jsu.translate('Access denied.'),
+        404: jsu.translate('Item not found.'),
+        500: jsu.translate('An internal server error occurred. An email has been sent to the support team.'),
+        timeout: jsu.translate('The connection timed out. Please retry later.'),
+        unreachable: jsu.translate('The server cannot be reached.')
     };
     this.calls = {
         ping: {
@@ -28,8 +28,8 @@ function MSAPIClient(options) {
             method: 'GET',
             url: '/api/v2/search/',
             errors: {
-                403: utils.translate('Unable to get search\'s results content because you cannot access to this channel.'),
-                404: utils.translate('Requested channel does not exist.')
+                403: jsu.translate('Unable to get search\'s results content because you cannot access to this channel.'),
+                404: jsu.translate('Requested channel does not exist.')
             }
         },
         get_latest_content: {
@@ -44,32 +44,32 @@ function MSAPIClient(options) {
             method: 'GET',
             url: '/api/v2/channels/content/',
             errors: {
-                403: utils.translate('Unable to get channel content because you cannot access to this channel.'),
-                404: utils.translate('Requested channel does not exist.')
+                403: jsu.translate('Unable to get channel content because you cannot access to this channel.'),
+                404: jsu.translate('Requested channel does not exist.')
             }
         },
         get_channels: {
             method: 'GET',
             url: '/api/v2/channels/get/',
             errors: {
-                403: utils.translate('Unable to get channel information because you cannot access to this channel.'),
-                404: utils.translate('Requested channel does not exist.')
+                403: jsu.translate('Unable to get channel information because you cannot access to this channel.'),
+                404: jsu.translate('Requested channel does not exist.')
             }
         },
         get_channels_tree: {
             method: 'GET',
             url: '/api/v2/channels/tree/',
             errors: {
-                403: utils.translate('Unable to get channels tree because you cannot access to this channel.'),
-                404: utils.translate('Requested channel does not exist.')
+                403: jsu.translate('Unable to get channels tree because you cannot access to this channel.'),
+                404: jsu.translate('Requested channel does not exist.')
             }
         },
         get_channels_path: {
             method: 'GET',
             url: '/api/v2/channels/path/',
             errors: {
-                403: utils.translate('Unable to get channels path because you cannot access to this channel.'),
-                404: utils.translate('Requested channel does not exist.')
+                403: jsu.translate('Unable to get channels path because you cannot access to this channel.'),
+                404: jsu.translate('Requested channel does not exist.')
             }
         },
         get_channels_personal: {
@@ -84,8 +84,8 @@ function MSAPIClient(options) {
             method: 'GET',
             url: '/api/v2/medias/get/',
             errors: {
-                403: utils.translate('Unable to get media information because you cannot access to this media.'),
-                404: utils.translate('Media does not exist.')
+                403: jsu.translate('Unable to get media information because you cannot access to this media.'),
+                404: jsu.translate('Media does not exist.')
             }
         },
         add_medias: {
@@ -120,8 +120,8 @@ function MSAPIClient(options) {
             method: 'POST',
             url: '/api/v2/lives/stop/',
             errors: {
-                403: utils.translate('You are not allowed to perform this action.'),
-                404: utils.translate('Media does not exist.')
+                403: jsu.translate('You are not allowed to perform this action.'),
+                404: jsu.translate('Media does not exist.')
             }
         },
         lives_change_slides: {
@@ -250,7 +250,7 @@ MSAPIClient.prototype.ajax_call = function (call_or_uri, data, callback, async, 
         cache: false,
         success: function (response) {
             if (!response.success && !response.error)
-                response.error = response.message ? response.message : utils.translate('No information about error.');
+                response.error = response.message ? response.message : jsu.translate('No information about error.');
             if (callback)
                 return callback(response);
         },
@@ -265,7 +265,7 @@ MSAPIClient.prototype.ajax_call = function (call_or_uri, data, callback, async, 
 
             var msg = call_info.errors && reason in call_info.errors ? call_info.errors[reason] : '';
             if (!msg)
-                msg = reason in obj.defaults_errors_messages ? obj.defaults_errors_messages[reason] : utils.translate('Request failed:')+' '+thrownError;
+                msg = reason in obj.defaults_errors_messages ? obj.defaults_errors_messages[reason] : jsu.translate('Request failed:')+' '+thrownError;
 
             return callback({
                 success: false,
@@ -294,9 +294,9 @@ MSAPIClient.prototype.ajax_call = function (call_or_uri, data, callback, async, 
 MSAPIClient.prototype.get_storage_display = function (item) {
     var html = '';
     if (item.storage_used !== null && item.storage_used !== undefined) {
-        html = '<span class="storage-usage">' + utils.get_size_display(item.storage_used);
+        html = '<span class="storage-usage">' + jsu.getSizeDisplay(item.storage_used);
         if (item.storage_quota > 0) {
-            html += ' / ' + item.storage_quota + ' G' + utils.translate('B');
+            html += ' / ' + item.storage_quota + ' G' + jsu.translate('B');
             var storage_used_percents = Math.round(100 * (item.storage_used / 1000000000) / item.storage_quota);
             if (storage_used_percents > 100)
                 storage_used_percents = 100;
@@ -319,9 +319,9 @@ MSAPIClient.prototype.get_storage_display = function (item) {
 MSAPIClient.prototype.get_storage_minimal_display = function (item) {
     var html = '';
     if (item.storage_used !== null && item.storage_used !== undefined) {
-        html = '<span class="storage-usage">' + utils.get_size_display(item.storage_used);
+        html = '<span class="storage-usage">' + jsu.getSizeDisplay(item.storage_used);
         if (item.storage_quota > 0) {
-            html += ' / ' + item.storage_quota + ' G' + utils.translate('B');
+            html += ' / ' + item.storage_quota + ' G' + jsu.translate('B');
         }
         html += '</span>';
     }
@@ -338,11 +338,11 @@ MSAPIClient.prototype.get_available_storage_display = function (item) {
         }
         html += '<span class="storage-available nowrap">';
         if (item.storage_available > 0) {
-            html += '<span class="' + storage_class + ' ">' + utils.translate('Available space:') + ' ' + utils.get_size_display(item.storage_available) + '</span>';
+            html += '<span class="' + storage_class + ' ">' + jsu.translate('Available space:') + ' ' + jsu.getSizeDisplay(item.storage_available) + '</span>';
         } else {
-            html += '<span class="red">' + utils.translate('No available space') + '</span>';
+            html += '<span class="red">' + jsu.translate('No available space') + '</span>';
         }
-        html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + utils.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + utils.translate('The storage quota of the parent channels can have an impact on the available space of this channel.') + '</span></button>';
+        html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + jsu.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + jsu.translate('The storage quota of the parent channels can have an impact on the available space of this channel.') + '</span></button>';
         html += '</span>';
     }
     return html;

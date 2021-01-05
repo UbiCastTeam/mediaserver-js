@@ -3,7 +3,12 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals MSAPIClient, utils, OverlayDisplayManager, MSBrowserChannels, MSBrowserSearch, MSBrowserLatest */
+/* global jsu */
+/* global MSAPIClient */
+/* global MSBrowserChannels */
+/* global MSBrowserLatest */
+/* global MSBrowserSearch */
+/* global OverlayDisplayManager */
 
 function MSBrowser(options) {
     // params
@@ -52,7 +57,7 @@ function MSBrowser(options) {
 
     this.default_search_in = [];
 
-    utils.setup_class(this, options, [
+    jsu.setObjectAttributes(this, options, [
         // allowed options
         'title',
         'place',
@@ -92,13 +97,13 @@ MSBrowser.prototype.init = function () {
         return;
     this.initialized = true;
 
-    if (utils.get_cookie('catalog-display_mode') == 'thumbnail') {
+    if (jsu.getCookie('catalog-display_mode') == 'thumbnail') {
         this.display_as_thumbnails = true;
         if (!this.use_overlay)
             $('#container').removeClass('max-width-1200');
     }
 
-    if (utils.get_cookie('catalog-display_types_icons') == 'yes') {
+    if (jsu.getCookie('catalog-display_types_icons') == 'yes') {
         this.display_types_icons = true;
     }
 
@@ -233,12 +238,10 @@ MSBrowser.prototype.open = function () {
     if (!this.use_overlay)
         return;
     this.init();
-    var obj = this;
     this.overlay.show({
         mode: 'html',
         title: this.title,
-        html: this.$widget,
-        on_hide: function () { obj.$widget.detach(); }
+        html: this.$widget
     });
 };
 MSBrowser.prototype.update_catalog = function (item, full) {

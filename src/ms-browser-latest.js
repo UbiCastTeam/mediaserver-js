@@ -3,7 +3,7 @@
 * Copyright: UbiCast, all rights reserved  *
 * Author: Stephane Diemer                  *
 *******************************************/
-/* globals utils */
+/* global jsu */
 
 function MSBrowserLatest(options) {
     // params
@@ -20,7 +20,7 @@ function MSBrowserLatest(options) {
     this.can_add_channel = false;
     this.can_add_video = false;
 
-    utils.setup_class(this, options, [
+    jsu.setObjectAttributes(this, options, [
         // allowed options
         'browser'
     ]);
@@ -39,24 +39,24 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
     html += '<div id="ms_browser_latest_menu" style="display: none;">';
     if (dc.length > 1) {
         html +=     '<div class="ms-browser-dropdown" id="ms_browser_latest_types_dropdown">';
-        html +=         '<button type="button" aria-controls="ms_browser_latest_types_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+utils.translate('Content types')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+        html +=         '<button type="button" aria-controls="ms_browser_latest_types_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button '+this.browser.btn_class+'">'+jsu.translate('Content types')+' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
         html +=         '<div class="ms-browser-dropdown-menu ms-browser-latest-types" id="ms_browser_latest_types_dropdown_menu">';
-        html +=             '<h4>'+utils.translate('Content types to display:')+'</h4>';
+        html +=             '<h4>'+jsu.translate('Content types to display:')+'</h4>';
         if (dc.indexOf('c') != -1) {
             html += '<p><input id="latest_display_channel" type="checkbox">';
-            html += ' <label for="latest_display_channel">'+utils.translate('channels')+'</label></p>';
+            html += ' <label for="latest_display_channel">'+jsu.translate('channels')+'</label></p>';
         }
         if (dc.indexOf('v') != -1) {
             html += '<p><input id="latest_display_video" type="checkbox">';
-            html += ' <label for="latest_display_video">'+utils.translate('videos')+'</label></p>';
+            html += ' <label for="latest_display_video">'+jsu.translate('videos')+'</label></p>';
         }
         if (dc.indexOf('l') != -1) {
             html += '<p><input id="latest_display_live" type="checkbox">';
-            html += ' <label for="latest_display_live">'+utils.translate('live streams')+'</label></p>';
+            html += ' <label for="latest_display_live">'+jsu.translate('live streams')+'</label></p>';
         }
         if (dc.indexOf('p') != -1) {
             html += '<p><input id="latest_display_photos" type="checkbox">';
-            html += ' <label for="latest_display_photos">'+utils.translate('photos')+'</label></p>';
+            html += ' <label for="latest_display_photos">'+jsu.translate('photos')+'</label></p>';
         }
         html +=         '</div>';
         html +=     '</div>';
@@ -69,7 +69,7 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
         $('.ms-browser-latest-types input', this.$menu).change({ obj: this }, function (event) {
             event.data.obj.refresh_display(true);
             var type_letter = this.id.split('_')[2][0];
-            var types = utils.get_cookie('catalog-lastest_types');
+            var types = jsu.getCookie('catalog-lastest_types');
             if (!types)
                 types = 'vlp';
             if (this.checked) {
@@ -78,17 +78,17 @@ MSBrowserLatest.prototype.get_menu_jq = function () {
             } else {
                 types = types.replace(new RegExp(type_letter), '');
             }
-            utils.set_cookie('catalog-lastest_types', types);
+            jsu.setCookie('catalog-lastest_types', types);
         });
     }
     return this.$menu;
 };
 MSBrowserLatest.prototype.get_content_jq = function () {
-    var more_label = utils.translate('Display {count} more items');
+    var more_label = jsu.translate('Display {count} more items');
     var html = '';
     html += '<div id="ms_browser_latest" class="ms-browser-content" style="display: none;">';
     html +=     '<div class="messages">';
-    html +=         '<div class="message info">'+utils.translate('This list presents all media and channels ordered by add date.')+'</div>';
+    html +=         '<div class="message info">'+jsu.translate('This list presents all media and channels ordered by add date.')+'</div>';
     html +=     '</div>';
     html +=     '<div class="ms-browser-latest-place"></div>';
     html +=     '<div class="ms-browser-latest-btns">';
@@ -105,14 +105,14 @@ MSBrowserLatest.prototype.get_content_jq = function () {
 };
 
 MSBrowserLatest.prototype.on_show = function () {
-    this.browser.set_title('latest', utils.translate('Latest content added'));
+    this.browser.set_title('latest', jsu.translate('Latest content added'));
     if (this.initialized)
         return;
     this.initialized = true;
 
     var dc = this.get_displayable_content();
     if (dc.length > 1) {
-        var types = utils.get_cookie('catalog-lastest_types');
+        var types = jsu.getCookie('catalog-lastest_types');
         if (!types)
             types = 'vlp';
         $('.ms-browser-latest-types #latest_display_channel', this.$menu).prop('checked', types.indexOf('c') != -1);
@@ -195,7 +195,7 @@ MSBrowserLatest.prototype._on_ajax_error = function (response) {
         var login_url = this.browser.url_login+'?next='+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
         message += '<div class="item-description">';
         message += '<div class="message error">'+response.error+'</div>';
-        message += '<p>'+utils.translate('Please login to access this page')+'<br /> <a href="'+login_url+'">'+utils.translate('Sign in')+'</a></p>';
+        message += '<p>'+jsu.translate('Please login to access this page')+'<br /> <a href="'+login_url+'">'+jsu.translate('Sign in')+'</a></p>';
         message += '</div>';
     } else {
         message += '<div class="message error">'+response.error+'</div>';
@@ -241,7 +241,7 @@ MSBrowserLatest.prototype._on_ajax_response = function (response) {
         this.$section.append(this.browser.get_content_entry(type, item, selectable, 'latest'));
     }
     if (this.$section === null) {
-        var $msg = $('<div class="messages"><div class="message info">'+utils.translate('No contents.')+'</div></div>');
+        var $msg = $('<div class="messages"><div class="message info">'+jsu.translate('No contents.')+'</div></div>');
         this.$place.append($msg);
     }
     if (this.more)
