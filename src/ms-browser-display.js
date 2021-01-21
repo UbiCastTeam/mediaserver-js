@@ -816,8 +816,8 @@ MSBrowser.prototype.get_entry_links = function (item, item_type, selectable) {
                 msg = 'failed to copy';
                 console.log('Failed to copy to clipboard: ' + err);
             }
-            msg = '<i class="fa ' + (successful ? 'fa-check' : 'fa-warning') + '" aria-hidden="true"></i> ' + jsu.translate(msg);
-            $btn.append('<span class="copy-msg">' + jsu.escapeHTML(msg) + '</span>');
+            msg = '<i class="fa ' + (successful ? 'fa-check' : 'fa-warning') + '" aria-hidden="true"></i> ' + jsu.escapeHTML(jsu.translate(msg));
+            $btn.append('<span class="copy-msg">' + msg + '</span>');
             $btn.addClass('copied');
             setTimeout(function () {
                 $btn.removeClass('copied');
