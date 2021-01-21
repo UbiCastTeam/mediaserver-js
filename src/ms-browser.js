@@ -132,7 +132,6 @@ MSBrowser.prototype.init = function () {
 
         if (url_data.lti) {
             this.lti_mode = true;
-            this.filter_speaker = 'self';
             url_params.push('lti');
         }
 
