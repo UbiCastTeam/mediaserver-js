@@ -11,6 +11,7 @@ function MSBrowserSearch(options) {
     // vars
     this.$menu = null;
     this.$content = null;
+    this.order = 'default';
     this.last_response = null;
     this.search_in_fields = [
         { name: 'in_title', label: 'titles', initial: true, items: null },
@@ -157,6 +158,10 @@ MSBrowserSearch.prototype.on_show = function () {
         });
     }
 };
+MSBrowserSearch.prototype.set_order = function (order) {
+    this.order = order ? order : 'default';
+    this.refresh_display(true);
+};
 
 MSBrowserSearch.prototype.on_url_change = function () {
     if (!this.initialized)
@@ -235,6 +240,7 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
     var data = {
         search: search,
         content: content,
+        order_by: this.order,
         fields: fields
     };
     if (this.browser.filter_editable !== null)
@@ -245,9 +251,8 @@ MSBrowserSearch.prototype.on_search_submit = function (no_pushstate) {
         data.speaker = this.browser.filter_speaker;
     if (this.browser.filter_no_categories) {
         data.no_categories = true;
-    } else {
-        if (this.browser.filter_categories.length > 0)
-            data.categories = this.browser.filter_categories.join('\n');
+    } else if (this.browser.filter_categories.length > 0) {
+        data.categories = this.browser.filter_categories.join('\n');
     }
     // change url
     var title = jsu.escapeHTML(jsu.translate('Search results for:')+' '+search);

@@ -92,7 +92,7 @@ MSBrowser.prototype.build_widget = function () {
 };
 MSBrowser.prototype.get_top_menu_jq = function () {
     var sorting_values = [
-        { 'default': jsu.translate('Use channel default sorting') },
+        { 'default': jsu.translate('Use default sorting') },
         { 'creation_date-desc': jsu.translate('Creation date, descending') },
         { 'creation_date-asc': jsu.translate('Creation date, ascending') },
         { 'add_date-desc': jsu.translate('Add date, descending') },
@@ -166,6 +166,7 @@ MSBrowser.prototype.get_top_menu_jq = function () {
     });
     $('#ms_browser_order_channel', $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
         event.data.obj.channels.set_order($(this).val());
+        event.data.obj.search.set_order($(this).val());
     });
     $('#ms_browser_filters_form select', $dropdown).change({ obj: this, $dropdown: $dropdown }, function (event) {
         $('#ms_browser_filters_form', event.data.$dropdown).submit();
@@ -370,10 +371,11 @@ MSBrowser.prototype.change_tab = function (tab, no_pushstate) {
         this[tab].on_show();
     }
     // special case
-    if (tab == 'channels')
+    if (tab != 'latest') {
         $('.ms-browser-channel-order', this.$top_menu).css('display', '');
-    else
+    } else {
         $('.ms-browser-channel-order', this.$top_menu).css('display', 'none');
+    }
 
     if (!this.use_overlay && !no_pushstate) {
         var url;

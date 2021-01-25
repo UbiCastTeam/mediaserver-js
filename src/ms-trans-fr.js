@@ -192,7 +192,7 @@ jsu.addTranslations({
     'Unable to get search\'s results content because you cannot access to this channel.': 'Impossible d\'obtenir les résultats de la recherche car vous ne disposez pas du droit d\'accès à cette chaîne.',
     'unspecified': 'non spécifié',
     'Unspecified': 'Non spécifié',
-    'Use channel default sorting': 'Utiliser le tri par défaut des chaînes',
+    'Use default sorting': 'Utiliser le tri par défaut',
     'Use the input above to search for something.': 'Utilisez le champ de texte ci dessus pour rechercher du contenu.',
     'video': 'vidéo',
     'video(s)': 'vidéo(s)',
