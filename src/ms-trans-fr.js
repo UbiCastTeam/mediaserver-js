@@ -141,6 +141,8 @@ jsu.addTranslations({
     'selected tab': 'onglet sélectionné',
     'September': 'septembre',
     'Sign in': 'Connexion',
+    'Slug, ascending': 'Jeton, croissant',
+    'Slug, descending': 'Jeton, décroissant',
     'Some contents may still exist in this channel but if it is the case your account is not allowed to see them.': 'Du contenu peut tout de même être présent dans cette chaîne mais si c\'est le cas, votre compte utilisateur ne possède pas la permission de le voir.',
     'Sort by:': 'Trier par :',
     'Speaker': 'Intervenant',

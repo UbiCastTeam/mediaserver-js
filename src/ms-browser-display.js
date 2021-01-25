@@ -99,6 +99,8 @@ MSBrowser.prototype.get_top_menu_jq = function () {
         { 'add_date-asc': jsu.translate('Add date, ascending') },
         { 'title-desc': jsu.translate('Title, descending') },
         { 'title-asc': jsu.translate('Title, ascending') },
+        { 'slug-desc': jsu.translate('Slug, descending') },
+        { 'slug-asc': jsu.translate('Slug, ascending') },
         // { 'comments-desc': jsu.translate('Number of annotations, descending') },
         // { 'comments-asc': jsu.translate('Number of annotations, ascending') },
         { 'views-desc': jsu.translate('Number of views, descending') },
