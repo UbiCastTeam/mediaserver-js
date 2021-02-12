@@ -1,0 +1,617 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-02-12 15:18+0100\n"
+"PO-Revision-Date: 2021-02-12 15:24+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+msgid "Access denied."
+msgstr "Accès refusé."
+
+msgid "Add a channel"
+msgstr "Ajouter une chaîne"
+
+msgid "Add a sub channel"
+msgstr "Ajouter une sous chaîne"
+
+msgid "Add a video"
+msgstr "Ajouter une vidéo"
+
+msgid "Add date, ascending"
+msgstr "Date d'ajout, croissante"
+
+msgid "Add date, descending"
+msgstr "Date d'ajout, décroissante"
+
+msgid "Added on"
+msgstr "Ajouté le"
+
+msgid "all"
+msgstr "tout"
+
+msgid "An error occurred during request:"
+msgstr "Une erreur est survenue pendant la requête :"
+
+msgid "An error occurred in the server. Please try again later."
+msgstr "La requête a échoué. Veuillez réessayer plus tard."
+
+msgid "An internal server error occurred. An email has been sent to the support team."
+msgstr "Une erreur interne au serveur est survenue. Un email a été envoyé à l'équipe de support afin de résoudre le problème."
+
+msgid "Annotations last month"
+msgstr "Annotations ce mois"
+
+msgid "Annotations"
+msgstr "Annotations"
+
+msgid "annotations"
+msgstr "annotations"
+
+msgid "Apply"
+msgstr "Appliquer"
+
+msgid "April"
+msgstr "Avril"
+
+msgid "at"
+msgstr "à"
+
+msgid "August"
+msgstr "Ao&ucirc;t"
+
+msgid "Available space:"
+msgstr "Espace disponible :"
+
+msgid "B"
+msgstr "o"
+
+msgid "cannot copy"
+msgstr "impossible de copier"
+
+msgid "Categories"
+msgstr "Catégories"
+
+msgid "categories"
+msgstr "catégories"
+
+msgid "Channel content:"
+msgstr "Contenu de la chaîne :"
+
+msgid "channel"
+msgstr "chaîne"
+
+msgid "channel(s)"
+msgstr "chaîne(s)"
+
+msgid "Channel:"
+msgstr "Chaîne :"
+
+msgid "Channels list"
+msgstr "Liste des chaînes"
+
+msgid "channels"
+msgstr "chaînes"
+
+msgid "Channels"
+msgstr "Chaînes"
+
+msgid "chapters"
+msgstr "chapitres"
+
+msgid "classic Rich Media"
+msgstr "Rich Media classique"
+
+msgid "Click to display the content of this channel"
+msgstr "Cliquez pour afficher cette chaîne"
+
+msgid "Click to select this media"
+msgstr "Cliquez pour sélectionner ce média"
+
+msgid "comments, slides, ..."
+msgstr "commentaires, diapositives, ..."
+
+msgid "companies"
+msgstr "sociétés"
+
+msgid "Content types to display:"
+msgstr "Types de contenu à afficher :"
+
+msgid "Content types"
+msgstr "Types de contenu"
+
+msgid "copied"
+msgstr "copié"
+
+msgid "Copy LTI link"
+msgstr "Copier le lien LTI"
+
+msgid "Created on"
+msgstr "Créé le"
+
+msgid "Creation date, ascending"
+msgstr "Date de création, croissante"
+
+msgid "Creation date, descending"
+msgstr "Date de création, décroissante"
+
+msgid "Current channel"
+msgstr "Chaîne courante"
+
+msgid "December"
+msgstr "D&eacute;cembre"
+
+msgid "descriptions"
+msgstr "descriptions"
+
+msgid "Display channel"
+msgstr "Afficher la chaîne"
+
+msgid "Display channels"
+msgstr "Afficher les chaînes"
+
+msgid "display items type icons"
+msgstr "afficher les icônes de type des éléments"
+
+msgid "Display mode:"
+msgstr "Mode d'affichage :"
+
+msgid "Display parent channel"
+msgstr "Afficher la chaîne parente"
+
+msgid "Display {count} more items"
+msgstr "Afficher {count} vidéos de plus"
+
+msgid "Display"
+msgstr "Affichage"
+
+msgid "Duration"
+msgstr "Durée"
+
+msgid "dynamic Rich Media"
+msgstr "Rich Media dynamique"
+
+msgid "Edit it"
+msgstr "Éditer"
+
+msgid "Edit this channel"
+msgstr "Éditer cette chaîne"
+
+msgid "Edit"
+msgstr "Éditer"
+
+msgid "Editable:"
+msgstr "Éditable:"
+
+msgid "failed to copy"
+msgstr "échec de la copie"
+
+msgid "February"
+msgstr "F&eacute;vrier"
+
+msgid "Filters:"
+msgstr "Filtres :"
+
+msgid "Go"
+msgstr "Envoyer"
+
+msgid "help"
+msgstr "aide"
+
+msgid "Hide this window"
+msgstr "Fermer cette fenêtre"
+
+msgid "Information about media"
+msgstr "Informations sur le média"
+
+msgid "Item not found."
+msgstr "Élément introuvable."
+
+msgid "iTunes (audio only)"
+msgstr "iTunes (audio uniquement)"
+
+msgid "January"
+msgstr "Janvier"
+
+msgid "July"
+msgstr "Juillet"
+
+msgid "June"
+msgstr "Juin"
+
+msgid "keywords"
+msgstr "mots clés"
+
+msgid "Latest content added"
+msgstr "Contenu récemment ajouté"
+
+msgid "Latest content"
+msgstr "Contenu récent"
+
+msgid "licenses"
+msgstr "licences"
+
+msgid "list"
+msgstr "liste"
+
+msgid "live stream(s)"
+msgstr "diffusion(s) en direct"
+
+msgid "live streams"
+msgstr "diffusions en direct"
+
+msgid "Live streams"
+msgstr "Diffusions en direct"
+
+msgid "Loading"
+msgstr "Chargement"
+
+msgid "Loading..."
+msgstr "Chargement ..."
+
+msgid "locations"
+msgstr "emplacements"
+
+msgid "Main channels"
+msgstr "Chaînes principales"
+
+msgid "March"
+msgstr "Mars"
+
+msgid "Matching annotations:"
+msgstr "Annotations correspondantes :"
+
+msgid "Matching items:"
+msgstr "Éléments correspondants :"
+
+msgid "Matching photos:"
+msgstr "Photos correspondantes :"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "Media does not exist."
+msgstr "Le média n'existe pas."
+
+msgid "My channel"
+msgstr "Ma chaîne"
+
+msgid "My media"
+msgstr "Mes médias"
+
+msgid "No available space"
+msgstr "Pas d'espace disponible"
+
+msgid "No contents."
+msgstr "Pas de contenu."
+
+msgid "No information about error."
+msgstr "Informations sur le média."
+
+msgid "No information about media."
+msgstr "Pas d'informations sur le média."
+
+msgid "No results."
+msgstr "Pas de résultats."
+
+msgid "no"
+msgstr "non"
+
+msgid "none"
+msgstr "aucun"
+
+msgid "November"
+msgstr "Novembre"
+
+msgid "Number of annotations, ascending"
+msgstr "Nombre de annotations, croissant"
+
+msgid "Number of annotations, descending"
+msgstr "Nombre de annotations, décroissant"
+
+msgid "Number of views, ascending"
+msgstr "Nombre de vues, croissant"
+
+msgid "Number of views, descending"
+msgstr "Nombre de vues, décroissant"
+
+msgid "October"
+msgstr "Octobre"
+
+msgid "Open information panel"
+msgstr "Ouvrir le panneau d'information"
+
+msgid "Parent channel"
+msgstr "Chaîne parente"
+
+msgid "Parent channel:"
+msgstr "Chaîne parente :"
+
+msgid "photos group(s)"
+msgstr "groupe(s) de photos"
+
+msgid "photos groups"
+msgstr "groupes de photos"
+
+msgid "Photos groups"
+msgstr "Groupes de photos"
+
+msgid "photos"
+msgstr "photos"
+
+msgid "Please login to access this channel"
+msgstr "Veuillez vous connecter pour accéder à cette chaîne"
+
+msgid "Published:"
+msgstr "Publié:"
+
+msgid "Publishing date"
+msgstr "Date de publication"
+
+msgid "Recording date"
+msgstr "Date d'enregistrement"
+
+msgid "Requested channel does not exist."
+msgstr "La chaîne demandée n'existe pas."
+
+msgid "Root"
+msgstr "Racine"
+
+msgid "Search for"
+msgstr "Contenu à rechercher"
+
+msgid "Search in my media"
+msgstr "Rechercher dans mes médias"
+
+msgid "Search in progress"
+msgstr "Recherche en cours"
+
+msgid "Search in"
+msgstr "Rechercher dans"
+
+msgid "Search results for:"
+msgstr "Résultats de recherche pour:"
+
+msgid "Search"
+msgstr "Rechercher"
+
+msgid "Search:"
+msgstr "Rechercher :"
+
+msgid "See statistics on this channel"
+msgstr "Voir les statistiques de cette chaîne"
+
+msgid "See"
+msgstr "Voir"
+
+msgid "Select a channel to display its content."
+msgstr "Sélectionnez une chaîne pour afficher son contenu."
+
+msgid "Select a channel"
+msgstr "Sélectionner une chaîne"
+
+msgid "Select a media"
+msgstr "Sélectionner un média"
+
+msgid "Select this channel"
+msgstr "Sélectionner cette chaîne"
+
+msgid "Select this media"
+msgstr "Sélectionner ce média"
+
+msgid "selected setting"
+msgstr "option sélectionnée"
+
+msgid "selected tab"
+msgstr "onglet sélectionné"
+
+msgid "September"
+msgstr "Septembre"
+
+msgid "Sign in"
+msgstr "Connexion"
+
+msgid "Slug, ascending"
+msgstr "Jeton, croissant"
+
+msgid "Slug, descending"
+msgstr "Jeton, décroissant"
+
+msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
+msgstr "Du contenu peut tout de même être présent dans cette chaîne mais si c'est le cas, votre compte utilisateur ne possède pas la permission de le voir."
+
+msgid "Sort by:"
+msgstr "Trier par :"
+
+msgid "Speaker"
+msgstr "Intervenant"
+
+msgid "Speaker:"
+msgstr "Intervenant :"
+
+msgid "speakers"
+msgstr "intervenants"
+
+msgid "standard"
+msgstr "standard"
+
+msgid "Statistics"
+msgstr "Statistiques"
+
+msgid "Storage usage"
+msgstr "Stockage utilisé"
+
+msgid "Storage usage:"
+msgstr "Stockage utilisé :"
+
+msgid "Sub channels items are included in counts."
+msgstr "Les éléments contenus dans les sous chaînes sont inclus dans les comptes."
+
+msgid "Sub channels"
+msgstr "Sous chaînes"
+
+msgid "Subscribe to channel videos RSS"
+msgstr "S'abonner au flux RSS des vidéos de la chaîne"
+
+msgid "Subscribe to channel videos RSS:"
+msgstr "S'abonner au flux RSS des vidéos de la chaîne :"
+
+msgid "The connection timed out. Please retry later."
+msgstr "Le délai d'attente de réponse a été dépassé. Veuillez réessayez plus tard."
+
+msgid "The query has been found in audio:"
+msgstr "Le mot recherché a été trouvé dans la bande audio de cette vidéo :"
+
+msgid "The query has been found in following photos:"
+msgstr "Le mot recherché a été trouvé dans les photos suivantes :"
+
+msgid "The query has been found in following slides:"
+msgstr "Le mot recherché a été trouvé dans les diapositives suivantes :"
+
+msgid "The server cannot be reached."
+msgstr "Le serveur est injoignable."
+
+msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
+msgstr "Le quota de stockage des chaînes en amont peut avoir un impact sur l'espace disponible dans cette chaîne."
+
+msgid "This channel contains no media."
+msgstr "Cette chaîne ne contient pas de médias."
+
+msgid "This channel contains no sub channels and no media."
+msgstr "Cette chaîne ne contient pas de sous chaînes ni de médias."
+
+msgid "This channel contains no sub channels."
+msgstr "Cette chaîne ne contient pas de sous chaînes."
+
+msgid "This channel is selected"
+msgstr "Cette chaîne est sélectionnée"
+
+msgid "This channel is unlisted"
+msgstr "Cette chaîne est non listée"
+
+msgid "This item is a channel"
+msgstr "Cet élément est une chaîne"
+
+msgid "This item is a live stream"
+msgstr "Cet élément est une diffusion en direct"
+
+msgid "This item is a photos group"
+msgstr "Cet élément est un groupe de photos"
+
+msgid "This item is a video"
+msgstr "Cet élément est une vidéo"
+
+msgid "This list presents all media and channels ordered by add date."
+msgstr "Cette liste présente les derniers éléments ajoutés triés par date d'ajout."
+
+msgid "This media is not published"
+msgstr "Ce média n'est pas publié"
+
+msgid "This media is published and unlisted"
+msgstr "Ce média est publié et non listé"
+
+msgid "This media is published"
+msgstr "Ce média est publié"
+
+msgid "This media is selected"
+msgstr "Ce média est sélectionné"
+
+msgid "this month"
+msgstr "ce mois"
+
+msgid "This video is not ready"
+msgstr "Cette vidéo n'est pas prête"
+
+msgid "thumbnails"
+msgstr "vignettes"
+
+msgid "Title, ascending"
+msgstr "Titre, croissant"
+
+msgid "Title, descending"
+msgstr "Titre, décroissant"
+
+msgid "titles"
+msgstr "titres"
+
+msgid "Type:"
+msgstr "Type :"
+
+msgid "Unable to get channel content because you cannot access to this channel."
+msgstr "Impossible d'obtenir la liste du contenu de la chaîne car vous ne disposez pas du droit d'accès à cette chaîne."
+
+msgid "Unable to get channel content. Request timed out."
+msgstr "Impossible d'obtenir le contenu de la chaîne. Délai d'attente pour la requête expiré."
+
+msgid "Unable to get channel information because you cannot access to this channel."
+msgstr "Impossible d'obtenir les informations sur la chaîne car vous ne pouvez pas accéder à cette chaîne."
+
+msgid "Unable to get channels tree because you are not logged in."
+msgstr "Impossible d'obtenir la liste des chaînes, vous n'êtes pas authentifié."
+
+msgid "Unable to get channels tree because you cannot access to this channel."
+msgstr "Impossible d'obtenir la liste du contenu de la chaîne car vous ne disposez pas du droit d'accès à cette chaîne."
+
+msgid "Unable to get channels tree. Request timed out."
+msgstr "Impossible d'obtenir la liste des chaînes. Délai d'attente de la requête écoulé."
+
+msgid "Unable to get media information because you cannot access to this media."
+msgstr "Impossible d'obtenir les informations sur le média car vous ne pouvez pas accéder à ce média."
+
+msgid "Unable to get media information. Request timed out."
+msgstr "Impossible d'obtenir les informations sur le média. Délai d'attente de la requête écoulé."
+
+msgid "Unable to get search's results content because you cannot access to this channel."
+msgstr "Impossible d'obtenir les résultats de la recherche car vous ne disposez pas du droit d'accès à cette chaîne."
+
+msgid "unspecified"
+msgstr "non spécifié"
+
+msgid "Unspecified"
+msgstr "Non spécifié"
+
+msgid "Use default sorting"
+msgstr "Utiliser le tri par défaut"
+
+msgid "Use the input above to search for something."
+msgstr "Utilisez le champ de texte ci dessus pour rechercher du contenu."
+
+msgid "video"
+msgstr "vidéo"
+
+msgid "video(s)"
+msgstr "vidéo(s)"
+
+msgid "videos"
+msgstr "vidéos"
+
+msgid "Videos"
+msgstr "Vidéos"
+
+msgid "Views last month"
+msgstr "Vues ce mois"
+
+msgid "Views"
+msgstr "Vues"
+
+msgid "views"
+msgstr "vues"
+
+msgid "yes"
+msgstr "oui"
+
+msgid "selected"
+msgstr "sélectionné"
+
+msgid "You are not allowed to have a personnal channel."
+msgstr "Vous n'avez pas la permission de disposer d'une chaîne personnelle."
+
+msgid "You are not logged in or your session has expired. Please login and retry."
+msgstr "Vous n'êtes pas connecté ou votre session a expiré. Veuillez vous reconnecter puis réessayez."

@@ -1,0 +1,28 @@
+{
+  "name": "ms-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build",
+    "lint": "eslint src/*.js",
+    "translations_fr": "node po2js.js locales/fr.po locales/fr.js",
+    "translations_de": "node po2js.js locales/de.po locales/de.js",
+    "translations_fi": "node po2js.js locales/fi.po locales/fi.js",
+    "translations_nl": "node po2js.js locales/nl.po locales/nl.js",
+    "translations_es": "node po2js.js locales/es.po locales/es.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "latest",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0",
+    "gulp-rename": "^2.0.0",
+    "node-getopt": "^0.3.2",
+    "po2json": "^0.4.5"
+  }
+}
