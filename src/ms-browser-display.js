@@ -564,7 +564,7 @@ MSBrowser.prototype._get_entry_block_html = function (item, item_type, clickable
             else
                 top_bar += 'layout-video';
             top_bar += '" title="';
-            var title_text = jsu.translate(item_type == 'live' ? 'This item is a live stream' : 'This item is a video');
+            var title_text = item_type == 'live' ? jsu.translate('This item is a live stream') : jsu.translate('This item is a video');
             if (item.layout) {
                 if (item.layout == 'composition') {
                     title_text += ' (' + jsu.translate('dynamic Rich Media') + ')';
