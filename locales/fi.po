@@ -1,617 +1,691 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2021-02-12 15:19+0100\n"
-"PO-Revision-Date: 2021-02-12 15:19+0100\n"
-"Last-Translator: \n"
+"Project-Id-Version: MediaServer-JS\n"
+"POT-Creation-Date: 2021-02-16 18:28+0100\n"
+"PO-Revision-Date: 2021-02-16 18:28+0100\n"
+"Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
-"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: fi\n"
-
-msgid "Access denied."
-msgstr ""
-
-msgid "Add a channel"
-msgstr ""
-
-msgid "Add a sub channel"
-msgstr ""
-
-msgid "Add a video"
-msgstr ""
-
-msgid "Add date, ascending"
-msgstr ""
-
-msgid "Add date, descending"
-msgstr ""
-
-msgid "Added on"
-msgstr ""
-
-msgid "all"
-msgstr ""
-
-msgid "An error occurred during request:"
-msgstr ""
-
-msgid "An error occurred in the server. Please try again later."
-msgstr ""
-
-msgid "An internal server error occurred. An email has been sent to the support team."
-msgstr ""
-
-msgid "Annotations last month"
-msgstr ""
-
-msgid "Annotations"
-msgstr ""
-
-msgid "annotations"
-msgstr ""
-
-msgid "Apply"
-msgstr ""
-
-msgid "April"
-msgstr ""
-
-msgid "at"
-msgstr ""
-
-msgid "August"
-msgstr ""
-
-msgid "Available space:"
-msgstr ""
-
-msgid "B"
-msgstr ""
-
-msgid "cannot copy"
-msgstr ""
-
-msgid "Categories"
-msgstr ""
-
-msgid "categories"
-msgstr ""
-
-msgid "Channel content:"
-msgstr ""
-
-msgid "channel"
-msgstr ""
-
-msgid "channel(s)"
-msgstr ""
-
-msgid "Channel:"
-msgstr ""
-
-msgid "Channels list"
-msgstr ""
-
-msgid "channels"
-msgstr ""
-
-msgid "Channels"
-msgstr ""
-
-msgid "chapters"
-msgstr ""
-
-msgid "classic Rich Media"
-msgstr ""
-
-msgid "Click to display the content of this channel"
-msgstr ""
-
-msgid "Click to select this media"
-msgstr ""
-
-msgid "comments, slides, ..."
-msgstr ""
-
-msgid "companies"
-msgstr ""
-
-msgid "Content types to display:"
-msgstr ""
-
-msgid "Content types"
-msgstr ""
-
-msgid "copied"
-msgstr ""
-
-msgid "Copy LTI link"
-msgstr ""
-
-msgid "Created on"
-msgstr ""
-
-msgid "Creation date, ascending"
-msgstr ""
-
-msgid "Creation date, descending"
-msgstr ""
-
-msgid "Current channel"
-msgstr ""
-
-msgid "December"
-msgstr ""
-
-msgid "descriptions"
-msgstr ""
-
-msgid "Display channel"
-msgstr ""
-
-msgid "Display channels"
-msgstr ""
-
-msgid "display items type icons"
-msgstr ""
-
-msgid "Display mode:"
-msgstr ""
-
-msgid "Display parent channel"
-msgstr ""
-
-msgid "Display {count} more items"
-msgstr ""
-
-msgid "Display"
-msgstr ""
-
-msgid "Duration"
-msgstr ""
-
-msgid "dynamic Rich Media"
-msgstr ""
-
-msgid "Edit it"
-msgstr ""
-
-msgid "Edit this channel"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Editable:"
-msgstr ""
-
-msgid "failed to copy"
-msgstr ""
-
-msgid "February"
-msgstr ""
-
-msgid "Filters:"
-msgstr ""
-
-msgid "Go"
-msgstr ""
-
-msgid "help"
-msgstr ""
-
-msgid "Hide this window"
-msgstr ""
-
-msgid "Information about media"
-msgstr ""
-
-msgid "Item not found."
-msgstr ""
-
-msgid "iTunes (audio only)"
-msgstr ""
-
+"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-Basepath: ../src\n"
+"X-Poedit-KeywordsList: ;translate:1;translate:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: extra-translations/jsu-translations.js:8
 msgid "January"
 msgstr ""
 
-msgid "July"
+#: extra-translations/jsu-translations.js:9
+msgid "February"
 msgstr ""
 
-msgid "June"
-msgstr ""
-
-msgid "keywords"
-msgstr ""
-
-msgid "Latest content added"
-msgstr ""
-
-msgid "Latest content"
-msgstr ""
-
-msgid "licenses"
-msgstr ""
-
-msgid "list"
-msgstr ""
-
-msgid "live stream(s)"
-msgstr ""
-
-msgid "live streams"
-msgstr ""
-
-msgid "Live streams"
-msgstr ""
-
-msgid "Loading"
-msgstr ""
-
-msgid "Loading..."
-msgstr ""
-
-msgid "locations"
-msgstr ""
-
-msgid "Main channels"
-msgstr ""
-
+#: extra-translations/jsu-translations.js:10
 msgid "March"
 msgstr ""
 
-msgid "Matching annotations:"
+#: extra-translations/jsu-translations.js:11
+msgid "April"
 msgstr ""
 
-msgid "Matching items:"
-msgstr ""
-
-msgid "Matching photos:"
-msgstr ""
-
+#: extra-translations/jsu-translations.js:12
 msgid "May"
 msgstr ""
 
-msgid "Media does not exist."
+#: extra-translations/jsu-translations.js:13
+msgid "June"
 msgstr ""
 
-msgid "My channel"
+#: extra-translations/jsu-translations.js:14
+msgid "July"
 msgstr ""
 
-msgid "My media"
+#: extra-translations/jsu-translations.js:15
+msgid "August"
 msgstr ""
 
-msgid "No available space"
-msgstr ""
-
-msgid "No contents."
-msgstr ""
-
-msgid "No information about error."
-msgstr ""
-
-msgid "No information about media."
-msgstr ""
-
-msgid "No results."
-msgstr ""
-
-msgid "no"
-msgstr ""
-
-msgid "none"
-msgstr ""
-
-msgid "November"
-msgstr ""
-
-msgid "Number of annotations, ascending"
-msgstr ""
-
-msgid "Number of annotations, descending"
-msgstr ""
-
-msgid "Number of views, ascending"
-msgstr ""
-
-msgid "Number of views, descending"
-msgstr ""
-
-msgid "October"
-msgstr ""
-
-msgid "Open information panel"
-msgstr ""
-
-msgid "Parent channel"
-msgstr ""
-
-msgid "Parent channel:"
-msgstr ""
-
-msgid "photos group(s)"
-msgstr ""
-
-msgid "photos groups"
-msgstr ""
-
-msgid "Photos groups"
-msgstr ""
-
-msgid "photos"
-msgstr ""
-
-msgid "Please login to access this channel"
-msgstr ""
-
-msgid "Published:"
-msgstr ""
-
-msgid "Publishing date"
-msgstr ""
-
-msgid "Recording date"
-msgstr ""
-
-msgid "Requested channel does not exist."
-msgstr ""
-
-msgid "Root"
-msgstr ""
-
-msgid "Search for"
-msgstr ""
-
-msgid "Search in my media"
-msgstr ""
-
-msgid "Search in progress"
-msgstr ""
-
-msgid "Search in"
-msgstr ""
-
-msgid "Search results for:"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-msgid "Search:"
-msgstr ""
-
-msgid "See statistics on this channel"
-msgstr ""
-
-msgid "See"
-msgstr ""
-
-msgid "Select a channel to display its content."
-msgstr ""
-
-msgid "Select a channel"
-msgstr ""
-
-msgid "Select a media"
-msgstr ""
-
-msgid "Select this channel"
-msgstr ""
-
-msgid "Select this media"
-msgstr ""
-
-msgid "selected setting"
-msgstr ""
-
-msgid "selected tab"
-msgstr ""
-
+#: extra-translations/jsu-translations.js:16
 msgid "September"
 msgstr ""
 
-msgid "Sign in"
+#: extra-translations/jsu-translations.js:17
+msgid "October"
 msgstr ""
 
-msgid "Slug, ascending"
+#: extra-translations/jsu-translations.js:18
+msgid "November"
 msgstr ""
 
-msgid "Slug, descending"
+#: extra-translations/jsu-translations.js:19
+msgid "December"
 msgstr ""
 
-msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
+#: extra-translations/jsu-translations.js:20
+msgid "at"
 msgstr ""
 
-msgid "Sort by:"
+#: extra-translations/jsu-translations.js:21 ms-api.js:299 ms-api.js:324
+msgid "B"
 msgstr ""
 
-msgid "Speaker"
+#: ms-api.js:15
+msgid "You are not logged in or your session has expired. Please login and retry."
 msgstr ""
 
-msgid "Speaker:"
+#: ms-api.js:16
+msgid "Access denied."
 msgstr ""
 
-msgid "speakers"
+#: ms-api.js:17
+msgid "Item not found."
 msgstr ""
 
-msgid "standard"
+#: ms-api.js:18
+msgid "An internal server error occurred. An email has been sent to the support team."
 msgstr ""
 
-msgid "Statistics"
-msgstr ""
-
-msgid "Storage usage"
-msgstr ""
-
-msgid "Storage usage:"
-msgstr ""
-
-msgid "Sub channels items are included in counts."
-msgstr ""
-
-msgid "Sub channels"
-msgstr ""
-
-msgid "Subscribe to channel videos RSS"
-msgstr ""
-
-msgid "Subscribe to channel videos RSS:"
-msgstr ""
-
+#: ms-api.js:19
 msgid "The connection timed out. Please retry later."
 msgstr ""
 
-msgid "The query has been found in audio:"
-msgstr ""
-
-msgid "The query has been found in following photos:"
-msgstr ""
-
-msgid "The query has been found in following slides:"
-msgstr ""
-
+#: ms-api.js:20 ms-tree.js:174
 msgid "The server cannot be reached."
 msgstr ""
 
-msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
-msgstr ""
-
-msgid "This channel contains no media."
-msgstr ""
-
-msgid "This channel contains no sub channels and no media."
-msgstr ""
-
-msgid "This channel contains no sub channels."
-msgstr ""
-
-msgid "This channel is selected"
-msgstr ""
-
-msgid "This channel is unlisted"
-msgstr ""
-
-msgid "This item is a channel"
-msgstr ""
-
-msgid "This item is a live stream"
-msgstr ""
-
-msgid "This item is a photos group"
-msgstr ""
-
-msgid "This item is a video"
-msgstr ""
-
-msgid "This list presents all media and channels ordered by add date."
-msgstr ""
-
-msgid "This media is not published"
-msgstr ""
-
-msgid "This media is published and unlisted"
-msgstr ""
-
-msgid "This media is published"
-msgstr ""
-
-msgid "This media is selected"
-msgstr ""
-
-msgid "this month"
-msgstr ""
-
-msgid "This video is not ready"
-msgstr ""
-
-msgid "thumbnails"
-msgstr ""
-
-msgid "Title, ascending"
-msgstr ""
-
-msgid "Title, descending"
-msgstr ""
-
-msgid "titles"
-msgstr ""
-
-msgid "Type:"
-msgstr ""
-
-msgid "Unable to get channel content because you cannot access to this channel."
-msgstr ""
-
-msgid "Unable to get channel content. Request timed out."
-msgstr ""
-
-msgid "Unable to get channel information because you cannot access to this channel."
-msgstr ""
-
-msgid "Unable to get channels tree because you are not logged in."
-msgstr ""
-
-msgid "Unable to get channels tree because you cannot access to this channel."
-msgstr ""
-
-msgid "Unable to get channels tree. Request timed out."
-msgstr ""
-
-msgid "Unable to get media information because you cannot access to this media."
-msgstr ""
-
-msgid "Unable to get media information. Request timed out."
-msgstr ""
-
+#: ms-api.js:31
 msgid "Unable to get search's results content because you cannot access to this channel."
 msgstr ""
 
-msgid "unspecified"
+#: ms-api.js:32 ms-api.js:48 ms-api.js:56 ms-api.js:64 ms-api.js:72
+msgid "Requested channel does not exist."
 msgstr ""
 
-msgid "Unspecified"
+#: ms-api.js:47
+msgid "Unable to get channel content because you cannot access to this channel."
 msgstr ""
 
-msgid "Use default sorting"
+#: ms-api.js:55
+msgid "Unable to get channel information because you cannot access to this channel."
 msgstr ""
 
-msgid "Use the input above to search for something."
+#: ms-api.js:63 ms-tree.js:165
+msgid "Unable to get channels tree because you cannot access to this channel."
 msgstr ""
 
-msgid "video"
+#: ms-api.js:71
+msgid "Unable to get channels path because you cannot access to this channel."
 msgstr ""
 
-msgid "video(s)"
+#: ms-api.js:87
+msgid "Unable to get media information because you cannot access to this media."
 msgstr ""
 
-msgid "videos"
+#: ms-api.js:88 ms-api.js:124
+msgid "Media does not exist."
 msgstr ""
 
-msgid "Videos"
+#: ms-api.js:123
+msgid "You are not allowed to perform this action."
 msgstr ""
 
-msgid "Views last month"
+#: ms-api.js:253 ms-tree.js:269
+msgid "No information about error."
 msgstr ""
 
-msgid "Views"
+#: ms-api.js:268
+msgid "Request failed:"
 msgstr ""
 
-msgid "views"
+#: ms-api.js:341
+msgid "Available space:"
 msgstr ""
 
-msgid "yes"
+#: ms-api.js:343
+msgid "No available space"
 msgstr ""
 
-msgid "selected"
+#: ms-api.js:345 ms-browser-channels.js:350
+msgid "help"
 msgstr ""
 
+#: ms-api.js:345
+msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
+msgstr ""
+
+#: ms-browser-channels.js:42 ms-browser-display.js:44
+msgid "Loading..."
+msgstr ""
+
+#: ms-browser-channels.js:46
+msgid "Select a channel to display its content."
+msgstr ""
+
+#: ms-browser-channels.js:61 ms-tree.js:84 ms-tree.js:86
+msgid "Root"
+msgstr ""
+
+#: ms-browser-channels.js:72 ms-browser-display.js:17 ms-tree.js:107
+#: ms-tree.js:392 ms-tree.js:399
+msgid "My channel"
+msgstr ""
+
+#: ms-browser-channels.js:74
+msgid "Main channels"
+msgstr ""
+
+#: ms-browser-channels.js:128
 msgid "You are not allowed to have a personnal channel."
 msgstr ""
 
-msgid "You are not logged in or your session has expired. Please login and retry."
+#: ms-browser-channels.js:180
+msgid "Please login to access this channel"
+msgstr ""
+
+#: ms-browser-channels.js:180 ms-browser-latest.js:198 ms-browser-search.js:289
+msgid "Sign in"
+msgstr ""
+
+#: ms-browser-channels.js:251 ms-browser-channels.js:270
+#: ms-browser-channels.js:271 ms-browser-channels.js:275
+msgid "Parent channel"
+msgstr ""
+
+#: ms-browser-channels.js:312 ms-browser-display.js:629
+msgid "views"
+msgstr ""
+
+#: ms-browser-channels.js:314 ms-browser-channels.js:320
+#: ms-browser-display.js:631
+msgid "this month"
+msgstr ""
+
+#: ms-browser-channels.js:318
+msgid "annotations"
+msgstr ""
+
+#: ms-browser-channels.js:341 ms-browser-search.js:315
+msgid "channel(s)"
+msgstr ""
+
+#: ms-browser-channels.js:343 ms-browser-search.js:317
+msgid "video(s)"
+msgstr ""
+
+#: ms-browser-channels.js:345 ms-browser-search.js:319
+msgid "live stream(s)"
+msgstr ""
+
+#: ms-browser-channels.js:347 ms-browser-search.js:321
+msgid "photos group(s)"
+msgstr ""
+
+#: ms-browser-channels.js:348
+msgid "Channel content:"
+msgstr ""
+
+#: ms-browser-channels.js:350
+msgid "Sub channels items are included in counts."
+msgstr ""
+
+#: ms-browser-channels.js:358 ms-browser-display.js:637
+msgid "Storage usage:"
+msgstr ""
+
+#: ms-browser-channels.js:367
+msgid "Subscribe to channel videos RSS:"
+msgstr ""
+
+#: ms-browser-channels.js:369
+msgid "standard"
+msgstr ""
+
+#: ms-browser-channels.js:371
+msgid "iTunes"
+msgstr ""
+
+#: ms-browser-channels.js:373
+msgid "iTunes (audio only)"
+msgstr ""
+
+#: ms-browser-channels.js:376
+msgid "Subscribe to channel videos RSS"
+msgstr ""
+
+#: ms-browser-channels.js:424
+msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
+msgstr ""
+
+#: ms-browser-display.js:18
+msgid "My media"
+msgstr ""
+
+#: ms-browser-display.js:19
+msgid "Search in my media"
+msgstr ""
+
+#: ms-browser-display.js:21 ms-browser-display.js:429
+msgid "Channels"
+msgstr ""
+
+#: ms-browser-display.js:22
+msgid "Latest content"
+msgstr ""
+
+#: ms-browser-display.js:23 ms-browser-search.js:147
+msgid "Search"
+msgstr ""
+
+#: ms-browser-display.js:95
+msgid "Use default sorting"
+msgstr ""
+
+#: ms-browser-display.js:96
+msgid "Creation date, descending"
+msgstr ""
+
+#: ms-browser-display.js:97
+msgid "Creation date, ascending"
+msgstr ""
+
+#: ms-browser-display.js:98
+msgid "Add date, descending"
+msgstr ""
+
+#: ms-browser-display.js:99
+msgid "Add date, ascending"
+msgstr ""
+
+#: ms-browser-display.js:100
+msgid "Title, descending"
+msgstr ""
+
+#: ms-browser-display.js:101
+msgid "Title, ascending"
+msgstr ""
+
+#: ms-browser-display.js:102
+msgid "Slug, descending"
+msgstr ""
+
+#: ms-browser-display.js:103
+msgid "Slug, ascending"
+msgstr ""
+
+#: ms-browser-display.js:106
+msgid "Number of views, descending"
+msgstr ""
+
+#: ms-browser-display.js:107
+msgid "Number of views, ascending"
+msgstr ""
+
+#: ms-browser-display.js:111
+msgid "Display"
+msgstr ""
+
+#: ms-browser-display.js:115
+msgid "Display mode:"
+msgstr ""
+
+#: ms-browser-display.js:116
+msgid "list"
+msgstr ""
+
+#: ms-browser-display.js:116 ms-browser-display.js:117
+#: ms-browser-display.js:312 ms-browser-display.js:327
+msgid "selected setting"
+msgstr ""
+
+#: ms-browser-display.js:117
+msgid "thumbnails"
+msgstr ""
+
+#: ms-browser-display.js:119
+msgid "display items type icons"
+msgstr ""
+
+#: ms-browser-display.js:121
+msgid "Sort by:"
+msgstr ""
+
+#: ms-browser-display.js:128
+msgid "unspecified"
+msgstr ""
+
+#: ms-browser-display.js:129
+msgid "yes"
+msgstr ""
+
+#: ms-browser-display.js:130
+msgid "no"
+msgstr ""
+
+#: ms-browser-display.js:131
+msgid "Filters:"
+msgstr ""
+
+#: ms-browser-display.js:133
+msgid "Editable:"
+msgstr ""
+
+#: ms-browser-display.js:137
+msgid "Published:"
+msgstr ""
+
+#: ms-browser-display.js:141
+msgid "Speaker:"
+msgstr ""
+
+#: ms-browser-display.js:143
+msgid "Ok"
+msgstr ""
+
+#: ms-browser-display.js:369
+msgid "selected tab"
+msgstr ""
+
+#: ms-browser-display.js:427
+msgid "Sub channels"
+msgstr ""
+
+#: ms-browser-display.js:444
+msgid "Live streams"
+msgstr ""
+
+#: ms-browser-display.js:455
+msgid "Videos"
+msgstr ""
+
+#: ms-browser-display.js:466
+msgid "Photos groups"
+msgstr ""
+
+#: ms-browser-display.js:486 ms-tree.js:84 ms-tree.js:86 ms-tree.js:232
+#: ms-tree.js:353
+msgid "selected"
+msgstr ""
+
+#: ms-browser-display.js:497
+msgid "Open information panel"
+msgstr ""
+
+#: ms-browser-display.js:499 ms-browser-display.js:743
+#: ms-browser-display.js:773
+msgid "Edit"
+msgstr ""
+
+#: ms-browser-display.js:533
+msgid "Click to select this media"
+msgstr ""
+
+#: ms-browser-display.js:555
+msgid "This item is a channel"
+msgstr ""
+
+#: ms-browser-display.js:559
+msgid "This item is a photos group"
+msgstr ""
+
+#: ms-browser-display.js:567
+msgid "This item is a live stream"
+msgstr ""
+
+#: ms-browser-display.js:567
+msgid "This item is a video"
+msgstr ""
+
+#: ms-browser-display.js:570
+msgid "dynamic Rich Media"
+msgstr ""
+
+#: ms-browser-display.js:572
+msgid "classic Rich Media"
+msgstr ""
+
+#: ms-browser-display.js:586 ms-browser-display.js:587
+msgid "This channel is unlisted"
+msgstr ""
+
+#: ms-browser-display.js:591 ms-browser-display.js:592
+msgid "This media is not published"
+msgstr ""
+
+#: ms-browser-display.js:595 ms-browser-display.js:596
+msgid "This media is published and unlisted"
+msgstr ""
+
+#: ms-browser-display.js:599 ms-browser-display.js:600
+msgid "This media is published"
+msgstr ""
+
+#: ms-browser-display.js:603 ms-browser-display.js:604
+msgid "This video is not ready"
+msgstr ""
+
+#: ms-browser-display.js:622
+msgid "Created on"
+msgstr ""
+
+#: ms-browser-display.js:640
+msgid "Type:"
+msgstr ""
+
+#: ms-browser-display.js:643
+msgid "Added on"
+msgstr ""
+
+#: ms-browser-display.js:646
+msgid "Parent channel:"
+msgstr ""
+
+#: ms-browser-display.js:662 ms-browser-display.js:909
+msgid "Matching annotations:"
+msgstr ""
+
+#: ms-browser-display.js:674 ms-browser-display.js:922
+msgid "Matching photos:"
+msgstr ""
+
+#: ms-browser-display.js:726
+msgid "This channel is selected"
+msgstr ""
+
+#: ms-browser-display.js:728
+msgid "Select this channel"
+msgstr ""
+
+#: ms-browser-display.js:731
+msgid "This media is selected"
+msgstr ""
+
+#: ms-browser-display.js:733
+msgid "Select this media"
+msgstr ""
+
+#: ms-browser-display.js:740
+msgid "Statistics"
+msgstr ""
+
+#: ms-browser-display.js:745 ms-browser-display.js:776
+msgid "Delete"
+msgstr ""
+
+#: ms-browser-display.js:750 ms-browser-display.js:754
+msgid "Add a sub channel"
+msgstr ""
+
+#: ms-browser-display.js:759 ms-browser-display.js:763
+msgid "Add a video"
+msgstr ""
+
+#: ms-browser-display.js:767
+msgid "Copy LTI link"
+msgstr ""
+
+#: ms-browser-display.js:770
+msgid "See"
+msgstr ""
+
+#: ms-browser-display.js:902
+msgid "Hide this window"
+msgstr ""
+
+#: ms-browser-display.js:937
+msgid "Media information"
+msgstr ""
+
+#: ms-browser-display.js:940
+msgid "Recording date"
+msgstr ""
+
+#: ms-browser-display.js:946
+msgid "Publishing date"
+msgstr ""
+
+#: ms-browser-display.js:952
+msgid "Duration"
+msgstr ""
+
+#: ms-browser-display.js:957
+msgid "Views last month"
+msgstr ""
+
+#: ms-browser-display.js:960
+msgid "Views"
+msgstr ""
+
+#: ms-browser-display.js:963
+msgid "Annotations last month"
+msgstr ""
+
+#: ms-browser-display.js:966
+msgid "Annotations"
+msgstr ""
+
+#: ms-browser-display.js:971
+msgid "Storage usage"
+msgstr ""
+
+#: ms-browser-display.js:1084
+msgid "Categories"
+msgstr ""
+
+#: ms-browser-display.js:1086
+msgid "Unspecified"
+msgstr ""
+
+#: ms-browser-display.js:1160
+msgid "See statistics on this channel"
+msgstr ""
+
+#: ms-browser-latest.js:42
+msgid "Content types"
+msgstr ""
+
+#: ms-browser-latest.js:44
+msgid "Content types to display:"
+msgstr ""
+
+#: ms-browser-latest.js:47
+msgid "channels"
+msgstr ""
+
+#: ms-browser-latest.js:51
+msgid "videos"
+msgstr ""
+
+#: ms-browser-latest.js:55
+msgid "live streams"
+msgstr ""
+
+#: ms-browser-latest.js:59
+msgid "photos"
+msgstr ""
+
+#: ms-browser-latest.js:87
+msgid "Display {count} more items"
+msgstr ""
+
+#: ms-browser-latest.js:91
+msgid "This list presents all media and channels ordered by add date."
+msgstr ""
+
+#: ms-browser-latest.js:108
+msgid "Latest content added"
+msgstr ""
+
+#: ms-browser-latest.js:198 ms-browser-search.js:289
+msgid "Please login to access this page"
+msgstr ""
+
+#: ms-browser-latest.js:244
+msgid "No contents."
+msgstr ""
+
+#: ms-browser-search.js:74
+msgid "Search:"
+msgstr ""
+
+#: ms-browser-search.js:76
+msgid "Go"
+msgstr ""
+
+#: ms-browser-search.js:79
+msgid "Search in"
+msgstr ""
+
+#: ms-browser-search.js:82 ms-browser-search.js:98
+msgid "all"
+msgstr ""
+
+#: ms-browser-search.js:83 ms-browser-search.js:99
+msgid "none"
+msgstr ""
+
+#: ms-browser-search.js:95
+msgid "Search for"
+msgstr ""
+
+#: ms-browser-search.js:140
+msgid "Use the input above to search for something."
+msgstr ""
+
+#: ms-browser-search.js:258
+msgid "Search results for:"
+msgstr ""
+
+#: ms-browser-search.js:322
+msgid "Matching items:"
+msgstr ""
+
+#: ms-browser-search.js:327
+msgid "No results."
+msgstr ""
+
+#: ms-tree.js:154
+msgid "Loading"
+msgstr ""
+
+#: ms-tree.js:163
+msgid "Unable to get channels tree because you are not logged in."
+msgstr ""
+
+#: ms-tree.js:167
+msgid "Channel does not exist."
+msgstr ""
+
+#: ms-tree.js:169
+msgid "An error occurred in the server. Please try again later."
+msgstr ""
+
+#: ms-tree.js:172
+msgid "Unable to get channels tree. Request timed out."
+msgstr ""
+
+#: ms-tree.js:176
+msgid "An error occurred during request:"
 msgstr ""
