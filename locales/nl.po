@@ -12,3 +12,606 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: nl\n"
+
+msgid "Access denied."
+msgstr ""
+
+msgid "Add a channel"
+msgstr ""
+
+msgid "Add a sub channel"
+msgstr ""
+
+msgid "Add a video"
+msgstr ""
+
+msgid "Add date, ascending"
+msgstr ""
+
+msgid "Add date, descending"
+msgstr ""
+
+msgid "Added on"
+msgstr ""
+
+msgid "all"
+msgstr ""
+
+msgid "An error occurred during request:"
+msgstr ""
+
+msgid "An error occurred in the server. Please try again later."
+msgstr ""
+
+msgid "An internal server error occurred. An email has been sent to the support team."
+msgstr ""
+
+msgid "Annotations last month"
+msgstr ""
+
+msgid "Annotations"
+msgstr ""
+
+msgid "annotations"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "at"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "Available space:"
+msgstr ""
+
+msgid "B"
+msgstr ""
+
+msgid "cannot copy"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "categories"
+msgstr ""
+
+msgid "Channel content:"
+msgstr ""
+
+msgid "channel"
+msgstr ""
+
+msgid "channel(s)"
+msgstr ""
+
+msgid "Channel:"
+msgstr ""
+
+msgid "Channels list"
+msgstr ""
+
+msgid "channels"
+msgstr ""
+
+msgid "Channels"
+msgstr ""
+
+msgid "chapters"
+msgstr ""
+
+msgid "classic Rich Media"
+msgstr ""
+
+msgid "Click to display the content of this channel"
+msgstr ""
+
+msgid "Click to select this media"
+msgstr ""
+
+msgid "comments, slides, ..."
+msgstr ""
+
+msgid "companies"
+msgstr ""
+
+msgid "Content types to display:"
+msgstr ""
+
+msgid "Content types"
+msgstr ""
+
+msgid "copied"
+msgstr ""
+
+msgid "Copy LTI link"
+msgstr ""
+
+msgid "Created on"
+msgstr ""
+
+msgid "Creation date, ascending"
+msgstr ""
+
+msgid "Creation date, descending"
+msgstr ""
+
+msgid "Current channel"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "descriptions"
+msgstr ""
+
+msgid "Display channel"
+msgstr ""
+
+msgid "Display channels"
+msgstr ""
+
+msgid "display items type icons"
+msgstr ""
+
+msgid "Display mode:"
+msgstr ""
+
+msgid "Display parent channel"
+msgstr ""
+
+msgid "Display {count} more items"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "dynamic Rich Media"
+msgstr ""
+
+msgid "Edit it"
+msgstr ""
+
+msgid "Edit this channel"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Editable:"
+msgstr ""
+
+msgid "failed to copy"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "Filters:"
+msgstr ""
+
+msgid "Go"
+msgstr ""
+
+msgid "help"
+msgstr ""
+
+msgid "Hide this window"
+msgstr ""
+
+msgid "Information about media"
+msgstr ""
+
+msgid "Item not found."
+msgstr ""
+
+msgid "iTunes (audio only)"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "keywords"
+msgstr ""
+
+msgid "Latest content added"
+msgstr ""
+
+msgid "Latest content"
+msgstr ""
+
+msgid "licenses"
+msgstr ""
+
+msgid "list"
+msgstr ""
+
+msgid "live stream(s)"
+msgstr ""
+
+msgid "live streams"
+msgstr ""
+
+msgid "Live streams"
+msgstr ""
+
+msgid "Loading"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "locations"
+msgstr ""
+
+msgid "Main channels"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "Matching annotations:"
+msgstr ""
+
+msgid "Matching items:"
+msgstr ""
+
+msgid "Matching photos:"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "Media does not exist."
+msgstr ""
+
+msgid "My channel"
+msgstr ""
+
+msgid "My media"
+msgstr ""
+
+msgid "No available space"
+msgstr ""
+
+msgid "No contents."
+msgstr ""
+
+msgid "No information about error."
+msgstr ""
+
+msgid "No information about media."
+msgstr ""
+
+msgid "No results."
+msgstr ""
+
+msgid "no"
+msgstr ""
+
+msgid "none"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "Number of annotations, ascending"
+msgstr ""
+
+msgid "Number of annotations, descending"
+msgstr ""
+
+msgid "Number of views, ascending"
+msgstr ""
+
+msgid "Number of views, descending"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "Open information panel"
+msgstr ""
+
+msgid "Parent channel"
+msgstr ""
+
+msgid "Parent channel:"
+msgstr ""
+
+msgid "photos group(s)"
+msgstr ""
+
+msgid "photos groups"
+msgstr ""
+
+msgid "Photos groups"
+msgstr ""
+
+msgid "photos"
+msgstr ""
+
+msgid "Please login to access this channel"
+msgstr ""
+
+msgid "Published:"
+msgstr ""
+
+msgid "Publishing date"
+msgstr ""
+
+msgid "Recording date"
+msgstr ""
+
+msgid "Requested channel does not exist."
+msgstr ""
+
+msgid "Root"
+msgstr ""
+
+msgid "Search for"
+msgstr ""
+
+msgid "Search in my media"
+msgstr ""
+
+msgid "Search in progress"
+msgstr ""
+
+msgid "Search in"
+msgstr ""
+
+msgid "Search results for:"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search:"
+msgstr ""
+
+msgid "See statistics on this channel"
+msgstr ""
+
+msgid "See"
+msgstr ""
+
+msgid "Select a channel to display its content."
+msgstr ""
+
+msgid "Select a channel"
+msgstr ""
+
+msgid "Select a media"
+msgstr ""
+
+msgid "Select this channel"
+msgstr ""
+
+msgid "Select this media"
+msgstr ""
+
+msgid "selected setting"
+msgstr ""
+
+msgid "selected tab"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "Sign in"
+msgstr ""
+
+msgid "Slug, ascending"
+msgstr ""
+
+msgid "Slug, descending"
+msgstr ""
+
+msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
+msgstr ""
+
+msgid "Sort by:"
+msgstr ""
+
+msgid "Speaker"
+msgstr ""
+
+msgid "Speaker:"
+msgstr ""
+
+msgid "speakers"
+msgstr ""
+
+msgid "standard"
+msgstr ""
+
+msgid "Statistics"
+msgstr ""
+
+msgid "Storage usage"
+msgstr ""
+
+msgid "Storage usage:"
+msgstr ""
+
+msgid "Sub channels items are included in counts."
+msgstr ""
+
+msgid "Sub channels"
+msgstr ""
+
+msgid "Subscribe to channel videos RSS"
+msgstr ""
+
+msgid "Subscribe to channel videos RSS:"
+msgstr ""
+
+msgid "The connection timed out. Please retry later."
+msgstr ""
+
+msgid "The query has been found in audio:"
+msgstr ""
+
+msgid "The query has been found in following photos:"
+msgstr ""
+
+msgid "The query has been found in following slides:"
+msgstr ""
+
+msgid "The server cannot be reached."
+msgstr ""
+
+msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
+msgstr ""
+
+msgid "This channel contains no media."
+msgstr ""
+
+msgid "This channel contains no sub channels and no media."
+msgstr ""
+
+msgid "This channel contains no sub channels."
+msgstr ""
+
+msgid "This channel is selected"
+msgstr ""
+
+msgid "This channel is unlisted"
+msgstr ""
+
+msgid "This item is a channel"
+msgstr ""
+
+msgid "This item is a live stream"
+msgstr ""
+
+msgid "This item is a photos group"
+msgstr ""
+
+msgid "This item is a video"
+msgstr ""
+
+msgid "This list presents all media and channels ordered by add date."
+msgstr ""
+
+msgid "This media is not published"
+msgstr ""
+
+msgid "This media is published and unlisted"
+msgstr ""
+
+msgid "This media is published"
+msgstr ""
+
+msgid "This media is selected"
+msgstr ""
+
+msgid "this month"
+msgstr ""
+
+msgid "This video is not ready"
+msgstr ""
+
+msgid "thumbnails"
+msgstr ""
+
+msgid "Title, ascending"
+msgstr ""
+
+msgid "Title, descending"
+msgstr ""
+
+msgid "titles"
+msgstr ""
+
+msgid "Type:"
+msgstr ""
+
+msgid "Unable to get channel content because you cannot access to this channel."
+msgstr ""
+
+msgid "Unable to get channel content. Request timed out."
+msgstr ""
+
+msgid "Unable to get channel information because you cannot access to this channel."
+msgstr ""
+
+msgid "Unable to get channels tree because you are not logged in."
+msgstr ""
+
+msgid "Unable to get channels tree because you cannot access to this channel."
+msgstr ""
+
+msgid "Unable to get channels tree. Request timed out."
+msgstr ""
+
+msgid "Unable to get media information because you cannot access to this media."
+msgstr ""
+
+msgid "Unable to get media information. Request timed out."
+msgstr ""
+
+msgid "Unable to get search's results content because you cannot access to this channel."
+msgstr ""
+
+msgid "unspecified"
+msgstr ""
+
+msgid "Unspecified"
+msgstr ""
+
+msgid "Use default sorting"
+msgstr ""
+
+msgid "Use the input above to search for something."
+msgstr ""
+
+msgid "video"
+msgstr ""
+
+msgid "video(s)"
+msgstr ""
+
+msgid "videos"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Views last month"
+msgstr ""
+
+msgid "Views"
+msgstr ""
+
+msgid "views"
+msgstr ""
+
+msgid "yes"
+msgstr ""
+
+msgid "selected"
+msgstr ""
+
+msgid "You are not allowed to have a personnal channel."
+msgstr ""
+
+msgid "You are not logged in or your session has expired. Please login and retry."
+msgstr ""
