@@ -12,7 +12,7 @@ gulp.task('autobuild', function() {
 gulp.task('build', function() {
     /* build api + trans */
     gulp.src([
-        'src/ms-trans-fr.js',
+        'dist/locales/*.js',
         'src/ms-api.js'
     ])
     .pipe(concat('dist/ms-api.js'))

@@ -19,4 +19,8 @@ pip-log.txt
 .tox
 nosetests.xml
 
+package-lock.json
+node_modules
+
 *.tmp.js
+*.mo
