@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-/* globals require process */
+/* globals require, process */
 
 const getopt = require('node-getopt');
 const fs = require('fs');
@@ -47,5 +47,10 @@ const bodyPart = Object.keys(data).filter(msgid => msgid !== '').map((msgid) => 
 }).join(',\n');
 
 const output = `/* global jsu */\njsu.addTranslations({\n${bodyPart}\n}, "${lang}");`;
+
+const outDir = path.dirname(opt.argv[1]);
+if (!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir, { recursive: true });
+}
 
 fs.writeFileSync(opt.argv[1], output);
