@@ -187,7 +187,8 @@
     padding-bottom: 0;
     font-style: italic;
     text-align: left;
-    background: #fff;
+    background: #efefef;
+    color: #404040;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }

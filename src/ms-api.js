@@ -5,13 +5,13 @@
  *********************************************/
 /* global jsu */
 
-function MSAPIClient(options) {
+function MSAPIClient (options) {
     // params
-    this.base_url = '';
-    this.use_proxy = false;
-    this.extra_data = null;
+    this.baseUrl = '';
+    this.useProxy = false;
+    this.extraData = null;
     // vars
-    this.defaults_errors_messages = {
+    this.defaultsErrorsMessages = {
         401: jsu.translate('You are not logged in or your session has expired. Please login and retry.'),
         403: jsu.translate('Access denied.'),
         404: jsu.translate('Item not found.'),
@@ -32,15 +32,15 @@ function MSAPIClient(options) {
                 404: jsu.translate('Requested channel does not exist.')
             }
         },
-        get_latest_content: {
+        getLatestContent: {
             method: 'GET',
             url: '/api/v2/latest/'
         },
-        get_channels_list: {
+        getChannelsList: {
             method: 'GET',
             url: '/api/v2/channels/'
         },
-        get_channels_content: {
+        getChannelsContent: {
             method: 'GET',
             url: '/api/v2/channels/content/',
             errors: {
@@ -48,7 +48,7 @@ function MSAPIClient(options) {
                 404: jsu.translate('Requested channel does not exist.')
             }
         },
-        get_channels: {
+        getChannels: {
             method: 'GET',
             url: '/api/v2/channels/get/',
             errors: {
@@ -56,7 +56,7 @@ function MSAPIClient(options) {
                 404: jsu.translate('Requested channel does not exist.')
             }
         },
-        get_channels_tree: {
+        getChannelsTree: {
             method: 'GET',
             url: '/api/v2/channels/tree/',
             errors: {
@@ -64,7 +64,7 @@ function MSAPIClient(options) {
                 404: jsu.translate('Requested channel does not exist.')
             }
         },
-        get_channels_path: {
+        getChannelsPath: {
             method: 'GET',
             url: '/api/v2/channels/path/',
             errors: {
@@ -72,15 +72,15 @@ function MSAPIClient(options) {
                 404: jsu.translate('Requested channel does not exist.')
             }
         },
-        get_channels_personal: {
+        getChannelsPersonal: {
             method: 'GET',
             url: '/api/v2/channels/personal/'
         },
-        get_medias_list: {
+        getMediasList: {
             method: 'GET',
             url: '/api/v2/medias/'
         },
-        get_medias: {
+        getMedias: {
             method: 'GET',
             url: '/api/v2/medias/get/',
             errors: {
@@ -88,35 +88,35 @@ function MSAPIClient(options) {
                 404: jsu.translate('Media does not exist.')
             }
         },
-        add_medias: {
+        addMedias: {
             method: 'POST',
             url: '/api/v2/medias/add/'
         },
-        medias_resources_check: {
+        mediasResourcesCheck: {
             method: 'POST',
             url: '/api/v2/medias/resources-check/'
         },
-        medias_trimming_child_init: {
+        mediasTrimmingChildInit: {
             method: 'POST',
             url: '/api/v2/medias/trimming-child-init/'
         },
-        medias_get_upload_config: {
+        mediasGetUploadConfig: {
             method: 'GET',
             url: '/api/v2/medias/get-upload-config/'
         },
-        get_lives_list: {
+        getLivesList: {
             method: 'GET',
             url: '/api/v2/lives/'
         },
-        prepare_lives: {
+        prepareLives: {
             method: 'POST',
             url: '/api/v2/lives/prepare/'
         },
-        start_lives: {
+        startLives: {
             method: 'POST',
             url: '/api/v2/lives/start/'
         },
-        stop_lives: {
+        stopLives: {
             method: 'POST',
             url: '/api/v2/lives/stop/',
             errors: {
@@ -124,75 +124,75 @@ function MSAPIClient(options) {
                 404: jsu.translate('Media does not exist.')
             }
         },
-        lives_change_slides: {
+        livesChangeSlides: {
             method: 'POST',
             url: '/api/v2/lives/change-slide/'
         },
-        lives_change_status: {
+        livesChangeStatus: {
             method: 'POST',
             url: '/api/v2/lives/change-status/'
         },
-        lives_get_viewers: {
+        livesGetViewers: {
             method: 'GET',
             url: '/api/v2/lives/get-viewers/'
         },
-        list_media_annotations: {
+        listMediaAnnotations: {
             method: 'GET',
             url: '/api/v2/annotations/list/'
         },
-        list_media_user_annotations: {
+        listMediaUserAnnotations: {
             method: 'GET',
             url: '/api/v2/annotations/list/moderate/'
         },
-        list_annotations_types: {
+        listAnnotationsTypes: {
             method: 'GET',
             url: '/api/v2/annotations/types/list/'
         },
-        vote_for_annotation: {
+        voteForAnnotation: {
             method: 'POST',
             url: '/api/v2/annotations/vote/'
         },
-        post_annotation: {
+        postAnnotation: {
             method: 'POST',
             url: '/api/v2/annotations/post/'
         },
-        validate_annotation: {
+        validateAnnotation: {
             method: 'POST',
             url: '/api/v2/annotations/validate/'
         },
-        unvalidate_annotation: {
+        unvalidateAnnotation: {
             method: 'POST',
             url: '/api/v2/annotations/unvalidate/'
         },
-        delete_annotation: {
+        deleteAnnotation: {
             method: 'POST',
             url: '/api/v2/annotations/delete/'
         },
-        list_media_slides: {
+        listMediaSlides: {
             method: 'GET',
             url: '/api/v2/annotations/slides/list/'
         },
-        list_media_resources: {
+        listMediaResources: {
             method: 'GET',
             url: '/api/v2/annotations/resources/list/'
         },
-        list_media_chapters: {
+        listMediaChapters: {
             method: 'GET',
             url: '/api/v2/annotations/chapters/list/'
         },
-        list_media_activities: {
+        listMediaActivities: {
             method: 'GET',
             url: '/api/v2/annotations/activities/list/'
         },
-        email_notification: {
+        emailNotification: {
             method: 'POST',
             url: '/api/v2/annotations/notification/'
         },
-        search_annotations: {
+        searchAnnotations: {
             method: 'GET',
             url: '/api/v2/annotations/search/'
         },
-        list_categories: {
+        listCategories: {
             method: 'GET',
             url: '/api/v2/categories/'
         }
@@ -201,76 +201,86 @@ function MSAPIClient(options) {
     this.configure(options);
 }
 MSAPIClient.prototype.configure = function (options) {
-    if (!options)
+    if (!options) {
         return;
-    if ('base_url' in options)
-        this.base_url = options.base_url;
-    if ('use_proxy' in options)
-        this.use_proxy = options.use_proxy;
-    if ('extra_data' in options)
-        this.extra_data = options.extra_data;
+    }
+    if (options.baseUrl) {
+        this.baseUrl = options.baseUrl;
+    }
+    if (options.useProxy) {
+        this.useProxy = options.useProxy;
+    }
+    if (options.extraData) {
+        this.extraData = options.extraData;
+    }
 };
-MSAPIClient.prototype.ajax_call = function (call_or_uri, data, callback, async, file, xhr_function) {
-    // call_or_uri can be either an API call name ('list_categories' for example) or an uri like 'GET:/api/v2/categories/'
-    var call_info = this.calls[call_or_uri];
-    if (!call_info) {
-        var splitted = call_or_uri.split(':');
+MSAPIClient.prototype.ajaxCall = function (callOrUri, data, callback, async, file, xhrFunction) {
+    // callOrUri can be either an API call name ('listCategories' for example) or an uri like 'GET:/api/v2/categories/'
+    let callInfo = this.calls[callOrUri];
+    if (!callInfo) {
+        const splitted = callOrUri.split(':');
         if (splitted.length == 1) {
-            call_info = {method: 'GET', url: splitted[0]};
+            callInfo = {method: 'GET', url: splitted[0]};
         } else if (splitted.length == 2) {
-            call_info = {method: splitted[0], url: splitted[1]};
+            callInfo = {method: splitted[0], url: splitted[1]};
         } else {
             throw new Error('Invalid call or uri.');
         }
     }
 
-    var url = this.base_url;
-    if (this.use_proxy) {
-        data.action = call_info.url;
+    let url = this.baseUrl;
+    if (this.useProxy) {
+        data.action = callInfo.url;
     } else {
-        if (!this.base_url)
-            data.local = 'yes';  // To get urls with no host
-        url += call_info.url;
+        if (!this.baseUrl) {
+            data.local = 'yes'; // To get urls with no host
+        }
+        url += callInfo.url;
     }
     if (typeof url === 'undefined' || url === 'undefined') {
         throw new Error('No url to call.');
     }
-    if (this.extra_data) {
-        for (var field in this.extra_data) {
-            data[field] = this.extra_data[field];
+    if (this.extraData) {
+        let field;
+        for (field in this.extraData) {
+            data[field] = this.extraData[field];
         }
     }
 
-    var obj = this;
-    var ajax_data = {
+    const obj = this;
+    const ajaxData = {
         url: url,
-        method: call_info.method,
+        method: callInfo.method,
         data: data,
         dataType: 'json',
         cache: false,
         success: function (response) {
-            if (!response.success && !response.error)
+            if (!response.success && !response.error) {
                 response.error = response.message ? response.message : jsu.translate('No information about error.');
-            if (callback)
+            }
+            if (callback) {
                 return callback(response);
+            }
         },
         error: function (xhr, textStatus, thrownError) {
-            var reason = '?';
-            if (xhr.status)
+            let reason = '?';
+            if (xhr.status) {
                 reason = xhr.status;
-            else if (textStatus == 'error')
+            } else if (textStatus == 'error') {
                 reason = 'unreachable';
-            else if (textStatus == 'timeout')
+            } else if (textStatus == 'timeout') {
                 reason = 'timeout';
+            }
 
-            var msg = call_info.errors && reason in call_info.errors ? call_info.errors[reason] : '';
-            if (!msg)
-                msg = reason in obj.defaults_errors_messages ? obj.defaults_errors_messages[reason] : jsu.translate('Request failed:')+' '+thrownError;
+            let msg = callInfo.errors && reason in callInfo.errors ? callInfo.errors[reason] : '';
+            if (!msg) {
+                msg = reason in obj.defaultsErrorsMessages ? obj.defaultsErrorsMessages[reason] : jsu.translate('Request failed:') + ' ' + thrownError;
+            }
 
             return callback({
                 success: false,
                 error: msg,
-                error_code: xhr.status,
+                errorCode: xhr.status,
                 xhr: xhr,
                 textStatus: textStatus,
                 thrownError: thrownError
@@ -279,45 +289,47 @@ MSAPIClient.prototype.ajax_call = function (call_or_uri, data, callback, async, 
     };
 
     if (typeof async === 'undefined' || async) {
-        ajax_data.async = async;
+        ajaxData.async = async;
     }
     if (file) {
-        ajax_data.processData = false;
-        ajax_data.enctype = 'multipart/form-data';
-        ajax_data.contentType = false;
+        ajaxData.processData = false;
+        ajaxData.enctype = 'multipart/form-data';
+        ajaxData.contentType = false;
     }
-    if (xhr_function) {
-        ajax_data.xhr = xhr_function;
+    if (xhrFunction) {
+        ajaxData.xhr = xhrFunction;
     }
-    return $.ajax(ajax_data);
+    return $.ajax(ajaxData);
 };
-MSAPIClient.prototype.get_storage_display = function (item) {
-    var html = '';
+MSAPIClient.prototype.getStorageDisplay = function (item) {
+    let html = '';
     if (item.storage_used !== null && item.storage_used !== undefined) {
         html = '<span class="storage-usage">' + jsu.getSizeDisplay(item.storage_used);
         if (item.storage_quota > 0) {
             html += ' / ' + item.storage_quota + ' G' + jsu.translate('B');
-            var storage_used_percents = Math.round(100 * (item.storage_used / 1000000000) / item.storage_quota);
-            if (storage_used_percents > 100)
-                storage_used_percents = 100;
-            var storage_class = '';
-            if (item.storage_warning && storage_used_percents > item.storage_warning)
-                storage_class = ' red';
-            html += '<span class="progress-bar inline-block' + storage_class + '" aria-hidden="true" style="width: 100%; vertical-align: middle;">' +
-            '<span class="progress-level" style="width: ' + storage_used_percents + '%"></span>' +
-            '<span class="progress-label">' + storage_used_percents + ' %</span>' +
+            let storageUsedPercents = Math.round(100 * (item.storage_used / 1000000000) / item.storage_quota);
+            if (storageUsedPercents > 100) {
+                storageUsedPercents = 100;
+            }
+            let storageClass = '';
+            if (item.storage_warning && storageUsedPercents > item.storage_warning) {
+                storageClass = ' red';
+            }
+            html += '<span class="progress-bar inline-block' + storageClass + '" aria-hidden="true" style="width: 100%; vertical-align: middle;">' +
+            '<span class="progress-level" style="width: ' + storageUsedPercents + '%"></span>' +
+            '<span class="progress-label">' + storageUsedPercents + ' %</span>' +
             '</span>';
         }
         html += '</span>';
-        var storage_available = this.get_available_storage_display(item);
-        if (storage_available) {
-            html += ' ' + storage_available;
+        const storageAvailable = this.getAvailableStorageDisplay(item);
+        if (storageAvailable) {
+            html += ' ' + storageAvailable;
         }
     }
     return html;
 };
-MSAPIClient.prototype.get_storage_minimal_display = function (item) {
-    var html = '';
+MSAPIClient.prototype.getStorageMinimalDisplay = function (item) {
+    let html = '';
     if (item.storage_used !== null && item.storage_used !== undefined) {
         html = '<span class="storage-usage">' + jsu.getSizeDisplay(item.storage_used);
         if (item.storage_quota > 0) {
@@ -327,18 +339,19 @@ MSAPIClient.prototype.get_storage_minimal_display = function (item) {
     }
     return html;
 };
-MSAPIClient.prototype.get_available_storage_display = function (item) {
-    var html = '';
+MSAPIClient.prototype.getAvailableStorageDisplay = function (item) {
+    let html = '';
     if (item.storage_available !== null && item.storage_available !== undefined) {
-        var storage_class = '';
+        let storageClass = '';
         if (item.storage_quota > 0) {
-            var storage_used_percents = 100 * (item.storage_used / 1000000000) / item.storage_quota;
-            if (item.storage_warning && storage_used_percents > item.storage_warning)
-                storage_class = ' orange';
+            const storageUsedPercents = 100 * (item.storage_used / 1000000000) / item.storage_quota;
+            if (item.storage_warning && storageUsedPercents > item.storage_warning) {
+                storageClass = ' orange';
+            }
         }
         html += '<span class="storage-available nowrap">';
         if (item.storage_available > 0) {
-            html += '<span class="' + storage_class + ' ">' + jsu.translate('Available space:') + ' ' + jsu.getSizeDisplay(item.storage_available) + '</span>';
+            html += '<span class="' + storageClass + ' ">' + jsu.translate('Available space:') + ' ' + jsu.getSizeDisplay(item.storage_available) + '</span>';
         } else {
             html += '<span class="red">' + jsu.translate('No available space') + '</span>';
         }

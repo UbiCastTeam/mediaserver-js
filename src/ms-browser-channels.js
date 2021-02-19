@@ -6,447 +6,496 @@
 /* global jsu */
 /* global MSTreeManager */
 
-function MSBrowserChannels(options) {
+function MSBrowserChannels (options) {
     // params
     this.browser = null;
-    this.display_itunes_rss = false;
-    this.current_channel_oid = '0';
+    this.displayItunesRss = false;
+    this.currentChannelOid = '0';
     // vars
     this.$menu = null;
     this.$content = null;
-    this.tree_manager = null;
+    this.treeManager = null;
     this.order = 'default';
-    this.last_response = null;
+    this.lastResponse = null;
 
     jsu.setObjectAttributes(this, options, [
         // allowed options
         'browser',
-        'display_itunes_rss',
-        'current_channel_oid'
+        'displayItunesRss',
+        'currentChannelOid'
     ]);
-    this.init_options = options ? options : {};
+    this.initOptions = options ? options : {};
 }
 
-MSBrowserChannels.prototype.get_menu_jq = function () {
-    var html = '';
+MSBrowserChannels.prototype.getMenuJq = function () {
+    let html = '';
     html += '<div id="ms_browser_channels_menu" style="display: none;">';
     html += '</div>';
     this.$menu = $(html);
     return this.$menu;
 };
-MSBrowserChannels.prototype.get_content_jq = function () {
-    var html = '';
+MSBrowserChannels.prototype.getContentJq = function () {
+    let html = '';
     html += '<div id="ms_browser_channels" class="ms-browser-content" style="display: none;">';
-    if (this.browser.tree_manager) {
-        html +=     '<div class="ms-browser-tree-place ms-channels-tree">';
-        html +=         '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> '+jsu.translate('Loading...')+'</div>';
-        html +=     '</div>';
+    if (this.browser.treeManager) {
+        html += '<div class="ms-browser-tree-place ms-channels-tree">';
+        html += '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translate('Loading...') + '</div>';
+        html += '</div>';
     }
-    html +=     '<div class="ms-browser-channels-place">';
-    html +=         '<div class="messages"><div class="message info">'+jsu.translate('Select a channel to display its content.')+'</div></div>';
-    html +=     '</div>';
+    html += '<div class="ms-browser-channels-place">';
+    html += '<div class="messages"><div class="message info">' + jsu.translate('Select a channel to display its content.') + '</div></div>';
+    html += '</div>';
     html += '</div>';
     this.$content = $(html);
     this.$place = $('.ms-browser-channels-place', this.$content);
     return this.$content;
 };
 
-MSBrowserChannels.prototype.refresh_title = function () {
-    if (this.browser.get_active_tab() != 'channels')
+MSBrowserChannels.prototype.refreshTitle = function () {
+    if (this.browser.getActiveTab() != 'channels') {
         return;
-    var item = this.last_response ? this.last_response.info : undefined;
+    }
+    const item = this.lastResponse ? this.lastResponse.info : undefined;
     if (item && item.oid != '0') {
-        var html = '<span class="item-entry-preview"><img src="'+item.thumb+'" alt="'+jsu.escapeHTML(item.title)+'"/></span>';
+        let html = '<span class="item-entry-preview"><img src="' + item.thumb + '" alt="' + jsu.escapeHTML(item.title) + '"/></span>';
         html += '<span class="channel-titles-place">';
-        var parent_title = item.parent_oid && item.parent_oid != '0' ? item.parent_title : jsu.translate('Root');
-        if (!this.browser.use_overlay && parent_title) {
-            html += '<a class="parent-channel-title" href="#' + (item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>'+jsu.escapeHTML(parent_title)+'</a>';
+        const parentTitle = item.parent_oid && item.parent_oid != '0' ? item.parent_title : jsu.translate('Root');
+        if (!this.browser.useOverlay && parentTitle) {
+            html += '<a class="parent-channel-title" href="#' + (item.parentSlug ? item.parentSlug : '') + '"' + (item.parentLanguage ? 'lang="' + item.parentLanguage + '"' : '') + '>' + jsu.escapeHTML(parentTitle) + '</a>';
         }
-        html += '<span class="channel-title"' + (item.language ? 'lang="' + item.language + '"' : '') + '>'+jsu.escapeHTML(item.title)+'</span>';
+        html += '<span class="channel-title"' + (item.language ? 'lang="' + item.language + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
         html += '</span>';
-        if (this.browser.current_selection && this.browser.current_selection.oid == item.oid) {
-            html = '<span class="selected">'+html+'</span>';
+        if (this.browser.currentSelection && this.browser.currentSelection.oid == item.oid) {
+            html = '<span class="selected">' + html + '</span>';
         }
-        this.browser.set_title(item.title, html);
-    } else if (this.browser.lti_mode) {
-        this.browser.set_title(jsu.translate('My channel'));
+        this.browser.setTitle(item.title, html);
+    } else if (this.browser.ltiMode) {
+        this.browser.setTitle(jsu.translate('My channel'));
     } else {
-        this.browser.set_title(jsu.translate('Main channels'));
+        this.browser.setTitle(jsu.translate('Main channels'));
     }
 };
 
-MSBrowserChannels.prototype.on_show = function () {
-    this.refresh_title();
-    if (this.initialized)
+MSBrowserChannels.prototype.onShow = function () {
+    this.refreshTitle();
+    if (this.initialized) {
         return;
+    }
     this.initialized = true;
 
-    this.default_logo_src = $('#mainlogo .header-logo').attr('src');
-    this.default_fav_src = $('#favicon_link').attr('src');
+    this.defaultLogoSrc = $('#mainlogo .header-logo').attr('src');
+    this.defaultFavSrc = $('#favicon_link').attr('src');
 
     // tree manager
-    var obj = this;
-    if (this.browser.tree_manager) {
-        var params = {
+    const obj = this;
+    if (this.browser.treeManager) {
+        const params = {
             $place: $('.ms-browser-tree-place', this.$content),
             msapi: this.browser.msapi,
-            display_root: this.browser.displayable_content.indexOf('c') != -1,
-            display_personal: true,
-            current_channel_oid: this.current_channel_oid,
-            on_data_retrieved: function (data) { obj.browser.update_catalog(data); }
+            displayRoot: this.browser.displayableContent.indexOf('c') != -1,
+            displayPersonal: true,
+            currentChannelOid: this.currentChannelOid,
+            onDataRetrieved: function (data) {
+                obj.browser.updateCatalog(data);
+            }
         };
-        if (this.browser.pick_mode) {
-            params.on_change = function (oid) {
-                obj.display_channel(oid);
+        if (this.browser.pickMode) {
+            params.onChange = function (oid) {
+                obj.displayChannel(oid);
             };
         }
-        this.tree_manager = new MSTreeManager(params);
+        this.treeManager = new MSTreeManager(params);
     }
 
     // load first channel
-    if (this.init_options.initial_state && this.init_options.initial_state.channel_slug) {
-        this.display_channel_by_slug(this.init_options.initial_state.channel_slug);
-    } else if (this.browser.filter_speaker == 'self') {
-        this.display_personal_channel();
+    if (this.initOptions.initialState && this.initOptions.initialState.channelSlug) {
+        this.displayChannelBySlug(this.initOptions.initialState.channelSlug);
+    } else if (this.browser.filterSpeaker == 'self') {
+        this.displayPersonalChannel();
     } else {
-        this.display_channel(this.current_channel_oid);
+        this.displayChannel(this.currentChannelOid);
     }
 };
 
-MSBrowserChannels.prototype.set_order = function (order) {
+MSBrowserChannels.prototype.setOrder = function (order) {
     this.order = order ? order : 'default';
-    this.refresh_display(true);
+    this.refreshDisplay(true);
 };
-MSBrowserChannels.prototype.display_personal_channel = function () {
-    var obj = this;
-    if (!this.personal_channel_oid) {
-        this.browser.msapi.ajax_call('get_channels_personal', {}, function (response) {
+MSBrowserChannels.prototype.displayPersonalChannel = function () {
+    const obj = this;
+    if (!this.personalChannelOid) {
+        this.browser.msapi.ajaxCall('getChannelsPersonal', {}, function (response) {
             if (response.success) {
-                obj.personal_channel_oid = response.oid;
-                obj.display_channel(response.oid);
-            } else if (response.error_code == 403) {
-                obj._on_channel_error({ error: jsu.translate('You are not allowed to have a personnal channel.') });
+                obj.personalChannelOid = response.oid;
+                obj.displayChannel(response.oid);
+            } else if (response.errorCode == 403) {
+                obj._onChannelError({ error: jsu.translate('You are not allowed to have a personnal channel.') });
             } else {
-                obj._on_channel_error(response);
+                obj._onChannelError(response);
             }
         });
     } else {
-        obj.display_channel(this.personal_channel_oid);
+        obj.displayChannel(this.personalChannelOid);
     }
 };
-MSBrowserChannels.prototype.display_channel_by_slug = function (slug) {
-    var obj = this;
-    this.browser.get_info_for_slug(slug, false, true, function (response) {
-        if (!response.success)
-            obj._on_channel_error(response);
-        else
-            obj.display_channel(response.info.oid);
+MSBrowserChannels.prototype.displayChannelBySlug = function (slug) {
+    const obj = this;
+    this.browser.getInfoForSlug(slug, false, true, function (response) {
+        if (!response.success) {
+            obj._onChannelError(response);
+        } else {
+            obj.displayChannel(response.info.oid);
+        }
     });
 };
-MSBrowserChannels.prototype.display_channel = function (oid) {
-    this.current_channel_oid = oid;
-    this.browser.box_hide_info();
+MSBrowserChannels.prototype.displayChannel = function (oid) {
+    this.currentChannelOid = oid;
+    this.browser.boxHideInfo();
 
-    if (!this.initialized)
+    if (!this.initialized) {
         return;
-    this.browser.display_loading();
-    if (this.tree_manager)
-        this.tree_manager.set_active(oid);
+    }
+    this.browser.displayLoading();
+    if (this.treeManager) {
+        this.treeManager.setActive(oid);
+    }
     if (oid != '0') {
-        var obj = this;
-        this.browser.get_info_for_oid(oid, true, function (response) {
-            obj._on_channel_info(response, oid);
+        const obj = this;
+        this.browser.getInfoForOid(oid, true, function (response) {
+            obj._onChannelInfo(response, oid);
         });
     } else {
-        this._on_channel_info(null, oid);
+        this._onChannelInfo(null, oid);
     }
 };
-MSBrowserChannels.prototype.display_parent = function () {
-    if (!this.current_channel_oid)
+MSBrowserChannels.prototype.displayParent = function () {
+    if (!this.currentChannelOid) {
         return;
-    var oid = this.current_channel_oid;
-    var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : '0';
-    this.display_channel(parent_oid);
+    }
+    const oid = this.currentChannelOid;
+    const parentOid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : '0';
+    this.displayChannel(parentOid);
 };
 
-MSBrowserChannels.prototype._on_channel_error = function (response) {
-    this.last_response = null;
+MSBrowserChannels.prototype._onChannelError = function (response) {
+    this.lastResponse = null;
 
-    var message = '<div class="messages">';
-    if (!this.browser.use_overlay && (response.error_code == '403' || response.error_code == '401')) {
-        var login_url = this.browser.url_login+'?next='+window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
+    let message = '<div class="messages">';
+    if (!this.browser.useOverlay && (response.errorCode == '403' || response.errorCode == '401')) {
+        const loginUrl = this.browser.urlLogin + '?next=' + window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
         message += '<div class="item-description">';
-        message += '<div class="message error">'+response.error+'</div>';
-        message += '<p>'+jsu.translate('Please login to access this channel')+'<br /> <a href="'+login_url+'">'+jsu.translate('Sign in')+'</a></p>';
+        message += '<div class="message error">' + response.error + '</div>';
+        message += '<p>' + jsu.translate('Please login to access this channel') + '<br /> <a href="' + loginUrl + '">' + jsu.translate('Sign in') + '</a></p>';
         message += '</div>';
     } else {
-        message += '<div class="message error">'+response.error+'</div>';
+        message += '<div class="message error">' + response.error + '</div>';
     }
     message += '</div>';
     this.$place.html(message);
 };
 
-MSBrowserChannels.prototype._on_channel_info = function (response_info, oid) {
-    if (this.current_channel_oid != oid) {
-        this.browser.hide_loading();
+MSBrowserChannels.prototype._onChannelInfo = function (responseInfo, oid) {
+    if (this.currentChannelOid != oid) {
+        this.browser.hideLoading();
         return;
     }
-    if (response_info && !response_info.success)
-        return this._on_channel_error(response_info);
-
-    var data = {};
-    if (oid && oid != '0')
-        data.parent_oid = oid;
-    if (this.browser.parent_selection_oid)
-        data.parent_selection_oid = this.browser.parent_selection_oid;
-    if (this.browser.displayable_content)
-        data.content = this.browser.displayable_content;
-    if (this.browser.filter_editable !== null)
-        data.editable = this.browser.filter_editable ? 'yes' : 'no';
-    if (this.browser.filter_validated !== null)
-        data.validated = this.browser.filter_validated ? 'yes' : 'no';
-    if (!this.browser.lti_mode && this.browser.filter_speaker !== null)
-        data.speaker = this.browser.filter_speaker;
-    if (this.browser.filter_no_categories) {
-        data.no_categories = true;
-    } else {
-        if (this.browser.filter_categories.length > 0)
-            data.categories = this.browser.filter_categories.join('\n');
+    if (responseInfo && !responseInfo.success) {
+        return this._onChannelError(responseInfo);
     }
-    data.order_by = this.order;
-    var obj = this;
-    this.browser.msapi.ajax_call('get_channels_content', data, function (response) {
+
+    const data = {};
+    /* eslint-disable camelcase */
+    if (oid && oid != '0') {
+        data.parent_oid = oid;
+    }
+    if (this.browser.parentSelectionOid) {
+        data.parent_selection_oid = this.browser.parentSelectionOid;
+    }
+    /* eslint-enable camelcase */
+    if (this.browser.displayableContent) {
+        data.content = this.browser.displayableContent;
+    }
+    if (this.browser.filterEditable !== null) {
+        data.editable = this.browser.filterEditable ? 'yes' : 'no';
+    }
+    if (this.browser.filterValidated !== null) {
+        data.validated = this.browser.filterValidated ? 'yes' : 'no';
+    }
+    if (!this.browser.ltiMode && this.browser.filterSpeaker !== null) {
+        data.speaker = this.browser.filterSpeaker;
+    }
+    if (this.browser.filterNoCategories) {
+        /* eslint-disable camelcase */
+        data.no_categories = true;
+        /* eslint-enable camelcase */
+    } else if (this.browser.filterCategories.length > 0) {
+        data.categories = this.browser.filterCategories.join('\n');
+    }
+    data.orderBy = this.order;
+    const obj = this;
+    this.browser.msapi.ajaxCall('getChannelsContent', data, function (response) {
         // Merge response
-        if (response_info) {
-            if (response_info.info)
-                response.info = response_info.info;
-            if (response_info.parent_selectable)
-                response.parent_selectable = response_info.parent_selectable;
-            if (response_info.selectable)
-                response.selectable = response_info.selectable;
+        if (responseInfo) {
+            if (responseInfo.info) {
+                response.info = responseInfo.info;
+            }
+            if (responseInfo.parentSelectable) {
+                response.parentSelectable = responseInfo.parentSelectable;
+            }
+            if (responseInfo.selectable) {
+                response.selectable = responseInfo.selectable;
+            }
         }
-        obj._on_channel_content(response, oid);
+        obj._onChannelContent(response, oid);
     });
 };
 
-MSBrowserChannels.prototype._on_channel_content = function (response, oid) {
-    this.browser.hide_loading();
-    if (this.current_channel_oid != oid)
+MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
+    this.browser.hideLoading();
+    if (this.currentChannelOid != oid) {
         return;
-    if (!response.success)
-        return this._on_channel_error(response);
+    }
+    if (!response.success) {
+        return this._onChannelError(response);
+    }
 
-    this.last_response = response;
+    this.lastResponse = response;
 
-    if (!this.browser.use_overlay && this.browser.display_as_thumbnails)
-        this.browser.box_hide_info();
+    if (!this.browser.useOverlay && this.browser.displayAsThumbnails) {
+        this.browser.boxHideInfo();
+    }
 
     // update top bar
     this.$menu.html('');
-    var $entry_links;
+    let $entryLinks;
     if (oid != '0') {
         // back to parent button
-        if (!this.browser.lti_mode || oid != this.personal_channel_oid) {
-            var parent_oid = response.info.parent_oid ? response.info.parent_oid : '0';
-            var parent_title = response.info.parent_title ? response.info.parent_title : jsu.translate('Parent channel');
-            var parent = {
-                oid: parent_oid,
-                title: parent_title,
-                slug: response.info.parent_slug
+        if (!this.browser.ltiMode || oid != this.personalChannelOid) {
+            const parentOid = response.info.parent_oid ? response.info.parent_oid : '0';
+            const parentTitle = response.info.parent_title ? response.info.parent_title : jsu.translate('Parent channel');
+            const parent = {
+                oid: parentOid,
+                title: parentTitle,
+                slug: response.info.parentSlug
             };
-            if (response.info.parent_oid && response.info.parent_slug)
-                this.browser.update_catalog(parent);
-            var $back;
-            if (!this.browser.use_overlay) {
-                $back = $('<a class="button '+this.browser.btn_class+' back-button" href="'+this.browser.get_button_link(parent, 'view')+'"></a>');
+            if (response.info.parent_oid && response.info.parentSlug) {
+                this.browser.updateCatalog(parent);
+            }
+            let $back;
+            if (!this.browser.useOverlay) {
+                $back = $('<a class="button ' + this.browser.btnClass + ' back-button" href="' + this.browser.getButtonLink(parent, 'view') + '"></a>');
             } else {
-                $back = $('<button type="button" class="button '+this.browser.btn_class+' back-button"></button>');
+                $back = $('<button type="button" class="button ' + this.browser.btnClass + ' back-button"></button>');
                 $back.click({ obj: this, oid: parent.oid }, function (event) {
-                    event.data.obj.display_channel(event.data.oid);
+                    event.data.obj.displayChannel(event.data.oid);
                 });
             }
-            if (!this.browser.use_overlay && $('.navbar .back.button-text').length > 0) {
+            if (!this.browser.useOverlay && $('.navbar .back.button-text').length > 0) {
                 $back.html('<i class="fa fa-chevron-circle-up fa-fw fa-2x" aria-hidden="true"></i>');
                 $back.attr('title', jsu.translate('Parent channel'));
                 $back.attr('aria-label', jsu.translate('Parent channel'));
                 $back.addClass('back').addClass('button-text');
                 $('.navbar .back.button-text').replaceWith($back);
             } else {
-                $back.html('<i class="fa fa-chevron-circle-up" aria-hidden="true"></i> <span class="hidden-below-800">'+jsu.translate('Parent channel')+'</span>');
+                $back.html('<i class="fa fa-chevron-circle-up" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translate('Parent channel') + '</span>');
                 this.$menu.append($back);
             }
-            if (this.browser.pick_mode) {
-                var available_storage_html = this.browser.msapi.get_available_storage_display(response.info);
-                if (available_storage_html) {
-                    this.$menu.append(available_storage_html + ' ');
-                    if (!window.uwlb)
-                        $('.tooltip-button', this.$menu).click(function () { $('span', this).toggle(); });
+            if (this.browser.pickMode) {
+                const availableStorageHtml = this.browser.msapi.getAvailableStorageDisplay(response.info);
+                if (availableStorageHtml) {
+                    this.$menu.append(availableStorageHtml + ' ');
+                    if (!window.uwlb) {
+                        $('.tooltip-button', this.$menu).click(function () {
+                            $('span', this).toggle();
+                        });
+                    }
                 }
             }
         }
         // current channel buttons
-        var current_selectable = this.browser.selectable_content.indexOf('c') != -1 && (!this.browser.parent_selection_oid || response.selectable);
-        $entry_links = this.browser.get_entry_links(response.info, 'current', current_selectable);
+        const currentSelectable = this.browser.selectableContent.indexOf('c') != -1 && (!this.browser.parentSelectionOid || response.selectable);
+        $entryLinks = this.browser.getEntryLinks(response.info, 'current', currentSelectable);
     } else {
         response.oid = '0';
-        $entry_links = this.browser.get_entry_links(response, 'current', false);
-        if (!this.browser.use_overlay && $('.navbar .back.button-text').length > 0)
+        $entryLinks = this.browser.getEntryLinks(response, 'current', false);
+        if (!this.browser.useOverlay && $('.navbar .back.button-text').length > 0) {
             $('.navbar .back.button-text').attr('href', '..');
+        }
     }
-    if ($entry_links)
-        this.$menu.append($entry_links);
+    if ($entryLinks) {
+        this.$menu.append($entryLinks);
+    }
 
     // update list place
     this.$place.html('');
-    if (this.browser.use_overlay) {
+    if (this.browser.useOverlay) {
         this.$place.scrollTop(0);
     } else {
         // current Channel data
         if (oid != '0') {
-            var $current_item_desc = $('<div class="item-description"></div>');
-            var is_empty = true;
-            var storage_display = response.info.can_edit ? this.browser.msapi.get_storage_display(response.info) : '';
+            const $currentItemDesc = $('<div class="item-description"></div>');
+            let isEmpty = true;
+            let storageDisplay = response.info.can_edit ? this.browser.msapi.getStorageDisplay(response.info) : '';
             if (response.info.views || response.info.comments) {
-                var anno_and_views = '<div class="' + (response.info.short_description || response.info.display_rss_links || storage_display ? 'right' : 'align-right') + ' channel-description-stats">';
+                let annoAndViews = '<div class="' + (response.info.short_description || response.info.display_rss_links || storageDisplay ? 'right' : 'align-right') + ' channel-description-stats">';
                 if (response.info.views) {
-                    anno_and_views += '<span class="inline-block">' + response.info.views + ' ' + jsu.translate('views');
-                    if (response.info.views_last_month)
-                        anno_and_views += ', ' + response.info.views_last_month + ' ' + jsu.translate('this month');
-                    anno_and_views += '</span>';
+                    annoAndViews += '<span class="inline-block">' + response.info.views + ' ' + jsu.translate('views');
+                    if (response.info.views_last_month) {
+                        annoAndViews += ', ' + response.info.views_last_month + ' ' + jsu.translate('this month');
+                    }
+                    annoAndViews += '</span>';
                 }
                 if (response.info.comments) {
-                    anno_and_views += ' <span class="inline-block">' + response.info.comments + ' ' + jsu.translate('annotations');
-                    if (response.info.comments_last_month)
-                        anno_and_views += ', ' + response.info.comments_last_month + ' ' + jsu.translate('this month');
-                    anno_and_views += '</span>';
+                    annoAndViews += ' <span class="inline-block">' + response.info.comments + ' ' + jsu.translate('annotations');
+                    if (response.info.comments_last_month) {
+                        annoAndViews += ', ' + response.info.comments_last_month + ' ' + jsu.translate('this month');
+                    }
+                    annoAndViews += '</span>';
                 }
-                anno_and_views += '</div>';
-                $current_item_desc.append(anno_and_views);
-                is_empty = false;
+                annoAndViews += '</div>';
+                $currentItemDesc.append(annoAndViews);
+                isEmpty = false;
             }
             if (response.info.short_description) {
-                var $desc = $('<div class="channel-description-text">' + response.info.short_description + '</div>');
+                const $desc = $('<div class="channel-description-text">' + response.info.short_description + '</div>');
                 if (response.info.short_description != response.info.description) {
                     $desc.addClass('short-desc');
                     $desc.click({ description: response.info.description }, function (event) {
                         $(this).html(event.data.description).unbind('click').removeClass('short-desc');
                     });
                 }
-                $current_item_desc.append($desc);
-                is_empty = false;
+                $currentItemDesc.append($desc);
+                isEmpty = false;
             }
-            if (response.info.items_count) {
-                var results = [];
-                if (response.info.channels_count)
-                    results.push(response.info.channels_count + ' ' + jsu.translate('channel(s)'));
-                if (response.info.videos_count)
-                    results.push(response.info.videos_count + ' ' + jsu.translate('video(s)'));
-                if (response.info.lives_count)
-                    results.push(response.info.lives_count + ' ' + jsu.translate('live stream(s)'));
-                if (response.info.pgroups_count)
-                    results.push(response.info.pgroups_count + ' ' + jsu.translate('photos group(s)'));
-                var count_display = '<div class="channel-items-count">' + jsu.translate('Channel content:');
-                count_display += ' <span>' + jsu.escapeHTML(results.join(', ')) + '</span>';
-                count_display += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translate('Sub channels items are included in counts.') + '</span></button>';
-                count_display += '</div>';
-                $current_item_desc.append(count_display);
-                if (!window.uwlb)
-                    $('.channel-items-count .tooltip-button', $current_item_desc).click(function () { $('span', this).toggle(); });
-                is_empty = false;
+            if (response.info.itemsCount) {
+                const results = [];
+                if (response.info.channelsCount) {
+                    results.push(response.info.channelsCount + ' ' + jsu.translate('channel(s)'));
+                }
+                if (response.info.videosCount) {
+                    results.push(response.info.videosCount + ' ' + jsu.translate('video(s)'));
+                }
+                if (response.info.livesCount) {
+                    results.push(response.info.livesCount + ' ' + jsu.translate('live stream(s)'));
+                }
+                if (response.info.pgroupsCount) {
+                    results.push(response.info.pgroupsCount + ' ' + jsu.translate('photos group(s)'));
+                }
+                let countDisplay = '<div class="channel-items-count">' + jsu.translate('Channel content:');
+                countDisplay += ' <span>' + jsu.escapeHTML(results.join(', ')) + '</span>';
+                countDisplay += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translate('Sub channels items are included in counts.') + '</span></button>';
+                countDisplay += '</div>';
+                $currentItemDesc.append(countDisplay);
+                if (!window.uwlb) {
+                    $('.channel-items-count .tooltip-button', $currentItemDesc).click(function () {
+                        $('span', this).toggle();
+                    });
+                }
+                isEmpty = false;
             }
-            if (storage_display) {
-                storage_display = '<div class="channel-storage-usage">' + jsu.translate('Storage usage:') + ' ' + storage_display + '</div>';
-                $current_item_desc.append(storage_display);
-                if (!window.uwlb)
-                    $('.channel-storage-usage .tooltip-button', $current_item_desc).click(function () { $('span', this).toggle(); });
-                is_empty = false;
+            if (storageDisplay) {
+                storageDisplay = '<div class="channel-storage-usage">' + jsu.translate('Storage usage:') + ' ' + storageDisplay + '</div>';
+                $currentItemDesc.append(storageDisplay);
+                if (!window.uwlb) {
+                    $('.channel-storage-usage .tooltip-button', $currentItemDesc).click(function () {
+                        $('span', this).toggle();
+                    });
+                }
+                isEmpty = false;
             }
             if (response.info.display_rss_links) {
-                var rss = '<div class="channel-description-rss"> ';
-                if (this.display_itunes_rss) {
+                let rss = '<div class="channel-description-rss"> ';
+                if (this.displayItunesRss) {
                     rss += ' <span class="inline-block">' + jsu.translate('Subscribe to channel videos RSS:') + '</span>';
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">';
-                    rss +=     '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translate('standard') + '</a>';
+                    rss += '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translate('standard') + '</a>';
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-video.xml">';
-                    rss +=     '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translate('iTunes') + '</a>';
+                    rss += '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translate('iTunes') + '</a>';
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-audio.xml">';
-                    rss +=     '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translate('iTunes (audio only)') + '</a>';
+                    rss += '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translate('iTunes (audio only)') + '</a>';
                 } else {
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">';
-                    rss +=     '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translate('Subscribe to channel videos RSS') + '</a>';
+                    rss += '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translate('Subscribe to channel videos RSS') + '</a>';
                 }
                 rss += '</div>';
-                $current_item_desc.append(rss);
-                is_empty = false;
+                $currentItemDesc.append(rss);
+                isEmpty = false;
             }
-            if (!is_empty)
-                this.$place.append($current_item_desc);
+            if (!isEmpty) {
+                this.$place.append($currentItemDesc);
+            }
         }
         // channel custom CSS
         $('head .csslistlink').remove();
         if (response.info) {
-            var csslinks = '';
-            for (var index in response.info.css_list) {
-                csslinks += '<link class="csslistlink" rel="stylesheet" type="text/css" href="'+response.info.css_list[index]+'"/>';
+            let csslinks = '';
+            let index;
+            for (index in response.info.cssList) {
+                csslinks += '<link class="csslistlink" rel="stylesheet" type="text/css" href="' + response.info.cssList[index] + '"/>';
             }
             $('head').append(csslinks);
         }
-        if (response.info && response.info.logo_url)
-            $('#mainlogo .header-logo').attr('src', response.info.logo_url);
-        else
-            $('#mainlogo .header-logo').attr('src', this.default_logo_src);
-        if (response.info && response.info.favicon_url)
-            $('#favicon_link').attr('href', response.info.favicon_url);
-        else
-            $('#favicon_link').attr('href', this.default_fav_src);
+        if (response.info && response.info.logoUrl) {
+            $('#mainlogo .header-logo').attr('src', response.info.logoUrl);
+        } else {
+            $('#mainlogo .header-logo').attr('src', this.defaultLogoSrc);
+        }
+        if (response.info && response.info.faviconUrl) {
+            $('#faviconLink').attr('href', response.info.faviconUrl);
+        } else {
+            $('#faviconLink').attr('href', this.defaultFavSrc);
+        }
     }
 
-    var nb_channels = response.channels ? response.channels.length : 0;
-    var nb_videos = response.videos ? response.videos.length : 0;
-    var nb_live_streams = response.live_streams ? response.live_streams.length : 0;
-    var nb_photos_groups = response.photos_groups ? response.photos_groups.length : 0;
-    var has_items = nb_channels > 0 || nb_videos > 0 || nb_live_streams > 0 || nb_photos_groups > 0;
+    const nbChannels = response.channels ? response.channels.length : 0;
+    const nbVideos = response.videos ? response.videos.length : 0;
+    const nbLiveStreams = response.liveStreams ? response.liveStreams.length : 0;
+    const nbPhotosGroups = response.photosGroups ? response.photosGroups.length : 0;
+    const hasItems = nbChannels > 0 || nbVideos > 0 || nbLiveStreams > 0 || nbPhotosGroups > 0;
     // channel display
-    this.refresh_title();
-    if (has_items)
-        this.browser.display_content(this.$place, response, oid, 'channels');
-    else {
-        var msg;
-        if (this.browser.selectable_content.indexOf('c') != -1) {
-            if (this.browser.displayable_content.length > 1)
+    this.refreshTitle();
+    if (hasItems) {
+        this.browser.displayContent(this.$place, response, oid, 'channels');
+    } else {
+        let msg;
+        if (this.browser.selectableContent.indexOf('c') != -1) {
+            if (this.browser.displayableContent.length > 1) {
                 msg = 'This channel contains no sub channels and no media.';
-            else
+            } else {
                 msg = 'This channel contains no sub channels.';
+            }
         } else {
             msg = 'This channel contains no media.';
         }
         msg = jsu.translate(msg) + '<br/>';
         msg += jsu.translate('Some contents may still exist in this channel but if it is the case your account is not allowed to see them.');
-        this.$place.append('<div class="messages"><div class="message info">'+msg+'</div></div>');
+        this.$place.append('<div class="messages"><div class="message info">' + msg + '</div></div>');
     }
 };
 
-MSBrowserChannels.prototype.refresh_display = function (reset) {
-    if (reset && this.last_response)
-        this.last_response = null;
-    if (this.last_response)
-        this._on_channel_content(this.last_response, this.current_channel_oid);
-    else if (this.browser.lti_mode)
-        this.display_personal_channel();
-    else
-        this.display_channel(this.current_channel_oid);
+MSBrowserChannels.prototype.refreshDisplay = function (reset) {
+    if (reset && this.lastResponse) {
+        this.lastResponse = null;
+    }
+    if (this.lastResponse) {
+        this._onChannelContent(this.lastResponse, this.currentChannelOid);
+    } else if (this.browser.ltiMode) {
+        this.displayPersonalChannel();
+    } else {
+        this.displayChannel(this.currentChannelOid);
+    }
 };
 
 MSBrowserChannels.prototype.remove = function (oid) {
-    if (this.current_channel_oid == oid) {
+    if (this.currentChannelOid == oid) {
         // display parent channel
-        var parent_oid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : '0';
-        if (!this.browser.pick_mode && this.browser.catalog[parent_oid] && this.browser.catalog[parent_oid].slug) {
-            window.location.hash = '#'+this.browser.catalog[parent_oid].slug;
+        const parentOid = (this.browser.catalog[oid] && this.browser.catalog[oid].parent_oid) ? this.browser.catalog[oid].parent_oid : '0';
+        if (!this.browser.pickMode && this.browser.catalog[parentOid] && this.browser.catalog[parentOid].slug) {
+            window.location.hash = '#' + this.browser.catalog[parentOid].slug;
         } else {
-            this.display_channel(parent_oid);
+            this.displayChannel(parentOid);
         }
     } else {
-        this.browser.remove_oid_from_tab(this, oid);
+        this.browser.removeOidFromTab(this, oid);
     }
 };
