@@ -1,7 +1,6 @@
 /*******************************************
-* Labels to translate from HTML file       *
+* Labels to translate texts from jsu       *
 * Copyright: UbiCast, all rights reserved  *
-* Author: Stephane Diemer                  *
 *******************************************/
 /* global jsu */
 

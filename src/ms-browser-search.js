@@ -14,17 +14,17 @@ function MSBrowserSearch (options) {
     this.order = 'default';
     this.lastResponse = null;
     this.searchInFields = [
-        { name: 'in_title', label: 'titles', initial: true, items: null },
-        { name: 'in_description', label: 'descriptions', initial: false, items: null },
-        { name: 'in_keywords', label: 'keywords', initial: true, items: null },
-        { name: 'in_speaker', label: 'speakers', initial: true, items: 'vlp' },
-        { name: 'in_license', label: 'licenses', initial: false, items: 'vlp' },
-        { name: 'in_company', label: 'companies', initial: false, items: 'vlp' },
-        { name: 'in_location', label: 'locations', initial: false, items: 'vlp' },
-        { name: 'in_categories', label: 'categories', initial: false, items: 'vlp' },
-        { name: 'in_annotations', label: 'comments, slides, ...', initial: false, items: 'vlp' },
-        { name: 'in_photos', label: 'photos', initial: false, items: 'p' },
-        { name: 'in_extref', label: 'external references', initial: true, items: null }
+        { name: 'in_title', label: jsu.escapeHTML(jsu.translate('titles')), initial: true, items: null },
+        { name: 'in_description', label: jsu.escapeHTML(jsu.translate('descriptions')), initial: false, items: null },
+        { name: 'in_keywords', label: jsu.escapeHTML(jsu.translate('keywords')), initial: true, items: null },
+        { name: 'in_speaker', label: jsu.escapeHTML(jsu.translate('speakers')), initial: true, items: 'vlp' },
+        { name: 'in_license', label: jsu.escapeHTML(jsu.translate('licenses')), initial: false, items: 'vlp' },
+        { name: 'in_company', label: jsu.escapeHTML(jsu.translate('companies')), initial: false, items: 'vlp' },
+        { name: 'in_location', label: jsu.escapeHTML(jsu.translate('locations')), initial: false, items: 'vlp' },
+        { name: 'in_categories', label: jsu.escapeHTML(jsu.translate('categories')), initial: false, items: 'vlp' },
+        { name: 'in_annotations', label: jsu.escapeHTML(jsu.translate('comments, slides, ...')), initial: false, items: 'vlp' },
+        { name: 'in_photos', label: jsu.escapeHTML(jsu.translate('photos')), initial: false, items: 'p' },
+        { name: 'in_extref', label: jsu.escapeHTML(jsu.translate('external references')), initial: true, items: null }
     ];
     if (options.defaultSearchIn) {
         for (let i = 0; i < this.searchInFields.length; i++) {
@@ -37,10 +37,10 @@ function MSBrowserSearch (options) {
         }
     }
     this.searchForFields = [
-        { name: 'for_channels', label: 'channels', initial: true, items: 'c' },
-        { name: 'for_videos', label: 'videos', initial: true, items: 'v' },
-        { name: 'for_lives', label: 'live streams', initial: true, items: 'l' },
-        { name: 'for_photos', label: 'photos groups', initial: true, items: 'p' }
+        { name: 'for_channels', label: jsu.escapeHTML(jsu.translate('channels')), initial: true, items: 'c' },
+        { name: 'for_videos', label: jsu.escapeHTML(jsu.translate('videos')), initial: true, items: 'v' },
+        { name: 'for_lives', label: jsu.escapeHTML(jsu.translate('live streams')), initial: true, items: 'l' },
+        { name: 'for_photos', label: jsu.escapeHTML(jsu.translate('photos groups')), initial: true, items: 'p' }
     ];
 
     jsu.setObjectAttributes(this, options, [
@@ -85,7 +85,7 @@ MSBrowserSearch.prototype.getMenuJq = function () {
         const field = this.searchInFields[i];
         if (this.shouldBeDisplayed(dc, field.items)) {
             html += ' <div><input id="ms_browser_search_' + field.name + '" type="checkbox" ' + (field.initial ? 'checked="checked"' : '') + '>';
-            html += ' <label for="ms_browser_search_' + field.name + '">' + jsu.escapeHTML(jsu.translate(field.label)) + '</label></div>';
+            html += ' <label for="ms_browser_search_' + field.name + '">' + field.label + '</label></div>';
         }
     }
     html += '' +
@@ -102,7 +102,7 @@ MSBrowserSearch.prototype.getMenuJq = function () {
             const field = this.searchForFields[i];
             if (this.shouldBeDisplayed(dc, field.items)) {
                 html += ' <div><input id="ms_browser_search_' + field.name + '" type="checkbox" ' + (field.initial ? 'checked="checked"' : '') + '>';
-                html += ' <label for="ms_browser_search_' + field.name + '">' + jsu.escapeHTML(jsu.translate(field.label)) + '</label></div>';
+                html += ' <label for="ms_browser_search_' + field.name + '">' + field.label + '</label></div>';
             }
         }
         html += '' +

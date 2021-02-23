@@ -288,11 +288,11 @@ MSBrowser.prototype.checkFocusDropdown = function () {
 
 MSBrowser.prototype.onFiltersSubmit = function ($form) {
     const inputs = [
-        { type: 'choice', id: 'ms_browser_filter_editable', name: 'filter_editable' },
-        { type: 'choice', id: 'ms_browser_filter_validated', name: 'filter_validated' }
+        { type: 'choice', id: 'ms_browser_filter_editable', name: 'filterEditable' },
+        { type: 'choice', id: 'ms_browser_filter_validated', name: 'filterValidated' }
     ];
     if (this.filterSpeaker != 'self') {
-        inputs.push({ type: 'text', id: 'ms_browser_filter_speaker', name: 'filter_speaker' });
+        inputs.push({ type: 'text', id: 'ms_browser_filter_speaker', name: 'filterSpeaker' });
     }
     let changed = false;
     for (let i = 0; i < inputs.length; i++) {
@@ -305,6 +305,8 @@ MSBrowser.prototype.onFiltersSubmit = function ($form) {
                     case 'no': value = false; break;
                     default: value = null; break;
                 }
+            } else if (!value) {
+                value = null;
             }
             if (this[inputs[i].name] !== value) {
                 this[inputs[i].name] = value;
@@ -779,7 +781,7 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
                     label = jsu.translate('Select this media');
                 }
             }
-            html += '<button type="button" class="' + this.btnClass + ' button main item-entry-pick"><i class="fa ' + icon + '" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translate(label) + '</span></button>';
+            html += '<button type="button" class="' + this.btnClass + ' button main item-entry-pick"><i class="fa ' + icon + '" aria-hidden="true"></i> <span class="hidden-below-800">' + label + '</span></button>';
         }
     } else {
         if (itemType == 'current') {
@@ -865,13 +867,13 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
             let successful, msg;
             try {
                 successful = document.execCommand('copy');
-                msg = successful ? 'copied' : 'cannot copy';
+                msg = successful ? jsu.translate('copied') : jsu.translate('cannot copy');
             } catch (err) {
                 successful = false;
-                msg = 'failed to copy';
+                msg = jsu.translate('failed to copy');
                 console.log('Failed to copy to clipboard: ' + err);
             }
-            msg = '<i class="fa ' + (successful ? 'fa-check' : 'fa-warning') + '" aria-hidden="true"></i> ' + jsu.escapeHTML(jsu.translate(msg));
+            msg = '<i class="fa ' + (successful ? 'fa-check' : 'fa-warning') + '" aria-hidden="true"></i> ' + jsu.escapeHTML(msg);
             $btn.append('<span class="copy-msg">' + msg + '</span>');
             $btn.addClass('copied');
             setTimeout(function () {
@@ -1055,7 +1057,7 @@ MSBrowser.prototype._getThumbnailInfoBoxHtml = function (item, itemType, selecta
 };
 MSBrowser.prototype._setThumbnailInfoBoxHtml = function (itemType, selectable, oid, $entry, item, tab) {
     $('.item-entry-info', $entry).click({ obj: this, $entry: $entry }, function (event) {
-        const infoId = '#' + $entry.attr('id') + 'Info';
+        const infoId = '#' + $entry.attr('id') + '_info';
         event.data.obj.previousFocus = this;
         if ($(infoId, event.data.$entry).html() !== '') {
             event.data.obj.boxOpenInfo($entry);

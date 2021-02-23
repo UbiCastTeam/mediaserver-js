@@ -458,17 +458,14 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
         this.browser.displayContent(this.$place, response, oid, 'channels');
     } else {
         let msg;
-        if (this.browser.selectableContent.indexOf('c') != -1) {
-            if (this.browser.displayableContent.length > 1) {
-                msg = 'This channel contains no sub channels and no media.';
-            } else {
-                msg = 'This channel contains no sub channels.';
-            }
+        if (this.browser.selectableContent.indexOf('c') == -1) {
+            msg = jsu.translate('This channel contains no media.');
+        } else if (this.browser.displayableContent.length > 1) {
+            msg = jsu.translate('This channel contains no sub channels and no media.');
         } else {
-            msg = 'This channel contains no media.';
+            msg = jsu.translate('This channel contains no sub channels.');
         }
-        msg = jsu.translate(msg) + '<br/>';
-        msg += jsu.translate('Some contents may still exist in this channel but if it is the case your account is not allowed to see them.');
+        msg += '<br/>' + jsu.translate('Some contents may still exist in this channel but if it is the case your account is not allowed to see them.');
         this.$place.append('<div class="messages"><div class="message info">' + msg + '</div></div>');
     }
 };
