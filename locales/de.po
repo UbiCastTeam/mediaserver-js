@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
-"POT-Creation-Date: 2021-02-16 18:27+0100\n"
-"PO-Revision-Date: 2021-02-16 18:27+0100\n"
+"POT-Creation-Date: 2021-02-23 17:04+0100\n"
+"PO-Revision-Date: 2021-02-23 17:06+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,676 +16,763 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: extra-translations/jsu-translations.js:8
-msgid "January"
+#: extra-translations/item-types.js:7
+msgid "channel"
+msgstr "Kanäle"
+
+#: extra-translations/item-types.js:8
+msgid "video"
+msgstr "Video"
+
+#: extra-translations/item-types.js:9
+msgid "live"
 msgstr ""
+
+#: extra-translations/item-types.js:10 ms-browser-latest.js:58
+#: ms-browser-search.js:26
+msgid "photos"
+msgstr "Fotos"
+
+#: extra-translations/jsu-translations.js:7
+msgid "January"
+msgstr "Januar"
+
+#: extra-translations/jsu-translations.js:8
+msgid "February"
+msgstr "Februar"
 
 #: extra-translations/jsu-translations.js:9
-msgid "February"
-msgstr ""
+msgid "March"
+msgstr "März"
 
 #: extra-translations/jsu-translations.js:10
-msgid "March"
-msgstr ""
+msgid "April"
+msgstr "April"
 
 #: extra-translations/jsu-translations.js:11
-msgid "April"
-msgstr ""
+msgid "May"
+msgstr "Mai"
 
 #: extra-translations/jsu-translations.js:12
-msgid "May"
-msgstr ""
+msgid "June"
+msgstr "Juni"
 
 #: extra-translations/jsu-translations.js:13
-msgid "June"
-msgstr ""
+msgid "July"
+msgstr "Juli"
 
 #: extra-translations/jsu-translations.js:14
-msgid "July"
-msgstr ""
+msgid "August"
+msgstr "August"
 
 #: extra-translations/jsu-translations.js:15
-msgid "August"
-msgstr ""
+msgid "September"
+msgstr "September"
 
 #: extra-translations/jsu-translations.js:16
-msgid "September"
-msgstr ""
+msgid "October"
+msgstr "Oktober"
 
 #: extra-translations/jsu-translations.js:17
-msgid "October"
-msgstr ""
+msgid "November"
+msgstr "November"
 
 #: extra-translations/jsu-translations.js:18
-msgid "November"
-msgstr ""
+msgid "December"
+msgstr "Dezember"
 
 #: extra-translations/jsu-translations.js:19
-msgid "December"
-msgstr ""
-
-#: extra-translations/jsu-translations.js:20
 msgid "at"
-msgstr ""
+msgstr "am"
 
-#: extra-translations/jsu-translations.js:21 ms-api.js:299 ms-api.js:324
+#: extra-translations/jsu-translations.js:20 ms-api.js:309 ms-api.js:336
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ms-api.js:15
 msgid "You are not logged in or your session has expired. Please login and retry."
-msgstr ""
+msgstr "Sie sind nicht eingeloggt oder Ihre Sitzung ist abgelaufen Bitte melden Sie sich an und versuchen Sie es erneut."
 
 #: ms-api.js:16
 msgid "Access denied."
-msgstr ""
+msgstr "Zugriff verweigert."
 
 #: ms-api.js:17
 msgid "Item not found."
-msgstr ""
+msgstr "Objekt nicht gefunden."
 
 #: ms-api.js:18
 msgid "An internal server error occurred. An email has been sent to the support team."
-msgstr ""
+msgstr "Ein interner Server-Fehler ist aufgetreten. Eine E-Mail wurde an das Support-Team gesendet."
 
 #: ms-api.js:19
 msgid "The connection timed out. Please retry later."
-msgstr ""
+msgstr "Zeitüberschreitung der Verbindung. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut."
 
-#: ms-api.js:20 ms-tree.js:174
+#: ms-api.js:20 ms-tree.js:191
 msgid "The server cannot be reached."
-msgstr ""
+msgstr "Der Server kann nicht erreicht werden."
 
 #: ms-api.js:31
 msgid "Unable to get search's results content because you cannot access to this channel."
-msgstr ""
+msgstr "Der Inhalt der Suchergebnisse kann nicht abgerufen werden, da Sie nicht auf diesen Kanal zugreifen können."
 
 #: ms-api.js:32 ms-api.js:48 ms-api.js:56 ms-api.js:64 ms-api.js:72
 msgid "Requested channel does not exist."
-msgstr ""
+msgstr "Der angeforderte Kanal existiert nicht."
 
 #: ms-api.js:47
 msgid "Unable to get channel content because you cannot access to this channel."
-msgstr ""
+msgstr "Der Kanalinhalt kann nicht abgerufen werden, da Sie nicht auf diesen Kanal zugreifen können."
 
 #: ms-api.js:55
 msgid "Unable to get channel information because you cannot access to this channel."
-msgstr ""
+msgstr "Kanalinformationen können nicht abgerufen werden, da Sie nicht auf diesen Kanal zugreifen können."
 
-#: ms-api.js:63 ms-tree.js:165
+#: ms-api.js:63 ms-tree.js:181
 msgid "Unable to get channels tree because you cannot access to this channel."
-msgstr ""
+msgstr "Der Kanalbaum kann nicht abgerufen werden, da Sie nicht auf diesen Kanal zugreifen können."
 
 #: ms-api.js:71
 msgid "Unable to get channels path because you cannot access to this channel."
-msgstr ""
+msgstr "Der Kanalpfad kann nicht abgerufen werden, da Sie nicht auf diesen Kanal zugreifen können."
 
 #: ms-api.js:87
 msgid "Unable to get media information because you cannot access to this media."
-msgstr ""
+msgstr "Medieninformationen können nicht abgerufen werden, da Sie nicht auf dieses Medium zugreifen können."
 
 #: ms-api.js:88 ms-api.js:124
 msgid "Media does not exist."
-msgstr ""
+msgstr "Die referenzierte Mediendatei existiert nicht."
 
 #: ms-api.js:123
 msgid "You are not allowed to perform this action."
-msgstr ""
+msgstr "Sie sind nicht berechtigt, diese Aktion durchzuführen."
 
-#: ms-api.js:253 ms-tree.js:269
+#: ms-api.js:259 ms-tree.js:294
 msgid "No information about error."
-msgstr ""
+msgstr "Keine Informationen zu diesem Fehler verfügbar."
 
-#: ms-api.js:268
+#: ms-api.js:277
 msgid "Request failed:"
-msgstr ""
+msgstr "Anforderung fehlgeschlagen:"
 
-#: ms-api.js:341
+#: ms-api.js:354
 msgid "Available space:"
-msgstr ""
+msgstr "Verfügbarer Platz:"
 
-#: ms-api.js:343
+#: ms-api.js:356
 msgid "No available space"
-msgstr ""
+msgstr "Kein verfügbarer Platz"
 
-#: ms-api.js:345 ms-browser-channels.js:350
+#: ms-api.js:358 ms-browser-channels.js:386
 msgid "help"
-msgstr ""
+msgstr "Hilfe"
 
-#: ms-api.js:345
+#: ms-api.js:358
 msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
-msgstr ""
+msgstr "Das Speicherkontingent der übergeordneten Kanäle kann sich auf den verfügbaren Speicherplatz dieses Kanals auswirken."
 
-#: ms-browser-channels.js:42 ms-browser-display.js:44
+#: ms-browser-channels.js:42 ms-browser-display.js:48
 msgid "Loading..."
-msgstr ""
+msgstr "Lädt…"
 
 #: ms-browser-channels.js:46
 msgid "Select a channel to display its content."
-msgstr ""
+msgstr "Wählen Sie einen Kanal aus, um dessen Inhalt anzuzeigen."
 
-#: ms-browser-channels.js:61 ms-tree.js:84 ms-tree.js:86
+#: ms-browser-channels.js:62 ms-tree.js:89 ms-tree.js:91
 msgid "Root"
-msgstr ""
+msgstr "Root"
 
-#: ms-browser-channels.js:72 ms-browser-display.js:17 ms-tree.js:107
-#: ms-tree.js:392 ms-tree.js:399
+#: ms-browser-channels.js:73 ms-browser-display.js:17 ms-tree.js:114
+#: ms-tree.js:430 ms-tree.js:438
 msgid "My channel"
-msgstr ""
+msgstr "Mein Kanal"
 
-#: ms-browser-channels.js:74
+#: ms-browser-channels.js:75
 msgid "Main channels"
-msgstr ""
+msgstr "Hauptkanäle"
 
-#: ms-browser-channels.js:128
+#: ms-browser-channels.js:132
 msgid "You are not allowed to have a personnal channel."
-msgstr ""
+msgstr "Sie dürfen keinen persönlichen Kanal haben."
 
-#: ms-browser-channels.js:180
+#: ms-browser-channels.js:188
 msgid "Please login to access this channel"
-msgstr ""
+msgstr "Bitte melden Sie sich an, um auf diesen Kanal zuzugreifen"
 
-#: ms-browser-channels.js:180 ms-browser-latest.js:198 ms-browser-search.js:289
+#: ms-browser-channels.js:188 ms-browser-latest.js:218 ms-browser-search.js:307
 msgid "Sign in"
-msgstr ""
+msgstr "Anmelden"
 
-#: ms-browser-channels.js:251 ms-browser-channels.js:270
-#: ms-browser-channels.js:271 ms-browser-channels.js:275
+#: ms-browser-channels.js:275 ms-browser-channels.js:295
+#: ms-browser-channels.js:296 ms-browser-channels.js:300
 msgid "Parent channel"
-msgstr ""
+msgstr "Übergeordneter Kanal"
 
-#: ms-browser-channels.js:312 ms-browser-display.js:629
+#: ms-browser-channels.js:342 ms-browser-display.js:671
 msgid "views"
-msgstr ""
+msgstr "Aufrufe"
 
-#: ms-browser-channels.js:314 ms-browser-channels.js:320
-#: ms-browser-display.js:631
+#: ms-browser-channels.js:344 ms-browser-channels.js:351
+#: ms-browser-display.js:673
 msgid "this month"
-msgstr ""
+msgstr "diesen Monat"
 
-#: ms-browser-channels.js:318
+#: ms-browser-channels.js:349
 msgid "annotations"
-msgstr ""
+msgstr "Anmerkungen"
 
-#: ms-browser-channels.js:341 ms-browser-search.js:315
+#: ms-browser-channels.js:373 ms-browser-search.js:334
 msgid "channel(s)"
-msgstr ""
+msgstr "Kanal/Kanäle"
 
-#: ms-browser-channels.js:343 ms-browser-search.js:317
+#: ms-browser-channels.js:376 ms-browser-search.js:337
 msgid "video(s)"
-msgstr ""
+msgstr "Video(s)"
 
-#: ms-browser-channels.js:345 ms-browser-search.js:319
+#: ms-browser-channels.js:379 ms-browser-search.js:340
 msgid "live stream(s)"
-msgstr ""
+msgstr "Live-Stream(s)"
 
-#: ms-browser-channels.js:347 ms-browser-search.js:321
+#: ms-browser-channels.js:382 ms-browser-search.js:343
 msgid "photos group(s)"
-msgstr ""
+msgstr "Fotogruppe(n)"
 
-#: ms-browser-channels.js:348
+#: ms-browser-channels.js:384
 msgid "Channel content:"
-msgstr ""
+msgstr "Kanalinhalt:"
 
-#: ms-browser-channels.js:350
+#: ms-browser-channels.js:386
 msgid "Sub channels items are included in counts."
-msgstr ""
+msgstr "Unterkanalelemente werden bei der Anzahl berücksichtigt."
 
-#: ms-browser-channels.js:358 ms-browser-display.js:637
+#: ms-browser-channels.js:397 ms-browser-display.js:680
 msgid "Storage usage:"
-msgstr ""
+msgstr "Speicherauslastung:"
 
-#: ms-browser-channels.js:367
+#: ms-browser-channels.js:409
 msgid "Subscribe to channel videos RSS:"
-msgstr ""
+msgstr "Kanalvideos abonnieren (RSS):"
 
-#: ms-browser-channels.js:369
+#: ms-browser-channels.js:411
 msgid "standard"
-msgstr ""
+msgstr "Standard"
 
-#: ms-browser-channels.js:371
+#: ms-browser-channels.js:413
 msgid "iTunes"
-msgstr ""
+msgstr "iTunes"
 
-#: ms-browser-channels.js:373
+#: ms-browser-channels.js:415
 msgid "iTunes (audio only)"
-msgstr ""
+msgstr "iTunes (nur Audio)"
 
-#: ms-browser-channels.js:376
+#: ms-browser-channels.js:418
 msgid "Subscribe to channel videos RSS"
+msgstr "Kanalvideos abonnieren (RSS)"
+
+#: ms-browser-channels.js:462
+#, fuzzy
+#| msgid "This channel is unlisted"
+msgid "This channel contains no media."
+msgstr "Dieser Kanal ist nicht gelistet"
+
+#: ms-browser-channels.js:464
+msgid "This channel contains no sub channels and no media."
 msgstr ""
 
-#: ms-browser-channels.js:424
+#: ms-browser-channels.js:466
+#, fuzzy
+#| msgid "This channel is unlisted"
+msgid "This channel contains no sub channels."
+msgstr "Dieser Kanal ist nicht gelistet"
+
+#: ms-browser-channels.js:468
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
-msgstr ""
+msgstr "Einige Inhalte sind möglicherweise noch in diesem Kanal vorhanden. In diesem Fall dürfe Sie diese mit Ihrem Konto jedoch nicht anzeigen."
 
 #: ms-browser-display.js:18
 msgid "My media"
-msgstr ""
+msgstr "Meine Medien"
 
 #: ms-browser-display.js:19
 msgid "Search in my media"
-msgstr ""
+msgstr "Suche in meinen Medien"
 
-#: ms-browser-display.js:21 ms-browser-display.js:429
+#: ms-browser-display.js:21 ms-browser-display.js:458
 msgid "Channels"
-msgstr ""
+msgstr "Kanäle"
 
 #: ms-browser-display.js:22
 msgid "Latest content"
-msgstr ""
+msgstr "Neuester Inhalt"
 
-#: ms-browser-display.js:23 ms-browser-search.js:147
+#: ms-browser-display.js:23 ms-browser-search.js:151
 msgid "Search"
-msgstr ""
-
-#: ms-browser-display.js:95
-msgid "Use default sorting"
-msgstr ""
-
-#: ms-browser-display.js:96
-msgid "Creation date, descending"
-msgstr ""
-
-#: ms-browser-display.js:97
-msgid "Creation date, ascending"
-msgstr ""
-
-#: ms-browser-display.js:98
-msgid "Add date, descending"
-msgstr ""
-
-#: ms-browser-display.js:99
-msgid "Add date, ascending"
-msgstr ""
-
-#: ms-browser-display.js:100
-msgid "Title, descending"
-msgstr ""
-
-#: ms-browser-display.js:101
-msgid "Title, ascending"
-msgstr ""
-
-#: ms-browser-display.js:102
-msgid "Slug, descending"
-msgstr ""
+msgstr "Suche"
 
 #: ms-browser-display.js:103
-msgid "Slug, ascending"
-msgstr ""
+msgid "Use default sorting"
+msgstr "Standardsortierung verwenden"
+
+#: ms-browser-display.js:104
+msgid "Creation date, descending"
+msgstr "Erstellungsdatum, absteigend"
+
+#: ms-browser-display.js:105
+msgid "Creation date, ascending"
+msgstr "Erstellungsdatum, aufsteigend"
 
 #: ms-browser-display.js:106
-msgid "Number of views, descending"
-msgstr ""
+msgid "Add date, descending"
+msgstr "Hinzufügungsdatum, absteigend"
 
 #: ms-browser-display.js:107
-msgid "Number of views, ascending"
-msgstr ""
+msgid "Add date, ascending"
+msgstr "Hinzufügungsdatum, aufsteigend"
+
+#: ms-browser-display.js:108
+msgid "Title, descending"
+msgstr "Titel, absteigend"
+
+#: ms-browser-display.js:109
+msgid "Title, ascending"
+msgstr "Titel, aufsteigend"
+
+#: ms-browser-display.js:110
+msgid "Slug, descending"
+msgstr "Schlange, absteigend"
 
 #: ms-browser-display.js:111
-msgid "Display"
-msgstr ""
+msgid "Slug, ascending"
+msgstr "Schlange, aufsteigend"
+
+#: ms-browser-display.js:114
+msgid "Number of views, descending"
+msgstr "Anzahl der Aufrufe, absteigend"
 
 #: ms-browser-display.js:115
-msgid "Display mode:"
-msgstr ""
-
-#: ms-browser-display.js:116
-msgid "list"
-msgstr ""
-
-#: ms-browser-display.js:116 ms-browser-display.js:117
-#: ms-browser-display.js:312 ms-browser-display.js:327
-msgid "selected setting"
-msgstr ""
-
-#: ms-browser-display.js:117
-msgid "thumbnails"
-msgstr ""
+msgid "Number of views, ascending"
+msgstr "Anzahl der Aufrufe, aufsteigend"
 
 #: ms-browser-display.js:119
+msgid "Display"
+msgstr "Anzeige"
+
+#: ms-browser-display.js:123
+msgid "Display mode:"
+msgstr "Anzeigemodus:"
+
+#: ms-browser-display.js:124
+msgid "list"
+msgstr "Liste"
+
+#: ms-browser-display.js:124 ms-browser-display.js:125
+#: ms-browser-display.js:331 ms-browser-display.js:348
+msgid "selected setting"
+msgstr "ausgewählte Einstellung"
+
+#: ms-browser-display.js:125
+msgid "thumbnails"
+msgstr "Vorschaubilder"
+
+#: ms-browser-display.js:127
 msgid "display items type icons"
-msgstr ""
-
-#: ms-browser-display.js:121
-msgid "Sort by:"
-msgstr ""
-
-#: ms-browser-display.js:128
-msgid "unspecified"
-msgstr ""
+msgstr "Symbole für Anzeigetypen"
 
 #: ms-browser-display.js:129
-msgid "yes"
-msgstr ""
+msgid "Sort by:"
+msgstr "Sortieren nach:"
 
-#: ms-browser-display.js:130
-msgid "no"
-msgstr ""
-
-#: ms-browser-display.js:131
-msgid "Filters:"
-msgstr ""
-
-#: ms-browser-display.js:133
-msgid "Editable:"
-msgstr ""
-
-#: ms-browser-display.js:137
-msgid "Published:"
-msgstr ""
+#: ms-browser-display.js:140
+msgid "unspecified"
+msgstr "unspezifiziert"
 
 #: ms-browser-display.js:141
-msgid "Speaker:"
-msgstr ""
+msgid "yes"
+msgstr "ja"
+
+#: ms-browser-display.js:142
+msgid "no"
+msgstr "nein"
 
 #: ms-browser-display.js:143
+msgid "Filters:"
+msgstr "Filter:"
+
+#: ms-browser-display.js:145
+msgid "Editable:"
+msgstr "Bearbeitbar:"
+
+#: ms-browser-display.js:149
+msgid "Published:"
+msgstr "Veröffentlicht:"
+
+#: ms-browser-display.js:153
+msgid "Speaker:"
+msgstr "Sprecher:"
+
+#: ms-browser-display.js:155
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
-#: ms-browser-display.js:369
+#: ms-browser-display.js:393
 msgid "selected tab"
-msgstr ""
+msgstr "Ausgewählte Registerkarte"
 
-#: ms-browser-display.js:427
+#: ms-browser-display.js:456
 msgid "Sub channels"
-msgstr ""
+msgstr "Unterkanäle"
 
-#: ms-browser-display.js:444
+#: ms-browser-display.js:476
 msgid "Live streams"
-msgstr ""
+msgstr "Live-Streams"
 
-#: ms-browser-display.js:455
+#: ms-browser-display.js:487
 msgid "Videos"
-msgstr ""
+msgstr "Videos"
 
-#: ms-browser-display.js:466
+#: ms-browser-display.js:498
 msgid "Photos groups"
-msgstr ""
+msgstr "Fotogruppen"
 
-#: ms-browser-display.js:486 ms-tree.js:84 ms-tree.js:86 ms-tree.js:232
-#: ms-tree.js:353
+#: ms-browser-display.js:518 ms-tree.js:89 ms-tree.js:91 ms-tree.js:255
+#: ms-tree.js:389
 msgid "selected"
-msgstr ""
+msgstr "ausgewählt"
 
-#: ms-browser-display.js:497
+#: ms-browser-display.js:532
 msgid "Open information panel"
-msgstr ""
+msgstr "Informationstafel öffnen"
 
-#: ms-browser-display.js:499 ms-browser-display.js:743
-#: ms-browser-display.js:773
+#: ms-browser-display.js:534 ms-browser-display.js:792
+#: ms-browser-display.js:823
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
-#: ms-browser-display.js:533
+#: ms-browser-display.js:569
 msgid "Click to select this media"
-msgstr ""
+msgstr "Klicken Sie, um dieses Medium auszuwählen."
 
-#: ms-browser-display.js:555
+#: ms-browser-display.js:591
 msgid "This item is a channel"
-msgstr ""
+msgstr "Dieses Element ist ein Kanal"
 
-#: ms-browser-display.js:559
+#: ms-browser-display.js:595
 msgid "This item is a photos group"
-msgstr ""
+msgstr "Dieses Element ist eine Fotogruppe"
 
-#: ms-browser-display.js:567
+#: ms-browser-display.js:604
 msgid "This item is a live stream"
-msgstr ""
+msgstr "Dieses Element ist ein Live-Stream"
 
-#: ms-browser-display.js:567
+#: ms-browser-display.js:604
 msgid "This item is a video"
-msgstr ""
+msgstr "Dieses Element ist ein Video"
 
-#: ms-browser-display.js:570
+#: ms-browser-display.js:607
 msgid "dynamic Rich Media"
-msgstr ""
+msgstr "Dynamic-Rich-Medium"
 
-#: ms-browser-display.js:572
+#: ms-browser-display.js:609
 msgid "classic Rich Media"
-msgstr ""
+msgstr "Classic-Rich-Medium"
 
-#: ms-browser-display.js:586 ms-browser-display.js:587
+#: ms-browser-display.js:623 ms-browser-display.js:624
 msgid "This channel is unlisted"
-msgstr ""
+msgstr "Dieser Kanal ist nicht gelistet"
 
-#: ms-browser-display.js:591 ms-browser-display.js:592
+#: ms-browser-display.js:629 ms-browser-display.js:630
 msgid "This media is not published"
-msgstr ""
+msgstr "Dieses Medium ist nicht veröffentlicht"
 
-#: ms-browser-display.js:595 ms-browser-display.js:596
+#: ms-browser-display.js:633 ms-browser-display.js:634
 msgid "This media is published and unlisted"
-msgstr ""
+msgstr "Dieses Medium ist veröffentlicht und nicht gelistet"
 
-#: ms-browser-display.js:599 ms-browser-display.js:600
+#: ms-browser-display.js:637 ms-browser-display.js:638
 msgid "This media is published"
-msgstr ""
+msgstr "Dieses Medium ist veröffentlicht"
 
-#: ms-browser-display.js:603 ms-browser-display.js:604
+#: ms-browser-display.js:642 ms-browser-display.js:643
 msgid "This video is not ready"
-msgstr ""
+msgstr "Dieses Video ist nicht bereit"
 
-#: ms-browser-display.js:622
+#: ms-browser-display.js:664
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
-#: ms-browser-display.js:640
+#: ms-browser-display.js:684
 msgid "Type:"
-msgstr ""
+msgstr "Typ:"
 
-#: ms-browser-display.js:643
+#: ms-browser-display.js:687
 msgid "Added on"
-msgstr ""
+msgstr "Hinzugefügt am"
 
-#: ms-browser-display.js:646
+#: ms-browser-display.js:691
 msgid "Parent channel:"
-msgstr ""
+msgstr "Übergeordneter Kanal:"
 
-#: ms-browser-display.js:662 ms-browser-display.js:909
+#: ms-browser-display.js:708 ms-browser-display.js:964
 msgid "Matching annotations:"
-msgstr ""
+msgstr "Passende Anmerkungen:"
 
-#: ms-browser-display.js:674 ms-browser-display.js:922
+#: ms-browser-display.js:721 ms-browser-display.js:978
 msgid "Matching photos:"
-msgstr ""
+msgstr "Passende Fotos:"
 
-#: ms-browser-display.js:726
+#: ms-browser-display.js:773
 msgid "This channel is selected"
-msgstr ""
+msgstr "Dieser Kanal ist ausgewählt"
 
-#: ms-browser-display.js:728
+#: ms-browser-display.js:775
 msgid "Select this channel"
-msgstr ""
+msgstr "Diesen Kanal auswählen"
 
-#: ms-browser-display.js:731
+#: ms-browser-display.js:779
 msgid "This media is selected"
-msgstr ""
+msgstr "Dieses Medium ist ausgewählt"
 
-#: ms-browser-display.js:733
+#: ms-browser-display.js:781
 msgid "Select this media"
-msgstr ""
+msgstr "Dieses Medium auswählen"
 
-#: ms-browser-display.js:740
+#: ms-browser-display.js:789
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiken"
 
-#: ms-browser-display.js:745 ms-browser-display.js:776
+#: ms-browser-display.js:794 ms-browser-display.js:826
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
-#: ms-browser-display.js:750 ms-browser-display.js:754
+#: ms-browser-display.js:800 ms-browser-display.js:804
 msgid "Add a sub channel"
-msgstr ""
+msgstr "Unterkanal hinzufügen"
 
-#: ms-browser-display.js:759 ms-browser-display.js:763
+#: ms-browser-display.js:809 ms-browser-display.js:813
 msgid "Add a video"
-msgstr ""
+msgstr "Video hinzufügen"
 
-#: ms-browser-display.js:767
+#: ms-browser-display.js:817
 msgid "Copy LTI link"
-msgstr ""
+msgstr "LTI-Link kopieren"
 
-#: ms-browser-display.js:770
+#: ms-browser-display.js:820
 msgid "See"
+msgstr "Anzeigen"
+
+#: ms-browser-display.js:870
+msgid "copied"
 msgstr ""
 
-#: ms-browser-display.js:902
+#: ms-browser-display.js:870
+msgid "cannot copy"
+msgstr ""
+
+#: ms-browser-display.js:873
+msgid "failed to copy"
+msgstr ""
+
+#: ms-browser-display.js:958
 msgid "Hide this window"
-msgstr ""
+msgstr "Dieses Fenster ausblenden"
 
-#: ms-browser-display.js:937
+#: ms-browser-display.js:994
 msgid "Media information"
-msgstr ""
+msgstr "Medieninformation"
 
-#: ms-browser-display.js:940
+#: ms-browser-display.js:997
 msgid "Recording date"
-msgstr ""
+msgstr "Aufzeichnungsdatum"
 
-#: ms-browser-display.js:946
+#: ms-browser-display.js:1003
 msgid "Publishing date"
-msgstr ""
+msgstr "Erscheinungsdatum"
 
-#: ms-browser-display.js:952
+#: ms-browser-display.js:1009
 msgid "Duration"
-msgstr ""
+msgstr "Dauer"
 
-#: ms-browser-display.js:957
+#: ms-browser-display.js:1014
 msgid "Views last month"
-msgstr ""
+msgstr "Aufrufe im letzten Monat"
 
-#: ms-browser-display.js:960
+#: ms-browser-display.js:1017
 msgid "Views"
-msgstr ""
+msgstr "Aufrufe"
 
-#: ms-browser-display.js:963
+#: ms-browser-display.js:1020
 msgid "Annotations last month"
-msgstr ""
+msgstr "Anmerkungen im letzten Monat"
 
-#: ms-browser-display.js:966
+#: ms-browser-display.js:1023
 msgid "Annotations"
-msgstr ""
+msgstr "Anmerkungen"
 
-#: ms-browser-display.js:971
+#: ms-browser-display.js:1028
 msgid "Storage usage"
-msgstr ""
+msgstr "Speicherauslastung"
 
-#: ms-browser-display.js:1084
+#: ms-browser-display.js:1147
 msgid "Categories"
-msgstr ""
+msgstr "Kategorien"
 
-#: ms-browser-display.js:1086
+#: ms-browser-display.js:1149
 msgid "Unspecified"
-msgstr ""
+msgstr "Nicht spezifiziert"
 
-#: ms-browser-display.js:1160
+#: ms-browser-display.js:1224
 msgid "See statistics on this channel"
-msgstr ""
+msgstr "Statistiken zu diesem Kanal anzeigen"
 
-#: ms-browser-latest.js:42
+#: ms-browser-latest.js:41
 msgid "Content types"
-msgstr ""
+msgstr "Inhaltstypen"
 
-#: ms-browser-latest.js:44
+#: ms-browser-latest.js:43
 msgid "Content types to display:"
-msgstr ""
+msgstr "Anzuzeigende Inhaltstypen:"
 
-#: ms-browser-latest.js:47
+#: ms-browser-latest.js:46 ms-browser-search.js:40
 msgid "channels"
-msgstr ""
+msgstr "Kanäle"
 
-#: ms-browser-latest.js:51
+#: ms-browser-latest.js:50 ms-browser-search.js:41
 msgid "videos"
-msgstr ""
+msgstr "Videos"
 
-#: ms-browser-latest.js:55
+#: ms-browser-latest.js:54 ms-browser-search.js:42
 msgid "live streams"
-msgstr ""
+msgstr "Live-Streams"
 
-#: ms-browser-latest.js:59
-msgid "photos"
-msgstr ""
-
-#: ms-browser-latest.js:87
+#: ms-browser-latest.js:88
 msgid "Display {count} more items"
-msgstr ""
+msgstr "Weitere {count} Elemente anzeigen"
 
-#: ms-browser-latest.js:91
+#: ms-browser-latest.js:92
 msgid "This list presents all media and channels ordered by add date."
-msgstr ""
+msgstr "Diese Liste enthält alle Medien und Kanäle, sortiert nach dem Datum des Hinzufügens."
 
-#: ms-browser-latest.js:108
+#: ms-browser-latest.js:113
 msgid "Latest content added"
-msgstr ""
+msgstr "Neueste Inhalte hinzugefügt"
 
-#: ms-browser-latest.js:198 ms-browser-search.js:289
+#: ms-browser-latest.js:218 ms-browser-search.js:307
 msgid "Please login to access this page"
-msgstr ""
+msgstr "Bitte melden Sie sich an, um auf diese Seite zuzugreifen"
 
-#: ms-browser-latest.js:244
+#: ms-browser-latest.js:262
 msgid "No contents."
+msgstr "Keine Inhalte."
+
+#: ms-browser-search.js:17
+msgid "titles"
 msgstr ""
 
-#: ms-browser-search.js:74
+#: ms-browser-search.js:18
+msgid "descriptions"
+msgstr ""
+
+#: ms-browser-search.js:19
+msgid "keywords"
+msgstr ""
+
+#: ms-browser-search.js:20
+msgid "speakers"
+msgstr "Sprecher"
+
+#: ms-browser-search.js:21
+msgid "licenses"
+msgstr ""
+
+#: ms-browser-search.js:22
+msgid "companies"
+msgstr ""
+
+#: ms-browser-search.js:23
+#, fuzzy
+#| msgid "annotations"
+msgid "locations"
+msgstr "Anmerkungen"
+
+#: ms-browser-search.js:24
+msgid "categories"
+msgstr "Kategorien"
+
+#: ms-browser-search.js:25
+msgid "comments, slides, ..."
+msgstr ""
+
+#: ms-browser-search.js:27
+msgid "external references"
+msgstr ""
+
+#: ms-browser-search.js:43
+msgid "photos groups"
+msgstr "Fotogruppen"
+
+#: ms-browser-search.js:75
 msgid "Search:"
-msgstr ""
+msgstr "Suchen:"
 
-#: ms-browser-search.js:76
+#: ms-browser-search.js:77
 msgid "Go"
-msgstr ""
+msgstr "Los"
 
-#: ms-browser-search.js:79
+#: ms-browser-search.js:80
 msgid "Search in"
-msgstr ""
+msgstr "Suchen in"
 
-#: ms-browser-search.js:82 ms-browser-search.js:98
+#: ms-browser-search.js:82 ms-browser-search.js:99
 msgid "all"
-msgstr ""
+msgstr "alles"
 
-#: ms-browser-search.js:83 ms-browser-search.js:99
+#: ms-browser-search.js:83 ms-browser-search.js:100
 msgid "none"
-msgstr ""
+msgstr "keine"
 
-#: ms-browser-search.js:95
+#: ms-browser-search.js:97
 msgid "Search for"
-msgstr ""
+msgstr "Suche nach"
 
-#: ms-browser-search.js:140
+#: ms-browser-search.js:144
 msgid "Use the input above to search for something."
-msgstr ""
+msgstr "Verwenden Sie die Eingabe oben, um eine Suche durchzuführen."
 
-#: ms-browser-search.js:258
+#: ms-browser-search.js:274
 msgid "Search results for:"
-msgstr ""
+msgstr "Suchergebnisse für:"
 
-#: ms-browser-search.js:322
+#: ms-browser-search.js:345
 msgid "Matching items:"
-msgstr ""
+msgstr "Übereinstimmende Elemente:"
 
-#: ms-browser-search.js:327
+#: ms-browser-search.js:349
 msgid "No results."
-msgstr ""
-
-#: ms-tree.js:154
-msgid "Loading"
-msgstr ""
-
-#: ms-tree.js:163
-msgid "Unable to get channels tree because you are not logged in."
-msgstr ""
-
-#: ms-tree.js:167
-msgid "Channel does not exist."
-msgstr ""
+msgstr "Keine Ergebnisse."
 
 #: ms-tree.js:169
+msgid "Loading"
+msgstr "Lädt"
+
+#: ms-tree.js:179
+msgid "Unable to get channels tree because you are not logged in."
+msgstr "Der Kanalbaum kann nicht abgerufen werden, da Sie nicht angemeldet sind."
+
+#: ms-tree.js:183
+msgid "Channel does not exist."
+msgstr "Der Kanal existiert nicht."
+
+#: ms-tree.js:185
 msgid "An error occurred in the server. Please try again later."
-msgstr ""
+msgstr "Auf dem Server ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut."
 
-#: ms-tree.js:172
+#: ms-tree.js:189
 msgid "Unable to get channels tree. Request timed out."
-msgstr ""
+msgstr "Der Kanalbaum kann nicht abgerufen werden. Die Anfrage ist abgelaufen."
 
-#: ms-tree.js:176
+#: ms-tree.js:193
 msgid "An error occurred during request:"
-msgstr ""
+msgstr "Während der Anfrage ist ein Fehler aufgetreten:"
