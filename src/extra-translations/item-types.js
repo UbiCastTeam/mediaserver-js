@@ -1,5 +1,5 @@
 /*******************************************
-* Labels to translate item types           *
+* Translations for item types              *
 * Copyright: UbiCast, all rights reserved  *
 *******************************************/
 /* global jsu */

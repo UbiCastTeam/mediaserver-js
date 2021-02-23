@@ -1,5 +1,5 @@
 /*******************************************
-* Labels to translate texts from jsu       *
+* Translations for jsu texts               *
 * Copyright: UbiCast, all rights reserved  *
 *******************************************/
 /* global jsu */
