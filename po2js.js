@@ -36,20 +36,28 @@ const data = po2json.parseFileSync(opt.argv[0]);
 const filename = path.parse(opt.argv[0]).base;
 const lang = filename.split('.')[0];
 
-const bodyPart = Object.keys(data).filter(msgid => msgid !== '').map((msgid) => {
+let bodyPart = '';
+for (const msgid in data) {
     if (msgid === '') {
-        return;
+        continue;
     }
     const msgstr = data[msgid][1];
     if (msgstr === '') {
-        return;
+        continue;
     }
     const jsonMsgid = JSON.stringify(msgid);
     const jsonMsgstr = JSON.stringify(msgstr);
-    return `    ${jsonMsgid}: ${jsonMsgstr}`;
-}).join(',\n');
+    bodyPart += `\n    ${jsonMsgid}: ${jsonMsgstr},`;
+}
+bodyPart = bodyPart.slice(0, -1);
 
-const output = `/* global jsu */\njsu.addTranslations({\n${bodyPart}\n}, "${lang}");`;
+let output;
+if (bodyPart) {
+    output = `/* global jsu */\njsu.addTranslations({${bodyPart}\n}, "${lang}");`;
+} else {
+    // no translations available
+    output = '';
+}
 
 const outDir = path.dirname(opt.argv[1]);
 if (!fs.existsSync(outDir)) {
