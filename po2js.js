@@ -41,6 +41,9 @@ const bodyPart = Object.keys(data).filter(msgid => msgid !== '').map((msgid) => 
         return;
     }
     const msgstr = data[msgid][1];
+    if (msgstr === '') {
+        return;
+    }
     const jsonMsgid = JSON.stringify(msgid);
     const jsonMsgstr = JSON.stringify(msgstr);
     return `    ${jsonMsgid}: ${jsonMsgstr}`;
