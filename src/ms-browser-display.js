@@ -470,14 +470,14 @@ MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab
         }
         $container.append($section);
     }
-    if (data.liveStreams && data.liveStreams.length > 0) {
+    if (data.live_streams && data.live_streams.length > 0) {
         // live streams
         selectable = this.selectableContent.indexOf('l') != -1;
         $container.append('<' + markup + '>' + jsu.translate('Live streams') + '</' + markup + '>');
 
         $section = $(sectionHtml);
-        for (i = 0; i < data.liveStreams.length; i++) {
-            $section.append(this.getContentEntry('live', data.liveStreams[i], selectable, tab));
+        for (i = 0; i < data.live_streams.length; i++) {
+            $section.append(this.getContentEntry('live', data.live_streams[i], selectable, tab));
         }
         $container.append($section);
     }
@@ -492,14 +492,14 @@ MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab
         }
         $container.append($section);
     }
-    if (data.photosGroups && data.photosGroups.length > 0) {
+    if (data.photos_groups && data.photos_groups.length > 0) {
         // photos groups
         selectable = this.selectableContent.indexOf('p') != -1;
         $container.append('<' + markup + '>' + jsu.translate('Photos groups') + '</' + markup + '>');
 
         $section = $(sectionHtml);
-        for (i = 0; i < data.photosGroups.length; i++) {
-            $section.append(this.getContentEntry('photos', data.photosGroups[i], selectable, tab));
+        for (i = 0; i < data.photos_groups.length; i++) {
+            $section.append(this.getContentEntry('photos', data.photos_groups[i], selectable, tab));
         }
         $container.append($section);
     }

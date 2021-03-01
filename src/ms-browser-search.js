@@ -323,8 +323,8 @@ MSBrowserSearch.prototype._onAjaxResponse = function (response) {
 
     const nbChannels = response.channels ? response.channels.length : 0;
     const nbVideos = response.videos ? response.videos.length : 0;
-    const nbLiveStreams = response.liveStreams ? response.liveStreams.length : 0;
-    const nbPhotosGroups = response.photosGroups ? response.photosGroups.length : 0;
+    const nbLiveStreams = response.live_streams ? response.live_streams.length : 0;
+    const nbPhotosGroups = response.photos_groups ? response.photos_groups.length : 0;
     const hasItems = nbChannels > 0 || nbVideos > 0 || nbLiveStreams > 0 || nbPhotosGroups > 0;
     this.$content.html('');
     // search result display

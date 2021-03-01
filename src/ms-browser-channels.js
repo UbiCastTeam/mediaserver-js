@@ -236,15 +236,17 @@ MSBrowserChannels.prototype._onChannelInfo = function (responseInfo, oid) {
     this.browser.msapi.ajaxCall('getChannelsContent', data, function (response) {
         // Merge response
         if (responseInfo) {
+            /* eslint-disable camelcase */
             if (responseInfo.info) {
                 response.info = responseInfo.info;
             }
-            if (responseInfo.parentSelectable) {
-                response.parentSelectable = responseInfo.parentSelectable;
+            if (responseInfo.parent_selectable) {
+                response.parent_selectable = responseInfo.parent_selectable;
             }
             if (responseInfo.selectable) {
                 response.selectable = responseInfo.selectable;
             }
+            /* eslint-enable camelcase */
         }
         obj._onChannelContent(response, oid);
     });
@@ -367,19 +369,19 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 $currentItemDesc.append($desc);
                 isEmpty = false;
             }
-            if (response.info.itemsCount) {
+            if (response.info.items_count) {
                 const results = [];
-                if (response.info.channelsCount) {
-                    results.push(response.info.channelsCount + ' ' + jsu.translate('channel(s)'));
+                if (response.info.channels_count) {
+                    results.push(response.info.channels_count + ' ' + jsu.translate('channel(s)'));
                 }
-                if (response.info.videosCount) {
-                    results.push(response.info.videosCount + ' ' + jsu.translate('video(s)'));
+                if (response.info.videos_count) {
+                    results.push(response.info.videos_count + ' ' + jsu.translate('video(s)'));
                 }
-                if (response.info.livesCount) {
-                    results.push(response.info.livesCount + ' ' + jsu.translate('live stream(s)'));
+                if (response.info.lives_count) {
+                    results.push(response.info.lives_count + ' ' + jsu.translate('live stream(s)'));
                 }
-                if (response.info.pgroupsCount) {
-                    results.push(response.info.pgroupsCount + ' ' + jsu.translate('photos group(s)'));
+                if (response.info.pgroups_count) {
+                    results.push(response.info.pgroups_count + ' ' + jsu.translate('photos group(s)'));
                 }
                 let countDisplay = '<div class="channel-items-count">' + jsu.translate('Channel content:');
                 countDisplay += ' <span>' + jsu.escapeHTML(results.join(', ')) + '</span>';
@@ -430,18 +432,18 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
         if (response.info) {
             let csslinks = '';
             let index;
-            for (index in response.info.cssList) {
-                csslinks += '<link class="csslistlink" rel="stylesheet" type="text/css" href="' + response.info.cssList[index] + '"/>';
+            for (index in response.info.css_list) {
+                csslinks += '<link class="csslistlink" rel="stylesheet" type="text/css" href="' + response.info.css_list[index] + '"/>';
             }
             $('head').append(csslinks);
         }
-        if (response.info && response.info.logoUrl) {
-            $('#mainlogo .header-logo').attr('src', response.info.logoUrl);
+        if (response.info && response.info.logo_url) {
+            $('#mainlogo .header-logo').attr('src', response.info.logo_url);
         } else {
             $('#mainlogo .header-logo').attr('src', this.defaultLogoSrc);
         }
-        if (response.info && response.info.faviconUrl) {
-            $('#faviconLink').attr('href', response.info.faviconUrl);
+        if (response.info && response.info.favicon_url) {
+            $('#faviconLink').attr('href', response.info.favicon_url);
         } else {
             $('#faviconLink').attr('href', this.defaultFavSrc);
         }
@@ -449,8 +451,8 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
 
     const nbChannels = response.channels ? response.channels.length : 0;
     const nbVideos = response.videos ? response.videos.length : 0;
-    const nbLiveStreams = response.liveStreams ? response.liveStreams.length : 0;
-    const nbPhotosGroups = response.photosGroups ? response.photosGroups.length : 0;
+    const nbLiveStreams = response.live_streams ? response.live_streams.length : 0;
+    const nbPhotosGroups = response.photos_groups ? response.photos_groups.length : 0;
     const hasItems = nbChannels > 0 || nbVideos > 0 || nbLiveStreams > 0 || nbPhotosGroups > 0;
     // channel display
     this.refreshTitle();

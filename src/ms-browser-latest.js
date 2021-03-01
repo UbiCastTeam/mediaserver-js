@@ -230,7 +230,7 @@ MSBrowserLatest.prototype._onAjaxResponse = function (response) {
         return this._onAjaxError(response);
     }
 
-    this.startDate = response.maxDate;
+    this.startDate = response.max_date;
     this.more = response.more === true;
     for (let i = 0; i < response.items.length; i++) {
         const item = response.items[i];
