@@ -260,7 +260,7 @@ MSBrowser.prototype.updateCatalog = function (item, full) {
     }
     if (!this.catalog[item.oid]) {
         if (full) {
-            item.isFull = true;
+            item.is_full = true; // eslint-disable-line camelcase
         }
         this.catalog[item.oid] = item;
     } else {
@@ -269,7 +269,7 @@ MSBrowser.prototype.updateCatalog = function (item, full) {
             this.catalog[item.oid][field] = item[field];
         }
         if (full) {
-            this.catalog[item.oid].isFull = true;
+            this.catalog[item.oid].is_full = true; // eslint-disable-line camelcase
         }
     }
 };
@@ -324,7 +324,7 @@ MSBrowser.prototype.pick = function (oid, action, initialPick) {
         }
         return;
     }
-    if (this.catalog[oid] && this.catalog[oid].isFull) {
+    if (this.catalog[oid] && this.catalog[oid].is_full) {
         this._pick(oid, { success: true, info: this.catalog[oid] }, action, initialPick);
         return;
     }

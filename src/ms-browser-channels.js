@@ -61,7 +61,7 @@ MSBrowserChannels.prototype.refreshTitle = function () {
         html += '<span class="channel-titles-place">';
         const parentTitle = item.parent_oid && item.parent_oid != '0' ? item.parent_title : jsu.translate('Root');
         if (!this.browser.useOverlay && parentTitle) {
-            html += '<a class="parent-channel-title" href="#' + (item.parentSlug ? item.parentSlug : '') + '"' + (item.parentLanguage ? 'lang="' + item.parentLanguage + '"' : '') + '>' + jsu.escapeHTML(parentTitle) + '</a>';
+            html += '<a class="parent-channel-title" href="#' + (item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>' + jsu.escapeHTML(parentTitle) + '</a>';
         }
         html += '<span class="channel-title"' + (item.language ? 'lang="' + item.language + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
         html += '</span>';
@@ -278,9 +278,9 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
             const parent = {
                 oid: parentOid,
                 title: parentTitle,
-                slug: response.info.parentSlug
+                slug: response.info.parent_slug
             };
-            if (response.info.parent_oid && response.info.parentSlug) {
+            if (response.info.parent_oid && response.info.parent_slug) {
                 this.browser.updateCatalog(parent);
             }
             let $back;
