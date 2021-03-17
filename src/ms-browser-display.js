@@ -1031,7 +1031,7 @@ MSBrowser.prototype._getThumbnailInfoBoxHtml = function (item, itemType, selecta
     html += '</table>';
     if (item.short_description) {
         html += '<hr/>';
-        html += '<div class="float-container"><p>' + jsu.escapeHTML($('<span>' + item.short_description + '</span>').text()) + '</p></div>';
+        html += '<p>' + jsu.escapeHTML($('<span>' + item.short_description + '</span>').text()) + '</p>';
     }
     html += '</div>';
     html += '</div>';
