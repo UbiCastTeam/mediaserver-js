@@ -182,7 +182,8 @@ MSBrowser.prototype.init = function () {
                 }
                 if (returnTarget.indexOf('postMessageAPI') === 0) {
                     const topFrame = window.opener ? window.opener.parent : window.parent;
-                    const targetName = returnTarget.substring('postMessageAPI'.length).replace(/^: + |: + $/g, '');
+                    const targetName = returnTarget.substring('postMessageAPI'.length).replace(/^:+|:+$/g, '');
+                    console.log('Posting message:', {item: item, initialPick: Boolean(initialPick), target: targetName});
                     topFrame.postMessage({item: item, initialPick: Boolean(initialPick), target: targetName}, '*');
                     if (window.opener) {
                         window.close();
