@@ -285,7 +285,7 @@ MSTreeManager.prototype._onTreeLoaded = function (result, oid, $target, callback
             });
         }
         this.content[oid].loaded = true;
-        if (result.personalChannel) {
+        if (result.personal_channel) {
             this.hasPersonalChannel = true;
         }
     } else if (result.error) {
