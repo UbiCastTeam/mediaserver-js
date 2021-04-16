@@ -225,13 +225,11 @@ MSBrowserChannels.prototype._onChannelInfo = function (responseInfo, oid) {
         data.speaker = this.browser.filterSpeaker;
     }
     if (this.browser.filterNoCategories) {
-        /* eslint-disable camelcase */
-        data.no_categories = true;
-        /* eslint-enable camelcase */
+        data.no_categories = true; // eslint-disable-line camelcase
     } else if (this.browser.filterCategories.length > 0) {
         data.categories = this.browser.filterCategories.join('\n');
     }
-    data.orderBy = this.order;
+    data.order_by = this.order; // eslint-disable-line camelcase
     const obj = this;
     this.browser.msapi.ajaxCall('getChannelsContent', data, function (response) {
         // Merge response

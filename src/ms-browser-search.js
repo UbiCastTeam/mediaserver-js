@@ -251,7 +251,7 @@ MSBrowserSearch.prototype.onSearchSubmit = function (noPushstate) {
     const data = {
         search: search,
         content: content,
-        orderBy: this.order,
+        order_by: this.order, // eslint-disable-line camelcase
         fields: fields
     };
     if (this.browser.filterEditable !== null) {
@@ -264,9 +264,7 @@ MSBrowserSearch.prototype.onSearchSubmit = function (noPushstate) {
         data.speaker = this.browser.filterSpeaker;
     }
     if (this.browser.filterNoCategories) {
-        /* eslint-disable camelcase */
-        data.no_categories = true;
-        /* eslint-enable camelcase */
+        data.no_categories = true; // eslint-disable-line camelcase
     } else if (this.browser.filterCategories.length > 0) {
         data.categories = this.browser.filterCategories.join('\n');
     }
