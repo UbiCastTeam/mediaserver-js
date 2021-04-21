@@ -481,10 +481,21 @@
 }
 
 /* no header adjustments */
-.ms-browser.no-header .ms-browser-header,
+.ms-browser.no-header .ms-browser-header .ms-browser-top-buttons,
+.ms-browser.no-header .ms-browser-header .ms-browser-menu,
 .ms-browser.no-header .ms-browser-bar,
 .ms-browser.no-header .ms-browser-search-form {
     display: none;
+}
+.ms-browser.no-header .ms-browser-header {
+    height: auto;
+}
+.ms-browser.no-header .ms-browser-header .ms-browser-title {
+    white-space: normal;
+}
+.ms-browser.no-header .ms-browser-header .ms-browser-title .parent-channel-title,
+.ms-browser.no-header .ms-browser-header .ms-browser-title .channel-title {
+    white-space: nowrap;
 }
 
 /* 64em ~ 1000px */

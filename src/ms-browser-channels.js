@@ -60,8 +60,9 @@ MSBrowserChannels.prototype.refreshTitle = function () {
         let html = '<span class="item-entry-preview"><img src="' + item.thumb + '" alt="' + jsu.escapeHTML(item.title) + '"/></span>';
         html += '<span class="channel-titles-place">';
         const parentTitle = item.parent_oid && item.parent_oid != '0' ? item.parent_title : jsu.translate('Root');
-        if (!this.browser.useOverlay && parentTitle) {
-            html += '<a class="parent-channel-title" href="#' + (item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>' + jsu.escapeHTML(parentTitle) + '</a>';
+        if (!this.browser.useOverlay && parentTitle && (!this.browser.hideHeader || !this.browser.initialState || !this.browser.initialState.channelSlug || this.browser.initialState.channelSlug != item.slug)) {
+            // If header is disabled, do not display parent link of first opened channel to prevent navigation on whole catalog
+            html += '<a class="parent-channel-title" href="#' + (item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>' + jsu.escapeHTML(parentTitle) + '</a><wbr/>';
         }
         html += '<span class="channel-title"' + (item.language ? 'lang="' + item.language + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
         html += '</span>';

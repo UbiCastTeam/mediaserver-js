@@ -122,6 +122,15 @@ MSBrowser.prototype.init = function () {
             urlParams.push('iframe');
         }
 
+        if (urlData.login) {
+            // Preserve login argument for MediaServer
+            urlParams.push('login=' + window.encodeURIComponent(urlData.login));
+        }
+
+        if (this.hideHeader) {
+            urlParams.push('header=no');
+        }
+
         if (urlData.speaker) {
             this.filterSpeaker = urlData.speaker;
             urlParams.push('speaker=' + window.encodeURIComponent(this.filterSpeaker));
