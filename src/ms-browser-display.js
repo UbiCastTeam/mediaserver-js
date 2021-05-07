@@ -712,7 +712,7 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
                 if (annotation.title) {
                     html += jsu.escapeHTML(annotation.title);
                 }
-                html += ' (' + annotation.timeDisplay + ') ';
+                html += ' (' + annotation.time_display + ') ';
                 html += '</a></li>';
             }
             html += '</ul>';
@@ -969,7 +969,7 @@ MSBrowser.prototype._getThumbnailInfoBoxHtml = function (item, itemType, selecta
                 if (annotation.title) {
                     html += jsu.escapeHTML(annotation.title);
                 }
-                html += ' (' + annotation.timeDisplay + ') ';
+                html += ' (' + annotation.time_display + ') ';
                 html += '</a></li>';
             }
             html += '</ul>';
