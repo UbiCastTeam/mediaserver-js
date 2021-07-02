@@ -13,3 +13,4 @@ translate:
 	npm run translations_fi
 	npm run translations_nl
 	npm run translations_es
+	npm run translations_pl
