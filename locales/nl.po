@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "POT-Creation-Date: 2021-02-23 17:08+0100\n"
-"PO-Revision-Date: 2021-02-23 17:08+0100\n"
+"PO-Revision-Date: 2021-07-03 21:07+0200\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ../src\n"
 "X-Poedit-KeywordsList: ;translate:1;translate:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -26,7 +26,7 @@ msgstr "video"
 
 #: extra-translations/item-types.js:9
 msgid "live"
-msgstr ""
+msgstr "live"
 
 #: extra-translations/item-types.js:10 ms-browser-latest.js:58
 #: ms-browser-search.js:26
@@ -273,20 +273,16 @@ msgid "Subscribe to channel videos RSS"
 msgstr "Abonneren op kanaalvideo's RSS"
 
 #: ms-browser-channels.js:462
-#, fuzzy
-#| msgid "This channel is unlisted"
 msgid "This channel contains no media."
-msgstr "Dit kanaal is niet vermeld"
+msgstr "Dit kanaal bevat geen media."
 
 #: ms-browser-channels.js:464
 msgid "This channel contains no sub channels and no media."
-msgstr ""
+msgstr "Dit kanaal bevat geen subkanalen en geen media."
 
 #: ms-browser-channels.js:466
-#, fuzzy
-#| msgid "This channel is unlisted"
 msgid "This channel contains no sub channels."
-msgstr "Dit kanaal is niet vermeld"
+msgstr "Dit kanaal bevat geen subkanalen."
 
 #: ms-browser-channels.js:468
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
@@ -565,15 +561,15 @@ msgstr "Bekijken"
 
 #: ms-browser-display.js:870
 msgid "copied"
-msgstr ""
+msgstr "gecopieerd"
 
 #: ms-browser-display.js:870
 msgid "cannot copy"
-msgstr ""
+msgstr "kan niet kopiëren"
 
 #: ms-browser-display.js:873
 msgid "failed to copy"
-msgstr ""
+msgstr "kopiëren mislukt"
 
 #: ms-browser-display.js:958
 msgid "Hide this window"
@@ -669,15 +665,15 @@ msgstr "Geen inhoud."
 
 #: ms-browser-search.js:17
 msgid "titles"
-msgstr ""
+msgstr "titels"
 
 #: ms-browser-search.js:18
 msgid "descriptions"
-msgstr ""
+msgstr "beschrijvingen"
 
 #: ms-browser-search.js:19
 msgid "keywords"
-msgstr ""
+msgstr "trefwoorden"
 
 #: ms-browser-search.js:20
 msgid "speakers"
@@ -685,17 +681,15 @@ msgstr "spreker"
 
 #: ms-browser-search.js:21
 msgid "licenses"
-msgstr ""
+msgstr "licenties"
 
 #: ms-browser-search.js:22
 msgid "companies"
-msgstr ""
+msgstr "bedrijven"
 
 #: ms-browser-search.js:23
-#, fuzzy
-#| msgid "annotations"
 msgid "locations"
-msgstr "annotaties"
+msgstr "lokaties"
 
 #: ms-browser-search.js:24
 msgid "categories"
@@ -703,11 +697,11 @@ msgstr "categorieën"
 
 #: ms-browser-search.js:25
 msgid "comments, slides, ..."
-msgstr ""
+msgstr "opmerkingen, dia's, ..."
 
 #: ms-browser-search.js:27
 msgid "external references"
-msgstr ""
+msgstr "externe referenties"
 
 #: ms-browser-search.js:43
 msgid "photos groups"
