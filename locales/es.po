@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "POT-Creation-Date: 2021-02-23 17:06+0100\n"
-"PO-Revision-Date: 2021-02-23 17:07+0100\n"
+"PO-Revision-Date: 2021-07-09 10:07+0200\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -26,7 +26,7 @@ msgstr "vídeo"
 
 #: extra-translations/item-types.js:9
 msgid "live"
-msgstr ""
+msgstr "live"
 
 #: extra-translations/item-types.js:10 ms-browser-latest.js:58
 #: ms-browser-search.js:26
@@ -273,20 +273,18 @@ msgid "Subscribe to channel videos RSS"
 msgstr "Suscribirse a la RSS de los vídeos del canal"
 
 #: ms-browser-channels.js:462
-#, fuzzy
 #| msgid "This channel is unlisted"
 msgid "This channel contains no media."
-msgstr "Este canal está oculto"
+msgstr "Este canal no contiene medios de comunicación."
 
 #: ms-browser-channels.js:464
 msgid "This channel contains no sub channels and no media."
-msgstr ""
+msgstr "Este canal no contiene subcanales ni medios."
 
 #: ms-browser-channels.js:466
-#, fuzzy
 #| msgid "This channel is unlisted"
 msgid "This channel contains no sub channels."
-msgstr "Este canal está oculto"
+msgstr "Este canal no contiene subcanales."
 
 #: ms-browser-channels.js:468
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
@@ -473,7 +471,7 @@ msgstr "Este elemento es un vídeo"
 
 #: ms-browser-display.js:607
 msgid "dynamic Rich Media"
-msgstr "Rich media dinámico"
+msgstr "Rich Media dinámico"
 
 #: ms-browser-display.js:609
 msgid "classic Rich Media"
@@ -545,7 +543,7 @@ msgstr "Estadísticas"
 
 #: ms-browser-display.js:794 ms-browser-display.js:826
 msgid "Delete"
-msgstr "Borrar"
+msgstr "Eliminar"
 
 #: ms-browser-display.js:800 ms-browser-display.js:804
 msgid "Add a sub channel"
@@ -565,15 +563,15 @@ msgstr "Ver"
 
 #: ms-browser-display.js:870
 msgid "copied"
-msgstr ""
+msgstr "copiado"
 
 #: ms-browser-display.js:870
 msgid "cannot copy"
-msgstr ""
+msgstr "no se puede copiar"
 
 #: ms-browser-display.js:873
 msgid "failed to copy"
-msgstr ""
+msgstr "no se ha podido copiar"
 
 #: ms-browser-display.js:958
 msgid "Hide this window"
@@ -669,15 +667,15 @@ msgstr "Sin contenido."
 
 #: ms-browser-search.js:17
 msgid "titles"
-msgstr ""
+msgstr "títulos"
 
 #: ms-browser-search.js:18
 msgid "descriptions"
-msgstr ""
+msgstr "descripciones"
 
 #: ms-browser-search.js:19
 msgid "keywords"
-msgstr ""
+msgstr "palabras clave"
 
 #: ms-browser-search.js:20
 msgid "speakers"
@@ -685,14 +683,13 @@ msgstr "ponentes"
 
 #: ms-browser-search.js:21
 msgid "licenses"
-msgstr ""
+msgstr "licencias"
 
 #: ms-browser-search.js:22
 msgid "companies"
-msgstr ""
+msgstr "empresas"
 
 #: ms-browser-search.js:23
-#, fuzzy
 #| msgid "annotations"
 msgid "locations"
 msgstr "anotaciones"
@@ -703,11 +700,11 @@ msgstr "categorías"
 
 #: ms-browser-search.js:25
 msgid "comments, slides, ..."
-msgstr ""
+msgstr "comentarios, diapositivas, ..."
 
 #: ms-browser-search.js:27
 msgid "external references"
-msgstr ""
+msgstr "referencias externas"
 
 #: ms-browser-search.js:43
 msgid "photos groups"

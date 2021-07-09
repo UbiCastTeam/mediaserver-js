@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "POT-Creation-Date: 2021-02-23 17:04+0100\n"
-"PO-Revision-Date: 2021-02-23 17:06+0100\n"
+"PO-Revision-Date: 2021-07-09 09:17+0200\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: extra-translations/item-types.js:7
 msgid "channel"
-msgstr "Kanäle"
+msgstr "Kanal"
 
 #: extra-translations/item-types.js:8
 msgid "video"
@@ -26,7 +26,7 @@ msgstr "Video"
 
 #: extra-translations/item-types.js:9
 msgid "live"
-msgstr ""
+msgstr "Live"
 
 #: extra-translations/item-types.js:10 ms-browser-latest.js:58
 #: ms-browser-search.js:26
@@ -175,7 +175,7 @@ msgstr "Das Speicherkontingent der übergeordneten Kanäle kann sich auf den ver
 
 #: ms-browser-channels.js:42 ms-browser-display.js:48
 msgid "Loading..."
-msgstr "Lädt…"
+msgstr "Lädt …"
 
 #: ms-browser-channels.js:46
 msgid "Select a channel to display its content."
@@ -273,20 +273,18 @@ msgid "Subscribe to channel videos RSS"
 msgstr "Kanalvideos abonnieren (RSS)"
 
 #: ms-browser-channels.js:462
-#, fuzzy
 #| msgid "This channel is unlisted"
 msgid "This channel contains no media."
-msgstr "Dieser Kanal ist nicht gelistet"
+msgstr "Dieser Kanal enthält keine Medien."
 
 #: ms-browser-channels.js:464
 msgid "This channel contains no sub channels and no media."
-msgstr ""
+msgstr "Dieser Kanal enthält keine Unterkanäle und keine Medien."
 
 #: ms-browser-channels.js:466
-#, fuzzy
 #| msgid "This channel is unlisted"
 msgid "This channel contains no sub channels."
-msgstr "Dieser Kanal ist nicht gelistet"
+msgstr "Dieser Kanal enthält keine Unterkanäle."
 
 #: ms-browser-channels.js:468
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
@@ -342,11 +340,11 @@ msgstr "Titel, aufsteigend"
 
 #: ms-browser-display.js:110
 msgid "Slug, descending"
-msgstr "Schlange, absteigend"
+msgstr "Slug, absteigend"
 
 #: ms-browser-display.js:111
 msgid "Slug, ascending"
-msgstr "Schlange, aufsteigend"
+msgstr "Slug, aufsteigend"
 
 #: ms-browser-display.js:114
 msgid "Number of views, descending"
@@ -411,7 +409,7 @@ msgstr "Veröffentlicht:"
 
 #: ms-browser-display.js:153
 msgid "Speaker:"
-msgstr "Sprecher:"
+msgstr "Redner:"
 
 #: ms-browser-display.js:155
 msgid "Ok"
@@ -453,7 +451,7 @@ msgstr "Bearbeiten"
 
 #: ms-browser-display.js:569
 msgid "Click to select this media"
-msgstr "Klicken Sie, um dieses Medium auszuwählen."
+msgstr "Klicken Sie, um dieses Medium auszuwählen"
 
 #: ms-browser-display.js:591
 msgid "This item is a channel"
@@ -565,15 +563,15 @@ msgstr "Anzeigen"
 
 #: ms-browser-display.js:870
 msgid "copied"
-msgstr ""
+msgstr "kopiert"
 
 #: ms-browser-display.js:870
 msgid "cannot copy"
-msgstr ""
+msgstr "konnte nicht kopiert werden"
 
 #: ms-browser-display.js:873
 msgid "failed to copy"
-msgstr ""
+msgstr "Kopieren fehlgeschlagen"
 
 #: ms-browser-display.js:958
 msgid "Hide this window"
@@ -669,15 +667,15 @@ msgstr "Keine Inhalte."
 
 #: ms-browser-search.js:17
 msgid "titles"
-msgstr ""
+msgstr "Titel"
 
 #: ms-browser-search.js:18
 msgid "descriptions"
-msgstr ""
+msgstr "Beschreibungen"
 
 #: ms-browser-search.js:19
 msgid "keywords"
-msgstr ""
+msgstr "Schlüsselwörter"
 
 #: ms-browser-search.js:20
 msgid "speakers"
@@ -685,14 +683,13 @@ msgstr "Sprecher"
 
 #: ms-browser-search.js:21
 msgid "licenses"
-msgstr ""
+msgstr "Lizenzen"
 
 #: ms-browser-search.js:22
 msgid "companies"
-msgstr ""
+msgstr "Unternehmen"
 
 #: ms-browser-search.js:23
-#, fuzzy
 #| msgid "annotations"
 msgid "locations"
 msgstr "Anmerkungen"
@@ -703,11 +700,11 @@ msgstr "Kategorien"
 
 #: ms-browser-search.js:25
 msgid "comments, slides, ..."
-msgstr ""
+msgstr "Kommentare, Folien, …"
 
 #: ms-browser-search.js:27
 msgid "external references"
-msgstr ""
+msgstr "Externe Referenzen"
 
 #: ms-browser-search.js:43
 msgid "photos groups"
