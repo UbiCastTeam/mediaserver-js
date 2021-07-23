@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
-"POT-Creation-Date: 2021-02-23 17:01+0100\n"
-"PO-Revision-Date: 2021-02-23 17:03+0100\n"
+"POT-Creation-Date: 2021-07-23 10:51+0200\n"
+"PO-Revision-Date: 2021-07-23 10:51+0200\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -165,7 +165,7 @@ msgstr "Espace disponible :"
 msgid "No available space"
 msgstr "Pas d'espace disponible"
 
-#: ms-api.js:358 ms-browser-channels.js:386
+#: ms-api.js:358 ms-browser-channels.js:387
 msgid "help"
 msgstr "aide"
 
@@ -185,106 +185,106 @@ msgstr "Sélectionnez une chaîne pour afficher son contenu."
 msgid "Root"
 msgstr "Racine"
 
-#: ms-browser-channels.js:73 ms-browser-display.js:17 ms-tree.js:114
+#: ms-browser-channels.js:74 ms-browser-display.js:17 ms-tree.js:114
 #: ms-tree.js:430 ms-tree.js:438
 msgid "My channel"
 msgstr "Ma chaîne"
 
-#: ms-browser-channels.js:75
+#: ms-browser-channels.js:76
 msgid "Main channels"
 msgstr "Chaînes principales"
 
-#: ms-browser-channels.js:132
+#: ms-browser-channels.js:133
 msgid "You are not allowed to have a personnal channel."
 msgstr "Vous n'avez pas la permission de disposer d'une chaîne personnelle."
 
-#: ms-browser-channels.js:188
+#: ms-browser-channels.js:189
 msgid "Please login to access this channel"
 msgstr "Veuillez vous connecter pour accéder à cette chaîne"
 
-#: ms-browser-channels.js:188 ms-browser-latest.js:218 ms-browser-search.js:307
+#: ms-browser-channels.js:189 ms-browser-latest.js:218 ms-browser-search.js:305
 msgid "Sign in"
 msgstr "Connexion"
 
-#: ms-browser-channels.js:275 ms-browser-channels.js:295
-#: ms-browser-channels.js:296 ms-browser-channels.js:300
+#: ms-browser-channels.js:276 ms-browser-channels.js:296
+#: ms-browser-channels.js:297 ms-browser-channels.js:301
 msgid "Parent channel"
 msgstr "Chaîne parente"
 
-#: ms-browser-channels.js:342 ms-browser-display.js:671
+#: ms-browser-channels.js:343 ms-browser-display.js:671
 msgid "views"
 msgstr "vues"
 
-#: ms-browser-channels.js:344 ms-browser-channels.js:351
+#: ms-browser-channels.js:345 ms-browser-channels.js:352
 #: ms-browser-display.js:673
 msgid "this month"
 msgstr "ce mois"
 
-#: ms-browser-channels.js:349
+#: ms-browser-channels.js:350
 msgid "annotations"
 msgstr "annotations"
 
-#: ms-browser-channels.js:373 ms-browser-search.js:334
+#: ms-browser-channels.js:374 ms-browser-search.js:332
 msgid "channel(s)"
 msgstr "chaîne(s)"
 
-#: ms-browser-channels.js:376 ms-browser-search.js:337
+#: ms-browser-channels.js:377 ms-browser-search.js:335
 msgid "video(s)"
 msgstr "vidéo(s)"
 
-#: ms-browser-channels.js:379 ms-browser-search.js:340
+#: ms-browser-channels.js:380 ms-browser-search.js:338
 msgid "live stream(s)"
 msgstr "diffusion(s) en direct"
 
-#: ms-browser-channels.js:382 ms-browser-search.js:343
+#: ms-browser-channels.js:383 ms-browser-search.js:341
 msgid "photos group(s)"
 msgstr "groupe(s) de photos"
 
-#: ms-browser-channels.js:384
+#: ms-browser-channels.js:385
 msgid "Channel content:"
 msgstr "Contenu de la chaîne :"
 
-#: ms-browser-channels.js:386
+#: ms-browser-channels.js:387
 msgid "Sub channels items are included in counts."
 msgstr "Les éléments contenus dans les sous chaînes sont inclus dans les comptes."
 
-#: ms-browser-channels.js:397 ms-browser-display.js:680
+#: ms-browser-channels.js:398 ms-browser-display.js:680
 msgid "Storage usage:"
 msgstr "Stockage utilisé :"
 
-#: ms-browser-channels.js:409
+#: ms-browser-channels.js:410
 msgid "Subscribe to channel videos RSS:"
 msgstr "S'abonner au flux RSS des vidéos de la chaîne :"
 
-#: ms-browser-channels.js:411
+#: ms-browser-channels.js:412
 msgid "standard"
 msgstr "standard"
 
-#: ms-browser-channels.js:413
+#: ms-browser-channels.js:414
 msgid "iTunes"
 msgstr "iTunes"
 
-#: ms-browser-channels.js:415
+#: ms-browser-channels.js:416
 msgid "iTunes (audio only)"
 msgstr "iTunes (audio uniquement)"
 
-#: ms-browser-channels.js:418
+#: ms-browser-channels.js:419
 msgid "Subscribe to channel videos RSS"
 msgstr "S'abonner au flux RSS des vidéos de la chaîne"
 
-#: ms-browser-channels.js:462
+#: ms-browser-channels.js:463
 msgid "This channel contains no media."
 msgstr "Cette chaîne ne contient pas de média."
 
-#: ms-browser-channels.js:464
+#: ms-browser-channels.js:465
 msgid "This channel contains no sub channels and no media."
 msgstr "Cette chaîne ne contient pas de sous chaîne ni de média."
 
-#: ms-browser-channels.js:466
+#: ms-browser-channels.js:467
 msgid "This channel contains no sub channels."
 msgstr "Cette chaîne ne contient pas de sous chaîne."
 
-#: ms-browser-channels.js:468
+#: ms-browser-channels.js:469
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
 msgstr "Du contenu peut tout de même être présent dans cette chaîne mais si c'est le cas, votre compte utilisateur ne possède pas la permission de le voir."
 
@@ -655,7 +655,7 @@ msgstr "Cette liste présente les derniers éléments ajoutés triés par date d
 msgid "Latest content added"
 msgstr "Contenu récemment ajouté"
 
-#: ms-browser-latest.js:218 ms-browser-search.js:307
+#: ms-browser-latest.js:218 ms-browser-search.js:305
 msgid "Please login to access this page"
 msgstr "Veuillez vous connecter pour accéder à cette page"
 
@@ -689,7 +689,7 @@ msgstr "sociétés"
 
 #: ms-browser-search.js:23
 msgid "locations"
-msgstr "lieus"
+msgstr "lieux"
 
 #: ms-browser-search.js:24
 msgid "categories"
@@ -735,15 +735,15 @@ msgstr "Contenu à rechercher"
 msgid "Use the input above to search for something."
 msgstr "Utilisez le champ de texte ci dessus pour rechercher du contenu."
 
-#: ms-browser-search.js:274
+#: ms-browser-search.js:272
 msgid "Search results for:"
 msgstr "Résultats de recherche pour:"
 
-#: ms-browser-search.js:345
+#: ms-browser-search.js:343
 msgid "Matching items:"
 msgstr "Éléments correspondants :"
 
-#: ms-browser-search.js:349
+#: ms-browser-search.js:347
 msgid "No results."
 msgstr "Pas de résultats."
 
