@@ -152,6 +152,12 @@ MSBrowser.prototype.init = function () {
             urlParams.push('newtab');
         }
 
+        if (urlData.categories) {
+            // Expected value is a list of category slugs separated with comas.
+            this.filterCategories = urlData.categories.toString().split(',');
+            urlParams.push('categories=' + window.encodeURIComponent(urlData.categories));
+        }
+
         if (urlData.pick) {
             this.pickMode = true;
             if (urlData.pick.toString().match(/^[cvlp]+$/)) {

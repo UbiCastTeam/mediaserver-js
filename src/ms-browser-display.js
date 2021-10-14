@@ -1150,7 +1150,8 @@ MSBrowser.prototype.displayCategories = function () {
         for (let i = 0; i < this.siteSettingsCategories.length; i++) {
             const slug = jsu.escapeAttribute(this.siteSettingsCategories[i][0]);
             const label = jsu.escapeHTML(this.siteSettingsCategories[i][1]);
-            html += ' <label for="' + slug + '"><input class="checkbox" id="' + slug + '" type="checkbox" value="' + slug + '"/><span>' + label + '</span></label>';
+            const check = this.filterCategories.indexOf(slug) < 0 ? '' : ' checked="checked"';
+            html += ' <label for="' + slug + '"><input class="checkbox" id="' + slug + '" type="checkbox" value="' + slug + '"' + check + '/><span>' + label + '</span></label>';
         }
         html += ' </div>';
         $('.ms-browser-filters', this.$topMenu).append(html);
