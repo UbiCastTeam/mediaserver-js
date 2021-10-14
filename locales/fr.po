@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
-"POT-Creation-Date: 2021-07-23 10:51+0200\n"
-"PO-Revision-Date: 2021-07-23 10:51+0200\n"
+"POT-Creation-Date: 2021-10-14 09:46+0200\n"
+"PO-Revision-Date: 2021-10-14 09:46+0200\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -202,7 +202,7 @@ msgstr "Vous n'avez pas la permission de disposer d'une chaîne personnelle."
 msgid "Please login to access this channel"
 msgstr "Veuillez vous connecter pour accéder à cette chaîne"
 
-#: ms-browser-channels.js:189 ms-browser-latest.js:218 ms-browser-search.js:305
+#: ms-browser-channels.js:189 ms-browser-latest.js:218 ms-browser-search.js:306
 msgid "Sign in"
 msgstr "Connexion"
 
@@ -224,19 +224,19 @@ msgstr "ce mois"
 msgid "annotations"
 msgstr "annotations"
 
-#: ms-browser-channels.js:374 ms-browser-search.js:332
+#: ms-browser-channels.js:374 ms-browser-search.js:333
 msgid "channel(s)"
 msgstr "chaîne(s)"
 
-#: ms-browser-channels.js:377 ms-browser-search.js:335
+#: ms-browser-channels.js:377 ms-browser-search.js:336
 msgid "video(s)"
 msgstr "vidéo(s)"
 
-#: ms-browser-channels.js:380 ms-browser-search.js:338
+#: ms-browser-channels.js:380 ms-browser-search.js:339
 msgid "live stream(s)"
 msgstr "diffusion(s) en direct"
 
-#: ms-browser-channels.js:383 ms-browser-search.js:341
+#: ms-browser-channels.js:383 ms-browser-search.js:342
 msgid "photos group(s)"
 msgstr "groupe(s) de photos"
 
@@ -304,7 +304,7 @@ msgstr "Chaînes"
 msgid "Latest content"
 msgstr "Contenu récent"
 
-#: ms-browser-display.js:23 ms-browser-search.js:151
+#: ms-browser-display.js:23 ms-browser-search.js:152
 msgid "Search"
 msgstr "Rechercher"
 
@@ -619,7 +619,7 @@ msgstr "Catégories"
 msgid "Unspecified"
 msgstr "Non spécifié"
 
-#: ms-browser-display.js:1224
+#: ms-browser-display.js:1225
 msgid "See statistics on this channel"
 msgstr "Voir les statistiques de cette chaîne"
 
@@ -631,15 +631,15 @@ msgstr "Types de contenu"
 msgid "Content types to display:"
 msgstr "Types de contenu à afficher :"
 
-#: ms-browser-latest.js:46 ms-browser-search.js:40
+#: ms-browser-latest.js:46 ms-browser-search.js:41
 msgid "channels"
 msgstr "chaînes"
 
-#: ms-browser-latest.js:50 ms-browser-search.js:41
+#: ms-browser-latest.js:50 ms-browser-search.js:42
 msgid "videos"
 msgstr "vidéos"
 
-#: ms-browser-latest.js:54 ms-browser-search.js:42
+#: ms-browser-latest.js:54 ms-browser-search.js:43
 msgid "live streams"
 msgstr "diffusions en direct"
 
@@ -655,7 +655,7 @@ msgstr "Cette liste présente les derniers éléments ajoutés triés par date d
 msgid "Latest content added"
 msgstr "Contenu récemment ajouté"
 
-#: ms-browser-latest.js:218 ms-browser-search.js:305
+#: ms-browser-latest.js:218 ms-browser-search.js:306
 msgid "Please login to access this page"
 msgstr "Veuillez vous connecter pour accéder à cette page"
 
@@ -703,47 +703,51 @@ msgstr "commentaires, diapositives, ..."
 msgid "external references"
 msgstr "références externes"
 
-#: ms-browser-search.js:43
+#: ms-browser-search.js:28
+msgid "external data"
+msgstr "données externes"
+
+#: ms-browser-search.js:44
 msgid "photos groups"
 msgstr "groupes de photos"
 
-#: ms-browser-search.js:75
+#: ms-browser-search.js:76
 msgid "Search:"
 msgstr "Rechercher :"
 
-#: ms-browser-search.js:77
+#: ms-browser-search.js:78
 msgid "Go"
 msgstr "Envoyer"
 
-#: ms-browser-search.js:80
+#: ms-browser-search.js:81
 msgid "Search in"
 msgstr "Rechercher dans"
 
-#: ms-browser-search.js:82 ms-browser-search.js:99
+#: ms-browser-search.js:83 ms-browser-search.js:100
 msgid "all"
 msgstr "tout"
 
-#: ms-browser-search.js:83 ms-browser-search.js:100
+#: ms-browser-search.js:84 ms-browser-search.js:101
 msgid "none"
 msgstr "aucun"
 
-#: ms-browser-search.js:97
+#: ms-browser-search.js:98
 msgid "Search for"
 msgstr "Contenu à rechercher"
 
-#: ms-browser-search.js:144
+#: ms-browser-search.js:145
 msgid "Use the input above to search for something."
 msgstr "Utilisez le champ de texte ci dessus pour rechercher du contenu."
 
-#: ms-browser-search.js:272
+#: ms-browser-search.js:273
 msgid "Search results for:"
 msgstr "Résultats de recherche pour:"
 
-#: ms-browser-search.js:343
+#: ms-browser-search.js:344
 msgid "Matching items:"
 msgstr "Éléments correspondants :"
 
-#: ms-browser-search.js:347
+#: ms-browser-search.js:348
 msgid "No results."
 msgstr "Pas de résultats."
 

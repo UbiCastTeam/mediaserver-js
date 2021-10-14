@@ -24,7 +24,8 @@ function MSBrowserSearch (options) {
         { name: 'in_categories', label: jsu.escapeHTML(jsu.translate('categories')), initial: false, items: 'vlp' },
         { name: 'in_annotations', label: jsu.escapeHTML(jsu.translate('comments, slides, ...')), initial: false, items: 'vlp' },
         { name: 'in_photos', label: jsu.escapeHTML(jsu.translate('photos')), initial: false, items: 'p' },
-        { name: 'in_extref', label: jsu.escapeHTML(jsu.translate('external references')), initial: true, items: null }
+        { name: 'in_extref', label: jsu.escapeHTML(jsu.translate('external references')), initial: true, items: null },
+        { name: 'in_extdata', label: jsu.escapeHTML(jsu.translate('external data')), initial: false, items: null }
     ];
     if (options.defaultSearchIn) {
         for (let i = 0; i < this.searchInFields.length; i++) {
