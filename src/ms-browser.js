@@ -62,7 +62,7 @@ function MSBrowser (options) {
     this.moreVideos = [];
     this.morePhotosGroups = [];
 
-    this.displayCount = 30;
+    this.displayCount = jsu.getCookie('catalog-displayCount') || 30;
 
     jsu.setObjectAttributes(this, options, [
         // allowed options
