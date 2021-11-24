@@ -174,10 +174,6 @@ MSBrowser.prototype.getTopMenuJq = function () {
     }
     html += ' </form>';
     html += '</div>';
-    // TODO: pagination
-    // html += '<div><h4>' + jsu.translate('Number of elements per page:') + '</h4>';
-    // html += '    <input type="number" class="center" id="elements_per_page" value="30"/>';
-    // html += '<button type="button">' + jsu.translate('Ok') + '</button></div>';
     html += '</div>';
     html += '</div>';
 
@@ -484,7 +480,7 @@ MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab
             this.moreChannels = data.channels;
         }
         if (channels.length > 0) {
-            this.displayMedias($container, channels, 'channel', tab, channelOid);
+            this.displayItems($container, channels, 'channel', tab, channelOid);
         }
     }
     if (data.live_streams && data.live_streams.length > 0) {
@@ -497,7 +493,7 @@ MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab
             this.moreLiveStreams = data.live_streams;
         }
         if (liveStreams.length > 0) {
-            this.displayMedias($container, liveStreams, 'live', tab);
+            this.displayItems($container, liveStreams, 'live', tab);
         }
     }
     if (data.videos && data.videos.length > 0) {
@@ -510,7 +506,7 @@ MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab
             this.moreVideos = data.videos;
         }
         if (videos.length > 0) {
-            this.displayMedias($container, videos, 'video', tab);
+            this.displayItems($container, videos, 'video', tab);
         }
     }
     if (data.photos_groups && data.photos_groups.length > 0) {
@@ -523,7 +519,7 @@ MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab
             this.morePhotosGroups = data.photos_groups;
         }
         if (photosGroups.length > 0) {
-            this.displayMedias($container, photosGroups, 'photos', tab);
+            this.displayItems($container, photosGroups, 'photos', tab);
         }
     }
     if ((this.moreChannels.length + this.moreLiveStreams.length + this.moreVideos.length + this.morePhotosGroups.length) > 0) {
@@ -532,7 +528,7 @@ MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab
         this.hideMoreBtns();
     }
 };
-MSBrowser.prototype.displayMedias = function ($container, medias, type, tab, channelOid) {
+MSBrowser.prototype.displayItems = function ($container, medias, type, tab, channelOid) {
     const markup = (this.pickMode ? 'h3' : 'h2');
     const selectable = this.selectableContent.indexOf(type[0]) != -1;
     let label = '';
