@@ -455,6 +455,11 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
     const hasItems = nbChannels > 0 || nbVideos > 0 || nbLiveStreams > 0 || nbPhotosGroups > 0;
     // channel display
     this.refreshTitle();
+    this.browser.moreChannels = [];
+    this.browser.moreLiveStreams = [];
+    this.browser.moreVideos = [];
+    this.browser.morePhotosGroups = [];
+    this.browser.hideMoreBtns();
     if (hasItems) {
         this.browser.displayContent(this.$place, response, oid, 'channels');
     } else {

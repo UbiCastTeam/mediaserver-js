@@ -154,6 +154,7 @@ MSBrowserSearch.prototype.onShow = function () {
         return;
     }
     this.initialized = true;
+    this.browser.hideMoreBtns();
 
     this.onUrlChange();
     if (!this.browser.useOverlay && this.browser.getActiveTab() == 'search') {

@@ -473,13 +473,15 @@
 .ms-browser .ms-browser-search-matching {
     padding: 10px 30px;
 }
-
-/* latest tab */
-.ms-browser .ms-browser-latest-btns {
+.ms-browser .ms-browser-more-btns {
     margin: 8px 5px;
     text-align: center;
 }
-
+.ms-browser.in-overlay .ms-browser-more-btns {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
 /* no header adjustments */
 .ms-browser.no-header .ms-browser-header .ms-browser-top-buttons,
 .ms-browser.no-header .ms-browser-header .ms-browser-menu,

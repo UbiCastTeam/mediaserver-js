@@ -57,6 +57,13 @@ function MSBrowser (options) {
 
     this.defaultSearchIn = [];
 
+    this.moreChannels = [];
+    this.moreLiveStreams = [];
+    this.moreVideos = [];
+    this.morePhotosGroups = [];
+
+    this.displayCount = 30;
+
     jsu.setObjectAttributes(this, options, [
         // allowed options
         'title',
