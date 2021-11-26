@@ -37,7 +37,7 @@ MSBrowser.prototype.buildWidget = function () {
             '<button type="button" id="ms_browser_latest_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + latestLabel + '" aria-label="' + latestLabel + '"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + latestLabel + '</span></button>' +
             '<button type="button" id="ms_browser_search_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + searchLabel + '" aria-label="' + searchLabel + '"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + searchLabel + '</span></button>';
     }
-    const moreLabel = jsu.translate('Display {count} more items');
+    this.moreLabel = jsu.translate('Display {count} more items');
     html += '' +
                 '</div>' +
                 '<h2 class="ms-browser-title"></h2>' +
@@ -51,8 +51,7 @@ MSBrowser.prototype.buildWidget = function () {
                 '<div class="ms-browser-message"><div></div></div>' +
             '</div>' +
             '<div class="ms-browser-more-btns">' +
-                '<button type="button" class="button ms-browser-more-btn-10">' + moreLabel.replace(/\{count\}/, '10') + '</button>' +
-                '<button type="button" class="button ms-browser-more-btn-30">' + moreLabel.replace(/\{count\}/, '30') + '</button>' +
+                '<button type="button" class="button ms-browser-more-btn">' + this.moreLabel.replace(/\{count\}/, this.displayCount) + '</button>' +
             '</div>' +
         '</div>';
     this.$widget = $(html);
@@ -102,11 +101,8 @@ MSBrowser.prototype.buildWidget = function () {
     $('#ms_browser_search_tab', this.$menu).click({ obj: this }, function (event) {
         event.data.obj.changeTab('search'); return false;
     });
-    $('.ms-browser-more-btn-10', this.$widget).click({ obj: this }, function (event) {
-        event.data.obj.displayMore(10);
-    });
-    $('.ms-browser-more-btn-30', this.$widget).click({ obj: this }, function (event) {
-        event.data.obj.displayMore(30);
+    $('.ms-browser-more-btn', this.$widget).click({ obj: this }, function (event) {
+        event.data.obj.displayMore(this.displayCount);
     });
 };
 MSBrowser.prototype.getTopMenuJq = function () {
@@ -208,6 +204,7 @@ MSBrowser.prototype.getTopMenuJq = function () {
             event.data.obj.displayMore(newValue - event.data.obj.displayCount);
         }
         event.data.obj.displayCount = newValue;
+        $('.ms-browser-more-btns .ms-browser-more-btn').text(this.moreLabel.replace(/\{count\}/, this.displayCount));
         jsu.setCookie('catalog-displayCount', newValue);
     });
     // detect focus change
