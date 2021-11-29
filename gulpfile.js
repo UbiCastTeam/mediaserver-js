@@ -45,7 +45,10 @@ gulp.task('build', function () {
         .pipe(gulp.dest('.'));
 
     /* build browser + tree + api + trans */
-    gulp.src(['src/*.js'])
+    gulp.src([
+        'dist/locales/*.js',
+        'src/*.js'
+    ])
         .pipe(concat('dist/ms-full.js'))
         .pipe(minify({
             ext: { src: '.tmp.js', min: '.min.js' },
