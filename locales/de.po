@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
-"POT-Creation-Date: 2021-02-23 17:04+0100\n"
-"PO-Revision-Date: 2021-07-09 09:17+0200\n"
+"POT-Creation-Date: 2021-11-29 17:53+0100\n"
+"PO-Revision-Date: 2021-11-29 17:55+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -165,7 +165,7 @@ msgstr "Verfügbarer Platz:"
 msgid "No available space"
 msgstr "Kein verfügbarer Platz"
 
-#: ms-api.js:358 ms-browser-channels.js:386
+#: ms-api.js:358 ms-browser-channels.js:393
 msgid "help"
 msgstr "Hilfe"
 
@@ -173,7 +173,7 @@ msgstr "Hilfe"
 msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
 msgstr "Das Speicherkontingent der übergeordneten Kanäle kann sich auf den verfügbaren Speicherplatz dieses Kanals auswirken."
 
-#: ms-browser-channels.js:42 ms-browser-display.js:48
+#: ms-browser-channels.js:42 ms-browser-display.js:49
 msgid "Loading..."
 msgstr "Lädt …"
 
@@ -185,108 +185,106 @@ msgstr "Wählen Sie einen Kanal aus, um dessen Inhalt anzuzeigen."
 msgid "Root"
 msgstr "Root"
 
-#: ms-browser-channels.js:73 ms-browser-display.js:17 ms-tree.js:114
+#: ms-browser-channels.js:74 ms-browser-display.js:17 ms-tree.js:114
 #: ms-tree.js:430 ms-tree.js:438
 msgid "My channel"
 msgstr "Mein Kanal"
 
-#: ms-browser-channels.js:75
+#: ms-browser-channels.js:76
 msgid "Main channels"
 msgstr "Hauptkanäle"
 
-#: ms-browser-channels.js:132
+#: ms-browser-channels.js:133
 msgid "You are not allowed to have a personal channel."
 msgstr "Sie dürfen keinen persönlichen Kanal haben."
 
-#: ms-browser-channels.js:188
+#: ms-browser-channels.js:189
 msgid "Please login to access this channel"
 msgstr "Bitte melden Sie sich an, um auf diesen Kanal zuzugreifen"
 
-#: ms-browser-channels.js:188 ms-browser-latest.js:218 ms-browser-search.js:307
+#: ms-browser-channels.js:189 ms-browser-latest.js:206 ms-browser-search.js:307
 msgid "Sign in"
 msgstr "Anmelden"
 
-#: ms-browser-channels.js:275 ms-browser-channels.js:295
-#: ms-browser-channels.js:296 ms-browser-channels.js:300
+#: ms-browser-channels.js:282 ms-browser-channels.js:302
+#: ms-browser-channels.js:303 ms-browser-channels.js:307
 msgid "Parent channel"
 msgstr "Übergeordneter Kanal"
 
-#: ms-browser-channels.js:342 ms-browser-display.js:671
+#: ms-browser-channels.js:349 ms-browser-display.js:751
 msgid "views"
 msgstr "Aufrufe"
 
-#: ms-browser-channels.js:344 ms-browser-channels.js:351
-#: ms-browser-display.js:673
+#: ms-browser-channels.js:351 ms-browser-channels.js:358
+#: ms-browser-display.js:753
 msgid "this month"
 msgstr "diesen Monat"
 
-#: ms-browser-channels.js:349
+#: ms-browser-channels.js:356
 msgid "annotations"
 msgstr "Anmerkungen"
 
-#: ms-browser-channels.js:373 ms-browser-search.js:334
+#: ms-browser-channels.js:380 ms-browser-search.js:334
 msgid "channel(s)"
 msgstr "Kanal/Kanäle"
 
-#: ms-browser-channels.js:376 ms-browser-search.js:337
+#: ms-browser-channels.js:383 ms-browser-search.js:337
 msgid "video(s)"
 msgstr "Video(s)"
 
-#: ms-browser-channels.js:379 ms-browser-search.js:340
+#: ms-browser-channels.js:386 ms-browser-search.js:340
 msgid "live stream(s)"
 msgstr "Live-Stream(s)"
 
-#: ms-browser-channels.js:382 ms-browser-search.js:343
+#: ms-browser-channels.js:389 ms-browser-search.js:343
 msgid "photos group(s)"
 msgstr "Fotogruppe(n)"
 
-#: ms-browser-channels.js:384
+#: ms-browser-channels.js:391
 msgid "Channel content:"
 msgstr "Kanalinhalt:"
 
-#: ms-browser-channels.js:386
+#: ms-browser-channels.js:393
 msgid "Sub channels items are included in counts."
 msgstr "Unterkanalelemente werden bei der Anzahl berücksichtigt."
 
-#: ms-browser-channels.js:397 ms-browser-display.js:680
+#: ms-browser-channels.js:404 ms-browser-display.js:760
 msgid "Storage usage:"
 msgstr "Speicherauslastung:"
 
-#: ms-browser-channels.js:409
+#: ms-browser-channels.js:416
 msgid "Subscribe to channel videos RSS:"
 msgstr "Kanalvideos abonnieren (RSS):"
 
-#: ms-browser-channels.js:411
+#: ms-browser-channels.js:418
 msgid "standard"
 msgstr "Standard"
 
-#: ms-browser-channels.js:413
+#: ms-browser-channels.js:420
 msgid "iTunes"
 msgstr "iTunes"
 
-#: ms-browser-channels.js:415
+#: ms-browser-channels.js:422
 msgid "iTunes (audio only)"
 msgstr "iTunes (nur Audio)"
 
-#: ms-browser-channels.js:418
+#: ms-browser-channels.js:425
 msgid "Subscribe to channel videos RSS"
 msgstr "Kanalvideos abonnieren (RSS)"
 
-#: ms-browser-channels.js:462
-#| msgid "This channel is unlisted"
+#: ms-browser-channels.js:470
 msgid "This channel contains no media."
 msgstr "Dieser Kanal enthält keine Medien."
 
-#: ms-browser-channels.js:464
+#: ms-browser-channels.js:472
 msgid "This channel contains no sub channels and no media."
 msgstr "Dieser Kanal enthält keine Unterkanäle und keine Medien."
 
-#: ms-browser-channels.js:466
-#| msgid "This channel is unlisted"
+#: ms-browser-channels.js:474
 msgid "This channel contains no sub channels."
 msgstr "Dieser Kanal enthält keine Unterkanäle."
 
-#: ms-browser-channels.js:468
+#: ms-browser-channels.js:476
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
 msgstr "Einige Inhalte sind möglicherweise noch in diesem Kanal vorhanden. In diesem Fall dürfe Sie diese mit Ihrem Konto jedoch nicht anzeigen."
 
@@ -298,7 +296,7 @@ msgstr "Meine Medien"
 msgid "Search in my media"
 msgstr "Suche in meinen Medien"
 
-#: ms-browser-display.js:21 ms-browser-display.js:458
+#: ms-browser-display.js:21 ms-browser-display.js:534
 msgid "Channels"
 msgstr "Kanäle"
 
@@ -306,322 +304,330 @@ msgstr "Kanäle"
 msgid "Latest content"
 msgstr "Neuester Inhalt"
 
-#: ms-browser-display.js:23 ms-browser-search.js:151
+#: ms-browser-display.js:23 ms-browser-search.js:152
 msgid "Search"
 msgstr "Suche"
 
-#: ms-browser-display.js:103
+#: ms-browser-display.js:40
+msgid "Display {count} more items"
+msgstr "Weitere {count} Elemente anzeigen"
+
+#: ms-browser-display.js:110
 msgid "Use default sorting"
 msgstr "Standardsortierung verwenden"
 
-#: ms-browser-display.js:104
+#: ms-browser-display.js:111
 msgid "Creation date, descending"
 msgstr "Erstellungsdatum, absteigend"
 
-#: ms-browser-display.js:105
+#: ms-browser-display.js:112
 msgid "Creation date, ascending"
 msgstr "Erstellungsdatum, aufsteigend"
 
-#: ms-browser-display.js:106
+#: ms-browser-display.js:113
 msgid "Add date, descending"
 msgstr "Hinzufügungsdatum, absteigend"
 
-#: ms-browser-display.js:107
+#: ms-browser-display.js:114
 msgid "Add date, ascending"
 msgstr "Hinzufügungsdatum, aufsteigend"
 
-#: ms-browser-display.js:108
+#: ms-browser-display.js:115
 msgid "Title, descending"
 msgstr "Titel, absteigend"
 
-#: ms-browser-display.js:109
+#: ms-browser-display.js:116
 msgid "Title, ascending"
 msgstr "Titel, aufsteigend"
 
-#: ms-browser-display.js:110
+#: ms-browser-display.js:117
 msgid "Slug, descending"
 msgstr "Slug, absteigend"
 
-#: ms-browser-display.js:111
+#: ms-browser-display.js:118
 msgid "Slug, ascending"
 msgstr "Slug, aufsteigend"
 
-#: ms-browser-display.js:114
+#: ms-browser-display.js:121
 msgid "Number of views, descending"
 msgstr "Anzahl der Aufrufe, absteigend"
 
-#: ms-browser-display.js:115
+#: ms-browser-display.js:122
 msgid "Number of views, ascending"
 msgstr "Anzahl der Aufrufe, aufsteigend"
 
-#: ms-browser-display.js:119
+#: ms-browser-display.js:126
 msgid "Display"
 msgstr "Anzeige"
 
-#: ms-browser-display.js:123
+#: ms-browser-display.js:130
 msgid "Display mode:"
 msgstr "Anzeigemodus:"
 
-#: ms-browser-display.js:124
+#: ms-browser-display.js:131
 msgid "list"
 msgstr "Liste"
 
-#: ms-browser-display.js:124 ms-browser-display.js:125
-#: ms-browser-display.js:331 ms-browser-display.js:348
+#: ms-browser-display.js:131 ms-browser-display.js:132
+#: ms-browser-display.js:349 ms-browser-display.js:366
 msgid "selected setting"
 msgstr "ausgewählte Einstellung"
 
-#: ms-browser-display.js:125
+#: ms-browser-display.js:132
 msgid "thumbnails"
 msgstr "Vorschaubilder"
 
-#: ms-browser-display.js:127
+#: ms-browser-display.js:133
+msgid "Number of items:"
+msgstr "Anzahl an Elementen:"
+
+#: ms-browser-display.js:140
 msgid "display items type icons"
 msgstr "Symbole für Anzeigetypen"
 
-#: ms-browser-display.js:129
+#: ms-browser-display.js:142
 msgid "Sort by:"
 msgstr "Sortieren nach:"
 
-#: ms-browser-display.js:140
+#: ms-browser-display.js:153
 msgid "unspecified"
 msgstr "unspezifiziert"
 
-#: ms-browser-display.js:141
+#: ms-browser-display.js:154
 msgid "yes"
 msgstr "ja"
 
-#: ms-browser-display.js:142
+#: ms-browser-display.js:155
 msgid "no"
 msgstr "nein"
 
-#: ms-browser-display.js:143
+#: ms-browser-display.js:156
 msgid "Filters:"
 msgstr "Filter:"
 
-#: ms-browser-display.js:145
+#: ms-browser-display.js:158
 msgid "Editable:"
 msgstr "Bearbeitbar:"
 
-#: ms-browser-display.js:149
+#: ms-browser-display.js:162
 msgid "Published:"
 msgstr "Veröffentlicht:"
 
-#: ms-browser-display.js:153
+#: ms-browser-display.js:166
 msgid "Speaker:"
 msgstr "Redner:"
 
-#: ms-browser-display.js:155
+#: ms-browser-display.js:168
 msgid "Ok"
 msgstr "OK"
 
-#: ms-browser-display.js:393
+#: ms-browser-display.js:411
 msgid "selected tab"
 msgstr "Ausgewählte Registerkarte"
 
-#: ms-browser-display.js:456
+#: ms-browser-display.js:536
 msgid "Sub channels"
 msgstr "Unterkanäle"
 
-#: ms-browser-display.js:476
+#: ms-browser-display.js:540
 msgid "Live streams"
 msgstr "Live-Streams"
 
-#: ms-browser-display.js:487
+#: ms-browser-display.js:543
 msgid "Videos"
 msgstr "Videos"
 
-#: ms-browser-display.js:498
+#: ms-browser-display.js:546
 msgid "Photos groups"
 msgstr "Fotogruppen"
 
-#: ms-browser-display.js:518 ms-tree.js:89 ms-tree.js:91 ms-tree.js:255
+#: ms-browser-display.js:598 ms-tree.js:89 ms-tree.js:91 ms-tree.js:255
 #: ms-tree.js:389
 msgid "selected"
 msgstr "ausgewählt"
 
-#: ms-browser-display.js:532
+#: ms-browser-display.js:612
 msgid "Open information panel"
 msgstr "Informationstafel öffnen"
 
-#: ms-browser-display.js:534 ms-browser-display.js:792
-#: ms-browser-display.js:823
+#: ms-browser-display.js:614 ms-browser-display.js:872
+#: ms-browser-display.js:903
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: ms-browser-display.js:569
+#: ms-browser-display.js:649
 msgid "Click to select this media"
 msgstr "Klicken Sie, um dieses Medium auszuwählen"
 
-#: ms-browser-display.js:591
+#: ms-browser-display.js:671
 msgid "This item is a channel"
 msgstr "Dieses Element ist ein Kanal"
 
-#: ms-browser-display.js:595
+#: ms-browser-display.js:675
 msgid "This item is a photos group"
 msgstr "Dieses Element ist eine Fotogruppe"
 
-#: ms-browser-display.js:604
+#: ms-browser-display.js:684
 msgid "This item is a live stream"
 msgstr "Dieses Element ist ein Live-Stream"
 
-#: ms-browser-display.js:604
+#: ms-browser-display.js:684
 msgid "This item is a video"
 msgstr "Dieses Element ist ein Video"
 
-#: ms-browser-display.js:607
+#: ms-browser-display.js:687
 msgid "dynamic Rich Media"
 msgstr "Dynamic-Rich-Medium"
 
-#: ms-browser-display.js:609
+#: ms-browser-display.js:689
 msgid "classic Rich Media"
 msgstr "Classic-Rich-Medium"
 
-#: ms-browser-display.js:623 ms-browser-display.js:624
+#: ms-browser-display.js:703 ms-browser-display.js:704
 msgid "This channel is unlisted"
 msgstr "Dieser Kanal ist nicht gelistet"
 
-#: ms-browser-display.js:629 ms-browser-display.js:630
+#: ms-browser-display.js:709 ms-browser-display.js:710
 msgid "This media is not published"
 msgstr "Dieses Medium ist nicht veröffentlicht"
 
-#: ms-browser-display.js:633 ms-browser-display.js:634
+#: ms-browser-display.js:713 ms-browser-display.js:714
 msgid "This media is published and unlisted"
 msgstr "Dieses Medium ist veröffentlicht und nicht gelistet"
 
-#: ms-browser-display.js:637 ms-browser-display.js:638
+#: ms-browser-display.js:717 ms-browser-display.js:718
 msgid "This media is published"
 msgstr "Dieses Medium ist veröffentlicht"
 
-#: ms-browser-display.js:642 ms-browser-display.js:643
+#: ms-browser-display.js:722 ms-browser-display.js:723
 msgid "This video is not ready"
 msgstr "Dieses Video ist nicht bereit"
 
-#: ms-browser-display.js:664
+#: ms-browser-display.js:744
 msgid "Created on"
 msgstr "Erstellt am"
 
-#: ms-browser-display.js:684
+#: ms-browser-display.js:764
 msgid "Type:"
 msgstr "Typ:"
 
-#: ms-browser-display.js:687
+#: ms-browser-display.js:767
 msgid "Added on"
 msgstr "Hinzugefügt am"
 
-#: ms-browser-display.js:691
+#: ms-browser-display.js:771
 msgid "Parent channel:"
 msgstr "Übergeordneter Kanal:"
 
-#: ms-browser-display.js:708 ms-browser-display.js:964
+#: ms-browser-display.js:788 ms-browser-display.js:1044
 msgid "Matching annotations:"
 msgstr "Passende Anmerkungen:"
 
-#: ms-browser-display.js:721 ms-browser-display.js:978
+#: ms-browser-display.js:801 ms-browser-display.js:1058
 msgid "Matching photos:"
 msgstr "Passende Fotos:"
 
-#: ms-browser-display.js:773
+#: ms-browser-display.js:853
 msgid "This channel is selected"
 msgstr "Dieser Kanal ist ausgewählt"
 
-#: ms-browser-display.js:775
+#: ms-browser-display.js:855
 msgid "Select this channel"
 msgstr "Diesen Kanal auswählen"
 
-#: ms-browser-display.js:779
+#: ms-browser-display.js:859
 msgid "This media is selected"
 msgstr "Dieses Medium ist ausgewählt"
 
-#: ms-browser-display.js:781
+#: ms-browser-display.js:861
 msgid "Select this media"
 msgstr "Dieses Medium auswählen"
 
-#: ms-browser-display.js:789
+#: ms-browser-display.js:869
 msgid "Statistics"
 msgstr "Statistiken"
 
-#: ms-browser-display.js:794 ms-browser-display.js:826
+#: ms-browser-display.js:874 ms-browser-display.js:906
 msgid "Delete"
 msgstr "Löschen"
 
-#: ms-browser-display.js:800 ms-browser-display.js:804
+#: ms-browser-display.js:880 ms-browser-display.js:884
 msgid "Add a sub channel"
 msgstr "Unterkanal hinzufügen"
 
-#: ms-browser-display.js:809 ms-browser-display.js:813
+#: ms-browser-display.js:889 ms-browser-display.js:893
 msgid "Add a video"
 msgstr "Video hinzufügen"
 
-#: ms-browser-display.js:817
+#: ms-browser-display.js:897
 msgid "Copy LTI link"
 msgstr "LTI-Link kopieren"
 
-#: ms-browser-display.js:820
+#: ms-browser-display.js:900
 msgid "See"
 msgstr "Anzeigen"
 
-#: ms-browser-display.js:870
+#: ms-browser-display.js:950
 msgid "copied"
 msgstr "kopiert"
 
-#: ms-browser-display.js:870
+#: ms-browser-display.js:950
 msgid "cannot copy"
 msgstr "konnte nicht kopiert werden"
 
-#: ms-browser-display.js:873
+#: ms-browser-display.js:953
 msgid "failed to copy"
 msgstr "Kopieren fehlgeschlagen"
 
-#: ms-browser-display.js:958
+#: ms-browser-display.js:1038
 msgid "Hide this window"
 msgstr "Dieses Fenster ausblenden"
 
-#: ms-browser-display.js:994
+#: ms-browser-display.js:1074
 msgid "Media information"
 msgstr "Medieninformation"
 
-#: ms-browser-display.js:997
+#: ms-browser-display.js:1077
 msgid "Recording date"
 msgstr "Aufzeichnungsdatum"
 
-#: ms-browser-display.js:1003
+#: ms-browser-display.js:1083
 msgid "Publishing date"
 msgstr "Erscheinungsdatum"
 
-#: ms-browser-display.js:1009
+#: ms-browser-display.js:1089
 msgid "Duration"
 msgstr "Dauer"
 
-#: ms-browser-display.js:1014
+#: ms-browser-display.js:1094
 msgid "Views last month"
 msgstr "Aufrufe im letzten Monat"
 
-#: ms-browser-display.js:1017
+#: ms-browser-display.js:1097
 msgid "Views"
 msgstr "Aufrufe"
 
-#: ms-browser-display.js:1020
+#: ms-browser-display.js:1100
 msgid "Annotations last month"
 msgstr "Anmerkungen im letzten Monat"
 
-#: ms-browser-display.js:1023
+#: ms-browser-display.js:1103
 msgid "Annotations"
 msgstr "Anmerkungen"
 
-#: ms-browser-display.js:1028
+#: ms-browser-display.js:1108
 msgid "Storage usage"
 msgstr "Speicherauslastung"
 
-#: ms-browser-display.js:1147
+#: ms-browser-display.js:1227
 msgid "Categories"
 msgstr "Kategorien"
 
-#: ms-browser-display.js:1149
+#: ms-browser-display.js:1229
 msgid "Unspecified"
 msgstr "Nicht spezifiziert"
 
-#: ms-browser-display.js:1224
+#: ms-browser-display.js:1305
 msgid "See statistics on this channel"
 msgstr "Statistiken zu diesem Kanal anzeigen"
 
@@ -633,35 +639,31 @@ msgstr "Inhaltstypen"
 msgid "Content types to display:"
 msgstr "Anzuzeigende Inhaltstypen:"
 
-#: ms-browser-latest.js:46 ms-browser-search.js:40
+#: ms-browser-latest.js:46 ms-browser-search.js:41
 msgid "channels"
 msgstr "Kanäle"
 
-#: ms-browser-latest.js:50 ms-browser-search.js:41
+#: ms-browser-latest.js:50 ms-browser-search.js:42
 msgid "videos"
 msgstr "Videos"
 
-#: ms-browser-latest.js:54 ms-browser-search.js:42
+#: ms-browser-latest.js:54 ms-browser-search.js:43
 msgid "live streams"
 msgstr "Live-Streams"
 
-#: ms-browser-latest.js:88
-msgid "Display {count} more items"
-msgstr "Weitere {count} Elemente anzeigen"
-
-#: ms-browser-latest.js:92
+#: ms-browser-latest.js:91
 msgid "This list presents all media and channels ordered by add date."
 msgstr "Diese Liste enthält alle Medien und Kanäle, sortiert nach dem Datum des Hinzufügens."
 
-#: ms-browser-latest.js:113
+#: ms-browser-latest.js:101
 msgid "Latest content added"
 msgstr "Neueste Inhalte hinzugefügt"
 
-#: ms-browser-latest.js:218 ms-browser-search.js:307
+#: ms-browser-latest.js:206 ms-browser-search.js:307
 msgid "Please login to access this page"
 msgstr "Bitte melden Sie sich an, um auf diese Seite zuzugreifen"
 
-#: ms-browser-latest.js:262
+#: ms-browser-latest.js:250
 msgid "No contents."
 msgstr "Keine Inhalte."
 
@@ -690,7 +692,6 @@ msgid "companies"
 msgstr "Unternehmen"
 
 #: ms-browser-search.js:23
-#| msgid "annotations"
 msgid "locations"
 msgstr "Anmerkungen"
 
@@ -706,35 +707,39 @@ msgstr "Kommentare, Folien, …"
 msgid "external references"
 msgstr "Externe Referenzen"
 
-#: ms-browser-search.js:43
+#: ms-browser-search.js:28
+msgid "external data"
+msgstr "Externe Daten"
+
+#: ms-browser-search.js:44
 msgid "photos groups"
 msgstr "Fotogruppen"
 
-#: ms-browser-search.js:75
+#: ms-browser-search.js:76
 msgid "Search:"
 msgstr "Suchen:"
 
-#: ms-browser-search.js:77
+#: ms-browser-search.js:78
 msgid "Go"
 msgstr "Los"
 
-#: ms-browser-search.js:80
+#: ms-browser-search.js:81
 msgid "Search in"
 msgstr "Suchen in"
 
-#: ms-browser-search.js:82 ms-browser-search.js:99
+#: ms-browser-search.js:83 ms-browser-search.js:100
 msgid "all"
 msgstr "alles"
 
-#: ms-browser-search.js:83 ms-browser-search.js:100
+#: ms-browser-search.js:84 ms-browser-search.js:101
 msgid "none"
 msgstr "keine"
 
-#: ms-browser-search.js:97
+#: ms-browser-search.js:98
 msgid "Search for"
 msgstr "Suche nach"
 
-#: ms-browser-search.js:144
+#: ms-browser-search.js:145
 msgid "Use the input above to search for something."
 msgstr "Verwenden Sie die Eingabe oben, um eine Suche durchzuführen."
 
