@@ -135,7 +135,7 @@ MSBrowser.prototype.getTopMenuJq = function () {
     for (const value of [10, 30, 100]) {
         html += '<option value="' + value + '"' + (value == this.displayCount ? ' selected="selected"' : '') + '>' + value + '</option>';
     }
-    html += '</select>';
+    html += '</select><br/>';
     html += '<input id="ms_browser_display_types_icons" type="checkbox" ' + (this.displayTypesIcons ? 'checked="checked"' : '') + '>';
     html += ' <label for="ms_browser_display_types_icons">' + jsu.translate('display items type icons') + '</label></div>';
     // channel sorting
