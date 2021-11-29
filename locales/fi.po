@@ -195,7 +195,7 @@ msgid "Main channels"
 msgstr ""
 
 #: ms-browser-channels.js:132
-msgid "You are not allowed to have a personnal channel."
+msgid "You are not allowed to have a personal channel."
 msgstr ""
 
 #: ms-browser-channels.js:188

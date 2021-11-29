@@ -130,7 +130,7 @@ MSBrowserChannels.prototype.displayPersonalChannel = function () {
                 obj.personalChannelOid = response.oid;
                 obj.displayChannel(response.oid);
             } else if (response.errorCode == 403) {
-                obj._onChannelError({ error: jsu.translate('You are not allowed to have a personnal channel.') });
+                obj._onChannelError({ error: jsu.translate('You are not allowed to have a personal channel.') });
             } else {
                 obj._onChannelError(response);
             }
