@@ -37,6 +37,7 @@ MSBrowser.prototype.buildWidget = function () {
             '<button type="button" id="ms_browser_latest_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + latestLabel + '" aria-label="' + latestLabel + '"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + latestLabel + '</span></button>' +
             '<button type="button" id="ms_browser_search_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + searchLabel + '" aria-label="' + searchLabel + '"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + searchLabel + '</span></button>';
     }
+    this.moreLabel = jsu.translate('Display {count} more items');
     html += '' +
                 '</div>' +
                 '<h2 class="ms-browser-title"></h2>' +
@@ -48,6 +49,9 @@ MSBrowser.prototype.buildWidget = function () {
                     '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translate('Loading...') +
                 '</div></div>' +
                 '<div class="ms-browser-message"><div></div></div>' +
+            '</div>' +
+            '<div class="ms-browser-more-btns">' +
+                '<button type="button" class="button ms-browser-more-btn">' + this.moreLabel.replace(/\{count\}/, this.displayCount) + '</button>' +
             '</div>' +
         '</div>';
     this.$widget = $(html);
@@ -97,6 +101,9 @@ MSBrowser.prototype.buildWidget = function () {
     $('#ms_browser_search_tab', this.$menu).click({ obj: this }, function (event) {
         event.data.obj.changeTab('search'); return false;
     });
+    $('.ms-browser-more-btn', this.$widget).click({ obj: this }, function (event) {
+        event.data.obj.displayMore(this.displayCount);
+    });
 };
 MSBrowser.prototype.getTopMenuJq = function () {
     const sortingValues = [
@@ -123,6 +130,12 @@ MSBrowser.prototype.getTopMenuJq = function () {
     html += '<div><h4>' + jsu.translate('Display mode:') + '</h4>';
     html += '<button type="button" class="button ' + (!this.displayAsThumbnails ? 'active' : '') + '" id="ms_browser_display_as_list" title="' + jsu.translate('list') + (!this.displayAsThumbnails ? ' (' + jsu.translate('selected setting') + ')' : '') + '">' + jsu.translate('list') + '</button>';
     html += '<button type="button" class="button ' + (this.displayAsThumbnails ? 'active' : '') + '" id="ms_browser_display_as_thumbnails" title="' + jsu.translate('thumbnails') + (this.displayAsThumbnails ? ' (' + jsu.translate('selected setting') + ')' : '') + '">' + jsu.translate('thumbnails') + '</button><br/>';
+    html += '<label for="ms_browser_number_item">' + jsu.translate('Number of items:') + '</label>';
+    html += '<select id="ms_browser_number_item">';
+    for (const value of [10, 30, 100]) {
+        html += '<option value="' + value + '"' + (value == this.displayCount ? ' selected="selected"' : '') + '>' + value + '</option>';
+    }
+    html += '</select>';
     html += '<input id="ms_browser_display_types_icons" type="checkbox" ' + (this.displayTypesIcons ? 'checked="checked"' : '') + '>';
     html += ' <label for="ms_browser_display_types_icons">' + jsu.translate('display items type icons') + '</label></div>';
     // channel sorting
@@ -157,10 +170,6 @@ MSBrowser.prototype.getTopMenuJq = function () {
     }
     html += ' </form>';
     html += '</div>';
-    // TODO: pagination
-    // html += '<div><h4>' + jsu.translate('Number of elements per page:') + '</h4>';
-    // html += '    <input type="number" class="center" id="elements_per_page" value="30"/>';
-    // html += '<button type="button">' + jsu.translate('Ok') + '</button></div>';
     html += '</div>';
     html += '</div>';
 
@@ -188,6 +197,15 @@ MSBrowser.prototype.getTopMenuJq = function () {
     $('#ms_browser_filters_form', $dropdown).submit({ obj: this, $dropdown: $dropdown }, function (event) {
         event.data.obj.onFiltersSubmit($(this));
         return false;
+    });
+    $('#ms_browser_number_item', $dropdown).change({ obj: this }, function (event) {
+        const newValue = parseInt(this.value, 10);
+        if (newValue > event.data.obj.displayCount) {
+            event.data.obj.displayMore(newValue - event.data.obj.displayCount);
+        }
+        event.data.obj.displayCount = newValue;
+        $('.ms-browser-more-btns .ms-browser-more-btn').text(this.moreLabel.replace(/\{count\}/, this.displayCount));
+        jsu.setCookie('catalog-displayCount', newValue);
     });
     // detect focus change
     try {
@@ -445,63 +463,125 @@ MSBrowser.prototype.hideLoading = function () {
     $('.ms-browser-loading', this.$widget).css('display', '');
 };
 
-MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab) {
-    let i, selectable, $section;
-    const markup = (this.pickMode ? 'h3' : 'h2');
-    const sectionHtml = '<ul class="ms-browser-section"></ul>';
+MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab, count) {
+    if (!count) {
+        count = this.displayCount;
+    }
     if (data.channels && data.channels.length > 0) {
-        // sub channels
-        selectable = this.selectableContent.indexOf('c') != -1;
-        if (channelOid && channelOid != '0') {
-            $container.append('<' + markup + '>' + jsu.translate('Sub channels') + '</' + markup + '>');
-        } else if (tab == 'search') {
-            $container.append('<' + markup + '>' + jsu.translate('Channels') + '</' + markup + '>');
+        let channels = [];
+        if (count > 0) {
+            channels = data.channels.slice(0, count);
+            this.moreChannels = data.channels.slice(count);
+            count -= channels.length;
+        } else {
+            this.moreChannels = data.channels;
         }
-
-        $section = $(sectionHtml);
-        for (i = 0; i < data.channels.length; i++) {
-            if (data.channels[i].parent_oid === undefined && channelOid) {
-                /* eslint-disable camelcase */
-                data.channels[i].parent_oid = channelOid;
-                /* eslint-enable camelcase */
-            }
-
-            $section.append(this.getContentEntry('channel', data.channels[i], selectable, tab));
+        if (channels.length > 0) {
+            this.displayItems($container, channels, 'channel', tab, channelOid);
         }
-        $container.append($section);
     }
     if (data.live_streams && data.live_streams.length > 0) {
-        // live streams
-        selectable = this.selectableContent.indexOf('l') != -1;
-        $container.append('<' + markup + '>' + jsu.translate('Live streams') + '</' + markup + '>');
-
-        $section = $(sectionHtml);
-        for (i = 0; i < data.live_streams.length; i++) {
-            $section.append(this.getContentEntry('live', data.live_streams[i], selectable, tab));
+        let liveStreams = [];
+        if (count > 0) {
+            liveStreams = data.live_streams.slice(0, count);
+            this.moreLiveStreams = data.live_streams.slice(count);
+            count -= liveStreams.length;
+        } else {
+            this.moreLiveStreams = data.live_streams;
         }
-        $container.append($section);
+        if (liveStreams.length > 0) {
+            this.displayItems($container, liveStreams, 'live', tab);
+        }
     }
     if (data.videos && data.videos.length > 0) {
-        // videos
-        selectable = this.selectableContent.indexOf('v') != -1;
-        $container.append('<' + markup + '>' + jsu.translate('Videos') + '</' + markup + '>');
-
-        $section = $(sectionHtml);
-        for (i = 0; i < data.videos.length; i++) {
-            $section.append(this.getContentEntry('video', data.videos[i], selectable, tab));
+        let videos = [];
+        if (count > 0) {
+            videos = data.videos.slice(0, count);
+            this.moreVideos = data.videos.slice(count);
+            count -= videos.length;
+        } else {
+            this.moreVideos = data.videos;
         }
-        $container.append($section);
+        if (videos.length > 0) {
+            this.displayItems($container, videos, 'video', tab);
+        }
     }
     if (data.photos_groups && data.photos_groups.length > 0) {
-        // photos groups
-        selectable = this.selectableContent.indexOf('p') != -1;
-        $container.append('<' + markup + '>' + jsu.translate('Photos groups') + '</' + markup + '>');
-
-        $section = $(sectionHtml);
-        for (i = 0; i < data.photos_groups.length; i++) {
-            $section.append(this.getContentEntry('photos', data.photos_groups[i], selectable, tab));
+        let photosGroups = [];
+        if (count > 0) {
+            photosGroups = data.photos_groups.slice(0, count);
+            this.morePhotosGroups = data.photos_groups.slice(count);
+            count -= photosGroups.length;
+        } else {
+            this.morePhotosGroups = data.photos_groups;
         }
-        $container.append($section);
+        if (photosGroups.length > 0) {
+            this.displayItems($container, photosGroups, 'photos', tab);
+        }
+    }
+    if ((this.moreChannels.length + this.moreLiveStreams.length + this.moreVideos.length + this.morePhotosGroups.length) > 0) {
+        this.showMoreBtns();
+    } else {
+        this.hideMoreBtns();
+    }
+};
+MSBrowser.prototype.displayItems = function ($container, medias, type, tab, channelOid) {
+    const markup = (this.pickMode ? 'h3' : 'h2');
+    const selectable = this.selectableContent.indexOf(type[0]) != -1;
+    let label = '';
+    switch (type) {
+        case 'channel':
+            label = jsu.translate('Channels');
+            if (channelOid && channelOid != '0') {
+                label = jsu.translate('Sub channels');
+            }
+            break;
+        case 'live':
+            label = jsu.translate('Live streams');
+            break;
+        case 'video':
+            label = jsu.translate('Videos');
+            break;
+        case 'photos':
+            label = jsu.translate('Photos groups');
+            break;
+    }
+    if (!$('#header_type_' + type).length) {
+        $container.append('<' + markup + ' id="header_type_' + type + '">' + label + '</' + markup + '>');
+    }
+    let $section = $('#section_type_' + type);
+    if (!$section.length) {
+        $section = $('<ul id="section_type_' + type + '" class="ms-browser-section"></ul>');
+    }
+    for (let i = 0; i < medias.length; i++) {
+        if (type == 'channels' && medias[i].parent_oid === undefined && channelOid) {
+            /* eslint-disable-next-line camelcase */
+            medias[i].parent_oid = channelOid;
+        }
+        $section.append(this.getContentEntry(type, medias[i], selectable, tab));
+    }
+    $container.append($section);
+};
+MSBrowser.prototype.showMoreBtns = function () {
+    $('.ms-browser-more-btns', this.place).css('display', 'block');
+};
+MSBrowser.prototype.hideMoreBtns = function () {
+    $('.ms-browser-more-btns', this.place).css('display', 'none');
+};
+MSBrowser.prototype.displayMore = function (count) {
+    const currentTab = this.getActiveTab();
+    const data = {
+        'channels': this.moreChannels,
+        'live_streams': this.moreLiveStreams,
+        'videos': this.moreVideos,
+        'photos_groups': this.morePhotosGroups
+    };
+    if (currentTab === 'latest') {
+        this.latest.displayMore(count);
+    } else if (currentTab === 'channels') {
+        this.displayContent(this.channels.$place, data, null, 'channels', count);
+    } else if (currentTab === 'search') {
+        this.displayContent(this.search.$content, data, null, 'search', count);
     }
 };
 MSBrowser.prototype.getContentEntry = function (itemType, item, gselectable, tab) {

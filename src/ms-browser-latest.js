@@ -85,27 +85,15 @@ MSBrowserLatest.prototype.getMenuJq = function () {
     return this.$menu;
 };
 MSBrowserLatest.prototype.getContentJq = function () {
-    const moreLabel = jsu.translate('Display {count} more items');
     const html = '' +
         '<div id="ms_browser_latest" class="ms-browser-content" style="display: none;">' +
             '<div class="messages">' +
                 '<div class="message info">' + jsu.translate('This list presents all media and channels ordered by add date.') + '</div>' +
             '</div>' +
             '<div class="ms-browser-latest-place"></div>' +
-            '<div class="ms-browser-latest-btns">' +
-                '<button type="button" class="button ms-browser-latest-more-10">' + moreLabel.replace(/\{count\}/, '10') + '</button>' +
-                '<button type="button" class="button ms-browser-latest-more-30">' + moreLabel.replace(/\{count\}/, '30') + '</button>' +
-            '</div>' +
         '</div>';
     this.$content = $(html);
     this.$place = $('.ms-browser-latest-place', this.$content);
-    // events
-    $('.ms-browser-latest-more-10', this.$content).click({ obj: this }, function (event) {
-        event.data.obj.displayMore(10);
-    });
-    $('.ms-browser-latest-more-30', this.$content).click({ obj: this }, function (event) {
-        event.data.obj.displayMore(30);
-    });
     return this.$content;
 };
 
@@ -128,7 +116,7 @@ MSBrowserLatest.prototype.onShow = function () {
         $('.ms-browser-latest-types #latest_display_photos', this.$menu).prop('checked', types.indexOf('p') != -1);
     }
 
-    this.loadLatest();
+    this.loadLatest(this.browser.displayCount);
 };
 
 MSBrowserLatest.prototype.loadLatest = function (count, end) {
@@ -263,9 +251,9 @@ MSBrowserLatest.prototype._onAjaxResponse = function (response) {
         this.$place.append($msg);
     }
     if (this.more) {
-        $('.ms-browser-latest-btns', this.$content).css('display', 'block');
+        this.browser.showMoreBtns();
     } else {
-        $('.ms-browser-latest-btns', this.$content).css('display', 'none');
+        this.browser.hideMoreBtns();
     }
 };
 
@@ -290,7 +278,7 @@ MSBrowserLatest.prototype.refreshDisplay = function (reset) {
         this.dateLabel = '';
         this.$section = null;
         this.$place.html('');
-        this.loadLatest();
+        this.loadLatest(this.browser.displayCount);
     }
 };
 
