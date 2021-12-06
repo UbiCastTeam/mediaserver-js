@@ -204,7 +204,7 @@ MSBrowser.prototype.getTopMenuJq = function () {
             event.data.obj.displayMore(newValue - event.data.obj.displayCount);
         }
         event.data.obj.displayCount = newValue;
-        $('.ms-browser-more-btns .ms-browser-more-btn').text(this.moreLabel.replace(/\{count\}/, this.displayCount));
+        $('.ms-browser-more-btns .ms-browser-more-btn').text(event.data.obj.moreLabel.replace(/\{count\}/, event.data.obj.displayCount));
         jsu.setCookie('catalog-displayCount', newValue);
     });
     // detect focus change
