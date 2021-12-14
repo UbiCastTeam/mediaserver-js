@@ -91,6 +91,7 @@ MSBrowserLatest.prototype.getContentJq = function () {
                 '<div class="message info">' + jsu.translate('This list presents all media and channels ordered by add date.') + '</div>' +
             '</div>' +
             '<div class="ms-browser-latest-place"></div>' +
+            this.browser.getMoreButton() +
         '</div>';
     this.$content = $(html);
     this.$place = $('.ms-browser-latest-place', this.$content);
@@ -251,9 +252,9 @@ MSBrowserLatest.prototype._onAjaxResponse = function (response) {
         this.$place.append($msg);
     }
     if (this.more) {
-        this.browser.showMoreBtns();
+        this.browser.showMoreBtns('latest');
     } else {
-        this.browser.hideMoreBtns();
+        this.browser.hideMoreBtns('latest');
     }
 };
 

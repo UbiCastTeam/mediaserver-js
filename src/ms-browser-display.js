@@ -37,7 +37,6 @@ MSBrowser.prototype.buildWidget = function () {
             '<button type="button" id="ms_browser_latest_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + latestLabel + '" aria-label="' + latestLabel + '"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + latestLabel + '</span></button>' +
             '<button type="button" id="ms_browser_search_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + searchLabel + '" aria-label="' + searchLabel + '"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + searchLabel + '</span></button>';
     }
-    this.moreLabel = jsu.translate('Display {count} more items');
     html += '' +
                 '</div>' +
                 '<h2 class="ms-browser-title"></h2>' +
@@ -49,9 +48,6 @@ MSBrowser.prototype.buildWidget = function () {
                     '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translate('Loading...') +
                 '</div></div>' +
                 '<div class="ms-browser-message"><div></div></div>' +
-            '</div>' +
-            '<div class="ms-browser-more-btns">' +
-                '<button type="button" class="button ms-browser-more-btn">' + this.moreLabel.replace(/\{count\}/, this.displayCount) + '</button>' +
             '</div>' +
         '</div>';
     this.$widget = $(html);
@@ -101,7 +97,7 @@ MSBrowser.prototype.buildWidget = function () {
     $('#ms_browser_search_tab', this.$menu).click({ obj: this }, function (event) {
         event.data.obj.changeTab('search'); return false;
     });
-    $('.ms-browser-more-btn', this.$widget).click({ obj: this }, function (event) {
+    $('.ms-browser-more-btn button', this.$widget).click({ obj: this }, function (event) {
         event.data.obj.displayMore(this.displayCount);
     });
 };
@@ -204,7 +200,7 @@ MSBrowser.prototype.getTopMenuJq = function () {
             event.data.obj.displayMore(newValue - event.data.obj.displayCount);
         }
         event.data.obj.displayCount = newValue;
-        $('.ms-browser-more-btns .ms-browser-more-btn').text(event.data.obj.moreLabel.replace(/\{count\}/, event.data.obj.displayCount));
+        $('.ms-browser-more-btn button').text(event.data.obj.moreLabel.replace(/\{count\}/, event.data.obj.displayCount));
         jsu.setCookie('catalog-displayCount', newValue);
     });
     // detect focus change
@@ -220,6 +216,15 @@ MSBrowser.prototype.getTopMenuJq = function () {
         console.error('Failed to listen to focus changes: ' + e);
     }
     return this.$topMenu;
+};
+MSBrowser.prototype.getMoreButton = function () {
+    if (!this.moreLabel) {
+        this.moreLabel = jsu.translate('Display {count} more items');
+    }
+    return '' +
+        '<div class="ms-browser-more-btn">' +
+            '<button type="button" class="button">' + this.moreLabel.replace(/\{count\}/, this.displayCount) + '</button>' +
+        '</div>';
 };
 MSBrowser.prototype.setTitle = function (text, html) {
     if (!html) {
@@ -520,12 +525,12 @@ MSBrowser.prototype.displayContent = function ($container, data, channelOid, tab
         }
     }
     if ((this.moreChannels.length + this.moreLiveStreams.length + this.moreVideos.length + this.morePhotosGroups.length) > 0) {
-        this.showMoreBtns();
+        this.showMoreBtns(tab);
     } else {
-        this.hideMoreBtns();
+        this.hideMoreBtns(tab);
     }
 };
-MSBrowser.prototype.displayItems = function ($container, medias, type, tab, channelOid) {
+MSBrowser.prototype.displayItems = function ($container, items, type, tab, channelOid) {
     const markup = (this.pickMode ? 'h3' : 'h2');
     const selectable = this.selectableContent.indexOf(type[0]) != -1;
     let label = '';
@@ -546,27 +551,27 @@ MSBrowser.prototype.displayItems = function ($container, medias, type, tab, chan
             label = jsu.translate('Photos groups');
             break;
     }
-    if (!$('#header_type_' + type).length) {
+    if (!$('#header_type_' + type, $container).length) {
         $container.append('<' + markup + ' id="header_type_' + type + '">' + label + '</' + markup + '>');
     }
-    let $section = $('#section_type_' + type);
+    let $section = $('#section_type_' + type, $container);
     if (!$section.length) {
         $section = $('<ul id="section_type_' + type + '" class="ms-browser-section"></ul>');
     }
-    for (let i = 0; i < medias.length; i++) {
-        if (type == 'channels' && medias[i].parent_oid === undefined && channelOid) {
+    for (let i = 0; i < items.length; i++) {
+        if (type == 'channels' && items[i].parent_oid === undefined && channelOid) {
             /* eslint-disable-next-line camelcase */
-            medias[i].parent_oid = channelOid;
+            items[i].parent_oid = channelOid;
         }
-        $section.append(this.getContentEntry(type, medias[i], selectable, tab));
+        $section.append(this.getContentEntry(type, items[i], selectable, tab));
     }
     $container.append($section);
 };
-MSBrowser.prototype.showMoreBtns = function () {
-    $('.ms-browser-more-btns', this.place).css('display', 'block');
+MSBrowser.prototype.showMoreBtns = function (tab) {
+    $('#ms_browser_' + tab + ' .ms-browser-more-btn', this.place).css('display', 'block');
 };
-MSBrowser.prototype.hideMoreBtns = function () {
-    $('.ms-browser-more-btns', this.place).css('display', 'none');
+MSBrowser.prototype.hideMoreBtns = function (tab) {
+    $('#ms_browser_' + tab + ' .ms-browser-more-btn', this.place).css('display', 'none');
 };
 MSBrowser.prototype.displayMore = function (count) {
     const currentTab = this.getActiveTab();
