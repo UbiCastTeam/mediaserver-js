@@ -119,19 +119,19 @@ MSBrowserSearch.prototype.getMenuJq = function () {
         event.data.obj.onSearchSubmit();
     });
     $('#ms_browser_search_in_all', this.$menu).click({ obj: this }, function (event) {
-        $('.ms-browser-search-in input[type=checkbox]', event.data.obj.$main).prop('checked', true);
+        $('.ms-browser-search-in input[type=checkbox]', event.data.obj.$menu).prop('checked', true);
         event.data.obj.onSearchSubmit();
     });
     $('#ms_browser_search_in_none', this.$menu).click({ obj: this }, function (event) {
-        $('.ms-browser-search-in input[type=checkbox]', event.data.obj.$main).prop('checked', false);
+        $('.ms-browser-search-in input[type=checkbox]', event.data.obj.$menu).prop('checked', false);
         event.data.obj.onSearchSubmit();
     });
     $('#ms_browser_search_for_all', this.$menu).click({ obj: this }, function (event) {
-        $('.ms-browser-search-for input[type=checkbox]', event.data.obj.$main).prop('checked', true);
+        $('.ms-browser-search-for input[type=checkbox]', event.data.obj.$menu).prop('checked', true);
         event.data.obj.onSearchSubmit();
     });
     $('#ms_browser_search_for_none', this.$menu).click({ obj: this }, function (event) {
-        $('.ms-browser-search-for input[type=checkbox]', event.data.obj.$main).prop('checked', false);
+        $('.ms-browser-search-for input[type=checkbox]', event.data.obj.$menu).prop('checked', false);
         event.data.obj.onSearchSubmit();
     });
     $('input[type=checkbox]', this.$menu).change({obj: this}, function (event) {
@@ -142,9 +142,13 @@ MSBrowserSearch.prototype.getMenuJq = function () {
 MSBrowserSearch.prototype.getContentJq = function () {
     const html = '' +
         '<div id="ms_browser_search" class="ms-browser-content" style="display: none;">' +
-            '<div class="messages"><div class="message info">' + jsu.translate('Use the input above to search for something.') + '</div></div>' +
+            '<div class="ms-browser-search-place">' +
+                '<div class="messages"><div class="message info">' + jsu.translate('Use the input above to search for something.') + '</div></div>' +
+            '</div>' +
+            this.browser.getMoreButton() +
         '</div>';
     this.$content = $(html);
+    this.$place = $('.ms-browser-search-place', this.$content);
     return this.$content;
 };
 
@@ -154,7 +158,7 @@ MSBrowserSearch.prototype.onShow = function () {
         return;
     }
     this.initialized = true;
-    this.browser.hideMoreBtns();
+    this.browser.hideMoreBtns('search');
 
     this.onUrlChange();
     if (!this.browser.useOverlay && this.browser.getActiveTab() == 'search') {
@@ -310,11 +314,16 @@ MSBrowserSearch.prototype._onAjaxError = function (response) {
         message += '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>';
     }
     message += '</div>';
-    this.$content.html(message);
+    this.$place.html(message);
 };
 
 MSBrowserSearch.prototype._onAjaxResponse = function (response) {
     this.browser.hideLoading();
+    this.browser.moreChannels = [];
+    this.browser.moreLiveStreams = [];
+    this.browser.moreVideos = [];
+    this.browser.morePhotosGroups = [];
+    this.browser.hideMoreBtns('search');
     if (!response.success) {
         return this._onAjaxError(response);
     }
@@ -326,7 +335,7 @@ MSBrowserSearch.prototype._onAjaxResponse = function (response) {
     const nbLiveStreams = response.live_streams ? response.live_streams.length : 0;
     const nbPhotosGroups = response.photos_groups ? response.photos_groups.length : 0;
     const hasItems = nbChannels > 0 || nbVideos > 0 || nbLiveStreams > 0 || nbPhotosGroups > 0;
-    this.$content.html('');
+    this.$place.html('');
     // search result display
     if (hasItems) {
         const results = [];
@@ -343,10 +352,10 @@ MSBrowserSearch.prototype._onAjaxResponse = function (response) {
             results.push(nbPhotosGroups + ' ' + jsu.translate('photos group(s)'));
         }
         const text = '<div class="ms-browser-search-matching"><b>' + jsu.translate('Matching items:') + '</b> ' + jsu.escapeHTML(results.join(', ')) + '</div>';
-        this.$content.append(text);
-        this.browser.displayContent(this.$content, response, null, 'search');
+        this.$place.append(text);
+        this.browser.displayContent(this.$place, response, null, 'search');
     } else {
-        this.$content.html('<div class="messages"><div class="message info">' + jsu.translate('No results.') + '</div></div>');
+        this.$place.html('<div class="messages"><div class="message info">' + jsu.translate('No results.') + '</div></div>');
     }
 };
 

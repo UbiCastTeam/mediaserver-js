@@ -361,7 +361,7 @@
 
 /* channels tab */
 .ms-browser.has-tree.in-overlay .ms-browser-tree-place,
-.ms-browser.has-tree.in-overlay .ms-browser-channels-place {
+.ms-browser.has-tree.in-overlay .ms-browser-channels-body {
     padding: 0.5em;
     top: 0;
     bottom: 0;
@@ -380,10 +380,10 @@
     float: none;
     right: auto;
 }
-.ms-browser.has-tree .ms-browser-channels-place {
+.ms-browser.has-tree .ms-browser-channels-body {
     margin-left: 19em;
 }
-.ms-browser.has-tree.in-overlay .ms-browser-channels-place {
+.ms-browser.has-tree.in-overlay .ms-browser-channels-body {
     margin-left: 0;
     left: 19em;
 }
@@ -473,14 +473,9 @@
 .ms-browser .ms-browser-search-matching {
     padding: 10px 30px;
 }
-.ms-browser .ms-browser-more-btns {
-    margin: 8px 5px;
+.ms-browser .ms-browser-more-btn {
+    padding: 10px 5px;
     text-align: center;
-}
-.ms-browser.in-overlay .ms-browser-more-btns {
-    position: absolute;
-    bottom: 1em;
-    right: 1em;
 }
 /* no header adjustments */
 .ms-browser.no-header .ms-browser-header .ms-browser-top-buttons,
@@ -514,32 +509,32 @@
     .ms-browser.has-tree .ms-browser-tree-place {
         width: 15em;
     }
-    .ms-browser.has-tree .ms-browser-channels-place {
+    .ms-browser.has-tree .ms-browser-channels-body {
         margin-left: 16em;
     }
-    .ms-browser.has-tree.in-overlay .ms-browser-channels-place {
+    .ms-browser.has-tree.in-overlay .ms-browser-channels-body {
         left: 16em;
     }
 }
 /* 41em ~ 640px */
 @media (max-width: 41em) {
-    .ms-browser .ms-browser-channels-place {
+    .ms-browser .ms-browser-channels-body {
         left: 0;
     }
     .ms-browser.in-overlay .ms-browser-header,
     .ms-browser.in-overlay .ms-browser-bar,
     .ms-browser.in-overlay .ms-browser-main,
     .ms-browser.has-tree.in-overlay .ms-browser-tree-place,
-    .ms-browser.has-tree.in-overlay .ms-browser-channels-place {
+    .ms-browser.has-tree.in-overlay .ms-browser-channels-body {
         position: static;
     }
     .ms-browser.has-tree .ms-browser-tree-place {
         display: none;
     }
-    .ms-browser .ms-browser-channels-place {
+    .ms-browser .ms-browser-channels-body {
         padding: 10px 0;
     }
-    .ms-browser.has-tree .ms-browser-channels-place {
+    .ms-browser.has-tree .ms-browser-channels-body {
         margin-left: 0;
     }
     .ms-browser.in-overlay .ms-browser-bar,

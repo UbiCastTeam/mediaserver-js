@@ -35,17 +35,22 @@ MSBrowserChannels.prototype.getMenuJq = function () {
     return this.$menu;
 };
 MSBrowserChannels.prototype.getContentJq = function () {
-    let html = '';
-    html += '<div id="ms_browser_channels" class="ms-browser-content" style="display: none;">';
+    let html = '' +
+        '<div id="ms_browser_channels" class="ms-browser-content" style="display: none;">';
     if (this.browser.treeManager) {
-        html += '<div class="ms-browser-tree-place ms-channels-tree">';
-        html += '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translate('Loading...') + '</div>';
-        html += '</div>';
+        html += '' +
+            '<div class="ms-browser-tree-place ms-channels-tree">' +
+                '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translate('Loading...') + '</div>' +
+            '</div>';
     }
-    html += '<div class="ms-browser-channels-place">';
-    html += '<div class="messages"><div class="message info">' + jsu.translate('Select a channel to display its content.') + '</div></div>';
-    html += '</div>';
-    html += '</div>';
+    html += '' +
+            '<div class="ms-browser-channels-body">' +
+                '<div class="ms-browser-channels-place">' +
+                    '<div class="messages"><div class="message info">' + jsu.translate('Select a channel to display its content.') + '</div></div>' +
+                '</div>' +
+                this.browser.getMoreButton() +
+            '</div>' +
+        '</div>';
     this.$content = $(html);
     this.$place = $('.ms-browser-channels-place', this.$content);
     return this.$content;
@@ -193,7 +198,7 @@ MSBrowserChannels.prototype._onChannelError = function (response) {
     }
     message += '</div>';
     this.$place.html(message);
-    this.browser.hideMoreBtns();
+    this.browser.hideMoreBtns('channels');
 };
 
 MSBrowserChannels.prototype._onChannelInfo = function (responseInfo, oid) {
@@ -258,7 +263,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
     this.browser.moreLiveStreams = [];
     this.browser.moreVideos = [];
     this.browser.morePhotosGroups = [];
-    this.browser.hideMoreBtns();
+    this.browser.hideMoreBtns('channels');
     if (this.currentChannelOid != oid) {
         return;
     }
