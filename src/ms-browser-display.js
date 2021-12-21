@@ -1018,7 +1018,7 @@ MSBrowser.prototype.getButtonLink = function (item, action, absolute) {
         url = '/add-content/channel/?in=' + (item && item.oid != '0' ? item.oid : 'root');
     } else if (action == 'addVideo') {
         url = '/add-content/';
-        hash = '#addMediaByUpload';
+        hash = '#add_media_by_upload';
         if (item && item.oid != '0') {
             url += '?in=' + item.oid;
         }
