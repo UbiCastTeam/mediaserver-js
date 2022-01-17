@@ -38,24 +38,24 @@ MSBrowserLatest.prototype.getMenuJq = function () {
     html += '<div id="ms_browser_latest_menu" style="display: none;">';
     if (dc.length > 1) {
         html += '<div class="ms-browser-dropdown" id="ms_browser_latest_types_dropdown">';
-        html += '<button type="button" aria-controls="ms_browser_latest_types_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button ' + this.browser.btnClass + '">' + jsu.translate('Content types') + ' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
+        html += '<button type="button" aria-controls="ms_browser_latest_types_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button ' + this.browser.btnClass + '">' + jsu.translateHTML('Content types') + ' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
         html += '<div class="ms-browser-dropdown-menu ms-browser-latest-types" id="ms_browser_latest_types_dropdown_menu">';
-        html += '<h4>' + jsu.translate('Content types to display:') + '</h4>';
+        html += '<h4>' + jsu.translateHTML('Content types to display:') + '</h4>';
         if (dc.indexOf('c') != -1) {
             html += '<p><input id="latest_display_channel" type="checkbox">';
-            html += ' <label for="latest_display_channel">' + jsu.translate('channels') + '</label></p>';
+            html += ' <label for="latest_display_channel">' + jsu.translateHTML('channels') + '</label></p>';
         }
         if (dc.indexOf('v') != -1) {
             html += '<p><input id="latest_display_video" type="checkbox">';
-            html += ' <label for="latest_display_video">' + jsu.translate('videos') + '</label></p>';
+            html += ' <label for="latest_display_video">' + jsu.translateHTML('videos') + '</label></p>';
         }
         if (dc.indexOf('l') != -1) {
             html += '<p><input id="latest_display_live" type="checkbox">';
-            html += ' <label for="latest_display_live">' + jsu.translate('live streams') + '</label></p>';
+            html += ' <label for="latest_display_live">' + jsu.translateHTML('live streams') + '</label></p>';
         }
         if (dc.indexOf('p') != -1) {
             html += '<p><input id="latest_display_photos" type="checkbox">';
-            html += ' <label for="latest_display_photos">' + jsu.translate('photos') + '</label></p>';
+            html += ' <label for="latest_display_photos">' + jsu.translateHTML('photos') + '</label></p>';
         }
         html += '</div>';
         html += '</div>';
@@ -88,7 +88,7 @@ MSBrowserLatest.prototype.getContentJq = function () {
     const html = '' +
         '<div id="ms_browser_latest" class="ms-browser-content" style="display: none;">' +
             '<div class="messages">' +
-                '<div class="message info">' + jsu.translate('This list presents all media and channels ordered by add date.') + '</div>' +
+                '<div class="message info">' + jsu.translateHTML('This list presents all media and channels ordered by add date.') + '</div>' +
             '</div>' +
             '<div class="ms-browser-latest-place"></div>' +
             this.browser.getMoreButton() +
@@ -202,12 +202,12 @@ MSBrowserLatest.prototype._onAjaxError = function (response) {
     let message = '<div class="messages">';
     if (!this.browser.useOverlay && (response.errorCode == '403' || response.errorCode == '401')) {
         const loginUrl = this.browser.urlLogin + '?next=' + window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
-        message += '<div class="item-description">';
-        message += '<div class="message error">' + response.error + '</div>';
-        message += '<p>' + jsu.translate('Please login to access this page') + '<br /> <a href="' + loginUrl + '">' + jsu.translate('Sign in') + '</a></p>';
-        message += '</div>';
+        message += '<div class="item-description">' +
+        '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>' +
+        '<p>' + jsu.translateHTML('Please login to access this page') + '<br /> <a href="' + loginUrl + '">' + jsu.translateHTML('Sign in') + '</a></p>' +
+        '</div>';
     } else {
-        message += '<div class="message error">' + response.error + '</div>';
+        message += '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>';
     }
     message += '</div>';
     this.$place.html(message);

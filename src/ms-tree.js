@@ -86,9 +86,9 @@ MSTreeManager.prototype.init = function () {
     if (this.displayRoot) {
         html += '<div id="' + this.idPrefix + 'tree_channel_0_link" ' + (this.currentChannelOid == '0' ? 'class="channel-active"' : '') + '>';
         if (this.onChange) {
-            html += '<button type="button" data-ref="0" class="channel-btn"' + (this.currentChannelOid == '0' ? 'title="' + jsu.translate('Root') + ' ' + jsu.translate('selected') + '"' : '') + '>' + jsu.translate('Root') + '</button>';
+            html += '<button type="button" data-ref="0" class="channel-btn"' + (this.currentChannelOid == '0' ? 'title="' + jsu.translateAttribute('Root') + ' ' + jsu.translateAttribute('selected') + '"' : '') + '>' + jsu.translateHTML('Root') + '</button>';
         } else {
-            html += '<a href="' + this.channelsBaseUrl + '" class="channel-btn"' + (this.currentChannelOid == '0' ? 'title="' + jsu.translate('Root') + ' ' + jsu.translate('selected') + '"' : '') + '>' + jsu.translate('Root') + '</a>';
+            html += '<a href="' + this.channelsBaseUrl + '" class="channel-btn"' + (this.currentChannelOid == '0' ? 'title="' + jsu.translateAttribute('Root') + ' ' + jsu.translateAttribute('selected') + '"' : '') + '>' + jsu.translateHTML('Root') + '</a>';
         }
         html += '</div>';
     }
@@ -111,7 +111,7 @@ MSTreeManager.prototype.init = function () {
             }
         }
         if (obj.displayPersonal && obj.hasPersonalChannel) {
-            const $btn = $('<button type="button" class="button channel-personal-btn"><i class="fa fa-bookmark" aria-hidden="true"></i> <span>' + jsu.translate('My channel') + '</span></button>');
+            const $btn = $('<button type="button" class="button channel-personal-btn"><i class="fa fa-bookmark" aria-hidden="true"></i> <span>' + jsu.translateHTML('My channel') + '</span></button>');
             $btn.click({ obj: obj }, function (evt) {
                 evt.data.obj.openPersonalChannel();
             });
@@ -166,7 +166,7 @@ MSTreeManager.prototype.loadTree = function (oid, callback) {
     this.content[oid].timeout = setTimeout(function () {
         obj.content[oid].timeout = null;
         $target.css('display', 'block');
-        $target.html('<li style="display: block;"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translate('Loading') + '...</li>');
+        $target.html('<li style="display: block;"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translateHTML('Loading') + '...</li>');
     }, 500);
     // load channel tree
     const scallback = function (response) {
@@ -244,7 +244,7 @@ MSTreeManager.prototype._onTreeLoaded = function (result, oid, $target, callback
                 }
                 let button = '';
                 if (channel.channels) {
-                    button = '<button type="button" aria-expanded="false" aria-controls="tree_channel_' + channel.oid + '" aria-label="' + channel.title + '" data-ref="' + channel.oid +
+                    button = '<button type="button" aria-expanded="false" aria-controls="tree_channel_' + channel.oid + '" aria-label="' + jsu.escapeAttribute(channel.title) + '" data-ref="' + channel.oid +
                                '" class="channel-toggle button-text list-entry">' +
                                  '<i class="fa fa-fw fa-angle-right" aria-hidden="true"></i>' +
                              '</button>';
@@ -252,9 +252,12 @@ MSTreeManager.prototype._onTreeLoaded = function (result, oid, $target, callback
                 html += '<li><span id="' + this.idPrefix + 'tree_channel_' + channel.oid + '_link" data-ref="' + channel.oid +
                                '" class="' + (!this.onChange ? 'aside-list-btn' : '') + (this.currentChannelOid == channel.oid ? ' channel-active' : '') + '">' + button;
                 if (this.onChange) {
-                    html += '<button ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' type="button" data-ref="' + channel.oid + '" class="channel-btn"' + (this.currentChannelOid == channel.oid ? ' title="' + jsu.escapeHTML(channel.title) + ' ' + jsu.translate('selected') + '"' : '') + '>' + jsu.escapeHTML(channel.title) + '</button>';
+                    html += '<button ' + (channel.language ? 'lang="' + jsu.escapeAttribute(channel.language) + '"' : '') +
+                        ' type="button" data-ref="' + channel.oid + '"' +
+                        ' class="channel-btn"' + (this.currentChannelOid == channel.oid ? ' title="' + jsu.escapeAttribute(channel.title + ' ' + jsu.translate('selected')) + '"' : '') + '>' +
+                        jsu.escapeHTML(channel.title) + '</button>';
                 } else {
-                    html += '<a ' + (channel.language ? 'lang="' + channel.language + '"' : '') + ' href="' + this.channelsBaseUrl + channel[this.channelsUrlField] + '" class="channel-btn">' + jsu.escapeHTML(channel.title) + '</a>';
+                    html += '<a ' + (channel.language ? 'lang="' + jsu.escapeAttribute(channel.language) + '"' : '') + ' href="' + this.channelsBaseUrl + channel[this.channelsUrlField] + '" class="channel-btn">' + jsu.escapeHTML(channel.title) + '</a>';
                 }
                 html += '</span>';
                 if (channel.channels) {
@@ -289,9 +292,9 @@ MSTreeManager.prototype._onTreeLoaded = function (result, oid, $target, callback
             this.hasPersonalChannel = true;
         }
     } else if (result.error) {
-        $target.html('<li class="error">' + result.error + '</li>');
+        $target.html('<li class="error">' + jsu.escapeHTML(result.error) + '</li>');
     } else {
-        $target.html('<li class="error">' + jsu.translate('No information about error.') + '</li>');
+        $target.html('<li class="error">' + jsu.translateHTML('No information about error.') + '</li>');
     }
 
     this.loading = false;
@@ -427,7 +430,7 @@ MSTreeManager.prototype.openPersonalChannel = function () {
     const callback = function (response) {
         if (response.success) {
             obj.personalChannelInfo = response;
-            $('.channel-personal-btn span', obj.$widget).html(jsu.translate('My channel'));
+            $('.channel-personal-btn span', obj.$widget).text(jsu.translate('My channel'));
             obj.openTree(response.oid);
             if (obj.onChange) {
                 obj.onChange(response.oid);
@@ -435,7 +438,7 @@ MSTreeManager.prototype.openPersonalChannel = function () {
                 window.location.hash = '#' + response.slug;
             }
         } else {
-            $('.channel-personal-btn span', obj.$widget).html(jsu.translate('My channel') + ' (' + response.xhr.status + ')');
+            $('.channel-personal-btn span', obj.$widget).text(jsu.translate('My channel') + ' (' + response.xhr.status + ')');
         }
     };
     if (!this.personalChannelInfo) {

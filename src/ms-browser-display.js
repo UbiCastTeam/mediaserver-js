@@ -28,14 +28,14 @@ MSBrowser.prototype.buildWidget = function () {
                 '<div class="ms-browser-menu">';
     if (!this.useOverlay) {
         html += '' +
-            '<a id="ms_browser_channels_tab" class="ms-browser-tab button ' + this.btnClass + '" href="' + this.urlChannels + '" title="' + channelsLabel + '" aria-label="' + channelsLabel + '"><i class="fa fa-folder-open" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + channelsLabel + '</span></a>' +
-            '<a id="ms_browser_latest_tab" class="ms-browser-tab button ' + this.btnClass + '" href="' + this.urlLatest + '" title="' + latestLabel + '" aria-label="' + latestLabel + '"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + latestLabel + '</span></a>' +
-            '<a id="ms_browser_search_tab" class="ms-browser-tab button ' + this.btnClass + '" href="' + this.urlSearch + '" title="' + searchLabel + '" aria-label="' + searchLabel + '"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + searchLabel + '</span></a>';
+            '<a id="ms_browser_channels_tab" class="ms-browser-tab button ' + this.btnClass + '" href="' + this.urlChannels + '" title="' + jsu.escapeAttribute(channelsLabel) + '" aria-label="' + jsu.escapeAttribute(channelsLabel) + '"><i class="fa fa-folder-open" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + jsu.escapeHTML(channelsLabel) + '</span></a>' +
+            '<a id="ms_browser_latest_tab" class="ms-browser-tab button ' + this.btnClass + '" href="' + this.urlLatest + '" title="' + jsu.escapeAttribute(latestLabel) + '" aria-label="' + jsu.escapeAttribute(latestLabel) + '"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + jsu.escapeHTML(latestLabel) + '</span></a>' +
+            '<a id="ms_browser_search_tab" class="ms-browser-tab button ' + this.btnClass + '" href="' + this.urlSearch + '" title="' + jsu.escapeAttribute(searchLabel) + '" aria-label="' + jsu.escapeAttribute(searchLabel) + '"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + jsu.escapeHTML(searchLabel) + '</span></a>';
     } else {
         html += '' +
-            '<button type="button" id="ms_browser_channels_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + channelsLabel + '" aria-label="' + channelsLabel + '"><i class="fa fa-folder-open" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + channelsLabel + '</span></button>' +
-            '<button type="button" id="ms_browser_latest_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + latestLabel + '" aria-label="' + latestLabel + '"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + latestLabel + '</span></button>' +
-            '<button type="button" id="ms_browser_search_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + searchLabel + '" aria-label="' + searchLabel + '"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + searchLabel + '</span></button>';
+            '<button type="button" id="ms_browser_channels_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + jsu.escapeAttribute(channelsLabel) + '" aria-label="' + jsu.escapeAttribute(channelsLabel) + '"><i class="fa fa-folder-open" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + jsu.escapeHTML(channelsLabel) + '</span></button>' +
+            '<button type="button" id="ms_browser_latest_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + jsu.escapeAttribute(latestLabel) + '" aria-label="' + jsu.escapeAttribute(latestLabel) + '"><i class="fa fa-clock-o" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + jsu.escapeHTML(latestLabel) + '</span></button>' +
+            '<button type="button" id="ms_browser_search_tab" class="ms-browser-tab button ' + this.btnClass + '" title="' + jsu.escapeAttribute(searchLabel) + '" aria-label="' + jsu.escapeAttribute(searchLabel) + '"><i class="fa fa-search" aria-hidden="true"></i> <span class="hidden-below-800" aria-hidden="true">' + jsu.escapeHTML(searchLabel) + '</span></button>';
     }
     html += '' +
                 '</div>' +
@@ -45,7 +45,7 @@ MSBrowser.prototype.buildWidget = function () {
             '<div class="ms-browser-main ms-items">' +
                 '<div class="ms-browser-clear"></div>' +
                 '<div class="ms-browser-loading"><div>' +
-                    '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translate('Loading...') +
+                    '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translateHTML('Loading...') +
                 '</div></div>' +
                 '<div class="ms-browser-message"><div></div></div>' +
             '</div>' +
@@ -117,57 +117,56 @@ MSBrowser.prototype.getTopMenuJq = function () {
         { 'views-desc': jsu.translate('Number of views, descending') },
         { 'views-asc': jsu.translate('Number of views, ascending') }
     ];
-    let html = '<div class="ms-browser-top-buttons">';
-    html += '<div class="ms-browser-dropdown" id="ms_browser_display_dropdown">';
-    html += '<button aria-controls="ms_browser_display_dropdow_menu" aria-expanded="false" type="button" title="' + jsu.translate('Display') + '" class="button ms-browser-dropdown-button ' + this.btnClass + '"><i class="fa fa-tv" aria-hidden="true"></i> <span class="hidden-below-1280">' + jsu.translate('Display') + ' </span><i class="fa fa-angle-down" aria-hidden="true"></i></button>';
-
-    html += '<div class="ms-browser-dropdown-menu" id="ms_browser_display_dropdow_menu">';
-    // display mode
-    html += '<div><h4>' + jsu.translate('Display mode:') + '</h4>';
-    html += '<button type="button" class="button ' + (!this.displayAsThumbnails ? 'active' : '') + '" id="ms_browser_display_as_list" title="' + jsu.translate('list') + (!this.displayAsThumbnails ? ' (' + jsu.translate('selected setting') + ')' : '') + '">' + jsu.translate('list') + '</button>';
-    html += '<button type="button" class="button ' + (this.displayAsThumbnails ? 'active' : '') + '" id="ms_browser_display_as_thumbnails" title="' + jsu.translate('thumbnails') + (this.displayAsThumbnails ? ' (' + jsu.translate('selected setting') + ')' : '') + '">' + jsu.translate('thumbnails') + '</button><br/>';
-    html += '<label for="ms_browser_number_item">' + jsu.translate('Number of items:') + '</label>';
-    html += '<select id="ms_browser_number_item">';
+    let html = '<div class="ms-browser-top-buttons">' +
+        '<div class="ms-browser-dropdown" id="ms_browser_display_dropdown">' +
+        '<button aria-controls="ms_browser_display_dropdow_menu" aria-expanded="false" type="button" title="' + jsu.translateAttribute('Display') + '" class="button ms-browser-dropdown-button ' + this.btnClass + '"><i class="fa fa-tv" aria-hidden="true"></i> <span class="hidden-below-1280">' + jsu.translateHTML('Display') + ' </span><i class="fa fa-angle-down" aria-hidden="true"></i></button>' +
+        '<div class="ms-browser-dropdown-menu" id="ms_browser_display_dropdow_menu">' +
+        // display mode
+        '<div><h4>' + jsu.translateHTML('Display mode:') + '</h4>' +
+        '<button type="button" class="button ' + (!this.displayAsThumbnails ? 'active' : '') + '" id="ms_browser_display_as_list" title="' + jsu.translateAttribute('list') + (!this.displayAsThumbnails ? ' (' + jsu.translateAttribute('selected setting') + ')' : '') + '">' + jsu.translateHTML('list') + '</button>' +
+        '<button type="button" class="button ' + (this.displayAsThumbnails ? 'active' : '') + '" id="ms_browser_display_as_thumbnails" title="' + jsu.translateAttribute('thumbnails') + (this.displayAsThumbnails ? ' (' + jsu.translateAttribute('selected setting') + ')' : '') + '">' + jsu.translateHTML('thumbnails') + '</button><br/>' +
+        '<label for="ms_browser_number_item">' + jsu.translateHTML('Number of items:') + '</label>' +
+        '<select id="ms_browser_number_item">';
     for (const value of [10, 30, 100]) {
         html += '<option value="' + value + '"' + (value == this.displayCount ? ' selected="selected"' : '') + '>' + value + '</option>';
     }
-    html += '</select><br/>';
-    html += '<input id="ms_browser_display_types_icons" type="checkbox" ' + (this.displayTypesIcons ? 'checked="checked"' : '') + '>';
-    html += ' <label for="ms_browser_display_types_icons">' + jsu.translate('display items type icons') + '</label></div>';
-    // channel sorting
-    html += '<div class="ms-browser-channel-order"><h4><label for="ms_browser_order_channel">' + jsu.translate('Sort by:') + '</label></h4>';
-    html += ' <select id="ms_browser_order_channel">';
+    html += '</select><br/>' +
+        '<input id="ms_browser_display_types_icons" type="checkbox" ' + (this.displayTypesIcons ? 'checked="checked"' : '') + '>' +
+        ' <label for="ms_browser_display_types_icons">' + jsu.translateHTML('display items type icons') + '</label></div>' +
+        // channel sorting
+        '<div class="ms-browser-channel-order"><h4><label for="ms_browser_order_channel">' + jsu.translate('Sort by:') + '</label></h4>' +
+        ' <select id="ms_browser_order_channel">';
     let index;
     for (index in sortingValues) {
-        let key;
-        for (key in sortingValues[index]) {
+        for (const key in sortingValues[index]) {
             html += '<option value="' + key + '">' + jsu.escapeHTML(sortingValues[index][key]) + '</option>';
         }
     }
     html += '</select></div>';
     // filters
-    let optHtml = '<option value="">' + jsu.translate('unspecified') + '</option>';
-    optHtml += '<option value="yes">' + jsu.translate('yes') + '</option>';
-    optHtml += '<option value="no">' + jsu.translate('no') + '</option>';
-    html += '<div class="ms-browser-filters"><h4>' + jsu.translate('Filters:') + '</h4>';
-    html += ' <form id="ms_browser_filters_form">';
-    html += ' <label for="ms_browser_filter_editable">' + jsu.translate('Editable:') + '</label>';
-    html += ' <select id="ms_browser_filter_editable">' + optHtml + '</select>';
+    const optHtml = '' +
+        '<option value="">' + jsu.translateHTML('unspecified') + '</option>' +
+        '<option value="yes">' + jsu.translateHTML('yes') + '</option>' +
+        '<option value="no">' + jsu.translateHTML('no') + '</option>';
+    html += '<div class="ms-browser-filters"><h4>' + jsu.translateHTML('Filters:') + '</h4>' +
+        ' <form id="ms_browser_filters_form">' +
+        ' <label for="ms_browser_filter_editable">' + jsu.translateHTML('Editable:') + '</label>' +
+        ' <select id="ms_browser_filter_editable">' + optHtml + '</select>';
     if (this.displayableContent.length > 1 || this.displayableContent != 'c') {
-        html += ' <br/>';
-        html += ' <label for="ms_browser_filter_validated">' + jsu.translate('Published:') + '</label>';
-        html += ' <select id="ms_browser_filter_validated">' + optHtml + '</select>';
+        html += ' <br/>' +
+            ' <label for="ms_browser_filter_validated">' + jsu.translateHTML('Published:') + '</label>' +
+            ' <select id="ms_browser_filter_validated">' + optHtml + '</select>';
         if (this.filterSpeaker != 'self') {
-            html += ' <br/>';
-            html += ' <label for="ms_browser_filter_speaker">' + jsu.translate('Speaker:') + '</label>';
-            html += ' <input type="text" id="ms_browser_filter_speaker" value="' + (this.filterSpeaker ? this.filterSpeaker : '') + '"/>';
-            html += ' <button type="submit" class="button">' + jsu.translate('Ok') + '</button>';
+            html += ' <br/>' +
+                ' <label for="ms_browser_filter_speaker">' + jsu.translateHTML('Speaker:') + '</label>' +
+                ' <input type="text" id="ms_browser_filter_speaker" value="' + (this.filterSpeaker ? this.filterSpeaker : '') + '"/>' +
+                ' <button type="submit" class="button">' + jsu.translateHTML('Ok') + '</button>';
         }
     }
-    html += ' </form>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
+    html += ' </form>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
 
     html += '</div>';
     this.$topMenu = $(html);
@@ -245,7 +244,7 @@ MSBrowser.prototype.setTitle = function (text, html) {
             if (index != -1) {
                 this.documentTilteSuffix = document.title.substring(index);
             } else {
-                this.documentTilteSuffix = ' - MediaServer';
+                this.documentTilteSuffix = ' - Nudgis';
             }
         }
         document.title = text + this.documentTilteSuffix;
@@ -614,9 +613,9 @@ MSBrowser.prototype.getContentEntry = function (itemType, item, gselectable, tab
     let html = this._getEntryBlockHtml(item, itemType, clickable, tab);
     if (this.displayAsThumbnails && !this.pickMode) {
         html += '<div class="item-entry-buttons">';
-        html += '<button type="button" class="item-entry-info" title="' + jsu.translate('Open information panel') + '"><i class="fa fa-info" aria-hidden="true"></i></button>';
+        html += '<button type="button" class="item-entry-info" title="' + jsu.translateAttribute('Open information panel') + '"><i class="fa fa-info" aria-hidden="true"></i></button>';
         if (item.can_edit) {
-            html += '<a title="' + jsu.translate('Edit') + '" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i></a>';
+            html += '<a title="' + jsu.translateAttribute('Edit') + '" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i></a>';
         }
         html += '<div class="overlay-info ms-items" id="item_entry_' + oid + '_' + tab + '_info" style="display: none;" role="dialog" tabindex="-1" aria-labelledby="item_entry_' + item.oid + '_' + tab + '_info_title" aria-modal="true"></div>';
         html += '</div>';
@@ -651,13 +650,13 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         }
     }
 
-    let html = '<' + markup + href + buttonStyle + ' class="item-entry-link"' + (clickable && itemType != 'channel' ? ' title="' + jsu.translate('Click to select this media') + '"' : '') + '>';
+    let html = '<' + markup + href + buttonStyle + ' class="item-entry-link"' + (clickable && itemType != 'channel' ? ' title="' + jsu.translateAttribute('Click to select this media') + '"' : '') + '>';
 
     /********************** Image preview ****************/
     let imagePreview = '<span class="item-entry-preview">';
     imagePreview += '<span class="item-entry-preview-aligner"></span>';
     if (item.thumb) {
-        imagePreview += '<img src="' + item.thumb + '" alt=""' + (item.language ? ' lang="' + item.language + '"' : '') + '/>';
+        imagePreview += '<img src="' + jsu.escapeAttribute(item.thumb) + '" alt=""' + (item.language ? ' lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '/>';
     }
     if (!this.pickMode && itemType != 'channel') {
         imagePreview += '<b class="item-entry-preview-play"><i class="fa fa-play fa-4x" aria-hidden="true"></i></b>';
@@ -673,27 +672,27 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
     // type icon
     if (itemType == 'channel') {
         topBar += '<span class="item-entry-layout layout-channel" title="' +
-                    jsu.translate('This item is a channel') + '"></span>';
+                    jsu.translateAttribute('This item is a channel') + '"></span>';
     } else {
         if (itemType == 'photos') {
             topBar += '<span class="item-entry-layout layout-pgroup" title="' +
-                        jsu.translate('This item is a photos group') + '"></span>';
+                        jsu.translateAttribute('This item is a photos group') + '"></span>';
         } else {
             topBar += '<span class="item-entry-layout ';
             if (item.layout) {
-                topBar += 'layout-' + item.layout;
+                topBar += 'layout-' + jsu.escapeAttribute(item.layout);
             } else {
                 topBar += 'layout-video';
             }
             topBar += '" title="';
-            let titleText = itemType == 'live' ? jsu.translate('This item is a live stream') : jsu.translate('This item is a video');
+            let titleText = itemType == 'live' ? jsu.translateHTML('This item is a live stream') : jsu.translateHTML('This item is a video');
             if (item.layout) {
                 if (item.layout == 'composition') {
-                    titleText += ' (' + jsu.translate('dynamic Rich Media') + ')';
+                    titleText += ' (' + jsu.translateHTML('dynamic Rich Media') + ')';
                 } else if (item.layout == 'webinar') {
-                    titleText += ' (' + jsu.translate('classic Rich Media') + ')';
+                    titleText += ' (' + jsu.translateHTML('classic Rich Media') + ')';
                 } else {
-                    titleText += ' (' + item.layout.replace(/_/, ' ') + ')';
+                    titleText += ' (' + jsu.escapeHTML(item.layout.replace(/_/, ' ')) + ')';
                 }
             }
             topBar += titleText;
@@ -705,37 +704,37 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         if (itemType == 'channel') {
             if (item.unlisted) {
                 topBar += '<span class="item-entry-unlisted" title="' +
-                            jsu.translate('This channel is unlisted') + '"><span class="sr-only">' +
-                            jsu.translate('This channel is unlisted') + '</span></span>';
+                            jsu.translateAttribute('This channel is unlisted') + '"><span class="sr-only">' +
+                            jsu.translateHTML('This channel is unlisted') + '</span></span>';
             }
         } else {
             if (!item.validated) {
                 topBar += '<span class="item-entry-notpublished" title="' +
-                            jsu.translate('This media is not published') + '"><span class="sr-only">' +
-                            jsu.translate('This media is not published') + '</span></span>';
+                            jsu.translateAttribute('This media is not published') + '"><span class="sr-only">' +
+                            jsu.translateHTML('This media is not published') + '</span></span>';
             } else if (item.unlisted) {
                 topBar += '<span class="item-entry-unlisted" title="' +
-                            jsu.translate('This media is published and unlisted') + '"><span class="sr-only">' +
-                            jsu.translate('This media is published and unlisted') + '</span></span>';
+                            jsu.translateAttribute('This media is published and unlisted') + '"><span class="sr-only">' +
+                            jsu.translateHTML('This media is published and unlisted') + '</span></span>';
             } else {
                 topBar += '<span class="item-entry-published" title="' +
-                            jsu.translate('This media is published') + '"><span class="sr-only">' +
-                            jsu.translate('This media is published') + '</span></span>';
+                            jsu.translateAttribute('This media is published') + '"><span class="sr-only">' +
+                            jsu.translateHTML('This media is published') + '</span></span>';
             }
             if (itemType == 'video' && !item.ready) {
                 topBar += '<span class="item-entry-notready" title="' +
-                            jsu.translate('This video is not ready') + '"><span class="sr-only">' +
-                            jsu.translate('This video is not ready') + '</span></span>';
+                            jsu.translateAttribute('This video is not ready') + '"><span class="sr-only">' +
+                            jsu.translateHTML('This video is not ready') + '</span></span>';
             }
         }
     }
     // duration
     if (item.duration) {
-        topBar += '<span class="item-entry-duration">' + item.duration + '</span>';
+        topBar += '<span class="item-entry-duration">' + jsu.escapeHTML(item.duration) + '</span>';
     }
     // title
     if (!this.displayAsThumbnails) {
-        topBar += '<span class="item-entry-title"' + (item.language ? ' lang="' + item.language + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
+        topBar += '<span class="item-entry-title"' + (item.language ? ' lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
     }
     topBar += '</span>';
     content += topBar;
@@ -743,10 +742,10 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
     /********************** Bottom bar ****************/
     let bottomBar = '<span class="item-entry-bottom-bar">';
     if (this.displayAsThumbnails) {
-        bottomBar += '<span class="item-entry-title"' + (item.language ? ' lang="' + item.language + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
+        bottomBar += '<span class="item-entry-title"' + (item.language ? ' lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
     } else {
         if (item.creation) {
-            bottomBar += '<span class="item-entry-date">' + jsu.translate('Created on') + ' ' +
+            bottomBar += '<span class="item-entry-date">' + jsu.translateHTML('Created on') + ' ' +
                         jsu.getDateDisplay(item.creation) + '</span>';
         }
         if (item.short_description) {
@@ -766,14 +765,14 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
             }
         }
         if (tab == 'latest') {
-            bottomBar += '<span class="item-entry-type">' + jsu.translate('Type:') + ' ' +
-                            jsu.translate(itemType) + '</span>';
+            bottomBar += '<span class="item-entry-type">' + jsu.translateHTML('Type:') + ' ' +
+                            jsu.translateHTML(itemType) + '</span>';
             if (item.add_date) {
-                bottomBar += '<span class="item-entry-date">' + jsu.translate('Added on') + ' ' +
+                bottomBar += '<span class="item-entry-date">' + jsu.translateHTML('Added on') + ' ' +
                                 jsu.getDateDisplay(item.add_date) + '</span>';
             }
             if (item.parent_title) {
-                bottomBar += '<span class="item-entry-parent">' + jsu.translate('Parent channel:') + ' ' +
+                bottomBar += '<span class="item-entry-parent">' + jsu.translateHTML('Parent channel:') + ' ' +
                                 jsu.escapeHTML(item.parent_title) + '</span>';
             }
         }
@@ -790,20 +789,20 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         html += '<span class="item-entry-extra">';
         let i;
         if (item.annotations) {
-            html += '<span>' + jsu.translate('Matching annotations:') + '</span><ul>';
+            html += '<span>' + jsu.translateHTML('Matching annotations:') + '</span><ul>';
             for (i = 0; i < item.annotations.length; i++) {
                 const annotation = item.annotations[i];
                 html += '<li><a href="' + this.getButtonLink(item, 'view') + '#start=' + annotation.time + '&autoplay"' + this.linksTarget + '>';
                 if (annotation.title) {
                     html += jsu.escapeHTML(annotation.title);
                 }
-                html += ' (' + annotation.time_display + ') ';
+                html += ' (' + jsu.escapeHTML(annotation.time_display) + ') ';
                 html += '</a></li>';
             }
             html += '</ul>';
         }
         if (item.photos) {
-            html += '<span>' + jsu.translate('Matching photos:') + '</span><ul>';
+            html += '<span>' + jsu.translateHTML('Matching photos:') + '</span><ul>';
             for (i = 0; i < item.photos.length; i++) {
                 const photo = item.photos[i];
                 html += '<li><a href="' + this.getButtonLink(item, 'view') + '#' + photo.index + '"' + this.linksTarget + '>';
@@ -866,49 +865,49 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
                     label = jsu.translate('Select this media');
                 }
             }
-            html += '<button type="button" class="' + this.btnClass + ' button main item-entry-pick"><i class="fa ' + icon + '" aria-hidden="true"></i> <span class="hidden-below-800">' + label + '</span></button>';
+            html += '<button type="button" class="' + this.btnClass + ' button main item-entry-pick"><i class="fa ' + icon + '" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.escapeHTML(label) + '</span></button>';
         }
     } else {
         if (itemType == 'current') {
             if (item.can_see_stats) {
-                html += '<button type="button" title="' + jsu.translate('Statistics') + '" class="' + this.btnClass + ' button default item-entry-pick-stats-media"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translate('Statistics') + '</span></button>';
+                html += '<button type="button" title="' + jsu.translateAttribute('Statistics') + '" class="' + this.btnClass + ' button default item-entry-pick-stats-media"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Statistics') + '</span></button>';
             }
             if (item.can_edit) {
-                html += '<a title="' + jsu.translate('Edit') + '" class="' + this.btnClass + ' button default item-entry-pick item-entry-pick-edit-media" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translate('Edit') + '</span></a>';
+                html += '<a title="' + jsu.translateAttribute('Edit') + '" class="' + this.btnClass + ' button default item-entry-pick item-entry-pick-edit-media" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Edit') + '</span></a>';
                 if (item.can_delete) {
-                    html += '<button type="button" title="' + jsu.translate('Delete') + '" class="' + this.btnClass + ' button danger item-entry-pick-delete-media"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translate('Delete') + '</span></button>';
+                    html += '<button type="button" title="' + jsu.translateAttribute('Delete') + '" class="' + this.btnClass + ' button danger item-entry-pick-delete-media"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Delete') + '</span></button>';
                 }
             }
             if (item.can_add_channel) {
                 const addChannelIcon = '<i class="fa fa-folder" aria-hidden="true"></i>' +
                 ' <i class="fa fa-plus color-green" aria-hidden="true"></i>';
-                html += '<a title="' + jsu.translate('Add a sub channel') + '"' +
+                html += '<a title="' + jsu.translateAttribute('Add a sub channel') + '"' +
                         ' class="' + this.btnClass + ' button item-entry-pick item-entry-pick-add-channel" href="' +
                         this.getButtonLink(item, 'addChannel') + '"' + this.linksTarget + '>' + addChannelIcon +
                         ' <span class="hidden-below-800">' +
-                        jsu.translate('Add a sub channel') + '</span></a>';
+                        jsu.translateHTML('Add a sub channel') + '</span></a>';
             }
             if (item.oid != '0' && item.can_add_video) {
                 const addVideoIcon = '<i class="fa fa-film" aria-hidden="true"></i>' +
                 ' <i class="fa fa-plus color-green" aria-hidden="true"></i>';
-                html += '<a title="' + jsu.translate('Add a video') + '"' +
+                html += '<a title="' + jsu.translateAttribute('Add a video') + '"' +
                         ' class="' + this.btnClass + ' button item-entry-pick item-entry-pick-add-video" href="' +
                         this.getButtonLink(item, 'addVideo') + '"' + this.linksTarget + '>' + addVideoIcon +
                         ' <span class="hidden-below-800">' +
-                        jsu.translate('Add a video') + '</span></a>';
+                        jsu.translateHTML('Add a video') + '</span></a>';
             }
         } else {
             if (itemType != 'channel' && this.ltiMode) {
-                html += '<button type="button" class="' + this.btnClass + ' button default item-entry-copy" data-link="' + this.getButtonLink(item, 'lti', true) + '"><i class="fa fa-chain" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translate('Copy LTI link') + '</span></button>';
+                html += '<button type="button" class="' + this.btnClass + ' button default item-entry-copy" data-link="' + this.getButtonLink(item, 'lti', true) + '"><i class="fa fa-chain" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Copy LTI link') + '</span></button>';
             }
             if ((itemType != 'channel' && this.ltiMode) || item.can_edit || item.can_delete) {
-                html += '<a class="' + this.btnClass + ' button default item-entry-pick-view-media" href="' + this.getButtonLink(item, 'view') + '"' + this.linksTarget + '><i class="fa fa-eye" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translate('See') + '</span></a>';
+                html += '<a class="' + this.btnClass + ' button default item-entry-pick-view-media" href="' + this.getButtonLink(item, 'view') + '"' + this.linksTarget + '><i class="fa fa-eye" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('See') + '</span></a>';
             }
             if (item.can_edit) {
-                html += '<a class="' + this.btnClass + ' button item-entry-pick-edit-media default" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translate('Edit') + '</span></a>';
+                html += '<a class="' + this.btnClass + ' button item-entry-pick-edit-media default" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Edit') + '</span></a>';
             }
             if (item.can_delete) {
-                html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translate('Delete') + '</span></button>';
+                html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Delete') + '</span></button>';
             }
         }
     }
@@ -1040,13 +1039,13 @@ MSBrowser.prototype._getThumbnailInfoBoxHtml = function (item, itemType, selecta
     let html = '<div><div tabindex="0"></div>';
     html += '<div class="trap-focus">';
     html += '<div class="overlay-info-title" id="item_entry_' + item.oid + '_' + tab + '_info_title" >';
-    html += '<button type="button" class="overlay-info-close button default ' + this.btnClass + '" title="' + jsu.translate('Hide this window') + '" aria-label="' + jsu.translate('Hide this window') + '"><i class="fa fa-close" aria-hidden="true"></i></button>';
+    html += '<button type="button" class="overlay-info-close button default ' + this.btnClass + '" title="' + jsu.translateAttribute('Hide this window') + '" aria-label="' + jsu.translateAttribute('Hide this window') + '"><i class="fa fa-close" aria-hidden="true"></i></button>';
     html += '<h1><a href="' + this.getButtonLink(item, 'view') + '"' + this.linksTarget + '>' + jsu.escapeHTML(item.title) + '</a></h1>';
     html += '</div>';
     html += '<div class="overlay-info-content">';
     if (!this.pickMode && tab == 'search' && (item.annotations || item.photos)) {
         if (item.annotations) {
-            html += '<div><b>' + jsu.translate('Matching annotations:') + '</b></div>';
+            html += '<div><b>' + jsu.translateHTML('Matching annotations:') + '</b></div>';
             html += '<ul>';
             for (let i = 0; i < item.annotations.length; i++) {
                 const annotation = item.annotations[i];
@@ -1054,7 +1053,7 @@ MSBrowser.prototype._getThumbnailInfoBoxHtml = function (item, itemType, selecta
                 if (annotation.title) {
                     html += jsu.escapeHTML(annotation.title);
                 }
-                html += ' (' + annotation.time_display + ') ';
+                html += ' (' + jsu.escapeHTML(annotation.time_display) + ') ';
                 html += '</a></li>';
             }
             html += '</ul>';
@@ -1076,41 +1075,41 @@ MSBrowser.prototype._getThumbnailInfoBoxHtml = function (item, itemType, selecta
         html += '<hr/>';
     }
     html += '<table class="overlay-info-table">';
-    html += '<caption class="sr-only">' + jsu.translate('Media information') + '</caption>';
+    html += '<caption class="sr-only">' + jsu.translateHTML('Media information') + '</caption>';
     if (item.creation && itemType == 'video') {
         html += '<tr>';
-        html += '<th scope="row" class="overlay-info-label">' + jsu.translate('Recording date') + ' :</th>';
+        html += '<th scope="row" class="overlay-info-label">' + jsu.translateHTML('Recording date') + ' :</th>';
         html += '<td>' + jsu.getDateDisplay(item.creation) + '</td>';
         html += '</tr>';
     }
     if (item.add_date) {
         html += '<tr>';
-        html += '<th scope="row" class="overlay-info-label">' + jsu.translate('Publishing date') + ' :</th>';
+        html += '<th scope="row" class="overlay-info-label">' + jsu.translateHTML('Publishing date') + ' :</th>';
         html += '<td>' + jsu.getDateDisplay(item.add_date) + '</td>';
         html += '</tr>';
     }
     if (item.duration) {
         html += '<tr>';
-        html += '<th scope="row" class="overlay-info-label">' + jsu.translate('Duration') + ' :</th>';
-        html += '<td>' + item.duration + '</td>';
+        html += '<th scope="row" class="overlay-info-label">' + jsu.translateHTML('Duration') + ' :</th>';
+        html += '<td>' + jsu.escapeHTML(item.duration) + '</td>';
         html += '</tr>';
     }
     if (item.views_last_month) {
-        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translate('Views last month') + ' :</th><td>' + item.views_last_month + '</td></tr>';
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Views last month') + ' :</th><td>' + item.views_last_month + '</td></tr>';
     }
     if (item.views) {
-        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translate('Views') + ' :</th><td>' + item.views + '</td></tr>';
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Views') + ' :</th><td>' + item.views + '</td></tr>';
     }
     if (item.comments_last_month) {
-        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translate('Annotations last month') + ' :</th><td>' + item.comments_last_month + '</td></tr>';
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Annotations last month') + ' :</th><td>' + item.comments_last_month + '</td></tr>';
     }
     if (item.comments) {
-        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translate('Annotations') + ' :</th><td>' + item.comments + '</td></tr>';
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Annotations') + ' :</th><td>' + item.comments + '</td></tr>';
     }
     if (item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
         const storageDisplay = this.msapi.getStorageMinimalDisplay(item);
         if (storageDisplay) {
-            html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translate('Storage usage') + ' :</th><td>' + storageDisplay + '</td></tr>';
+            html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Storage usage') + ' :</th><td>' + storageDisplay + '</td></tr>';
         }
     }
     html += '</table>';
@@ -1231,12 +1230,12 @@ MSBrowser.prototype.displayCategories = function () {
     if (this.siteSettingsCategories.length > 0) {
         let html = ' <button type="button" id="open_hidden_categories" class="button">' + jsu.translate('Categories') + ' <i class="fa fa-angle-down" aria-hidden="true"></i></button>';
         html += ' <div id="hidden_categories" class="hidden-visibility">';
-        html += ' <label for="filter_no_categories"><input id="filter_no_categories" type="checkbox"/><span>' + jsu.translate('Unspecified') + '</span></label><br />';
+        html += ' <label for="filter_no_categories"><input id="filter_no_categories" type="checkbox"/><span>' + jsu.translateHTML('Unspecified') + '</span></label><br />';
         for (let i = 0; i < this.siteSettingsCategories.length; i++) {
             const slug = jsu.escapeAttribute(this.siteSettingsCategories[i][0]);
             const label = jsu.escapeHTML(this.siteSettingsCategories[i][1]);
             const check = this.filterCategories.indexOf(slug) < 0 ? '' : ' checked="checked"';
-            html += ' <label for="' + slug + '"><input class="checkbox" id="' + slug + '" type="checkbox" value="' + slug + '"' + check + '/><span>' + label + '</span></label>';
+            html += ' <label for="' + slug + '"><input class="checkbox" id="' + jsu.escapeAttribute(slug) + '" type="checkbox" value="' + jsu.escapeAttribute(slug) + '"' + check + '/><span>' + jsu.escapeHTML(label) + '</span></label>';
         }
         html += ' </div>';
         $('.ms-browser-filters', this.$topMenu).append(html);

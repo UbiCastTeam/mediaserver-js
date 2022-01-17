@@ -28,9 +28,9 @@ function MSBrowserChannels (options) {
 }
 
 MSBrowserChannels.prototype.getMenuJq = function () {
-    let html = '';
-    html += '<div id="ms_browser_channels_menu" style="display: none;">';
-    html += '</div>';
+    const html = '' +
+        '<div id="ms_browser_channels_menu" style="display: none;">' +
+        '</div>';
     this.$menu = $(html);
     return this.$menu;
 };
@@ -40,13 +40,13 @@ MSBrowserChannels.prototype.getContentJq = function () {
     if (this.browser.treeManager) {
         html += '' +
             '<div class="ms-browser-tree-place ms-channels-tree">' +
-                '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translate('Loading...') + '</div>' +
+                '<div><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translateHTML('Loading...') + '</div>' +
             '</div>';
     }
     html += '' +
             '<div class="ms-browser-channels-body">' +
                 '<div class="ms-browser-channels-place">' +
-                    '<div class="messages"><div class="message info">' + jsu.translate('Select a channel to display its content.') + '</div></div>' +
+                    '<div class="messages"><div class="message info">' + jsu.translateHTML('Select a channel to display its content.') + '</div></div>' +
                 '</div>' +
                 this.browser.getMoreButton() +
             '</div>' +
@@ -62,23 +62,23 @@ MSBrowserChannels.prototype.refreshTitle = function () {
     }
     const item = this.lastResponse ? this.lastResponse.info : undefined;
     if (item && item.oid != '0') {
-        let html = '<span class="item-entry-preview"><img src="' + item.thumb + '" alt="' + jsu.escapeHTML(item.title) + '"/></span>';
+        let html = '<span class="item-entry-preview"><img src="' + jsu.escapeAttribute(item.thumb) + '" alt="' + jsu.escapeHTML(item.title) + '"/></span>';
         html += '<span class="channel-titles-place">';
         const parentTitle = item.parent_oid && item.parent_oid != '0' ? item.parent_title : jsu.translate('Root');
         if (!this.browser.useOverlay && parentTitle && (!this.browser.hideHeader || !this.browser.initialState || !this.browser.initialState.channelSlug || this.browser.initialState.channelSlug != item.slug)) {
             // If header is disabled, do not display parent link of first opened channel to prevent navigation on whole catalog
-            html += '<a class="parent-channel-title" href="#' + (item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + item.parent_language + '"' : '') + '>' + jsu.escapeHTML(parentTitle) + '</a><wbr/>';
+            html += '<a class="parent-channel-title" href="#' + jsu.escapeAttribute(item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + jsu.escapeAttribute(item.parent_language) + '"' : '') + '>' + jsu.escapeHTML(parentTitle) + '</a><wbr/>';
         }
-        html += '<span class="channel-title"' + (item.language ? 'lang="' + item.language + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
+        html += '<span class="channel-title"' + (item.language ? 'lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
         html += '</span>';
         if (this.browser.currentSelection && this.browser.currentSelection.oid == item.oid) {
             html = '<span class="selected">' + html + '</span>';
         }
         this.browser.setTitle(item.title, html);
     } else if (this.browser.ltiMode) {
-        this.browser.setTitle(jsu.translate('My channel'));
+        this.browser.setTitle(jsu.translateHTML('My channel'));
     } else {
-        this.browser.setTitle(jsu.translate('Main channels'));
+        this.browser.setTitle(jsu.translateHTML('Main channels'));
     }
 };
 
@@ -189,12 +189,12 @@ MSBrowserChannels.prototype._onChannelError = function (response) {
     let message = '<div class="messages">';
     if (!this.browser.useOverlay && (response.errorCode == '403' || response.errorCode == '401')) {
         const loginUrl = this.browser.urlLogin + '?next=' + window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
-        message += '<div class="item-description">';
-        message += '<div class="message error">' + response.error + '</div>';
-        message += '<p>' + jsu.translate('Please login to access this channel') + '<br /> <a href="' + loginUrl + '">' + jsu.translate('Sign in') + '</a></p>';
-        message += '</div>';
+        message += '<div class="item-description">' +
+            '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>' +
+            '<p>' + jsu.translateHTML('Please login to access this channel') + '<br /> <a href="' + loginUrl + '">' + jsu.translateHTML('Sign in') + '</a></p>' +
+            '</div>';
     } else {
-        message += '<div class="message error">' + response.error + '</div>';
+        message += '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>';
     }
     message += '</div>';
     this.$place.html(message);
@@ -309,7 +309,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 $back.addClass('back').addClass('button-text');
                 $('.navbar .back.button-text').replaceWith($back);
             } else {
-                $back.html('<i class="fa fa-chevron-circle-up" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translate('Parent channel') + '</span>');
+                $back.html('<i class="fa fa-chevron-circle-up" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Parent channel') + '</span>');
                 this.$menu.append($back);
             }
             if (this.browser.pickMode) {
@@ -369,6 +369,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 isEmpty = false;
             }
             if (response.info.short_description) {
+                // short description is a clean html
                 const $desc = $('<div class="channel-description-text">' + response.info.short_description + '</div>');
                 if (response.info.short_description != response.info.description) {
                     $desc.addClass('short-desc');
@@ -395,7 +396,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 }
                 let countDisplay = '<div class="channel-items-count">' + jsu.translate('Channel content:');
                 countDisplay += ' <span>' + jsu.escapeHTML(results.join(', ')) + '</span>';
-                countDisplay += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translate('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translate('Sub channels items are included in counts.') + '</span></button>';
+                countDisplay += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translateAttribute('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translateHTML('Sub channels items are included in counts.') + '</span></button>';
                 countDisplay += '</div>';
                 $currentItemDesc.append(countDisplay);
                 if (!window.uwlb) {

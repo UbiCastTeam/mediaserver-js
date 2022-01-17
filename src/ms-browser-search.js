@@ -14,18 +14,18 @@ function MSBrowserSearch (options) {
     this.order = 'default';
     this.lastResponse = null;
     this.searchInFields = [
-        { name: 'in_title', label: jsu.escapeHTML(jsu.translate('titles')), initial: true, items: null },
-        { name: 'in_description', label: jsu.escapeHTML(jsu.translate('descriptions')), initial: false, items: null },
-        { name: 'in_keywords', label: jsu.escapeHTML(jsu.translate('keywords')), initial: true, items: null },
-        { name: 'in_speaker', label: jsu.escapeHTML(jsu.translate('speakers')), initial: true, items: 'vlp' },
-        { name: 'in_license', label: jsu.escapeHTML(jsu.translate('licenses')), initial: false, items: 'vlp' },
-        { name: 'in_company', label: jsu.escapeHTML(jsu.translate('companies')), initial: false, items: 'vlp' },
-        { name: 'in_location', label: jsu.escapeHTML(jsu.translate('locations')), initial: false, items: 'vlp' },
-        { name: 'in_categories', label: jsu.escapeHTML(jsu.translate('categories')), initial: false, items: 'vlp' },
-        { name: 'in_annotations', label: jsu.escapeHTML(jsu.translate('comments, slides, ...')), initial: false, items: 'vlp' },
-        { name: 'in_photos', label: jsu.escapeHTML(jsu.translate('photos')), initial: false, items: 'p' },
-        { name: 'in_extref', label: jsu.escapeHTML(jsu.translate('external references')), initial: true, items: null },
-        { name: 'in_extdata', label: jsu.escapeHTML(jsu.translate('external data')), initial: false, items: null }
+        { name: 'in_title', label: jsu.translateHTML('titles'), initial: true, items: null },
+        { name: 'in_description', label: jsu.translateHTML('descriptions'), initial: false, items: null },
+        { name: 'in_keywords', label: jsu.translateHTML('keywords'), initial: true, items: null },
+        { name: 'in_speaker', label: jsu.translateHTML('speakers'), initial: true, items: 'vlp' },
+        { name: 'in_license', label: jsu.translateHTML('licenses'), initial: false, items: 'vlp' },
+        { name: 'in_company', label: jsu.translateHTML('companies'), initial: false, items: 'vlp' },
+        { name: 'in_location', label: jsu.translateHTML('locations'), initial: false, items: 'vlp' },
+        { name: 'in_categories', label: jsu.translateHTML('categories'), initial: false, items: 'vlp' },
+        { name: 'in_annotations', label: jsu.translateHTML('comments, slides, ...'), initial: false, items: 'vlp' },
+        { name: 'in_photos', label: jsu.translateHTML('photos'), initial: false, items: 'p' },
+        { name: 'in_extref', label: jsu.translateHTML('external references'), initial: true, items: null },
+        { name: 'in_extdata', label: jsu.translateHTML('external data'), initial: false, items: null }
     ];
     if (options.defaultSearchIn) {
         for (let i = 0; i < this.searchInFields.length; i++) {
@@ -38,10 +38,10 @@ function MSBrowserSearch (options) {
         }
     }
     this.searchForFields = [
-        { name: 'for_channels', label: jsu.escapeHTML(jsu.translate('channels')), initial: true, items: 'c' },
-        { name: 'for_videos', label: jsu.escapeHTML(jsu.translate('videos')), initial: true, items: 'v' },
-        { name: 'for_lives', label: jsu.escapeHTML(jsu.translate('live streams')), initial: true, items: 'l' },
-        { name: 'for_photos', label: jsu.escapeHTML(jsu.translate('photos groups')), initial: true, items: 'p' }
+        { name: 'for_channels', label: jsu.translateHTML('channels'), initial: true, items: 'c' },
+        { name: 'for_videos', label: jsu.translateHTML('videos'), initial: true, items: 'v' },
+        { name: 'for_lives', label: jsu.translateHTML('live streams'), initial: true, items: 'l' },
+        { name: 'for_photos', label: jsu.translateHTML('photos groups'), initial: true, items: 'p' }
     ];
 
     jsu.setObjectAttributes(this, options, [
@@ -73,15 +73,15 @@ MSBrowserSearch.prototype.getMenuJq = function () {
     const dc = this.getDisplayableContent();
     let html = '<div id="ms_browser_search_menu" style="display: none;">' +
         '<form class="ms-browser-search-form" method="get" action="." onsubmit="javascript: return false;">' +
-            '<label for="ms_browser_search_text"><span class="hidden-below-800">' + jsu.translate('Search:') + '</span></label>' +
+            '<label for="ms_browser_search_text"><span class="hidden-below-800">' + jsu.translateHTML('Search:') + '</span></label>' +
             ' <input id="ms_browser_search_text" type="text" value="">' +
-            ' <button type="submit" class="button" id="ms_browser_search_start">' + jsu.translate('Go') + '</button>' +
+            ' <button type="submit" class="button" id="ms_browser_search_start">' + jsu.translateHTML('Go') + '</button>' +
         '</form>' +
         '<div class="ms-browser-dropdown" id="ms_browser_search_in_dropdown">' +
             '<button type="button" aria-controls="ms_browser_search_in_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button ' + this.browser.btnClass + '">' + jsu.translate('Search in') + ' <i class="fa fa-angle-down" aria-hidden="true"></i></button>' +
             '<div class="ms-browser-dropdown-menu ms-browser-search-in" id="ms_browser_search_in_dropdown_menu">' +
-                ' <div><button type="button" class="button" id="ms_browser_search_in_all">' + jsu.translate('all') + '</button>' +
-                ' <button type="button" class="button" id="ms_browser_search_in_none">' + jsu.translate('none') + '</button></div>';
+                ' <div><button type="button" class="button" id="ms_browser_search_in_all">' + jsu.translateHTML('all') + '</button>' +
+                ' <button type="button" class="button" id="ms_browser_search_in_none">' + jsu.translateHTML('none') + '</button></div>';
     for (let i = 0; i < this.searchInFields.length; i++) {
         const field = this.searchInFields[i];
         if (this.shouldBeDisplayed(dc, field.items)) {
@@ -95,10 +95,10 @@ MSBrowserSearch.prototype.getMenuJq = function () {
     if (dc.length > 1) {
         html += '' +
             '<div class="ms-browser-dropdown" id="ms_browser_search_for_dropdown">' +
-                '<button type="button" aria-controls="ms_browser_search_for_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button ' + this.browser.btnClass + '">' + jsu.translate('Search for') + ' <i class="fa fa-angle-down" aria-hidden="true"></i></button>' +
+                '<button type="button" aria-controls="ms_browser_search_for_dropdown_menu" aria-expanded="false" class="button ms-browser-dropdown-button ' + this.browser.btnClass + '">' + jsu.translateHTML('Search for') + ' <i class="fa fa-angle-down" aria-hidden="true"></i></button>' +
                 '<div class="ms-browser-dropdown-menu ms-browser-search-for" id="ms_browser_search_for_dropdown_menu">' +
-                    ' <div><button type="button" class="button" id="ms_browser_search_for_all">' + jsu.translate('all') + '</button>' +
-                    ' <button type="button" class="button" id="ms_browser_search_for_none">' + jsu.translate('none') + '</button></div>';
+                    ' <div><button type="button" class="button" id="ms_browser_search_for_all">' + jsu.translateHTML('all') + '</button>' +
+                    ' <button type="button" class="button" id="ms_browser_search_for_none">' + jsu.translateHTML('none') + '</button></div>';
         for (let i = 0; i < this.searchForFields.length; i++) {
             const field = this.searchForFields[i];
             if (this.shouldBeDisplayed(dc, field.items)) {
@@ -143,7 +143,7 @@ MSBrowserSearch.prototype.getContentJq = function () {
     const html = '' +
         '<div id="ms_browser_search" class="ms-browser-content" style="display: none;">' +
             '<div class="ms-browser-search-place">' +
-                '<div class="messages"><div class="message info">' + jsu.translate('Use the input above to search for something.') + '</div></div>' +
+                '<div class="messages"><div class="message info">' + jsu.translateHTML('Use the input above to search for something.') + '</div></div>' +
             '</div>' +
             this.browser.getMoreButton() +
         '</div>';
@@ -306,10 +306,10 @@ MSBrowserSearch.prototype._onAjaxError = function (response) {
     let message = '<div class="messages">';
     if (!this.browser.useOverlay && (response.errorCode == '403' || response.errorCode == '401')) {
         const loginUrl = this.browser.urlLogin + '?next=' + window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
-        message += '<div class="item-description">';
-        message += '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>';
-        message += '<p>' + jsu.translate('Please login to access this page') + '<br /> <a href="' + loginUrl + '">' + jsu.translate('Sign in') + '</a></p>';
-        message += '</div>';
+        message += '<div class="item-description">' +
+            '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>' +
+            '<p>' + jsu.translateHTML('Please login to access this page') + '<br /> <a href="' + loginUrl + '">' + jsu.translate('Sign in') + '</a></p>' +
+            '</div>';
     } else {
         message += '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>';
     }
@@ -351,11 +351,11 @@ MSBrowserSearch.prototype._onAjaxResponse = function (response) {
         if (nbPhotosGroups > 0) {
             results.push(nbPhotosGroups + ' ' + jsu.translate('photos group(s)'));
         }
-        const text = '<div class="ms-browser-search-matching"><b>' + jsu.translate('Matching items:') + '</b> ' + jsu.escapeHTML(results.join(', ')) + '</div>';
+        const text = '<div class="ms-browser-search-matching"><b>' + jsu.translateHTML('Matching items:') + '</b> ' + jsu.escapeHTML(results.join(', ')) + '</div>';
         this.$place.append(text);
         this.browser.displayContent(this.$place, response, null, 'search');
     } else {
-        this.$place.html('<div class="messages"><div class="message info">' + jsu.translate('No results.') + '</div></div>');
+        this.$place.html('<div class="messages"><div class="message info">' + jsu.translateHTML('No results.') + '</div></div>');
     }
 };
 

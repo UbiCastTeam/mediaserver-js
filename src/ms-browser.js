@@ -272,7 +272,6 @@ MSBrowser.prototype.open = function () {
     }
     this.init();
     this.overlay.show({
-        mode: 'html',
         title: this.title,
         html: this.$widget
     });
