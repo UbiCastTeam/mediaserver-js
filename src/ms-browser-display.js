@@ -870,7 +870,7 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
     } else {
         if (itemType == 'current') {
             if (item.can_see_stats) {
-                html += '<button type="button" title="' + jsu.translateAttribute('Statistics') + '" class="' + this.btnClass + ' button default item-entry-pick-stats-media"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Statistics') + '</span></button>';
+                html += '<button type="button" title="' + jsu.translateAttribute('Statistics') + '" class="' + this.btnClass + ' button default item-entry-pick-stats-media"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span class="hidden-below-1280">' + jsu.translateHTML('Statistics') + '</span></button>';
             }
             if (item.can_edit) {
                 html += '<a title="' + jsu.translateAttribute('Edit') + '" class="' + this.btnClass + ' button default item-entry-pick item-entry-pick-edit-media" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Edit') + '</span></a>';
