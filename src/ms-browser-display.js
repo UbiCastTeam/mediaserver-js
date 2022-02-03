@@ -658,6 +658,13 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
     if (item.thumb) {
         imagePreview += '<img src="' + jsu.escapeAttribute(item.thumb) + '" alt=""' + (item.language ? ' lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '/>';
     }
+    if (item.language) {
+        if (item.icon_lang) {
+            imagePreview += '<i aria-hidden="true" class="icon-lang ' + item.icon_lang + '"></i>';
+        } else {
+            imagePreview += '<span class="text-lang" aria-hidden="true">' + item.language + '</span>';
+        }
+    }
     if (!this.pickMode && itemType != 'channel') {
         imagePreview += '<b class="item-entry-preview-play"><i class="fa fa-play fa-4x" aria-hidden="true"></i></b>';
     }
