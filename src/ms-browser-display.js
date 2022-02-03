@@ -658,13 +658,6 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
     if (item.thumb) {
         imagePreview += '<img src="' + jsu.escapeAttribute(item.thumb) + '" alt=""' + (item.language ? ' lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '/>';
     }
-    if (item.language) {
-        if (item.icon_lang) {
-            imagePreview += '<i aria-hidden="true" class="icon-lang ' + item.icon_lang + '"></i>';
-        } else {
-            imagePreview += '<span class="text-lang" aria-hidden="true">' + item.language + '</span>';
-        }
-    }
     if (!this.pickMode && itemType != 'channel') {
         imagePreview += '<b class="item-entry-preview-play"><i class="fa fa-play fa-4x" aria-hidden="true"></i></b>';
     }
@@ -737,7 +730,8 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
     }
     // duration
     if (item.duration) {
-        topBar += '<span class="item-entry-duration">' + jsu.escapeHTML(item.duration) + '</span>';
+        const langHtml = this.getLangHTML(item);
+        topBar += '<span class="item-entry-duration">' + jsu.escapeHTML(item.duration) + langHtml + '</span>';
     }
     // title
     if (!this.displayAsThumbnails) {
@@ -824,6 +818,15 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         html += '</span>';
     }
     return html;
+};
+MSBrowser.prototype.getLangHTML = function (item) {
+    if (item.language) {
+        if (item.icon_lang) {
+            return '<i aria-hidden="true" class="icon-lang ' + item.icon_lang + '"></i>';
+        } else {
+            return '<i class="text-lang" aria-hidden="true">[' + item.language + ']</i>';
+        }
+    }
 };
 MSBrowser.prototype._setOnClickEntryBlock = function ($entryBlock, oid, itemType, item, selectable) {
     if (this.pickMode) {

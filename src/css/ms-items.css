@@ -55,18 +55,10 @@
     display: inline-block;
     vertical-align: middle;
 }
-.ms-items .item-entry-preview .icon-lang,
-.ms-items .item-entry-preview .text-lang {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-.ms-items .item-entry-preview .icon-lang {
-    border: 1px solid #EEE;
-}
-.ms-items .item-entry-preview .text-lang {
-    padding: 1px;
-    background: #EEE;
+.ms-items .icon-lang,
+.ms-items .text-lang {
+    margin-left: 6px;
+    font-style: normal;
 }
 .ms-items .item-entry-preview .item-entry-preview-aligner {
     margin-left: -1px;
