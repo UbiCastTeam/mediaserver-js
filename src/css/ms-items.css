@@ -55,11 +55,6 @@
     display: inline-block;
     vertical-align: middle;
 }
-.ms-items .icon-lang,
-.ms-items .text-lang {
-    margin-left: 6px;
-    font-style: normal;
-}
 .ms-items .item-entry-preview .item-entry-preview-aligner {
     margin-left: -1px;
     width: 1px;
@@ -100,11 +95,20 @@
     font-weight: 600;
     padding: 5px 0;
 }
-.ms-items .item-entry-duration {
+.ms-items .item-entry-duration,
+.ms-items .item-entry-language {
     display: block;
     float: right;
+}
+.ms-items .item-entry-duration {
     margin-left: 10px;
     color: #666;
+}
+.ms-items .item-entry-language i {
+    font-style: normal;
+}
+.ms-items .thumbnail .item-entry-language {
+    padding: 5px;
 }
 .ms-items .item-entry-layout,
 .ms-items .item-entry-unlisted,
