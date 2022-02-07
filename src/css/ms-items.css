@@ -99,8 +99,6 @@
 .ms-items .item-entry-language {
     display: block;
     float: right;
-}
-.ms-items .item-entry-duration {
     margin-left: 10px;
     color: #666;
 }
@@ -108,6 +106,7 @@
     font-style: normal;
 }
 .ms-items .thumbnail .item-entry-language {
+    margin-left: 0;
     padding: 5px;
 }
 .ms-items .item-entry-layout,
