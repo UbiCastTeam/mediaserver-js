@@ -732,6 +732,11 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
     if (item.duration) {
         topBar += '<span class="item-entry-duration">' + jsu.escapeHTML(item.duration) + '</span>';
     }
+    if (item.language) {
+        const langHtml = this.getLangHTML(item);
+        topBar += '<span class="item-entry-language">' + langHtml + '</span>';
+    }
+
     // title
     if (!this.displayAsThumbnails) {
         topBar += '<span class="item-entry-title"' + (item.language ? ' lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
@@ -817,6 +822,15 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         html += '</span>';
     }
     return html;
+};
+MSBrowser.prototype.getLangHTML = function (item) {
+    if (item.language) {
+        if (item.icon_lang) {
+            return '<i aria-hidden="true" class="icon-lang ' + item.icon_lang + '"></i>';
+        } else {
+            return '<i class="text-lang" aria-hidden="true">[' + item.language + ']</i>';
+        }
+    }
 };
 MSBrowser.prototype._setOnClickEntryBlock = function ($entryBlock, oid, itemType, item, selectable) {
     if (this.pickMode) {

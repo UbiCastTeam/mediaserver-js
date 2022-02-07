@@ -95,11 +95,19 @@
     font-weight: 600;
     padding: 5px 0;
 }
-.ms-items .item-entry-duration {
+.ms-items .item-entry-duration,
+.ms-items .item-entry-language {
     display: block;
     float: right;
     margin-left: 10px;
     color: #666;
+}
+.ms-items .item-entry-language i {
+    font-style: normal;
+}
+.ms-items .thumbnail .item-entry-language {
+    margin-left: 0;
+    padding: 5px;
 }
 .ms-items .item-entry-layout,
 .ms-items .item-entry-unlisted,
