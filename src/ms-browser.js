@@ -48,6 +48,7 @@ function MSBrowser (options) {
     this.displayed = 'channels';
     this.currentSelection = null;
     this.siteSettingsCategories = [];
+    this.catalogFieldsToDisplay = [];
 
     this.urlLogin = '/login/';
     this.urlChannels = '/channels/';
@@ -83,7 +84,8 @@ function MSBrowser (options) {
         'treeManager',
         'displayTypesIcons',
         'displayItunesRss',
-        'defaultSearchIn'
+        'defaultSearchIn',
+        'catalogFieldsToDisplay'
     ]);
 
     if (!this.msapi) {
