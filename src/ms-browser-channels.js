@@ -416,7 +416,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 }
                 isEmpty = false;
             }
-            if (response.info.display_rss_links) {
+            if (this.browser.couldDisplay('rss_links') && response.info.display_rss_links) {
                 let rss = '<div class="channel-description-rss"> ';
                 if (this.displayItunesRss) {
                     rss += ' <span class="inline-block">' + jsu.translate('Subscribe to channel videos RSS:') + '</span>';
