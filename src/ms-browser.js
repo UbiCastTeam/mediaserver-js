@@ -48,7 +48,7 @@ function MSBrowser (options) {
     this.displayed = 'channels';
     this.currentSelection = null;
     this.siteSettingsCategories = [];
-    this.catalogFieldsToDisplay = ['duration', 'description', 'language', 'creation_date', 'views', 'annotations', 'storage', 'rss_links', 'channel_content', 'add_date', 'type', 'parent', ];
+    this.catalogFieldsToDisplay = ['duration', 'description', 'language', 'creation_date', 'views', 'annotations', 'storage', 'rss_links', 'channel_content', 'add_date', 'type', 'parent'];
 
     this.urlLogin = '/login/';
     this.urlChannels = '/channels/';
