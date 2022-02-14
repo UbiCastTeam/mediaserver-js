@@ -759,6 +759,15 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         if (this.couldDisplay('description') && item.short_description) {
             bottomBar += '<span class="item-entry-description">' + jsu.escapeHTML($('<span>' + item.short_description + '</span>').text()) + '</span>';
         }
+        if (this.couldDisplay('license') && item.license) {
+            bottomBar += '<span class="item-entry-license">' + jsu.translateHTML('License:') + ' ' + jsu.escapeHTML(item.license) + '</span>';
+        }
+        if (this.couldDisplay('speaker') && item.speaker) {
+            bottomBar += '<span class="item-entry-speaker">' + jsu.translateHTML('Speaker:') + ' ' + jsu.escapeHTML(item.speaker) + '</span>';
+        }
+        if (this.couldDisplay('company') && item.company) {
+            bottomBar += '<span class="item-entry-company">' + jsu.translateHTML('Company:') + ' ' + jsu.escapeHTML(item.company) + '</span>';
+        }
         if (this.couldDisplay('views') && item.views) {
             bottomBar += '<span class="item-entry-views">' + item.views + ' ' + jsu.translate('views');
             if (item.views_last_month) {
