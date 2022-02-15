@@ -350,14 +350,14 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
             let storageDisplay = response.info.can_edit ? this.browser.msapi.getStorageDisplay(response.info) : '';
             if (response.info.views || response.info.comments) {
                 let annoAndViews = '<div class="' + (response.info.short_description || response.info.display_rss_links || storageDisplay ? 'right' : 'align-right') + ' channel-description-stats">';
-                if (response.info.views) {
+                if (this.browser.couldDisplay('views') && response.info.views) {
                     annoAndViews += '<span class="inline-block">' + response.info.views + ' ' + jsu.translate('views');
                     if (response.info.views_last_month) {
                         annoAndViews += ', ' + response.info.views_last_month + ' ' + jsu.translate('this month');
                     }
                     annoAndViews += '</span>';
                 }
-                if (response.info.comments) {
+                if (this.browser.couldDisplay('annotations') && response.info.comments) {
                     annoAndViews += ' <span class="inline-block">' + response.info.comments + ' ' + jsu.translate('annotations');
                     if (response.info.comments_last_month) {
                         annoAndViews += ', ' + response.info.comments_last_month + ' ' + jsu.translate('this month');
@@ -368,7 +368,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 $currentItemDesc.append(annoAndViews);
                 isEmpty = false;
             }
-            if (response.info.short_description) {
+            if (this.browser.couldDisplay('description') && response.info.short_description) {
                 // short description is a clean html
                 const $desc = $('<div class="channel-description-text">' + response.info.short_description + '</div>');
                 if (response.info.short_description != response.info.description) {
@@ -380,7 +380,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 $currentItemDesc.append($desc);
                 isEmpty = false;
             }
-            if (response.info.items_count) {
+            if (this.browser.couldDisplay('channel_content') && response.info.items_count) {
                 const results = [];
                 if (response.info.channels_count) {
                     results.push(response.info.channels_count + ' ' + jsu.translate('channel(s)'));
@@ -406,7 +406,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 }
                 isEmpty = false;
             }
-            if (storageDisplay) {
+            if (this.browser.couldDisplay('storage') && storageDisplay) {
                 storageDisplay = '<div class="channel-storage-usage">' + jsu.translate('Storage usage:') + ' ' + storageDisplay + '</div>';
                 $currentItemDesc.append(storageDisplay);
                 if (!window.uwlb) {
@@ -416,7 +416,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 }
                 isEmpty = false;
             }
-            if (response.info.display_rss_links) {
+            if (this.browser.couldDisplay('rss_links') && response.info.display_rss_links) {
                 let rss = '<div class="channel-description-rss"> ';
                 if (this.displayItunesRss) {
                     rss += ' <span class="inline-block">' + jsu.translate('Subscribe to channel videos RSS:') + '</span>';

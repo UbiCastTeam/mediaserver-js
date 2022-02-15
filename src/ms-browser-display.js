@@ -637,6 +637,9 @@ MSBrowser.prototype.getContentEntry = function (itemType, item, gselectable, tab
     });
     return $entry;
 };
+MSBrowser.prototype.couldDisplay = function (type) {
+    return this.catalogFieldsToDisplay.indexOf(type) !== -1;
+};
 MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, tab) {
     let markup = 'span';
     let href = '';
@@ -729,10 +732,10 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         }
     }
     // duration
-    if (item.duration) {
+    if (this.couldDisplay('duration') && item.duration) {
         topBar += '<span class="item-entry-duration">' + jsu.escapeHTML(item.duration) + '</span>';
     }
-    if (item.language) {
+    if (this.couldDisplay('language') && item.language) {
         const langHtml = this.getLangHTML(item);
         topBar += '<span class="item-entry-language">' + langHtml + '</span>';
     }
@@ -749,34 +752,45 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
     if (this.displayAsThumbnails) {
         bottomBar += '<span class="item-entry-title"' + (item.language ? ' lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
     } else {
-        if (item.creation) {
+        if (this.couldDisplay('creation_date') && item.creation) {
             bottomBar += '<span class="item-entry-date">' + jsu.translateHTML('Created on') + ' ' +
                         jsu.getDateDisplay(item.creation) + '</span>';
         }
-        if (item.short_description) {
+        if (this.couldDisplay('description') && item.short_description) {
             bottomBar += '<span class="item-entry-description">' + jsu.escapeHTML($('<span>' + item.short_description + '</span>').text()) + '</span>';
         }
-        if (item.views) {
+        if (this.couldDisplay('license') && item.license) {
+            bottomBar += '<span class="item-entry-license">' + jsu.translateHTML('License:') + ' ' + jsu.escapeHTML(item.license) + '</span>';
+        }
+        if (this.couldDisplay('speaker') && item.speaker) {
+            bottomBar += '<span class="item-entry-speaker">' + jsu.translateHTML('Speaker:') + ' ' + jsu.escapeHTML(item.speaker) + '</span>';
+        }
+        if (this.couldDisplay('company') && item.company) {
+            bottomBar += '<span class="item-entry-company">' + jsu.translateHTML('Company:') + ' ' + jsu.escapeHTML(item.company) + '</span>';
+        }
+        if (this.couldDisplay('views') && item.views) {
             bottomBar += '<span class="item-entry-views">' + item.views + ' ' + jsu.translate('views');
             if (item.views_last_month) {
                 bottomBar += ', ' + item.views_last_month + ' ' + jsu.translate('this month');
             }
             bottomBar += '</span>';
         }
-        if (item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
+        if (this.couldDisplay('storage') && item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
             const storageDisplay = this.msapi.getStorageMinimalDisplay(item);
             if (storageDisplay) {
                 bottomBar += '<span class="item-entry-storage">' + jsu.translate('Storage usage:') + ' ' + storageDisplay + '</span>';
             }
         }
         if (tab == 'latest') {
-            bottomBar += '<span class="item-entry-type">' + jsu.translateHTML('Type:') + ' ' +
+            if (this.couldDisplay('type')) {
+                bottomBar += '<span class="item-entry-type">' + jsu.translateHTML('Type:') + ' ' +
                             jsu.translateHTML(itemType) + '</span>';
-            if (item.add_date) {
+            }
+            if (this.couldDisplay('add_date') && item.add_date) {
                 bottomBar += '<span class="item-entry-date">' + jsu.translateHTML('Added on') + ' ' +
                                 jsu.getDateDisplay(item.add_date) + '</span>';
             }
-            if (item.parent_title) {
+            if (this.couldDisplay('parent') && item.parent_title) {
                 bottomBar += '<span class="item-entry-parent">' + jsu.translateHTML('Parent channel:') + ' ' +
                                 jsu.escapeHTML(item.parent_title) + '</span>';
             }
@@ -1090,44 +1104,53 @@ MSBrowser.prototype._getThumbnailInfoBoxHtml = function (item, itemType, selecta
     }
     html += '<table class="overlay-info-table">';
     html += '<caption class="sr-only">' + jsu.translateHTML('Media information') + '</caption>';
-    if (item.creation && itemType == 'video') {
+    if (this.couldDisplay('creation_date') && item.creation && itemType == 'video') {
         html += '<tr>';
         html += '<th scope="row" class="overlay-info-label">' + jsu.translateHTML('Recording date') + ' :</th>';
         html += '<td>' + jsu.getDateDisplay(item.creation) + '</td>';
         html += '</tr>';
     }
-    if (item.add_date) {
+    if (this.couldDisplay('add_date') && item.add_date) {
         html += '<tr>';
         html += '<th scope="row" class="overlay-info-label">' + jsu.translateHTML('Publishing date') + ' :</th>';
         html += '<td>' + jsu.getDateDisplay(item.add_date) + '</td>';
         html += '</tr>';
     }
-    if (item.duration) {
+    if (this.couldDisplay('duration') && item.duration) {
         html += '<tr>';
         html += '<th scope="row" class="overlay-info-label">' + jsu.translateHTML('Duration') + ' :</th>';
         html += '<td>' + jsu.escapeHTML(item.duration) + '</td>';
         html += '</tr>';
     }
-    if (item.views_last_month) {
+    if (this.couldDisplay('views') && item.views_last_month) {
         html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Views last month') + ' :</th><td>' + item.views_last_month + '</td></tr>';
     }
-    if (item.views) {
+    if (this.couldDisplay('views') && item.views) {
         html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Views') + ' :</th><td>' + item.views + '</td></tr>';
     }
-    if (item.comments_last_month) {
+    if (this.couldDisplay('annotations') && item.comments_last_month) {
         html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Annotations last month') + ' :</th><td>' + item.comments_last_month + '</td></tr>';
     }
-    if (item.comments) {
+    if (this.couldDisplay('annotations') && item.comments) {
         html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Annotations') + ' :</th><td>' + item.comments + '</td></tr>';
     }
-    if (item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
+    if (this.couldDisplay('storage') && item.can_edit && item.storage_used !== null && item.storage_used !== undefined) {
         const storageDisplay = this.msapi.getStorageMinimalDisplay(item);
         if (storageDisplay) {
             html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Storage usage') + ' :</th><td>' + storageDisplay + '</td></tr>';
         }
     }
+    if (this.couldDisplay('license') && item.license) {
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('License') + ' :</th><td>' + jsu.escapeHTML(item.license) + '</td></tr>';
+    }
+    if (this.couldDisplay('speaker') && item.speaker) {
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Speaker') + ' :</th><td>' + jsu.escapeHTML(item.speaker) + '</td></tr>';
+    }
+    if (this.couldDisplay('company') && item.company) {
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Company') + ' :</th><td>' + jsu.escapeHTML(item.company) + '</td></tr>';
+    }
     html += '</table>';
-    if (item.short_description) {
+    if (this.couldDisplay('description') && item.short_description) {
         html += '<hr/>';
         html += '<p>' + jsu.escapeHTML($('<span>' + item.short_description + '</span>').text()) + '</p>';
     }
