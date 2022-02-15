@@ -1140,6 +1140,15 @@ MSBrowser.prototype._getThumbnailInfoBoxHtml = function (item, itemType, selecta
             html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Storage usage') + ' :</th><td>' + storageDisplay + '</td></tr>';
         }
     }
+    if (this.couldDisplay('license') && item.license) {
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('License') + ' :</th><td>' + jsu.escapeHTML(item.license) + '</td></tr>';
+    }
+    if (this.couldDisplay('speaker') && item.speaker) {
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Speaker') + ' :</th><td>' + jsu.escapeHTML(item.speaker) + '</td></tr>';
+    }
+    if (this.couldDisplay('company') && item.company) {
+        html += '<tr><th scope="row" class="overlay-info-label">' + jsu.translateHTML('Company') + ' :</th><td>' + jsu.escapeHTML(item.company) + '</td></tr>';
+    }
     html += '</table>';
     if (this.couldDisplay('description') && item.short_description) {
         html += '<hr/>';
