@@ -14,6 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: ../src\n"
 "X-Poedit-KeywordsList: ;translate:1;translateHTML:1;translateAttribute:1;translate:1,2c;translateHTML:1,2c;translateAttribute:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Flags-xgettext: --no-wrap\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: extra-translations/item-types.js:7
