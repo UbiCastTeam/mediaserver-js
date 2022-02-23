@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 16:29+0100\n"
-"PO-Revision-Date: 2021-12-14 11:05+0100\n"
+"PO-Revision-Date: 2022-02-23 16:32+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -99,13 +99,12 @@ msgid "Click to select this media"
 msgstr "Cliquez pour sélectionner ce média"
 
 #: ms-browser-display.js:1150
-#, fuzzy
 msgid "Company"
-msgstr "sociétés"
+msgstr "Société"
 
 #: ms-browser-display.js:769
 msgid "Company:"
-msgstr ""
+msgstr "Société :"
 
 #: ms-browser-latest.js:41
 msgid "Content types"
@@ -205,14 +204,12 @@ msgid "Latest content added"
 msgstr "Contenu récemment ajouté"
 
 #: ms-browser-display.js:1144
-#, fuzzy
 msgid "License"
-msgstr "licences"
+msgstr "License"
 
 #: ms-browser-display.js:763
-#, fuzzy
 msgid "License:"
-msgstr "licences"
+msgstr "Licence :"
 
 #: ms-browser-display.js:544
 msgid "Live streams"
@@ -425,9 +422,8 @@ msgid "Sort by:"
 msgstr "Trier par :"
 
 #: ms-browser-display.js:1147
-#, fuzzy
 msgid "Speaker"
-msgstr "Intervenant :"
+msgstr "Intervenant"
 
 #: ms-browser-display.js:161 ms-browser-display.js:766
 msgid "Speaker:"

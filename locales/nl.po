@@ -1,3 +1,4 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
@@ -13,10 +14,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Basepath: ../src\n"
-"X-Poedit-KeywordsList: ;translate:1;translateHTML:1;translateAttribute:1;translate:1,2c;translateHTML:1,2c;translateAttribute:1,2c\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Flags-xgettext: --no-wrap\n"
+"X-Poedit-KeywordsList: ;translate:1;translateHTML:1;translateAttribute:1;translate:1,2c;translateHTML:1,2c;translateAttribute:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: ms-api.js:16
 msgid "Access denied."
@@ -98,14 +99,15 @@ msgstr "Kanalen"
 msgid "Click to select this media"
 msgstr "Klik om deze media te selecteren"
 
+# Translated by DeepL.
 #: ms-browser-display.js:1150
-#, fuzzy
 msgid "Company"
-msgstr "bedrijven"
+msgstr "Bedrijf"
 
+# Translated by DeepL.
 #: ms-browser-display.js:769
 msgid "Company:"
-msgstr ""
+msgstr "Bedrijf:"
 
 #: ms-browser-latest.js:41
 msgid "Content types"
@@ -155,8 +157,7 @@ msgstr "Nog {count} items weergeven"
 msgid "Duration"
 msgstr "Duur"
 
-#: ms-browser-display.js:618 ms-browser-display.js:904
-#: ms-browser-display.js:935
+#: ms-browser-display.js:618 ms-browser-display.js:904 ms-browser-display.js:935
 msgid "Edit"
 msgstr "Bewerken"
 
@@ -204,15 +205,15 @@ msgstr "Nieuwste inhoud"
 msgid "Latest content added"
 msgstr "Laatste inhoud toegevoegd"
 
+# Translated by DeepL.
 #: ms-browser-display.js:1144
-#, fuzzy
 msgid "License"
-msgstr "licenties"
+msgstr "Licentie"
 
+# Translated by DeepL.
 #: ms-browser-display.js:763
-#, fuzzy
 msgid "License:"
-msgstr "licenties"
+msgstr "Licentie:"
 
 #: ms-browser-display.js:544
 msgid "Live streams"
@@ -258,8 +259,7 @@ msgstr "Media bestaat niet."
 msgid "Media information"
 msgstr "Media-informatie"
 
-#: ms-browser-display.js:17 ms-browser-channels.js:79 ms-tree.js:114
-#: ms-tree.js:433 ms-tree.js:441
+#: ms-browser-display.js:17 ms-browser-channels.js:79 ms-tree.js:114 ms-tree.js:433 ms-tree.js:441
 msgid "My channel"
 msgstr "Mijn kanaal"
 
@@ -311,8 +311,7 @@ msgstr "Ok"
 msgid "Open information panel"
 msgstr "Open informatiepaneel"
 
-#: ms-browser-channels.js:287 ms-browser-channels.js:307
-#: ms-browser-channels.js:308 ms-browser-channels.js:312
+#: ms-browser-channels.js:287 ms-browser-channels.js:307 ms-browser-channels.js:308 ms-browser-channels.js:312
 msgid "Parent channel"
 msgstr "Bovenliggend kanaal"
 
@@ -424,10 +423,10 @@ msgstr "Sommige inhoud kan nog steeds aanwezig zijn op dit kanaal, maar als dit 
 msgid "Sort by:"
 msgstr "Sorteren op:"
 
+# Translated by DeepL.
 #: ms-browser-display.js:1147
-#, fuzzy
 msgid "Speaker"
-msgstr "Spreker:"
+msgstr "Spreker"
 
 #: ms-browser-display.js:161 ms-browser-display.js:766
 msgid "Speaker:"
@@ -733,8 +732,7 @@ msgstr "nee"
 msgid "none"
 msgstr "geen"
 
-#: ms-browser-latest.js:58 extra-translations/item-types.js:10
-#: ms-browser-search.js:26
+#: ms-browser-latest.js:58 extra-translations/item-types.js:10 ms-browser-search.js:26
 msgid "photos"
 msgstr "foto's"
 
@@ -746,13 +744,11 @@ msgstr "fotogroep(en)"
 msgid "photos groups"
 msgstr "fotogroepen"
 
-#: ms-browser-display.js:602 ms-tree.js:89 ms-tree.js:91 ms-tree.js:257
-#: ms-tree.js:392
+#: ms-browser-display.js:602 ms-tree.js:89 ms-tree.js:91 ms-tree.js:257 ms-tree.js:392
 msgid "selected"
 msgstr "geselecteerd"
 
-#: ms-browser-display.js:126 ms-browser-display.js:127
-#: ms-browser-display.js:353 ms-browser-display.js:370
+#: ms-browser-display.js:126 ms-browser-display.js:127 ms-browser-display.js:353 ms-browser-display.js:370
 msgid "selected setting"
 msgstr "geselecteerde instelling"
 
@@ -768,8 +764,7 @@ msgstr "spreker"
 msgid "standard"
 msgstr "standaard"
 
-#: ms-browser-display.js:774 ms-browser-channels.js:356
-#: ms-browser-channels.js:363
+#: ms-browser-display.js:774 ms-browser-channels.js:356 ms-browser-channels.js:363
 msgid "this month"
 msgstr "deze maand"
 
