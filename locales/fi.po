@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
-"POT-Creation-Date: 2021-11-29 17:55+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-23 16:29+0100\n"
 "PO-Revision-Date: 2021-11-29 17:55+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
@@ -17,655 +18,99 @@ msgstr ""
 "X-Poedit-Flags-xgettext: --no-wrap\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: extra-translations/item-types.js:7
-msgid "channel"
-msgstr ""
-
-#: extra-translations/item-types.js:8
-#, fuzzy
-msgid "video"
-msgstr "Valitse kuva videosta"
-
-#: extra-translations/item-types.js:9
-#, fuzzy
-msgid "live"
-msgstr "Livelähetys pysäytetty."
-
-#: extra-translations/item-types.js:10 ms-browser-latest.js:58
-#: ms-browser-search.js:26
-#, fuzzy
-msgid "photos"
-msgstr "Kuvat"
-
-#: extra-translations/jsu-translations.js:7
-#, fuzzy
-msgid "January"
-msgstr "Tammikuu"
-
-#: extra-translations/jsu-translations.js:8
-#, fuzzy
-msgid "February"
-msgstr "Helmikuu"
-
-#: extra-translations/jsu-translations.js:9
-#, fuzzy
-msgid "March"
-msgstr "Maaliskuu"
-
-#: extra-translations/jsu-translations.js:10
-#, fuzzy
-msgid "April"
-msgstr "Huhtikuu"
-
-#: extra-translations/jsu-translations.js:11
-#, fuzzy
-msgid "May"
-msgstr "Toukokuu"
-
-#: extra-translations/jsu-translations.js:12
-#, fuzzy
-msgid "June"
-msgstr "Kesäkuu"
-
-#: extra-translations/jsu-translations.js:13
-#, fuzzy
-msgid "July"
-msgstr "Heinäkuu"
-
-#: extra-translations/jsu-translations.js:14
-#, fuzzy
-msgid "August"
-msgstr "Elokuu"
-
-#: extra-translations/jsu-translations.js:15
-#, fuzzy
-msgid "September"
-msgstr "Syyskuu"
-
-#: extra-translations/jsu-translations.js:16
-#, fuzzy
-msgid "October"
-msgstr "Lokakuu"
-
-#: extra-translations/jsu-translations.js:17
-#, fuzzy
-msgid "November"
-msgstr "Marraskuu"
-
-#: extra-translations/jsu-translations.js:18
-#, fuzzy
-msgid "December"
-msgstr "Joulukuu"
-
-#: extra-translations/jsu-translations.js:19
-msgid "at"
-msgstr ""
-
-#: extra-translations/jsu-translations.js:20 ms-api.js:309 ms-api.js:336
-msgid "B"
-msgstr ""
-
-#: ms-api.js:15
-msgid "You are not logged in or your session has expired. Please login and retry."
-msgstr ""
-
 #: ms-api.js:16
 #, fuzzy
 msgid "Access denied."
 msgstr "Pääsy kielletty."
 
-#: ms-api.js:17
-msgid "Item not found."
+#: ms-browser-display.js:912 ms-browser-display.js:916
+msgid "Add a sub channel"
+msgstr ""
+
+#: ms-browser-display.js:921 ms-browser-display.js:925
+msgid "Add a video"
+msgstr ""
+
+#: ms-browser-display.js:110
+msgid "Add date, ascending"
+msgstr ""
+
+#: ms-browser-display.js:109
+msgid "Add date, descending"
+msgstr ""
+
+#: ms-browser-display.js:790
+#, fuzzy
+msgid "Added on"
+msgstr "Lisätty:"
+
+#: ms-tree.js:193
+#, fuzzy
+msgid "An error occurred during request:"
+msgstr "Tapahtui virhe pyyntöä suoritettaessa"
+
+#: ms-tree.js:185
+msgid "An error occurred in the server. Please try again later."
 msgstr ""
 
 #: ms-api.js:18
 msgid "An internal server error occurred. An email has been sent to the support team."
 msgstr ""
 
-#: ms-api.js:19
-msgid "The connection timed out. Please retry later."
+#: ms-browser-display.js:1135
+msgid "Annotations"
 msgstr ""
 
-#: ms-api.js:20 ms-tree.js:191
-msgid "The server cannot be reached."
+#: ms-browser-display.js:1132
+msgid "Annotations last month"
 msgstr ""
 
-#: ms-api.js:31
-msgid "Unable to get search's results content because you cannot access to this channel."
-msgstr ""
+#: extra-translations/jsu-translations.js:10
+#, fuzzy
+msgid "April"
+msgstr "Huhtikuu"
 
-#: ms-api.js:32 ms-api.js:48 ms-api.js:56 ms-api.js:64 ms-api.js:72
-msgid "Requested channel does not exist."
-msgstr ""
-
-#: ms-api.js:47
-msgid "Unable to get channel content because you cannot access to this channel."
-msgstr ""
-
-#: ms-api.js:55
-msgid "Unable to get channel information because you cannot access to this channel."
-msgstr ""
-
-#: ms-api.js:63 ms-tree.js:181
-msgid "Unable to get channels tree because you cannot access to this channel."
-msgstr ""
-
-#: ms-api.js:71
-msgid "Unable to get channels path because you cannot access to this channel."
-msgstr ""
-
-#: ms-api.js:87
-msgid "Unable to get media information because you cannot access to this media."
-msgstr ""
-
-#: ms-api.js:88 ms-api.js:124
-msgid "Media does not exist."
-msgstr ""
-
-#: ms-api.js:123
-msgid "You are not allowed to perform this action."
-msgstr ""
-
-#: ms-api.js:259 ms-tree.js:294
-msgid "No information about error."
-msgstr ""
-
-#: ms-api.js:277
-msgid "Request failed:"
-msgstr ""
+#: extra-translations/jsu-translations.js:14
+#, fuzzy
+msgid "August"
+msgstr "Elokuu"
 
 #: ms-api.js:354
 msgid "Available space:"
 msgstr ""
 
-#: ms-api.js:356
-msgid "No available space"
+#: extra-translations/jsu-translations.js:20 ms-api.js:309 ms-api.js:336
+msgid "B"
 msgstr ""
 
-#: ms-api.js:358 ms-browser-channels.js:393
-#, fuzzy
-msgid "help"
-msgstr "Apua"
-
-#: ms-api.js:358
-msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
+#: ms-browser-display.js:1268
+msgid "Categories"
 msgstr ""
 
-#: ms-browser-channels.js:42 ms-browser-display.js:49
-#, fuzzy
-msgid "Loading..."
-msgstr "Lataa"
-
-#: ms-browser-channels.js:46
-msgid "Select a channel to display its content."
-msgstr ""
-
-#: ms-browser-channels.js:62 ms-tree.js:89 ms-tree.js:91
-msgid "Root"
-msgstr ""
-
-#: ms-browser-channels.js:74 ms-browser-display.js:17 ms-tree.js:114
-#: ms-tree.js:430 ms-tree.js:438
-msgid "My channel"
-msgstr ""
-
-#: ms-browser-channels.js:76
-msgid "Main channels"
-msgstr ""
-
-#: ms-browser-channels.js:133
-msgid "You are not allowed to have a personal channel."
-msgstr ""
-
-#: ms-browser-channels.js:189
-msgid "Please login to access this channel"
-msgstr ""
-
-#: ms-browser-channels.js:189 ms-browser-latest.js:206 ms-browser-search.js:307
-msgid "Sign in"
-msgstr ""
-
-#: ms-browser-channels.js:282 ms-browser-channels.js:302
-#: ms-browser-channels.js:303 ms-browser-channels.js:307
-msgid "Parent channel"
-msgstr ""
-
-#: ms-browser-channels.js:349 ms-browser-display.js:751
-msgid "views"
-msgstr ""
-
-#: ms-browser-channels.js:351 ms-browser-channels.js:358
-#: ms-browser-display.js:753
-msgid "this month"
-msgstr ""
-
-#: ms-browser-channels.js:356
-msgid "annotations"
-msgstr ""
-
-#: ms-browser-channels.js:380 ms-browser-search.js:334
-msgid "channel(s)"
-msgstr ""
-
-#: ms-browser-channels.js:383 ms-browser-search.js:337
-msgid "video(s)"
-msgstr ""
-
-#: ms-browser-channels.js:386 ms-browser-search.js:340
-msgid "live stream(s)"
-msgstr ""
-
-#: ms-browser-channels.js:389 ms-browser-search.js:343
-msgid "photos group(s)"
-msgstr ""
-
-#: ms-browser-channels.js:391
+#: ms-browser-channels.js:397
 msgid "Channel content:"
 msgstr ""
 
-#: ms-browser-channels.js:393
-msgid "Sub channels items are included in counts."
-msgstr ""
+#: ms-tree.js:183
+#, fuzzy
+msgid "Channel does not exist."
+msgstr "Kanavaa ei ole jota etsit."
 
-#: ms-browser-channels.js:404 ms-browser-display.js:760
-msgid "Storage usage:"
-msgstr ""
-
-#: ms-browser-channels.js:416
-msgid "Subscribe to channel videos RSS:"
-msgstr ""
-
-#: ms-browser-channels.js:418
-msgid "standard"
-msgstr ""
-
-#: ms-browser-channels.js:420
-msgid "iTunes"
-msgstr ""
-
-#: ms-browser-channels.js:422
-msgid "iTunes (audio only)"
-msgstr ""
-
-#: ms-browser-channels.js:425
-msgid "Subscribe to channel videos RSS"
-msgstr ""
-
-#: ms-browser-channels.js:470
-msgid "This channel contains no media."
-msgstr ""
-
-#: ms-browser-channels.js:472
-msgid "This channel contains no sub channels and no media."
-msgstr ""
-
-#: ms-browser-channels.js:474
-msgid "This channel contains no sub channels."
-msgstr ""
-
-#: ms-browser-channels.js:476
-msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
-msgstr ""
-
-#: ms-browser-display.js:18
-msgid "My media"
-msgstr ""
-
-#: ms-browser-display.js:19
-msgid "Search in my media"
-msgstr ""
-
-#: ms-browser-display.js:21 ms-browser-display.js:534
+#: ms-browser-display.js:21 ms-browser-display.js:538
 #, fuzzy
 msgid "Channels"
 msgstr "Videokanava"
 
-#: ms-browser-display.js:22
-msgid "Latest content"
-msgstr ""
-
-#: ms-browser-display.js:23 ms-browser-search.js:152
-#, fuzzy
-msgid "Search"
-msgstr "Haku"
-
-#: ms-browser-display.js:40
-msgid "Display {count} more items"
-msgstr ""
-
-#: ms-browser-display.js:110
-msgid "Use default sorting"
-msgstr ""
-
-#: ms-browser-display.js:111
-msgid "Creation date, descending"
-msgstr ""
-
-#: ms-browser-display.js:112
-msgid "Creation date, ascending"
-msgstr ""
-
-#: ms-browser-display.js:113
-msgid "Add date, descending"
-msgstr ""
-
-#: ms-browser-display.js:114
-msgid "Add date, ascending"
-msgstr ""
-
-#: ms-browser-display.js:115
-msgid "Title, descending"
-msgstr ""
-
-#: ms-browser-display.js:116
-msgid "Title, ascending"
-msgstr ""
-
-#: ms-browser-display.js:117
-msgid "Slug, descending"
-msgstr ""
-
-#: ms-browser-display.js:118
-msgid "Slug, ascending"
-msgstr ""
-
-#: ms-browser-display.js:121
-msgid "Number of views, descending"
-msgstr ""
-
-#: ms-browser-display.js:122
-msgid "Number of views, ascending"
-msgstr ""
-
-#: ms-browser-display.js:126
-#, fuzzy
-msgid "Display"
-msgstr "Näytä widgetit koko sivun tilassa"
-
-#: ms-browser-display.js:130
-msgid "Display mode:"
-msgstr ""
-
-#: ms-browser-display.js:131
-#, fuzzy
-msgid "list"
-msgstr "Vedä ja pudota videokanavalistaa muuttaaksesi järjestystä widgeteissä."
-
-#: ms-browser-display.js:131 ms-browser-display.js:132
-#: ms-browser-display.js:349 ms-browser-display.js:366
-msgid "selected setting"
-msgstr ""
-
-#: ms-browser-display.js:132
-msgid "thumbnails"
-msgstr ""
-
-#: ms-browser-display.js:133
-msgid "Number of items:"
-msgstr ""
-
-#: ms-browser-display.js:140
-msgid "display items type icons"
-msgstr ""
-
-#: ms-browser-display.js:142
-msgid "Sort by:"
-msgstr ""
-
-#: ms-browser-display.js:153
-msgid "unspecified"
-msgstr ""
-
-#: ms-browser-display.js:154
-#, fuzzy
-msgid "yes"
-msgstr "kyllä"
-
-#: ms-browser-display.js:155
-msgid "no"
-msgstr ""
-
-#: ms-browser-display.js:156
-msgid "Filters:"
-msgstr ""
-
-#: ms-browser-display.js:158
-msgid "Editable:"
-msgstr ""
-
-#: ms-browser-display.js:162
-msgid "Published:"
-msgstr ""
-
-#: ms-browser-display.js:166
-#, fuzzy
-msgid "Speaker:"
-msgstr "Puhuja-asetukset"
-
-#: ms-browser-display.js:168
-#, fuzzy
-msgid "Ok"
-msgstr "OK"
-
-#: ms-browser-display.js:411
-msgid "selected tab"
-msgstr ""
-
-#: ms-browser-display.js:536
-msgid "Sub channels"
-msgstr ""
-
-#: ms-browser-display.js:540
-#, fuzzy
-msgid "Live streams"
-msgstr "LIVE lähetykset"
-
-#: ms-browser-display.js:543
-#, fuzzy
-msgid "Videos"
-msgstr "Videot"
-
-#: ms-browser-display.js:546
-#, fuzzy
-msgid "Photos groups"
-msgstr "Kuvagalleriat"
-
-#: ms-browser-display.js:598 ms-tree.js:89 ms-tree.js:91 ms-tree.js:255
-#: ms-tree.js:389
-#, fuzzy
-msgid "selected"
-msgstr "Valittu videokanava on se, joka valitaan ensin."
-
-#: ms-browser-display.js:612
-msgid "Open information panel"
-msgstr ""
-
-#: ms-browser-display.js:614 ms-browser-display.js:872
-#: ms-browser-display.js:903
-#, fuzzy
-msgid "Edit"
-msgstr "Muokata"
-
-#: ms-browser-display.js:649
+#: ms-browser-display.js:656
 msgid "Click to select this media"
 msgstr ""
 
-#: ms-browser-display.js:671
-msgid "This item is a channel"
+#: ms-browser-display.js:1150
+msgid "Company"
 msgstr ""
 
-#: ms-browser-display.js:675
-msgid "This item is a photos group"
-msgstr ""
-
-#: ms-browser-display.js:684
-msgid "This item is a live stream"
-msgstr ""
-
-#: ms-browser-display.js:684
-msgid "This item is a video"
-msgstr ""
-
-#: ms-browser-display.js:687
-msgid "dynamic Rich Media"
-msgstr ""
-
-#: ms-browser-display.js:689
-msgid "classic Rich Media"
-msgstr ""
-
-#: ms-browser-display.js:703 ms-browser-display.js:704
-msgid "This channel is unlisted"
-msgstr ""
-
-#: ms-browser-display.js:709 ms-browser-display.js:710
-msgid "This media is not published"
-msgstr ""
-
-#: ms-browser-display.js:713 ms-browser-display.js:714
-msgid "This media is published and unlisted"
-msgstr ""
-
-#: ms-browser-display.js:717 ms-browser-display.js:718
-msgid "This media is published"
-msgstr ""
-
-#: ms-browser-display.js:722 ms-browser-display.js:723
-msgid "This video is not ready"
-msgstr ""
-
-#: ms-browser-display.js:744
-#, fuzzy
-msgid "Created on"
-msgstr "Tilisi on luotu."
-
-#: ms-browser-display.js:764
-#, fuzzy
-msgid "Type:"
-msgstr "Sinun täytyy valita kysymyksen tyyppi."
-
-#: ms-browser-display.js:767
-#, fuzzy
-msgid "Added on"
-msgstr "Lisätty:"
-
-#: ms-browser-display.js:771
-msgid "Parent channel:"
-msgstr ""
-
-#: ms-browser-display.js:788 ms-browser-display.js:1044
-msgid "Matching annotations:"
-msgstr ""
-
-#: ms-browser-display.js:801 ms-browser-display.js:1058
-msgid "Matching photos:"
-msgstr ""
-
-#: ms-browser-display.js:853
-msgid "This channel is selected"
-msgstr ""
-
-#: ms-browser-display.js:855
-#, fuzzy
-msgid "Select this channel"
-msgstr "Valitse kanava"
-
-#: ms-browser-display.js:859
-msgid "This media is selected"
-msgstr ""
-
-#: ms-browser-display.js:861
-msgid "Select this media"
-msgstr ""
-
-#: ms-browser-display.js:869
-#, fuzzy
-msgid "Statistics"
-msgstr "Tilastot "
-
-#: ms-browser-display.js:874 ms-browser-display.js:906
-#, fuzzy
-msgid "Delete"
-msgstr "Poistaa"
-
-#: ms-browser-display.js:880 ms-browser-display.js:884
-msgid "Add a sub channel"
-msgstr ""
-
-#: ms-browser-display.js:889 ms-browser-display.js:893
-msgid "Add a video"
-msgstr ""
-
-#: ms-browser-display.js:897
-msgid "Copy LTI link"
-msgstr ""
-
-#: ms-browser-display.js:900
-msgid "See"
-msgstr ""
-
-#: ms-browser-display.js:950
-msgid "copied"
-msgstr ""
-
-#: ms-browser-display.js:950
-msgid "cannot copy"
-msgstr ""
-
-#: ms-browser-display.js:953
-msgid "failed to copy"
-msgstr ""
-
-#: ms-browser-display.js:1038
-msgid "Hide this window"
-msgstr ""
-
-#: ms-browser-display.js:1074
-msgid "Media information"
-msgstr ""
-
-#: ms-browser-display.js:1077
-msgid "Recording date"
-msgstr ""
-
-#: ms-browser-display.js:1083
-msgid "Publishing date"
-msgstr ""
-
-#: ms-browser-display.js:1089
-msgid "Duration"
-msgstr ""
-
-#: ms-browser-display.js:1094
-msgid "Views last month"
-msgstr ""
-
-#: ms-browser-display.js:1097
-msgid "Views"
-msgstr ""
-
-#: ms-browser-display.js:1100
-msgid "Annotations last month"
-msgstr ""
-
-#: ms-browser-display.js:1103
-msgid "Annotations"
-msgstr ""
-
-#: ms-browser-display.js:1108
-msgid "Storage usage"
-msgstr ""
-
-#: ms-browser-display.js:1227
-msgid "Categories"
-msgstr ""
-
-#: ms-browser-display.js:1229
-msgid "Unspecified"
-msgstr ""
-
-#: ms-browser-display.js:1305
-msgid "See statistics on this channel"
+#: ms-browser-display.js:769
+msgid "Company:"
 msgstr ""
 
 #: ms-browser-latest.js:41
@@ -676,43 +121,617 @@ msgstr ""
 msgid "Content types to display:"
 msgstr ""
 
-#: ms-browser-latest.js:46 ms-browser-search.js:41
-#, fuzzy
-msgid "channels"
-msgstr "Videokanava"
+#: ms-browser-display.js:929
+msgid "Copy LTI link"
+msgstr ""
 
-#: ms-browser-latest.js:50 ms-browser-search.js:42
+#: ms-browser-display.js:756
 #, fuzzy
-msgid "videos"
-msgstr "Videot"
+msgid "Created on"
+msgstr "Tilisi on luotu."
 
-#: ms-browser-latest.js:54 ms-browser-search.js:43
+#: ms-browser-display.js:108
+msgid "Creation date, ascending"
+msgstr ""
+
+#: ms-browser-display.js:107
+msgid "Creation date, descending"
+msgstr ""
+
+#: extra-translations/jsu-translations.js:18
 #, fuzzy
-msgid "live streams"
+msgid "December"
+msgstr "Joulukuu"
+
+#: ms-browser-display.js:906 ms-browser-display.js:938
+#, fuzzy
+msgid "Delete"
+msgstr "Poistaa"
+
+#: ms-browser-display.js:122
+#, fuzzy
+msgid "Display"
+msgstr "Näytä widgetit koko sivun tilassa"
+
+#: ms-browser-display.js:125
+msgid "Display mode:"
+msgstr ""
+
+#: ms-browser-display.js:221
+msgid "Display {count} more items"
+msgstr ""
+
+#: ms-browser-display.js:1121
+msgid "Duration"
+msgstr ""
+
+#: ms-browser-display.js:618 ms-browser-display.js:904
+#: ms-browser-display.js:935
+#, fuzzy
+msgid "Edit"
+msgstr "Muokata"
+
+#: ms-browser-display.js:153
+msgid "Editable:"
+msgstr ""
+
+#: extra-translations/jsu-translations.js:8
+#, fuzzy
+msgid "February"
+msgstr "Helmikuu"
+
+#: ms-browser-display.js:151
+msgid "Filters:"
+msgstr ""
+
+#: ms-browser-search.js:78
+#, fuzzy
+msgid "Go"
+msgstr "Mene"
+
+#: ms-browser-display.js:1070
+msgid "Hide this window"
+msgstr ""
+
+#: ms-api.js:17
+msgid "Item not found."
+msgstr ""
+
+#: extra-translations/jsu-translations.js:7
+#, fuzzy
+msgid "January"
+msgstr "Tammikuu"
+
+#: extra-translations/jsu-translations.js:13
+#, fuzzy
+msgid "July"
+msgstr "Heinäkuu"
+
+#: extra-translations/jsu-translations.js:12
+#, fuzzy
+msgid "June"
+msgstr "Kesäkuu"
+
+#: ms-browser-display.js:22
+msgid "Latest content"
+msgstr ""
+
+#: ms-browser-latest.js:102
+msgid "Latest content added"
+msgstr ""
+
+#: ms-browser-display.js:1144
+msgid "License"
+msgstr ""
+
+#: ms-browser-display.js:763
+msgid "License:"
+msgstr ""
+
+#: ms-browser-display.js:544
+#, fuzzy
+msgid "Live streams"
 msgstr "LIVE lähetykset"
+
+#: ms-tree.js:169
+#, fuzzy
+msgid "Loading"
+msgstr "Lataa"
+
+#: ms-browser-display.js:48 ms-browser-channels.js:43
+#, fuzzy
+msgid "Loading..."
+msgstr "Lataa"
+
+#: ms-browser-channels.js:81
+msgid "Main channels"
+msgstr ""
+
+#: extra-translations/jsu-translations.js:9
+#, fuzzy
+msgid "March"
+msgstr "Maaliskuu"
+
+#: ms-browser-display.js:811 ms-browser-display.js:1076
+msgid "Matching annotations:"
+msgstr ""
+
+#: ms-browser-search.js:354
+msgid "Matching items:"
+msgstr ""
+
+#: ms-browser-display.js:824 ms-browser-display.js:1090
+msgid "Matching photos:"
+msgstr ""
+
+#: extra-translations/jsu-translations.js:11
+#, fuzzy
+msgid "May"
+msgstr "Toukokuu"
+
+#: ms-api.js:88 ms-api.js:124
+msgid "Media does not exist."
+msgstr ""
+
+#: ms-browser-display.js:1106
+msgid "Media information"
+msgstr ""
+
+#: ms-browser-display.js:17 ms-browser-channels.js:79 ms-tree.js:114
+#: ms-tree.js:433 ms-tree.js:441
+msgid "My channel"
+msgstr ""
+
+#: ms-browser-display.js:18
+msgid "My media"
+msgstr ""
+
+#: ms-api.js:356
+msgid "No available space"
+msgstr ""
+
+#: ms-browser-latest.js:251
+msgid "No contents."
+msgstr ""
+
+#: ms-api.js:259 ms-tree.js:297
+msgid "No information about error."
+msgstr ""
+
+#: ms-browser-search.js:358
+#, fuzzy
+msgid "No results."
+msgstr "Ei tuloksia"
+
+#: extra-translations/jsu-translations.js:17
+#, fuzzy
+msgid "November"
+msgstr "Marraskuu"
+
+#: ms-browser-display.js:128
+msgid "Number of items:"
+msgstr ""
+
+#: ms-browser-display.js:118
+msgid "Number of views, ascending"
+msgstr ""
+
+#: ms-browser-display.js:117
+msgid "Number of views, descending"
+msgstr ""
+
+#: extra-translations/jsu-translations.js:16
+#, fuzzy
+msgid "October"
+msgstr "Lokakuu"
+
+#: ms-browser-display.js:163
+#, fuzzy
+msgid "Ok"
+msgstr "OK"
+
+#: ms-browser-display.js:616
+msgid "Open information panel"
+msgstr ""
+
+#: ms-browser-channels.js:287 ms-browser-channels.js:307
+#: ms-browser-channels.js:308 ms-browser-channels.js:312
+msgid "Parent channel"
+msgstr ""
+
+#: ms-browser-display.js:794
+msgid "Parent channel:"
+msgstr ""
+
+#: ms-browser-display.js:550
+#, fuzzy
+msgid "Photos groups"
+msgstr "Kuvagalleriat"
+
+#: ms-browser-channels.js:194
+msgid "Please login to access this channel"
+msgstr ""
+
+#: ms-browser-latest.js:207 ms-browser-search.js:311
+msgid "Please login to access this page"
+msgstr ""
+
+#: ms-browser-display.js:157
+msgid "Published:"
+msgstr ""
+
+#: ms-browser-display.js:1115
+msgid "Publishing date"
+msgstr ""
+
+#: ms-browser-display.js:1109
+msgid "Recording date"
+msgstr ""
+
+#: ms-api.js:277
+msgid "Request failed:"
+msgstr ""
+
+#: ms-api.js:32 ms-api.js:48 ms-api.js:56 ms-api.js:64 ms-api.js:72
+msgid "Requested channel does not exist."
+msgstr ""
+
+#: ms-browser-channels.js:67 ms-tree.js:89 ms-tree.js:91
+msgid "Root"
+msgstr ""
+
+#: ms-browser-display.js:23 ms-browser-search.js:156
+#, fuzzy
+msgid "Search"
+msgstr "Haku"
+
+#: ms-browser-search.js:98
+msgid "Search for"
+msgstr ""
+
+#: ms-browser-search.js:81
+#, fuzzy
+msgid "Search in"
+msgstr "Haku"
+
+#: ms-browser-display.js:19
+msgid "Search in my media"
+msgstr ""
+
+#: ms-browser-search.js:278
+#, fuzzy
+msgid "Search results for:"
+msgstr "Hakutulokset"
+
+#: ms-browser-search.js:76
+#, fuzzy
+msgid "Search:"
+msgstr "Haku"
+
+#: ms-browser-display.js:932
+msgid "See"
+msgstr ""
+
+#: ms-browser-display.js:1346
+msgid "See statistics on this channel"
+msgstr ""
+
+#: ms-browser-channels.js:49
+msgid "Select a channel to display its content."
+msgstr ""
+
+#: ms-browser-display.js:887
+#, fuzzy
+msgid "Select this channel"
+msgstr "Valitse kanava"
+
+#: ms-browser-display.js:893
+msgid "Select this media"
+msgstr ""
+
+#: extra-translations/jsu-translations.js:15
+#, fuzzy
+msgid "September"
+msgstr "Syyskuu"
+
+#: ms-browser-latest.js:207 ms-browser-search.js:311 ms-browser-channels.js:194
+msgid "Sign in"
+msgstr ""
+
+#: ms-browser-display.js:114
+msgid "Slug, ascending"
+msgstr ""
+
+#: ms-browser-display.js:113
+msgid "Slug, descending"
+msgstr ""
+
+#: ms-browser-channels.js:482
+msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
+msgstr ""
+
+#: ms-browser-display.js:137
+msgid "Sort by:"
+msgstr ""
+
+#: ms-browser-display.js:1147
+#, fuzzy
+msgid "Speaker"
+msgstr "Puhuja-asetukset"
+
+#: ms-browser-display.js:161 ms-browser-display.js:766
+#, fuzzy
+msgid "Speaker:"
+msgstr "Puhuja-asetukset"
+
+#: ms-browser-display.js:901
+#, fuzzy
+msgid "Statistics"
+msgstr "Tilastot "
+
+#: ms-browser-display.js:1140
+msgid "Storage usage"
+msgstr ""
+
+#: ms-browser-display.js:781 ms-browser-channels.js:410
+msgid "Storage usage:"
+msgstr ""
+
+#: ms-browser-display.js:540
+msgid "Sub channels"
+msgstr ""
+
+#: ms-browser-channels.js:399
+msgid "Sub channels items are included in counts."
+msgstr ""
+
+#: ms-browser-channels.js:431
+msgid "Subscribe to channel videos RSS"
+msgstr ""
+
+#: ms-browser-channels.js:422
+msgid "Subscribe to channel videos RSS:"
+msgstr ""
+
+#: ms-api.js:19
+msgid "The connection timed out. Please retry later."
+msgstr ""
+
+#: ms-api.js:20 ms-tree.js:191
+msgid "The server cannot be reached."
+msgstr ""
+
+#: ms-api.js:358
+msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
+msgstr ""
+
+#: ms-browser-channels.js:476
+msgid "This channel contains no media."
+msgstr ""
+
+#: ms-browser-channels.js:478
+msgid "This channel contains no sub channels and no media."
+msgstr ""
+
+#: ms-browser-channels.js:480
+msgid "This channel contains no sub channels."
+msgstr ""
+
+#: ms-browser-display.js:885
+msgid "This channel is selected"
+msgstr ""
+
+#: ms-browser-display.js:710 ms-browser-display.js:711
+msgid "This channel is unlisted"
+msgstr ""
+
+#: ms-browser-display.js:678
+msgid "This item is a channel"
+msgstr ""
+
+#: ms-browser-display.js:691
+msgid "This item is a live stream"
+msgstr ""
+
+#: ms-browser-display.js:682
+msgid "This item is a photos group"
+msgstr ""
+
+#: ms-browser-display.js:691
+msgid "This item is a video"
+msgstr ""
 
 #: ms-browser-latest.js:91
 msgid "This list presents all media and channels ordered by add date."
 msgstr ""
 
-#: ms-browser-latest.js:101
-msgid "Latest content added"
+#: ms-browser-display.js:716 ms-browser-display.js:717
+msgid "This media is not published"
 msgstr ""
 
-#: ms-browser-latest.js:206 ms-browser-search.js:307
-msgid "Please login to access this page"
+#: ms-browser-display.js:724 ms-browser-display.js:725
+msgid "This media is published"
 msgstr ""
 
-#: ms-browser-latest.js:250
-msgid "No contents."
+#: ms-browser-display.js:720 ms-browser-display.js:721
+msgid "This media is published and unlisted"
 msgstr ""
 
-#: ms-browser-search.js:17
-msgid "titles"
+#: ms-browser-display.js:891
+msgid "This media is selected"
+msgstr ""
+
+#: ms-browser-display.js:729 ms-browser-display.js:730
+msgid "This video is not ready"
+msgstr ""
+
+#: ms-browser-display.js:112
+msgid "Title, ascending"
+msgstr ""
+
+#: ms-browser-display.js:111
+msgid "Title, descending"
+msgstr ""
+
+#: ms-browser-display.js:786
+#, fuzzy
+msgid "Type:"
+msgstr "Sinun täytyy valita kysymyksen tyyppi."
+
+#: ms-api.js:47
+msgid "Unable to get channel content because you cannot access to this channel."
+msgstr ""
+
+#: ms-api.js:55
+msgid "Unable to get channel information because you cannot access to this channel."
+msgstr ""
+
+#: ms-api.js:71
+msgid "Unable to get channels path because you cannot access to this channel."
+msgstr ""
+
+#: ms-tree.js:179
+msgid "Unable to get channels tree because you are not logged in."
+msgstr ""
+
+#: ms-api.js:63 ms-tree.js:181
+msgid "Unable to get channels tree because you cannot access to this channel."
+msgstr ""
+
+#: ms-tree.js:189
+msgid "Unable to get channels tree. Request timed out."
+msgstr ""
+
+#: ms-api.js:87
+msgid "Unable to get media information because you cannot access to this media."
+msgstr ""
+
+#: ms-api.js:31
+msgid "Unable to get search's results content because you cannot access to this channel."
+msgstr ""
+
+#: ms-browser-display.js:1270
+msgid "Unspecified"
+msgstr ""
+
+#: ms-browser-display.js:106
+msgid "Use default sorting"
+msgstr ""
+
+#: ms-browser-search.js:146
+msgid "Use the input above to search for something."
+msgstr ""
+
+#: ms-browser-display.js:547
+#, fuzzy
+msgid "Videos"
+msgstr "Videot"
+
+#: ms-browser-display.js:1129
+msgid "Views"
+msgstr ""
+
+#: ms-browser-display.js:1126
+msgid "Views last month"
+msgstr ""
+
+#: ms-browser-channels.js:138
+msgid "You are not allowed to have a personal channel."
+msgstr ""
+
+#: ms-api.js:123
+msgid "You are not allowed to perform this action."
+msgstr ""
+
+#: ms-api.js:15
+msgid "You are not logged in or your session has expired. Please login and retry."
+msgstr ""
+
+#: ms-browser-search.js:83 ms-browser-search.js:100
+#, fuzzy
+msgid "all"
+msgstr "Kaikki"
+
+#: ms-browser-channels.js:361
+msgid "annotations"
+msgstr ""
+
+#: extra-translations/jsu-translations.js:19
+msgid "at"
+msgstr ""
+
+#: ms-browser-display.js:982
+msgid "cannot copy"
+msgstr ""
+
+#: ms-browser-search.js:24
+msgid "categories"
+msgstr ""
+
+#: extra-translations/item-types.js:7
+msgid "channel"
+msgstr ""
+
+#: ms-browser-search.js:343 ms-browser-channels.js:386
+msgid "channel(s)"
+msgstr ""
+
+#: ms-browser-latest.js:46 ms-browser-search.js:41
+#, fuzzy
+msgid "channels"
+msgstr "Videokanava"
+
+#: ms-browser-display.js:696
+msgid "classic Rich Media"
+msgstr ""
+
+#: ms-browser-search.js:25
+msgid "comments, slides, ..."
+msgstr ""
+
+#: ms-browser-search.js:22
+msgid "companies"
+msgstr ""
+
+#: ms-browser-display.js:982
+msgid "copied"
 msgstr ""
 
 #: ms-browser-search.js:18
 msgid "descriptions"
+msgstr ""
+
+#: ms-browser-display.js:135
+msgid "display items type icons"
+msgstr ""
+
+#: ms-browser-display.js:694
+msgid "dynamic Rich Media"
+msgstr ""
+
+#: ms-browser-search.js:28
+msgid "external data"
+msgstr ""
+
+#: ms-browser-search.js:27
+msgid "external references"
+msgstr ""
+
+#: ms-browser-display.js:985
+msgid "failed to copy"
+msgstr ""
+
+#: ms-api.js:358 ms-browser-channels.js:399
+#, fuzzy
+msgid "help"
+msgstr "Apua"
+
+#: ms-browser-channels.js:426
+msgid "iTunes"
+msgstr ""
+
+#: ms-browser-channels.js:428
+msgid "iTunes (audio only)"
 msgstr ""
 
 #: ms-browser-search.js:19
@@ -720,36 +739,50 @@ msgstr ""
 msgid "keywords"
 msgstr "Avainsanat"
 
-#: ms-browser-search.js:20
-msgid "speakers"
-msgstr ""
-
 #: ms-browser-search.js:21
 msgid "licenses"
 msgstr ""
 
-#: ms-browser-search.js:22
-msgid "companies"
+#: ms-browser-display.js:126
+#, fuzzy
+msgid "list"
+msgstr "Vedä ja pudota videokanavalistaa muuttaaksesi järjestystä widgeteissä."
+
+#: extra-translations/item-types.js:9
+#, fuzzy
+msgid "live"
+msgstr "Livelähetys pysäytetty."
+
+#: ms-browser-search.js:349 ms-browser-channels.js:392
+msgid "live stream(s)"
 msgstr ""
+
+#: ms-browser-latest.js:54 ms-browser-search.js:43
+#, fuzzy
+msgid "live streams"
+msgstr "LIVE lähetykset"
 
 #: ms-browser-search.js:23
 msgid "locations"
 msgstr ""
 
-#: ms-browser-search.js:24
-msgid "categories"
+#: ms-browser-display.js:150
+msgid "no"
 msgstr ""
 
-#: ms-browser-search.js:25
-msgid "comments, slides, ..."
-msgstr ""
+#: ms-browser-search.js:84 ms-browser-search.js:101
+#, fuzzy
+msgid "none"
+msgstr "Ei mitään"
 
-#: ms-browser-search.js:27
-msgid "external references"
-msgstr ""
+#: ms-browser-latest.js:58 extra-translations/item-types.js:10
+#: ms-browser-search.js:26
+#, fuzzy
+msgid "photos"
+msgstr "Kuvat"
 
-#: ms-browser-search.js:28
-msgid "external data"
+#: ms-browser-search.js:352 ms-browser-channels.js:395
+msgid "photos group(s)"
 msgstr ""
 
 #: ms-browser-search.js:44
@@ -757,76 +790,65 @@ msgstr ""
 msgid "photos groups"
 msgstr "Kuvagalleriat"
 
-#: ms-browser-search.js:76
+#: ms-browser-display.js:602 ms-tree.js:89 ms-tree.js:91 ms-tree.js:257
+#: ms-tree.js:392
 #, fuzzy
-msgid "Search:"
-msgstr "Haku"
+msgid "selected"
+msgstr "Valittu videokanava on se, joka valitaan ensin."
 
-#: ms-browser-search.js:78
-#, fuzzy
-msgid "Go"
-msgstr "Mene"
-
-#: ms-browser-search.js:81
-#, fuzzy
-msgid "Search in"
-msgstr "Haku"
-
-#: ms-browser-search.js:83 ms-browser-search.js:100
-#, fuzzy
-msgid "all"
-msgstr "Kaikki"
-
-#: ms-browser-search.js:84 ms-browser-search.js:101
-#, fuzzy
-msgid "none"
-msgstr "Ei mitään"
-
-#: ms-browser-search.js:98
-msgid "Search for"
+#: ms-browser-display.js:126 ms-browser-display.js:127
+#: ms-browser-display.js:353 ms-browser-display.js:370
+msgid "selected setting"
 msgstr ""
 
-#: ms-browser-search.js:145
-msgid "Use the input above to search for something."
+#: ms-browser-display.js:415
+msgid "selected tab"
 msgstr ""
 
-#: ms-browser-search.js:274
-#, fuzzy
-msgid "Search results for:"
-msgstr "Hakutulokset"
-
-#: ms-browser-search.js:345
-msgid "Matching items:"
+#: ms-browser-search.js:20
+msgid "speakers"
 msgstr ""
 
-#: ms-browser-search.js:349
-#, fuzzy
-msgid "No results."
-msgstr "Ei tuloksia"
-
-#: ms-tree.js:169
-#, fuzzy
-msgid "Loading"
-msgstr "Lataa"
-
-#: ms-tree.js:179
-msgid "Unable to get channels tree because you are not logged in."
+#: ms-browser-channels.js:424
+msgid "standard"
 msgstr ""
 
-#: ms-tree.js:183
-#, fuzzy
-msgid "Channel does not exist."
-msgstr "Kanavaa ei ole jota etsit."
-
-#: ms-tree.js:185
-msgid "An error occurred in the server. Please try again later."
+#: ms-browser-display.js:774 ms-browser-channels.js:356
+#: ms-browser-channels.js:363
+msgid "this month"
 msgstr ""
 
-#: ms-tree.js:189
-msgid "Unable to get channels tree. Request timed out."
+#: ms-browser-display.js:127
+msgid "thumbnails"
 msgstr ""
 
-#: ms-tree.js:193
+#: ms-browser-search.js:17
+msgid "titles"
+msgstr ""
+
+#: ms-browser-display.js:148
+msgid "unspecified"
+msgstr ""
+
+#: extra-translations/item-types.js:8
 #, fuzzy
-msgid "An error occurred during request:"
-msgstr "Tapahtui virhe pyyntöä suoritettaessa"
+msgid "video"
+msgstr "Valitse kuva videosta"
+
+#: ms-browser-search.js:346 ms-browser-channels.js:389
+msgid "video(s)"
+msgstr ""
+
+#: ms-browser-latest.js:50 ms-browser-search.js:42
+#, fuzzy
+msgid "videos"
+msgstr "Videot"
+
+#: ms-browser-display.js:772 ms-browser-channels.js:354
+msgid "views"
+msgstr ""
+
+#: ms-browser-display.js:149
+#, fuzzy
+msgid "yes"
+msgstr "kyllä"
