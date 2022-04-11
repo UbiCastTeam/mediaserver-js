@@ -92,7 +92,7 @@ MSTreeManager.prototype.init = function () {
         }
         html += '</div>';
     }
-    html += '<ul class="list js-active-item border-color-blue active" id="' + this.idPrefix + 'tree_channel_0"></ul></div>';
+    html += '<ul class="list js-active-item border-color-green active" id="' + this.idPrefix + 'tree_channel_0"></ul></div>';
     this.$widget = $(html);
     if (this.displayRoot && this.onChange) {
         $('.channel-btn', this.$widget).click({ obj: this }, function (evt) {
@@ -261,7 +261,7 @@ MSTreeManager.prototype._onTreeLoaded = function (result, oid, $target, callback
                 }
                 html += '</span>';
                 if (channel.channels) {
-                    html += '<ul class="list border-color-blue" id="' + this.idPrefix + 'tree_channel_' + channel.oid + '"></ul>';
+                    html += '<ul class="list border-color-green" id="' + this.idPrefix + 'tree_channel_' + channel.oid + '"></ul>';
                 }
                 html += '</li>';
                 if (this.loadingQueue[channel.oid] !== undefined) {
