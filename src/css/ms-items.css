@@ -19,10 +19,11 @@
     display: block;
     color: inherit;
     overflow: hidden;
-    background: #efefef;
+    background: white;
     color: #404040;
     border-bottom: 3px solid #fff;
-    border-radius: 3px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
 .ms-items .clickable .item-entry-link {
     cursor: pointer;
