@@ -105,6 +105,7 @@
 }
 .ms-items .item-entry-language i {
     font-style: normal;
+    border: 1px solid #ddd;
 }
 .ms-items .thumbnail .item-entry-language {
     margin-left: 0;
