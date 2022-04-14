@@ -115,7 +115,8 @@
 .ms-items .item-entry-unlisted,
 .ms-items .item-entry-notpublished,
 .ms-items .item-entry-published,
-.ms-items .item-entry-notready {
+.ms-items .item-entry-notready,
+.ms-items .item-entry-live-running  {
     margin-left: 10px;
     display: block;
     float: right;
@@ -132,7 +133,8 @@
 .ms-items .item-entry-unlisted:before,
 .ms-items .item-entry-notpublished:before,
 .ms-items .item-entry-published:before,
-.ms-items .item-entry-notready:before {
+.ms-items .item-entry-notready:before,
+.ms-items .item-entry-live-running:before {
     color: #666;
     font: normal normal normal 16px/1 FontAwesome;
 }
@@ -160,7 +162,7 @@
 }
 .ms-items .item-entry-notpublished:before {
     content: "\f023";
-    color: #E65959;
+    color: #FE6F5E;
 }
 .ms-items .item-entry-published:before {
     content: "\f058";
@@ -170,7 +172,13 @@
     content: "\f085";
     color: #EC804D;
 }
-
+.ms-items .item-entry-live-running:before {
+    content: "\f111";
+    color: #E65959;
+    animation-name: live-glow-catalog;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
 .ms-items .item-entry-bottom-bar {
     display: block;
 }
@@ -447,4 +455,9 @@
     .ms-items .item-description {
         padding: 5px;
     }
+}
+@keyframes live-glow-catalog {
+    0% {color: #E65959;}
+    50% {color: transparent;}
+    100% {color: #E65959;}
 }

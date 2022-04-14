@@ -729,6 +729,11 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
                             jsu.translateAttribute('This video is not ready') + '"><span class="sr-only">' +
                             jsu.translateHTML('This video is not ready') + '</span></span>';
             }
+            if (itemType == 'live' && item.status == 'ongoing') {
+                topBar += '<span class="item-entry-live-running" title="' + jsu.translateAttribute('This live is running') + '">' +
+                            '<span class="sr-only">' + jsu.translateHTML('This live is running') + '</span>' +
+                        '</span>';
+            }
         }
     }
     // duration
