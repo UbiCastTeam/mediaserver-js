@@ -278,7 +278,8 @@
 .ms-items .item-entry.thumbnail .item-entry-notpublished,
 .ms-items .item-entry.thumbnail .item-entry-published,
 .ms-items .item-entry.thumbnail .item-entry-notready,
-.ms-items .item-entry.thumbnail .item-entry-duration {
+.ms-items .item-entry.thumbnail .item-entry-duration,
+.ms-items .item-entry.thumbnail .item-entry-live-running {
     margin-left: 5px;
     padding: 5px;
     float: left;
@@ -287,7 +288,7 @@
 .ms-items .item-entry.thumbnail .item-entry-duration {
     font-style: normal;
     font-weight: 500;
-    color:#666;
+    color: #666;
     padding-left: 0;
 }
 .ms-items .item-entry.thumbnail .item-entry-middle-bar {
