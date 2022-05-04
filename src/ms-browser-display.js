@@ -98,7 +98,7 @@ MSBrowser.prototype.buildWidget = function () {
         event.data.obj.changeTab('search'); return false;
     });
     $('.ms-browser-more-btn button', this.$widget).click({ obj: this }, function (event) {
-        event.data.obj.displayMore(this.displayCount);
+        event.data.obj.displayMore(event.data.obj.displayCount);
     });
 };
 MSBrowser.prototype.getTopMenuJq = function () {
@@ -988,7 +988,7 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
             } catch (err) {
                 successful = false;
                 msg = jsu.translate('failed to copy');
-                console.log('Failed to copy to clipboard: ' + err);
+                console.error('Failed to copy to clipboard: ' + err);
             }
             msg = '<i class="fa ' + (successful ? 'fa-check' : 'fa-warning') + '" aria-hidden="true"></i> ' + jsu.escapeHTML(msg);
             $btn.append('<span class="copy-msg">' + msg + '</span>');
