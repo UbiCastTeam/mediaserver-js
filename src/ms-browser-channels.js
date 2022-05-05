@@ -191,7 +191,8 @@ MSBrowserChannels.prototype._onChannelError = function (response) {
         const loginUrl = this.browser.urlLogin + '?next=' + window.location.pathname + (window.location.hash ? window.location.hash.substring(1) : '');
         message += '<div class="item-description">' +
             '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>' +
-            '<p>' + jsu.translateHTML('Please login to access this channel') + '<br /> <a href="' + loginUrl + '">' + jsu.translateHTML('Sign in') + '</a></p>' +
+            '<div style="margin: 0.3em;">' + jsu.translateHTML('Please login to access this channel') + '</div>' +
+            '<div><a class="button default" href="' + loginUrl + '">' + jsu.translateHTML('Sign in') + '</a></div>' +
             '</div>';
     } else {
         message += '<div class="message error">' + jsu.escapeHTML(response.error) + '</div>';
