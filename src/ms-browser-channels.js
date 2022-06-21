@@ -350,7 +350,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
             let isEmpty = true;
             let storageDisplay = response.info.can_edit ? this.browser.msapi.getStorageDisplay(response.info) : '';
             if (response.info.views || response.info.comments) {
-                let annoAndViews = '<div class="' + (response.info.short_description || response.info.display_rss_links || storageDisplay ? 'right' : 'align-right') + ' channel-description-stats">';
+                let annoAndViews = '<div class="' + (response.info.short_description || this.browser.couldDisplay('rss_links') || storageDisplay ? 'right' : 'align-right') + ' channel-description-stats">';
                 if (this.browser.couldDisplay('views') && response.info.views) {
                     annoAndViews += '<span class="inline-block">' + response.info.views + ' ' + jsu.translate('views');
                     if (response.info.views_last_month) {
@@ -417,7 +417,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 }
                 isEmpty = false;
             }
-            if (this.browser.couldDisplay('rss_links') && response.info.display_rss_links) {
+            if (this.browser.couldDisplay('rss_links')) {
                 let rss = '<div class="channel-description-rss"> ';
                 if (this.displayItunesRss) {
                     rss += ' <span class="inline-block">' + jsu.translate('Subscribe to channel videos RSS:') + '</span>';
