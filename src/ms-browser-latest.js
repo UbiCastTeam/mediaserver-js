@@ -99,7 +99,7 @@ MSBrowserLatest.prototype.getContentJq = function () {
 };
 
 MSBrowserLatest.prototype.onShow = function () {
-    this.browser.setTitle('latest', jsu.translate('Latest content added'));
+    this.browser.setTitle('latest', jsu.translate('Latest media'));
     if (this.initialized) {
         return;
     }
