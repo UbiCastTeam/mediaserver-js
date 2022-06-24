@@ -169,48 +169,26 @@ MSTreeManager.prototype.loadTree = function (oid, callback) {
         $target.html('<li style="display: block;"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ' + jsu.translateHTML('Loading') + '...</li>');
     }, 500);
     // load channel tree
-    const scallback = function (response) {
-        obj._onTreeLoaded(response, oid, $target, callback);
-    };
-    const ecallback = function (xhr, textStatus, thrownError) {
-        if (xhr.status) {
-            switch (xhr.status) {
-                case 401:
-                    return obj._onTreeLoaded({ success: false, error: jsu.translate('Unable to get channels tree because you are not logged in.') }, oid, $target, callback);
-                case 403:
-                    return obj._onTreeLoaded({ success: false, error: jsu.translate('Unable to get channels tree because you cannot access to this channel.') }, oid, $target, callback);
-                case 404:
-                    return obj._onTreeLoaded({ success: false, error: jsu.translate('Channel does not exist.') }, oid, $target, callback);
-                case 500:
-                    return obj._onTreeLoaded({ success: false, error: jsu.translate('An error occurred in the server. Please try again later.') }, oid, $target, callback);
-            }
-        }
-        if (textStatus == 'timeout') {
-            obj._onTreeLoaded({ success: false, error: jsu.translate('Unable to get channels tree. Request timed out.') }, oid, $target, callback);
-        } else if (textStatus == 'error') {
-            obj._onTreeLoaded({ success: false, error: jsu.translate('The server cannot be reached.') }, oid, $target, callback);
+    const uri = this.treeUrl ? 'GET:' + this.treeUrl : 'getChannelsTree';
+    this.msapi.ajaxCall(uri, data, function (response) {
+        if (!response.error) {
+            obj._onTreeLoaded(response, oid, $target, callback);
         } else {
-            obj._onTreeLoaded({ success: false, error: jsu.translate('An error occurred during request:') + '<br/>&nbsp;&nbsp;&nbsp;&nbsp;' + textStatus + ' ' + thrownError }, oid, $target, callback);
-        }
-    };
-    if (this.treeUrl) {
-        $.ajax({
-            url: this.treeUrl,
-            data: data,
-            dataType: 'json',
-            cache: false,
-            success: scallback,
-            error: ecallback
-        });
-    } else {
-        this.msapi.ajaxCall('getChannelsTree', data, function (response) {
-            if (response.success) {
-                scallback(response);
-            } else {
-                ecallback(response.xhr, response.textStatus, response.thrownError);
+            if (response.errorCode) {
+                switch (response.errorCode) {
+                    case 401:
+                        return obj._onTreeLoaded({ success: false, error: jsu.translate('Unable to get channels tree because you are not logged in.') }, oid, $target, callback);
+                    case 403:
+                        return obj._onTreeLoaded({ success: false, error: jsu.translate('Unable to get channels tree because you cannot access to this channel.') }, oid, $target, callback);
+                    case 404:
+                        return obj._onTreeLoaded({ success: false, error: jsu.translate('Channel does not exist.') }, oid, $target, callback);
+                    case 500:
+                        return obj._onTreeLoaded({ success: false, error: jsu.translate('An error occurred in the server. Please try again later.') }, oid, $target, callback);
+                }
             }
-        });
-    }
+            obj._onTreeLoaded({ success: false, error: jsu.escapeHTML(response.error) }, oid, $target, callback);
+        }
+    });
 };
 MSTreeManager.prototype._onTreeLoaded = function (result, oid, $target, callback) {
     if (this.content[oid].timeout) {
@@ -395,34 +373,14 @@ MSTreeManager.prototype.setActive = function (oid) {
 
 MSTreeManager.prototype.loadPath = function (oid, callback) {
     const data = { oid: oid };
-    const scallback = function (response) {
-        if (!response.success) {
+    const uri = this.pathUrl ? 'GET:' + this.pathUrl : 'getChannelsPath';
+    this.msapi.ajaxCall(uri, data, function (response) {
+        if (!response.error) {
+            callback(response);
+        } else {
             console.log('Error getting path for oid ' + oid + '. Error: ' + response.error);
         }
-        callback(response);
-    };
-    const ecallback = function (xhr, textStatus, thrownError) {
-        console.log('Error getting path for oid ' + oid + '. Error: ' + textStatus + ' | ' + thrownError);
-        callback({ success: false, error: textStatus + ' | ' + thrownError });
-    };
-    if (this.pathUrl) {
-        $.ajax({
-            url: this.pathUrl,
-            data: data,
-            dataType: 'json',
-            cache: false,
-            success: scallback,
-            error: ecallback
-        });
-    } else {
-        this.msapi.ajaxCall('getChannelsPath', data, function (response) {
-            if (response.success) {
-                scallback(response);
-            } else {
-                ecallback(response.xhr, response.textStatus, response.thrownError);
-            }
-        });
-    }
+    });
 };
 
 MSTreeManager.prototype.openPersonalChannel = function () {

@@ -255,36 +255,37 @@ MSAPIClient.prototype.ajaxCall = function (callOrUri, data, callback, async, fil
         dataType: 'json',
         cache: false,
         success: function (response) {
-            if (!response.success && !response.error) {
-                response.error = response.message ? response.message : jsu.translate('No information about error.');
-            }
             if (callback) {
                 return callback(response);
             }
         },
-        error: function (xhr, textStatus, thrownError) {
-            let reason = '?';
-            if (xhr.status) {
-                reason = xhr.status;
-            } else if (textStatus == 'error') {
-                reason = 'unreachable';
-            } else if (textStatus == 'timeout') {
-                reason = 'timeout';
-            }
+        error: function (xhr) {
+            if (callback) {
+                let response;
+                try {
+                    response = JSON.parse(xhr.responseText);
+                } catch (e) {
+                    response = {};
+                }
+                response.success = false;
+                response.errorCode = xhr.status;
 
-            let msg = callInfo.errors && reason in callInfo.errors ? callInfo.errors[reason] : '';
-            if (!msg) {
-                msg = reason in obj.defaultsErrorsMessages ? obj.defaultsErrorsMessages[reason] : jsu.translate('Request failed:') + ' ' + thrownError;
-            }
+                if (xhr.status === 500 || !response.error) {
+                    let msg = '';
+                    if (!xhr.status) {
+                        msg = jsu.translate('Failed to communicate with the service.');
+                    } else if (callInfo.errors && xhr.status in callInfo.errors) {
+                        msg = callInfo.errors[xhr.status];
+                    } else if (xhr.status in obj.defaultsErrorsMessages) {
+                        msg = obj.defaultsErrorsMessages[xhr.status];
+                    } else {
+                        msg = jsu.translate('Request failed with code:') + ' ' + xhr.status;
+                    }
+                    response.error = msg;
+                }
 
-            return callback({
-                success: false,
-                error: msg,
-                errorCode: xhr.status,
-                xhr: xhr,
-                textStatus: textStatus,
-                thrownError: thrownError
-            });
+                return callback(response);
+            }
         }
     };
 
