@@ -640,6 +640,16 @@ MSBrowser.prototype.getContentEntry = function (itemType, item, gselectable, tab
 MSBrowser.prototype.couldDisplay = function (type) {
     return this.catalogFieldsToDisplay.indexOf(type) !== -1;
 };
+MSBrowser.prototype._cleanSpeakers = function (speakerStr) {
+    const speakers = [];
+    for (let speaker of speakerStr.split(',')) {
+        speaker = speaker.trim();
+        if (speaker) {
+            speakers.push(speaker);
+        }
+    }
+    return speakers.join(', ');
+};
 MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, tab) {
     let markup = 'span';
     let href = '';
@@ -768,7 +778,7 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
             bottomBar += '<span class="item-entry-license">' + jsu.translateHTML('License:') + ' ' + jsu.escapeHTML(item.license) + '</span>';
         }
         if (this.couldDisplay('speaker') && item.speaker) {
-            bottomBar += '<span class="item-entry-speaker">' + jsu.translateHTML('Speaker:') + ' ' + jsu.escapeHTML(item.speaker) + '</span>';
+            bottomBar += '<span class="item-entry-speaker">' + jsu.translateHTML('Speaker:') + ' ' + jsu.escapeHTML(this._cleanSpeakers(item.speaker)) + '</span>';
         }
         if (this.couldDisplay('company') && item.company) {
             bottomBar += '<span class="item-entry-company">' + jsu.translateHTML('Company:') + ' ' + jsu.escapeHTML(item.company) + '</span>';
