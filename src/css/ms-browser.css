@@ -9,6 +9,9 @@
 .ms-browser-container.in-overlay {
     text-align: left;
 }
+.odm-main div.odm-element.ms-browser-container {
+    background: #f5f5f5;
+}
 
 /* base */
 .ms-browser * {
