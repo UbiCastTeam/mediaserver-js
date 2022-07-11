@@ -1,8 +1,9 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-23 16:29+0100\n"
+"POT-Creation-Date: 2022-07-11 09:10+0200\n"
 "PO-Revision-Date: 2021-11-29 17:55+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
@@ -13,842 +14,981 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Basepath: ../src\n"
-"X-Poedit-KeywordsList: ;translate:1;translateHTML:1;translateAttribute:1;translate:1,2c;translateHTML:1,2c;translateAttribute:1,2c\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Flags-xgettext: --no-wrap\n"
+"X-Poedit-KeywordsList: ;translate:1;translateHTML:1;translateAttribute:1;translate:1,2c;translateHTML:1,2c;translateAttribute:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
+# Translated by DeepL.
 #: ms-api.js:16
-#, fuzzy
 msgid "Access denied."
 msgstr "Pääsy kielletty."
 
-#: ms-browser-display.js:912 ms-browser-display.js:916
+# Translated by DeepL.
+#: ms-browser-display.js:927 ms-browser-display.js:931
 msgid "Add a sub channel"
-msgstr ""
+msgstr "Lisää alakanava"
 
-#: ms-browser-display.js:921 ms-browser-display.js:925
+# Translated by DeepL.
+#: ms-browser-display.js:936 ms-browser-display.js:940
 msgid "Add a video"
-msgstr ""
+msgstr "Lisää video"
 
+# Translated by DeepL.
 #: ms-browser-display.js:110
 msgid "Add date, ascending"
-msgstr ""
+msgstr "Lisää päivämäärä, nouseva"
 
+# Translated by DeepL.
 #: ms-browser-display.js:109
 msgid "Add date, descending"
-msgstr ""
+msgstr "Lisää päivämäärä, laskeva"
 
-#: ms-browser-display.js:790
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:805
 msgid "Added on"
-msgstr "Lisätty:"
+msgstr "Lisätty"
 
-#: ms-tree.js:193
-#, fuzzy
-msgid "An error occurred during request:"
-msgstr "Tapahtui virhe pyyntöä suoritettaessa"
-
-#: ms-tree.js:185
+# Translated by DeepL.
+#: ms-tree.js:186
 msgid "An error occurred in the server. Please try again later."
-msgstr ""
+msgstr "Palvelimessa tapahtui virhe. Yritä myöhemmin uudelleen."
 
+# Translated by DeepL.
 #: ms-api.js:18
 msgid "An internal server error occurred. An email has been sent to the support team."
-msgstr ""
+msgstr "Palvelimen sisäinen virhe tapahtui. Tukitiimille on lähetetty sähköpostia."
 
-#: ms-browser-display.js:1135
+# Translated by DeepL.
+#: ms-browser-display.js:1150
 msgid "Annotations"
-msgstr ""
+msgstr "Huomautukset"
 
-#: ms-browser-display.js:1132
+# Translated by DeepL.
+#: ms-browser-display.js:1147
 msgid "Annotations last month"
-msgstr ""
+msgstr "Huomautukset viime kuussa"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:10
-#, fuzzy
 msgid "April"
 msgstr "Huhtikuu"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:14
-#, fuzzy
 msgid "August"
 msgstr "Elokuu"
 
-#: ms-api.js:354
+# Translated by DeepL.
+#: ms-api.js:355
 msgid "Available space:"
-msgstr ""
+msgstr "Käytettävissä oleva tila:"
 
-#: extra-translations/jsu-translations.js:20 ms-api.js:309 ms-api.js:336
+# Translated by DeepL.
+#: extra-translations/jsu-translations.js:20 ms-api.js:310 ms-api.js:337
 msgid "B"
-msgstr ""
+msgstr "B"
 
-#: ms-browser-display.js:1268
+# Translated by DeepL.
+#: ms-browser-display.js:1283
 msgid "Categories"
-msgstr ""
+msgstr "Kategoriat"
 
-#: ms-browser-channels.js:397
+# Translated by DeepL.
+#: ms-browser-channels.js:398
 msgid "Channel content:"
-msgstr ""
+msgstr "Kanavan sisältö:"
 
-#: ms-tree.js:183
-#, fuzzy
+# Translated by DeepL.
+#: ms-tree.js:184
 msgid "Channel does not exist."
-msgstr "Kanavaa ei ole jota etsit."
+msgstr "Kanavaa ei ole olemassa."
 
+# Translated by DeepL.
 #: ms-browser-display.js:21 ms-browser-display.js:538
-#, fuzzy
 msgid "Channels"
-msgstr "Videokanava"
+msgstr "Kanavat"
 
-#: ms-browser-display.js:656
+# Translated by DeepL.
+#: ms-browser-display.js:666
 msgid "Click to select this media"
-msgstr ""
+msgstr "Valitse tämä media napsauttamalla"
 
-#: ms-browser-display.js:1150
+# Translated by DeepL.
+#: ms-browser-display.js:1165
 msgid "Company"
-msgstr ""
+msgstr "Yritys"
 
-#: ms-browser-display.js:769
+# Translated by DeepL.
+#: ms-browser-display.js:784
 msgid "Company:"
-msgstr ""
+msgstr "Yritys:"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:41
 msgid "Content types"
-msgstr ""
+msgstr "Sisältötyypit"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:43
 msgid "Content types to display:"
-msgstr ""
+msgstr "Näytettävät sisältötyypit:"
 
-#: ms-browser-display.js:929
+# Translated by DeepL.
+#: ms-browser-display.js:944
 msgid "Copy LTI link"
-msgstr ""
+msgstr "Kopioi LTI-linkki"
 
-#: ms-browser-display.js:756
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:771
 msgid "Created on"
-msgstr "Tilisi on luotu."
+msgstr "Luotu"
 
+# Translated by DeepL.
 #: ms-browser-display.js:108
 msgid "Creation date, ascending"
-msgstr ""
+msgstr "Luontipäivämäärä, nouseva"
 
+# Translated by DeepL.
 #: ms-browser-display.js:107
 msgid "Creation date, descending"
-msgstr ""
+msgstr "Luontipäivämäärä, aleneva"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:18
-#, fuzzy
 msgid "December"
 msgstr "Joulukuu"
 
-#: ms-browser-display.js:906 ms-browser-display.js:938
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:921 ms-browser-display.js:953
 msgid "Delete"
-msgstr "Poistaa"
+msgstr "Poista"
 
+# Translated by DeepL.
 #: ms-browser-display.js:122
-#, fuzzy
 msgid "Display"
-msgstr "Näytä widgetit koko sivun tilassa"
+msgstr "Näyttö"
 
+# Translated by DeepL.
 #: ms-browser-display.js:125
 msgid "Display mode:"
-msgstr ""
+msgstr "Näyttötila:"
 
+# Translated by DeepL.
 #: ms-browser-display.js:221
 msgid "Display {count} more items"
-msgstr ""
+msgstr "Näytä {count} lisää kohteita"
 
-#: ms-browser-display.js:1121
+# Translated by DeepL.
+#: ms-browser-display.js:1136
 msgid "Duration"
-msgstr ""
+msgstr "Kesto"
 
-#: ms-browser-display.js:618 ms-browser-display.js:904
-#: ms-browser-display.js:935
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:618 ms-browser-display.js:919 ms-browser-display.js:950
 msgid "Edit"
-msgstr "Muokata"
+msgstr "Muokkaa"
 
+# Translated by DeepL.
 #: ms-browser-display.js:153
 msgid "Editable:"
-msgstr ""
+msgstr "Muokattavissa:"
 
+# Translated by DeepL.
+#: ms-api.js:276
+msgid "Failed to communicate with the service."
+msgstr "Yhteydenotto palveluun epäonnistui."
+
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:8
-#, fuzzy
 msgid "February"
 msgstr "Helmikuu"
 
+# Translated by DeepL.
 #: ms-browser-display.js:151
 msgid "Filters:"
-msgstr ""
+msgstr "Suodattimet:"
 
+# Translated by DeepL.
 #: ms-browser-search.js:78
-#, fuzzy
 msgid "Go"
 msgstr "Mene"
 
-#: ms-browser-display.js:1070
+# Translated by DeepL.
+#: ms-browser-display.js:1085
 msgid "Hide this window"
-msgstr ""
+msgstr "Piilota tämä ikkuna"
 
+# Translated by DeepL.
 #: ms-api.js:17
 msgid "Item not found."
-msgstr ""
+msgstr "Tuotetta ei löydy."
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:7
-#, fuzzy
 msgid "January"
 msgstr "Tammikuu"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:13
-#, fuzzy
 msgid "July"
 msgstr "Heinäkuu"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:12
-#, fuzzy
 msgid "June"
 msgstr "Kesäkuu"
 
+# Translated by DeepL.
 #: ms-browser-display.js:22
 msgid "Latest content"
-msgstr ""
+msgstr "Viimeisin sisältö"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:102
-msgid "Latest content added"
-msgstr ""
+msgid "Latest media"
+msgstr "Viimeisimmät tiedotusvälineet"
 
-#: ms-browser-display.js:1144
+# Translated by DeepL.
+#: ms-browser-display.js:1159
 msgid "License"
-msgstr ""
+msgstr "Lisenssi"
 
-#: ms-browser-display.js:763
+# Translated by DeepL.
+#: ms-browser-display.js:778
 msgid "License:"
-msgstr ""
+msgstr "Lisenssi:"
 
+# Translated by DeepL.
 #: ms-browser-display.js:544
-#, fuzzy
 msgid "Live streams"
-msgstr "LIVE lähetykset"
+msgstr "Suorat lähetykset"
 
+# Translated by DeepL.
 #: ms-tree.js:169
-#, fuzzy
 msgid "Loading"
-msgstr "Lataa"
+msgstr "Ladataan"
 
-#: ms-browser-display.js:48 ms-browser-channels.js:43
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-channels.js:43 ms-browser-display.js:48
 msgid "Loading..."
-msgstr "Lataa"
+msgstr "Ladataan..."
 
+# Translated by DeepL.
 #: ms-browser-channels.js:81
 msgid "Main channels"
-msgstr ""
+msgstr "Pääkanavat"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:9
-#, fuzzy
 msgid "March"
 msgstr "Maaliskuu"
 
-#: ms-browser-display.js:811 ms-browser-display.js:1076
+# Translated by DeepL.
+#: ms-browser-display.js:826 ms-browser-display.js:1091
 msgid "Matching annotations:"
-msgstr ""
+msgstr "Vastaavat huomautukset:"
 
+# Translated by DeepL.
 #: ms-browser-search.js:354
 msgid "Matching items:"
-msgstr ""
+msgstr "Vastaavat tuotteet:"
 
-#: ms-browser-display.js:824 ms-browser-display.js:1090
+# Translated by DeepL.
+#: ms-browser-display.js:839 ms-browser-display.js:1105
 msgid "Matching photos:"
-msgstr ""
+msgstr "Vastaavat kuvat:"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:11
-#, fuzzy
 msgid "May"
 msgstr "Toukokuu"
 
+# Translated by DeepL.
 #: ms-api.js:88 ms-api.js:124
 msgid "Media does not exist."
-msgstr ""
+msgstr "Mediaa ei ole olemassa."
 
-#: ms-browser-display.js:1106
+# Translated by DeepL.
+#: ms-browser-display.js:1121
 msgid "Media information"
-msgstr ""
+msgstr "Tiedotusvälineitä koskevat tiedot"
 
-#: ms-browser-display.js:17 ms-browser-channels.js:79 ms-tree.js:114
-#: ms-tree.js:433 ms-tree.js:441
+# Translated by DeepL.
+#: ms-browser-channels.js:79 ms-tree.js:114 ms-tree.js:391 ms-tree.js:399 ms-browser-display.js:17
 msgid "My channel"
-msgstr ""
+msgstr "Minun kanavani"
 
+# Translated by DeepL.
 #: ms-browser-display.js:18
 msgid "My media"
-msgstr ""
+msgstr "Oma media"
 
-#: ms-api.js:356
+# Translated by DeepL.
+#: ms-api.js:357
 msgid "No available space"
-msgstr ""
+msgstr "Ei vapaata tilaa"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:251
 msgid "No contents."
-msgstr ""
+msgstr "Ei sisältöä."
 
-#: ms-api.js:259 ms-tree.js:297
+# Translated by DeepL.
+#: ms-tree.js:275
 msgid "No information about error."
-msgstr ""
+msgstr "Ei tietoa virheestä."
 
+# Translated by DeepL.
 #: ms-browser-search.js:358
-#, fuzzy
 msgid "No results."
-msgstr "Ei tuloksia"
+msgstr "Ei tuloksia."
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:17
-#, fuzzy
 msgid "November"
 msgstr "Marraskuu"
 
+# Translated by DeepL.
 #: ms-browser-display.js:128
 msgid "Number of items:"
-msgstr ""
+msgstr "Kappaleiden lukumäärä:"
 
+# Translated by DeepL.
 #: ms-browser-display.js:118
 msgid "Number of views, ascending"
-msgstr ""
+msgstr "Näkymien määrä, nouseva"
 
+# Translated by DeepL.
 #: ms-browser-display.js:117
 msgid "Number of views, descending"
-msgstr ""
+msgstr "Näkymien määrä, laskeva"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:16
-#, fuzzy
 msgid "October"
 msgstr "Lokakuu"
 
+# Translated by DeepL.
 #: ms-browser-display.js:163
-#, fuzzy
 msgid "Ok"
-msgstr "OK"
+msgstr "Ok"
 
+# Translated by DeepL.
 #: ms-browser-display.js:616
 msgid "Open information panel"
-msgstr ""
+msgstr "Avaa tietopaneeli"
 
-#: ms-browser-channels.js:287 ms-browser-channels.js:307
-#: ms-browser-channels.js:308 ms-browser-channels.js:312
+# Translated by DeepL.
+#: ms-browser-channels.js:288 ms-browser-channels.js:308 ms-browser-channels.js:309 ms-browser-channels.js:313
 msgid "Parent channel"
-msgstr ""
+msgstr "Vanhempien kanava"
 
-#: ms-browser-display.js:794
+# Translated by DeepL.
+#: ms-browser-display.js:809
 msgid "Parent channel:"
-msgstr ""
+msgstr "Vanhempien kanava:"
 
+# Translated by DeepL.
 #: ms-browser-display.js:550
-#, fuzzy
 msgid "Photos groups"
-msgstr "Kuvagalleriat"
+msgstr "Kuvat ryhmät"
 
+# Translated by DeepL.
 #: ms-browser-channels.js:194
 msgid "Please login to access this channel"
-msgstr ""
+msgstr "Kirjaudu sisään päästäksesi tälle kanavalle"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:207 ms-browser-search.js:311
 msgid "Please login to access this page"
-msgstr ""
+msgstr "Kirjaudu sisään päästäksesi tälle sivulle"
 
+# Translated by DeepL.
 #: ms-browser-display.js:157
 msgid "Published:"
-msgstr ""
+msgstr "Julkaistu:"
 
-#: ms-browser-display.js:1115
+# Translated by DeepL.
+#: ms-browser-display.js:1130
 msgid "Publishing date"
-msgstr ""
+msgstr "Julkaisupäivä"
 
-#: ms-browser-display.js:1109
+# Translated by DeepL.
+#: ms-browser-display.js:1124
 msgid "Recording date"
-msgstr ""
+msgstr "Tallennuspäivä"
 
-#: ms-api.js:277
-msgid "Request failed:"
-msgstr ""
+# Translated by DeepL.
+#: ms-api.js:282
+msgid "Request failed with code:"
+msgstr "Pyyntö epäonnistui koodilla:"
 
+# Translated by DeepL.
 #: ms-api.js:32 ms-api.js:48 ms-api.js:56 ms-api.js:64 ms-api.js:72
 msgid "Requested channel does not exist."
-msgstr ""
+msgstr "Pyydettyä kanavaa ei ole olemassa."
 
+# Translated by DeepL.
 #: ms-browser-channels.js:67 ms-tree.js:89 ms-tree.js:91
 msgid "Root"
-msgstr ""
+msgstr "Juuret"
 
-#: ms-browser-display.js:23 ms-browser-search.js:156
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-search.js:156 ms-browser-display.js:23
 msgid "Search"
-msgstr "Haku"
+msgstr "Etsi"
 
+# Translated by DeepL.
 #: ms-browser-search.js:98
 msgid "Search for"
-msgstr ""
+msgstr "Etsi"
 
+# Translated by DeepL.
 #: ms-browser-search.js:81
-#, fuzzy
 msgid "Search in"
-msgstr "Haku"
+msgstr "Haku osoitteessa"
 
+# Translated by DeepL.
 #: ms-browser-display.js:19
 msgid "Search in my media"
-msgstr ""
+msgstr "Etsi mediastani"
 
+# Translated by DeepL.
 #: ms-browser-search.js:278
-#, fuzzy
 msgid "Search results for:"
-msgstr "Hakutulokset"
+msgstr "Search results for:"
 
+# Translated by DeepL.
 #: ms-browser-search.js:76
-#, fuzzy
 msgid "Search:"
-msgstr "Haku"
+msgstr "Etsi:"
 
-#: ms-browser-display.js:932
+# Translated by DeepL.
+#: ms-browser-display.js:947
 msgid "See"
-msgstr ""
+msgstr "Katso"
 
-#: ms-browser-display.js:1346
+# Translated by DeepL.
+#: ms-browser-display.js:1361
 msgid "See statistics on this channel"
-msgstr ""
+msgstr "Katso tämän kanavan tilastot"
 
+# Translated by DeepL.
 #: ms-browser-channels.js:49
 msgid "Select a channel to display its content."
-msgstr ""
+msgstr "Valitse kanava näyttääksesi sen sisällön."
 
-#: ms-browser-display.js:887
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:902
 msgid "Select this channel"
-msgstr "Valitse kanava"
+msgstr "Valitse tämä kanava"
 
-#: ms-browser-display.js:893
+# Translated by DeepL.
+#: ms-browser-display.js:908
 msgid "Select this media"
-msgstr ""
+msgstr "Valitse tämä media"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:15
-#, fuzzy
 msgid "September"
 msgstr "Syyskuu"
 
-#: ms-browser-latest.js:207 ms-browser-search.js:311 ms-browser-channels.js:194
+# Translated by DeepL.
+#: ms-browser-channels.js:195 ms-browser-latest.js:207 ms-browser-search.js:311
 msgid "Sign in"
-msgstr ""
+msgstr "Kirjaudu sisään"
 
+# Translated by DeepL.
 #: ms-browser-display.js:114
 msgid "Slug, ascending"
-msgstr ""
+msgstr "Etana, nouseva"
 
+# Translated by DeepL.
 #: ms-browser-display.js:113
 msgid "Slug, descending"
-msgstr ""
+msgstr "Etana, laskeva"
 
-#: ms-browser-channels.js:482
+# Translated by DeepL.
+#: ms-browser-channels.js:483
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
-msgstr ""
+msgstr "Joitakin sisältöjä saattaa olla edelleen tällä kanavalla, mutta jos näin on, tilisi ei saa nähdä niitä."
 
+# Translated by DeepL.
 #: ms-browser-display.js:137
 msgid "Sort by:"
-msgstr ""
+msgstr "Lajittelu:"
 
-#: ms-browser-display.js:1147
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:1162
 msgid "Speaker"
-msgstr "Puhuja-asetukset"
+msgstr "Puhuja"
 
-#: ms-browser-display.js:161 ms-browser-display.js:766
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:161 ms-browser-display.js:781
 msgid "Speaker:"
-msgstr "Puhuja-asetukset"
+msgstr "Puhuja:"
 
-#: ms-browser-display.js:901
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:916
 msgid "Statistics"
-msgstr "Tilastot "
+msgstr "Tilastot"
 
-#: ms-browser-display.js:1140
+# Translated by DeepL.
+#: ms-browser-display.js:1155
 msgid "Storage usage"
-msgstr ""
+msgstr "Varaston käyttö"
 
-#: ms-browser-display.js:781 ms-browser-channels.js:410
+# Translated by DeepL.
+#: ms-browser-channels.js:411 ms-browser-display.js:796
 msgid "Storage usage:"
-msgstr ""
+msgstr "Säilytyksen käyttö:"
 
+# Translated by DeepL.
 #: ms-browser-display.js:540
 msgid "Sub channels"
-msgstr ""
+msgstr "Alakanavat"
 
-#: ms-browser-channels.js:399
+# Translated by DeepL.
+#: ms-browser-channels.js:400
 msgid "Sub channels items are included in counts."
-msgstr ""
+msgstr "Alikanavat sisältyvät laskentaan."
 
-#: ms-browser-channels.js:431
+# Translated by DeepL.
+#: ms-browser-channels.js:432
 msgid "Subscribe to channel videos RSS"
-msgstr ""
+msgstr "Tilaa kanavan videot RSS"
 
-#: ms-browser-channels.js:422
+# Translated by DeepL.
+#: ms-browser-channels.js:423
 msgid "Subscribe to channel videos RSS:"
-msgstr ""
+msgstr "Tilaa kanavan videot RSS:"
 
+# Translated by DeepL.
 #: ms-api.js:19
 msgid "The connection timed out. Please retry later."
-msgstr ""
+msgstr "Yhteys katkesi. Yritä myöhemmin uudelleen."
 
-#: ms-api.js:20 ms-tree.js:191
+# Translated by DeepL.
+#: ms-api.js:20
 msgid "The server cannot be reached."
-msgstr ""
+msgstr "Palvelinta ei tavoiteta."
 
-#: ms-api.js:358
+# Translated by DeepL.
+#: ms-api.js:359
 msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
-msgstr ""
+msgstr "Vanhempien kanavien tallennuskiintiö voi vaikuttaa tämän kanavan käytettävissä olevaan tilaan."
 
-#: ms-browser-channels.js:476
+# Translated by DeepL.
+#: ms-browser-channels.js:477
 msgid "This channel contains no media."
-msgstr ""
+msgstr "Tämä kanava ei sisällä mediaa."
 
-#: ms-browser-channels.js:478
+# Translated by DeepL.
+#: ms-browser-channels.js:479
 msgid "This channel contains no sub channels and no media."
-msgstr ""
+msgstr "Tämä kanava ei sisällä alakanavia eikä mediaa."
 
-#: ms-browser-channels.js:480
+# Translated by DeepL.
+#: ms-browser-channels.js:481
 msgid "This channel contains no sub channels."
-msgstr ""
+msgstr "Tämä kanava ei sisällä alakanavia."
 
-#: ms-browser-display.js:885
+# Translated by DeepL.
+#: ms-browser-display.js:900
 msgid "This channel is selected"
-msgstr ""
+msgstr "Tämä kanava on valittu"
 
-#: ms-browser-display.js:710 ms-browser-display.js:711
+# Translated by DeepL.
+#: ms-browser-display.js:720 ms-browser-display.js:721
 msgid "This channel is unlisted"
-msgstr ""
+msgstr "Tämä kanava on listaamaton"
 
-#: ms-browser-display.js:678
+# Translated by DeepL.
+#: ms-browser-display.js:688
 msgid "This item is a channel"
-msgstr ""
+msgstr "Tämä tuote on kanava"
 
-#: ms-browser-display.js:691
+# Translated by DeepL.
+#: ms-browser-display.js:701
 msgid "This item is a live stream"
-msgstr ""
+msgstr "Tämä kohde on suoratoisto"
 
-#: ms-browser-display.js:682
+# Translated by DeepL.
+#: ms-browser-display.js:692
 msgid "This item is a photos group"
-msgstr ""
+msgstr "Tämä tuote on valokuvaryhmä"
 
-#: ms-browser-display.js:691
+# Translated by DeepL.
+#: ms-browser-display.js:701
 msgid "This item is a video"
-msgstr ""
+msgstr "Tämä tuote on video"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:91
 msgid "This list presents all media and channels ordered by add date."
-msgstr ""
+msgstr "Tässä luettelossa näkyvät kaikki mediat ja kanavat lisäyspäivämäärän mukaisessa järjestyksessä."
 
-#: ms-browser-display.js:716 ms-browser-display.js:717
+# Translated by DeepL.
+#: ms-browser-display.js:743 ms-browser-display.js:744
+msgid "This live is running"
+msgstr "Tämä live on käynnissä"
+
+# Translated by DeepL.
+#: ms-browser-display.js:726 ms-browser-display.js:727
 msgid "This media is not published"
-msgstr ""
+msgstr "Tätä mediaa ei julkaista"
 
-#: ms-browser-display.js:724 ms-browser-display.js:725
+# Translated by DeepL.
+#: ms-browser-display.js:734 ms-browser-display.js:735
 msgid "This media is published"
-msgstr ""
+msgstr "Tämä media julkaistaan"
 
-#: ms-browser-display.js:720 ms-browser-display.js:721
+# Translated by DeepL.
+#: ms-browser-display.js:730 ms-browser-display.js:731
 msgid "This media is published and unlisted"
-msgstr ""
+msgstr "Tämä media on julkaistu ja luetteloimaton"
 
-#: ms-browser-display.js:891
+# Translated by DeepL.
+#: ms-browser-display.js:906
 msgid "This media is selected"
-msgstr ""
+msgstr "Tämä media on valittu"
 
-#: ms-browser-display.js:729 ms-browser-display.js:730
+# Translated by DeepL.
+#: ms-browser-display.js:739 ms-browser-display.js:740
 msgid "This video is not ready"
-msgstr ""
+msgstr "Tämä video ei ole valmis"
 
+# Translated by DeepL.
 #: ms-browser-display.js:112
 msgid "Title, ascending"
-msgstr ""
+msgstr "Otsikko, nouseva"
 
+# Translated by DeepL.
 #: ms-browser-display.js:111
 msgid "Title, descending"
-msgstr ""
+msgstr "Otsikko, aleneva"
 
-#: ms-browser-display.js:786
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-display.js:801
 msgid "Type:"
-msgstr "Sinun täytyy valita kysymyksen tyyppi."
+msgstr "Tyyppi:"
 
+# Translated by DeepL.
 #: ms-api.js:47
 msgid "Unable to get channel content because you cannot access to this channel."
-msgstr ""
+msgstr "Kanavan sisältöä ei voi saada, koska et pääse tälle kanavalle."
 
+# Translated by DeepL.
 #: ms-api.js:55
 msgid "Unable to get channel information because you cannot access to this channel."
-msgstr ""
+msgstr "Kanavatietoja ei voida saada, koska et pääse tälle kanavalle."
 
+# Translated by DeepL.
 #: ms-api.js:71
 msgid "Unable to get channels path because you cannot access to this channel."
-msgstr ""
+msgstr "Kanavapolkua ei voida saada, koska et pääse tälle kanavalle."
 
-#: ms-tree.js:179
+# Translated by DeepL.
+#: ms-tree.js:180
 msgid "Unable to get channels tree because you are not logged in."
-msgstr ""
+msgstr "Kanavapuuta ei voi hakea, koska et ole kirjautunut sisään."
 
-#: ms-api.js:63 ms-tree.js:181
+# Translated by DeepL.
+#: ms-tree.js:182 ms-api.js:63
 msgid "Unable to get channels tree because you cannot access to this channel."
-msgstr ""
+msgstr "Kanavapuuta ei voi hakea, koska et pääse tälle kanavalle."
 
-#: ms-tree.js:189
-msgid "Unable to get channels tree. Request timed out."
-msgstr ""
-
+# Translated by DeepL.
 #: ms-api.js:87
 msgid "Unable to get media information because you cannot access to this media."
-msgstr ""
+msgstr "Mediatietoja ei voida saada, koska et pääse käsiksi tähän mediaan."
 
+# Translated by DeepL.
 #: ms-api.js:31
 msgid "Unable to get search's results content because you cannot access to this channel."
-msgstr ""
+msgstr "Hakutulosten sisältöä ei voi hakea, koska et pääse tähän kanavaan."
 
-#: ms-browser-display.js:1270
+# Translated by DeepL.
+#: ms-browser-display.js:1285
 msgid "Unspecified"
-msgstr ""
+msgstr "Määrittelemätön"
 
+# Translated by DeepL.
 #: ms-browser-display.js:106
 msgid "Use default sorting"
-msgstr ""
+msgstr "Käytä oletuslajittelua"
 
+# Translated by DeepL.
 #: ms-browser-search.js:146
 msgid "Use the input above to search for something."
-msgstr ""
+msgstr "Käytä yllä olevaa syöttötapaa jonkin asian etsimiseen."
 
+# Translated by DeepL.
 #: ms-browser-display.js:547
-#, fuzzy
 msgid "Videos"
 msgstr "Videot"
 
-#: ms-browser-display.js:1129
+# Translated by DeepL.
+#: ms-browser-display.js:1144
 msgid "Views"
-msgstr ""
+msgstr "Näkymät"
 
-#: ms-browser-display.js:1126
+# Translated by DeepL.
+#: ms-browser-display.js:1141
 msgid "Views last month"
-msgstr ""
+msgstr "Näkymiä viime kuussa"
 
+# Translated by DeepL.
 #: ms-browser-channels.js:138
 msgid "You are not allowed to have a personal channel."
-msgstr ""
+msgstr "Sinulla ei saa olla henkilökohtaista kanavaa."
 
+# Translated by DeepL.
 #: ms-api.js:123
 msgid "You are not allowed to perform this action."
-msgstr ""
+msgstr "Et saa suorittaa tätä toimintoa."
 
+# Translated by DeepL.
 #: ms-api.js:15
 msgid "You are not logged in or your session has expired. Please login and retry."
-msgstr ""
+msgstr "Et ole kirjautunut sisään tai istuntosi on päättynyt. Kirjaudu sisään ja yritä uudelleen."
 
+# Translated by DeepL.
 #: ms-browser-search.js:83 ms-browser-search.js:100
-#, fuzzy
 msgid "all"
-msgstr "Kaikki"
+msgstr "kaikki"
 
-#: ms-browser-channels.js:361
+# Translated by DeepL.
+#: ms-browser-channels.js:362
 msgid "annotations"
-msgstr ""
+msgstr "huomautukset"
 
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:19
 msgid "at"
-msgstr ""
+msgstr "osoitteessa"
 
-#: ms-browser-display.js:982
+# Translated by DeepL.
+#: ms-browser-display.js:997
 msgid "cannot copy"
-msgstr ""
+msgstr "ei voi kopioida"
 
+# Translated by DeepL.
 #: ms-browser-search.js:24
 msgid "categories"
-msgstr ""
+msgstr "luokat"
 
+# Translated by DeepL.
 #: extra-translations/item-types.js:7
 msgid "channel"
-msgstr ""
+msgstr "kanava"
 
-#: ms-browser-search.js:343 ms-browser-channels.js:386
+# Translated by DeepL.
+#: ms-browser-channels.js:387 ms-browser-search.js:343
 msgid "channel(s)"
-msgstr ""
+msgstr "kanava(t)"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:46 ms-browser-search.js:41
-#, fuzzy
 msgid "channels"
-msgstr "Videokanava"
+msgstr "kanavat"
 
-#: ms-browser-display.js:696
+# Translated by DeepL.
+#: ms-browser-display.js:706
 msgid "classic Rich Media"
-msgstr ""
+msgstr "klassinen Rich Media"
 
+# Translated by DeepL.
 #: ms-browser-search.js:25
 msgid "comments, slides, ..."
-msgstr ""
+msgstr "kommentit, diat, ..."
 
+# Translated by DeepL.
 #: ms-browser-search.js:22
 msgid "companies"
-msgstr ""
+msgstr "yritykset"
 
-#: ms-browser-display.js:982
+# Translated by DeepL.
+#: ms-browser-display.js:997
 msgid "copied"
-msgstr ""
+msgstr "kopioitu"
 
+# Translated by DeepL.
 #: ms-browser-search.js:18
 msgid "descriptions"
-msgstr ""
+msgstr "kuvaukset"
 
+# Translated by DeepL.
 #: ms-browser-display.js:135
 msgid "display items type icons"
-msgstr ""
+msgstr "näyttö kohteiden tyypin kuvakkeet"
 
-#: ms-browser-display.js:694
+# Translated by DeepL.
+#: ms-browser-display.js:704
 msgid "dynamic Rich Media"
-msgstr ""
+msgstr "dynaaminen Rich Media"
 
+# Translated by DeepL.
 #: ms-browser-search.js:28
 msgid "external data"
-msgstr ""
+msgstr "ulkoiset tiedot"
 
+# Translated by DeepL.
 #: ms-browser-search.js:27
 msgid "external references"
-msgstr ""
+msgstr "ulkoiset viittaukset"
 
-#: ms-browser-display.js:985
+# Translated by DeepL.
+#: ms-browser-display.js:1000
 msgid "failed to copy"
-msgstr ""
+msgstr "ei onnistunut kopioimaan"
 
-#: ms-api.js:358 ms-browser-channels.js:399
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-channels.js:400 ms-api.js:359
 msgid "help"
-msgstr "Apua"
+msgstr "apua"
 
-#: ms-browser-channels.js:426
+# Translated by DeepL.
+#: ms-browser-channels.js:427
 msgid "iTunes"
-msgstr ""
+msgstr "iTunes"
 
-#: ms-browser-channels.js:428
+# Translated by DeepL.
+#: ms-browser-channels.js:429
 msgid "iTunes (audio only)"
-msgstr ""
+msgstr "iTunes (vain ääni)"
 
+# Translated by DeepL.
 #: ms-browser-search.js:19
-#, fuzzy
 msgid "keywords"
-msgstr "Avainsanat"
+msgstr "avainsanat"
 
+# Translated by DeepL.
 #: ms-browser-search.js:21
 msgid "licenses"
-msgstr ""
+msgstr "lisenssit"
 
+# Translated by DeepL.
 #: ms-browser-display.js:126
-#, fuzzy
 msgid "list"
-msgstr "Vedä ja pudota videokanavalistaa muuttaaksesi järjestystä widgeteissä."
+msgstr "lista"
 
+# Translated by DeepL.
 #: extra-translations/item-types.js:9
-#, fuzzy
 msgid "live"
-msgstr "Livelähetys pysäytetty."
+msgstr "live"
 
-#: ms-browser-search.js:349 ms-browser-channels.js:392
+# Translated by DeepL.
+#: ms-browser-channels.js:393 ms-browser-search.js:349
 msgid "live stream(s)"
-msgstr ""
+msgstr "suoratoisto(t)"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:54 ms-browser-search.js:43
-#, fuzzy
 msgid "live streams"
-msgstr "LIVE lähetykset"
+msgstr "suorat lähetykset"
 
+# Translated by DeepL.
 #: ms-browser-search.js:23
 msgid "locations"
-msgstr ""
+msgstr "sijainnit"
 
+# Translated by DeepL.
 #: ms-browser-display.js:150
 msgid "no"
-msgstr ""
+msgstr "ei"
 
+# Translated by DeepL.
 #: ms-browser-search.js:84 ms-browser-search.js:101
-#, fuzzy
 msgid "none"
-msgstr "Ei mitään"
+msgstr "none"
 
-#: ms-browser-latest.js:58 extra-translations/item-types.js:10
-#: ms-browser-search.js:26
-#, fuzzy
+# Translated by DeepL.
+#: ms-browser-latest.js:58 ms-browser-search.js:26 extra-translations/item-types.js:10
 msgid "photos"
-msgstr "Kuvat"
+msgstr "kuvat"
 
-#: ms-browser-search.js:352 ms-browser-channels.js:395
+# Translated by DeepL.
+#: ms-browser-channels.js:396 ms-browser-search.js:352
 msgid "photos group(s)"
-msgstr ""
+msgstr "valokuvat ryhmä(t)"
 
+# Translated by DeepL.
 #: ms-browser-search.js:44
-#, fuzzy
 msgid "photos groups"
-msgstr "Kuvagalleriat"
+msgstr "valokuvat ryhmät"
 
-#: ms-browser-display.js:602 ms-tree.js:89 ms-tree.js:91 ms-tree.js:257
-#: ms-tree.js:392
-#, fuzzy
+# Translated by DeepL.
+#: ms-tree.js:89 ms-tree.js:91 ms-tree.js:235 ms-tree.js:370 ms-browser-display.js:602
 msgid "selected"
-msgstr "Valittu videokanava on se, joka valitaan ensin."
+msgstr "valitut"
 
-#: ms-browser-display.js:126 ms-browser-display.js:127
-#: ms-browser-display.js:353 ms-browser-display.js:370
+# Translated by DeepL.
+#: ms-browser-display.js:126 ms-browser-display.js:127 ms-browser-display.js:353 ms-browser-display.js:370
 msgid "selected setting"
-msgstr ""
+msgstr "valittu asetus"
 
+# Translated by DeepL.
 #: ms-browser-display.js:415
 msgid "selected tab"
-msgstr ""
+msgstr "valittu välilehti"
 
+# Translated by DeepL.
 #: ms-browser-search.js:20
 msgid "speakers"
-msgstr ""
+msgstr "kaiuttimet"
 
-#: ms-browser-channels.js:424
+# Translated by DeepL.
+#: ms-browser-channels.js:425
 msgid "standard"
-msgstr ""
+msgstr "standardi"
 
-#: ms-browser-display.js:774 ms-browser-channels.js:356
-#: ms-browser-channels.js:363
+# Translated by DeepL.
+#: ms-browser-channels.js:357 ms-browser-channels.js:364 ms-browser-display.js:789
 msgid "this month"
-msgstr ""
+msgstr "tässä kuussa"
 
+# Translated by DeepL.
 #: ms-browser-display.js:127
 msgid "thumbnails"
-msgstr ""
+msgstr "pikkukuvat"
 
+# Translated by DeepL.
 #: ms-browser-search.js:17
 msgid "titles"
-msgstr ""
+msgstr "otsikot"
 
+# Translated by DeepL.
 #: ms-browser-display.js:148
 msgid "unspecified"
-msgstr ""
+msgstr "määrittelemätön"
 
+# Translated by DeepL.
 #: extra-translations/item-types.js:8
-#, fuzzy
 msgid "video"
-msgstr "Valitse kuva videosta"
+msgstr "video"
 
-#: ms-browser-search.js:346 ms-browser-channels.js:389
+# Translated by DeepL.
+#: ms-browser-channels.js:390 ms-browser-search.js:346
 msgid "video(s)"
-msgstr ""
+msgstr "video(t)"
 
+# Translated by DeepL.
 #: ms-browser-latest.js:50 ms-browser-search.js:42
-#, fuzzy
 msgid "videos"
-msgstr "Videot"
+msgstr "videot"
 
-#: ms-browser-display.js:772 ms-browser-channels.js:354
+# Translated by DeepL.
+#: ms-browser-channels.js:355 ms-browser-display.js:787
 msgid "views"
-msgstr ""
+msgstr "näkymät"
 
+# Translated by DeepL.
 #: ms-browser-display.js:149
-#, fuzzy
 msgid "yes"
 msgstr "kyllä"
+
+#, fuzzy
+#~ msgid "An error occurred during request:"
+#~ msgstr "Tapahtui virhe pyyntöä suoritettaessa"
