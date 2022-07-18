@@ -337,9 +337,24 @@ MSBrowser.prototype.onFiltersSubmit = function ($form) {
         }
     }
     if (changed) {
-        this.channels.refreshDisplay(true);
-        this.latest.refreshDisplay(true);
-        this.search.refreshDisplay(true);
+        if (this.useOverlay) {
+            this.channels.refreshDisplay(true);
+            this.latest.refreshDisplay(true);
+            this.search.refreshDisplay(true);
+        } else {
+            const currentTab = this.getActiveTab();
+            switch (currentTab) {
+                case 'channels':
+                    this.channels.refreshDisplay(true);
+                    break;
+                case 'latest':
+                    this.latest.refreshDisplay(true);
+                    break;
+                case 'search':
+                    this.search.refreshDisplay(true);
+                    break;
+            }
+        }
     }
 };
 MSBrowser.prototype.setDisplayAsList = function () {
