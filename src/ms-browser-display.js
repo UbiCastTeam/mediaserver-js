@@ -600,7 +600,7 @@ MSBrowser.prototype.displayMore = function (count) {
     } else if (currentTab === 'channels') {
         this.displayContent(this.channels.$place, data, null, 'channels', count);
     } else if (currentTab === 'search') {
-        this.displayContent(this.search.$content, data, null, 'search', count);
+        this.displayContent(this.search.$place, data, null, 'search', count);
     }
 };
 MSBrowser.prototype.getContentEntry = function (itemType, item, gselectable, tab) {
