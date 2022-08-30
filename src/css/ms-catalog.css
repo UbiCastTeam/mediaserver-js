@@ -167,10 +167,13 @@ h1 .channel-titles-place .channel-title {
     padding-left: 12px;
     padding-right: 12px;
 }
+.overlay-info table.overlay-info-table {
+    border: none;
+}
 .overlay-info table.overlay-info-table td {
     padding: 4px 0;
-    vertical-align: top;
     border: 0 none;
+    color: white;
 }
 .overlay-info table.overlay-info-table th.overlay-info-label {
     padding-right: 8px;
