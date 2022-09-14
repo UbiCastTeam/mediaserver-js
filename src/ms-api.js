@@ -313,7 +313,7 @@ MSAPIClient.prototype.getStorageDisplay = function (item) {
                 storageUsedPercents = 100;
             }
             let storageClass = '';
-            if (item.storage_warning && storageUsedPercents > item.storage_warning) {
+            if ((storageUsedPercents == 100) || (item.storage_warning && storageUsedPercents > item.storage_warning)) {
                 storageClass = ' red';
             }
             html += '<span class="progress-bar inline-block' + storageClass + '" aria-hidden="true" style="width: 100%; vertical-align: middle;">' +
