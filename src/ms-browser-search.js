@@ -13,6 +13,7 @@ function MSBrowserSearch (options) {
     this.$content = null;
     this.order = 'default';
     this.lastResponse = null;
+    this.loadingSearch = false;
     this.searchInFields = [
         { name: 'in_title', label: jsu.translateHTML('titles'), initial: true, items: null },
         { name: 'in_description', label: jsu.translateHTML('descriptions'), initial: false, items: null },
@@ -212,12 +213,25 @@ MSBrowserSearch.prototype.onUrlChange = function () {
         this.onSearchSubmit(true);
     }
 };
-
+MSBrowserSearch.prototype.toggleSearchLoading = function () {
+    this.loadingSearch = !this.loadingSearch;
+    if (this.loadingSearch) {
+        document.getElementById('top_search_input').setAttribute('disabled', 'disabled');
+        document.getElementById('top_search_btn').setAttribute('disabled', 'disabled');
+    } else {
+        document.getElementById('top_search_input').removeAttribute('disabled');
+        document.getElementById('top_search_btn').removeAttribute('disabled');
+    }
+};
 MSBrowserSearch.prototype.onSearchSubmit = function (noPushstate) {
     const search = $('#ms_browser_search_text', this.$menu).val();
     if (!search) {
         return;
     }
+    if (this.loadingSearch) {
+        return;
+    }
+    this.toggleSearchLoading();
     this.browser.displayLoading();
     const dc = this.getDisplayableContent();
     let urlQuery = 'text=' + search;
@@ -293,6 +307,7 @@ MSBrowserSearch.prototype.onSearchSubmit = function (noPushstate) {
     // execute search request
     const obj = this;
     this.browser.msapi.ajaxCall('search', data, function (response) {
+        obj.toggleSearchLoading();
         obj._onAjaxResponse(response);
         if (window.gaPageview) {
             window.gaPageview('ajax search', '/ajax_search?search=' + data.search + '&fields=' + data.fields);
