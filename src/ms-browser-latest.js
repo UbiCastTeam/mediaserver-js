@@ -109,7 +109,7 @@ MSBrowserLatest.prototype.onShow = function () {
     if (dc.length > 1) {
         let types = jsu.getCookie('catalog-lastestTypes');
         if (!types) {
-            types = 'vlp';
+            types = 'cvlp';
         }
         $('.ms-browser-latest-types #latest_display_channel', this.$menu).prop('checked', types.indexOf('c') != -1);
         $('.ms-browser-latest-types #latest_display_video', this.$menu).prop('checked', types.indexOf('v') != -1);
