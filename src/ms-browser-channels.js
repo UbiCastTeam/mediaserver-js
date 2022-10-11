@@ -55,8 +55,24 @@ MSBrowserChannels.prototype.getContentJq = function () {
     this.$place = $('.ms-browser-channels-place', this.$content);
     return this.$content;
 };
-
-MSBrowserChannels.prototype.refreshTitle = function () {
+MSBrowserChannels.prototype.buildBreadcrumb = function (item) {
+    let html = '<ol>';
+    html += '<li><a href="#">' + jsu.translateHTML('Catalog home') + '</a></li>';
+    for (const parent of item.path) {
+        html += '<li><a class="tree" href="#' + jsu.escapeAttribute(parent.slug ? parent.slug : '') + '"' +
+            (parent.language ? 'lang="' + jsu.escapeAttribute(parent.language) + '"' : '') + '>' +
+                jsu.escapeHTML(parent.title) +
+        '</a></li>';
+        console.log(parent);
+    }
+    html += '<li><a aria-current="page" class="tree" href="#' + jsu.escapeAttribute(item.slug ? item.slug : '') + '"' +
+        (item.language ? 'lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' +
+            jsu.escapeHTML(item.title) +
+    '</a></li>';
+    html += '</ol>';
+    return html;
+};
+MSBrowserChannels.prototype.refreshAndBreadcrumb = function () {
     if (this.browser.getActiveTab() != 'channels') {
         return;
     }
@@ -64,12 +80,14 @@ MSBrowserChannels.prototype.refreshTitle = function () {
     if (item && item.oid != '0') {
         let html = '<span class="item-entry-preview"><img src="' + jsu.escapeAttribute(item.thumb) + '" alt="' + jsu.escapeHTML(item.title) + '"/></span>';
         html += '<span class="channel-titles-place">';
-        const parentTitle = item.parent_oid && item.parent_oid != '0' ? item.parent_title : jsu.translate('Root');
-        if (!this.browser.useOverlay && parentTitle && (!this.browser.hideHeader || !this.browser.initialState || !this.browser.initialState.channelSlug || this.browser.initialState.channelSlug != item.slug)) {
-            // If header is disabled, do not display parent link of first opened channel to prevent navigation on whole catalog
-            html += '<a class="parent-channel-title" href="#' + jsu.escapeAttribute(item.parent_slug ? item.parent_slug : '') + '"' + (item.parent_language ? 'lang="' + jsu.escapeAttribute(item.parent_language) + '"' : '') + '>' + jsu.escapeHTML(parentTitle) + '</a><wbr/>';
-        }
         html += '<span class="channel-title"' + (item.language ? 'lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' + jsu.escapeHTML(item.title) + '</span>';
+        if (!this.browser.useOverlay && (!this.browser.hideHeader || !this.browser.initialState || !this.browser.initialState.channelSlug || this.browser.initialState.channelSlug != item.slug)) {
+            // If header is disabled, do not display parent link of first opened channel to prevent navigation on whole catalog
+            const breadCrumbElement = document.getElementById('breadcrumb');
+            if (breadCrumbElement) {
+                breadCrumbElement.innerHTML = this.buildBreadcrumb(item);
+            }
+        }
         html += '</span>';
         if (this.browser.currentSelection && this.browser.currentSelection.oid == item.oid) {
             html = '<span class="selected">' + html + '</span>';
@@ -83,7 +101,7 @@ MSBrowserChannels.prototype.refreshTitle = function () {
 };
 
 MSBrowserChannels.prototype.onShow = function () {
-    this.refreshTitle();
+    this.refreshAndBreadcrumb();
     if (this.initialized) {
         return;
     }
@@ -467,7 +485,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
     const nbPhotosGroups = response.photos_groups ? response.photos_groups.length : 0;
     const hasItems = nbChannels > 0 || nbVideos > 0 || nbLiveStreams > 0 || nbPhotosGroups > 0;
     // channel display
-    this.refreshTitle();
+    this.refreshAndBreadcrumb();
 
     if (hasItems) {
         this.browser.displayContent(this.$place, response, oid, 'channels');

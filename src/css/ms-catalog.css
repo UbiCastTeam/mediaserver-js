@@ -39,6 +39,9 @@ h1 .channel-titles-place .parent-channel-title {
 h1 .channel-titles-place .channel-title {
     display: inline-block;
 }
+h1 .channel-titles-place .breadcrumb {
+    font-size: 0.4em;
+}
 /* ms-browser */
 .ms-browser .ms-browser-header,
 .ms-browser .ms-browser-bar,
