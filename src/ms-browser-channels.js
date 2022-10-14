@@ -57,22 +57,24 @@ MSBrowserChannels.prototype.getContentJq = function () {
 };
 MSBrowserChannels.prototype.buildBreadcrumb = function (item) {
     let html = '<ol>';
-    html += '<li><a href="#">' + jsu.translateHTML('Catalog home') + '</a></li>';
-    for (const parent of item.path) {
-        html += '<li><a class="tree" href="#' + jsu.escapeAttribute(parent.slug ? parent.slug : '') + '"' +
-            (parent.language ? 'lang="' + jsu.escapeAttribute(parent.language) + '"' : '') + '>' +
-                jsu.escapeHTML(parent.title) +
+    html += '<li><a href="/">' + jsu.translateHTML('Home') + '</a></li>';
+    html += '<li><a href="#" class="tree">' + jsu.translateHTML('Channels') + '</a></li>';
+    if (item) {
+        for (const parent of item.path) {
+            html += '<li><a class="tree" href="#' + jsu.escapeAttribute(parent.slug ? parent.slug : '') + '"' +
+                (parent.language ? 'lang="' + jsu.escapeAttribute(parent.language) + '"' : '') + '>' +
+                    jsu.escapeHTML(parent.title) +
+            '</a></li>';
+        }
+        html += '<li><a aria-current="page" class="tree" href="#' + jsu.escapeAttribute(item.slug ? item.slug : '') + '"' +
+            (item.language ? 'lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' +
+                jsu.escapeHTML(item.title) +
         '</a></li>';
-        console.log(parent);
     }
-    html += '<li><a aria-current="page" class="tree" href="#' + jsu.escapeAttribute(item.slug ? item.slug : '') + '"' +
-        (item.language ? 'lang="' + jsu.escapeAttribute(item.language) + '"' : '') + '>' +
-            jsu.escapeHTML(item.title) +
-    '</a></li>';
     html += '</ol>';
     return html;
 };
-MSBrowserChannels.prototype.refreshAndBreadcrumb = function () {
+MSBrowserChannels.prototype.refreshTitleAndBreadcrumb = function () {
     if (this.browser.getActiveTab() != 'channels') {
         return;
     }
@@ -97,11 +99,15 @@ MSBrowserChannels.prototype.refreshAndBreadcrumb = function () {
         this.browser.setTitle(jsu.translateHTML('My channel'));
     } else {
         this.browser.setTitle(jsu.translateHTML('Main channels'));
+        const breadCrumbElement = document.getElementById('breadcrumb');
+        if (breadCrumbElement) {
+            breadCrumbElement.innerHTML = this.buildBreadcrumb(item);
+        }
     }
 };
 
 MSBrowserChannels.prototype.onShow = function () {
-    this.refreshAndBreadcrumb();
+    this.refreshTitleAndBreadcrumb();
     if (this.initialized) {
         return;
     }
@@ -485,7 +491,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
     const nbPhotosGroups = response.photos_groups ? response.photos_groups.length : 0;
     const hasItems = nbChannels > 0 || nbVideos > 0 || nbLiveStreams > 0 || nbPhotosGroups > 0;
     // channel display
-    this.refreshAndBreadcrumb();
+    this.refreshTitleAndBreadcrumb();
 
     if (hasItems) {
         this.browser.displayContent(this.$place, response, oid, 'channels');
