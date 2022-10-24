@@ -162,7 +162,7 @@ MSBrowser.prototype.init = function () {
         }
 
         if (urlData.categories) {
-            // Expected value is a list of category slugs separated with comas.
+            // Expected value is a list of category slugs separated with commas.
             this.filterCategories = urlData.categories.toString().split(',');
             urlParams.push('categories=' + window.encodeURIComponent(urlData.categories));
         }
