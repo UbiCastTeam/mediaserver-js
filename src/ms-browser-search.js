@@ -164,7 +164,7 @@ MSBrowserSearch.prototype.onShow = function () {
     this.onUrlChange();
     if (!this.browser.useOverlay && this.browser.getActiveTab() == 'search') {
         $('#top_search_form form').submit({obj: this}, function (event) {
-            $('#ms_browser_search_text').val($('#top_search_input').val());
+            $('#ms_browser_search_text', this.$menu).val($('#top_search_input').val());
             event.data.obj.onSearchSubmit();
             return false;
         });
@@ -215,12 +215,14 @@ MSBrowserSearch.prototype.onUrlChange = function () {
 };
 MSBrowserSearch.prototype.toggleSearchLoading = function () {
     this.loadingSearch = !this.loadingSearch;
+    const input = this.browser.useOverlay ? $('#ms_browser_search_text', this.$menu) : $('#top_search_input');
+    const btn = this.browser.useOverlay ? $('#ms_browser_search_start', this.$menu) : $('#top_search_btn');
     if (this.loadingSearch) {
-        document.getElementById('top_search_input').setAttribute('disabled', 'disabled');
-        document.getElementById('top_search_btn').setAttribute('disabled', 'disabled');
+        input.prop('disabled', true);
+        btn.prop('disabled', true);
     } else {
-        document.getElementById('top_search_input').removeAttribute('disabled');
-        document.getElementById('top_search_btn').removeAttribute('disabled');
+        input.prop('disabled', false);
+        btn.prop('disabled', false);
     }
 };
 MSBrowserSearch.prototype.onSearchSubmit = function (noPushstate) {
