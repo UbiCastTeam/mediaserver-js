@@ -129,7 +129,7 @@ MSBrowserChannels.prototype.onShow = function () {
                 obj.browser.updateCatalog(data);
             }
         };
-        if (this.browser.pickMode) {
+        if (this.browser.useOverlay) {
             params.onChange = function (oid) {
                 obj.displayChannel(oid);
             };

@@ -877,26 +877,32 @@ MSBrowser.prototype.getLangHTML = function (item) {
     }
 };
 MSBrowser.prototype._setOnClickEntryBlock = function ($entryBlock, oid, itemType, item, selectable) {
-    if (this.pickMode) {
-        if (itemType == 'channel' || itemType == 'parent') {
+    let listenClick = false;
+    if (itemType == 'channel' || itemType == 'parent') {
+        if (this.useOverlay) {
             $entryBlock.click({ obj: this, oid: oid }, function (event) {
                 event.data.obj.channels.displayChannel(event.data.oid);
                 event.data.obj.changeTab('channels');
                 jsu.focusFirstDescendant($('#ms_browser_channels .ms-browser-channels-place')[0]);
             });
-        } else if (selectable) {
-            $entryBlock.click({ obj: this, oid: oid }, function (event) {
-                event.data.obj.pick(event.data.oid);
-            });
+            listenClick = true;
         }
-        $entryBlock.keydown(function (event) {
-            if (event.which == '32' || event.which == '13') { // space or enter
+    } else if (this.pickMode && selectable) {
+        $entryBlock.click({ obj: this, oid: oid }, function (event) {
+            event.data.obj.pick(event.data.oid);
+        });
+        listenClick = true;
+    }
+    if (listenClick) {
+        $entryBlock.keydown({ obj: this, oid: oid }, function (event) {
+            if (event.which == '13') { // enter
                 event.preventDefault();
                 event.stopPropagation();
-                $(this).trigger('click');
+                $(this).click();
             }
         });
-    } else if (item.can_delete) {
+    }
+    if (!this.pickMode && item.can_delete) {
         $('.item-entry-pick-delete-media', $entryBlock).click({ obj: this, oid: oid }, function (event) {
             event.data.obj.pick(event.data.oid, 'delete');
         });
@@ -932,9 +938,9 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
             }
             if (item.can_edit) {
                 html += '<a title="' + jsu.translateAttribute('Edit') + '" class="' + this.btnClass + ' button default item-entry-pick item-entry-pick-edit-media" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Edit') + '</span></a>';
-                if (item.can_delete) {
-                    html += '<button type="button" title="' + jsu.translateAttribute('Delete') + '" class="' + this.btnClass + ' button danger item-entry-pick-delete-media"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Delete') + '</span></button>';
-                }
+            }
+            if (item.can_delete) {
+                html += '<button type="button" title="' + jsu.translateAttribute('Delete') + '" class="' + this.btnClass + ' button danger item-entry-pick-delete-media"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-800">' + jsu.translateHTML('Delete') + '</span></button>';
             }
             if (item.can_add_channel) {
                 const addChannelIcon = '<i class="fa fa-folder" aria-hidden="true"></i>' +

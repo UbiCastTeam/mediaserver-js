@@ -384,13 +384,8 @@ MSBrowser.prototype._pick = function (oid, result, action, initialPick) {
         // select and open channel
         if (!this.useOverlay && result.info.parent_slug) {
             window.location.hash = '#' + result.info.parent_slug;
-        }
-        if (this.channels && (!initialPick || !this.initialState || !this.initialState.channelSlug)) {
-            if (oid.indexOf('c') === 0 || !isNaN(parseInt(oid, 10))) {
-                this.channels.displayChannel(oid);
-            } else {
-                this.channels.displayChannel(result.info.parent_oid);
-            }
+        } else if (this.useOverlay && result.info.parent_oid) {
+            this.channels.displayChannel(result.info.parent_oid);
         }
     }
 };
