@@ -382,10 +382,22 @@ MSBrowser.prototype._pick = function (oid, result, action, initialPick) {
             this.onPick(this.catalog[oid], initialPick);
         }
         // select and open channel
-        if (!this.useOverlay && result.info.parent_slug) {
-            window.location.hash = '#' + result.info.parent_slug;
-        } else if (this.useOverlay && result.info.parent_oid) {
-            this.channels.displayChannel(result.info.parent_oid);
+        if (initialPick) {
+            if (oid.indexOf('c') === 0 || !isNaN(parseInt(oid, 10))) {
+                // go to channel
+                if (!this.useOverlay && result.info.slug) {
+                    window.location.hash = '#' + result.info.slug;
+                } else if (this.useOverlay && result.info.oid) {
+                    this.channels.displayChannel(result.info.oid);
+                }
+            } else {
+                // go to media parent channel
+                if (!this.useOverlay && result.info.parent_slug) {
+                    window.location.hash = '#' + result.info.parent_slug;
+                } else if (this.useOverlay && result.info.parent_oid) {
+                    this.channels.displayChannel(result.info.parent_oid);
+                }
+            }
         }
     }
 };
