@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-13 15:37+0200\n"
+"POT-Creation-Date: 2022-11-15 11:26+0100\n"
 "PO-Revision-Date: 2021-11-29 17:55+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "Access denied."
 msgstr "Acceso denegado."
 
-#: ms-browser-display.js:942 ms-browser-display.js:946
+#: ms-browser-display.js:948 ms-browser-display.js:952
 msgid "Add a sub channel"
 msgstr "Añadir un subcanal"
 
-#: ms-browser-display.js:951 ms-browser-display.js:955
+#: ms-browser-display.js:957 ms-browser-display.js:961
 msgid "Add a video"
 msgstr "Añadir un vídeo"
 
@@ -51,11 +51,11 @@ msgstr "Se ha producido un error en el servidor. Inténtalo de nuevo más tarde.
 msgid "An internal server error occurred. An email has been sent to the support team."
 msgstr "Se ha producido un error interno del servidor. Se ha enviado un email al equipo de asistencia técnica."
 
-#: ms-browser-display.js:1165
+#: ms-browser-display.js:1171
 msgid "Annotations"
 msgstr "Anotaciones"
 
-#: ms-browser-display.js:1162
+#: ms-browser-display.js:1168
 msgid "Annotations last month"
 msgstr "Anotaciones el mes pasado"
 
@@ -75,16 +75,11 @@ msgstr "Espacio disponible:"
 msgid "B"
 msgstr "B"
 
-# Translated by DeepL.
-#: ms-browser-channels.js:60
-msgid "Catalog home"
-msgstr "Página de inicio del catálogo"
-
-#: ms-browser-display.js:1298
+#: ms-browser-display.js:1304
 msgid "Categories"
 msgstr "Categorías"
 
-#: ms-browser-channels.js:416
+#: ms-browser-channels.js:422
 msgid "Channel content:"
 msgstr "Contenido del canal:"
 
@@ -92,7 +87,7 @@ msgstr "Contenido del canal:"
 msgid "Channel does not exist."
 msgstr "El canal no existe."
 
-#: ms-browser-display.js:21 ms-browser-display.js:553
+#: ms-browser-channels.js:61 ms-browser-display.js:21 ms-browser-display.js:553
 msgid "Channels"
 msgstr "Canales"
 
@@ -101,7 +96,7 @@ msgid "Click to select this media"
 msgstr "Haz clic para seleccionar este elemento multimedia"
 
 # Translated by DeepL.
-#: ms-browser-display.js:1180
+#: ms-browser-display.js:1186
 msgid "Company"
 msgstr "Empresa"
 
@@ -118,7 +113,7 @@ msgstr "Tipos de contenido"
 msgid "Content types to display:"
 msgstr "Tipos de contenido para mostrar:"
 
-#: ms-browser-display.js:959
+#: ms-browser-display.js:965
 msgid "Copy LTI link"
 msgstr "Copiar enlace LTI"
 
@@ -138,7 +133,7 @@ msgstr "Fecha de creación (descendente)"
 msgid "December"
 msgstr "Diciembre"
 
-#: ms-browser-display.js:936 ms-browser-display.js:968
+#: ms-browser-display.js:943 ms-browser-display.js:974
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -154,11 +149,11 @@ msgstr "Modo de pantalla:"
 msgid "Display {count} more items"
 msgstr "Mostrar {count} elementos más"
 
-#: ms-browser-display.js:1151
+#: ms-browser-display.js:1157
 msgid "Duration"
 msgstr "Duración"
 
-#: ms-browser-display.js:633 ms-browser-display.js:934 ms-browser-display.js:965
+#: ms-browser-display.js:633 ms-browser-display.js:940 ms-browser-display.js:971
 msgid "Edit"
 msgstr "Editar"
 
@@ -183,9 +178,14 @@ msgstr "Filtros:"
 msgid "Go"
 msgstr "Ir"
 
-#: ms-browser-display.js:1100
+#: ms-browser-display.js:1106
 msgid "Hide this window"
 msgstr "Ocultar esta ventana"
+
+# Translated by DeepL.
+#: ms-browser-channels.js:60
+msgid "Home"
+msgstr "Inicio"
 
 #: ms-api.js:17
 msgid "Item not found."
@@ -213,7 +213,7 @@ msgid "Latest media"
 msgstr "Últimos medios de comunicación"
 
 # Translated by DeepL.
-#: ms-browser-display.js:1174
+#: ms-browser-display.js:1180
 msgid "License"
 msgstr "Licencia"
 
@@ -234,7 +234,7 @@ msgstr "Cargando"
 msgid "Loading..."
 msgstr "Cargando..."
 
-#: ms-browser-channels.js:99
+#: ms-browser-channels.js:101
 msgid "Main channels"
 msgstr "Canales principales"
 
@@ -242,15 +242,15 @@ msgstr "Canales principales"
 msgid "March"
 msgstr "Marzo"
 
-#: ms-browser-display.js:841 ms-browser-display.js:1106
+#: ms-browser-display.js:841 ms-browser-display.js:1112
 msgid "Matching annotations:"
 msgstr "Anotaciones coincidentes:"
 
-#: ms-browser-search.js:369
+#: ms-browser-search.js:371
 msgid "Matching items:"
 msgstr "Elementos coincidentes:"
 
-#: ms-browser-display.js:854 ms-browser-display.js:1120
+#: ms-browser-display.js:854 ms-browser-display.js:1126
 msgid "Matching photos:"
 msgstr "Fotos coincidentes:"
 
@@ -262,11 +262,11 @@ msgstr "Mayo"
 msgid "Media does not exist."
 msgstr "El elemento multimedia no existe."
 
-#: ms-browser-display.js:1136
+#: ms-browser-display.js:1142
 msgid "Media information"
 msgstr "Información del elemento multimedia"
 
-#: ms-browser-channels.js:97 ms-tree.js:114 ms-tree.js:391 ms-tree.js:399 ms-browser-display.js:17
+#: ms-browser-channels.js:99 ms-tree.js:114 ms-tree.js:391 ms-tree.js:399 ms-browser-display.js:17
 msgid "My channel"
 msgstr "Mi canal"
 
@@ -286,7 +286,7 @@ msgstr "Sin contenido."
 msgid "No information about error."
 msgstr "No hay información sobre el error."
 
-#: ms-browser-search.js:373
+#: ms-browser-search.js:375
 msgid "No results."
 msgstr "No hay resultados."
 
@@ -318,7 +318,7 @@ msgstr "Aceptar"
 msgid "Open information panel"
 msgstr "Abrir panel de información"
 
-#: ms-browser-channels.js:306 ms-browser-channels.js:326 ms-browser-channels.js:327 ms-browser-channels.js:331
+#: ms-browser-channels.js:312 ms-browser-channels.js:332 ms-browser-channels.js:333 ms-browser-channels.js:337
 msgid "Parent channel"
 msgstr "Canal matriz"
 
@@ -330,11 +330,11 @@ msgstr "Canal matriz:"
 msgid "Photos groups"
 msgstr "Grupos de fotos"
 
-#: ms-browser-channels.js:212
+#: ms-browser-channels.js:218
 msgid "Please login to access this channel"
 msgstr "Inicia sesión para acceder a este canal"
 
-#: ms-browser-latest.js:207 ms-browser-search.js:326
+#: ms-browser-latest.js:207 ms-browser-search.js:328
 msgid "Please login to access this page"
 msgstr "Inicia sesión para acceder a esta página"
 
@@ -342,11 +342,11 @@ msgstr "Inicia sesión para acceder a esta página"
 msgid "Published:"
 msgstr "Publicado:"
 
-#: ms-browser-display.js:1145
+#: ms-browser-display.js:1151
 msgid "Publishing date"
 msgstr "Fecha de publicación"
 
-#: ms-browser-display.js:1139
+#: ms-browser-display.js:1145
 msgid "Recording date"
 msgstr "Fecha de grabación"
 
@@ -379,7 +379,7 @@ msgstr "Buscar en"
 msgid "Search in my media"
 msgstr "Buscar en mis elementos multimedia"
 
-#: ms-browser-search.js:292
+#: ms-browser-search.js:294
 msgid "Search results for:"
 msgstr "Buscar resultados para:"
 
@@ -387,11 +387,11 @@ msgstr "Buscar resultados para:"
 msgid "Search:"
 msgstr "Buscar:"
 
-#: ms-browser-display.js:962
+#: ms-browser-display.js:968
 msgid "See"
 msgstr "Ver"
 
-#: ms-browser-display.js:1376
+#: ms-browser-display.js:1382
 msgid "See statistics on this channel"
 msgstr "Ver estadísticas de este canal"
 
@@ -399,11 +399,11 @@ msgstr "Ver estadísticas de este canal"
 msgid "Select a channel to display its content."
 msgstr "Selecciona un canal para mostrar su contenido."
 
-#: ms-browser-display.js:917
+#: ms-browser-display.js:923
 msgid "Select this channel"
 msgstr "Seleccionar este canal"
 
-#: ms-browser-display.js:923
+#: ms-browser-display.js:929
 msgid "Select this media"
 msgstr "Seleccionar este elemento multimedia"
 
@@ -411,7 +411,7 @@ msgstr "Seleccionar este elemento multimedia"
 msgid "September"
 msgstr "Septiembre"
 
-#: ms-browser-channels.js:213 ms-browser-latest.js:207 ms-browser-search.js:326
+#: ms-browser-channels.js:219 ms-browser-latest.js:207 ms-browser-search.js:328
 msgid "Sign in"
 msgstr "Iniciar sesión"
 
@@ -423,7 +423,7 @@ msgstr "Slug (ascendente)"
 msgid "Slug, descending"
 msgstr "Slug (descendente)"
 
-#: ms-browser-channels.js:501
+#: ms-browser-channels.js:507
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
 msgstr "Es posible que aún existan algunos contenidos en este canal, pero si es así, tu cuenta no tiene permiso para verlos."
 
@@ -432,7 +432,7 @@ msgid "Sort by:"
 msgstr "Ordenar por:"
 
 # Translated by DeepL.
-#: ms-browser-display.js:1177
+#: ms-browser-display.js:1183
 msgid "Speaker"
 msgstr "Altavoz"
 
@@ -440,15 +440,15 @@ msgstr "Altavoz"
 msgid "Speaker:"
 msgstr "Ponente:"
 
-#: ms-browser-display.js:931
+#: ms-browser-display.js:937
 msgid "Statistics"
 msgstr "Estadísticas"
 
-#: ms-browser-display.js:1170
+#: ms-browser-display.js:1176
 msgid "Storage usage"
 msgstr "Uso del almacenamiento"
 
-#: ms-browser-channels.js:429 ms-browser-display.js:811
+#: ms-browser-channels.js:435 ms-browser-display.js:811
 msgid "Storage usage:"
 msgstr "Uso del almacenamiento:"
 
@@ -456,15 +456,15 @@ msgstr "Uso del almacenamiento:"
 msgid "Sub channels"
 msgstr "Subcanales"
 
-#: ms-browser-channels.js:418
+#: ms-browser-channels.js:424
 msgid "Sub channels items are included in counts."
 msgstr "Los elementos de los subcanales están incluidos en los recuentos."
 
-#: ms-browser-channels.js:450
+#: ms-browser-channels.js:456
 msgid "Subscribe to channel videos RSS"
 msgstr "Suscribirse a la RSS de los vídeos del canal"
 
-#: ms-browser-channels.js:441
+#: ms-browser-channels.js:447
 msgid "Subscribe to channel videos RSS:"
 msgstr "Suscribirse a la RSS de los vídeos del canal:"
 
@@ -480,19 +480,19 @@ msgstr "No se puede acceder al servidor."
 msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
 msgstr "El cupo de almacenamiento de los canales matrices podría afectar al espacio disponible en este canal."
 
-#: ms-browser-channels.js:495
+#: ms-browser-channels.js:501
 msgid "This channel contains no media."
 msgstr "Este canal no contiene medios de comunicación."
 
-#: ms-browser-channels.js:497
+#: ms-browser-channels.js:503
 msgid "This channel contains no sub channels and no media."
 msgstr "Este canal no contiene subcanales ni medios."
 
-#: ms-browser-channels.js:499
+#: ms-browser-channels.js:505
 msgid "This channel contains no sub channels."
 msgstr "Este canal no contiene subcanales."
 
-#: ms-browser-display.js:915
+#: ms-browser-display.js:921
 msgid "This channel is selected"
 msgstr "Este canal está seleccionado"
 
@@ -537,7 +537,7 @@ msgstr "Este elemento multimedia está publicado"
 msgid "This media is published and unlisted"
 msgstr "Este elemento multimedia está publicado y oculto"
 
-#: ms-browser-display.js:921
+#: ms-browser-display.js:927
 msgid "This media is selected"
 msgstr "Este elemento multimedia está seleccionado"
 
@@ -585,7 +585,7 @@ msgstr "No es posible obtener la información del elemento multimedia porque no 
 msgid "Unable to get search's results content because you cannot access to this channel."
 msgstr "No es posible obtener el contenido de los resultados de la búsqueda porque no puedes acceder a este canal."
 
-#: ms-browser-display.js:1300
+#: ms-browser-display.js:1306
 msgid "Unspecified"
 msgstr "Sin especificar"
 
@@ -601,15 +601,15 @@ msgstr "Utiliza la información anterior para buscar algo."
 msgid "Videos"
 msgstr "Vídeos"
 
-#: ms-browser-display.js:1159
+#: ms-browser-display.js:1165
 msgid "Views"
 msgstr "Visualizaciones"
 
-#: ms-browser-display.js:1156
+#: ms-browser-display.js:1162
 msgid "Views last month"
 msgstr "Visualizaciones el mes pasado"
 
-#: ms-browser-channels.js:156
+#: ms-browser-channels.js:162
 msgid "You are not allowed to have a personal channel."
 msgstr "No tienes permiso para tener un canal personal."
 
@@ -625,7 +625,7 @@ msgstr "No has iniciado sesión o la sesión ha caducado. Inicia sesión e inté
 msgid "all"
 msgstr "todos"
 
-#: ms-browser-channels.js:380
+#: ms-browser-channels.js:386
 msgid "annotations"
 msgstr "anotaciones"
 
@@ -633,7 +633,7 @@ msgstr "anotaciones"
 msgid "at"
 msgstr "en"
 
-#: ms-browser-display.js:1012
+#: ms-browser-display.js:1018
 msgid "cannot copy"
 msgstr "no se puede copiar"
 
@@ -645,7 +645,7 @@ msgstr "categorías"
 msgid "channel"
 msgstr "canale"
 
-#: ms-browser-channels.js:405 ms-browser-search.js:358
+#: ms-browser-channels.js:411 ms-browser-search.js:360
 msgid "channel(s)"
 msgstr "canal(es)"
 
@@ -665,7 +665,7 @@ msgstr "comentarios, diapositivas, ..."
 msgid "companies"
 msgstr "empresas"
 
-#: ms-browser-display.js:1012
+#: ms-browser-display.js:1018
 msgid "copied"
 msgstr "copiado"
 
@@ -689,19 +689,19 @@ msgstr "datos externos"
 msgid "external references"
 msgstr "referencias externas"
 
-#: ms-browser-display.js:1015
+#: ms-browser-display.js:1021
 msgid "failed to copy"
 msgstr "no se ha podido copiar"
 
-#: ms-browser-channels.js:418 ms-api.js:359
+#: ms-browser-channels.js:424 ms-api.js:359
 msgid "help"
 msgstr "ayuda"
 
-#: ms-browser-channels.js:445
+#: ms-browser-channels.js:451
 msgid "iTunes"
 msgstr "iTunes"
 
-#: ms-browser-channels.js:447
+#: ms-browser-channels.js:453
 msgid "iTunes (audio only)"
 msgstr "iTunes (solo audio)"
 
@@ -721,7 +721,7 @@ msgstr "lista"
 msgid "live"
 msgstr "live"
 
-#: ms-browser-channels.js:411 ms-browser-search.js:364
+#: ms-browser-channels.js:417 ms-browser-search.js:366
 msgid "live stream(s)"
 msgstr "transmisión(es) en directo"
 
@@ -745,7 +745,7 @@ msgstr "ninguno"
 msgid "photos"
 msgstr "fotos"
 
-#: ms-browser-channels.js:414 ms-browser-search.js:367
+#: ms-browser-channels.js:420 ms-browser-search.js:369
 msgid "photos group(s)"
 msgstr "grupo(s) de fotos"
 
@@ -769,11 +769,11 @@ msgstr "pestaña seleccionada"
 msgid "speakers"
 msgstr "ponentes"
 
-#: ms-browser-channels.js:443
+#: ms-browser-channels.js:449
 msgid "standard"
 msgstr "estándar"
 
-#: ms-browser-channels.js:375 ms-browser-channels.js:382 ms-browser-display.js:804
+#: ms-browser-channels.js:381 ms-browser-channels.js:388 ms-browser-display.js:804
 msgid "this month"
 msgstr "este mes"
 
@@ -793,7 +793,7 @@ msgstr "sin especificar"
 msgid "video"
 msgstr "vídeo"
 
-#: ms-browser-channels.js:408 ms-browser-search.js:361
+#: ms-browser-channels.js:414 ms-browser-search.js:363
 msgid "video(s)"
 msgstr "vídeo(s)"
 
@@ -801,7 +801,7 @@ msgstr "vídeo(s)"
 msgid "videos"
 msgstr "vídeos"
 
-#: ms-browser-channels.js:373 ms-browser-display.js:802
+#: ms-browser-channels.js:379 ms-browser-display.js:802
 msgid "views"
 msgstr "visualizaciones"
 
@@ -811,6 +811,10 @@ msgstr "sí"
 
 #~ msgid "An error occurred during request:"
 #~ msgstr "Ha ocurrido un error durante la solicitud:"
+
+# Translated by DeepL.
+#~ msgid "Catalog home"
+#~ msgstr "Página de inicio del catálogo"
 
 #~ msgid "Latest content added"
 #~ msgstr "Último contenido añadido"
