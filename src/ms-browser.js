@@ -54,7 +54,6 @@ function MSBrowser (options) {
     this.urlChannels = '/channels/';
     this.urlLatest = '/latest/';
     this.urlSearch = '/search/';
-    this.urlPostLink = '/lti/post-link/';
 
     this.defaultSearchIn = [];
 
@@ -186,7 +185,10 @@ MSBrowser.prototype.init = function () {
             }
         }
 
-        if (urlData['return'] && ((window.parent && urlData['return'].toString().indexOf('postMessageAPI') === 0) || (urlData['return'].toString().indexOf('https://') === 0 && urlData['return'].toString().length > 8))) {
+        if (urlData['return'] && (
+            (window.parent && urlData['return'].toString().indexOf('postMessageAPI') === 0)
+            || (urlData['return'].toString().indexOf('/') === 0 && urlData['return'].toString().length > 1)
+        )) {
             if (!this.pickMode) {
                 this.pickMode = true;
                 this.selectableContent = 'vlp';
@@ -194,12 +196,7 @@ MSBrowser.prototype.init = function () {
                 urlParams.push('pick=' + this.selectableContent);
             }
             urlParams.push('return=' + urlData['return']);
-            let returnTarget;
-            if (window.parent && urlData['return'].toString().indexOf('postMessageAPI') === 0) {
-                returnTarget = urlData['return'];
-            } else {
-                returnTarget = this.urlPostLink + '?return=' + urlData['return'];
-            }
+            const returnTarget = urlData['return'];
             this.onPick = function (item, initialPick) {
                 if (initialPick) {
                     return;
@@ -213,7 +210,7 @@ MSBrowser.prototype.init = function () {
                         window.close();
                     }
                 } else {
-                    window.location = returnTarget + '&oid=' + item.oid;
+                    window.location = returnTarget + (returnTarget.indexOf('?') !== -1 ? '&' : '?') + 'oid=' + item.oid;
                 }
             };
         }
