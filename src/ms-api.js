@@ -302,27 +302,31 @@ MSAPIClient.prototype.ajaxCall = function (callOrUri, data, callback, async, fil
     }
     return $.ajax(ajaxData);
 };
-MSAPIClient.prototype.getStorageDisplay = function (item) {
+MSAPIClient.prototype.getStorageLevelClass = function (level) {
+    switch (level) {
+        case 'critical':
+            return 'red';
+        case 'warning':
+            return 'orange';
+        default:
+            return '';
+    }
+};
+MSAPIClient.prototype.getStorageDisplay = function (item, isUserStorage) {
     let html = '';
     if (item.storage_used !== null && item.storage_used !== undefined) {
         html = '<span class="storage-usage">' + jsu.getSizeDisplay(item.storage_used);
         if (item.storage_quota > 0) {
             html += ' / ' + jsu.escapeHTML(item.storage_quota) + ' G' + jsu.translateHTML('B');
-            let storageUsedPercents = Math.round(100 * (item.storage_used / 1000000000) / item.storage_quota);
-            if (storageUsedPercents > 100) {
-                storageUsedPercents = 100;
+            if (item.storage_quota_percents !== undefined) {
+                html += ' <span class="progress-bar ' + this.getStorageLevelClass(item.storage_quota_level) + '" aria-hidden="true">' +
+                '<span class="progress-level" style="width: ' + item.storage_quota_percents + '%"></span>' +
+                '<span class="progress-label">' + item.storage_quota_percents + ' %</span>' +
+                '</span>';
             }
-            let storageClass = '';
-            if ((storageUsedPercents == 100) || (item.storage_warning && storageUsedPercents > item.storage_warning)) {
-                storageClass = ' red';
-            }
-            html += '<span class="progress-bar inline-block' + storageClass + '" aria-hidden="true" style="width: 100%; vertical-align: middle;">' +
-            '<span class="progress-level" style="width: ' + storageUsedPercents + '%"></span>' +
-            '<span class="progress-label">' + storageUsedPercents + ' %</span>' +
-            '</span>';
         }
         html += '</span>';
-        const storageAvailable = this.getAvailableStorageDisplay(item);
+        const storageAvailable = this.getAvailableStorageDisplay(item, isUserStorage);
         if (storageAvailable) {
             html += ' ' + storageAvailable;
         }
@@ -340,24 +344,24 @@ MSAPIClient.prototype.getStorageMinimalDisplay = function (item) {
     }
     return html;
 };
-MSAPIClient.prototype.getAvailableStorageDisplay = function (item) {
+MSAPIClient.prototype.getAvailableStorageDisplay = function (item, isUserStorage) {
     let html = '';
     if (item.storage_available !== null && item.storage_available !== undefined) {
-        let storageClass = '';
-        if (item.storage_quota > 0) {
-            const storageUsedPercents = 100 * (item.storage_used / 1000000000) / item.storage_quota;
-            if (item.storage_warning && storageUsedPercents > item.storage_warning) {
-                storageClass = ' orange';
-            }
-        }
-        html += '<span class="storage-available nowrap">';
-        if (item.storage_available > 0) {
-            html += '<span class="' + storageClass + ' ">' + jsu.translateHTML('Available space:') + ' ' + jsu.getSizeDisplay(item.storage_available) + '</span>';
-        } else {
-            html += '<span class="red">' + jsu.translateHTML('No available space') + '</span>';
-        }
-        html += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + jsu.translateAttribute('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' + jsu.translateHTML('The storage quota of the parent channels can have an impact on the available space of this channel.') + '</span></button>';
-        html += '</span>';
+        html = '<span class="storage-available nowrap">' +
+        (item.storage_available > 0
+            ? '<span class="' + this.getStorageLevelClass(item.storage_quota_level) + ' ">' + jsu.translateHTML('Available space:') + ' ' + jsu.getSizeDisplay(item.storage_available) + '</span>'
+            : '<span class="red">' + jsu.translateHTML('No available space') + '</span>'
+        ) +
+        ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + jsu.translateAttribute('help') + '">' +
+        '<i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>' +
+        '<span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' +
+        (isUserStorage
+            ? jsu.translateHTML('Your storage usage is the size used by all media for which you are in the speakers list and all media in your personal channel.')
+            : jsu.translateHTML('The storage quota of the parent channels can have an impact on the available space of this channel.')
+        ) +
+        '</span>' +
+        '</button>' +
+        '</span>';
     }
     return html;
 };
