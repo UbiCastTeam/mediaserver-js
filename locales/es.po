@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-15 11:26+0100\n"
+"POT-Creation-Date: 2023-02-01 14:54+0100\n"
 "PO-Revision-Date: 2021-11-29 17:55+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
@@ -67,11 +67,11 @@ msgstr "Abril"
 msgid "August"
 msgstr "Agosto"
 
-#: ms-api.js:355
+#: ms-api.js:352
 msgid "Available space:"
 msgstr "Espacio disponible:"
 
-#: extra-translations/jsu-translations.js:20 ms-api.js:310 ms-api.js:337
+#: extra-translations/jsu-translations.js:20 ms-api.js:320 ms-api.js:341
 msgid "B"
 msgstr "B"
 
@@ -274,7 +274,7 @@ msgstr "Mi canal"
 msgid "My media"
 msgstr "Mis elementos multimedia"
 
-#: ms-api.js:357
+#: ms-api.js:353
 msgid "No available space"
 msgstr "No hay espacio disponible"
 
@@ -476,7 +476,7 @@ msgstr "Se ha agotado el tiempo de conexión. Vuelve a intentarlo más tarde."
 msgid "The server cannot be reached."
 msgstr "No se puede acceder al servidor."
 
-#: ms-api.js:359
+#: ms-api.js:360
 msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
 msgstr "El cupo de almacenamiento de los canales matrices podría afectar al espacio disponible en este canal."
 
@@ -621,6 +621,11 @@ msgstr "No tienes permiso para realizar esta acción."
 msgid "You are not logged in or your session has expired. Please login and retry."
 msgstr "No has iniciado sesión o la sesión ha caducado. Inicia sesión e inténtalo otra vez."
 
+# Translated by DeepL.
+#: ms-api.js:359
+msgid "Your storage usage is the size used by all media for which you are in the speakers list and all media in your personal channel."
+msgstr "Tu uso de almacenamiento es el tamaño utilizado por todos los medios para los que estás en la lista de altavoces y todos los medios en tu canal personal."
+
 #: ms-browser-search.js:84 ms-browser-search.js:101
 msgid "all"
 msgstr "todos"
@@ -693,7 +698,7 @@ msgstr "referencias externas"
 msgid "failed to copy"
 msgstr "no se ha podido copiar"
 
-#: ms-browser-channels.js:424 ms-api.js:359
+#: ms-browser-channels.js:424 ms-api.js:355
 msgid "help"
 msgstr "ayuda"
 
