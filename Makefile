@@ -1,11 +1,9 @@
-SHELL=/bin/bash
-
 DOCKER_NODE ?= docker run \
 	--name mediaserver-js-builder \
 	--workdir /opt/src \
 	--mount type=bind,src=${PWD},dst=/opt/src \
 	--user $(shell id -u) \
-	--rm \
+	--rm -it \
 	node:latest
 
 
@@ -50,3 +48,7 @@ compile_translations_local: install_local
 
 compile_translations:
 	${DOCKER_NODE} make compile_translations_local
+
+
+shell:
+	${DOCKER_NODE} /bin/bash
