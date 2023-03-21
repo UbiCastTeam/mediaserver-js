@@ -88,8 +88,9 @@ h1 .channel-titles-place .breadcrumb {
     margin-left: 20px;
 }
 .ms-browser-content .channel-description-stats,
-.ms-browser-content .channel-description-rss {
-    padding: 0 15px;
+.ms-browser-content .channel-description-rss,
+.ms-browser-content .channel-description-managers {
+    margin: 10px;
 }
 .ms-browser-content .channel-description-rss a {
     margin-left: 10px;

@@ -419,7 +419,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 if (response.info.pgroups_count) {
                     results.push(response.info.pgroups_count + ' ' + jsu.translate('photos group(s)'));
                 }
-                let countDisplay = '<div class="channel-items-count">' + jsu.translate('Channel content:');
+                let countDisplay = '<div class="channel-items-count">' + jsu.translateHTML('Channel content:');
                 countDisplay += ' <span>' + jsu.escapeHTML(results.join(', ')) + '</span>';
                 countDisplay += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translateAttribute('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translateHTML('Sub channels items are included in counts.') + '</span></button>';
                 countDisplay += '</div>';
@@ -432,7 +432,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 isEmpty = false;
             }
             if (this.browser.couldDisplay('storage') && storageDisplay) {
-                storageDisplay = '<div class="channel-storage-usage">' + jsu.translate('Storage usage:') + ' ' + storageDisplay + '</div>';
+                storageDisplay = '<div class="channel-storage-usage">' + jsu.translateHTML('Storage usage:') + ' ' + storageDisplay + '</div>';
                 $currentItemDesc.append(storageDisplay);
                 if (!window.uwlb) {
                     $('.channel-storage-usage .tooltip-button', $currentItemDesc).click(function () {
@@ -444,20 +444,29 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
             if (this.browser.couldDisplay('rss_links')) {
                 let rss = '<div class="channel-description-rss"> ';
                 if (this.displayItunesRss) {
-                    rss += ' <span class="inline-block">' + jsu.translate('Subscribe to channel videos RSS:') + '</span>';
-                    rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">';
-                    rss += '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translate('standard') + '</a>';
-                    rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-video.xml">';
-                    rss += '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translate('iTunes') + '</a>';
-                    rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-audio.xml">';
-                    rss += '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translate('iTunes (audio only)') + '</a>';
+                    rss += ' <span class="inline-block">' + jsu.translateHTML('Subscribe to channel videos RSS:') + '</span>' +
+                        ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">' +
+                        '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translateHTML('standard') + '</a>' +
+                        ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-video.xml">' +
+                        '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translateHTML('iTunes') + '</a>' +
+                        ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-audio.xml">' +
+                        '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translateHTML('iTunes (audio only)') + '</a>';
                 } else {
-                    rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">';
-                    rss += '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translate('Subscribe to channel videos RSS') + '</a>';
+                    rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">' +
+                        '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translateHTML('Subscribe to channel videos RSS') + '</a>';
                 }
                 rss += '</div>';
                 $currentItemDesc.append(rss);
                 isEmpty = false;
+            }
+            if (response.info.managers_emails && response.info.managers_emails.length > 0) {
+                $currentItemDesc.append(
+                    '<div class="channel-description-managers">' +
+                        '<a href="mailto:' + response.info.managers_emails.join(',') + '">' +
+                            jsu.translateHTML('Send an email to the managers of this channel') +
+                        '</a>' +
+                    '</div>'
+                );
             }
             if (!isEmpty) {
                 this.$place.append($currentItemDesc);
@@ -498,13 +507,13 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
     } else {
         let msg;
         if (this.browser.selectableContent.indexOf('c') == -1) {
-            msg = jsu.translate('This channel contains no media.');
+            msg = jsu.translateHTML('This channel contains no media.');
         } else if (this.browser.displayableContent.length > 1) {
-            msg = jsu.translate('This channel contains no sub channels and no media.');
+            msg = jsu.translateHTML('This channel contains no sub channels and no media.');
         } else {
-            msg = jsu.translate('This channel contains no sub channels.');
+            msg = jsu.translateHTML('This channel contains no sub channels.');
         }
-        msg += '<br/>' + jsu.translate('Some contents may still exist in this channel but if it is the case your account is not allowed to see them.');
+        msg += '<br/>' + jsu.translateHTML('Some contents may still exist in this channel but if it is the case your account is not allowed to see them.');
         this.$place.append('<div class="messages"><div class="message info">' + msg + '</div></div>');
     }
 };
