@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-01 14:54+0100\n"
+"POT-Creation-Date: 2023-04-04 09:32+0000\n"
 "PO-Revision-Date: 2021-11-29 17:56+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
@@ -407,6 +407,11 @@ msgstr "Selecteer dit kanaal"
 msgid "Select this media"
 msgstr "Selecteer deze media"
 
+# Translated by DeepL.
+#: ms-browser-channels.js:466
+msgid "Send an email to the managers of this channel"
+msgstr "Stuur een e-mail naar de beheerders van dit kanaal"
+
 #: extra-translations/jsu-translations.js:15
 msgid "September"
 msgstr "September"
@@ -423,7 +428,7 @@ msgstr "Slug, oplopend"
 msgid "Slug, descending"
 msgstr "Slug, aflopend"
 
-#: ms-browser-channels.js:507
+#: ms-browser-channels.js:516
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
 msgstr "Sommige inhoud kan nog steeds aanwezig zijn op dit kanaal, maar als dit het geval is, mag jouw account deze niet bekijken."
 
@@ -480,15 +485,15 @@ msgstr "De server is niet bereikbaar."
 msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
 msgstr "Het opslagquotum van de bovenliggende kanalen kan een invloed hebben op de beschikbare ruimte van dit kanaal."
 
-#: ms-browser-channels.js:501
+#: ms-browser-channels.js:510
 msgid "This channel contains no media."
 msgstr "Dit kanaal bevat geen media."
 
-#: ms-browser-channels.js:503
+#: ms-browser-channels.js:512
 msgid "This channel contains no sub channels and no media."
 msgstr "Dit kanaal bevat geen subkanalen en geen media."
 
-#: ms-browser-channels.js:505
+#: ms-browser-channels.js:514
 msgid "This channel contains no sub channels."
 msgstr "Dit kanaal bevat geen subkanalen."
 

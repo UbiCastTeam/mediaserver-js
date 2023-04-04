@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-01 14:54+0100\n"
-"PO-Revision-Date: 2023-02-01 14:55+0100\n"
+"POT-Creation-Date: 2023-04-04 09:32+0000\n"
+"PO-Revision-Date: 2023-04-04 11:33+0200\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -402,6 +402,10 @@ msgstr "Sélectionner cette chaîne"
 msgid "Select this media"
 msgstr "Sélectionner ce média"
 
+#: ms-browser-channels.js:466
+msgid "Send an email to the managers of this channel"
+msgstr "Envoyer un courriel aux responsables de cette chaîne"
+
 #: extra-translations/jsu-translations.js:15
 msgid "September"
 msgstr "Septembre"
@@ -418,7 +422,7 @@ msgstr "Jeton, croissant"
 msgid "Slug, descending"
 msgstr "Jeton, décroissant"
 
-#: ms-browser-channels.js:507
+#: ms-browser-channels.js:516
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
 msgstr "Du contenu peut tout de même être présent dans cette chaîne mais si c'est le cas, votre compte utilisateur ne possède pas la permission de le voir."
 
@@ -474,15 +478,15 @@ msgstr "Le serveur est injoignable."
 msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
 msgstr "Le quota de stockage des chaînes en amont peut avoir un impact sur l'espace disponible dans cette chaîne."
 
-#: ms-browser-channels.js:501
+#: ms-browser-channels.js:510
 msgid "This channel contains no media."
 msgstr "Cette chaîne ne contient pas de média."
 
-#: ms-browser-channels.js:503
+#: ms-browser-channels.js:512
 msgid "This channel contains no sub channels and no media."
 msgstr "Cette chaîne ne contient pas de sous chaîne ni de média."
 
-#: ms-browser-channels.js:505
+#: ms-browser-channels.js:514
 msgid "This channel contains no sub channels."
 msgstr "Cette chaîne ne contient pas de sous chaîne."
 

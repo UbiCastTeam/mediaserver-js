@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-01 14:54+0100\n"
+"POT-Creation-Date: 2023-04-04 09:32+0000\n"
 "PO-Revision-Date: 2021-11-29 17:55+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
@@ -495,6 +495,11 @@ msgid "Select this media"
 msgstr "Valitse tämä media"
 
 # Translated by DeepL.
+#: ms-browser-channels.js:466
+msgid "Send an email to the managers of this channel"
+msgstr "Lähetä sähköpostia tämän kanavan johtajille"
+
+# Translated by DeepL.
 #: extra-translations/jsu-translations.js:15
 msgid "September"
 msgstr "Syyskuu"
@@ -515,7 +520,7 @@ msgid "Slug, descending"
 msgstr "Etana, laskeva"
 
 # Translated by DeepL.
-#: ms-browser-channels.js:507
+#: ms-browser-channels.js:516
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
 msgstr "Joitakin sisältöjä saattaa olla edelleen tällä kanavalla, mutta jos näin on, tilisi ei saa nähdä niitä."
 
@@ -585,17 +590,17 @@ msgid "The storage quota of the parent channels can have an impact on the availa
 msgstr "Vanhempien kanavien tallennuskiintiö voi vaikuttaa tämän kanavan käytettävissä olevaan tilaan."
 
 # Translated by DeepL.
-#: ms-browser-channels.js:501
+#: ms-browser-channels.js:510
 msgid "This channel contains no media."
 msgstr "Tämä kanava ei sisällä mediaa."
 
 # Translated by DeepL.
-#: ms-browser-channels.js:503
+#: ms-browser-channels.js:512
 msgid "This channel contains no sub channels and no media."
 msgstr "Tämä kanava ei sisällä alakanavia eikä mediaa."
 
 # Translated by DeepL.
-#: ms-browser-channels.js:505
+#: ms-browser-channels.js:514
 msgid "This channel contains no sub channels."
 msgstr "Tämä kanava ei sisällä alakanavia."
 
