@@ -4,7 +4,7 @@ DOCKER_RUN ?= docker run \
 	--name msjs-builder \
 	--workdir /apps \
 	--mount type=bind,src=${PWD},dst=/apps \
-	--user $(shell id -u) \
+	--user "$(shell id -u):$(shell id -g)" \
 	--rm -it
 
 
