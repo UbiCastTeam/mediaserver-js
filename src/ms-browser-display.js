@@ -963,7 +963,7 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
                         jsu.translateHTML('Add a video') + '</span></a>';
             }
             if (isTrashBin) {
-                html += '<button type="button" title="' + jsu.translateAttribute('Restore everything in recycle bin') + '"' +
+                html += '<button type="button" title="' + jsu.translateAttribute('Restore everything from the recycle bin. All items will be restored in their respective original channels. If the destination channel for an item doesn\'t exist anymore, the content will be moved to the fallback restoration channel.') + '"' +
                                 'class="' + this.btnClass + ' button main trash-restore-all-media">' +
                             '<i class="fa fa-refresh" aria-hidden="true"></i>' +
                             '<span class="hidden-below-800" style="margin-left: 0.3em;">' +
@@ -990,8 +990,8 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
             }
             if (itemInTrash) {
                 if (item.can_delete) {
-                    html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Definitively delete') + '</span></button>';
-                    html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-restore-media main"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Restore') + '</span></button>';
+                    html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Delete definitively') + '</span></button>';
+                    html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-restore-media main" title="' + jsu.translateAttribute('This item will be restored in its original channel. If the destination channel doesn\'t exist anymore, the item will be moved to the fallback restoration channel.') + '"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Restore') + '</span></button>';
                 }
             } else {
                 if (item.can_delete) {

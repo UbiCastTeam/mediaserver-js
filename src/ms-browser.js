@@ -399,14 +399,14 @@ MSBrowser.prototype._pick = function (oid, result, action, initialPick) {
     }
 };
 MSBrowser.prototype.deleteOrRestore = function (items, restore) {
-    let confirmMessage = (restore ? jsu.translate('Are you sure to retore') :
-        jsu.translate('Are you sure to definitively delete')) + ' ';
+    let confirmMessage = (restore ? jsu.translate('This will restore') :
+        jsu.translate('This will definitively delete')) + ' ';
     if (items.length === 1) {
         confirmMessage += '"' + items[0].title + '"';
     } else {
         confirmMessage += items.length + ' ' + jsu.translate('items');
     }
-    confirmMessage += ' ?';
+    confirmMessage += '. ' + jsu.translate('Are you sure?');
     if (!confirm(confirmMessage)) {
         return;
     }
