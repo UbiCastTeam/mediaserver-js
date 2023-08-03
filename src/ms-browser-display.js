@@ -668,6 +668,7 @@ MSBrowser.prototype._cleanSpeakers = function (speakerStr) {
 MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, tab) {
     let markup = 'span';
     let href = '';
+    const itemInTrash = !!item.trash_data;
     let buttonStyle = ' tabindex="0" role="button"';
     if (!this.useOverlay && item.slug && (!this.pickMode || itemType == 'channel')) {
         markup = 'a';
@@ -769,6 +770,17 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         const langHtml = this.getLangHTML(item);
         topBar += '<span class="item-entry-language">' + langHtml + '</span>';
     }
+    if (itemInTrash) {
+        if (item.trash_data.parent_id) {
+            topBar += '<span class="item-entry-in-trash" title="' +
+                jsu.translateAttribute('This item is in the recycle bin') + '"><span class="sr-only">' +
+                jsu.translateHTML('This item is in the recycle bin') + '</span></span>';
+        } else {
+            topBar += '<span class="item-entry-in-trash" title="' +
+                jsu.translateAttribute('This item\'s parent is in the recycle bin') + '"><span class="sr-only">' +
+                jsu.translateHTML('This item\'s parent is in the recycle bin') + '</span></span>';
+        }
+    }
 
     // title
     if (!this.displayAsThumbnails) {
@@ -785,6 +797,14 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         if (this.couldDisplay('creation_date') && item.creation) {
             bottomBar += '<span class="item-entry-date">' + jsu.translateHTML('Created on') + ' ' +
                         jsu.getDateDisplay(item.creation) + '</span>';
+        }
+        if (itemInTrash) {
+            bottomBar += '<span class="item-entry-date">' + jsu.translateHTML('Deleted on') + ' ' +
+                jsu.getDateDisplay(item.trash_data.trashed_at.split('.')[0]) + '</span>';
+            if (item.trash_data.parent_title) {
+                bottomBar += '<span class="item-entry-description">' + jsu.translateHTML('Deleted from') +
+                    ' "' + item.trash_data.parent_title + '"</span>';
+            }
         }
         if (this.couldDisplay('description') && item.short_description) {
             bottomBar += '<span class="item-entry-description">' + jsu.escapeHTML($('<span>' + item.short_description + '</span>').text()) + '</span>';
@@ -990,6 +1010,9 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
             }
             if (itemInTrash) {
                 if (item.can_delete) {
+                    if (item.trash_data.parent_url) {
+                        html += '<a type="button" class="' + this.btnClass + ' button default" href="' + item.trash_data.parent_url + '" title="' + jsu.translateAttribute('Go to this item\'s original location (before it was deleted).') + '"><i class="fa fa-arrow-up" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Go to origin') + '</span></a>';
+                    }
                     html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Delete definitively') + '</span></button>';
                     html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-restore-media main" title="' + jsu.translateAttribute('This item will be restored in its original channel. If the destination channel doesn\'t exist anymore, the item will be moved to the fallback restoration channel.') + '"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Restore') + '</span></button>';
                 }
