@@ -1011,7 +1011,7 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
             if (itemInTrash) {
                 if (item.can_delete) {
                     if (item.trash_data.parent_url) {
-                        html += '<a type="button" class="' + this.btnClass + ' button default" href="' + item.trash_data.parent_url + '" title="' + jsu.translateAttribute('Go to this item\'s original location (before it was deleted).') + '"><i class="fa fa-arrow-up" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Go to origin') + '</span></a>';
+                        html += '<a type="button" class="' + this.btnClass + ' button default" href="' + item.trash_data.parent_url + '" title="' + jsu.translateAttribute('Go to this item\'s original location (before the item was deleted).') + '"><i class="fa fa-arrow-up" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Open original channel') + '</span></a>';
                     }
                     html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Delete definitively') + '</span></button>';
                     html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-restore-media main" title="' + jsu.translateAttribute('This item will be restored in its original channel. If the destination channel doesn\'t exist anymore, the item will be moved to the fallback restoration channel.') + '"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Restore') + '</span></button>';
