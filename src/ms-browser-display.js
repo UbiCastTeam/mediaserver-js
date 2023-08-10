@@ -668,6 +668,7 @@ MSBrowser.prototype._cleanSpeakers = function (speakerStr) {
 MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, tab) {
     let markup = 'span';
     let href = '';
+    const itemInTrash = !!item.trash_data;
     let buttonStyle = ' tabindex="0" role="button"';
     if (!this.useOverlay && item.slug && (!this.pickMode || itemType == 'channel')) {
         markup = 'a';
@@ -769,6 +770,17 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         const langHtml = this.getLangHTML(item);
         topBar += '<span class="item-entry-language">' + langHtml + '</span>';
     }
+    if (itemInTrash) {
+        if (item.trash_data.parent_id) {
+            topBar += '<span class="item-entry-in-trash" title="' +
+                jsu.translateAttribute('This item is in the recycle bin') + '"><span class="sr-only">' +
+                jsu.translateHTML('This item is in the recycle bin') + '</span></span>';
+        } else {
+            topBar += '<span class="item-entry-in-trash" title="' +
+                jsu.translateAttribute('This item\'s parent is in the recycle bin') + '"><span class="sr-only">' +
+                jsu.translateHTML('This item\'s parent is in the recycle bin') + '</span></span>';
+        }
+    }
 
     // title
     if (!this.displayAsThumbnails) {
@@ -785,6 +797,14 @@ MSBrowser.prototype._getEntryBlockHtml = function (item, itemType, clickable, ta
         if (this.couldDisplay('creation_date') && item.creation) {
             bottomBar += '<span class="item-entry-date">' + jsu.translateHTML('Created on') + ' ' +
                         jsu.getDateDisplay(item.creation) + '</span>';
+        }
+        if (itemInTrash) {
+            bottomBar += '<span class="item-entry-date">' + jsu.translateHTML('Deleted on') + ' ' +
+                jsu.getDateDisplay(item.trash_data.trashed_at.split('.')[0]) + '</span>';
+            if (item.trash_data.parent_title) {
+                bottomBar += '<span class="item-entry-description">' + jsu.translateHTML('Deleted from') +
+                    ' "' + item.trash_data.parent_title + '"</span>';
+            }
         }
         if (this.couldDisplay('description') && item.short_description) {
             bottomBar += '<span class="item-entry-description">' + jsu.escapeHTML($('<span>' + item.short_description + '</span>').text()) + '</span>';
@@ -911,6 +931,8 @@ MSBrowser.prototype._setOnClickEntryBlock = function ($entryBlock, oid, itemType
 
 MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
     let html = '';
+    const isTrashBin = item.oid === 'c00000000000000trash';
+    const itemInTrash = !!item.trash_data;
     if (this.pickMode) {
         if (selectable) {
             const selected = this.currentSelection && this.currentSelection.oid == item.oid;
@@ -960,6 +982,22 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
                         ' <span class="hidden-below-800">' +
                         jsu.translateHTML('Add a video') + '</span></a>';
             }
+            if (isTrashBin) {
+                html += '<button type="button" title="' + jsu.translateAttribute('Restore everything from the recycle bin. All items will be restored in their respective original channels. If the destination channel for an item doesn\'t exist anymore, the content will be moved to the fallback restoration channel.') + '"' +
+                                'class="' + this.btnClass + ' button main trash-restore-all-media">' +
+                            '<i class="fa fa-refresh" aria-hidden="true"></i>' +
+                            '<span class="hidden-below-800" style="margin-left: 0.3em;">' +
+                                jsu.translateHTML('Restore all') +
+                            '</span>' +
+                        '</button>';
+                html += '<button type="button" title="' + jsu.translateAttribute('Permanently delete everything in recycle bin') + '"' +
+                                'class="' + this.btnClass + ' button danger trash-delete-all-media">' +
+                            '<i class="fa fa-trash" aria-hidden="true"></i>' +
+                            '<span class="hidden-below-800" style="margin-left: 0.3em;">' +
+                                jsu.translateHTML('Delete all') +
+                            '</span>' +
+                        '</button>';
+            }
         } else {
             if (itemType != 'channel' && this.ltiMode) {
                 html += '<button type="button" class="' + this.btnClass + ' button default item-entry-copy" data-link="' + this.getButtonLink(item, 'lti', true) + '"><i class="fa fa-chain" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Copy LTI link') + '</span></button>';
@@ -970,8 +1008,18 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
             if (item.can_edit) {
                 html += '<a class="' + this.btnClass + ' button item-entry-pick-edit-media default" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Edit') + '</span></a>';
             }
-            if (item.can_delete) {
-                html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Delete') + '</span></button>';
+            if (itemInTrash) {
+                if (item.can_delete) {
+                    if (item.trash_data.parent_url) {
+                        html += '<a type="button" class="' + this.btnClass + ' button default" href="' + item.trash_data.parent_url + '" title="' + jsu.translateAttribute('Go to this item\'s original location (before the item was deleted).') + '"><i class="fa fa-arrow-up" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Open original channel') + '</span></a>';
+                    }
+                    html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Delete definitively') + '</span></button>';
+                    html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-trash-restore-media main" title="' + jsu.translateAttribute('This item will be restored in its original channel. If the destination channel doesn\'t exist anymore, the item will be moved to the fallback restoration channel.') + '"><i class="fa fa-refresh" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Restore') + '</span></button>';
+                }
+            } else {
+                if (item.can_delete) {
+                    html += '<button type="button" class="' + this.btnClass + ' button item-entry-pick-delete-media danger"><i class="fa fa-trash" aria-hidden="true"></i> <span class="hidden-below-440">' + jsu.translateHTML('Delete') + '</span></button>';
+                }
             }
         }
     }
@@ -1001,6 +1049,39 @@ MSBrowser.prototype.getEntryLinks = function (item, itemType, selectable) {
     if (!this.pickMode && item.can_delete) {
         $('.item-entry-pick-delete-media', $entryLinks).click({ obj: this, item: item }, function (event) {
             event.data.obj.pick(event.data.item.oid, 'delete');
+        });
+    }
+    if (isTrashBin) {
+        $('.trash-restore-all-media', $entryLinks).click({ obj: this, item: item }, function (event) {
+            const allSubItems = [];
+            console.log(event.data.obj.channels.lastResponse);
+            for (const itemType of ['channels', 'videos', 'live_streams', 'photos_groups']) {
+                if (Array.isArray(event.data.obj.channels.lastResponse[itemType])) {
+                    for (const item of event.data.obj.channels.lastResponse[itemType]) {
+                        allSubItems.push(item);
+                    }
+                }
+            }
+            event.data.obj.deleteOrRestore(allSubItems, true);
+        });
+        $('.trash-delete-all-media', $entryLinks).click({ obj: this, item: item }, function (event) {
+            const allSubItems = [];
+            for (const itemType of ['channels', 'videos', 'live_streams', 'photos_groups']) {
+                if (Array.isArray(event.data.obj.channels.lastResponse[itemType])) {
+                    for (const item of event.data.obj.channels.lastResponse[itemType]) {
+                        allSubItems.push(item);
+                    }
+                }
+            }
+            event.data.obj.deleteOrRestore(allSubItems);
+        });
+    }
+    if (itemInTrash) {
+        $('.item-entry-pick-trash-delete-media', $entryLinks).click({ obj: this, item: item }, function (event) {
+            event.data.obj.deleteOrRestore([event.data.item]);
+        });
+        $('.item-entry-pick-trash-restore-media', $entryLinks).click({ obj: this, item: item }, function (event) {
+            event.data.obj.deleteOrRestore([event.data.item], true);
         });
     }
     const $copyBtn = $('.item-entry-copy', $entryLinks);

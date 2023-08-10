@@ -117,6 +117,7 @@
 }
 .ms-items .item-entry-layout,
 .ms-items .item-entry-unlisted,
+.ms-items .item-entry-in-trash,
 .ms-items .item-entry-notpublished,
 .ms-items .item-entry-published,
 .ms-items .item-entry-notready,
@@ -135,6 +136,7 @@
 }
 .ms-items .item-entry-layout:before,
 .ms-items .item-entry-unlisted:before,
+.ms-items .item-entry-in-trash:before,
 .ms-items .item-entry-notpublished:before,
 .ms-items .item-entry-published:before,
 .ms-items .item-entry-notready:before,
@@ -162,6 +164,10 @@
 }
 .ms-items .item-entry-unlisted:before {
     content: "\f070";
+    color: #EC804D;
+}
+.ms-items .item-entry-in-trash:before {
+    content: "\f1f8";
     color: #EC804D;
 }
 .ms-items .item-entry-notpublished:before {
@@ -279,6 +285,7 @@
 }
 .ms-items .item-entry.thumbnail .item-entry-layout,
 .ms-items .item-entry.thumbnail .item-entry-unlisted,
+.ms-items .item-entry.thumbnail .item-entry-in-trash,
 .ms-items .item-entry.thumbnail .item-entry-notpublished,
 .ms-items .item-entry.thumbnail .item-entry-published,
 .ms-items .item-entry.thumbnail .item-entry-notready,
@@ -440,6 +447,7 @@
     }
     .ms-items .item-entry-layout,
     .ms-items .item-entry-unlisted,
+    .ms-items .item-entry-in-trash,
     .ms-items .item-entry-notpublished,
     .ms-items .item-entry-published,
     .ms-items .item-entry-notready {

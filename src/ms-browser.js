@@ -398,6 +398,20 @@ MSBrowser.prototype._pick = function (oid, result, action, initialPick) {
         }
     }
 };
+MSBrowser.prototype.deleteOrRestore = function (items, restore) {
+    let confirmMessage = (restore ? jsu.translate('This will restore') :
+        jsu.translate('This will definitively delete')) + ' ';
+    if (items.length === 1) {
+        confirmMessage += '"' + items[0].title + '"';
+    } else {
+        confirmMessage += items.length + ' ' + jsu.translate('items');
+    }
+    confirmMessage += '. ' + jsu.translate('Are you sure?');
+    if (!confirm(confirmMessage)) {
+        return;
+    }
+    window.deleteFormManager.deleteOrRestoreItems(items, restore);
+};
 MSBrowser.prototype.remove = function (oid) {
     // remove given oid from display without reloading page
     // this do not remove the object in the server
