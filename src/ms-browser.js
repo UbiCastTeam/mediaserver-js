@@ -406,8 +406,8 @@ MSBrowser.prototype.deleteOrRestore = function (items, restore) {
     } else {
         confirmMessage += items.length + ' ' + jsu.translate('items');
     }
-    confirmMessage += '. ' + jsu.translate('Are you sure?');
-    if (!confirm(confirmMessage)) {
+    confirmMessage += '.\n' + jsu.translate('Are you sure?');
+    if (!confirm(confirmMessage.replace('&nbsp;', ' '))) {
         return;
     }
     window.deleteFormManager.deleteOrRestoreItems(items, restore);
