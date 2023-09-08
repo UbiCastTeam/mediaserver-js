@@ -352,7 +352,7 @@ MSAPIClient.prototype.getAvailableStorageDisplay = function (item, isUserStorage
             ? '<span class="' + this.getStorageLevelClass(item.storage_quota_level) + ' ">' + jsu.translateHTML('Available space:') + ' ' + jsu.getSizeDisplay(item.storage_available) + '</span>'
             : '<span class="red">' + jsu.translateHTML('No available space') + '</span>'
         ) +
-        ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + jsu.translateAttribute('help') + '">' +
+        ' <button type="button" class="ubi-web-lib-tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + jsu.translateAttribute('help') + '">' +
         '<i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>' +
         '<span role="tooltip" id="id_storage_help" class="tooltip-hidden-content">' +
         (isUserStorage
