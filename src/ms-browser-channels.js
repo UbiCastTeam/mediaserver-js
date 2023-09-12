@@ -341,7 +341,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 const availableStorageHtml = this.browser.msapi.getAvailableStorageDisplay(response.info);
                 if (availableStorageHtml) {
                     this.$menu.append(availableStorageHtml + ' ');
-                    if (!window.uwlb) {
+                    if (!window.ubiBaseJS) {
                         $('.tooltip-button', this.$menu).click(function () {
                             $('span', this).toggle();
                         });
@@ -424,7 +424,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 countDisplay += ' <button type="button" class="ubi-web-lib-tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translateAttribute('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translateHTML('Sub channels items are included in counts.') + '</span></button>';
                 countDisplay += '</div>';
                 $currentItemDesc.append(countDisplay);
-                if (!window.uwlb) {
+                if (!window.ubiBaseJS) {
                     $('.channel-items-count .ubi-web-lib-tooltip-button', $currentItemDesc).click(function () {
                         $('span', this).toggle();
                     });
@@ -434,7 +434,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
             if (this.browser.couldDisplay('storage') && storageDisplay) {
                 storageDisplay = '<div class="channel-storage-usage">' + jsu.translateHTML('Storage usage:') + ' ' + storageDisplay + '</div>';
                 $currentItemDesc.append(storageDisplay);
-                if (!window.uwlb) {
+                if (!window.ubiBaseJS) {
                     $('.channel-storage-usage .ubi-web-lib-tooltip-button', $currentItemDesc).click(function () {
                         $('span', this).toggle();
                     });
