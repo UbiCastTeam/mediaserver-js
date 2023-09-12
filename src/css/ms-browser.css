@@ -92,10 +92,10 @@
 
 
 /* tooltips */
-.ms-browser .ubi-web-lib-tooltip-button {
+.ms-browser .ubi-legacy-tooltip-button {
     padding: 2px;
 }
-.ms-browser .ubi-web-lib-tooltip-button .tooltip-hidden-content {
+.ms-browser .ubi-legacy-tooltip-button .tooltip-hidden-content {
     display: none;
 }
 
