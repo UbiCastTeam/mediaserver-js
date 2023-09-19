@@ -1,16 +1,44 @@
 /* CSS for MediaServer browser */
+.ms-browser {
+    --ubi-legacy-white-rgbb: 255, 255, 255;
+    --ubi-legacy-white: #ffffff;
+    --ubi-legacy-white-darker: #f5f5f6;
+    --ubi-legacy-black: #37373c;
+    --ubi-legacy-black-rgb: 55, 55, 60;
+    --ubi-legacy-black-darker: #000000;
+    --ubi-legacy-black-darker-rgb: 0, 0, 0;
+    --ubi-legacy-black-lighter: #666;
+    --ubi-legacy-grey: #999;
+    --ubi-legacy-grey-lighter: #DDD;
+    --ubi-legacy-blue-lighter: #E2EFFD;
+    --ubi-legacy-blue: #274BB1;
+    --ubi-legacy-blue-darker: #000F32;
+    --ubi-legacy-green: #1DCDCF;
+    --ubi-legacy-green-lighter: #DDF7F7;
+    --ubi-legacy-green-darker: #00c5c5;
+    --ubi-legacy-red: #e14149;
+    --ubi-legacy-red-rgb: 225, 65, 73;
+    --ubi-legacy-red-darker: #9B1B2B;
+    --ubi-legacy-red-lighter: #FECFC9;
+    --ubi-legacy-orange: #ff806c;
+    --ubi-legacy-orange-lighter: #FECFC9;
+    --ubi-legacy-violet: #AA60FF;
+    --ubi-legacy-violet-lighter: #EBDBFF;
+    --ubi-legacy-yellow: #FFCF03;
+    --ubi-legacy-yellow-lighter: #fff4C7;
+}
 .ms-browser-container {
     margin: 0;
     padding: 0;
     position: relative;
     display: block;
-    color: #404040;
+    color: var(--ubi-legacy-black);
 }
 .ms-browser-container.in-overlay {
     text-align: left;
 }
 .odm-main div.odm-element.ms-browser-container {
-    background: #f5f5f5;
+    background: var(--ubi-legacy-white-darker);
 }
 
 /* base */
@@ -20,11 +48,11 @@
 }
 .ms-browser-container a {
     text-decoration: none;
-    color: #274BB1;
+    color: var(--ubi-legacy-blue);
 }
 .ms-browser-container a:hover {
     text-decoration: none;
-    color: #000F32;
+    color: var(--ubi-legacy-blue-darker);
 }
 .ms-browser img {
     vertical-align: middle;
@@ -82,8 +110,8 @@
 }
 .ms-browser .button.active,
 .ms-browser button.button.active {
-    color: #fff;
-    background: #404040;
+    color: var(--ubi-legacy-white);
+    background: var(--ubi-legacy-black);
 }
 .ms-browser br + .button,
 .ms-browser br + .button + .button {
@@ -141,7 +169,7 @@
     max-height: 1.4em;
 }
 .ms-browser .ms-browser-title .parent-channel-title {
-    color: #777;
+    color: var(--ubi-legacy-black-lighter);
     font-size: 80%;
 }
 .ms-browser .ms-browser-title .parent-channel-title:after {
@@ -151,10 +179,10 @@
     padding: 0.3em;
     line-height: 2.6em;
     text-align: center;
-    background: #fff;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    background: var(--ubi-legacy-white);
+    border-top: 1px solid var(--ubi-legacy-grey-lighter);
+    border-bottom: 1px solid var(--ubi-legacy-grey-lighter);
+    box-shadow: 1px 1px 2px rgba(var(--ubi-legacy-black-rgb), 0.4);
     z-index: 1;
 }
 .ms-browser.in-overlay .ms-browser-bar {
@@ -180,7 +208,7 @@
     padding: 5px 10px;
     font-weight: bold;
     text-decoration: italic;
-    color: #404040;
+    color: var(--ubi-legacy-black);
 }
 .ms-browser.in-overlay h3,
 .ms-browser h4 {
@@ -220,8 +248,8 @@
     z-index: 4;
 }
 .ms-browser-dropdown .ms-browser-dropdown-button.active {
-    background: #404040;
-    color: #fff;
+    background: var(--ubi-legacy-black);
+    color: var(--ubi-legacy-white);
 }
 .ms-browser-dropdown .ms-browser-dropdown-menu {
     top: 100%;
@@ -234,11 +262,11 @@
     line-height: 24px;
     white-space: nowrap;
     text-align: left;
-    border: 1px solid #ccc;
+    border: 1px solid var(--ubi-legacy-grey-lighter);
     border-radius: 4px;
-    color: #404040;
-    background: #fff;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    color: var(--ubi-legacy-black);
+    background: var(--ubi-legacy-white);
+    box-shadow: 1px 1px 2px rgba(var(--ubi-legacy-black-darker-rgb), 0.4);
 }
 .ms-browser-dropdown-right .ms-browser-dropdown-menu {
     left: auto;
@@ -289,15 +317,15 @@
     left: 40%;
     display: none;
     padding: 10px;
-    color: #fff;
+    color: var(--ubi-legacy-white);
     border-radius: 3px;
-    background: #000;
-    background: rgba(0, 0, 0, .7);
+    background: var(--ubi-legacy-black);
+    background: rgba(var(--ubi-legacy-black-darker-rgb), .7);
     z-index: 1;
 }
 .ms-browser .ms-browser-message {
-    background: #fff;
-    color: #000;
+    background: var(--ubi-legacy-white);
+    color: var(--ubi-legacy-black);
 }
 .ms-browser .ms-browser-loading {
     font-size: 150%;
@@ -320,9 +348,9 @@
     line-height: normal;
     text-align: left;
     min-height: 0;
-    color: #fff;
-    background: #222;
-    box-shadow: 2px 2px 1px 0px #ddd;
+    color: var(--ubi-legacy-white);
+    background: var(--ubi-legacy-black);
+    box-shadow: 2px 2px 1px 0px var(--ubi-legacy-grey-lighter);
 }
 .ms-browser .message.info:before,
 .ms-browser .message.success:before,
@@ -338,25 +366,25 @@
     font: normal normal normal 20px/1 FontAwesome;
 }
 .ms-browser .message.info {
-    background: #274BB1;
+    background: var(--ubi-legacy-blue);
 }
 .ms-browser .message.info:before {
     content: "\f05a";
 }
 .ms-browser .message.success {
-    background: #008750;
+    background: var(--ubi-legacy-green);
 }
 .ms-browser .message.success:before {
     content: "\f058";
 }
 .ms-browser .message.warning {
-    background: #F7B407;
+    background: var(--ubi-legacy-orange);
 }
 .ms-browser .message.warning:before {
     content: "\f071";
 }
 .ms-browser .message.error {
-    background: #DB263D;
+    background: var(--ubi-legacy-red);
 }
 .ms-browser .message.error:before {
     content: "\f06a";
@@ -377,7 +405,7 @@
     padding: 0.5em;
     float: left;
     width: 18em;
-    background: #eee;
+    background: var(--ubi-legacy-white-darker);
 }
 .ms-browser.has-tree.in-overlay .ms-browser-tree-place {
     float: none;
@@ -411,13 +439,12 @@
     float: left;
     text-align: center;
     font-weight: normal;
-    vertical-align: top;
     width: 1.3em;
     height: 1.3em;
     line-height: 1;
     cursor: default;
-    background: #fff;
-    border: 1px solid #ccc;
+    background: var(--ubi-legacy-white);
+    border: 1px solid var(--ubi-legacy-grey-lighter);
     border-radius: 2px;
     box-sizing: content-box;
 }
@@ -439,7 +466,7 @@
     text-align: left;
     line-height: 1;
     cursor: pointer;
-    color: #354b75;
+    color: var(--ubi-legacy-blue);
     background: transparent;
     border: 0 none;
     text-decoration: none;
@@ -455,13 +482,13 @@
 }
 .ms-channels-tree .channel-active .channel-btn {
     font-weight: bold;
-    color: #ffffff;
-    background-color: #354b75;
+    color: var(--ubi-legacy-white);
+    background-color: var(--ubi-legacy-blue);
 }
 .ms-channels-tree .channel-locked,
 .ms-channels-tree .channel-empty,
 .ms-channels-tree .channel-empty .channel-btn {
-    color: #666;
+    color: var(--ubi-legacy-black-lighter);
 }
 
 /* search tab */
