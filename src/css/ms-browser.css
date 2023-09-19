@@ -1,17 +1,21 @@
 /* CSS for MediaServer browser */
 .ms-browser {
-    --ubi-legacy-white-rgbb: 255, 255, 255;
+    --ubi-legacy-white-rgb: 255, 255, 255;
     --ubi-legacy-white: #ffffff;
     --ubi-legacy-white-darker: #f5f5f6;
+    --ubi-legacy-white-darker-rgb: 245, 245, 246;
     --ubi-legacy-black: #37373c;
     --ubi-legacy-black-rgb: 55, 55, 60;
     --ubi-legacy-black-darker: #000000;
     --ubi-legacy-black-darker-rgb: 0, 0, 0;
     --ubi-legacy-black-lighter: #666;
+    --ubi-legacy-black-lighter-rgb: 102, 102, 102;
     --ubi-legacy-grey: #999;
-    --ubi-legacy-grey-lighter: #DDD;
+    --ubi-legacy-grey-rgb: 153, 153, 153;
+    --ubi-legacy-grey-lighter: #EEEEEE;
     --ubi-legacy-blue-lighter: #E2EFFD;
     --ubi-legacy-blue: #274BB1;
+    --ubi-legacy-blue-rgb: 39, 75, 177;
     --ubi-legacy-blue-darker: #000F32;
     --ubi-legacy-green: #1DCDCF;
     --ubi-legacy-green-lighter: #DDF7F7;
