@@ -2,44 +2,44 @@
 html.iframe .ms-browser-container {
     background: var(--ubi-legacy-white-darker);
 }
-nav.navbar .buttons-left .back {
+.ubi-legacy nav.navbar .buttons-left .back {
     font-size: 1.1em;
 }
-nav.navbar .buttons-left > div {
+.ubi-legacy nav.navbar .buttons-left > div {
     display: inline-block;
 }
-nav.navbar .links {
+.ubi-legacy nav.navbar .links {
     display: none;
 }
-nav.navbar .buttons-left,
-nav.navbar .buttons-right {
+.ubi-legacy nav.navbar .buttons-left,
+.ubi-legacy nav.navbar .buttons-right {
     width: auto;
     vertical-align: middle;
     line-height: 39px;
 }
-nav.navbar .buttons-right {
+.ubi-legacy nav.navbar .buttons-right {
     float: right;
 }
-h1 .item-entry-preview img {
+.ubi-legacy h1 .item-entry-preview img {
     margin-right: 10px;
     max-width: 100px;
     max-height: 100px;
 }
-h1 .channel-titles-place {
+.ubi-legacy h1 .channel-titles-place {
     display: inline-block;
     vertical-align: middle;
     text-align: left;
     max-width: calc(100% - 120px);
 }
-h1 .channel-titles-place .parent-channel-title {
+.ubi-legacy h1 .channel-titles-place .parent-channel-title {
     display: block;
     font-size: 0.6em;
     color: var(--ubi-legacy-black-lighter);
 }
-h1 .channel-titles-place .channel-title {
+.ubi-legacy h1 .channel-titles-place .channel-title {
     display: inline-block;
 }
-h1 .channel-titles-place .breadcrumb {
+.ubi-legacy h1 .channel-titles-place .breadcrumb {
     font-size: 0.4em;
 }
 /* ms-browser */
@@ -192,8 +192,8 @@ h1 .channel-titles-place .breadcrumb {
     color: var(--ubi-legacy-black);
 }
 @media (max-width: 800px) {
-    nav.navbar .buttons-left,
-    nav.navbar .buttons-right {
+    .ubi-legacy .navbar .buttons-left,
+    .ubi-legacy .navbar .buttons-right {
         width: auto;
     }
     .overlay-info {
@@ -202,7 +202,7 @@ h1 .channel-titles-place .breadcrumb {
     }
 }
 @media (max-width: 600px) {
-    #global .main-title h1 {
+    #global.ubi-legacy .main-title h1 {
         text-align: center;
         max-width: 100%;
     }
