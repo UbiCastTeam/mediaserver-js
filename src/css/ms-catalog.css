@@ -1,6 +1,6 @@
 /* Additional CSS for non overlay use */
 html.iframe .ms-browser-container {
-    background: #f5f5f5;
+    background: var(--ubi-legacy-white-darker);
 }
 nav.navbar .buttons-left .back {
     font-size: 1.1em;
@@ -34,7 +34,7 @@ h1 .channel-titles-place {
 h1 .channel-titles-place .parent-channel-title {
     display: block;
     font-size: 0.6em;
-    color: #595959;
+    color: var(--ubi-legacy-black-lighter);
 }
 h1 .channel-titles-place .channel-title {
     display: inline-block;
@@ -122,16 +122,16 @@ h1 .channel-titles-place .breadcrumb {
     position: absolute;
     text-align: left;
     width: 361px;
-    border: 1px solid #aaa;
-    color: #fff;
+    border: 1px solid var(--ubi-legacy-grey);
+    color: var(--ubi-legacy-white);
     overflow: hidden;
-    background: #222;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--ubi-legacy-black);
+    background: rgba(var(--ubi-legacy-black-rgb), 0.8);
     border-radius: 3px;
 }
 .overlay-info-title {
     position: relative;
-    background: #eee;
+    background: var(--ubi-legacy-white-darker);
 }
 .overlay-info h1 {
     margin: 0;
@@ -177,7 +177,7 @@ h1 .channel-titles-place .breadcrumb {
 .overlay-info table.overlay-info-table td {
     padding: 4px 0;
     border: 0 none;
-    color: white;
+    color: var(--ubi-legacy-white);
 }
 .overlay-info table.overlay-info-table th.overlay-info-label {
     padding-right: 8px;
@@ -189,7 +189,7 @@ h1 .channel-titles-place .breadcrumb {
 }
 .overlay-info .item-entry-links .button a {
     text-decoration: none;
-    color: #333;
+    color: var(--ubi-legacy-black);
 }
 @media (max-width: 800px) {
     nav.navbar .buttons-left,

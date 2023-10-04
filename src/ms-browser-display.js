@@ -632,7 +632,7 @@ MSBrowser.prototype.getContentEntry = function (itemType, item, gselectable, tab
         if (item.can_edit) {
             html += '<a title="' + jsu.translateAttribute('Edit') + '" href="' + this.getButtonLink(item, 'edit') + '"' + this.linksTarget + '><i class="fa fa-pencil" aria-hidden="true"></i></a>';
         }
-        html += '<div class="overlay-info ms-items" id="item_entry_' + oid + '_' + tab + '_info" style="display: none;" role="dialog" tabindex="-1" aria-labelledby="item_entry_' + item.oid + '_' + tab + '_info_title" aria-modal="true"></div>';
+        html += '<div class="ubi-legacy overlay-info ms-items" id="item_entry_' + oid + '_' + tab + '_info" style="display: none;" role="dialog" tabindex="-1" aria-labelledby="item_entry_' + item.oid + '_' + tab + '_info_title" aria-modal="true"></div>';
         html += '</div>';
     }
     const $entryBlock = $(html);

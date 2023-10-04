@@ -341,7 +341,7 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 const availableStorageHtml = this.browser.msapi.getAvailableStorageDisplay(response.info);
                 if (availableStorageHtml) {
                     this.$menu.append(availableStorageHtml + ' ');
-                    if (!window.uwlb) {
+                    if (!window.ubiBaseJS) {
                         $('.tooltip-button', this.$menu).click(function () {
                             $('span', this).toggle();
                         });
@@ -421,11 +421,11 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 }
                 let countDisplay = '<div class="channel-items-count">' + jsu.translateHTML('Channel content:');
                 countDisplay += ' <span>' + jsu.escapeHTML(results.join(', ')) + '</span>';
-                countDisplay += ' <button type="button" class="tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translateAttribute('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translateHTML('Sub channels items are included in counts.') + '</span></button>';
+                countDisplay += ' <button type="button" class="ubi-legacy-tooltip-button no-padding no-border no-background" aria-describedby="id_count_help" aria-label="' + jsu.translateAttribute('help') + '"><i class="fa fa-question-circle fa-fw" aria-hidden="true"></i><span role="tooltip" id="id_count_help" class="tooltip-hidden-content">' + jsu.translateHTML('Sub channels items are included in counts.') + '</span></button>';
                 countDisplay += '</div>';
                 $currentItemDesc.append(countDisplay);
-                if (!window.uwlb) {
-                    $('.channel-items-count .tooltip-button', $currentItemDesc).click(function () {
+                if (!window.ubiBaseJS) {
+                    $('.channel-items-count .ubi-legacy-tooltip-button', $currentItemDesc).click(function () {
                         $('span', this).toggle();
                     });
                 }
@@ -434,8 +434,8 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
             if (this.browser.couldDisplay('storage') && storageDisplay) {
                 storageDisplay = '<div class="channel-storage-usage">' + jsu.translateHTML('Storage usage:') + ' ' + storageDisplay + '</div>';
                 $currentItemDesc.append(storageDisplay);
-                if (!window.uwlb) {
-                    $('.channel-storage-usage .tooltip-button', $currentItemDesc).click(function () {
+                if (!window.ubiBaseJS) {
+                    $('.channel-storage-usage .ubi-legacy-tooltip-button', $currentItemDesc).click(function () {
                         $('span', this).toggle();
                     });
                 }
