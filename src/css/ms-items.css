@@ -2,9 +2,9 @@
 .ms-items .item-entry {
     margin: 10px;
     position: relative;
-    display: block;
     display: inline-block;
     width: calc(50% - 20px);
+    vertical-align: top;
 }
 .ms-items .item-description {
     padding: 10px;
@@ -33,11 +33,11 @@
 }
 .ms-items .selected .item-entry-link,
 .ms-items .selected .item-entry-link:hover {
-    color: var(--ubi-legacy-blue-darker);
-    border-bottom: 3px solid var(--ubi-legacy-blue);
+    color: var(--ubi-legacy-blue-text);
+    border-bottom: 3px solid var(--ubi-legacy-blue-text);
 }
 .ms-items .item-entry .item-entry-link:hover {
-    border-bottom: 3px solid var(--ubi-legacy-green);
+    border-bottom: 3px solid var(--ubi-legacy-green-text);
     text-decoration: none;
 }
 .ms-browser-title .item-entry-preview {
@@ -360,7 +360,7 @@
 }
 .ms-items .item-entry.thumbnail .item-entry-buttons a:hover,
 .ms-items .item-entry.thumbnail .item-entry-buttons button:hover {
-    background: var(--ubi-legacy-blue-darker);
+    box-shadow: inset 0px 100vh rgba(0, 0, 0, 0.1);
 }
 .ms-items .item-entry.thumbnail .item-entry-info.info-displayed,
 .ms-items .item-entry.thumbnail.focus .item-entry-buttons a,
