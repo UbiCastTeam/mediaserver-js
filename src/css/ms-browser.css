@@ -13,23 +13,41 @@
     --ubi-legacy-grey: #999;
     --ubi-legacy-grey-rgb: 153, 153, 153;
     --ubi-legacy-grey-lighter: #E5E5E5;
-    --ubi-legacy-blue-lighter: #E2EFFD;
     --ubi-legacy-blue: #274BB1;
-    --ubi-legacy-blue-rgb: 39, 75, 177;
     --ubi-legacy-blue-darker: #000F32;
     --ubi-legacy-green: #1DCDCF;
-    --ubi-legacy-green-lighter: #DDF7F7;
-    --ubi-legacy-green-darker: #00c5c5;
     --ubi-legacy-red: #e14149;
-    --ubi-legacy-red-rgb: 225, 65, 73;
-    --ubi-legacy-red-darker: #9B1B2B;
-    --ubi-legacy-red-lighter: #FECFC9;
     --ubi-legacy-orange: #ff806c;
-    --ubi-legacy-orange-lighter: #FECFC9;
-    --ubi-legacy-violet: #AA60FF;
-    --ubi-legacy-violet-lighter: #EBDBFF;
-    --ubi-legacy-yellow: #FFCF03;
-    --ubi-legacy-yellow-lighter: #fff4C7;
+}
+.dark-theme .ms-browser {
+    --ubi-legacy-white-rgb: 49, 49, 49;
+    --ubi-legacy-white: #313131;
+    --ubi-legacy-white-darker: #37373c;
+    --ubi-legacy-white-darker-rgb: 55,55,60;
+    --ubi-legacy-black: #f5f5f6;
+    --ubi-legacy-black-rgb: 245,245,246;
+    --ubi-legacy-black-darker: #ffffff;
+    --ubi-legacy-black-darker-rgb: 255,255,255;
+    --ubi-legacy-black-lighter: #eeeeee;
+    --ubi-legacy-black-lighter-rgb: 238, 238 ,238;
+    --ubi-legacy-grey: #999;
+    --ubi-legacy-grey-rgb: 153,153,153;
+    --ubi-legacy-grey-lighter: #202020;
+    --ubi-legacy-blue-text: #60A3ED;
+    --ubi-legacy-green-text: #1dd1a1;
+    --ubi-legacy-red-text: #FF6652;
+  }
+.dark-theme .ms-items .item-entry-preview .item-entry-preview-play {
+    color: var(--ubi-legacy-black);
+    text-shadow: 0 0 5px var(--ubi-legacy-white);
+}
+.dark-theme .overlay-info {
+    background: var(--ubi-legacy-white);
+    background: rgba(var(--ubi-legacy-white-rgb), 0.8);
+}
+.dark-theme .overlay-info table.overlay-info-table td,
+.dark-theme .overlay-info table.overlay-info-table th.overlay-info-label {
+    color: var(--ubi-legacy-black);
 }
 .ms-browser-container {
     margin: 0;
@@ -52,11 +70,10 @@
 }
 .ms-browser-container a {
     text-decoration: none;
-    color: var(--ubi-legacy-blue);
+    color: var(--ubi-legacy-blue-text);
 }
 .ms-browser-container a:hover {
-    text-decoration: none;
-    color: var(--ubi-legacy-blue-darker);
+    text-decoration: underline;
 }
 .ms-browser img {
     vertical-align: middle;
@@ -371,24 +388,28 @@
 }
 .ms-browser .message.info {
     background: var(--ubi-legacy-blue);
+    color: var(--ubi-legacy-blue-contrast);
 }
 .ms-browser .message.info:before {
     content: "\f05a";
 }
 .ms-browser .message.success {
     background: var(--ubi-legacy-green);
+    color: var(--ubi-legacy-green-contrast);
 }
 .ms-browser .message.success:before {
     content: "\f058";
 }
 .ms-browser .message.warning {
     background: var(--ubi-legacy-orange);
+    color: var(--ubi-legacy-orange-contrast);
 }
 .ms-browser .message.warning:before {
     content: "\f071";
 }
 .ms-browser .message.error {
     background: var(--ubi-legacy-red);
+    color: var(--ubi-legacy-red-contrast);
 }
 .ms-browser .message.error:before {
     content: "\f06a";
@@ -470,7 +491,7 @@
     text-align: left;
     line-height: 1;
     cursor: pointer;
-    color: var(--ubi-legacy-blue);
+    color: var(--ubi-legacy-blue-text);
     background: transparent;
     border: 0 none;
     text-decoration: none;
