@@ -81,8 +81,9 @@ html.iframe .ms-browser-container {
     cursor: pointer;
 }
 .ms-browser-content .channel-storage-usage .progress-bar {
-    margin: 0 10px;
-    width: 150px !important;
+    width: 300px;
+    max-width: 40%;
+    min-width: 150px;
 }
 .ms-browser-content .channel-description-stats span + span {
     margin-left: 20px;

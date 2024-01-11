@@ -111,7 +111,6 @@
     overflow: hidden;
 }
 .ms-browser .storage-available {
-    margin-left: 24px;
     white-space: nowrap;
 }
 .ms-browser .storage-available + .item-entry-links {

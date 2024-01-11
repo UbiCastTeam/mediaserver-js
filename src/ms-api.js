@@ -315,20 +315,24 @@ MSAPIClient.prototype.getStorageLevelClass = function (level) {
 MSAPIClient.prototype.getStorageDisplay = function (item, isUserStorage) {
     let html = '';
     if (item.storage_used !== null && item.storage_used !== undefined) {
-        html = '<span class="storage-usage">' + jsu.getSizeDisplay(item.storage_used);
+        html = '<span class="storage-usage">';
         if (item.storage_quota > 0) {
-            html += ' / ' + jsu.escapeHTML(item.storage_quota) + ' G' + jsu.translateHTML('B');
+            const usageRepr = jsu.getSizeDisplay(item.storage_used) + ' / ' + jsu.escapeHTML(item.storage_quota) + ' G' + jsu.translateHTML('B');
             if (item.storage_quota_percents !== undefined) {
                 html += ' <span class="progress-bar ' + this.getStorageLevelClass(item.storage_quota_level) + '" aria-hidden="true">' +
                 '<span class="progress-level" style="width: ' + item.storage_quota_percents + '%"></span>' +
-                '<span class="progress-label">' + item.storage_quota_percents + ' %</span>' +
+                '<span class="progress-label">' + usageRepr + '</span>' +
                 '</span>';
+            } else {
+                html += usageRepr;
             }
+        } else {
+            html += jsu.getSizeDisplay(item.storage_used);
         }
         html += '</span>';
         const storageAvailable = this.getAvailableStorageDisplay(item, isUserStorage);
         if (storageAvailable) {
-            html += ' ' + storageAvailable;
+            html += ' (' + storageAvailable + ')';
         }
     }
     return html;
@@ -349,8 +353,8 @@ MSAPIClient.prototype.getAvailableStorageDisplay = function (item, isUserStorage
     if (item.storage_available !== null && item.storage_available !== undefined) {
         html = '<span class="storage-available nowrap">' +
         (item.storage_available > 0
-            ? '<span class="' + this.getStorageLevelClass(item.storage_quota_level) + ' ">' + jsu.translateHTML('Available space:') + ' ' + jsu.getSizeDisplay(item.storage_available) + '</span>'
-            : '<span class="red">' + jsu.translateHTML('No available space') + '</span>'
+            ? '<span class="' + this.getStorageLevelClass(item.storage_quota_level) + ' ">' + jsu.translateHTML('available:') + ' ' + jsu.getSizeDisplay(item.storage_available) + '</span>'
+            : '<span class="red">' + jsu.translateHTML('no available space') + '</span>'
         ) +
         ' <button type="button" class="ubi-legacy-tooltip-button no-padding no-border no-background" aria-describedby="id_storage_help" aria-label="' + jsu.translateAttribute('help') + '">' +
         '<i class="fa fa-question-circle fa-fw" aria-hidden="true"></i>' +
