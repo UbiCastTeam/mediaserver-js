@@ -33,9 +33,9 @@
     --ubi-legacy-grey: #999;
     --ubi-legacy-grey-rgb: 153,153,153;
     --ubi-legacy-grey-lighter: #202020;
-    --ubi-legacy-blue-text: #60A3ED;
+    --ubi-legacy-blue-text: #7AB3F0;
     --ubi-legacy-green-text: #1dd1a1;
-    --ubi-legacy-red-text: #FF6652;
+    --ubi-legacy-red-text: #FF8E80;
   }
 .dark-theme .ms-items .item-entry-preview .item-entry-preview-play {
     color: var(--ubi-legacy-black);
