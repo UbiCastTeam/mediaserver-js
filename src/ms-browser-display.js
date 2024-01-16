@@ -200,7 +200,7 @@ MSBrowser.prototype.getTopMenuJq = function () {
         }
         event.data.obj.displayCount = newValue;
         $('.ms-browser-more-btn button').text(event.data.obj.moreLabel.replace(/\{count\}/, event.data.obj.displayCount));
-        jsu.setCookie('catalog-displayCount', newValue);
+        window.localStorage.setItem('nudgis.legacyCatalog.displayCount', newValue);
     });
     // detect focus change
     try {
@@ -369,7 +369,7 @@ MSBrowser.prototype.setDisplayAsList = function () {
     if (!this.useOverlay) {
         $('#global').addClass('max-width-1200');
     }
-    jsu.setCookie('catalog-displayMode', 'list');
+    window.localStorage.setItem('nudgis.legacyCatalog.displayMode', 'list');
     this.channels.refreshDisplay();
     this.latest.refreshDisplay();
     this.search.refreshDisplay();
@@ -386,7 +386,7 @@ MSBrowser.prototype.setDisplayAsThumbnails = function () {
     if (!this.useOverlay) {
         $('#global').removeClass('max-width-1200');
     }
-    jsu.setCookie('catalog-displayMode', 'thumbnail');
+    window.localStorage.setItem('nudgis.legacyCatalog.displayMode', 'thumbnail');
     this.channels.refreshDisplay();
     this.latest.refreshDisplay();
     this.search.refreshDisplay();
@@ -398,7 +398,7 @@ MSBrowser.prototype.setDisplayTypesIcons = function (checked) {
     } else {
         this.$widget.removeClass('show-types-icons');
     }
-    jsu.setCookie('catalog-displayTypesIcons', checked ? 'yes' : 'no');
+    window.localStorage.setItem('nudgis.legacyCatalog.displayTypesIcons', checked ? 'yes' : 'no');
 };
 MSBrowser.prototype.getActiveTab = function () {
     const $active = $('.ms-browser-tab.active', this.$menu);

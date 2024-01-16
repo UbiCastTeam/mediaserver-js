@@ -68,7 +68,7 @@ MSBrowserLatest.prototype.getMenuJq = function () {
         $('.ms-browser-latest-types input', this.$menu).change({ obj: this }, function (event) {
             event.data.obj.refreshDisplay(true);
             const typeLetter = this.id.split('_')[2][0];
-            let types = jsu.getCookie('catalog-lastestTypes');
+            let types = window.localStorage.getItem('nudgis.legacyCatalog.lastestTypes');
             if (!types) {
                 types = 'vlp';
             }
@@ -79,7 +79,7 @@ MSBrowserLatest.prototype.getMenuJq = function () {
             } else {
                 types = types.replace(new RegExp(typeLetter), '');
             }
-            jsu.setCookie('catalog-lastestTypes', types);
+            window.localStorage.setItem('nudgis.legacyCatalog.lastestTypes', types);
         });
     }
     return this.$menu;
@@ -107,7 +107,7 @@ MSBrowserLatest.prototype.onShow = function () {
 
     const dc = this.getDisplayableContent();
     if (dc.length > 1) {
-        let types = jsu.getCookie('catalog-lastestTypes');
+        let types = window.localStorage.getItem('nudgis.legacyCatalog.lastestTypes');
         if (!types) {
             types = 'cvlp';
         }

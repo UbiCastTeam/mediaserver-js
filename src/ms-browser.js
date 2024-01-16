@@ -62,7 +62,7 @@ function MSBrowser (options) {
     this.moreVideos = [];
     this.morePhotosGroups = [];
 
-    this.displayCount = jsu.getCookie('catalog-displayCount') || 30;
+    this.displayCount = window.localStorage.getItem('nudgis.legacyCatalog.displayCount') || 30;
 
     jsu.setObjectAttributes(this, options, [
         // allowed options
@@ -107,14 +107,14 @@ MSBrowser.prototype.init = function () {
     }
     this.initialized = true;
 
-    if (jsu.getCookie('catalog-displayMode') == 'thumbnail') {
+    if (window.localStorage.getItem('nudgis.legacyCatalog.displayMode') == 'thumbnail') {
         this.displayAsThumbnails = true;
         if (!this.useOverlay) {
             $('#container').removeClass('max-width-1200');
         }
     }
 
-    if (jsu.getCookie('catalog-displayTypesIcons') == 'yes') {
+    if (window.localStorage.getItem('nudgis.legacyCatalog.displayTypesIcons') == 'yes') {
         this.displayTypesIcons = true;
     }
 
