@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MediaServer-JS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-10 13:00+0000\n"
-"PO-Revision-Date: 2023-08-10 15:05+0200\n"
+"POT-Creation-Date: 2024-01-31 14:12+0000\n"
+"PO-Revision-Date: 2024-01-31 15:13+0100\n"
 "Last-Translator: Stéphane Diemer <stephane.diemer@ubicast.eu>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -63,7 +63,7 @@ msgstr "Annotations ce mois"
 msgid "April"
 msgstr "Avril"
 
-#: ms-browser.js:409
+#: ms-browser.js:407
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
 
@@ -71,11 +71,7 @@ msgstr "Êtes-vous sûr ?"
 msgid "August"
 msgstr "Ao&ucirc;t"
 
-#: ms-api.js:352
-msgid "Available space:"
-msgstr "Espace disponible :"
-
-#: extra-translations/jsu-translations.js:20 ms-api.js:320 ms-api.js:341
+#: extra-translations/jsu-translations.js:20 ms-api.js:320 ms-api.js:345
 msgid "B"
 msgstr "o"
 
@@ -83,7 +79,7 @@ msgstr "o"
 msgid "Categories"
 msgstr "Catégories"
 
-#: ms-browser-channels.js:422
+#: ms-browser-channels.js:420
 msgid "Channel content:"
 msgstr "Contenu de la chaîne :"
 
@@ -91,7 +87,7 @@ msgstr "Contenu de la chaîne :"
 msgid "Channel does not exist."
 msgstr "La chaîne n'existe pas."
 
-#: ms-browser-display.js:21 ms-browser-display.js:553 ms-browser-channels.js:61
+#: ms-browser-display.js:21 ms-browser-display.js:553 ms-browser-channels.js:59
 msgid "Channels"
 msgstr "Chaînes"
 
@@ -204,7 +200,7 @@ msgstr "Aller à l'emplacement d'origine de cet élément (avant qu'il ne soit s
 msgid "Hide this window"
 msgstr "Fermer cette fenêtre"
 
-#: ms-browser-channels.js:60
+#: ms-browser-channels.js:58
 msgid "Home"
 msgstr "Accueil"
 
@@ -248,11 +244,11 @@ msgstr "Diffusions en direct"
 msgid "Loading"
 msgstr "Chargement"
 
-#: ms-browser-display.js:48 ms-browser-channels.js:43
+#: ms-browser-display.js:48 ms-browser-channels.js:41
 msgid "Loading..."
 msgstr "Chargement ..."
 
-#: ms-browser-channels.js:101
+#: ms-browser-channels.js:99
 msgid "Main channels"
 msgstr "Chaînes principales"
 
@@ -284,7 +280,7 @@ msgstr "Le média n'existe pas."
 msgid "Media information"
 msgstr "Informations sur le média"
 
-#: ms-browser-display.js:17 ms-browser-channels.js:99 ms-tree.js:114
+#: ms-browser-display.js:17 ms-browser-channels.js:97 ms-tree.js:114
 #: ms-tree.js:391 ms-tree.js:399
 msgid "My channel"
 msgstr "Ma chaîne"
@@ -292,10 +288,6 @@ msgstr "Ma chaîne"
 #: ms-browser-display.js:18
 msgid "My media"
 msgstr "Mes médias"
-
-#: ms-api.js:353
-msgid "No available space"
-msgstr "Pas d'espace disponible"
 
 #: ms-browser-latest.js:251
 msgid "No contents."
@@ -341,8 +333,8 @@ msgstr "Ouvrir le panneau d'information"
 msgid "Open original channel"
 msgstr "Ouvrir la chaîne d'origine"
 
-#: ms-browser-channels.js:312 ms-browser-channels.js:332
-#: ms-browser-channels.js:333 ms-browser-channels.js:337
+#: ms-browser-channels.js:310 ms-browser-channels.js:330
+#: ms-browser-channels.js:331 ms-browser-channels.js:335
 msgid "Parent channel"
 msgstr "Chaîne parente"
 
@@ -358,7 +350,7 @@ msgstr "Supprimer définitivement tout ce qui se trouve dans la corbeille"
 msgid "Photos groups"
 msgstr "Groupes de photos"
 
-#: ms-browser-channels.js:218
+#: ms-browser-channels.js:216
 msgid "Please login to access this channel"
 msgstr "Veuillez vous connecter pour accéder à cette chaîne"
 
@@ -434,7 +426,7 @@ msgstr "Voir"
 msgid "See statistics on this channel"
 msgstr "Voir les statistiques de cette chaîne"
 
-#: ms-browser-channels.js:49
+#: ms-browser-channels.js:47
 msgid "Select a channel to display its content."
 msgstr "Sélectionnez une chaîne pour afficher son contenu."
 
@@ -446,7 +438,7 @@ msgstr "Sélectionner cette chaîne"
 msgid "Select this media"
 msgstr "Sélectionner ce média"
 
-#: ms-browser-channels.js:466
+#: ms-browser-channels.js:470
 msgid "Send an email to the managers of this channel"
 msgstr "Envoyer un courriel aux responsables de cette chaîne"
 
@@ -454,7 +446,7 @@ msgstr "Envoyer un courriel aux responsables de cette chaîne"
 msgid "September"
 msgstr "Septembre"
 
-#: ms-browser-search.js:328 ms-browser-channels.js:219 ms-browser-latest.js:207
+#: ms-browser-search.js:328 ms-browser-channels.js:217 ms-browser-latest.js:207
 msgid "Sign in"
 msgstr "Connexion"
 
@@ -466,7 +458,7 @@ msgstr "Jeton, croissant"
 msgid "Slug, descending"
 msgstr "Jeton, décroissant"
 
-#: ms-browser-channels.js:516
+#: ms-browser-channels.js:520
 msgid "Some contents may still exist in this channel but if it is the case your account is not allowed to see them."
 msgstr "Du contenu peut tout de même être présent dans cette chaîne mais si c'est le cas, votre compte utilisateur ne possède pas la permission de le voir."
 
@@ -490,7 +482,7 @@ msgstr "Statistiques"
 msgid "Storage usage"
 msgstr "Stockage utilisé"
 
-#: ms-browser-display.js:831 ms-browser-channels.js:435
+#: ms-browser-display.js:831 ms-browser-channels.js:433
 msgid "Storage usage:"
 msgstr "Stockage utilisé :"
 
@@ -498,15 +490,15 @@ msgstr "Stockage utilisé :"
 msgid "Sub channels"
 msgstr "Sous chaînes"
 
-#: ms-browser-channels.js:424
+#: ms-browser-channels.js:422
 msgid "Sub channels items are included in counts."
 msgstr "Les éléments contenus dans les sous chaînes sont inclus dans les comptes."
 
-#: ms-browser-channels.js:456
+#: ms-browser-channels.js:454
 msgid "Subscribe to channel videos RSS"
 msgstr "S'abonner au flux RSS des vidéos de la chaîne"
 
-#: ms-browser-channels.js:447
+#: ms-browser-channels.js:445 ms-browser-channels.js:456
 msgid "Subscribe to channel videos RSS:"
 msgstr "S'abonner au flux RSS des vidéos de la chaîne :"
 
@@ -518,19 +510,19 @@ msgstr "Le délai d'attente de réponse a été dépassé. Veuillez réessayez p
 msgid "The server cannot be reached."
 msgstr "Le serveur est injoignable."
 
-#: ms-api.js:360
+#: ms-api.js:364
 msgid "The storage quota of the parent channels can have an impact on the available space of this channel."
 msgstr "Le quota de stockage des chaînes en amont peut avoir un impact sur l'espace disponible dans cette chaîne."
 
-#: ms-browser-channels.js:510
+#: ms-browser-channels.js:514
 msgid "This channel contains no media."
 msgstr "Cette chaîne ne contient pas de média."
 
-#: ms-browser-channels.js:512
+#: ms-browser-channels.js:516
 msgid "This channel contains no sub channels and no media."
 msgstr "Cette chaîne ne contient pas de sous chaîne ni de média."
 
-#: ms-browser-channels.js:514
+#: ms-browser-channels.js:518
 msgid "This channel contains no sub channels."
 msgstr "Cette chaîne ne contient pas de sous chaîne."
 
@@ -598,11 +590,11 @@ msgstr "Ce média est sélectionné"
 msgid "This video is not ready"
 msgstr "Cette vidéo n'est pas prête"
 
-#: ms-browser.js:403
+#: ms-browser.js:401
 msgid "This will definitively delete"
 msgstr "Ceci supprimera définitivement"
 
-#: ms-browser.js:402
+#: ms-browser.js:400
 msgid "This will restore"
 msgstr "Cela restaurera"
 
@@ -670,7 +662,7 @@ msgstr "Vues"
 msgid "Views last month"
 msgstr "Vues ce mois"
 
-#: ms-browser-channels.js:162
+#: ms-browser-channels.js:160
 msgid "You are not allowed to have a personal channel."
 msgstr "Vous n'avez pas la permission de disposer d'une chaîne personnelle."
 
@@ -682,7 +674,7 @@ msgstr "Vous n'avez pas la permission d'effectuer cette action."
 msgid "You are not logged in or your session has expired. Please login and retry."
 msgstr "Vous n'êtes pas connecté ou votre session a expiré. Veuillez vous reconnecter puis réessayez."
 
-#: ms-api.js:359
+#: ms-api.js:363
 msgid "Your storage usage is the size used by all media for which you are in the speakers list and all media in your personal channel."
 msgstr "Votre utilisation de l'espace de stockage correspond à la taille utilisée par tous les médias pour lesquels vous êtes dans la liste des intervenants et tous les médias de votre chaîne personnelle."
 
@@ -690,13 +682,17 @@ msgstr "Votre utilisation de l'espace de stockage correspond à la taille utilis
 msgid "all"
 msgstr "tout"
 
-#: ms-browser-channels.js:386
+#: ms-browser-channels.js:384
 msgid "annotations"
 msgstr "annotations"
 
 #: extra-translations/jsu-translations.js:19
 msgid "at"
 msgstr "à"
+
+#: ms-api.js:356
+msgid "available:"
+msgstr "disponible :"
 
 #: ms-browser-display.js:1099
 msgid "cannot copy"
@@ -710,7 +706,7 @@ msgstr "catégories"
 msgid "channel"
 msgstr "chaîne"
 
-#: ms-browser-search.js:360 ms-browser-channels.js:411
+#: ms-browser-search.js:360 ms-browser-channels.js:409
 msgid "channel(s)"
 msgstr "chaîne(s)"
 
@@ -758,19 +754,11 @@ msgstr "références externes"
 msgid "failed to copy"
 msgstr "échec de la copie"
 
-#: ms-browser-channels.js:424 ms-api.js:355
+#: ms-browser-channels.js:422 ms-api.js:359
 msgid "help"
 msgstr "aide"
 
-#: ms-browser-channels.js:451
-msgid "iTunes"
-msgstr "iTunes"
-
-#: ms-browser-channels.js:453
-msgid "iTunes (audio only)"
-msgstr "iTunes (audio uniquement)"
-
-#: ms-browser.js:407
+#: ms-browser.js:405
 msgid "items"
 msgstr "éléments"
 
@@ -790,7 +778,7 @@ msgstr "liste"
 msgid "live"
 msgstr "live"
 
-#: ms-browser-search.js:366 ms-browser-channels.js:417
+#: ms-browser-search.js:366 ms-browser-channels.js:415
 msgid "live stream(s)"
 msgstr "diffusion(s) en direct"
 
@@ -806,6 +794,10 @@ msgstr "lieux"
 msgid "no"
 msgstr "non"
 
+#: ms-api.js:357
+msgid "no available space"
+msgstr "pas d'espace disponible"
+
 #: ms-browser-search.js:85 ms-browser-search.js:102
 msgid "none"
 msgstr "aucun"
@@ -815,13 +807,21 @@ msgstr "aucun"
 msgid "photos"
 msgstr "photos"
 
-#: ms-browser-search.js:369 ms-browser-channels.js:420
+#: ms-browser-search.js:369 ms-browser-channels.js:418
 msgid "photos group(s)"
 msgstr "groupe(s) de photos"
 
 #: ms-browser-search.js:45
 msgid "photos groups"
 msgstr "groupes de photos"
+
+#: ms-browser-channels.js:451 ms-browser-channels.js:460
+msgid "podcast (audio)"
+msgstr "podcast (audio)"
+
+#: ms-browser-channels.js:449 ms-browser-channels.js:458
+msgid "podcast (video)"
+msgstr "podcast (vidéo)"
 
 #: ms-browser-display.js:617 ms-tree.js:89 ms-tree.js:91 ms-tree.js:235
 #: ms-tree.js:370
@@ -841,12 +841,12 @@ msgstr "onglet sélectionné"
 msgid "speakers"
 msgstr "intervenants"
 
-#: ms-browser-channels.js:449
+#: ms-browser-channels.js:447
 msgid "standard"
 msgstr "standard"
 
-#: ms-browser-display.js:824 ms-browser-channels.js:381
-#: ms-browser-channels.js:388
+#: ms-browser-display.js:824 ms-browser-channels.js:379
+#: ms-browser-channels.js:386
 msgid "this month"
 msgstr "ce mois"
 
@@ -866,7 +866,7 @@ msgstr "non spécifié"
 msgid "video"
 msgstr "vidéo"
 
-#: ms-browser-search.js:363 ms-browser-channels.js:414
+#: ms-browser-search.js:363 ms-browser-channels.js:412
 msgid "video(s)"
 msgstr "vidéo(s)"
 
@@ -874,7 +874,7 @@ msgstr "vidéo(s)"
 msgid "videos"
 msgstr "vidéos"
 
-#: ms-browser-display.js:822 ms-browser-channels.js:379
+#: ms-browser-display.js:822 ms-browser-channels.js:377
 msgid "views"
 msgstr "vues"
 
@@ -893,3 +893,9 @@ msgstr "oui"
 
 #~ msgid "Unable to get channels tree. Request timed out."
 #~ msgstr "Impossible d'obtenir la liste des chaînes. Délai d'attente de la requête écoulé."
+
+#~ msgid "iTunes"
+#~ msgstr "iTunes"
+
+#~ msgid "iTunes (audio only)"
+#~ msgstr "iTunes (audio uniquement)"

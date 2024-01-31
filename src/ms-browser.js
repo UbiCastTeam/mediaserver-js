@@ -30,7 +30,6 @@ function MSBrowser (options) {
     this.msapi = null;
     this.treeManager = true;
     this.displayTypesIcons = false;
-    this.displayItunesRss = true;
     // vars
     this.useOverlay = true;
     this.pickMode = true;
@@ -48,7 +47,7 @@ function MSBrowser (options) {
     this.displayed = 'channels';
     this.currentSelection = null;
     this.siteSettingsCategories = [];
-    this.catalogFieldsToDisplay = ['duration', 'description', 'creation_date', 'views', 'annotations', 'storage', 'rss_links', 'channel_content', 'add_date', 'type', 'parent'];
+    this.catalogFieldsToDisplay = ['duration', 'description', 'creation_date', 'views', 'annotations', 'storage', 'rss_links', 'rss_links_podcast', 'channel_content', 'add_date', 'type', 'parent'];
 
     this.urlLogin = '/login/';
     this.urlChannels = '/channels/';
@@ -82,7 +81,6 @@ function MSBrowser (options) {
         'btnClass',
         'treeManager',
         'displayTypesIcons',
-        'displayItunesRss',
         'defaultSearchIn',
         'catalogFieldsToDisplay'
     ]);

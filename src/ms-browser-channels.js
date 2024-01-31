@@ -9,7 +9,6 @@
 function MSBrowserChannels (options) {
     // params
     this.browser = null;
-    this.displayItunesRss = false;
     this.currentChannelOid = '0';
     // vars
     this.$menu = null;
@@ -21,7 +20,6 @@ function MSBrowserChannels (options) {
     jsu.setObjectAttributes(this, options, [
         // allowed options
         'browser',
-        'displayItunesRss',
         'currentChannelOid'
     ]);
     this.initOptions = options ? options : {};
@@ -441,19 +439,25 @@ MSBrowserChannels.prototype._onChannelContent = function (response, oid) {
                 }
                 isEmpty = false;
             }
-            if (this.browser.couldDisplay('rss_links')) {
+            if (this.browser.couldDisplay('rss_links') || this.browser.couldDisplay('rss_links_podcast')) {
                 let rss = '<div class="channel-description-rss"> ';
-                if (this.displayItunesRss) {
+                if (this.browser.couldDisplay('rss_links') && this.browser.couldDisplay('rss_links_podcast')) {
                     rss += ' <span class="inline-block">' + jsu.translateHTML('Subscribe to channel videos RSS:') + '</span>' +
                         ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">' +
-                        '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translateHTML('standard') + '</a>' +
+                        '<i class="fa fa-newspaper-o" aria-hidden="true"></i> ' + jsu.translateHTML('standard') + '</a>' +
                         ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-video.xml">' +
-                        '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translateHTML('iTunes') + '</a>' +
+                        '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translateHTML('podcast (video)') + '</a>' +
                         ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-audio.xml">' +
-                        '<i class="fa fa-apple" aria-hidden="true"></i> ' + jsu.translateHTML('iTunes (audio only)') + '</a>';
-                } else {
+                        '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translateHTML('podcast (audio)') + '</a>';
+                } else if (this.browser.couldDisplay('rss_links')) {
                     rss += ' <a class="nowrap" href="/channels/' + response.info.oid + '/rss.xml">' +
-                        '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translateHTML('Subscribe to channel videos RSS') + '</a>';
+                        '<i class="fa fa-newspaper-o" aria-hidden="true"></i> ' + jsu.translateHTML('Subscribe to channel videos RSS') + '</a>';
+                } else {
+                    rss += ' <span class="inline-block">' + jsu.translateHTML('Subscribe to channel videos RSS:') + '</span>' +
+                        ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-video.xml">' +
+                        '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translateHTML('podcast (video)') + '</a>' +
+                        ' <a class="nowrap" href="/channels/' + response.info.oid + '/itunes-audio.xml">' +
+                        '<i class="fa fa-rss" aria-hidden="true"></i> ' + jsu.translateHTML('podcast (audio)') + '</a>';
                 }
                 rss += '</div>';
                 $currentItemDesc.append(rss);
