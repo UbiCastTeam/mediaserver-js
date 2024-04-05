@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "eslint": "latest",
-    "gulp": "latest",
+    "gulp": "< 5",
     "gulp-clean-css": "latest",
     "gulp-concat": "latest",
     "gulp-minify": "latest",

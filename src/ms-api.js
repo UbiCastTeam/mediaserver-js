@@ -184,10 +184,6 @@ function MSAPIClient (options) {
             method: 'GET',
             url: '/api/v2/annotations/activities/list/'
         },
-        emailNotification: {
-            method: 'POST',
-            url: '/api/v2/annotations/notification/'
-        },
         searchAnnotations: {
             method: 'GET',
             url: '/api/v2/annotations/search/'
@@ -195,6 +191,14 @@ function MSAPIClient (options) {
         listCategories: {
             method: 'GET',
             url: '/api/v2/categories/'
+        },
+        listNotifications: {
+            method: 'GET',
+            url: '/api/v2/notifications/'
+        },
+        subscribeNotifications: {
+            method: 'POST',
+            url: '/api/v2/notifications/join/'
         }
     };
 
