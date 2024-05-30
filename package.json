@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "eslint": "latest",
+    "eslint": "< 9",
     "gulp": "< 5",
     "gulp-clean-css": "latest",
     "gulp-concat": "latest",

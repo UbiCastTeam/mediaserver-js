@@ -13,11 +13,17 @@
     --ubi-legacy-grey: #999;
     --ubi-legacy-grey-rgb: 153, 153, 153;
     --ubi-legacy-grey-lighter: #E5E5E5;
-    --ubi-legacy-blue: #274BB1;
     --ubi-legacy-blue-darker: #000F32;
-    --ubi-legacy-green: #1DCDCF;
-    --ubi-legacy-red: #e14149;
-    --ubi-legacy-orange: #ff806c;
+
+    --ubi-legacy-blue: #2656cf;
+    --ubi-legacy-blue-contrast: #FFFFFF;
+    --ubi-legacy-blue-text: #2656cf;
+    --ubi-legacy-green: #008066;
+    --ubi-legacy-green-contrast: #FFFFFF;
+    --ubi-legacy-green-text: #008066;
+    --ubi-legacy-red: #da2525;
+    --ubi-legacy-red-contrast: #FFFFFF;
+    --ubi-legacy-red-text: #da2525;
 }
 .dark-theme .ms-browser {
     --ubi-legacy-white-rgb: 49, 49, 49;
@@ -33,9 +39,16 @@
     --ubi-legacy-grey: #999;
     --ubi-legacy-grey-rgb: 153,153,153;
     --ubi-legacy-grey-lighter: #202020;
+
+    --ubi-legacy-blue: #7AB3F0;
     --ubi-legacy-blue-text: #7AB3F0;
+    --ubi-legacy-green: #1dd1a1;
     --ubi-legacy-green-text: #1dd1a1;
+    --ubi-legacy-red: #FF8E80;
     --ubi-legacy-red-text: #FF8E80;
+    --ubi-legacy-blue-contrast: #000000;
+    --ubi-legacy-green-contrast: #000000;
+    --ubi-legacy-red-contrast: #000000;
   }
 .dark-theme .ms-items .item-entry-preview .item-entry-preview-play {
     color: var(--ubi-legacy-black);
